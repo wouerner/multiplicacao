@@ -1,0 +1,232 @@
+<?php
+namespace discipulo\Modelo;
+class Discipulo{
+
+	private $id;
+	private $nome;
+	private $telefone;
+	private $email;
+	private $endereco;
+	private $nivel;
+	private $lider;
+	private $celula;
+	private $usuario;
+	private $senha;
+
+	public function __construct (){
+	}
+
+	public function __get($prop){
+		return $this->$prop;
+	
+	}
+	
+	public function __set($prop , $valor){
+		$this->$prop = $valor;
+	
+	}
+
+		
+	public function salvar(){
+
+	//abrir conexao com o banco
+	$pdo = new \PDO(DSN, USER, PASSWD);
+	//cria sql
+	$sql = "INSERT INTO Discipulo (
+					nome, telefone, email,endereco, nivel, 
+					lider, celula, usuario, senha
+					)
+		VALUES (?,?,?,?,?,?,?,?,?)";
+	//prepara sql
+	$stm = $pdo->prepare($sql);
+	//trocar valores
+	$stm->bindParam(1, $this->nome);
+	$stm->bindParam(2, $this->telefone);
+	$stm->bindParam(3, $this->email);
+	$stm->bindParam(4, $this->endereco);
+	$stm->bindParam(5, $this->nivel);
+	$stm->bindParam(6, $this->lider);
+	$stm->bindParam(7, $this->celula);
+	$stm->bindParam(8, $this->usuario);
+	$stm->bindParam(9, md5($this->senha));
+
+	$resposta = $stm->execute();
+
+	//fechar conexão
+	$pdo = null ;
+
+	return $resposta;
+	
+	}
+
+	public function atualizar(){
+
+	//abrir conexao com o banco
+	$pdo = new \PDO(DSN, USER, PASSWD);
+	//cria sql
+	$sql = "UPDATE Discipulo SET 	nome = ? , telefone = ? , email = ? ,endereco = ? , nivel = ?, 
+		lider = ?, celula = ?, usuario = ? , senha = ?
+		WHERE id = ?
+					";
+	//prepara sql
+	$stm = $pdo->prepare($sql);
+	//trocar valores
+	$stm->bindParam(1, $this->nome);
+	$stm->bindParam(2, $this->telefone);
+	$stm->bindParam(3, $this->email);
+	$stm->bindParam(4, $this->endereco);
+	$stm->bindParam(5, $this->nivel);
+	$stm->bindParam(6, $this->lider);
+	$stm->bindParam(7, $this->celula);
+	$stm->bindParam(8, $this->usuario);
+	$stm->bindParam(9, md5($this->senha));
+	$stm->bindParam(10, $this->id);
+
+	$resposta = $stm->execute();
+
+	//fechar conexão
+	$pdo = null ;
+
+	return $resposta;
+	
+	}
+	/*Recebe o id para não listar este cadastro.
+	 *
+	 * */
+	public function listarTodos($id){
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT * FROM Discipulo';
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(1,$id);
+
+		$stm->execute();
+
+		return $stm->fetchAll();
+
+	}
+
+	public function excluir(){
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'DELETE FROM Discipulo WHERE id = ?';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->bindParam(1, $this->id);
+
+		$stm->execute();
+
+	}
+
+	
+	/*Lista apenas um Disicpulo
+	*/
+
+	public function listarUm(){
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT * FROM Discipulo WHERE id = ?';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->bindParam(1, $this->id);
+
+		$stm->execute();
+
+		return $stm->fetch();
+
+	}
+
+	
+	public function entrar(){
+		
+		try {
+		//conectar ao banco de dados
+			$pdo = new \PDO(DSN, USER, PASSWD);	
+			//montar o comando
+			$sql = "SELECT * FROM Discipulo  WHERE usuario =? AND senha =?";
+		//preparar o comando
+			$stm = $pdo->prepare($sql);
+
+		//trocar valores
+			$stm->bindParam(1, $this->usuario);
+			$stm->bindParam(2, md5($this->senha));
+
+		//executar o comando
+			$resposta =$stm->execute();
+			$erros = $stm->errorInfo();
+			
+
+			if(!empty($erros[2])){
+				throw new \Exception($erros[2]);
+	
+			}
+		
+		//fechar conexao
+			$pdo=null;
+
+			if($resposta){
+				
+				return  $stm -> fetch();
+		
+			}
+
+			return false;
+		}
+
+		catch(\Exception $e){
+			$this->erros['banco'] = $e->getMessage();
+		
+		
+		}
+
+
+	
+	
+	}
+
+	/* destroi a sessão do usuario
+	 *
+	 * */
+	public function sair(){
+	
+		session_start();
+		session_destroy();
+	
+	}
+
+
+	/* devolve uma lista de discipulos com nome especificado.
+	 *
+	 * */
+
+	public function chamar($nome){
+
+		$nome = "%$nome%" ; // os '%%' funcionam como curingas na expressão revelando mais resultados.
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT * FROM Discipulo WHERE nome LIKE ?';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->bindParam(1, $nome);
+
+		$stm->execute();
+
+		return $stm->fetchAll();
+		
+
+	
+	
+	}
+
+
+}
+
+?> 

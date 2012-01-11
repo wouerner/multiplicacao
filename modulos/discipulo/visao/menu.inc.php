@@ -1,0 +1,12 @@
+<ul id = "menu" >
+	<li><a href = "#">Multiplicação</a></li>
+
+	<li><a href = "#" >Discipulos</a>
+		<ul >	
+			<li><a href = "../formularios/novo.php" >Criar</a></li>
+			<li><a href = "../acao/listar.php" >Igreja</a></li>
+			<li><a href = "../acao/chamar.php" >Chamar</a></li>
+		</ul>
+	</li>
+	
+</ul>
