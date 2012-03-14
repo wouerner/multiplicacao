@@ -84,9 +84,9 @@ class Discipulo{
 
 	$resposta = $stm->execute();
 
-	//$erro = $stm->errorInfo();
-	//var_dump($erro);
-	//exit();
+	$erro = $stm->errorInfo();
+	var_dump($erro);
+	exit();
 
 	//fechar conexão
 	$pdo = null ;

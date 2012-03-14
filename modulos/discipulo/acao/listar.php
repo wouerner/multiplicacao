@@ -1,9 +1,10 @@
 <?php
 session_start();
 
-var_dump($_SESSION);
-
 if (!isset($_SESSION['logado'])) exit();
+
+
+$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
 //importar discipulo
 require '../../../config/autoload.php';
@@ -14,10 +15,13 @@ require '../../../config/autoload.php';
 
 $discipulo = new discipulo\Modelo\Discipulo();
 
-$discipulos = $discipulo->listarTodos($_SESSION['usuario_id']);
+//lista todos os registros menos o do usuario logado no sistema.
 
 $usuarioNome = $_SESSION['usuario_nome'];
 
+$totalDiscipulos = discipulo\Modelo\Discipulo::totalDiscipulos();
+
+$discipulos = $discipulo->listarTodosPag($_SESSION['usuario_id'], 3  , $pagina);
 ?>
 
 <!DOCTYPE html>
@@ -35,8 +39,7 @@ $usuarioNome = $_SESSION['usuario_nome'];
 		<section class = "container">
 
 		<nav> 
-		Olá <a href="detalhar.php?id=<?php echo $_SESSION['usuario_id'] ; ?>"><?php echo $_SESSION['usuario_nome'] ; ?></a> |
-			<a href="../../seguranca/acao/sair.php">Sair</a>
+			<?php include '../../../incluidos/menu.inc.php' ; ?>
 			<?php include '../visao/menu.inc.php' ; ?>	
 		</nav>
 			
@@ -72,6 +75,7 @@ $usuarioNome = $_SESSION['usuario_nome'];
 						<?php endforeach ; ?>
 						</table>
 				
+						<?php discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos['total'] ,3 ,$pagina ) ; ?>
 			
 			</article>
 		

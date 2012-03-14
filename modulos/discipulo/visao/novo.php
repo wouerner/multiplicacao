@@ -1,7 +1,3 @@
-<?php
-session_start();
-
-?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -17,8 +13,7 @@ session_start();
 		<section class = "container">
 		<header>
 			<nav>
-			<?php include '../../../incluidos/menu.inc.php' ; ?>
-				<?php include '../visao/menu.inc.php' ; ?>
+			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
 			</nav>
 		
 		</header>
@@ -27,9 +22,9 @@ session_start();
 			<article>
 				<fieldset>
 					<legend>Criar Discipulo</legend>
-					<form action = "../acao/criar.php" method = "post"  class = "form-stacked">
+					<form action = "/discipulo/novo" method = "post"  class = "form-stacked">
 						<label>Nome:</label>
-						<input name = "nome" autofocus alt = "Nome">
+						<input name = "nome" autofocus alt = "Nome" placeholder= "Nome completo">
 						<label>Telefone:</label>
 						<input name = "telefone" type = "tel" placeholder= "(00)9999-9999" pattern="\([0-9]{2}\)[0-9]{4}\-[0-9]{4}" maxlength="13" >
 						<label>Endereço:</label>

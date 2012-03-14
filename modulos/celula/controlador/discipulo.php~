@@ -1,0 +1,127 @@
+<?php
+use discipulo\Modelo\Discipulo;
+namespace discipulo\controlador; 
+
+
+	class discipulo{
+	
+		public function index(){
+
+		$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
+		$discipulos =	new \discipulo\Modelo\Discipulo();
+		//$discipulos =	$discipulos->listarTodos(8);
+		$discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], 3  , $pagina);
+		$totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos();
+		$totalDiscipulos --;
+
+			require_once  'modulos/discipulo/visao/listar.php';
+
+		
+		}
+		public function novo($url){
+			if ( empty ( $url['post'] ) ) {
+		
+			require_once  'modulos/discipulo/visao/novo.php';
+			
+			}else {
+				$discipulo =	new \discipulo\Modelo\Discipulo();
+
+		$post = $url['post'] ;
+		$discipulo->nome = $post['nome'];
+		$discipulo->telefone = $post['telefone'];
+		$discipulo->endereco = $post['endereco'];
+		$discipulo->email = $post['email'];
+		$discipulo->usuario = $post['usuario'];
+		$discipulo->senha = $post['senha'];
+
+
+		$discipulo->salvar();
+				header ('location:/discipulo');
+				exit();
+			}
+			
+
+		}
+
+		public function atualizar($url){
+
+			if ( empty ( $url['post'] ) ) {
+
+				$discipulo =	new \discipulo\Modelo\Discipulo();
+				$lideres = $discipulo->listarLideres();
+
+				$discipulo->id =  $url[3] ;
+				$discipulo = $discipulo->listarUm();
+
+				$lider =	new \discipulo\Modelo\Discipulo();
+				$lider->id = $discipulo['lider'] ;
+				$lider = $lider->listarUm($discipulo['lider']);
+
+
+
+				var_dump($discipulo['lider']);
+				var_dump($lider);
+
+
+
+		
+				require_once  'modulos/discipulo/visao/atualizar.php';
+			
+			}else {
+				$discipulo =	new \discipulo\Modelo\Discipulo();
+				var_dump($discipulo);
+
+				$post = $url['post'] ;
+
+				$discipulo->id = $post['id'];	
+				$discipulo->nome = $post['nome'];
+				$discipulo->telefone = $post['telefone'];
+				$discipulo->endereco = $post['endereco'];
+				$discipulo->email = $post['email'];
+				$discipulo->usuario = $post['usuario'];
+				$discipulo->senha = $post['senha'];
+				$discipulo->lider = $post['lider'];
+
+				$discipulo->atualizar();
+
+
+				//$lider =	new \discipulo\Modelo\Discipulo();
+				//$lideres = $discipulo->listarLideres();
+				header ('location:/discipulo/atualizar/id/'.$discipulo->id);
+				exit();
+			}
+
+		
+		
+		}
+
+		public function excluir($url){
+			echo "aki";
+				$discipulo =	new \discipulo\Modelo\Discipulo();
+				$discipulo->id = $url[3]; 
+				$discipulo->excluir();
+				header ('location:/discipulo');
+				exit();
+		
+			
+		
+		
+		}
+
+
+		public function chamar () {
+
+			$nome = $_GET['nome'];
+			$discipulo =	new \discipulo\Modelo\Discipulo();
+			$discipulo->nome = $nome; 
+			$discipulos = $discipulo->chamar($nome);	
+			require_once 'discipulo/visao/chamar.php' ;
+
+		
+		}
+	
+	
+	
+	}	
+
+?>

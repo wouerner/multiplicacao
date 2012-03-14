@@ -1,17 +1,12 @@
 <?php
-namespace discipulo\Modelo;
-class Discipulo{
+namespace celula\modelo;
+class celula{
 
 	private $id;
 	private $nome;
-	private $telefone;
-	private $email;
+	private $horarioFuncionamento;
 	private $endereco;
-	private $nivel;
 	private $lider;
-	private $celula;
-	private $usuario;
-	private $senha;
 
 	public function __construct (){
 	}
@@ -32,23 +27,17 @@ class Discipulo{
 	//abrir conexao com o banco
 	$pdo = new \PDO(DSN, USER, PASSWD);
 	//cria sql
-	$sql = "INSERT INTO Discipulo (
-					nome, telefone, email,endereco, nivel, 
-					lider, celula, usuario, senha
-					)
-		VALUES (?,?,?,?,?,?,?,?,?)";
+	$sql = "INSERT INTO Celula (
+					nome, horarioFuncionamento, endereco, 
+					lider	)
+		VALUES (?,?,?,?)";
 	//prepara sql
 	$stm = $pdo->prepare($sql);
 	//trocar valores
 	$stm->bindParam(1, $this->nome);
-	$stm->bindParam(2, $this->telefone);
-	$stm->bindParam(3, $this->email);
-	$stm->bindParam(4, $this->endereco);
-	$stm->bindParam(5, $this->nivel);
-	$stm->bindParam(6, $this->lider);
-	$stm->bindParam(7, $this->celula);
-	$stm->bindParam(8, $this->usuario);
-	$stm->bindParam(9, md5($this->senha));
+	$stm->bindParam(2, $this->horarioFuncionamento);
+	$stm->bindParam(3, $this->endereco);
+	$stm->bindParam(4, $this->lider);
 
 	$resposta = $stm->execute();
 
@@ -64,23 +53,18 @@ class Discipulo{
 	//abrir conexao com o banco
 	$pdo = new \PDO(DSN, USER, PASSWD);
 	//cria sql
-	$sql = "UPDATE Discipulo SET 	nome = ? , telefone = ? , email = ? ,endereco = ? , nivel = ?, 
-		lider = ?, celula = ?, usuario = ? , senha = ?
+	$sql = "UPDATE Celula SET 	nome = ? , horarioFuncionamento = ? , endereco = ?, 
+		lider = ?
 		WHERE id = ?
 					";
 	//prepara sql
 	$stm = $pdo->prepare($sql);
 	//trocar valores
 	$stm->bindParam(1, $this->nome);
-	$stm->bindParam(2, $this->telefone);
-	$stm->bindParam(3, $this->email);
-	$stm->bindParam(4, $this->endereco);
-	$stm->bindParam(5, $this->nivel);
-	$stm->bindParam(6, $this->lider);
-	$stm->bindParam(7, $this->celula);
-	$stm->bindParam(8, $this->usuario);
-	$stm->bindParam(9, md5($this->senha));
-	$stm->bindParam(10, $this->id);
+	$stm->bindParam(2, $this->horarioFuncionamento);
+	$stm->bindParam(3, $this->endereco);
+	$stm->bindParam(4, $this->lider);
+	$stm->bindParam(5, $this->id);
 
 	$resposta = $stm->execute();
 
@@ -97,14 +81,13 @@ class Discipulo{
 	/*Recebe o id para não listar este cadastro.
 	 *
 	 * */
-	public function listarTodos($id){
+	public function listarTodos(){
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'SELECT * FROM Discipulo WHERE id != ?';
+		$sql = 'SELECT * FROM Celula';
 
 		$stm = $pdo->prepare($sql);
-		$stm->bindParam(1,$id);
 
 		$stm->execute();
 
@@ -236,7 +219,7 @@ class Discipulo{
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'DELETE FROM Discipulo WHERE id = ?';
+		$sql = 'DELETE FROM Celula WHERE id = ?';
 
 		$stm = $pdo->prepare($sql);
 
@@ -254,7 +237,7 @@ class Discipulo{
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'SELECT * FROM Discipulo WHERE id = ?';
+		$sql = 'SELECT * FROM Celula WHERE id = ?';
 
 		$stm = $pdo->prepare($sql);
 

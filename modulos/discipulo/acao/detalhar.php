@@ -32,8 +32,7 @@ $discipulo = $discipulo->listarUm() ;
 		<section class = "container">
 
 		<nav> 
-		Olá <a href="#"><?php echo $_SESSION['usuario_nome'] ; ?></a> |
-			<a href="#">Sair</a>
+			<?php include '../../../incluidos/menu.inc.php' ; ?>
 			<?php include '../visao/menu.inc.php' ; ?>	
 		</nav>
 			

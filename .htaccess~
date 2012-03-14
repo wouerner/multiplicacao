@@ -1,0 +1,12 @@
+#locaweb
+AddHandler php53-script .php .php5 .php53 .pht .phtm .phtml
+suPHP_ConfigPath /home/wouerner1/
+
+
+
+Options +FollowSymLinks +Indexes
+RewriteEngine on
+RewriteBase / 
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]

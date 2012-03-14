@@ -8,13 +8,6 @@
 			<li><a href = "/discipulo/chamar" >Chamar</a></li>
 		</ul>
 	</li>
-	<li><a href = "#" >Célula</a>
-		<ul >	
-			<li><a href = "/celula/novo" >Criar</a></li>
-			<li><a href = "/celula" >Igreja</a></li>
-			<li><a href = "/celula/chamar" >Chamar</a></li>
-		</ul>
-	</li>
 	<li><a href = "/seguranca/sair" >Sair</a></li>
 	
 </ul>
