@@ -13,8 +13,7 @@
 		<section class = "container">
 
 		<nav> 
-			<?php include 'incluidos/menu.inc.php' ; ?>
-			<?php include 'discipulo/visao/menu.inc.php' ; ?>	
+			<?php require 'modulos/menu/visao/menu.inc.php' ; ?>	
 		</nav>
 			
 		<header>
@@ -24,33 +23,31 @@
 		<section>		
 			<article>
 
-			<fieldset> 
-				<form action = "/discipulo/chamar" method = "GET" >
-				<label>Chamar:</label>
-				<input type = "search" name = "nome">
-				<button type = "submit" class = "btn" >OK</button>
-			</fieldset>
-
-	
-						<table class = "bordered-table">
-						<caption>Lista de Discipulos</caption>
+				<?php require 'discipulo/visao/chamarDiscipulo.php' ; ?>
+			<div class = "row" >	
 			
 						<?php if (is_null($nome)) : ?>
-							<p>Faça sua pesquisa!</p>
+							<h3>Faça sua pesquisa!</h3>
 						<?php else : ?>
+
+						<table class = "table bordered-table">
+						<caption><h3>Lista de Discipulos</h3></caption>
 
 						<?php foreach ( $discipulos as $discipulo) : ?>
 
-						<tr><td colspan = "2" ><h2><?php echo $discipulo['nome'] ; ?> </h2></td></tr>
+						<tr>
+							<td><h2><?php echo $discipulo['nome'] ; ?> </h2>
+							<?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
+							</td>
+						</tr>
 						<tr><td>Telefone:<?php echo $discipulo['telefone'] ; ?></td> <td>E-mail:<?php echo $discipulo['email'] ; ?></td></tr>
 						<tr><td colspan = "2" >Endereço: <?php  echo $discipulo['endereco'] ; ?></td></tr>
 							
-							<?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
 						<?php endforeach ; ?>
 						<?php endif ; ?>
 						</table>
 				
-			
+			</div>
 			</article>
 		
 		</section>

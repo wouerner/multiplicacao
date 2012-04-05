@@ -100,6 +100,18 @@ namespace celula\controlador;
 		
 		}
 
+		public function detalhar($url){
+
+			$celula =	new \celula\modelo\celula();
+			$celula->id = $url[3]; 
+			$discipulos= $celula->listarDiscipulos();
+			$celula = $celula->listarUm();
+				
+			require 'celula/visao/detalhar.php' ;
+				
+		
+		}
+
 
 		public function chamar () {
 

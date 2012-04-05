@@ -36,7 +36,7 @@ namespace celula\controlador;
 				$celula->lider = $post['lider'];
 
 				$celula->salvar();
-				//header ('location:/celula');
+				header ('location:/celula');
 				exit();
 			}
 			
@@ -97,6 +97,18 @@ namespace celula\controlador;
 		
 			
 		
+		
+		}
+
+		public function detalhar($url){
+
+			$celula =	new \celula\modelo\celula();
+			$celula->id = $url[3]; 
+			$celula->listarDiscipulos();
+			$celula = $celula->listarUm();
+				
+			require 'celula/visao/detalhar.php' ;
+				
 		
 		}
 

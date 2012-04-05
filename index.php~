@@ -3,10 +3,8 @@
 //inicia a sessão
 session_start();
 
-var_dump($_SERVER);
 $sessao = isset ($_SESSION) ? $_SESSION : NULL ; 
 
-var_dump($_GET);
 
 $_GET['url'] = array_key_exists('url',$_GET) ? $_GET['url'] : NULL;
 
@@ -41,7 +39,7 @@ require_once 'modulos/'.$controlador.'/controlador/'.$controlador.'.php' ;
 
 $controlador = $controlador.'\controlador\\'.$controlador ;
 
-
+echo $controlador;
 $app = new $controlador();
 
 $app->$acao($url);

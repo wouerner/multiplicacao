@@ -1,3 +1,9 @@
+<div class = "row" >
+<div class = "span12" >Olá <a href="/discipulo/detalhar/id/<?php echo $_SESSION['usuario_id'] ; ?>"><?php echo $_SESSION['usuario_nome'] ; ?></a> |
+<a href="/seguranca/sair" class = "btn-mini btn-danger" >Sair</a>
+</div>
+
+<div class = "span12">
 <ul id = "menu" >
 	<li><a href = "#">Multiplicação</a></li>
 
@@ -15,6 +21,20 @@
 			<li><a href = "/celula/chamar">Chamar</a></li>
 		</ul>
 	</li>
-	<li><a href = "/seguranca/sair" >Sair</a></li>
+	<li><a href = "#" >Relatorios</a>
+		<ul >	
+			<li><a href = "/relatorio/discipulos" >Discipulos</a></li>
+			<li><a href = "/relatorio/celulas">Celulas</a></li>
+		</ul>
+	</li>
+	<li><a href = "#" >Eventos</a>
+		<ul>	
+			<li><a href = "/evento/novo">Novo</a></li>
+			<li><a href = "/evento" >Lista</a></li>
+		</ul>
+	</li>
 	
 </ul>
+</div>
+
+</div>

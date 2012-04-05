@@ -1,6 +1,8 @@
 <?php
 use discipulo\Modelo\Discipulo;
 use celula\modelo\celula;
+use evento\modelo\evento;
+
 namespace discipulo\controlador; 
 
 
@@ -65,18 +67,10 @@ namespace discipulo\controlador;
 				$celulas = new \celula\modelo\celula();
 				$celulas = $celulas->listarTodos();
 
-				//var_dump($discipulo);
-				//var_dump($lider);
-				var_dump($celula);
-
-
-
-		
 				require_once  'modulos/discipulo/visao/atualizar.php';
 			
 			}else {
 				$discipulo =	new \discipulo\Modelo\Discipulo();
-				var_dump($discipulo);
 
 				$post = $url['post'] ;
 
@@ -86,20 +80,14 @@ namespace discipulo\controlador;
 				$discipulo->endereco = $post['endereco'];
 				$discipulo->email = $post['email'];
 				$discipulo->celula = $post['celula'];
-				$discipulo->usuario = $post['usuario'];
-				$discipulo->senha = $post['senha'];
+				$discipulo->ativo =isset( $post['ativo']) ? $post['ativo']: null;
 				$discipulo->lider = $post['lider'];
 
 				$discipulo->atualizar();
 
-
-				//$lider =	new \discipulo\Modelo\Discipulo();
-				//$lideres = $discipulo->listarLideres();
 				header ('location:/discipulo/atualizar/id/'.$discipulo->id);
 				exit();
 			}
-
-		
 		
 		}
 
@@ -111,8 +99,17 @@ namespace discipulo\controlador;
 				header ('location:/discipulo');
 				exit();
 		
-			
+		}
+
+
+		public function detalhar ($url) {
+
+			$discipulo = new \discipulo\Modelo\Discipulo() ;
+
+			$discipulo->id = $url[3] ; 
+			$discipulo = $discipulo->listarUm() ;
 		
+			require 'discipulo/visao/detalhar.php' ;	
 		
 		}
 
@@ -128,7 +125,41 @@ namespace discipulo\controlador;
 		
 		}
 	
-	
+		public function evento($url){
+			
+
+			if ( empty ( $url['post'] ) ) {
+
+				  $eventos = new \evento\modelo\evento();
+				
+				  $id = $url[3];
+				  $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
+				$eventos = $eventos->listarTodos();
+
+
+			require_once 'modulos/discipulo/visao/evento.php' ;
+			}else {
+					  $post = $url['post'];
+					 $discipuloEvento = new \evento\modelo\evento();
+					  $eventoId = $post['eventoId'];
+						$discipuloId = $post['discipuloId'];
+
+					 $discipuloEvento->salvarDiscipuloEvento($discipuloId, $eventoId );	
+
+					  echo "url" ;
+					 var_dump($url);
+					 $id = $post['discipuloId'];
+
+					 header ('location:/discipulo/evento/id/'.$id);
+					 exit();
+			
+				
+			
+			
+			}
+				
+		
+		}	
 	
 	}	
 

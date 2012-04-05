@@ -31,8 +31,8 @@ unset($_SESSION['mensagem']);
 						<h2>Multiplicação</h2>
 				<form class="form-stacked" method="post" accept-charset="utf-8" action ="/seguranca/entrar" >
 						<?php echo $mensagem ; ?>
-							<label  for="login">Usuário ou E-Mail:</label>
-							<input type="text" name="usuario" class="text meddium" />
+							<label  for="login">E-Mail:</label>
+							<input type="text" name="email" class="text meddium" />
 							<label class="desc" for="senha">Senha:</label>
 							<input type="password" name="senha" class="text " />
 							<button type="submit" class="btn">Entrar</button>

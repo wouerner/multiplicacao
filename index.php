@@ -39,7 +39,6 @@ require_once 'modulos/'.$controlador.'/controlador/'.$controlador.'.php' ;
 
 $controlador = $controlador.'\controlador\\'.$controlador ;
 
-
 $app = new $controlador();
 
 $app->$acao($url);

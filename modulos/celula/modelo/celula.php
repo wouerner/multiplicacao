@@ -144,6 +144,26 @@ class celula{
 		return $stm->fetchAll();
 
 	}
+
+
+	public function listarDiscipulos(){
+	
+		$pdo = new \PDO (DSN, USER,PASSWD) ;
+
+		$sql = 'SELECT * FROM Discipulo WHERE celula = ?' ;
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->bindParam(1,$this->id);
+
+		$stm->execute();
+
+		return $stm->fetchAll() ;
+
+
+	
+	
+	}
 	
 	/* total de discipulos cadastrados no sistema*/
 

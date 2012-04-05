@@ -24,18 +24,23 @@
 					<form action = "/discipulo/atualizar" method = "post"  class = "form-horizontal">
 						<label>Nome:</label>
 						<input name = "nome"  value = "<?php echo $discipulo['nome'] ; ?>" >
+
+						<label>Ativo:</label>
+						<input name = "ativo" type = "checkbox"  
+							value = "<?php echo ($discipulo['ativo'] != TRUE )? TRUE : 0 ; ?>" <?php  echo ($discipulo['ativo'] == TRUE )? "checked" :"" ; ?> >
+
 						<label>Telefone:</label>
-						<input name = "telefone" value = "<?php echo $discipulo['telefone']?>" >
+						<input name = "telefone"  value = "<?php echo $discipulo['telefone']?>" >
 						<label>Endereço:</label>
 						<input name = "endereco" value = "<?php echo $discipulo['endereco']?>">
 						<label>E-mail:</label>
-						<input name = "email" value = "<?php echo $discipulo['email']?>">
+						<input name = "email" type = "email" value = "<?php echo $discipulo['email']?>">
 
 						<label>Nível</label>
 						<input name = "nivel" value = "<?php echo $discipulo['nivel']?>">
 
 						<label>Líder</label>
-						<select name = "lider">
+						<select name = "lider" required >
 
 						<option value = "<?php echo $lider['id']?>"><?php echo $lider['nome']?> </option>
 						<option>--------- </option>
@@ -48,7 +53,7 @@
 
 						<label>Célula</label>
 
-						<select name = "celula">
+						<select name = "celula" required >
 						<option value = "<?php echo $celula['id']?>"><?php echo $celula['nome']?> </option>
 						<option>--------- </option>
 
@@ -58,12 +63,7 @@
 
 						</select>
 
-						
 
-						<label>Usuario:</label>
-						<input name = "usuario" value = "<?php echo $discipulo['usuario']?>">
-						<label>Senha:</label>
-						<input name = "senha" >
 						<input type = "hidden" name = "id" value = "<?php echo $discipulo['id']?>">
 
 						<fieldset>

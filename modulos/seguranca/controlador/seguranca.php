@@ -16,11 +16,12 @@ use discipulo\Modelo\Discipulo;
 
 		//recuperar dados do post e atribuir ao objeto
 
-		$discipulo->usuario = $_POST['usuario'];
+		$discipulo->email = $_POST['email'];
 		$discipulo->senha = $_POST['senha'];
 
 
 		$discipuloLogado = $discipulo->entrar();
+
 
 		if($discipuloLogado){
 			$_SESSION['usuario_nome'] = $discipuloLogado['nome'];

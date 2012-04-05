@@ -13,7 +13,7 @@
 		<section class = "container">
 
 		<nav> 
-			<?php include 'menu.inc.php' ; ?>	
+			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
 		</nav>
 			
 		<header>
@@ -23,28 +23,25 @@
 		<section>		
 			<article>
 
-			<fieldset> 
-				<form action = "/celula/chamar" method = "GET" >
-				<label>Chamar:</label>
-				<input type = "search" name = "nome">
-				<button type = "submit" class = "btn" >OK</button>
-			</fieldset>
-
+					<?php require 'modulos/celula/visao/chamarCelula.php' ; ?>
 	
 						<table class = "table">
 
-							<caption>Lista de Células</caption>
+							<caption><h3>Lista de Células</h3></caption>
 
 							<?php foreach ( $celulas as $celula) : ?>
 
-							<tr><td colspan = "2" ><h2><?php echo $celula['nome'] ; ?> </h2></td></tr>
+							<tr><td colspan = "2" ><h2><a href ="/celula/detalhar/id/<?php echo $celula['id']?>" ><?php echo $celula['nome'] ; ?> </a></h2></td>
+
+								<?php require 'celula/visao/menuCelula.inc.php' ; ?>
+
+							</tr>
 							<tr>
 								<td>Endereço:<?php echo $celula['endereco'] ; ?>	</td> 
 								<td>Horario:<?php echo $celula['horarioFuncionamento'] ; ?></td>
 							</tr>
 								
 							
-								<?php require 'celula/visao/menuCelula.inc.php' ; ?>
 						<?php endforeach ; ?>
 						</table>
 				

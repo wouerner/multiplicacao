@@ -4,13 +4,13 @@ class Discipulo{
 
 	private $id;
 	private $nome;
+	private $ativo;
 	private $telefone;
 	private $email;
 	private $endereco;
 	private $nivel;
 	private $lider;
 	private $celula;
-	private $usuario;
 	private $senha;
 
 	public function __construct (){
@@ -34,9 +34,9 @@ class Discipulo{
 	//cria sql
 	$sql = "INSERT INTO Discipulo (
 					nome, telefone, email,endereco, nivel, 
-					lider, celula, usuario, senha
+					lider, celula,  senha
 					)
-		VALUES (?,?,?,?,?,?,?,?,?)";
+		VALUES (?,?,?,?,?,?,?,?)";
 	//prepara sql
 	$stm = $pdo->prepare($sql);
 	//trocar valores
@@ -47,8 +47,7 @@ class Discipulo{
 	$stm->bindParam(5, $this->nivel);
 	$stm->bindParam(6, $this->lider);
 	$stm->bindParam(7, $this->celula);
-	$stm->bindParam(8, $this->usuario);
-	$stm->bindParam(9, md5($this->senha));
+	$stm->bindParam(8, md5($this->senha));
 
 	$resposta = $stm->execute();
 
@@ -65,7 +64,7 @@ class Discipulo{
 	$pdo = new \PDO(DSN, USER, PASSWD);
 	//cria sql
 	$sql = "UPDATE Discipulo SET 	nome = ? , telefone = ? , email = ? ,endereco = ? , nivel = ?, 
-		lider = ?, celula = ?, usuario = ? , senha = ?
+		lider = ?, celula = ? ,  ativo = ?
 		WHERE id = ?
 					";
 	//prepara sql
@@ -78,13 +77,12 @@ class Discipulo{
 	$stm->bindParam(5, $this->nivel);
 	$stm->bindParam(6, $this->lider);
 	$stm->bindParam(7, $this->celula);
-	$stm->bindParam(8, $this->usuario);
-	$stm->bindParam(9, md5($this->senha));
-	$stm->bindParam(10, $this->id);
+	$stm->bindParam(8 , $this->ativo) ;
+	$stm->bindParam(9, $this->id);
 
 	$resposta = $stm->execute();
 
-	//$erro = $stm->errorInfo();
+	$erro = $stm->errorInfo();
 	//var_dump($erro);
 	//exit();
 
@@ -105,6 +103,20 @@ class Discipulo{
 
 		$stm = $pdo->prepare($sql);
 		$stm->bindParam(1,$id);
+
+		$stm->execute();
+
+		return $stm->fetchAll();
+
+	}
+
+	public function listarTodosDiscipulos(){
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT * FROM Discipulo';
+
+		$stm = $pdo->prepare($sql);
 
 		$stm->execute();
 
@@ -189,21 +201,21 @@ class Discipulo{
 	// se página maior que 1 (um), então temos link para a página anterior
 	if ($pagina > 1) 
 		{
-			$prev_link = '<a href=' ;
+			$prev_link = '<a class = "btn" href=' ;
 			$prev_link .= $_SERVER['REDIRECT_URL'];
 			$prev_link .= "?pagina=$prev> Anterior </a>";
 		} 
 	else { // senão não há link para a página anterior
-    		$prev_link = 'Anterior';
+    		$prev_link = '<a href="#" class = "btn disabled" >Anterior<a>';
 	}
 
 	// se número total de páginas for maior que a página corrente, 
 	// então temos link para a próxima página 
 	 if ($total_paginas > $pagina) {
-    		$next_link = '<a href='.$_SERVER['REDIRECT_URL'].'?pagina='.$next.'>Proxima';
+    		$next_link = '<a  class = "btn" href='.$_SERVER['REDIRECT_URL'].'?pagina='.$next.'>Proxima</a>';
 	  } else { 
 	// senão não há link para a próxima página
-	    $next_link = "Proxima";
+	    $next_link = '<a class = "btn disabled" href="#">Proxima</a>';
 	  }
 
 	// vamos arredondar para o alto o número de páginas  que serão necessárias para exibir todos os 
@@ -219,15 +231,15 @@ class Discipulo{
 	  for ($x=1; $x<= $total_paginas; $x++) {
 		  if ($x==$pagina) { 
 		// se estivermos na página corrente, não exibir o link para visualização desta página 
-	      	$painel .= ' ['.$x.'] ';
+	      	$painel .= '<a class = "btn disabled" > '.$x.'</a> ';
 	    	} else {
-			$painel .= ' <a href=' ; 
+			$painel .= ' <a  class = "btn" href=' ; 
 			$painel .= $_SERVER['REDIRECT_URL'] ;
-			$painel .= '?pagina='.$x.'>['.$x.']</a>';
+			$painel .= '?pagina='.$x.'>'.$x.'</a>';
 	    }
 	  }
 	// exibir painel na tela
-	  echo "$prev_link | $painel | $next_link";
+	  echo ''.$prev_link.' | '.$painel.' | '.$next_link.'';
   }
 
 
@@ -274,13 +286,15 @@ class Discipulo{
 		//conectar ao banco de dados
 			$pdo = new \PDO(DSN, USER, PASSWD);	
 			//montar o comando
-			$sql = "SELECT * FROM Discipulo  WHERE usuario =? AND senha =?";
+			$sql = "SELECT * FROM Discipulo  WHERE email =? AND senha =? AND ativo = ?";
 		//preparar o comando
 			$stm = $pdo->prepare($sql);
+			$ativo = 1 ;
 
 		//trocar valores
-			$stm->bindParam(1, $this->usuario);
+			$stm->bindParam(1, $this->email);
 			$stm->bindParam(2, md5($this->senha));
+			$stm->bindParam(3, $ativo);
 
 		//executar o comando
 			$resposta =$stm->execute();

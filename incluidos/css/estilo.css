@@ -22,7 +22,7 @@
 #menu li
 {
         float: left;
-        padding: 0 0 10px 0;
+        padding: 0 0 3px 0;
         position: relative;
 }
 
@@ -33,7 +33,7 @@
         padding: 0 25px;
         color: #999;
         text-transform: uppercase;
-        font: bold 12px/25px Arial, Helvetica;
+        font: bold 14px/25px Arial, Helvetica;
         text-decoration: none;
         text-shadow: 0 1px 0 #000;
 }
@@ -62,7 +62,7 @@
     padding: 0;
     display: none;
     position: absolute;
-    top: 35px;
+    top: 26px;
     left: 0;
     z-index: 99999;
     background: #444;

@@ -2,12 +2,12 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-ALTER TABLE `multiplicacao`.`Celula` DROP FOREIGN KEY `fk_Celula_Discipulo1` ;
+ALTER TABLE `Celula` DROP FOREIGN KEY `fk_Celula_Discipulo1` ;
 
-ALTER TABLE `multiplicacao`.`Celula` CHANGE COLUMN `Discipulo_id` `lider` INT(11) NULL DEFAULT NULL  , 
+ALTER TABLE `Celula` CHANGE COLUMN `Discipulo_id` `lider` INT(11) NULL DEFAULT NULL  , 
   ADD CONSTRAINT `fk_Celula_Discipulo1`
   FOREIGN KEY (`lider` )
-  REFERENCES `multiplicacao`.`Discipulo` (`id` )
+  REFERENCES `Discipulo` (`id` )
   ON DELETE NO ACTION
   ON UPDATE NO ACTION
 , DROP INDEX `fk_Celula_Discipulo1` 

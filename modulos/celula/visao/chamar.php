@@ -22,15 +22,8 @@
 
 		<section>		
 			<article>
+					<?php require 'modulos/celula/visao/chamarCelula.php' ; ?>
 
-			<fieldset> 
-				<form action = "/celula/chamar" method = "GET" class = "form-horizontal" >
-				<label>Chamar:</label>
-				<input type = "search" name = "nome">
-				<button type = "submit" class = "btn" >OK</button>
-			</fieldset>
-
-	
 						<table class = "table">
 						<caption>Lista de Discipulos</caption>
 			
