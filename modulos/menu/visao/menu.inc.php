@@ -25,6 +25,8 @@
 		<ul >	
 			<li><a href = "/relatorio/discipulos" >Discipulos</a></li>
 			<li><a href = "/relatorio/celulas">Celulas</a></li>
+			<li><a href = "/relatorio/statusCelular">Status Celular</a></li>
+			<li><a href = "/relatorio/statusCelularIndex">Status Celular Por Tipo</a></li>
 		</ul>
 	</li>
 	<li><a href = "#" >Eventos</a>

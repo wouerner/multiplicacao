@@ -107,9 +107,22 @@
 								  </select>
 								  </div>
 								  </div>
-								
-								  <a href="/statusCelular/novo/id/<?php echo $discipulo['id'] ;?>" class = "btn">Atualizar Status</a>
 
+							  <div class="control-group ">
+								  <label class = "control-label" >Status Celular</label>
+								  <div class = "controls" >
+
+									  <select name = "statusCelular" required >
+									  <option value = "<?php echo $celula['id']?>"><?php echo $celula['nome']?> </option>
+									  <option>--------- </option>
+
+									  <?php foreach($celulas as $celula) : ?>
+									  <option value = "<?php echo $celula['id']?>"><?php echo $celula['nome']?> </option>
+									  <?php endforeach ; ?>
+
+								  </select>
+								  </div>
+								  </div>
 
 							  </fieldset>
 

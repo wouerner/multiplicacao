@@ -1,68 +1,95 @@
 <?php
-use discipulo\Modelo\Discipulo;
-use celula\modelo\celula;
-use evento\modelo\evento;
+use \discipulo\Modelo\Discipulo ;
 
-namespace discipulo\controlador; 
+namespace oferta\controlador; 
 
 
-	class discipulo{
+	class oferta{
 	
 		public function index(){
 
-		$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
-		$discipulos =	new \discipulo\Modelo\Discipulo();
-		//$discipulos =	$discipulos->listarTodos(8);
-		$discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], 3  , $pagina);
-		$totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos();
-		$totalDiscipulos --;
 
-			require_once  'modulos/discipulo/visao/listar.php';
+//			require_once  'modulos/discipulo/visao/listar.php';
 
 		
 		}
 		public function novo($url){
-			if ( empty ( $url['post'] ) ) {
+				  if ( empty ( $url['post'] ) ) {
+
+			
+
+			 $tiposOfertas =	new \oferta\modelo\tipoOferta() ; 
+			 $ofertaDiscipulo =	new \oferta\modelo\oferta() ;
+
+
+			 $tiposOfertas = $tiposOfertas->listarTodos();	
+			
+			 $ofertaDiscipulo->discipuloId= $url[3];
+			 //$ofertaDiscipulo = $ofertaDiscipulo->pegarOferta();
+
+
+			$discipulo = new \discipulo\Modelo\Discipulo() ;
+			$discipulo->id = $url[3] ;
+			$discipulo = $discipulo->listarUm();
 		
-			require_once  'modulos/discipulo/visao/novo.php';
+			require_once  'modulos/oferta/visao/novo.php';
 			
 			}else {
-				$discipulo =	new \discipulo\Modelo\Discipulo();
+				$oferta =	new \oferta\modelo\oferta();
 
 		$post = $url['post'] ;
-		$discipulo->nome = $post['nome'];
-		$discipulo->telefone = $post['telefone'];
-		$discipulo->endereco = $post['endereco'];
-		$discipulo->email = $post['email'];
-		$discipulo->usuario = $post['usuario'];
-		$discipulo->senha = $post['senha'];
+		$oferta->discipuloId = $post['discipuloId'];
+		$oferta->tipoOfertaId = $post['tipoOfertaId'];
+		$oferta->dataOferta = $post['dataOferta'];
 
 
-		$discipulo->salvar();
-				header ('location:/discipulo');
+//		var_dump($oferta);
+//		exit();
+
+
+		if ($oferta->salvar()){
+
+				header ('location:/discipulo/detalhar/id/'.$oferta->discipuloId);
+				exit();
+		}else {
+				  $oferta->atualizar();
+				header ('location:/discipulo/detalhar/id/'.$oferta->discipuloId);
+				exit();
+		
+		
+		}
+			}
+			
+
+		}
+
+		public function novoTipoOferta($url){
+			if ( empty ( $url['post'] ) ) {
+		
+				require_once  'modulos/oferta/visao/novoTipoOferta.php' ;
+			
+			}else{
+
+			$tipoOferta =	new \oferta\modelo\tipoOferta() ; 
+
+			$post = $url['post'] ;
+			$tipoOferta->nome = $post['nome'] ;
+
+			$tipoOferta->salvar();
+			header ('location:/oferta/listarTipoOferta') ;
 				exit();
 			}
 			
 
 		}
 
-		public function novoTipoStatusCelular($url){
-			if ( empty ( $url['post'] ) ) {
+		public function listarTipoOferta(){
+
+				  $tipoOfertas =	new \oferta\modelo\tipoOferta();
+				  $tipoOfertas = $tipoOfertas->listarTodos();
+
+				  require 'modulos/oferta/visao/listarTipoOferta.php' ; 
 		
-			require_once  'modulos/statusCelular/visao/novoTipoStatus.php';
-			
-			}else {
-				$discipulo =	new \statusCelular\modelo\tipoStatusCelular();
-
-				$post = $url['post'] ;
-				$tipoStatusCelular->nome = $post['nome'];
-
-				$tipoStatusCelular->salvar();
-				header ('location:/statusCelular');
-				exit();
-			}
-			
-
 		}
 
 		public function atualizar($url){
@@ -113,14 +140,39 @@ namespace discipulo\controlador;
 		
 		}
 
-		public function excluir($url){
-			echo "aki";
-				$discipulo =	new \discipulo\Modelo\Discipulo();
-				$discipulo->id = $url[3]; 
-				$discipulo->excluir();
-				header ('location:/discipulo');
+		public function atualizarTipoOferta($url){
+
+			if ( empty ( $url['post'] ) ) {
+
+
+				$tipoOferta =	new \oferta\modelo\tipoOferta();
+				$tipoOferta->id = $url[3] ;
+				$tipoOferta = $tipoOferta->listarUm();
+
+				require_once  'modulos/oferta/visao/atualizarTipoOferta.php';
+			
+			}else {
+				$tipoOferta =	new \oferta\modelo\tipoOferta();
+
+				$post = $url['post'] ;
+
+				$tipoOferta->id = $post['id'];	
+				$tipoOferta->nome = $post['nome'];
+
+				$tipoOferta->atualizar();
+
+				header ('location:/oferta/atualizarTipoOferta/id/'.$tipoOferta->id);
 				exit();
+			}
 		
+		}
+
+		public function excluirTipoOferta($url){
+				$tipoOferta =	new \oferta\modelo\tipoOferta();
+				$tipoOferta->id = $url[3]; 
+				$tipoOferta->excluir();
+				header ('location:/oferta/listarTipoOferta');
+				exit();
 		}
 
 
