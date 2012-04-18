@@ -2,6 +2,7 @@
 use discipulo\Modelo\Discipulo;
 use celula\modelo\celula;
 use evento\modelo\evento;
+use evento\modelo\eventoDiscipulo;
 
 namespace discipulo\controlador; 
 
@@ -114,7 +115,6 @@ namespace discipulo\controlador;
 		}
 
 		public function excluir($url){
-			echo "aki";
 				$discipulo =	new \discipulo\Modelo\Discipulo();
 				$discipulo->id = $url[3]; 
 				$discipulo->excluir();
@@ -152,6 +152,12 @@ namespace discipulo\controlador;
 
 			if ( empty ( $url['post'] ) ) {
 
+			$discipulo = new \discipulo\Modelo\Discipulo() ;
+
+			$discipulo->id = $url[3] ; 
+			$discipulo = $discipulo->listarUm() ;
+
+
 				  $eventos = new \evento\modelo\evento();
 				
 				  $id = $url[3];
@@ -159,7 +165,7 @@ namespace discipulo\controlador;
 				$eventos = $eventos->listarTodos();
 
 
-			require_once 'modulos/discipulo/visao/evento.php' ;
+				require_once 'modulos/discipulo/visao/evento.php' ;
 			}else {
 					  $post = $url['post'];
 					 $discipuloEvento = new \evento\modelo\evento();
@@ -168,8 +174,6 @@ namespace discipulo\controlador;
 
 					 $discipuloEvento->salvarDiscipuloEvento($discipuloId, $eventoId );	
 
-					  echo "url" ;
-					 var_dump($url);
 					 $id = $post['discipuloId'];
 
 					 header ('location:/discipulo/evento/id/'.$id);

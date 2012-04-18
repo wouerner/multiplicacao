@@ -28,7 +28,7 @@
 			
 			<form action = "/discipulo/evento" method = "post" class = "form-horizontal" >
 				<fieldset>
-					<legend>Incluir evento</legend>
+				<legend>Incluir evento para <?php echo $discipulo['nome'] ; ?></legend>
 					<select name="eventoId">
 						<?php foreach($eventos as $evento) : ?>
 							<option value = "<?php echo $evento['id'] ; ?>" > <?php echo $evento['nome'] ; ?></option>
@@ -40,14 +40,14 @@
 				</fieldset>
 			</form>
 
-						<table class = "bordered-table">
+						<table class = "table bordered-table">
 						<caption>Eventos</caption>
 
 						<?php foreach ( $eventosDiscipulos as $evento) : ?>
 
-						<tr><td colspan = "2" ><a href="/evento/detalhar/id/<?php echo $evento['id']?>" ><?php echo $evento['nome'] ; ?> </a></td></tr>
-						
-							<?php require 'evento/visao/menuEvento.inc.php' ; ?>
+						<tr>
+							<td ><a href="/evento/detalhar/id/<?php echo $evento['id']?>" ><?php echo $evento['nome'] ; ?> </a></td>	
+							<td><?php require 'discipulo/visao/menuEvento.inc.php' ; ?>	</td></tr>
 						<?php endforeach ; ?>
 						</table>
 				

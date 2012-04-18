@@ -2,10 +2,10 @@
 
 namespace evento\modelo;
 
-class evento{
+class eventoDiscipulo{
 	
-		  private $id;
-		  private $nome;
+		  private $discipuloId;
+		  private $eventoId;
 
 
 		  public function __get($prop){
@@ -55,7 +55,6 @@ class evento{
 
 			  $resposta = $stm->execute();
 
-			  var_dump($stm->errorInfo());
 
 			  //fechar conexÃ£o
 			  $pdo = null ;
@@ -78,26 +77,12 @@ class evento{
 
 	}
 
-	public function excluir(){
-
-		$pdo = new \PDO (DSN,USER,PASSWD);	
-
-		$sql = 'DELETE FROM Evento WHERE id = ?';
-
-		$stm = $pdo->prepare($sql);
-
-		$stm->bindParam(1, $this->id);
-
-		$stm->execute();
-
-	}
-
 	/* Exclui um evento associado a um discipulo.
 	 *
 	 *
 	 *
 	 */
-	public function excluirParticipacao(){
+	public function excluir(){
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
@@ -106,7 +91,7 @@ class evento{
 		$stm = $pdo->prepare($sql);
 
 		$stm->bindParam(1, $this->discipuloId);
-		$stm->bindParam(1, $this->eventoId);
+		$stm->bindParam(2, $this->eventoId);
 
 		$stm->execute();
 
@@ -175,6 +160,7 @@ class evento{
 
 		$stm->execute() ; 
 
+		var_dump($stm->errorInfo());
 
 		return $stm->fetchAll();
 	

@@ -2,7 +2,7 @@
 
 namespace ministerio\modelo ;
 
-class  ministerio{
+class  funcao{
 
 	private $id ;
 	private $nome ;
@@ -25,7 +25,7 @@ class  ministerio{
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
-			  $sql = "INSERT INTO Ministerio ( nome )
+			  $sql = "INSERT INTO Funcao ( nome )
 				  VALUES (?)";
 
 			  //prepara sql
@@ -40,34 +40,12 @@ class  ministerio{
 
 			  return $resposta;
 	}
-			  public function salvarMinisterioDiscipulo(){
-
-			  //abrir conexao com o banco
-			  $pdo = new \PDO(DSN, USER, PASSWD);
-			  //cria sql
-			  $sql = "INSERT INTO MinisterioTemDiscipulo ( ministerioId, discipuloId, funcaoId )
-				  VALUES (?,?,?)";
-
-			  //prepara sql
-			  $stm = $pdo->prepare($sql);
-			  //trocar valores
-			  $stm->bindParam(1, $this->nome);
-			  $stm->bindParam(2, $this->nome);
-			  $stm->bindParam(3, $this->nome);
-
-			  $resposta = $stm->execute();
-
-			  //fechar conexÃ£o
-			  $pdo = null ;
-
-			  return $resposta;
-	}
 
 	public function listarTodos(){
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'SELECT * FROM Ministerio';
+		$sql = 'SELECT * FROM Funcao';
 
 		$stm = $pdo->prepare($sql);
 
@@ -81,7 +59,7 @@ class  ministerio{
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'SELECT * FROM Ministerio WHERE id = ?';
+		$sql = 'SELECT * FROM Funcao WHERE id = ?';
 
 		$stm = $pdo->prepare($sql);
 
@@ -93,12 +71,12 @@ class  ministerio{
 
 	}
 
-	public function atualizarMinisterio(){
+	public function atualizarFuncao(){
 
 	//abrir conexao com o banco
 	$pdo = new \PDO(DSN, USER, PASSWD);
 	//cria sql
-	$sql = " UPDATE Ministerio SET 	nome = ? 
+	$sql = " UPDATE Funcao SET 	nome = ? 
 		WHERE id = ? ";
 	//prepara sql
 	$stm = $pdo->prepare($sql);
@@ -123,7 +101,7 @@ class  ministerio{
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'DELETE FROM Ministerio WHERE id = ?';
+		$sql = 'DELETE FROM Funcao WHERE id = ?';
 
 		$stm = $pdo->prepare($sql);
 

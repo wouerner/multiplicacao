@@ -18,16 +18,17 @@ namespace ministerio\controlador;
 
 			
 
-			 $tiposOfertas =	new \ministerio\modelo\ministerio() ; 
-			 $ministerioDiscipulo =	new \ministerio\modelo\ministerio() ;
+			 $ministerios =	new \ministerio\modelo\ministerio() ; 
+			 $funcoes =	new \ministerio\modelo\funcao() ;
+			 $ministeriosDiscipulo =	new \ministerio\modelo\ministerioTemDiscipulo() ;
 
 
-			 $tiposOfertas = $tiposOfertas->listarTodos();	
+			 $ministerios = $ministerios->listarTodos();	
+			 $funcoes = $funcoes->listarTodos();	
+			 $ministeriosDiscipulo->discipuloId = $url[3];
+			 $ministeriosDiscipulo = $ministeriosDiscipulo->pegarMinisterioDiscipulo();
+
 			
-			 $ministerioDiscipulo->discipuloId= $url[3];
-			 //$ministerioDiscipulo = $ministerioDiscipulo->pegarOferta();
-
-
 			$discipulo = new \discipulo\Modelo\Discipulo() ;
 			$discipulo->id = $url[3] ;
 			$discipulo = $discipulo->listarUm();
@@ -35,21 +36,17 @@ namespace ministerio\controlador;
 			require_once  'modulos/ministerio/visao/novo.php';
 			
 			}else {
-				$ministerio =	new \ministerio\modelo\ministerio();
+				$ministerio =	new \ministerio\modelo\ministerioTemDiscipulo();
 
 		$post = $url['post'] ;
 		$ministerio->discipuloId = $post['discipuloId'];
 		$ministerio->ministerioId = $post['ministerioId'];
-		$ministerio->dataOferta = $post['dataOferta'];
-
-
-//		var_dump($ministerio);
-//		exit();
+		$ministerio->funcaoId = $post['funcaoId'];
 
 
 		if ($ministerio->salvar()){
 
-				header ('location:/discipulo/detalhar/id/'.$ministerio->discipuloId);
+				header ('location:/ministerio/novo/id/'.$ministerio->discipuloId);
 				exit();
 		}else {
 				  $ministerio->atualizar();
@@ -83,12 +80,41 @@ namespace ministerio\controlador;
 
 		}
 
+		public function novaFuncao($url){
+			if ( empty ( $url['post'] ) ) {
+		
+				require_once  'modulos/ministerio/visao/novaFuncao.php' ;
+			
+			}else{
+
+			$funcao =	new \ministerio\modelo\funcao() ; 
+
+			$post = $url['post'] ;
+			$funcao->nome = $post['nome'] ;
+
+			$funcao->salvar();
+			header ('location:/ministerio/listarFuncao') ;
+			exit();
+			}
+			
+
+		}
+
 		public function listarMinisterio(){
 
 				  $ministerios =	new \ministerio\modelo\ministerio();
 				  $ministerios = $ministerios->listarTodos();
 
 				  require 'modulos/ministerio/visao/listarMinisterio.php' ; 
+		
+		}
+
+		public function listarFuncao(){
+
+				  $funcoes =	new \ministerio\modelo\funcao();
+				  $funcoes = $funcoes->listarTodos();
+
+				  require 'modulos/ministerio/visao/listarFuncao.php' ; 
 		
 		}
 
@@ -172,6 +198,15 @@ namespace ministerio\controlador;
 				$ministerio->id = $url[3]; 
 				$ministerio->excluir();
 				header ('location:/ministerio/listarMinisterio');
+				exit();
+		}
+
+		public function excluir($url){
+				$ministerio =	new \ministerio\modelo\ministerioTemDiscipulo();
+				$ministerio->discipuloId = $url[3]; 
+				$ministerio->ministerioId = $url[4]; 
+				$ministerio->excluir();
+				header ('location:/ministerio/novo/id/'.$ministerio->discipuloId);
 				exit();
 		}
 

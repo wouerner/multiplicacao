@@ -24,31 +24,34 @@
 					<form action = "/discipulo/novo" method = "post"  class = "form-horizontal">
 				<fieldset>
 						<div class = "control-group" >
-
-						<label class = "control-label" >Nome:</label>
-						<div class = "controls" >
-						<input name = "nome" autofocus alt = "Nome" placeholder= "Nome completo">
-						</div>
+							<label class = "control-label" >Nome:</label>
+							<div class = "controls" >
+								<input name = "nome" alt = "Nome" placeholder= "Nome completo" autofocus >
+								<p class="help-inline">Digite o nome completo.</p>
+							</div>
 						</div>
 						
 						<div class = "control-group" >
-						<label class = "control-label" >Telefone:</label>
-						<div class = "controls" >
-						<input name = "telefone" type = "tel" placeholder= "(00)9999-9999" pattern="\([0-9]{2}\)[0-9]{4}\-[0-9]{4}" maxlength="13" >
-						</div>
+							<label class = "control-label" >Telefone:</label>
+							<div class = "controls" >
+								<input class = "span2" name = "telefone" type = "tel" placeholder= "(00)9999-9999" pattern="\([0-9]{2}\)[0-9]{4}\-[0-9]{4}" maxlength="13" >
+								<p class="help-inline">Digite o telefone com DDD</p>
+							</div>
 						</div>
 
 						<div class = "control-group" >
 						<label class = "control-label" >Endereço:</label>
 						<div class = "controls" >
 						<input name = "endereco" >
+								<p class="help-inline">Digite o Endereço Completo.</p>
 						</div>
 						</div>
 
 						<div class = "control-group" >
 						<label class = "control-label" >E-mail:</label>
 						<div class = "controls" >
-						<input name = "email" type = "email" placeholder= "Digite o seu e-mail" required>
+								<input name = "email" type = "email" placeholder= "teste@teste.br" required>
+								<p class="help-inline">Digite o E-mail.</p>
 						</div>
 						</div>
 
@@ -56,6 +59,7 @@
 						<label class = "control-label" >Senha:</label>
 						<div class = "controls" >
 						<input name = "senha" type = "password">
+								<p class="help-inline">Digite a senha para acesso ao sistema.</p>
 						</div>
 						</div>
 						

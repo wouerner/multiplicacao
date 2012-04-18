@@ -61,15 +61,6 @@
 								  </div>
 								  </div>
 
-							  <div class="control-group ">
-								  <label class = "control-label" >Nível</label>
-								  <div class = "controls" >
-									  <input name = "nivel" value = "<?php echo $discipulo['nivel']?>">
-								  </div>
-								  </div>
-
-
-
 								  <input type = "hidden" name = "id" value = "<?php echo $discipulo['id']?>">
 
 							  </fieldset>
@@ -116,7 +107,7 @@
 							  <fieldset class = "span12" >
 								  	<div class = "form-actions" >
 								  		<button type = "submit" class = "btn btn-primary" >Atualizar</button>
-								  		<button type = "reset" class = "btn" >Cancelar</button>
+								  		<a href = "/discipulo" class = "btn btn-danger" >Cancelar</a>
 								  </div>
 							  </fieldset>
 

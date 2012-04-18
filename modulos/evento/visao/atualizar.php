@@ -21,7 +21,7 @@
 			<article>
 					<form action = "/evento/atualizar" method = "post"  class = "form-inline">
 				<fieldset>
-					<legend>Atualizar Celula</legend>
+					<legend>Atualizar Evento</legend>
 
 						<label>Nome:</label>
 						<input name = "nome"  value = "<?php echo $evento['nome'] ; ?>" >
@@ -29,7 +29,7 @@
 
 						<div class = "form-actions" >
 						<button type = "submit" class = "btn btn-primary " >Atualizar</button>
-						<button type = "reset" class = "btn" >Cancelar</button>
+						<a class = "btn btn-danger" href = "/evento"  >Cancelar</a>
 							</div>
 						</fieldset>
 

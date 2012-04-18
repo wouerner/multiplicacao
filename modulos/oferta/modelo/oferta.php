@@ -40,8 +40,6 @@ class oferta{
 
 			  $resposta = $stm->execute();
 
-			  var_dump($stm->errorInfo());
-			  exit();
 				
 			  //fechar conexÃ£o
 			  $pdo = null ;
@@ -77,40 +75,19 @@ class oferta{
 			  
 			  }
 
-			  public function pegarStatusCelular(){
+			  public function pegarOfertasDiscipulo(){
 
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
-			  $sql = "SELECT * FROM StatusCelular, TipoStatusCelular WHERE  discipuloId = ? AND tipoOferta = TipoStatusCelular.id ";
+			  $sql = "SELECT * FROM Oferta, TipoOferta WHERE  discipuloId = ? AND Oferta.tipoOfertaId = TipoOferta.id ORDER BY data";
 
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
 			  $stm->bindParam(1, $this->discipuloId);
 
-			  $resposta = $stm->execute();
-
-			  //fechar conexÃ£o
-			  $pdo = null ;
-
-			  return $stm->fetch();
-	}
-
-			  public function listarStatusCelularTodos(){
-
-			  //abrir conexao com o banco
-			  $pdo = new \PDO(DSN, USER, PASSWD);
-			  //cria sql
-			  $sql = "SELECT Discipulo.nome AS discipulo , TipoStatusCelular.nome AS status FROM Discipulo,StatusCelular, TipoStatusCelular  
-						 WHERE Discipulo.id = StatusCelular.discipuloId And StatusCelular.tipoOferta = TipoStatusCelular.id ORDER BY discipulo";
-
-
-			  //prepara sql
-			  $stm = $pdo->prepare($sql);
-			  //trocar valores
-
-			  $resposta = $stm->execute();
+			  $stm->execute();
 
 			  //fechar conexÃ£o
 			  $pdo = null ;
@@ -118,30 +95,24 @@ class oferta{
 			  return $stm->fetchAll();
 	}
 
-
-			  public function listarStatusCelularPorTipo(){
-
+			public function excluir(){
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
-			  $sql = "SELECT Discipulo.nome AS discipulo , TipoStatusCelular.nome AS status 
- FROM Discipulo,StatusCelular, TipoStatusCelular  WHERE 
-Discipulo.id = StatusCelular.discipuloId AND TipoStatusCelular.id = ?  AND TipoStatusCelular.id = StatusCelular.tipoOferta" ; 
-
+			  $sql = "DELETE FROM Oferta WHERE  id = ?";
 
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
-			  //
-			  $stm->bindParam(1, $this->tipoOferta);
+			  $stm->bindParam(1, $this->id);
 
-			  $resposta = $stm->execute();
+			  $stm->execute();
 
 			  //fechar conexÃ£o
 			  $pdo = null ;
 
-			  return $stm->fetchAll();
-	}
+			}
+
 
 		  
 

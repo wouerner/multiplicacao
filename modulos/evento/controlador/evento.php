@@ -1,6 +1,7 @@
 <?php 
 
 use evento\modelo\evento;
+use evento\modelo\eventoDiscipulo;
 namespace evento\controlador; 
 
 class evento{
@@ -76,6 +77,23 @@ class evento{
 				$evento->id = $url[3]; 
 				$evento->excluir();
 				header ('location:/evento');
+				exit();
+		
+			
+		
+		
+		}
+
+		public function excluirEventoDiscipulo($url){
+				$evento =	new \evento\modelo\eventoDiscipulo();
+				$evento->eventoId = $url[3];
+				$evento->discipuloId = $url[4];
+
+				//var_dump($evento);
+				//exit();
+
+				$evento->excluir();
+				header ('location:/discipulo/evento/id/'.$evento->discipuloId);
 				exit();
 		
 			

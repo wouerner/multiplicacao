@@ -20,21 +20,25 @@
 
 		<section>		
 			<article>
+					<legend>Nova Função</legend>
+					<form action = "/ministerio/novaFuncao" method = "post"  class = "form-horizontal">
 				<fieldset>
-					<legend>Criar Evento</legend>
-					<form action = "/evento/novo" method = "post"  class = "form-inline">
 						<div class = "control-group" >
-								  <label>Nome:</label>
-								  <input name = "nome" autofocus alt = "Nome" placeholder= "Nome do Evento">
-						</div>
-						<div class ="form-actions" >
-						<button type = "submit" class = "btn btn-success" >Criar</button>
-						<a class = "btn btn-danger" href= "/evento" >Cancelar</a>
-						</div>
 
+						<label class = "control-label" >Nome da Função:</label>
+						<div class = "controls" >
+							<input name = "nome" autofocus alt = "Nome" placeholder= "">
+						</div>
+						</div>
+						
+						<div class = "form-actions" >
+						<button type = "submit" class = "btn btn-success" >Criar</button>
+						<button type = "reset" class = "btn" >Limpar</button>
+						</div>
+						</div>
+				</fieldset>
 					</form>
 				
-				</fieldset>
 			
 			</article>
 		

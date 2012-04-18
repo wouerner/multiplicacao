@@ -20,11 +20,11 @@
 
 		<section>		
 			<article>
-					<legend>Atualizar Celular</legend>
+					<legend>Ofertas</legend>
 					<form action = "/oferta/novo" method = "post"  class = "form-horizontal">
 				<fieldset>
 
-						<h2>oferta do discipulo: <strong><?php echo $discipulo['nome']; ?></strong></h2>
+						<h2><strong><?php echo $discipulo['nome']; ?></strong></h2>
 						<input type = "hidden" name = "discipuloId" value ="<?php echo $discipulo['id'] ; ?>" >	
 
 						<div class = "control-group" >
@@ -41,7 +41,9 @@
 						<div class = "control-group" >
 						<label class = "control-label" >Data da Oferta: </label>
 						<div class = "controls" >
-							<input type = "date" name= "dataOferta" >
+							<input class = "span1" type = "date" name= "dia" maxlength="2" >/
+							<input class = "span1" type = "date" name= "mes" maxlength="2" >/
+							<input class = "span1" type = "date" name= "ano" maxlength="4" >
 							</select>
 						
 						</div>
@@ -54,6 +56,22 @@
 						</div>
 				</fieldset>
 					</form>
+							
+						<table class = "table" >
+								<?php foreach ($ofertasDiscipulo as $oferta) : ?>
+									<tr>
+										<td>
+									<?php echo $oferta['nome'] ; ?> 
+										</td>
+										<td>
+									<?php echo $oferta['data'] ; ?> 
+										</td>
+										<td>
+										<a class = "btn btn-danger" href="/oferta/excluir/id/<?php echo $oferta['0'] ; ?>/<?php echo $oferta['discipuloId']?>" >Excluir</a>
+										</td>
+									</tr>
+								<?php endforeach ; ?>
+						</table>
 			
 			</article>
 		

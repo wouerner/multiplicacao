@@ -19,14 +19,13 @@ namespace oferta\controlador;
 			
 
 			 $tiposOfertas =	new \oferta\modelo\tipoOferta() ; 
-			 $ofertaDiscipulo =	new \oferta\modelo\oferta() ;
+			 $ofertasDiscipulo =	new \oferta\modelo\oferta() ;
 
 
 			 $tiposOfertas = $tiposOfertas->listarTodos();	
 			
-			 $ofertaDiscipulo->discipuloId= $url[3];
-			 //$ofertaDiscipulo = $ofertaDiscipulo->pegarOferta();
-
+			 $ofertasDiscipulo->discipuloId= $url[3];
+			 $ofertasDiscipulo= $ofertasDiscipulo->pegarOfertasDiscipulo();
 
 			$discipulo = new \discipulo\Modelo\Discipulo() ;
 			$discipulo->id = $url[3] ;
@@ -37,19 +36,16 @@ namespace oferta\controlador;
 			}else {
 				$oferta =	new \oferta\modelo\oferta();
 
-		$post = $url['post'] ;
-		$oferta->discipuloId = $post['discipuloId'];
-		$oferta->tipoOfertaId = $post['tipoOfertaId'];
-		$oferta->dataOferta = $post['dataOferta'];
+				$post = $url['post'] ;
+				$oferta->discipuloId = $post['discipuloId'];
+				$oferta->tipoOfertaId = $post['tipoOfertaId'];
+				$dataOferta = $post['ano'].'-'.$post['mes'].'-'.$post['dia'] ;
 
-
-//		var_dump($oferta);
-//		exit();
-
+				$oferta->dataOferta = $dataOferta;
 
 		if ($oferta->salvar()){
 
-				header ('location:/discipulo/detalhar/id/'.$oferta->discipuloId);
+				header ('location:/oferta/novo/id/'.$post['discipuloId']);
 				exit();
 		}else {
 				  $oferta->atualizar();
@@ -175,6 +171,14 @@ namespace oferta\controlador;
 				exit();
 		}
 
+		public function excluir($url){
+				$oferta =	new \oferta\modelo\oferta();
+				$oferta->id = $url[3]; 
+				$oferta->excluir();
+				header ('location:/oferta/novo/id/'.$url[4]);
+				exit();
+		}
+
 
 		public function detalhar ($url) {
 
@@ -188,52 +192,6 @@ namespace oferta\controlador;
 		}
 
 
-		public function chamar () {
-
-			$nome = (!empty($_GET['nome'])) ? $_GET['nome'] : NULL;
-			$discipulo =	new \discipulo\Modelo\Discipulo();
-			$discipulo->nome = $nome; 
-			$discipulos = $discipulo->chamar($nome);	
-			require_once 'discipulo/visao/chamar.php' ;
-
-		
-		}
-	
-		public function evento($url){
-			
-
-			if ( empty ( $url['post'] ) ) {
-
-				  $eventos = new \evento\modelo\evento();
-				
-				  $id = $url[3];
-				  $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
-				$eventos = $eventos->listarTodos();
-
-
-			require_once 'modulos/discipulo/visao/evento.php' ;
-			}else {
-					  $post = $url['post'];
-					 $discipuloEvento = new \evento\modelo\evento();
-					  $eventoId = $post['eventoId'];
-						$discipuloId = $post['discipuloId'];
-
-					 $discipuloEvento->salvarDiscipuloEvento($discipuloId, $eventoId );	
-
-					  echo "url" ;
-					 var_dump($url);
-					 $id = $post['discipuloId'];
-
-					 header ('location:/discipulo/evento/id/'.$id);
-					 exit();
-			
-				
-			
-			
-			}
-				
-		
-		}	
 	
 	}	
 
