@@ -22,8 +22,6 @@ use discipulo\Modelo\Discipulo;
 
 		$discipuloLogado = $discipulo->entrar();
 
-		var_dump($discipuloLogado);
-		exit();
 
 		if($discipuloLogado){
 			$_SESSION['usuario_nome'] = $discipuloLogado['nome'];

@@ -25,7 +25,7 @@
 					<form action = "/evento/novo" method = "post"  class = "form-inline">
 						<div class = "control-group" >
 								  <label>Nome:</label>
-								  <input name = "nome" autofocus alt = "Nome" placeholder= "Nome do Evento">
+								  <input name = "nome" autofocus alt = "Nome" placeholder= "Nome do Evento" required>
 						</div>
 						<div class ="form-actions" >
 						<button type = "submit" class = "btn btn-success" >Criar</button>

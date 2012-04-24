@@ -24,7 +24,7 @@
 					<form action = "/oferta/novo" method = "post"  class = "form-horizontal">
 				<fieldset>
 
-						<h2><strong><?php echo $discipulo['nome']; ?></strong></h2>
+						<h2><strong><a href = "/discipulo/detalhar/id/<?php echo $discipulo['id']?>" ><?php echo $discipulo['nome']; ?></a></strong></h2>
 						<input type = "hidden" name = "discipuloId" value ="<?php echo $discipulo['id'] ; ?>" >	
 
 						<div class = "control-group" >
@@ -41,9 +41,9 @@
 						<div class = "control-group" >
 						<label class = "control-label" >Data da Oferta: </label>
 						<div class = "controls" >
-							<input class = "span1" type = "date" name= "dia" maxlength="2" >/
-							<input class = "span1" type = "date" name= "mes" maxlength="2" >/
-							<input class = "span1" type = "date" name= "ano" maxlength="4" >
+							<input class = "span1" type = "date" name= "dia" maxlength="2" required >/
+							<input class = "span1" type = "date" name= "mes" maxlength="2" required >/
+							<input class = "span1" type = "date" name= "ano" maxlength="4" required >
 							</select>
 						
 						</div>
@@ -64,7 +64,7 @@
 									<?php echo $oferta['nome'] ; ?> 
 										</td>
 										<td>
-									<?php echo $oferta['data'] ; ?> 
+									<?php echo $of = implode ('/',array_reverse(explode('-',$oferta['data']))) ; ?> 
 										</td>
 										<td>
 										<a class = "btn btn-danger" href="/oferta/excluir/id/<?php echo $oferta['0'] ; ?>/<?php echo $oferta['discipuloId']?>" >Excluir</a>

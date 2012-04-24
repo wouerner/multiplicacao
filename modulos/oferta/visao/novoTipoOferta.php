@@ -27,7 +27,7 @@
 
 						<label class = "control-label" >Nome do tipo de oferta:</label>
 						<div class = "controls" >
-							<input name = "nome" autofocus alt = "Nome" placeholder= "">
+							<input name = "nome" autofocus alt = "Nome" placeholder= "" required>
 						</div>
 						</div>
 						

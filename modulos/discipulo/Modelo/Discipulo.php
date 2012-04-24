@@ -2,16 +2,17 @@
 namespace discipulo\Modelo;
 class Discipulo{
 
-	private $id;
-	private $nome;
-	private $ativo;
-	private $telefone;
-	private $email;
-	private $endereco;
-	private $nivel;
-	private $lider;
-	private $celula;
-	private $senha;
+	private $id ;
+	private $nome ;
+	private $ativo ;
+	private $telefone ;
+	private $email ;
+	private $endereco ;
+	private $nivel ;
+	private $lider ;
+	private $celula ;
+	private $senha ;
+	private $erro ;
 
 	public function __construct (){
 	}
@@ -29,67 +30,81 @@ class Discipulo{
 		
 	public function salvar(){
 
-	//abrir conexao com o banco
-	$pdo = new \PDO(DSN, USER, PASSWD);
-	//cria sql
-	$sql = "INSERT INTO Discipulo (
-					nome, telefone, email,endereco, nivel, 
-					lider, celula,  senha
-					)
-		VALUES (?,?,?,?,?,?,?,?)";
-	//prepara sql
-	$stm = $pdo->prepare($sql);
-	//trocar valores
-	$stm->bindParam(1, $this->nome);
-	$stm->bindParam(2, $this->telefone);
-	$stm->bindParam(3, $this->email);
-	$stm->bindParam(4, $this->endereco);
-	$stm->bindParam(5, $this->nivel);
-	$stm->bindParam(6, $this->lider);
-	$stm->bindParam(7, $this->celula);
-	$stm->bindParam(8, md5($this->senha));
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "INSERT INTO Discipulo (
+							  nome, telefone, email,endereco, nivel, 
+							  lider, celula,  senha
+							  )
+				  VALUES (?,?,?,?,?,?,?,?)";
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->nome);
+			  $stm->bindParam(2, $this->telefone);
+			  $stm->bindParam(3, $this->email);
+			  $stm->bindParam(4, $this->endereco);
+			  $stm->bindParam(5, $this->nivel);
+			  $stm->bindParam(6, $this->lider);
+			  $stm->bindParam(7, $this->celula);
+			  $stm->bindParam(8, md5($this->senha));
 
-	$resposta = $stm->execute();
+			  $resposta = $stm->execute();
+				
+			  $this->id = $pdo->lastInsertId();
 
-	//fechar conexÃ£o
-	$pdo = null ;
+			  $erro =  $stm->errorInfo();
 
-	return $resposta;
+			  $this->erro = $erro[0];
+
+			  //fechar conexão
+			  $pdo = null ;
+
+			  return $resposta;
 	
 	}
 
 	public function atualizar(){
+		try {
 
-	//abrir conexao com o banco
-	$pdo = new \PDO(DSN, USER, PASSWD);
-	//cria sql
-	$sql = "UPDATE Discipulo SET 	nome = ? , telefone = ? , email = ? ,endereco = ? , nivel = ?, 
-		lider = ?, celula = ? ,  ativo = ?
-		WHERE id = ?
-					";
-	//prepara sql
-	$stm = $pdo->prepare($sql);
-	//trocar valores
-	$stm->bindParam(1, $this->nome);
-	$stm->bindParam(2, $this->telefone);
-	$stm->bindParam(3, $this->email);
-	$stm->bindParam(4, $this->endereco);
-	$stm->bindParam(5, $this->nivel);
-	$stm->bindParam(6, $this->lider);
-	$stm->bindParam(7, $this->celula);
-	$stm->bindParam(8 , $this->ativo) ;
-	$stm->bindParam(9, $this->id);
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "UPDATE Discipulo SET 	nome = ? , telefone = ? , email = ? ,endereco = ? , nivel = ?, 
+				  lider = ?, celula = ? ,  ativo = ?
+				  WHERE id = ?
+							  ";
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->nome);
+			  $stm->bindParam(2, $this->telefone);
+			  $stm->bindParam(3, $this->email);
+			  $stm->bindParam(4, $this->endereco);
+			  $stm->bindParam(5, $this->nivel);
+			  $stm->bindParam(6, $this->lider);
+			  $stm->bindParam(7, $this->celula);
+			  $stm->bindParam(8 , $this->ativo) ;
+			  $stm->bindParam(9, $this->id);
 
-	$resposta = $stm->execute();
+			  $resposta = $stm->execute();
+			  $erro = $stm->errorCode();
 
-	$erro = $stm->errorInfo();
-	//var_dump($erro);
-	//exit();
+			  if ($erro != '0000'){
 
-	//fechar conexÃ£o
-	$pdo = null ;
+					throw new \Exception ('Não foi possivel atualizar') ;
+				}
 
-	return $resposta;
+			} catch ( \Exception $e ) {
+		
+				$this->erro= $e->getMessage();
+		
+			}
+		  //fechar conexÃ£o
+		  $pdo = null ;
+
+		  return $resposta;
 	
 	}
 	/*Recebe o id para nÃ£o listar este cadastro.
@@ -146,6 +161,39 @@ class Discipulo{
 	}
 
 
+	public function liderCelula(){
+	
+		$pdo = new \PDO(DSN , USER , PASSWD) ;
+
+		$sql = 'SELECT c.nome AS nomeCelula , c.id AS id
+					FROM Discipulo AS d, Celula AS c
+					WHERE d.id = ? AND d.id = c.lider' ;
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(1,$this->id);
+
+		$stm->execute();
+
+		return $stm->fetch();
+	
+	}
+
+	public function participaCelula(){
+	
+		$pdo = new \PDO(DSN , USER , PASSWD) ;
+
+		$sql = 'SELECT c.nome AS nomeCelula FROM Discipulo AS d , Celula AS c WHERE c.id = d.celula and d.id = ? ' ;
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(1,$this->id);
+
+		$stm->execute();
+
+		return $stm->fetch();
+	
+	}
+
+
 	/* listar todos menos os usuario logado atualmente, e com paginação
 	 *
 	 * */
@@ -158,7 +206,7 @@ class Discipulo{
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'SELECT * FROM Discipulo WHERE id != ? LIMIT ? , ?';
+		$sql = 'SELECT * FROM Discipulo WHERE id != ? ORDER BY nome LIMIT ? , ? ';
 
 		$stm = $pdo->prepare($sql);
 
@@ -196,8 +244,11 @@ class Discipulo{
 
 	$total_paginas = $total/$numPagina;
 
+	
+
 	$prev = $pagina - 1 ;
 	$next = $pagina + 1 ;
+
 	// se página maior que 1 (um), então temos link para a página anterior
 	if ($pagina > 1) 
 		{
@@ -240,6 +291,7 @@ class Discipulo{
 	  }
 	// exibir painel na tela
 	  echo ''.$prev_link.' | '.$painel.' | '.$next_link.'';
+
   }
 
 

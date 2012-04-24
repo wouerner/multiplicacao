@@ -26,16 +26,12 @@
 			<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
 			<table>
-				<caption><h3>Detalhes do Discipulos</h3></caption>
+				<caption><h3>Status Celular</h3></caption>
 
 
-				<tr><td colspan = "2" ><h2><?php echo $discipulo['nome'] ; ?> </h2></td></tr>
-				<tr><td>Telefone:<?php echo $discipulo['telefone'] ; ?></td>
-					 <td>E-mail:<?php echo $discipulo['email'] ; ?></td>
-				</tr>
+				<tr><td colspan = "2" ><h2><?php echo $status['nome'] ; ?> </h2></td></tr>
 
-				<tr><td colspan = "2" >Endereço: <?php  echo $discipulo['endereco'] ; ?></td></tr>
-					<?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
+					<?php require 'statusCelular/visao/menuTipoStatusCelular.inc.php' ; ?>
 				</table>
 				
 			

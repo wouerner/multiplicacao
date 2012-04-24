@@ -39,12 +39,10 @@ namespace statusCelular\controlador;
 			}else {
 				$statusCelular =	new \statusCelular\modelo\statusCelular();
 
-		$post = $url['post'] ;
-		$statusCelular->discipuloId = $post['discipuloId'];
-				header ('location:/discipulo/detalhar/id/'.$statusCelular->discipuloId);
-				exit();
-		$statusCelular->tipoStatusCelular = $post['tipoStatusCelular'];
-
+				$post = $url['post'] ;
+				$statusCelular->discipuloId = $post['discipuloId'];
+				$statusCelular->tipoStatusCelular = $post['tipoStatusCelular'];
+	
 
 		if ($statusCelular->salvar()){
 
@@ -170,6 +168,9 @@ namespace statusCelular\controlador;
 				$tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular();
 				$tipoStatusCelular->id = $url[3]; 
 				$tipoStatusCelular->excluir();
+
+				$_SESSION['mensagem'] = !is_null($tipoStatusCelular->erro) ? $tipoStatusCelular->erro : null ;
+				
 				header ('location:/statusCelular/listarTipoStatusCelular');
 				exit();
 		}
@@ -177,12 +178,12 @@ namespace statusCelular\controlador;
 
 		public function detalhar ($url) {
 
-			$discipulo = new \discipulo\Modelo\Discipulo() ;
+			$status = new \statusCelular\modelo\tipoStatusCelular() ;
 
-			$discipulo->id = $url[3] ; 
-			$discipulo = $discipulo->listarUm() ;
+			$status->id = $url[3] ; 
+			$status = $status->listarUm() ;
 		
-			require 'discipulo/visao/detalhar.php' ;	
+			require 'statusCelular/visao/detalhar.php' ;	
 		
 		}
 

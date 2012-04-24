@@ -28,7 +28,7 @@
 							  <div class="control-group ">
 								  <label class = "control-label" >Nome:</label>
 								  <div class = "controls" >
-									  <input name = "nome"  value = "<?php echo $tipoStatusCelular['nome'] ; ?>" >
+									  <input name = "nome"  value = "<?php echo $tipoStatusCelular['nome'] ; ?>" required >
 								  </div>
 								  </div>
 

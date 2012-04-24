@@ -38,7 +38,6 @@ class relatorio {
 		$statusCelulares->tipoStatusCelular = $url['2'] ;
 		$statusCelulares= $statusCelulares->listarStatusCelularPorTipo();
 		$status= $statusCelulares[0]['status'];
-
 		require 'relatorio/visao/statusCelularTipo.php' ;	
 	
 	} 

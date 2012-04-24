@@ -33,6 +33,9 @@ class statusCelular{
 			  $stm->bindParam(1, $this->discipuloId);
 			  $stm->bindParam(2, $this->tipoStatusCelular);
 
+			  //var_dump($stm->errorInfo());
+				//exit();
+
 			  $resposta = $stm->execute();
 
 			  //fechar conexÃ£o
@@ -63,7 +66,7 @@ class statusCelular{
 			  $resposta = $stm->execute();
 
 			  $erro = $stm->errorInfo();
-			  //var_dump($erro);
+			  var_dump($erro);
 			  //exit();
 
 			  //fechar conexÃ£o
@@ -71,6 +74,22 @@ class statusCelular{
 
 			  return $resposta;
 			  
+			  }
+
+			  public function listarUm(){
+
+				  $pdo = new \PDO (DSN,USER,PASSWD);	
+
+				  $sql = 'SELECT * FROM StatusCelular WHERE id = ?';
+
+				  $stm = $pdo->prepare($sql);
+
+				  $stm->bindParam(1, $this->id);
+
+				  $stm->execute();
+
+				  return $stm->fetch();
+
 			  }
 
 			  public function pegarStatusCelular(){

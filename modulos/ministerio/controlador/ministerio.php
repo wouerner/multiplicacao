@@ -193,11 +193,50 @@ namespace ministerio\controlador;
 		
 		}
 
+		public function atualizarFuncao($url){
+
+			if ( empty ( $url['post'] ) ) {
+
+
+				$funcao =	new \ministerio\modelo\funcao();
+				$funcao->id = $url[3] ;
+				$funcao = $funcao->listarUm();
+
+				require_once  'modulos/ministerio/visao/atualizarFuncao.php';
+			
+			}else {
+				$funcao =	new \ministerio\modelo\funcao();
+
+				$post = $url['post'] ;
+
+				$funcao->id = $post['id'];	
+				$funcao->nome = $post['nome'];
+
+				$funcao->atualizarFuncao();
+
+				header ('location:/ministerio/atualizarFuncao/id/'.$funcao->id);
+				exit();
+			}
+		
+		}
+
 		public function excluirMinisterio($url){
 				$ministerio =	new \ministerio\modelo\ministerio();
 				$ministerio->id = $url[3]; 
 				$ministerio->excluir();
+
+				$_SESSION['mensagem'] = !is_null($ministerio->erro) ? $ministerio->erro : null ;
 				header ('location:/ministerio/listarMinisterio');
+				exit();
+		}
+
+		public function excluirFuncao($url){
+				$funcao =	new \ministerio\modelo\funcao();
+				$funcao->id = $url[3]; 
+				$funcao->excluir();
+
+				$_SESSION['mensagem'] = !is_null($funcao->erro) ? $funcao->erro : null ;
+				header ('location:/funcao/listarFuncao');
 				exit();
 		}
 
@@ -219,6 +258,28 @@ namespace ministerio\controlador;
 			$discipulo = $discipulo->listarUm() ;
 		
 			require 'discipulo/visao/detalhar.php' ;	
+		
+		}
+
+		public function detalharFuncao ($url) {
+
+			$funcao = new \ministerio\modelo\funcao() ;
+
+			$funcao->id = $url[3] ; 
+			$funcao = $funcao->listarUm() ;
+		
+			require 'ministerio/visao/detalharFuncao.php' ;	
+		
+		}
+
+		public function detalharMinisterio ($url) {
+
+			$ministerio = new \ministerio\modelo\ministerio() ;
+
+			$ministerio->id = $url[3] ; 
+			$ministerio = $ministerio->listarUm() ;
+		
+			require 'ministerio/visao/detalharMinisterio.php' ;	
 		
 		}
 

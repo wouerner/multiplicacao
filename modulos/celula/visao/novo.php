@@ -27,7 +27,7 @@
 					<div class = "control-group" >
 						<label class = "control-label" >Nome:</label>
 						<div class = "controls" >
-						<input name = "nome" autofocus alt = "Nome" placeholder= "Nome da Célula">
+						<input name = "nome" autofocus alt = "Nome" placeholder= "Nome da Célula" required>
 						</div>
 					</div>	
 

@@ -1,3 +1,9 @@
+<?php 
+$mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL ;
+unset($_SESSION['mensagem']) ;
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -24,6 +30,14 @@
 			<article>
 
 					<?php require 'modulos/celula/visao/chamarCelula.php' ; ?>
+
+			<?php if (isset($mensagem)) : ?>
+					<div class="alert <?php echo ($mensagem=='ok') ? 'alert-success' : 'alert-error' ; ?>">
+				  	<h4 class="alert-heading">
+						<?php echo $mensagem ?>!
+					</h4>
+				   </div>
+				<?php endif ; ?>
 	
 						<table class = "table">
 

@@ -7,6 +7,7 @@ class celula{
 	private $horarioFuncionamento;
 	private $endereco;
 	private $lider;
+	private $erro;
 
 	public function __construct (){
 	}
@@ -41,7 +42,7 @@ class celula{
 
 	$resposta = $stm->execute();
 
-	//fechar conex√£o
+	//fechar conex√É¬£o
 	$pdo = null ;
 
 	return $resposta;
@@ -68,17 +69,14 @@ class celula{
 
 	$resposta = $stm->execute();
 
-	//$erro = $stm->errorInfo();
-	//var_dump($erro);
-	//exit();
 
-	//fechar conex√£o
+	//fechar conex√É¬£o
 	$pdo = null ;
 
 	return $resposta;
 	
 	}
-	/*Recebe o id para n√£o listar este cadastro.
+	/*Recebe o id para n√É¬£o listar este cadastro.
 	 *
 	 * */
 	public function listarTodos(){
@@ -117,7 +115,7 @@ class celula{
 	}
 
 
-	/* listar todos menos os usuario logado atualmente, e com paginaÁ„o
+	/* listar todos menos os usuario logado atualmente, e com pagina√ß√£o
 	 *
 	 * */
 
@@ -189,39 +187,39 @@ class celula{
 
 	$prev = $pagina - 1 ;
 	$next = $pagina + 1 ;
-	// se p·gina maior que 1 (um), ent„o temos link para a p·gina anterior
+	// se p√°gina maior que 1 (um), ent√£o temos link para a p√°gina anterior
 	if ($pagina > 1) 
 		{
 			$prev_link = '<a href=' ;
 			$prev_link .= $_SERVER['REDIRECT_URL'];
 			$prev_link .= "?pagina=$prev> Anterior </a>";
 		} 
-	else { // sen„o n„o h· link para a p·gina anterior
+	else { // sen√£o n√£o h√° link para a p√°gina anterior
     		$prev_link = 'Anterior';
 	}
 
-	// se n˙mero total de p·ginas for maior que a p·gina corrente, 
-	// ent„o temos link para a prÛxima p·gina 
+	// se n√∫mero total de p√°ginas for maior que a p√°gina corrente, 
+	// ent√£o temos link para a pr√≥xima p√°gina 
 	 if ($total_paginas > $pagina) {
     		$next_link = '<a href='.$_SERVER['REDIRECT_URL'].'?pagina='.$next.'>Proxima';
 	  } else { 
-	// sen„o n„o h· link para a prÛxima p·gina
+	// sen√£o n√£o h√° link para a pr√≥xima p√°gina
 	    $next_link = "Proxima";
 	  }
 
-	// vamos arredondar para o alto o n˙mero de p·ginas  que ser„o necess·rias para exibir todos os 
-	// registros. Por exemplo, se  temos 20 registros e mostramos 6 por p·gina, nossa vari·vel  
-	// $total_paginas ser· igual a 20/6, que resultar· em 3.33. Para exibir os  2 registros 
-	// restantes dos 18 mostrados nas primeiras 3 p·ginas (0.33),  ser· necess·ria a quarta p·gina. 
-	// Logo, sempre devemos arredondar uma  fraÁ„o de n˙mero real para um inteiro de cima e isto È 
-	// feito com a  funÁ„o ceil()/  
+	// vamos arredondar para o alto o n√∫mero de p√°ginas  que ser√£o necess√°rias para exibir todos os 
+	// registros. Por exemplo, se  temos 20 registros e mostramos 6 por p√°gina, nossa vari√°vel  
+	// $total_paginas ser√° igual a 20/6, que resultar√° em 3.33. Para exibir os  2 registros 
+	// restantes dos 18 mostrados nas primeiras 3 p√°ginas (0.33),  ser√° necess√°ria a quarta p√°gina. 
+	// Logo, sempre devemos arredondar uma  fra√ß√£o de n√∫mero real para um inteiro de cima e isto √© 
+	// feito com a  fun√ß√£o ceil()/  
 	$total_paginas = ceil($total_paginas);
 
 	  $painel = '';
 
 	  for ($x=1; $x<= $total_paginas; $x++) {
 		  if ($x==$pagina) { 
-		// se estivermos na p·gina corrente, n„o exibir o link para visualizaÁ„o desta p·gina 
+		// se estivermos na p√°gina corrente, n√£o exibir o link para visualiza√ß√£o desta p√°gina 
 	      	$painel .= ' ['.$x.'] ';
 	    	} else {
 			$painel .= ' <a href=' ; 
@@ -236,7 +234,7 @@ class celula{
 
 
 	public function excluir(){
-
+	try{
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
 		$sql = 'DELETE FROM Celula WHERE id = ?';
@@ -245,7 +243,17 @@ class celula{
 
 		$stm->bindParam(1, $this->id);
 
-		$stm->execute();
+		$resposta = $stm->execute();
+		$erro = $stm->errorCode();
+		 
+		if ($erro != '0000'){
+
+			 throw new \Exception ('Existe disc√≠pulos cadastrados nessa c√©lula') ;
+		}
+		}catch ( \Exception $e ) {
+		
+				  $this->erro= $e->getMessage();
+	}
 
 	}
 
@@ -318,7 +326,7 @@ class celula{
 	
 	}
 
-	/* destroi a sess√£o do usuario
+	/* destroi a sess√É¬£o do usuario
 	 *
 	 * */
 	public function sair(){
@@ -335,7 +343,7 @@ class celula{
 
 	public function chamar($nome){
 
-		$nome = "%$nome%" ; // os '%%' funcionam como curingas na express√£o revelando mais resultados.
+		$nome = "%$nome%" ; // os '%%' funcionam como curingas na express√É¬£o revelando mais resultados.
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 

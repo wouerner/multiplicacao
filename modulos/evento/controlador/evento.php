@@ -62,8 +62,6 @@ class evento{
 				$evento->atualizar();
 
 
-				//$lider =	new \evento\Modelo\Discipulo();
-				//$lideres = $evento->listarLideres();
 				header ('location:/evento/atualizar/id/'.$evento->id);
 				exit();
 			}
@@ -76,12 +74,10 @@ class evento{
 				$evento =	new \evento\modelo\evento();
 				$evento->id = $url[3]; 
 				$evento->excluir();
+
+				$_SESSION['mensagem'] = !is_null($evento->erro) ? $evento->erro : null ;
 				header ('location:/evento');
 				exit();
-		
-			
-		
-		
 		}
 
 		public function excluirEventoDiscipulo($url){
@@ -89,15 +85,9 @@ class evento{
 				$evento->eventoId = $url[3];
 				$evento->discipuloId = $url[4];
 
-				//var_dump($evento);
-				//exit();
-
 				$evento->excluir();
 				header ('location:/discipulo/evento/id/'.$evento->discipuloId);
 				exit();
-		
-			
-		
 		
 		}
 
@@ -112,11 +102,5 @@ class evento{
 			require 'evento/visao/detalhar.php' ;	
 		
 		}
-
-
-
-
-
-
 
 }

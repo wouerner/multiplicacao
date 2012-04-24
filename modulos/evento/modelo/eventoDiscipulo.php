@@ -160,8 +160,6 @@ class eventoDiscipulo{
 
 		$stm->execute() ; 
 
-		var_dump($stm->errorInfo());
-
 		return $stm->fetchAll();
 	
 	}

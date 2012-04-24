@@ -22,18 +22,32 @@
 				<fieldset>
 					<legend>Atualizar Célula</legend>
 					<form action = "/celula/atualizar" method = "post"  class = "form-horizontal">
-
-						<label>Nome:</label>
+						
+						<div class = "control-group" >
+						<label class = "control-label" >Nome:</label>
+						<div class = "controls" >
 						<input name = "nome"  value = "<?php echo $celula['nome'] ; ?>" >
+						</div>
+						</div>
 
-						<label>Horario:</label>
+						<div class = "control-group" >
+						<label class = "control-label" >Horario:</label>
+						<div class = "controls" >
 						<input name = "horarioFuncionamento" value = "<?php echo $celula['horarioFuncionamento']?>">
+						</div>
+						</div>
 
-						<label>Endereço:</label>
+						<div class = "control-group" >
+						<label class = "control-label" >Endereço:</label>
+						<div class = "controls" >
 						<input name = "endereco" value = "<?php echo $celula['endereco']?>">
+						</div>
+						</div>
 
 
-						<label>Líder</label>
+						<div class = "control-group" >
+						<label class = "control-label" >Líder:</label>
+						<div class = "controls" >
 						<select name = "lider">
 
 						<option value = "<?php echo $lider['id']?>"><?php echo $lider['nome']?> </option>
@@ -44,13 +58,17 @@
 						<?php endforeach ; ?>
 
 						</select>
+						</div>
+						</div>
 
 							<input type = "hidden" value="<?php echo $celula['id']?>" name = "id" >
-						<fieldset>
-							<legend>Controle</legend>
+
+						
+						<div class = "form-actions" >
 						<button type = "submit" class = "btn btn-primary" >Atualizar</button>
 						<button type = "reset" class = "btn" >Cancelar</button>
-						</fieldset>
+						</div>
+						
 
 					</form>
 				

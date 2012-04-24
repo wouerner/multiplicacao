@@ -1,12 +1,29 @@
+<?php 
+
+$mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : '';
+unset($_SESSION['mensagem']) ;
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="UTF-8" />
 		<style type="text/css">
 		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
 		   @import url("../../../incluidos/css/estilo.css");
 		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
+
+		<script src= "../../../ext/jquery/jquery-1.7.1.min.js"></script>
+		<script src= "../../../ext/jquery/jquery.maskedinput.js"> </script>
+		<script>
+
+		jQuery(function($){
+   	$("#telefone").mask("(99) 9999-9999");
+		});
+
+		</script>
+
 	</head>
 
 	<body>
@@ -19,6 +36,15 @@
 
 		<section>		
 			<article>
+
+				<?php if ($mensagem) : ?>
+					<div class="alert <?php echo ($mensagem=='ok') ? 'alert-success' : 'alert-error' ; ?>">
+				  	<h4 class="alert-heading">
+						<?php echo $mensagem ?>!
+					</h4>
+				   </div>
+				<?php endif ; ?>
+
 					<form action = "/discipulo/atualizar" method = "post"  class = "form-horizontal">
 
 					<div class = "row" >
@@ -28,7 +54,7 @@
 							  <div class="control-group ">
 								  <label class = "control-label" >Nome:</label>
 								  <div class = "controls" >
-									  <input name = "nome"  value = "<?php echo $discipulo['nome'] ; ?>" >
+									  <input name = "nome"  value = "<?php echo $discipulo['nome'] ; ?>" required >
 								  </div>
 								  </div>
 
@@ -43,21 +69,22 @@
 							  <div class="control-group ">
 								  <label class = "control-label" >Telefone:</label>
 								  <div class = "controls" >
-									  <input name = "telefone"  value = "<?php echo $discipulo['telefone']?>" >
+						<input type="tel" value = "<?php echo $discipulo['telefone'] ; ?>"  maxlength="14" 
+						pattern="\([0-9]{2}\) [0-9]{4}\-[0-9]{4}" placeholder="(00) 9999-9999" value="" name="telefone" id="telefone" class="span2">
 								  </div>
 								  </div>
 
 							  <div class="control-group ">
 								  <label class = "control-label" >Endereço:</label>
 									  <div class = "controls" >
-								  <input name = "endereco" value = "<?php echo $discipulo['endereco']?>">
+								  <input name = "endereco" value = "<?php echo $discipulo['endereco']?>" required >
 								  </div>
 								  </div>
 
 							  <div class="control-group ">
 								  <label class = "control-label" >E-mail:</label>
 								  <div class = "controls" >
-									  <input name = "email" type = "email" value = "<?php echo $discipulo['email']?>">
+									  <input name = "email" type = "email" value = "<?php echo $discipulo['email']?>" required >
 								  </div>
 								  </div>
 
@@ -99,7 +126,6 @@
 								  </div>
 								  </div>
 								
-								  <a href="/statusCelular/novo/id/<?php echo $discipulo['id'] ;?>" class = "btn">Atualizar Status</a>
 
 
 							  </fieldset>

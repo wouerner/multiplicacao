@@ -167,6 +167,7 @@ namespace oferta\controlador;
 				$tipoOferta =	new \oferta\modelo\tipoOferta();
 				$tipoOferta->id = $url[3]; 
 				$tipoOferta->excluir();
+				$_SESSION['mensagem'] = !is_null($tipoOferta->erro) ? $tipoOferta->erro : null ;
 				header ('location:/oferta/listarTipoOferta');
 				exit();
 		}
@@ -182,12 +183,12 @@ namespace oferta\controlador;
 
 		public function detalhar ($url) {
 
-			$discipulo = new \discipulo\Modelo\Discipulo() ;
+			$oferta = new \oferta\modelo\tipoOferta() ;
 
-			$discipulo->id = $url[3] ; 
-			$discipulo = $discipulo->listarUm() ;
+			$oferta->id = $url[3] ; 
+			$oferta = $oferta->listarUm() ;
 		
-			require 'discipulo/visao/detalhar.php' ;	
+			require 'oferta/visao/detalhar.php' ;	
 		
 		}
 

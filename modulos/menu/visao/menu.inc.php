@@ -5,7 +5,7 @@
 
 <div class = "span12">
 <ul id = "menu" >
-	<li><a href = "/discipulo">Multiplicação</a></li>
+	<li><a href = "/discipulo"><i class = "icon-home icon-white" ></i> Multiplicação</a></li>
 
 	<li><a href = "#" >Discipulos</a>
 		<ul >	
@@ -37,7 +37,7 @@
 		<ul>	
 			<li><a href = "/ministerio/novoMinisterio">Novo Ministerio</a></li>
 			<li><a href = "/ministerio/listarMinisterio">Listar Ministerio</a></li>
-			<li><a href = "/ministerio/novaFuncao" >Nova Fnção</a></li>
+			<li><a href = "/ministerio/novaFuncao" >Nova Função</a></li>
 			<li><a href = "/ministerio/listarFuncao" >Listar Função</a></li>
 		</ul>
 	</li>

@@ -6,6 +6,7 @@ class  ministerio{
 
 	private $id ;
 	private $nome ;
+	private $erro ;
 
 
 		  public function __get($prop){
@@ -108,9 +109,6 @@ class  ministerio{
 
 	$resposta = $stm->execute();
 
-	//$erro = $stm->errorInfo();
-	//var_dump($erro);
-	//exit();
 
 	//fechar conexÃ£o
 	$pdo = null ;
@@ -120,7 +118,7 @@ class  ministerio{
 	}
 
 	public function excluir(){
-
+	try {
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
 		$sql = 'DELETE FROM Ministerio WHERE id = ?';
@@ -129,7 +127,17 @@ class  ministerio{
 
 		$stm->bindParam(1, $this->id);
 
-		$stm->execute();
+		$resposta = $stm->execute();
+		$erro = $stm->errorCode();
+		 
+		if ($erro != '0000'){
+
+			 throw new \Exception ('Existe discípulos cadastrados') ;
+		}
+		}catch ( \Exception $e ) {
+		
+				  $this->erro= $e->getMessage();
+	}
 
 	}
 

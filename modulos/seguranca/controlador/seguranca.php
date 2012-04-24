@@ -33,7 +33,7 @@ use discipulo\Modelo\Discipulo;
 
 		}else{
 
-			$_SESSION['mensagem'] = 'Discipulo não encontrado';
+			$_SESSION['mensagem'] = 'E-mail/senha incorretos!';
 			header('Location:/seguranca');
 			exit();
 

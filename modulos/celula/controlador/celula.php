@@ -57,14 +57,6 @@ namespace celula\controlador;
 				$lider->id = $celula['lider'] ;
 				$lider = $lider->listarUm($celula['lider']);
 
-
-
-				var_dump($lider);
-				var_dump($celula);
-
-
-
-		
 				require_once  'modulos/celula/visao/atualizar.php';
 			
 			}else {
@@ -92,6 +84,8 @@ namespace celula\controlador;
 				$celula =	new \celula\modelo\celula();
 				$celula->id = $url[3]; 
 				$celula->excluir();
+
+				$_SESSION['mensagem'] = !is_null($celula->erro) ? $celula->erro : NULL ;
 				header ('location:/celula');
 				exit();
 		
@@ -115,7 +109,7 @@ namespace celula\controlador;
 
 		public function chamar () {
 
-			$nome = $_GET['nome'];
+			$nome = isset($_GET['nome']) ? $_GET['nome'] : NULL ;
 			$celula =	new \celula\modelo\celula();
 			$celula->nome = $nome; 
 			$celulas = $celula->chamar($nome);	

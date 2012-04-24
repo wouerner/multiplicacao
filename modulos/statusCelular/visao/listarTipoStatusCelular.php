@@ -1,3 +1,9 @@
+<?php 
+$mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL ;
+unset($_SESSION['mensagem']) ;
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -23,13 +29,21 @@
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
+			<?php if (isset($mensagem)) : ?>
+					<div class="alert <?php echo ($mensagem=='ok') ? 'alert-success' : 'alert-error' ; ?>">
+				  	<h4 class="alert-heading">
+						<?php echo $mensagem ?>!
+					</h4>
+				   </div>
+				<?php endif ; ?>
+
 				<div class = "row" >	
 						<table class = "table bordered-table">
 						<caption><h3>Lista de Tipo de Status Celular</h3></caption>
 
-						<?php foreach ( $tipoStatusCelulares as $tipoStatus) : ?>
+						<?php foreach ( $tipoStatusCelulares as $status) : ?>
 
-						<tr><td><a href="/statusCelular/detalhar/id/<?php echo $tipoStatus['id']?>" ><h2><?php echo $tipoStatus['nome'] ; ?> </h2></a></td>
+						<tr><td><a href="/statusCelular/detalhar/id/<?php echo $status['id']?>" ><h2><?php echo $status['nome'] ; ?> </h2></a></td>
 							<?php require 'statusCelular/visao/menuTipoStatusCelular.inc.php' ; ?>
 						</tr>
 						

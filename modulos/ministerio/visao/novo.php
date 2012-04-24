@@ -24,7 +24,7 @@
 					<form action = "/ministerio/novo" method = "post"  class = "form-horizontal">
 				<fieldset>
 
-						<h2><strong><?php echo $discipulo['nome']; ?></strong></h2>
+						<h2><a href = "/discipulo/detalhar/id/<?php echo $discipulo['id']?>" ><?php echo $discipulo['nome']; ?></a></strong></h2>
 						<input type = "hidden" name = "discipuloId" value ="<?php echo $discipulo['id'] ; ?>" >	
 
 						<div class = "control-group" >

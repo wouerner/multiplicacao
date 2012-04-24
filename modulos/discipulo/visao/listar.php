@@ -24,6 +24,7 @@
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
 				<div class = "row" >	
+				<a href = "/discipulo/novo" class = "btn btn-success" >Novo Discipulo</a>
 						<table class = "table bordered-table">
 						<caption><h3>Lista de Discipulos</h3></caption>
 
@@ -38,9 +39,10 @@
 						
 						<?php endforeach ; ?>
 						</table>
-					<div class = "form-actions" >	
-						<?php discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos['total'] ,3 ,$pagina ) ; ?>
-					</div>
+
+				<a href = "/discipulo/novo" class = "btn btn-success" >Novo Discipulo</a>
+
+						<?php discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos ,5 ,$pagina ) ; ?>
 			</div>
 			</article>
 		

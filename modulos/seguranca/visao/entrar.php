@@ -1,14 +1,5 @@
 <?php
 
-/*$mensagem=null;
-if(!empty($_SESSION['mensagem'])){
-	$mensagem = $_SESSION['mensagem'];
-	unset($_SESSION['mensagem']);
-}*/
-
-//var_dump($_SESSION['erros']);
-
-//$erros = $_SESSION['erros'];
 
 $mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL;
 $erros =  isset($_SESSION['erros']) ? $_SESSION['erros'] : NULL;
@@ -26,17 +17,40 @@ unset($_SESSION['mensagem']);
   </head>
   <body>
 
-
+	
 		<div class = "container">
-						<h2>Multiplicação</h2>
-				<form class="form-stacked" method="post" accept-charset="utf-8" action ="/seguranca/entrar" >
+			<div class = "row" >
+				<?php if ( !is_null($mensagem) ) :?>
+				<div class="alert">
 						<?php echo $mensagem ; ?>
-							<label  for="login">E-Mail:</label>
+				</div>
+				<?php endif ; ?>
+
+
+						<h2>Multiplicação</h2>
+				<form class="form-horizontal" method="post" accept-charset="utf-8" action ="/seguranca/entrar" >
+				<fieldset>
+							<div class = "control-group" >
+							<label  class = "control-label">E-Mail:</label>
+							<div class = "controls" >
 							<input type="text" name="email" class="text meddium" />
-							<label class="desc" for="senha">Senha:</label>
+							</div>			
+							</div>
+
+							<div class = "control-group" >
+							<label class="control-label" for="senha">Senha:</label>
+							<div class = "controls" >
 							<input type="password" name="senha" class="text " />
-							<button type="submit" class="btn">Entrar</button>
+							</div>			
+							</div>
+	
+							<div class = "form-actions" >
+							<button type="submit" class="btn btn-large">Entrar</button>
+							</div>
+							</div>
+			</fieldset>	
 				</form>
+			</div>
 			</div>
 
 		</div>

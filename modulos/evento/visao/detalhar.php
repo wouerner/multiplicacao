@@ -31,7 +31,7 @@
 					<td colspan = "2" ><h2><?php echo $evento['nome'] ; ?> </h2></td></tr>
 				</tr>
 
-					<?php require 'evento/visao/menuDiscipulo.inc.php' ; ?>
+					<?php require 'evento/visao/menuEvento.inc.php' ; ?>
 				</table>
 				
 			

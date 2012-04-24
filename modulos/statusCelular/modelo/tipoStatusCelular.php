@@ -6,6 +6,7 @@ class  tipoStatusCelular{
 
 	private $id ;
 	private $nome ;
+	private $erro ;
 
 
 		  public function __get($prop){
@@ -86,10 +87,6 @@ class  tipoStatusCelular{
 
 	$resposta = $stm->execute();
 
-	//$erro = $stm->errorInfo();
-	//var_dump($erro);
-	//exit();
-
 	//fechar conexÃ£o
 	$pdo = null ;
 
@@ -98,7 +95,7 @@ class  tipoStatusCelular{
 	}
 
 	public function excluir(){
-
+	try {
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
 		$sql = 'DELETE FROM TipoStatusCelular WHERE id = ?';
@@ -107,7 +104,18 @@ class  tipoStatusCelular{
 
 		$stm->bindParam(1, $this->id);
 
-		$stm->execute();
+
+		$resposta = $stm->execute();
+		$erro = $stm->errorCode();
+		 
+		if ($erro != '0000'){
+
+			 throw new \Exception ('Existe discípulos cadastrados') ;
+		}
+		}catch ( \Exception $e ) {
+		
+				  $this->erro= $e->getMessage();
+	}
 
 	}
 

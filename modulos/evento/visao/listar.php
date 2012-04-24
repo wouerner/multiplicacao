@@ -1,3 +1,9 @@
+<?php 
+$mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL ;
+unset($_SESSION['mensagem']) ;
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -23,6 +29,13 @@
 
 		<section>		
 			<article>
+			<?php if (isset($mensagem)) : ?>
+					<div class="alert <?php echo ($mensagem=='ok') ? 'alert-success' : 'alert-error' ; ?>">
+				  	<h4 class="alert-heading">
+						<?php echo $mensagem ?>!
+					</h4>
+				   </div>
+				<?php endif ; ?>
 
 						<table class = "table bordered-table">
 						<caption><h3>Lista de Eventos</h3></caption>

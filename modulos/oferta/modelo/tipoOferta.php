@@ -98,7 +98,7 @@ class  tipoOferta{
 	}
 
 	public function excluir(){
-
+	try{
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
 		$sql = 'DELETE FROM TipoOferta WHERE id = ?';
@@ -107,7 +107,17 @@ class  tipoOferta{
 
 		$stm->bindParam(1, $this->id);
 
-		$stm->execute();
+		$resposta = $stm->execute();
+		$erro = $stm->errorCode();
+		 
+		if ($erro != '0000'){
+
+			 throw new \Exception ('Existe discípulos cadastrados') ;
+		}
+		}catch ( \Exception $e ) {
+		
+				  $this->erro= $e->getMessage();
+	}
 
 	}
 

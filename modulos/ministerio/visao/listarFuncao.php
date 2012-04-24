@@ -29,7 +29,7 @@
 
 						<?php foreach ( $funcoes as $funcao) : ?>
 
-						<tr><td><a href="/funcao/detalhar/id/<?php echo $funcao['id']?>" ><h2><?php echo $funcao['nome'] ; ?> </h2></a></td>
+						<tr><td><a href="/ministerio/detalharFuncao/id/<?php echo $funcao['id']?>" ><h2><?php echo $funcao['nome'] ; ?> </h2></a></td>
 							<?php require 'ministerio/visao/menuFuncao.inc.php' ; ?>
 						</tr>
 						
