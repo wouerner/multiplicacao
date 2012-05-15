@@ -38,7 +38,7 @@ unset($_SESSION['mensagem']) ;
 					</h4>
 				   </div>
 				<?php endif ; ?>
-	
+				<p>Total de Células: <?php echo $totalCelulas ; ?>		</p>
 						<table class = "table">
 
 							<caption><h3>Lista de Células</h3></caption>

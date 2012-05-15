@@ -5,7 +5,7 @@ $hasDB = false;
 $server = 'localhost';
 $user = 'root';
 $pass = 'root';
-$db = 'ACL';
+$db = 'multiplicacao';
 $link = mysql_connect($server,$user,$pass);
 if (!is_resource($link)) {   
 	$hasDB = false;

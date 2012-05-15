@@ -24,7 +24,15 @@ if (array_key_exists('logado', $sessao) && $sessao['logado']==TRUE){
 	$url = 'seguranca' ;
 }
 
+//acesso anonimo ao cadastro
+if( $_GET['url'] == 'discipulo/novoAnonimo' ){
+
+	$url = $_GET['url'];
+
+}
+
 $url = explode('/' ,$url) ;
+
 
 $controlador = $url[0] ;
 $acao = ( array_key_exists(1, $url) ) ? $url[1] : 'index' ;
@@ -43,4 +51,5 @@ $app = new $controlador();
 
 $app->$acao($url);
 
+//var_dump($url);
 ?>

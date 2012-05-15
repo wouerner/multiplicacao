@@ -20,16 +20,16 @@
 
 		<section>		
 			<article>
-					<legend>Atualizar Celular</legend>
+					<legend>Atualizar Status Celular</legend>
 					<form action = "/statusCelular/novo" method = "post"  class = "form-horizontal">
 				<fieldset>
 						<div class = "control-group" >
 
 						
 
-						<input type = "hidden" name = "discipuloId" value ="<?php echo $discipulo['id'] ; ?>" >	
+						<input type = "hidden" name = "discipuloId" value ="<?php echo $discipulo->id ; ?>" >	
 
-						<label class = "control-label" ><strong><?php echo $discipulo['nome']; ?></strong> Tipo do Status:</label>
+						<label class = "control-label" ><strong><?php echo $discipulo->nome; ?></strong> Tipo do Status:</label>
 						<div class = "controls" >
 							<select name = "tipoStatusCelular" >
 									<option value = "<?php echo $statusCelularDiscipulo ['id'] ; ?>" ><?php echo $statusCelularDiscipulo ['nome'] ; ?></option>

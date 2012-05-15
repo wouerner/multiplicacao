@@ -28,7 +28,7 @@
 			
 			<form action = "/discipulo/evento" method = "post" class = "form-horizontal" >
 				<fieldset>
-				<legend>Incluir evento para <a href = "/discipulo/detalhar/id/<?php echo $url[3]?>" > <?php echo $discipulo['nome'] ; ?></legend>
+				<legend>Incluir Escala Exito <a href = "/discipulo/detalhar/id/<?php echo $url[3]?>" ><?php echo $discipulo->nome ; ?></a> </legend>
 					<select name="eventoId">
 						<?php foreach($eventos as $evento) : ?>
 							<option value = "<?php echo $evento['id'] ; ?>" > <?php echo $evento['nome'] ; ?></option>

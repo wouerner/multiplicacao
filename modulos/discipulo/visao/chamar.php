@@ -33,12 +33,12 @@
 						<?php foreach ( $discipulos as $discipulo) : ?>
 
 						<tr>
-							<td><h2><?php echo $discipulo['nome'] ; ?> </h2>
+							<td><h2><a href = "/discipulo/detalhar/id/<?php echo $discipulo->id ; ?>" ><?php echo $discipulo->nome ; ?></a></h2>
 							<?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
 							</td>
 						</tr>
-						<tr><td>Telefone:<?php echo $discipulo['telefone'] ; ?></td> <td>E-mail:<?php echo $discipulo['email'] ; ?></td></tr>
-						<tr><td colspan = "2" >Endereço: <?php  echo $discipulo['endereco'] ; ?></td></tr>
+						<tr><td>Telefone:<?php echo $discipulo->telefone ; ?></td> <td>E-mail:<?php echo $discipulo->email ; ?></td></tr>
+						<tr><td colspan = "2" >Endereço: <?php  echo $discipulo->endereco ; ?></td></tr>
 							
 						<?php endforeach ; ?>
 						<?php endif ; ?>

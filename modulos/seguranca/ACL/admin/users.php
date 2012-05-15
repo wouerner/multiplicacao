@@ -1,6 +1,9 @@
 <?php 
 include("../assets/php/database.php"); 
 include("../assets/php/class.acl.php");
+
+$_GET['action'] = isset($_GET['action']) ? $_GET['action'] : '';
+
 $myACL = new ACL();
 if (isset($_POST['action']))
 {
@@ -47,7 +50,9 @@ if ($myACL->hasPermission('access_admin') != true)
 {
 	header("location: ../index.php");
 }
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -57,17 +62,19 @@ if ($myACL->hasPermission('access_admin') != true)
 <body>
 <div id="header"></div>
 <div id="adminButton"><a href="../">Main Screen</a> | <a href="index.php">Admin Home</a></div>
+
 <div id="page">
 	<? if ($_GET['action'] == '' ) { ?>
     	<h2>Select a User to Manage:</h2>
         <? 
-		$strSQL = "SELECT * FROM `users` ORDER BY `Username` ASC";
+		$strSQL = "SELECT * FROM Discipulo ORDER BY nome ASC";
 		$data = mysql_query($strSQL);
 		while ($row = mysql_fetch_assoc($data))
 		{
-			echo "<a href=\"?action=user&userID=" . $row['ID'] . "\">" . $row['username'] . "</a><br />";
+			echo "<a href=\"?action=user&userID=" . $row['id'] . "\">" . $row['email'] . "</a><br />";
 		}
     } ?>
+
     <?
     if ($_GET['action'] == 'user' ) { 
 		$userACL = new ACL($_GET['userID']);

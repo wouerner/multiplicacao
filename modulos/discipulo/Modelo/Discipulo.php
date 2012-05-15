@@ -4,6 +4,9 @@ class Discipulo{
 
 	private $id ;
 	private $nome ;
+	private $dataNascimento ;
+	private $sexo = 'm' ; // padrão da classe é sexo masculino
+	private $estadoCivilId ;
 	private $ativo ;
 	private $telefone ;
 	private $email ;
@@ -18,16 +21,55 @@ class Discipulo{
 	}
 
 	public function __get($prop){
-		return $this->$prop;
+		if ($prop == 'dataNascimento'  ){  
+				return $this->getDataNascimento();
+
+		}else{
+				  return $this->$prop;
+		}
 	
 	}
 	
 	public function __set($prop , $valor){
-		$this->$prop = $valor;
+			  $this->$prop = $valor;
 	
 	}
 
-		
+
+	public function setDataNascimento($valor){
+	try
+	{
+		$dataNascimento = new \DateTime($valor,new \DateTimeZone('America/Sao_Paulo'));
+
+		$data = $dataNascimento->format('Y-m-d');	
+		$this->dataNascimento = $data;
+	}
+	catch( \Exception $e )
+		{
+ 		echo 'Erro ao instanciar objeto.';
+		 echo $e->getMessage();
+ 		exit();
+		}	
+	
+	}
+
+
+	public function getDataNascimento(){
+	try
+	{
+		$dataNascimento = new \DateTime($this->dataNascimento, new \DateTimeZone('America/Sao_Paulo'));
+		$data = $dataNascimento->format('d/m/Y');	
+		return $this->dataNascimento = $data;
+	}
+	catch( \Exception $e )
+		{
+ 		echo 'Erro ao instanciar objeto.';
+		 echo $e->getMessage();
+ 		exit();
+		}	
+	
+	}
+
 	public function salvar(){
 
 			  //abrir conexao com o banco
@@ -72,7 +114,7 @@ class Discipulo{
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
 			  $sql = "UPDATE Discipulo SET 	nome = ? , telefone = ? , email = ? ,endereco = ? , nivel = ?, 
-				  lider = ?, celula = ? ,  ativo = ?
+				  lider = ?, celula = ? ,  ativo = ?, dataNascimento = ? , estadoCivilId = ? ,sexo = ?
 				  WHERE id = ?
 							  ";
 			  //prepara sql
@@ -86,10 +128,14 @@ class Discipulo{
 			  $stm->bindParam(6, $this->lider);
 			  $stm->bindParam(7, $this->celula);
 			  $stm->bindParam(8 , $this->ativo) ;
-			  $stm->bindParam(9, $this->id);
+			  $stm->bindParam(9 , $this->dataNascimento) ;
+			  $stm->bindParam(10 , $this->estadoCivilId) ;
+			  $stm->bindParam(11 , $this->sexo ) ;
+			  $stm->bindParam(12, $this->id);
 
 			  $resposta = $stm->execute();
 			  $erro = $stm->errorCode();
+
 
 			  if ($erro != '0000'){
 
@@ -160,7 +206,6 @@ class Discipulo{
 	
 	}
 
-
 	public function liderCelula(){
 	
 		$pdo = new \PDO(DSN , USER , PASSWD) ;
@@ -174,7 +219,69 @@ class Discipulo{
 
 		$stm->execute();
 
-		return $stm->fetch();
+		return $stm->fetchAll();
+	
+	}
+
+	/*Lista todos os Discipulos sem célula
+	 *
+	 *
+	 * */
+	public function semCelula($numPagina, $pagina){
+
+		$numPagina = (int)$numPagina;
+		$pagina = (int)$pagina;
+
+
+		(int)$primeiroRegistro = ( $pagina * $numPagina ) - $numPagina ;
+
+		$pdo = new \PDO(DSN , USER , PASSWD) ;
+
+		$sql = 'SELECT * FROM Discipulo AS d WHERE ISNULL(d.celula) LIMIT ? , ?' ;
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(1, $primeiroRegistro ,\PDO::PARAM_INT);
+		$stm->bindParam(2, $numPagina , \PDO::PARAM_INT );
+
+		$stm->execute();
+
+		$resposta = array();
+
+		while($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')){
+			$resposta[$ob->id] = $ob ;
+		
+		}
+
+		return $resposta ;
+	
+	}
+
+	public function semLider($numPagina, $pagina){
+
+		$numPagina = (int)$numPagina;
+		$pagina = (int)$pagina;
+
+
+		(int)$primeiroRegistro = ( $pagina * $numPagina ) - $numPagina ;
+
+		$pdo = new \PDO(DSN , USER , PASSWD) ;
+
+		$sql = 'SELECT * FROM Discipulo AS d WHERE ISNULL(d.lider) LIMIT ? , ?' ;
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(1, $primeiroRegistro ,\PDO::PARAM_INT);
+		$stm->bindParam(2, $numPagina , \PDO::PARAM_INT );
+
+		$stm->execute();
+
+		$resposta = array();
+
+		while($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')){
+			$resposta[$ob->id] = $ob ;
+		
+		}
+
+		return $resposta ;
 	
 	}
 
@@ -218,8 +325,14 @@ class Discipulo{
 
 		$stm->errorInfo();
 
-		return $stm->fetchAll();
+		$resposta = array();
 
+		while($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')){
+			$resposta[$ob->id] = $ob ;
+		
+		}
+
+		return $resposta ; 
 	}
 	
 	/* total de discipulos cadastrados no sistema*/
@@ -236,6 +349,35 @@ class Discipulo{
 
 		return $stm->fetch();
 		
+
+	}
+
+	public static function totalDiscipulosSemCelula(){
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT COUNT(*) AS total FROM Discipulo AS d WHERE ISNULL(d.celula) ';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->execute();
+
+		return $stm->fetch();
+		
+
+	}
+
+	public static function totalDiscipulosSemLider(){
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT COUNT(*) AS total FROM Discipulo AS d WHERE ISNULL(d.lider) ';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->execute();
+
+		return $stm->fetch();
 
 	}
 
@@ -326,7 +468,7 @@ class Discipulo{
 
 		$stm->execute();
 
-		return $stm->fetch();
+		return $stm->fetchObject('\discipulo\Modelo\Discipulo');
 
 	}
 
@@ -410,11 +552,15 @@ class Discipulo{
 
 		$stm->execute();
 
-		return $stm->fetchAll();
-		
+		$resposta = array();
 
-	
-	
+		while($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')){
+			$resposta[$ob->id] = $ob ;
+		
+		}
+
+		return $resposta ; 
+
 	}
 
 

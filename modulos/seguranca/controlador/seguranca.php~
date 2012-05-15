@@ -1,6 +1,7 @@
 <?php 
 namespace seguranca\controlador ; 
 use discipulo\Modelo\Discipulo;
+use discipulo\modelo\role;
 
 	class seguranca{
 	
@@ -33,7 +34,7 @@ use discipulo\Modelo\Discipulo;
 
 		}else{
 
-			$_SESSION['mensagem'] = 'Discipulo não encontrado';
+			$_SESSION['mensagem'] = 'E-mail/senha incorretos!';
 			header('Location:/seguranca');
 			exit();
 
@@ -43,6 +44,30 @@ use discipulo\Modelo\Discipulo;
 	
 	
 		}	
+		
+		public function novoPapel($url){
+
+			if ( empty ( $url['post'] ) ) {
+		
+				require_once  'seguranca/visao/novoPapel.php' ;
+			
+			}else{
+
+			$role =	new \seguranca\modelo\role() ; 
+
+			$post = $url['post'] ;
+
+			$role->roleName = $post['roleName'] ;
+
+			$role->salvar();
+			header ('location:/seguranca/novoPapel') ;
+			exit();
+			}
+		
+		
+		}
+
+
 
 		public function sair(){
 		

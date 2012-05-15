@@ -11,7 +11,7 @@ namespace celula\controlador;
 		//$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 		$celulas =	new \celula\modelo\celula();
 		$celulas = $celulas->listarTodos();
-		//$totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos();
+		$totalCelulas = \celula\modelo\celula::totalCelulas();
 		//$totalDiscipulos --;
 
 			require_once  'modulos/celula/visao/listar.php';
@@ -114,6 +114,16 @@ namespace celula\controlador;
 			$celula->nome = $nome; 
 			$celulas = $celula->chamar($nome);	
 			require_once 'celula/visao/chamar.php' ;
+
+		
+		}
+
+		public function lideresCelula(){
+		
+			$lideres = new \celula\modelo\celula();
+			$lideres = $lideres->listarLideresCelula() ;
+
+			require_once 'celula/visao/listarLideresCelula.php' ;
 
 		
 		}

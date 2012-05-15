@@ -50,7 +50,7 @@
 						<div class = "controls" >
 						<select name = "lider">
 
-						<option value = "<?php echo $lider['id']?>"><?php echo $lider['nome']?> </option>
+						<option value = "<?php echo $lider->id ; ?>"><?php echo $lider->nome ; ?> </option>
 						<option>--------- </option>
 
 						<?php foreach($lideres as $lider) : ?>

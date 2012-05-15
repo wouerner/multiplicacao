@@ -7,33 +7,36 @@
 <ul id = "menu" >
 	<li><a href = "/discipulo"><i class = "icon-home icon-white" ></i> Multiplicação</a></li>
 
-	<li><a href = "#" >Discipulos</a>
+	<li><a href = "/discipulo" >Discipulos</a>
 		<ul >	
 			<li><a href = "/discipulo/novo" >Criar</a></li>
 			<li><a href = "/discipulo" >Igreja</a></li>
+			<li><a href = "/discipulo/semCelula" >Sem Célula</a></li>
+			<li><a href = "/discipulo/semLider" >Sem Líder</a></li>
 			<li><a href = "/discipulo/chamar" >Chamar</a></li>
 		</ul>
 	</li>
-	<li><a href = "#" >Célula</a>
+	<li><a href = "/celula" >Célula</a>
 		<ul >	
 			<li><a href = "/celula/novo" >Criar</a></li>
 			<li><a href = "/celula" >Lista</a></li>
+			<li><a href = "/celula/lideresCelula" >Líderes de Célula</a></li>
 			<li><a href = "/celula/chamar">Chamar</a></li>
 		</ul>
 	</li>
-	<li><a href = "#" >Eventos</a>
+	<li><a href = "/evento" >Eventos</a>
 		<ul>	
 			<li><a href = "/evento/novo">Novo</a></li>
 			<li><a href = "/evento" >Lista</a></li>
 		</ul>
 	</li>
-	<li><a href = "#" >Oferta</a>
+	<li><a href = "/oferta/listarTipoOferta" >Oferta</a>
 		<ul>	
 			<li><a href = "/oferta/novoTipoOferta">Novo</a></li>
 			<li><a href = "/oferta/listarTipoOferta" >Lista</a></li>
 		</ul>
 	</li>
-	<li><a href = "#" >Ministerio</a>
+	<li><a href = "/ministerio/listarMinisterio" >Ministerio</a>
 		<ul>	
 			<li><a href = "/ministerio/novoMinisterio">Novo Ministerio</a></li>
 			<li><a href = "/ministerio/listarMinisterio">Listar Ministerio</a></li>
@@ -41,7 +44,7 @@
 			<li><a href = "/ministerio/listarFuncao" >Listar Função</a></li>
 		</ul>
 	</li>
-	<li><a href = "#" >StatusCelular</a>
+	<li><a href = "/statusCelular/listarTipoStatusCelular" >StatusCelular</a>
 		<ul>	
 			<li><a href = "/statusCelular/novoTipoStatusCelular">Novo</a></li>
 			<li><a href = "/statusCelular/listarTipoStatusCelular" >Lista</a></li>

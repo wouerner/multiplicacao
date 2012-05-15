@@ -16,33 +16,32 @@
 			
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
 		</nav>
-			
-
 		<section>		
 			<article>
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
-
 				<div class = "row" >	
-				<a href = "/discipulo/novo" class = "btn btn-success" >Novo Discipulo</a>
-						<table class = "table bordered-table">
-						<caption><h3>Lista de Discipulos</h3></caption>
+				<span class = "span4" ><a href = "/discipulo/novo" class = "btn btn-success" >Novo Discipulo</a></span>
+				<span class = "span3"><p>Total Discipulos: <strong><?php echo $totalDiscipulos ; ?></strong></p></span>
 
-						<?php foreach ( $discipulos as $discipulo) : ?>
+				<div class = "span12" >
+				<table class = "table bordered-table">
+				<caption><h3>Lista de Discipulos</h3></caption>
 
-						<tr><td><a href="/discipulo/detalhar/id/<?php echo $discipulo['id']?>" ><h2><?php echo $discipulo['nome'] ; ?> </h2></a></td>
-							<?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
-						</tr>
-						<tr><td>Telefone:<?php echo $discipulo['telefone'] ; ?></td> <td>E-mail:<?php echo $discipulo['email'] ; ?></td></tr>
-						<tr><td colspan = "2" >Endereço: <?php  echo $discipulo['endereco'] ; ?></td></tr>
-							
-						
-						<?php endforeach ; ?>
-						</table>
+				<?php foreach ( $discipulos as $discipulo) : ?>
 
-				<a href = "/discipulo/novo" class = "btn btn-success" >Novo Discipulo</a>
+				<tr><td><a href="/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><h2><?php echo $discipulo->nome ; ?> </h2></a></td>
+				 <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
+				</tr>
+				<tr><td>Telefone:<?php echo $discipulo->telefone ; ?></td> <td>E-mail:<?php echo $discipulo->email ; ?></td></tr>
+				<tr><td colspan = "2" >Endereço: <?php  echo $discipulo->endereco ; ?></td></tr>
+				 
+				
+				<?php endforeach ; ?>
+				</table>
 
-						<?php discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos ,5 ,$pagina ) ; ?>
+						<?php discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos ,$quantidadePorPagina ,$pagina ) ; ?>
+				</div>
 			</div>
 			</article>
 		

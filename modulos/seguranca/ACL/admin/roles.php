@@ -1,6 +1,9 @@
 <?php 
 include("../assets/php/database.php"); 
 include("../assets/php/class.acl.php");
+$_GET['action'] = isset($_GET['action']) ? $_GET['action'] : '';
+$_GET['roleID'] = isset($_GET['roleID']) ? $_GET['roleID'] : ''; 
+
 $myACL = new ACL();
 if (isset($_POST['action']))
 {

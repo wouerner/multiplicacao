@@ -114,6 +114,23 @@ class celula{
 	
 	}
 
+	public function listarLideresCelula(){
+	
+		$pdo = new \PDO(DSN , USER , PASSWD) ;
+
+		$sql = 'SELECT Discipulo.id , Discipulo.nome, COUNT( Discipulo.id ) AS totalCelulas
+					 FROM Celula , Discipulo
+					 WHERE Celula.lider = Discipulo.id
+					 GROUP BY Discipulo.id ORDER BY Discipulo.nome';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->execute();
+
+		return $stm->fetchAll();
+	
+	}
+
 
 	/* listar todos menos os usuario logado atualmente, e com paginação
 	 *
@@ -165,17 +182,19 @@ class celula{
 	
 	/* total de discipulos cadastrados no sistema*/
 
-	public static function totalDiscipulos(){
+	public static function totalCelulas(){
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'SELECT COUNT(*) AS total FROM Discipulo';
+		$sql = 'SELECT COUNT(*) AS total FROM Celula';
 
 		$stm = $pdo->prepare($sql);
 
 		$stm->execute();
 
-		return $stm->fetch();
+		$resposta = $stm->fetch();
+
+		return $resposta['total'] ;
 		
 
 	}

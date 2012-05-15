@@ -180,7 +180,7 @@
 		
 		function getUsername($userID)
 		{
-			$strSQL = "SELECT `username` FROM `users` WHERE `ID` = " . floatval($userID) . " LIMIT 1";
+			$strSQL = "SELECT `email` FROM `Discipulo` WHERE `ID` = " . floatval($userID) . " LIMIT 1";
 			$data = mysql_query($strSQL);
 			$row = mysql_fetch_array($data);
 			return $row[0];

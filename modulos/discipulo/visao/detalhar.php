@@ -30,28 +30,31 @@
 
 				<tr>	
 					<td colspan = "2" >
-						<h3><?php echo $discipulo['nome'] ; ?></h3>
+						<h3><?php echo $discipulo->nome ; ?></h3>
 					</td>
 					<td>
 						<span class="badge"> <?php  echo $statusCelular['nome'] ; ?></span> 
 					</td>
 				</tr>
 
-				<tr><td>Telefone:<?php echo $discipulo['telefone'] ; ?></td>
-					 <td>E-mail:<?php echo $discipulo['email'] ; ?></td>
+				<tr><td>Telefone:<?php echo $discipulo->telefone ; ?></td>
+					 <td>E-mail:<?php echo $discipulo->email ; ?></td>
 				</tr>
 
-				<tr><td colspan = "2" >Endereço: <?php  echo $discipulo['endereco'] ; ?></td></tr>
+				<tr><td colspan = "2" >Endereço: <?php  echo $discipulo->endereco ; ?></td></tr>
 
 				<tr><td colspan = "2" >Líder da Célula: 
-						  <a href="/celula/detalhar/id/<?php echo $liderCelula['id']?>">
-							  <?php echo $liderCelula['nomeCelula'] ; ?>
+						<?php foreach ( $liderCelula as $celula) :?>
+						<a href="/celula/detalhar/id/<?php echo $celula['id'] ; ?>">
+							<?php echo $celula['nomeCelula'] ; ?> 
+						</a> |
+						<?php endforeach ; ?>
 						  </a>
 						</td>
 				</tr>
 
 				<tr><td colspan = "2" >Participa da Célula: 
-						<a href="/celula/detalhar/id/<?php echo $discipulo['celula'] ; ?>">
+						<a href="/celula/detalhar/id/<?php echo $discipulo->celula ; ?>">
 							<?php echo $participaCelula['nomeCelula'] ; ?>
 						</a>
 					</td>
