@@ -15,7 +15,10 @@ class Discipulo{
 	private $lider ;
 	private $celula ;
 	private $senha ;
+	private $statusCelular ;
+	private $admissao ;
 	private $erro ;
+	private $rede;
 
 	public function __construct (){
 	}
@@ -39,10 +42,9 @@ class Discipulo{
 	public function setDataNascimento($valor){
 	try
 	{
-		$dataNascimento = new \DateTime($valor,new \DateTimeZone('America/Sao_Paulo'));
 
-		$data = $dataNascimento->format('Y-m-d');	
-		$this->dataNascimento = $data;
+		$this->dataNascimento = \DateTime::createFromFormat('d/m/Y',$valor,new \DateTimeZone('America/Sao_Paulo'));
+
 	}
 	catch( \Exception $e )
 		{
@@ -55,20 +57,96 @@ class Discipulo{
 
 
 	public function getDataNascimento(){
-	try
-	{
-		$dataNascimento = new \DateTime($this->dataNascimento, new \DateTimeZone('America/Sao_Paulo'));
-		$data = $dataNascimento->format('d/m/Y');	
-		return $this->dataNascimento = $data;
+			  try
+			  {
+				  $this->dataNascimento = new \DateTime($this->dataNascimento, new \DateTimeZone('America/Sao_Paulo'));
+				  return $this->dataNascimento;
+			  }
+			  catch( \Exception $e )
+				  {
+				  echo 'Erro ao instanciar objeto.';
+					echo $e->getMessage();
+				  exit();
+				}	
 	}
-	catch( \Exception $e )
-		{
- 		echo 'Erro ao instanciar objeto.';
-		 echo $e->getMessage();
- 		exit();
-		}	
+
+
+	/*Pega a célula que o discipulo participa.
+	 *
+	 *
+	 * */
+	public function getCelula(){
+		$celula = new \celula\modelo\celula();
+		$celula->id = $this->celula;
+		$this->celula = $celula->listarUm();
+		return $this->celula	;
 	
 	}
+
+
+	/*
+	 *Listar todos os eventos do discipulo
+	 *
+	 * */
+	public function getEventos(){
+		$evento = new \evento\modelo\evento();
+		$evento = $evento->listarTodosDiscipulo($this->id);
+
+		return $evento	;
+	
+	}
+
+	public function getEstatoCivil(){
+		$estadoCivil = new estadoCivil();
+		$estadoCivil->id = $this->estadoCivilId;
+		$estadoCivil = $estadoCivil->listarUm();
+
+		return $estadoCivil	;
+	
+	}
+
+	public function getLider(){
+		$lider = new Discipulo();
+		$lider->id = $this->lider;
+		$lider = $lider->listarUm();
+		return $lider	;
+	
+	}
+
+	public function getStatusCelular(){
+		$status = new \statusCelular\modelo\statusCelular();
+		$status->discipuloId = $this->id;
+		$status = $status->pegarStatusCelular();
+		return $status	;
+	
+	}
+
+	public function getAdmissao(){
+		$admissao = new \admissao\modelo\admissao();
+		$admissao->discipuloId = $this->id;
+		$admissao=  $admissao->listarUm();
+		return $admissao	;
+	
+	}
+
+
+	public function getRede(){
+		$rede = new \rede\modelo\rede();
+		$rede->discipuloId = $this->id;
+		$rede =  $rede->pegarRedeDiscipulo();
+		return $rede ;
+	
+	}
+
+	public function getMinisterio(){
+		$ministerio = new \ministerio\modelo\ministerioTemDiscipulo();
+		$ministerio->discipuloId = $this->id;
+		$ministerio =  $ministerio->pegarMinisterioDiscipulo();
+		return $ministerio ;
+	
+	}
+
+
 
 	public function salvar(){
 
@@ -107,6 +185,68 @@ class Discipulo{
 	
 	}
 
+	public function salvarCompleto(){
+
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "INSERT INTO Discipulo (
+							  nome, ativo, datanascimento, sexo, estadoCivilId, telefone, email,endereco,  
+							  lider, celula,  senha
+							  )
+				  VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->nome);
+			  $stm->bindParam(2, $this->ativo);
+			  $stm->bindParam(3, $this->dataNascimento->format('Y-m-d') );
+			  $stm->bindParam(4, $this->sexo);
+			  $stm->bindParam(5, $this->estadoCivilId);
+			  $stm->bindParam(6, $this->telefone);
+			  $stm->bindParam(7, $this->email);
+			  $stm->bindParam(8, $this->endereco);
+			  $stm->bindParam(9, $this->lider);
+			  $stm->bindParam(10, $this->celula);
+			  $stm->bindParam(11, md5($this->senha));
+
+			  $resposta = $stm->execute();
+				
+			  $this->id = $pdo->lastInsertId();
+
+			  $erro =  $stm->errorInfo();
+
+			  $this->erro = $erro[0];
+
+			  //fechar conexão
+			  $pdo = null ;
+
+			  return $resposta;
+	
+	}
+
+	public function emailUnico(){
+
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "SELECT email FROM Discipulo WHERE email = ?";
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->email);
+
+			  $stm->execute();
+
+			  if ($stm->fetch() == false){
+			  		return true ;
+			  
+			  }
+			  		return false ;
+		
+	
+	}
+
+
 	public function atualizar(){
 		try {
 
@@ -128,7 +268,7 @@ class Discipulo{
 			  $stm->bindParam(6, $this->lider);
 			  $stm->bindParam(7, $this->celula);
 			  $stm->bindParam(8 , $this->ativo) ;
-			  $stm->bindParam(9 , $this->dataNascimento) ;
+			  $stm->bindParam(9 , $this->dataNascimento->format('Y-m-d')) ;
 			  $stm->bindParam(10 , $this->estadoCivilId) ;
 			  $stm->bindParam(11 , $this->sexo ) ;
 			  $stm->bindParam(12, $this->id);
@@ -222,6 +362,52 @@ class Discipulo{
 		return $stm->fetchAll();
 	
 	}
+
+	public function discipulosPorLider(){
+	
+		$pdo = new \PDO(DSN , USER , PASSWD) ;
+
+		$sql = 'SELECT l.id AS liderId, l.nome AS Lider, d.id AS discipuloId, d.nome AS nomeDiscipulo, d.lider AS discipuloLiderId
+				FROM Discipulo AS d
+				INNER JOIN Discipulo AS l ON d.lider = l.id
+				ORDER BY l.nome'; 
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->execute();
+
+		$respostas = $stm->fetchAll();
+
+//		var_dump($respostas);
+
+		$aux = array();
+
+		foreach ( $respostas as $valor) {
+				$i = $valor['liderId'] ;			 
+				$j = $valor['discipuloId'] ;
+
+				foreach($valor as  $v){
+
+				  	$aux[$i]['lider']	= $valor['Lider'] ;	
+				  	$aux[$i]['liderId']	= $valor['liderId'] ;	
+						  
+					$aux[$i]['discipulos'][$j] = array('nomeDiscipulo' => $valor['nomeDiscipulo'], 
+							  										'discipuloId' => $valor['discipuloId'] ,
+																	'discipulos' => array()  ) ;	
+						
+				}
+		}
+		
+		$teste = array_chunk($aux, 1,true);
+
+		$teste = array_merge($teste[0],$teste[1]) ;
+
+		//var_dump($teste);
+
+		return $aux;
+	
+	}
+
 
 	/*Lista todos os Discipulos sem célula
 	 *
@@ -561,6 +747,33 @@ class Discipulo{
 
 		return $resposta ; 
 
+	}
+
+	public function fichaPorStatus($idStatus){
+
+			  $pdo = new \PDO ( DSN, USER, PASSWD ) ;
+	
+		$sql = "SELECT *
+		  FROM Discipulo AS d, StatusCelular st
+		  WHERE d.id = st.discipuloId
+		  AND st.tipoStatusCelular =? order by d.nome" ;  		
+
+			  $stm = $pdo->prepare($sql);
+
+			  $stm->bindParam(1, $idStatus);
+
+			  $stm->execute();
+				
+		$resposta = array();
+
+		while($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')){
+			$resposta[$ob->id] = $ob ;
+		
+		}
+
+		return $resposta ; 
+
+	
 	}
 
 

@@ -49,15 +49,16 @@ class ministerioTemDiscipulo{
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
-			  $sql = "UPDATE StatusCelular SET 	tipoOferta = ?  
+			  $sql = "UPDATE MinisterioTemDiscipulo SET 	 ministerioId= ?  , funcaoId = ?
 				  WHERE discipuloId = ?
 							  ";
 
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
-			  $stm->bindParam(1, $this->tipoOferta );
-			  $stm->bindParam(2, $this->discipuloId );
+			  $stm->bindParam(1, $this->ministerioId );
+			  $stm->bindParam(2, $this->funcaoId );
+			  $stm->bindParam(3, $this->discipuloId );
 
 			  $resposta = $stm->execute();
 
@@ -77,8 +78,10 @@ class ministerioTemDiscipulo{
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
-			  $sql = "SELECT m.nome AS ministerio , f.nome AS funcao, discipuloId, ministerioId FROM Ministerio AS m , MinisterioTemDiscipulo, Funcao AS f 
-						 WHERE m.id = MinisterioTemDiscipulo.ministerioId AND f.id = MinisterioTemDiscipulo.funcaoId AND MinisterioTemDiscipulo.discipuloId = ? ";
+			  $sql = "SELECT m.nome AS ministerio , f.nome AS funcao, discipuloId, ministerioId , f.id AS funcaoId 
+						 FROM Ministerio AS m , MinisterioTemDiscipulo, Funcao AS f 
+						 WHERE m.id = MinisterioTemDiscipulo.ministerioId 
+						 AND f.id = MinisterioTemDiscipulo.funcaoId AND MinisterioTemDiscipulo.discipuloId = ? ";
 
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);

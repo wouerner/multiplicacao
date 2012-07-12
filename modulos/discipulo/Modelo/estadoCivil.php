@@ -110,7 +110,11 @@ class estadoCivil{
 
 		$stm->execute();
 
-		return $stm->fetchObject('\discipulo\Modelo\estadoCivil');
+		
+
+		$resposta =$stm->fetchObject('\discipulo\Modelo\estadoCivil');
+
+		return $resposta ;
 
 	}
 

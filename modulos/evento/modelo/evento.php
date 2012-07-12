@@ -65,6 +65,70 @@ class evento{
 			  
 		  }
 
+		  public function salvarEventos($eventos, $discipuloId){
+
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "INSERT INTO DiscipuloTemEvento (discipuloId, eventoId )
+				  		VALUES (?,?)";
+			
+
+			  foreach($eventos as $evento){
+						 $id = $evento;
+							//prepara sql
+						 $stm = $pdo->prepare($sql);
+						 //trocar valores
+						 $stm->bindParam(1, $discipuloId);
+						 $stm->bindParam(2, $id);
+
+						 $resposta = $stm->execute();
+
+
+			  }
+
+
+			  foreach($eventos as $evento){
+
+						 $ev[$evento] =  $evento; 
+						 
+			  }
+
+
+			  foreach($this->listarTodos() as $evento){
+						$remover[$evento['id']] = array('id' => $evento['id'] , 'nome' => $evento['nome'] ); 
+
+			  }
+
+			$dif = array_diff_key($remover,$ev) ; 
+
+			  $sql = "DELETE FROM DiscipuloTemEvento 
+				  		WHERE discipuloId = ?AND eventoId = ?";
+
+				foreach($dif as $d ){
+						 $id = $evento['id'];
+						//prepara sql
+						 $stm = $pdo->prepare($sql);
+						 //trocar valores
+						 $stm->bindParam(1, $discipuloId);
+						 $stm->bindParam(2, $d['id']);
+
+						// $resposta =
+								  	$stm->execute();
+
+						 //var_dump($stm->errorInfo());
+				
+				}
+
+
+
+			  //fechar conexÃ£o
+			  $pdo = null ;
+
+			  return $resposta;
+			  
+		  }
+
 		  public function listarTodos(){
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
@@ -75,7 +139,15 @@ class evento{
 
 		$stm->execute();
 
-		return $stm->fetchAll();
+		$resp = $stm->fetchAll();
+
+		$resposta = '' ;
+
+		foreach($resp as $r){
+				  $resposta[$r['id']] = array('id' => $r['id'] , 'nome' => $r['nome'] );
+			}
+
+		return $resposta;
 
 	}
 
@@ -170,7 +242,7 @@ class evento{
 		$pdo = new \PDO(DSN, USER, PASSWD);	  
 		
 		$sql = '
-		SELECT DISTINCT id , nome
+		SELECT DISTINCT id , nome , DiscipuloTemEvento.discipuloId
 		FROM DiscipuloTemEvento , Evento
 		WHERE DiscipuloTemEvento.discipuloId = ? AND Evento.id = DiscipuloTemEvento.eventoId
 		' ;
@@ -182,8 +254,16 @@ class evento{
 
 		$stm->execute() ; 
 
+		$resposta = $stm->fetchAll();
 
-		return $stm->fetchAll();
+		//var_dump($resposta);
+		$re = array();
+			
+			foreach($resposta as $r ){
+				$re[$r['id']] = array('id' => $r['id'], 'nome' => $r['nome'] , 'discipuloId' => $url)  ;	
+			}
+
+		return $re;
 	
 	}
 

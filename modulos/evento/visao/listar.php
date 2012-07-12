@@ -38,7 +38,7 @@ unset($_SESSION['mensagem']) ;
 				<?php endif ; ?>
 
 						<table class = "table bordered-table">
-						<caption><h3>Lista de Eventos</h3></caption>
+						<caption><h3>Lista dos tipo de Escala de Êxito </h3></caption>
 
 						<?php foreach ( $eventos as $evento) : ?>
 

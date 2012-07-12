@@ -68,7 +68,7 @@ class  tipoStatusCelular{
 
 		$stm->execute();
 
-		return $stm->fetch();
+		return $stm->fetchObject();
 
 	}
 

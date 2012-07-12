@@ -21,7 +21,7 @@
 			<article>
 					<form action = "/evento/atualizar" method = "post"  class = "form-inline">
 				<fieldset>
-					<legend>Atualizar Evento</legend>
+					<legend>Atualizar Escala de Êxito</legend>
 
 						<label>Nome:</label>
 						<input name = "nome"  value = "<?php echo $evento['nome'] ; ?>" >

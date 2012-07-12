@@ -24,6 +24,7 @@
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
 				<div class = "row" >	
+				<div class = "span12" >	
 						<table class = "table bordered-table">
 						<caption><h3>Lista de Discipulos</h3></caption>
 
@@ -40,6 +41,7 @@
 						</table>
 					<div class = "form-actions" >	
 						<?php discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos['total'] ,3 ,$pagina ) ; ?>
+					</div>
 					</div>
 			</div>
 			</article>

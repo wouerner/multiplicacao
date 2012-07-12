@@ -39,7 +39,7 @@
 							  <fieldset class = "span12" >
 								  	<div class = "form-actions" >
 								  		<button type = "submit" class = "btn btn-primary" >Atualizar</button>
-								  		<button type = "reset" class = "btn" >Cancelar</button>
+								  		<a class = "btn" href = "/statusCelular/listarTipoStatusCelular"  >Cancelar</a>
 								  </div>
 							  </fieldset>
 

@@ -13,7 +13,7 @@
 		<section class = "container">
 
 		<nav> 
-			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
+			<?php //include 'modulos/menu/visao/menu.inc.php' ; ?>	
 		</nav>
 			
 		<header>
@@ -22,15 +22,20 @@
 
 		<section>		
 			<article>
-	
-						<table class = "table">
+			<?php $cont = 0 ; ?>
+						<table class = "table table-condensed table-bordered">
 
 						<caption><h3>Relatorio de Status Por Tipo: <?php echo $status ; ?><h3></caption>
+							<thead>
+								<tr>
+								<th class = "span1" >Nº</th>	<th>Nome</th>
+								</tr>
+							</thead>
 
 							<?php foreach ( $statusCelulares as $statusCelular) : ?>
 
 							<tr>
-								<td><h2><?php echo $statusCelular['discipulo'] ; ?> </h2></td>
+								<td><?php echo ++$cont?></td> <td><?php echo $statusCelular['discipulo'] ; ?></td>
 							</tr>
 							<tr>
 							</tr>

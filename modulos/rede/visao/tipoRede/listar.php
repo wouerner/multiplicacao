@@ -28,15 +28,10 @@ unset($_SESSION['mensagem']) ;
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
-			<?php if (isset($mensagem)) : ?>
-					<div class="alert <?php echo ($mensagem=='ok') ? 'alert-success' : 'alert-error' ; ?>">
-				  	<h4 class="alert-heading">
-						<?php echo $mensagem ?>!
-					</h4>
-				   </div>
-				<?php endif ; ?>
 
 				<div class = "row" >	
+				<div class = "span12" >	
+			
 						<table class = "table bordered-table">
 						<caption><h3>Lista de Tipo de Rede</h3></caption>
 
@@ -51,6 +46,7 @@ unset($_SESSION['mensagem']) ;
 					<div class = "form-actions" >	
 						<?php //discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos['total'] ,3 ,$pagina ) ; ?>
 					</div>
+			</div>
 			</div>
 			</article>
 		

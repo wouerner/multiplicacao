@@ -21,7 +21,7 @@
 		<section>		
 			<article>
 				<fieldset>
-					<legend>Criar Evento</legend>
+					<legend>Criar Evento na Escala de Êxito</legend>
 					<form action = "/evento/novo" method = "post"  class = "form-inline">
 						<div class = "control-group" >
 								  <label>Nome:</label>

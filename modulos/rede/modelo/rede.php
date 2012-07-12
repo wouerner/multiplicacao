@@ -70,20 +70,27 @@ class rede{
 			  
 			  }
 
-			  public function pegarMinisterioDiscipulo(){
+			  public function pegarRedeDiscipulo(){
 
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
-			  $sql = "SELECT m.nome AS ministerio , f.nome AS funcao, discipuloId, tipoRede FROM Ministerio AS m , Redes, Funcao AS f 
-						 WHERE m.id = Redes.tipoRede AND f.id = Redes.funcaoRedeId AND Redes.discipuloId = ? ";
+			  $sql = 'SELECT
+ tpRede.nome AS tipoRede, 
+           tpRede.id AS tpRedeId, fRede.id AS funcaoId, fRede.nome AS funcaoRede
+	
+						FROM Redes AS r, TipoRede AS tpRede, FuncaoRede AS fRede
+
+							WHERE r.discipuloId = ? and tpRede.id = r.tipoRedeId and r.funcaoRedeid = fRede.id
+							';
 
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
 			  $stm->bindParam(1, $this->discipuloId);
 
-			  $resposta = $stm->execute();
+
+			  $stm->execute();
 
 			  //fechar conexÃ£o
 			  $pdo = null ;
@@ -140,29 +147,6 @@ class rede{
 	}
 
 
-			  public function listarStatusCelularPorTipo(){
-
-			  //abrir conexao com o banco
-			  $pdo = new \PDO(DSN, USER, PASSWD);
-			  //cria sql
-			  $sql = "SELECT Discipulo.nome AS discipulo , TipoStatusCelular.nome AS status 
- FROM Discipulo,StatusCelular, TipoStatusCelular  WHERE 
-Discipulo.id = StatusCelular.discipuloId AND TipoStatusCelular.id = ?  AND TipoStatusCelular.id = StatusCelular.tipoOferta" ; 
-
-
-			  //prepara sql
-			  $stm = $pdo->prepare($sql);
-			  //trocar valores
-			  //
-			  $stm->bindParam(1, $this->tipoOferta);
-
-			  $resposta = $stm->execute();
-
-			  //fechar conexÃ£o
-			  $pdo = null ;
-
-			  return $stm->fetchAll();
-	}
 
 		  
 

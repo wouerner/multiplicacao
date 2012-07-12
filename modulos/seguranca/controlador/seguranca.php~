@@ -41,8 +41,6 @@ use discipulo\modelo\role;
 			
 			}
 	
-	
-	
 		}	
 		
 		public function novoPapel($url){

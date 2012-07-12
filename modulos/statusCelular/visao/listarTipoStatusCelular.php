@@ -38,6 +38,7 @@ unset($_SESSION['mensagem']) ;
 				<?php endif ; ?>
 
 				<div class = "row" >	
+				<div class = "span12" >	
 						<table class = "table bordered-table">
 						<caption><h3>Lista de Tipo de Status Celular</h3></caption>
 
@@ -52,6 +53,7 @@ unset($_SESSION['mensagem']) ;
 					<div class = "form-actions" >	
 						<?php //discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos['total'] ,3 ,$pagina ) ; ?>
 					</div>
+			</div>
 			</div>
 			</article>
 		

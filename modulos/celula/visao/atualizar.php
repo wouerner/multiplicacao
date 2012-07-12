@@ -5,8 +5,13 @@
 		<style type="text/css">
 		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
 		   @import url("../../../incluidos/css/estilo.css");
+			@import url("../../../ext/jquery-ui/css/ui-lightness/jquery-ui.css");
 		</style>
 		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
+		<script src="../../../ext/jquery-ui/js/jquery-ui.js"></script>
+		<script src="/modulos/discipulo/visao/js/combobox.js"></script>
+		<script src="/modulos/discipulo/visao/js/comboboxCelula.js"></script>
+
 	</head>
 
 	<body>
@@ -44,18 +49,21 @@
 						</div>
 						</div>
 
-
-						<div class = "control-group" >
-						<label class = "control-label" >Líder:</label>
+						 <div class = "control-group " >
+							<div class = "ui-widget" >
+								 <label class = "control-label" for = "lider" >Líder</label>
 						<div class = "controls" >
-						<select name = "lider">
+								 <select id = "combobox" class = "combobox lider span3" name = "lider"  >
+										<option value = "<?php echo $lider->id?>"><?php echo $lider->nome ?></option>
+									  <?php foreach($lideres as $lider) : ?><option value = "<?php echo $lider['id']?>"><?php echo $lider['nome']?></option>
+									  <?php endforeach ; ?>
 
-						<option value = "<?php echo $lider->id ; ?>"><?php echo $lider->nome ; ?> </option>
-						<option>--------- </option>
+								 </select>
+							</div>
+						 </div>	
+						 </div>	
 
-						<?php foreach($lideres as $lider) : ?>
-						<option value = "<?php echo $lider['id']?>"><?php echo $lider['nome']?> </option>
-						<?php endforeach ; ?>
+
 
 						</select>
 						</div>
@@ -65,7 +73,7 @@
 
 						
 						<div class = "form-actions" >
-						<button type = "submit" class = "btn btn-primary" >Atualizar</button>
+						<button type = "submit" class = "btn btn-primary" >Salvar</button>
 						<button type = "reset" class = "btn" >Cancelar</button>
 						</div>
 						

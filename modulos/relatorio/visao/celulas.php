@@ -31,8 +31,7 @@
 
 							<?php foreach ( $celulas as $celula) : ?>
 
-							<tr><td colspan = "2" ><h2><?php echo $celula['nome'] ; ?> </h2></td></tr>
-							<tr>
+							<tr><td ><h4><?php echo $celula['nome'] ; ?> </h4></td>
 								<td>Endereço:<?php echo $celula['endereco'] ; ?>	</td> 
 							</tr>
 							

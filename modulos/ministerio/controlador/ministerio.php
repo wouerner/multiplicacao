@@ -236,7 +236,7 @@ namespace ministerio\controlador;
 				$funcao->excluir();
 
 				$_SESSION['mensagem'] = !is_null($funcao->erro) ? $funcao->erro : null ;
-				header ('location:/funcao/listarFuncao');
+				header ('location:/ministerio/listarFuncao');
 				exit();
 		}
 

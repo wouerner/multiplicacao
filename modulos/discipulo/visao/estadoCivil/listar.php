@@ -38,12 +38,13 @@ unset($_SESSION['mensagem']) ;
 				<?php endif ; ?>
 
 				<div class = "row" >	
+					<div class = "span12" >
 						<table class = "table bordered-table">
-						<caption><h3>Lista de Tipo de Status Celular</h3></caption>
+						<caption><h3>Lista de Tipo Estado Civil</h3></caption>
 
 						<?php foreach ( $estadosCivies as $estadoCivil) : ?>
 
-						<tr><td><h2><?php echo $estadoCivil['nome'] ; ?> </h2></td>
+						<tr><td><a href = "/discipulo/atualizarEstadoCivil/id/<?php echo $estadoCivil['id']?>"><h2><?php echo $estadoCivil['nome'] ; ?></a></h2></td>
 							<?php ///require 'statusCelular/visao/menuTipoStatusCelular.inc.php' ; ?>
 						</tr>
 						
@@ -52,6 +53,7 @@ unset($_SESSION['mensagem']) ;
 					<div class = "form-actions" >	
 						<?php //discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos['total'] ,3 ,$pagina ) ; ?>
 					</div>
+				</div>
 			</div>
 			</article>
 		

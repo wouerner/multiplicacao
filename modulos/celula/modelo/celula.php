@@ -83,7 +83,7 @@ class celula{
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'SELECT * FROM Celula';
+		$sql = 'SELECT * FROM Celula ORDER BY nome';
 
 		$stm = $pdo->prepare($sql);
 
@@ -103,7 +103,7 @@ class celula{
 	
 		$pdo = new \PDO(DSN , USER , PASSWD) ;
 
-		$sql = 'SELECT id , nome FROM Discipulo';
+		$sql = 'SELECT id , nome FROM Discipulo ORDER BY nome';
 
 		$stm = $pdo->prepare($sql);
 		$stm->bindParam(1,$id);
@@ -165,7 +165,7 @@ class celula{
 	
 		$pdo = new \PDO (DSN, USER,PASSWD) ;
 
-		$sql = 'SELECT * FROM Discipulo WHERE celula = ?' ;
+		$sql = 'SELECT * FROM Discipulo WHERE celula = ? ORDER BY nome' ;
 
 		$stm = $pdo->prepare($sql);
 

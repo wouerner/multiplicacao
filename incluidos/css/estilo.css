@@ -4,6 +4,11 @@ body {
 
 }
 
+.borda{
+	border	: 1px solid gray;
+
+}
+
 .container{
 	background : url(../img/rough_diagonal.png) white;
 	border-radius : 4px;
@@ -13,6 +18,42 @@ body {
 
 }
 
+legend{
+	margin-bottom : 2px;
+
+}
+
+h2{
+	display:block;
+	float : left ;
+
+}
+
+.f_fieldset{
+/*	border-radius : 4px ;
+	margin : 3px ;
+	border : 1px solid black;
+	margin-top : -1px ;
+	margin-bottom : 0px ;*/
+
+}
+
+.f_fieldset legend{
+}
+
+form {
+	margin-bottom : 5px;
+
+}
+
+.oculto{
+	display : none ;
+}
+
+.tabelaLista{
+	background : rgba(255,255,255,0.7);
+
+}
 
 /* Main */
 #menu
@@ -152,7 +193,7 @@ body {
 
 #menu ul li:first-child a:after
 {
-    content: '';
+/*    content: '';
     position: absolute;
     left: 30px;
     top: -8px;
@@ -160,7 +201,7 @@ body {
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-bottom: 8px solid #444;
+    border-bottom: 8px solid #444;*/
 }
 
 #menu ul li:first-child a:hover:after
@@ -173,6 +214,29 @@ body {
     -moz-border-radius: 0 0 5px 5px;
     border-radius: 0 0 5px 5px;
 }
+
+#menu ul li ul {
+		  position : absolute;
+			left: 100% ;
+			top: 0 ;
+  /*      width: 100%;*/
+        margin: 0;
+        padding: 10px 0 0 0;
+        list-style: none;
+        background: #111;
+        background: -moz-linear-gradient(#444, #111);
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #111),color-stop(1, #444));
+        background: -webkit-linear-gradient(#444, #111);
+        background: -o-linear-gradient(#444, #111);
+        background: -ms-linear-gradient(#444, #111);
+        background: linear-gradient(#444, #111);
+        -moz-box-shadow: 0 2px 1px #9c9c9c;
+        -webkit-box-shadow: 0 2px 1px #9c9c9c;
+        box-shadow: 0 2px 1px #9c9c9c;
+
+}
+
+
 
 /* Clear floated elements */
 #menu:after
@@ -187,3 +251,20 @@ body {
 
 * html #menu             { zoom: 1; } /* IE6 */
 *:first-child+html #menu { zoom: 1; } /* IE7 */
+
+
+#dataNacimento{
+	width: 100px;
+
+}
+
+#dataNascimento input.span2, textarea.span2, .uneditable-input.span2{
+	
+
+}
+
+.ui-button-icon-only {
+	width: 0px;
+	top:10px;
+}
+

@@ -51,4 +51,120 @@ class relatorio {
 	
 	} 
 
+	public function relatorioResumido($url){
+
+		$post = $url['post'];
+	if (empty($post)){
+		$tipoStatusCelulares = new \statusCelular\modelo\tipoStatusCelular();
+		$tipoStatusCelulares= $tipoStatusCelulares->listarTodos();
+
+		$estadoCivies = new \discipulo\Modelo\estadoCivil();
+		$estadoCivies = $estadoCivies->listarTodos();
+
+		require 'relatorio/visao/discipulosResumido.php' ;	
+	}else{
+	
+	
+		$idadeMinima = new \DateTime( "now" ,new \DateTimeZone('America/Sao_Paulo')) ;
+		$idadeMaxima = new \DateTime( "now" ,new \DateTimeZone('America/Sao_Paulo')) ;
+
+		$idadeMinima->sub(new \DateInterval('P'.$post['idadeMinima'].'Y') );
+		$idadeMaxima->sub(new \DateInterval('P'.$post['idadeMaxima'].'Y') );
+
+		$sexo = $post['sexo'];
+		$estadoCivil = $post['estadoCivil'];
+		$status = $post['tipoStatusCelular'];
+
+
+
+		$relatorio = new \relatorio\modelo\discipulos();
+
+		$relatorio = $relatorio->discipulosResumido($idadeMaxima->format('Y-m-d'), $idadeMinima->format('Y-m-d') ,$sexo,$estadoCivil,$status);
+		require 'relatorio/visao/discipulosResumidoRelatorio.php' ;	
+
+	}
+	
+	} 
+
+	public function liderComDiscipulos (){
+			
+		$relatorio = new \relatorio\modelo\discipulos();
+
+		$relatorio = $relatorio->liderComDiscipulos();
+
+//		var_dump($relatorio);
+		
+		require 'relatorio/visao/liderComDiscipulos.php' ;	
+
+	}
+
+	public function graficoPorStatusCelular (){
+	
+	
+		$relatorio = new \relatorio\modelo\discipulos();
+		$relatorio = $relatorio->graficoPorStatusCelular();		
+
+		require 'relatorio/visao/graficoPorStatusCelular.php' ;	
+	
+	}
+
+
+	public function graficoPorCelula ($url){
+			  
+			  
+	if(empty($url['post']))	{
+
+		$celulas = new \celula\modelo\celula();
+		$celulas = $celulas->listarTodos();
+		require 'relatorio/visao/graficoPorCelula.php' ;	
+	}else {
+		$celula = $url['post'];
+
+		$celulas = new \celula\modelo\celula();
+
+		$celulas->id = $celula['celula'];
+		$nomeCelula = $celulas->listarUm();
+
+
+		$celulas = $celulas->listarTodos();
+
+		$relatorio = new \relatorio\modelo\discipulos();
+		$relatorio = $relatorio->graficoPorCelula($celula['celula']);		
+
+
+
+		require 'relatorio/visao/graficoPorCelula.php' ;	
+	
+	
+	}
+	
+	}
+
+	public function graficoPorEvento (){
+	
+	
+		$relatorio = new \relatorio\modelo\discipulos();
+		$relatorio = $relatorio->graficoPorEvento();		
+
+		require 'relatorio/visao/graficoPorEvento.php' ;	
+	
+	}
+
+	public function aniversariantes($url){
+		$post = $url['post']	;
+
+		if ( !empty($post) ) {	
+		$relatorios = new \relatorio\modelo\discipulos();
+		$relatorios = $relatorios->aniversarianteMes($post['data']);		
+
+		require 'relatorio/visao/aniversariantes.php' ;	
+		} else {
+		require 'relatorio/visao/aniversarios.php' ;	
+		
+		}
+	
+	}
+
+
 } 
+

@@ -24,7 +24,7 @@
 			<article>
 					<?php require 'modulos/celula/visao/chamarCelula.php' ; ?>
 
-						<table class = "table">
+						<table class = "table table-bordered">
 						<caption>Lista de Discipulos</caption>
 			
 						<?php if (is_null($nome)) : ?>
@@ -33,7 +33,7 @@
 
 						<?php foreach ( $celulas as $celula) : ?>
 
-						<tr><td colspan = "2" ><h2><?php echo $celula['nome'] ; ?> </h2></td></tr>
+						<tr><td colspan = "2" ><h2><a href="/celula/detalhar/id/<?php echo $celula['id']; ?>"><?php echo $celula['nome'] ; ?></a> </h2></td></tr>
 						<tr><td>Endereco:<?php echo $celula['endereco'] ; ?></td> <td>Horario:<?php echo $celula['horarioFuncionamento'] ; ?></td></tr>
 							<?php require 'celula/visao/menuCelula.inc.php' ; ?>
 						<?php endforeach ; ?>

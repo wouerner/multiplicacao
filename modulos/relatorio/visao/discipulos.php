@@ -31,8 +31,8 @@
 
 							<?php foreach ( $discipulos as $discipulo) : ?>
 
-							<tr><td colspan = "2" ><h2><?php echo $discipulo['nome'] ; ?> </h2></td></tr>
 							<tr>
+								<td><h4><?php echo $discipulo['nome'] ; ?> </h4></td>
 								<td>Endereço:<?php echo $discipulo['endereco'] ; ?>	</td> 
 							</tr>
 								

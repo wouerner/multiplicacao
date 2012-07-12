@@ -100,6 +100,12 @@ namespace celula\controlador;
 			$celula->id = $url[3]; 
 			$discipulos= $celula->listarDiscipulos();
 			$celula = $celula->listarUm();
+
+				$lider =	new \discipulo\Modelo\Discipulo();
+				$lider->id = $celula['lider'] ;
+				$lider = $lider->listarUm($celula['lider']);
+
+//				var_dump($discipulos);
 				
 			require 'celula/visao/detalhar.php' ;
 				

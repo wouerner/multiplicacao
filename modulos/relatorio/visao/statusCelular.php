@@ -25,15 +25,16 @@
 	
 						<table class = "table">
 
-							<caption>Relatorios de Discipulos</caption>
-
+							<caption><h2>Relatorios de Discipulos por Status</h2></caption>
+							<thead>
+								<th>Nome</th>
+								<th>Status</th>
+							</thead>
 							<?php foreach ( $statusCelulares as $statusCelular) : ?>
 
 							<tr>
-								<td><h2><?php echo $statusCelular['discipulo'] ; ?> </h2></td>
-								<td><h2><?php echo $statusCelular['status'] ; ?> </h2></td>
-							</tr>
-							<tr>
+								<td><h4><?php echo $statusCelular['discipulo'] ; ?></h4></td>
+								<td><?php echo $statusCelular['status'] ; ?></td>
 							</tr>
 								
 							

@@ -16,25 +16,23 @@ namespace statusCelular\controlador;
 		
 		}
 		public function novo($url){
-				  if ( empty ( $url['post'] ) ) {
+			if ( empty ( $url['post'] ) ) {
+				$tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ; 
+			 	$statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
 
+			 	$tiposStatusCelulares = $tiposStatusCelulares->listarTodos();	
 			
+				$statusCelularDiscipulo->discipuloId= $url[3];
+				
+				$historico = $statusCelularDiscipulo->listarTodosStatus();
 
-			 $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ; 
-			 $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
+				$statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
 
+				$discipulo = new \discipulo\Modelo\Discipulo() ;
+				$discipulo->id = $url[3] ;
+				$discipulo = $discipulo->listarUm();
 
-			 $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();	
-			
-			 $statusCelularDiscipulo->discipuloId= $url[3];
-			 $statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
-
-
-			$discipulo = new \discipulo\Modelo\Discipulo() ;
-			$discipulo->id = $url[3] ;
-			$discipulo = $discipulo->listarUm();
-		
-			require_once  'modulos/statusCelular/visao/novo.php';
+				require_once  'modulos/statusCelular/visao/novo.php';
 			
 			}else {
 				$statusCelular =	new \statusCelular\modelo\statusCelular();
@@ -46,7 +44,7 @@ namespace statusCelular\controlador;
 
 		if ($statusCelular->salvar()){
 
-				header ('location:/discipulo/detalhar/id/'.$statusCelular->discipuloId);
+				header ('location:/statusCelular/novo/id/'.$statusCelular->discipuloId);
 				exit();
 		}else {
 				  $statusCelular->atualizar();
@@ -234,6 +232,21 @@ namespace statusCelular\controlador;
 				
 		
 		}	
+
+		public function excluir($url){
+
+				
+			$id = $url[3] ;
+			$discipulo = $url[5] ;
+
+			$status = new \statusCelular\modelo\statusCelular() ;
+			$status->id = $id ;
+			$status->excluir();
+			header ('location:/statusCelular/novo/id/'.$discipulo);
+			exit();
+		
+		
+		}
 	
 	}	
 
