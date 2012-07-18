@@ -6,6 +6,11 @@ body {
 
 .borda{
 	border	: 1px solid gray;
+	margin-top : 3px;
+	margin-bottom : 3px;
+	border-radius: 3px ;
+	padding-top : 3px;
+	padding-bottom : 3px;
 
 }
 
@@ -265,7 +270,19 @@ form {
 
 .ui-button-icon-only {
 	width: 0px;
-	padding: 13px;
 	top:10px;
 }
 
+
+#pesquisa {
+
+	font-size: 16pt;
+}
+#pesquisaLabel {
+	font-size: 16pt;
+}
+
+#butaoPesquisa{
+	margin-left: -5px;
+
+}

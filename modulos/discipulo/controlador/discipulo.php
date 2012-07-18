@@ -169,6 +169,10 @@ class discipulo{
 				if ( $discipulo->emailUnico() ) {
 
 						  $discipulo->salvarCompleto() ;
+						  $_SESSION['mensagem'] = array( 000 => array ( 
+									 												'mensagem'	=> 'Cadastro Realizado com Sucesso!',
+									 												'classe'		=> 'success'
+						  																				) );
 
 				}else {
 
@@ -179,7 +183,7 @@ class discipulo{
 				$_SESSION['dados']['email'] = $post['email'] ;
 
 					$_SESSION['mensagem'] ="E-mail já cadastrado" ;
-				  header ('location:/discipulo/novoCompleto');
+				  	header ('location:/discipulo/novoCompleto');
 					exit();
 				
 				}
@@ -397,7 +401,14 @@ class discipulo{
 
 				$estadosCivies = $estadosCivies->listarTodos();
 				
-				$_SESSION['mensagem'] = ($discipulo->erro) ? $discipulo->erro : array( 'id' => $discipulo->id, 'nome' => $discipulo->nome ) ;	
+				$_SESSION['mensagem'] = ($discipulo->erro) ? $discipulo->erro : array(  
+						  																					000 => array( 
+						  																							'mensagem' => 'Atualizado com Sucesso' , 
+																													'classe' => "success" )	,
+																											'discipulo' => array(
+																													  		'id' => $discipulo->id, 
+																									'nome' => $discipulo->nome ) 
+																						 					);	
 
 
 				$caminho = explode('/',$_SERVER['HTTP_REFERER']) ;
@@ -507,6 +518,15 @@ class discipulo{
 
 		
 		}
+
+		public function pesquisaJson($url){
+			$termo = $_GET['term'];
+			$pesquisa = new \discipulo\Modelo\Discipulo() ;
+			$pesquisa = $pesquisa->pesquisaJson($termo);	
+			echo json_encode($pesquisa) ;
+					
+		
+		} 
 	
 		public function evento($url){
 			

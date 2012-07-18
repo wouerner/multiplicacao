@@ -29,7 +29,7 @@ use discipulo\modelo\role;
 			$_SESSION['usuario_id'] = $discipuloLogado['id'];
 			$_SESSION['logado'] = TRUE;
 
-			header('Location:../discipulo/listarAtualizar');
+			header('Location:../painel');
 			exit();
 
 		}else{

@@ -16,6 +16,7 @@
 		<script src="../../../ext/jquery-ui/development-bundle/ui/i18n/jquery.ui.datepicker-pt-BR.js"></script>
 		<script src="../../../ext/jquery/jquery.maskedinput.js"></script>
 		<script src="../modulos/discipulo/visao/js/novo.js"></script>
+		<script src = "/modulos/discipulo/visao/js/pesquisa.js" ></script>
 
 <script type="text/javascript">
    $(document).ready(function() {
@@ -64,14 +65,22 @@ jQuery(function($) {
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
-			  <div class = "row" >
 
 				<?php if ( $mensagem ) : ?>
-				<div class = "alert alert-success span10" >	
-				<strong>Mensagem:</strong> Atualizado com Sucesso 
-						<a href="/discipulo/atualizar/id/<?php echo $mensagem['id']; ?>" > <?php echo $mensagem['nome'] ; ?></a>
+			  <div class = "row" >
+					<div class = "span12" >
+					<div class = "alert alert-<?php echo $mensagem[000]['classe'] ; ?>" >	
+					<strong>Mensagem:</strong> <?php echo $mensagem[000]['mensagem'] ; ?> 
+						<?php if (isset($mensagem['discipulo'])) : ?>
+								<a href = "/discipulo/atualizar/id/<?php echo $mensagem['discipulo']['id']?>" ><?php echo $mensagem['discipulo']['nome']?></a>
+						<?php endif ; ?>
+				</div>
+				</div>
 				</div>
 				<?php endif ; ?>
+
+			  <div class = "row" >
+
 						<h3 class = "span12" > Total de discípulos: <?php echo $totalDiscipulos?></h3>
 				<?php foreach ( $discipulos as $discipulo ) : ?>
 						<?php $lider = $discipulo->getLider() ; ?>
@@ -81,8 +90,11 @@ jQuery(function($) {
 						  <div class = "span12 borda" >
 
 								<h3 class = "span8" ><?php echo $discipulo->nome ; ?></h3>
-									<span class = "badge "  >Status: <?php echo $status['nome']; ?></span>
-									<h5 class = "span8" >Líder:<?php echo is_object($lider) ? $lider->nome : ''; ?></h5>
+									<a href = "/statusCelular/novo/id/<?php echo $discipulo->id?>" ><span class = "badge "  >Status: <?php echo $status['nome']; ?></span></a>
+									<h5 class = "span8" >
+										<a href= "/discipulo/atualizar/id/<?php echo is_object($lider) ? $lider->id : '';?>">
+											Líder:<?php echo is_object($lider) ? $lider->nome : ''; ?></h5>
+										</a>
 								
 							
 							<p class = "span5" >Endereço: <?php echo $discipulo->endereco; ?></p>

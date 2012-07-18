@@ -1,11 +1,16 @@
 body {
-	background : url('../img/agua_bg.png');
+	background : url('../img/agua_bg.jpg');
 
 
 }
 
 .borda{
 	border	: 1px solid gray;
+	margin-top : 3px;
+	margin-bottom : 3px;
+	border-radius: 3px ;
+	padding-top : 3px;
+	padding-bottom : 3px;
 
 }
 
@@ -268,3 +273,16 @@ form {
 	top:10px;
 }
 
+
+#pesquisa {
+
+	font-size: 16pt;
+}
+#pesquisaLabel {
+	font-size: 16pt;
+}
+
+#butaoPesquisa{
+	margin-left: -5px;
+
+}

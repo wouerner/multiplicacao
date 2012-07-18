@@ -24,7 +24,7 @@ class discipulos{
 			  if ($estadoCivil == 'todos' ){
 			  $estadoCivil ='';
 			  }else{
-			  $estadoCivil='AND Discipulo.estadoCivilId = :estadoCivil ';
+			  $estadoCivil='AND d.estadoCivilId = :estadoCivil ';
 			  }
 
 			  if ($status == 'todos' ){
@@ -57,8 +57,6 @@ class discipulos{
 
 			  $stm->execute();
 
-			  //var_dump($stm->fetchAll());
-
 			  $res = array();
 
 			  while ($s =$stm->fetchObject('\discipulo\Modelo\Discipulo')  ){
@@ -72,13 +70,10 @@ class discipulos{
 			  
 			  }
 			
-						 // sort alphabetically by name usort($data, 'compare_lastname');
-
-
-				//var_dump($resposta);
-			  //asort($res);
+				/*var_dump($sql);
+				var_dump($res);
+				exit();*/
 			  usort($res, function($a, $b) { return strnatcmp($a['lider'], $b['lider']); });
-				//var_dump($res);
 
 				return $res;	
 	

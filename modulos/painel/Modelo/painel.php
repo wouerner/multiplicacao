@@ -311,31 +311,6 @@ class Discipulo{
 
 	}
 
-	/*Pesquisa os nome dos discipulos.
-	 *Retorna apenas os nomes.
-	 *
-	 * */
-	public function pesquisaJson($nome){
-
-		$nome = "%$nome%" ; // os '%%' funcionam como curingas na expressão revelando mais resultados.
-
-		$pdo = new \PDO (DSN,USER,PASSWD);	
-
-		$sql = 'SELECT nome AS value FROM Discipulo WHERE nome LIKE ?';
-
-		$stm = $pdo->prepare($sql);
-
-		$stm->bindParam(1, $nome);
-
-		$stm->execute();
-
-		$resposta = $stm->fetchAll();
-
-
-		return $resposta ; 
-
-	}
-
 	public function listarTodosDiscipulos(){
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	

@@ -227,9 +227,9 @@
 		</fieldset>
 
 				<div class = "form-actions " >
-				  		<button type = "submit" class = "btn btn-primary" ><i class = "icon-pencil icon-white" ></i>Atualizar</button>
+				  		<button type = "submit" class = "btn btn-primary" >Atualizar</button>
 						<a class = "btn" href = "/discipulo/encontroComDeus/id/<?php echo $discipulo->id ; ?>" target = "blank" >Ficha encontro</a>
-						<a class = "btn btn-danger" href = "/discipulo/excluir/id/<?php echo $discipulo->id ; ?>" target = "blank" ><i class = "icon-remove" ></i>Excluir Cadastro</a>
+						<a class = "btn btn-danger" href = "/discipulo/excluir/id/<?php echo $discipulo->id ; ?>" target = "blank" >Excluir Cadastro</a>
 			  </div>
 	</fieldset>
 					</form>

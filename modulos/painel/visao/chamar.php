@@ -10,7 +10,6 @@
 		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
 		<script src="../../../ext/jquery-ui/js/jquery-ui.js"></script>
 		<script src="../../../ext/jquery-ui/development-bundle/ui/i18n/jquery.ui.datepicker-pt-BR.js"></script>
-		<script src = "/modulos/discipulo/visao/js/pesquisa.js" ></script>
 <script type="text/javascript">
    $(document).ready(function() {
 			  //$(".oculto form").hide();
@@ -82,40 +81,49 @@ jQuery(function($) {
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 			<div class = "row" >	
+				<div class = "span12" >	
 						<?php if (is_null($nome)) : ?>
-							<div class = "span12" >
 							<h3>Faça sua pesquisa!</h3>
-							</div>
 						<?php else : ?>
 
-				<?php foreach ( $discipulos as $discipulo ) : ?>
-						<?php $lider = $discipulo->getLider() ; ?>
+						<table class = "table bordered-table">
+						<caption><h3>Lista de Discipulos</h3></caption>
+
+						<?php foreach ( $discipulos as $discipulo) : ?>
+
+
+						 <?php $lider = $discipulo->getLider() ; ?>
 						<?php $status = $discipulo->getStatusCelular() ; ?>
-						<?php $dataN = $discipulo->getDataNascimento()->format('d/m/Y') ; ?>
+						 <?php $dataN = $discipulo->getDataNascimento()->format('d/m/Y') ; ?>
 
-						  <div class = "span12 borda" >
+						  <div class = "row" >
+						  <div class = "span12" >
 
-								<h3 class = "span8" ><?php echo $discipulo->nome ; ?></h3>
-									<a href = "/statusCelular/novo/id/<?php echo $discipulo->id?>" ><span class = "badge "  >Status: <?php echo $status['nome']; ?></span></a>
-									<h5 class = "span8" >
-										<a href= "/discipulo/atualizar/id/<?php echo is_object($lider) ? $lider->id : '';?>">
-											Líder:<?php echo is_object($lider) ? $lider->nome : ''; ?></h5>
-										</a>
-							
-							<p class = "span5" >Endereço: <?php echo $discipulo->endereco; ?></p>
-							<p class = "span4" >Telefone: <?php echo $discipulo->telefone; ?></p>
-							<p class = "span2" >Data Nasc.: <?php echo $dataN ; ?></p>
-							<button class = "btn btn-mini span1 editar" ><i class = "icon-pencil" ></i></button></td>
+							<table class = "table table-bordered table-condensed tabelaLista" >
+								<tr>
+									<td class = "span1" >
+									<button class = "btn btn-mini span1" ><i class = "icon-pencil" ></i></button></td>
+								<td class = "span5" >
+								<h4 class = "" ><?php echo $discipulo->nome ; ?></h4></td>
+							<td class = "span3" >Status: <?php echo $status['nome'] ; ?></td>
+							<td colspan = "2" >Líder:<?php echo is_object($lider) ? $lider->nome : ''; ?></td>
+								</tr>
+								<tr>
+							<td colspan = "2" class = "span4" >Endereço: <?php echo $discipulo->endereco; ?></td>
+							<td>Telefone: <?php echo $discipulo->telefone; ?></td>
+							<td>Data Nasc.: <?php echo $dataN ; ?></td>
+								</tr>
+							</table>
 
 							<div class = "oculto ui-widget" >
 						  	<?php include 'discipulo/visao/formularioAtualizar.inc.php' ; ?>
 							</div>
 						</div>
-
-
-				<?php endforeach ; ?>
-
+						</div>
+							
+						<?php endforeach ; ?>
 						<?php endif ; ?>
+						</table>
 				</div>
 				
 			</div>

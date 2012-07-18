@@ -1,24 +1,14 @@
-<div class = "row" >
-<div class = "span12" >Olá <a href="/discipulo/detalhar/id/<?php echo $_SESSION['usuario_id'] ; ?>"><?php echo $_SESSION['usuario_nome'] ; ?></a> |
-<a href="/seguranca/sair" class = "btn-mini btn-danger" >Sair</a>
-</div>
-
+<div class = "row">
 <div class = "span12">
 <ul id = "menu" >
-	<li><a href = "#"><i class = "icon-home icon-white" ></i> MGA</a></li>
+	<li><a href = "/painel"><i class = "icon-home icon-white" ></i> MGA</a></li>
 
 	<li><a href = "/discipulo/listarAtualizar" >Discípulos</a>
 
 		<ul >	
-			<!--<li><a href = "/discipulo/novo" >Criar</a></li>-->
 			<li><a href = "/discipulo/novoCompleto" >Novo Discípulo</a></li>
 			<li><a href = "/discipulo/listarAtualizar" >Listar Discípulos</a>
-				<ul>	
-					  <li><a href = "/discipulo/semCelula" >Sem Célula</a></li>
-					  <li><a href = "/discipulo/semLider" >Sem Líder</a></li>
-				</ul>
 			</li>
-			<!--<li><a href = "/discipulo" >Igreja</a></li>-->
 			<li><a href = "/discipulo/chamar" >Pesquisar</a></li>
 			<li>
 				<a href = "/statusCelular/listarTipoStatusCelular" >StatusCelular</a>
@@ -29,7 +19,7 @@
 				</ul>
 			</li>
 	</li>
-			<li>
+		<li>
 				<a href = "/discipulo/listarEstadoCivil" >Estado Civil</a>
 				<ul>	
 					  <li><a href = "/discipulo/novoEstadoCivil" >Novo Estado Civil</a></li>
@@ -79,8 +69,7 @@
 		</ul>
 	</li>-->
 	<li><a href = "#" >Relatorios</a>
-		<ul >	
-
+		<ul>	
 			<li><a href = "/relatorio/discipulos" >Discipulos</a>
 				<ul>
 					<li><a href = "/relatorio/liderComDiscipulos">Lider com Discipulos</a></li>
@@ -93,23 +82,28 @@
 					<li><a href = "/relatorio/graficoPorCelula">Gráfico de Status</a></li>
 				</ul>
 			</li>	
+
 			<li><a href = "/relatorio/statusCelular">Status Celular</a>
 				<ul>	
 					<li><a href = "/relatorio/statusCelularIndex">Por Tipo</a></li>
 				  	<li><a href = "/relatorio/graficoPorStatusCelular" >Gráfico</a></li>
 				</ul>
 			</li>
+
 			<li><a href = "#">Escala de Exito</a>
 				<ul>	
 					<li><a href = "/relatorio/graficoPorEvento">Participação Escala Exito</a></li>
 				</ul>
 			</li>	
+
 			<li><a href = "/discipulo/fichaPorStatus/id/8" >Ficha Encontro</a></li>
 	
 			<li><a href = "/relatorio/aniversariantes" >Aniversariantes</a></li>
-				  </ul>
-			</li>
-		</ul>
+	  </ul>
+	</li>
+
+	<li><a href="/seguranca/sair" class = "btn-mini btn-danger" >Sair</a></li>
+</ul>
 	</li>
 	
 </ul>

@@ -37,7 +37,8 @@ $(document).ready(function()
 			<table class = "table table-bordered table-condensed tablesorter" >
 				<thead>
 				<tr>
-					<th>Nome</th>
+					<th>Nº total</th>
+					<th colspan = "2" >Nome</th>
 					<th>Sexo</th>
 					<th>Endereço</th>
 					<th>Status</th>
@@ -46,9 +47,10 @@ $(document).ready(function()
 				</tr>
 				</thead>
 				<tbody>
+				<?php $contador = 0 ?>
 				<?php foreach($relatorio as $r ) : ?>
 				<?php ++$lidCont ; ?>
-					<tr>	<td colspan = "7" ><h4><?php echo $lidCont ; ?> - Líder: <?php echo $r['lider'] ; ?> </h4></td></tr>
+					<tr><td><?php  echo ++$contador  ;?></td>	<td colspan = "7" ><h4><?php echo $lidCont ; ?> - Líder: <?php echo $r['lider'] ; ?> </h4></td></tr>
 
 						<?php foreach($r as  $l ) : ?>
 							<tr>	
@@ -56,8 +58,9 @@ $(document).ready(function()
 							  <?php $status =  $l->getStatusCelular() ; ?>
 						  <tr>	
 							  <?php ++$cont ; ?>
+<td><?php echo ++$contador?></td>
 							  <td><?php echo  $cont ; ?></td>
-							  <td><?php echo  $l->nome ; ?></td>
+							  <td><a href="/discipulo/atualizar/id/<?php echo $l->id ; ?>"><?php echo  $l->nome ; ?></a></td>
 							  <td><?php echo  ($l->sexo == 'm')? 'Masculino' : 'Feminino' ; ?></td>
 							  <td><?php echo  $l->endereco ; ?></td>
 							  <td><?php echo  $status['nome'] ; ?></td>
