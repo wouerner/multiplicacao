@@ -32,6 +32,7 @@
 						</div>
 						
 						<div class = "form-actions" >
+						<a class = "btn" href = "/discipulo/listarEstadoCivil" ><i class = "icon-chevron-left" ></i></a>
 						<button type = "submit" class = "btn btn-success" >Criar</button>
 						<button type = "reset" class = "btn" >Limpar</button>
 						</div>

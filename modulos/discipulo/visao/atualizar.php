@@ -12,7 +12,7 @@ unset($_SESSION['mensagem']) ;
 		<style type="text/css">
 		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
 		   @import url("../../../incluidos/css/estilo.css");
-			@import url("../../../ext/jquery-ui/css/ui-lightness/jquery-ui.css");
+			@import url("../../../ext/jquery-ui/css/bootstrap/jquery-ui.css");
 		</style>
 
 		<script src= "../../../ext/jquery/jquery-1.7.1.min.js"></script>

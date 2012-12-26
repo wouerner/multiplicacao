@@ -1,8 +1,3 @@
-<?php 
-$mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL ;
-unset($_SESSION['mensagem']) ;
-
-?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -28,19 +23,23 @@ unset($_SESSION['mensagem']) ;
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
-
 				<div class = "row" >	
-				<div class = "span12" >	
-			
+					<div class = "span12" >
 						<table class = "table bordered-table">
-						<caption><h3>Lista de Tipo de Rede</h3></caption>
-						<tr><th><a class = "btn btn-success" href= "/rede/novoTipoRede" ><i class = "icon-plus icon-white" ></i> Novo</a></th></tr>
-
-						<?php foreach ( $redes as $rede) : ?>
-
-						<tr><td><a href="/rede/detalharTipoRede/id/<?php echo $rede['id']?>" ><?php echo $rede['nome'] ; ?> </a></td>
-							<?php require 'rede/visao/tipoRede/menu.inc.php' ; ?>
+						<caption><h3>Lista de Discipulos da rede <?php echo $tipoRede->nome ; ?></h3></caption>
+						<tr>
+							<th>Nº</th>
+							<th>Nome</th>
+							<th>Líder</th>
 						</tr>
+						<?php foreach ( $redeMembros as $discipulo) : ?>
+
+						<tr>
+							<td><?php echo  $cont++  ?></td>
+							<td><a href="/discipulo/detalhar/id/<?php echo $discipulo->id ?>" ><?php echo $discipulo->nome ; ?></a></td>
+							<td><a href="/discipulo/detalhar/id/<?php echo $discipulo->getLider()->id ?>" ><?php echo $discipulo->getLider()->nome ; ?></a></td>
+						</tr>
+							
 						
 						<?php endforeach ; ?>
 						</table>

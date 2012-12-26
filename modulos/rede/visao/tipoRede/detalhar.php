@@ -25,21 +25,20 @@
 
 			<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
-			<div class = "row" >
-			<div class = "span12" >
 			<table>
-				<caption><h3>Descrição do StatusCelular</h3></caption>
-				<tr><th>Nome: </th><td ><?php echo $status->nome ; ?></td></tr>
-				<tr><th>Descrição: </th><td ><?php echo $status->descricao ; ?> </td></tr>
-				<tr><th>Ordem: </th><td ><?php echo $status->ordem ; ?> </td></tr>
-				<tr><th>Cor: </th><td ><?php echo $status->cor ; ?> </td></tr>
-					<a href="/statusCelular/listarTipoStatusCelular" class = "btn"><i class = "icon-chevron-left"></i></a>
-					<?php require 'statusCelular/visao/menuTipoStatusCelular.inc.php' ; ?>
+				<caption><h3>Rede</h3></caption>
+
+
+				<tr><td colspan = "2" ><h2><?php echo $rede['nome'] ; ?> </h2></td></tr>
+
+					<?php require 'rede/visao/tipoRede/menu.inc.php' ; ?>
 				</table>
-			</div>
-			</div>
+				
+			
 			</article>
+		
 		</section>
+
 		</section>
 	</body>
 </html>

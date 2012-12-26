@@ -38,8 +38,8 @@
 
 							  <fieldset class = "span12" >
 								  	<div class = "form-actions" >
+											<a class = "btn" href = "/rede/listarTipoRede" ><i class = " icon-chevron-left" ></i></a>
 								  		<button type = "submit" class = "btn btn-primary" >Atualizar</button>
-								  		<button type = "reset" class = "btn" >Cancelar</button>
 								  </div>
 							  </fieldset>
 

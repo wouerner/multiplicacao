@@ -6,6 +6,9 @@ class  tipoStatusCelular{
 
 	private $id ;
 	private $nome ;
+	private $descricao ;
+	private $ordem ;
+	private $cor ;
 	private $erro ;
 
 
@@ -26,13 +29,16 @@ class  tipoStatusCelular{
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
-			  $sql = "INSERT INTO TipoStatusCelular ( nome )
-				  VALUES (?)";
+			  $sql = "INSERT INTO TipoStatusCelular ( nome, descricao, ordem, cor  )
+				  VALUES ( ? , ? , ? , ? )";
 
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
-			  $stm->bindParam(1, $this->nome);
+			  $stm->bindParam(1, $this->nome );
+			  $stm->bindParam(2, $this->descricao );
+			  $stm->bindParam(3, $this->ordem );
+			  $stm->bindParam(4, $this->cor );
 
 			  $resposta = $stm->execute();
 
@@ -46,13 +52,18 @@ class  tipoStatusCelular{
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'SELECT * FROM TipoStatusCelular';
+		$sql = 'SELECT * FROM TipoStatusCelular ORDER BY ordem ';
 
 		$stm = $pdo->prepare($sql);
 
 		$stm->execute();
+		
+		$resposta = array();
 
-		return $stm->fetchAll();
+		while ( $obj = $stm->fetchObject('\statusCelular\modelo\tipoStatusCelular') ) {
+			$resposta[$obj->id] = $obj ; 
+		}
+		return $resposta;
 
 	}
 
@@ -77,13 +88,16 @@ class  tipoStatusCelular{
 	//abrir conexao com o banco
 	$pdo = new \PDO(DSN, USER, PASSWD);
 	//cria sql
-	$sql = " UPDATE TipoStatusCelular SET 	nome = ? 
+	$sql = " UPDATE TipoStatusCelular SET 	nome = ? , descricao = ? ,  ordem = ? , cor = ?
 		WHERE id = ? ";
 	//prepara sql
 	$stm = $pdo->prepare($sql);
 	//trocar valores
 	$stm->bindParam(1, $this->nome);
-	$stm->bindParam(2, $this->id);
+	$stm->bindParam(2, $this->descricao);
+	$stm->bindParam(3, $this->ordem);
+	$stm->bindParam(4, $this->cor);
+	$stm->bindParam(5, $this->id);
 
 	$resposta = $stm->execute();
 

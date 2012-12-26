@@ -8,7 +8,7 @@
 					selected = select.children( ":selected" ),
 					value = selected.val() ? selected.text() : "",
 					wrapper = $( "<span>" )
-						.addClass( "ui-combobox span3" )
+						.addClass( "ui-combobox " )
 						.insertAfter( select );
 
 				input = $( "<input>" )

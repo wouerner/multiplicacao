@@ -51,13 +51,13 @@ namespace celula\controlador;
 				$lideres = $celula->listarLideres();
 
 				$celula->id =  $url[3] ;
-				$celula = $celula->listarUm();
+				$celula = $celula->listarUm() ;
 
-				$lider =	new \discipulo\Modelo\Discipulo();
-				$lider->id = $celula['lider'] ;
-				$lider = $lider->listarUm($celula['lider']);
+				$lider =	new \discipulo\Modelo\Discipulo() ;
+				$lider->id = $celula->lider ;
+				$lider = $lider->listarUm($celula->lider) ;
 
-				require_once  'modulos/celula/visao/atualizar.php';
+				require_once  'modulos/celula/visao/atualizar.php' ;
 			
 			}else {
 
@@ -96,14 +96,14 @@ namespace celula\controlador;
 
 		public function detalhar($url){
 
-			$celula =	new \celula\modelo\celula();
-			$celula->id = $url[3]; 
-			$discipulos= $celula->listarDiscipulos();
-			$celula = $celula->listarUm();
+			$celula =	new \celula\modelo\celula() ;
+			$celula->id = $url[3] ; 
+			$discipulos= $celula->listarDiscipulos() ;
+			$celula = $celula->listarUm() ;
 
-				$lider =	new \discipulo\Modelo\Discipulo();
-				$lider->id = $celula['lider'] ;
-				$lider = $lider->listarUm($celula['lider']);
+				$lider =	new \discipulo\Modelo\Discipulo() ;
+				$lider->id = $celula->lider ;
+				$lider = $lider->listarUm($celula->lider) ;
 
 //				var_dump($discipulos);
 				

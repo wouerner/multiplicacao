@@ -111,6 +111,21 @@ namespace rede\controlador;
 		
 		}
 
+		public function listarMembrosRede($url){
+					$redeId = $url[3];
+
+				  $rede =	new \rede\modelo\rede();
+					$tipoRede = new \rede\modelo\tipoRede();
+					$tipoRede->id = $redeId;
+					$tipoRede = $tipoRede->listarUm();
+					$rede->tipoRedeId = $redeId;
+				  $redeMembros = $rede->pegarMembros();
+					$cont = 1 ;
+				  require 'modulos/rede/visao/rede/listar.php' ; 
+		
+		}
+		
+
 		public function atualizar($url){
 
 			if ( empty ( $url['post'] ) ) {
@@ -265,14 +280,14 @@ namespace rede\controlador;
 		
 		}
 
-		public function detalhartipoRede ($url) {
+		public function detalharTipoRede ($url) {
 
-			$rede = new \rede\modelo\rede() ;
+			$rede = new \rede\modelo\tipoRede() ;
 
 			$rede->id = $url[3] ; 
 			$rede = $rede->listarUm() ;
 		
-			require 'rede/visao/detalhartipoRede.php' ;	
+			require 'rede/visao/tipoRede/detalhar.php' ;	
 		
 		}
 

@@ -26,7 +26,7 @@
 			<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
 			<table>
-				<caption><h3>Detalhes do Discipulos</h3></caption>
+				<caption><h3>Detalhes do Discipulo</h3></caption>
 
 				<tr>	
 					<td colspan = "2" >
@@ -62,7 +62,7 @@
 
 				<tr>
 					<td> 
-				<?php foreach ( $eventosDiscipulo as $evento) :?>
+				<?php foreach ( $eventoDiscipulo as $evento) :?>
 						<a href="/celula/detalhar/id/<?php echo $evento['id'] ; ?>">
 							<?php echo $evento['nome'] ; ?> 
 						</a> |

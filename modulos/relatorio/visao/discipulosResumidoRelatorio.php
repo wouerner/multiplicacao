@@ -33,18 +33,30 @@ $(document).ready(function()
 
 				<?php $cont = 0 ; ?>
 				<?php $lidCont = 0 ; ?>
+			<table class = "table table-bordered table-condensed" >
+					<caption><h3>Relatório</h3></caption>
+				<tr>
+					<th>Sexo :  <?php  echo $sexo ?></th>
+					<th>Estado Civil : <?php echo is_object($estadoCivil) ? $estadoCivil->nome : 'todos' ?></th>
+					<th>Rede : <?php echo is_object($rede) ? $rede->nome : 'todos' ?></th>
+					<th>Status :<?php echo is_object($status) ? $status->nome : 'todos' ?> </th>
+					<th>célula :<?php echo is_object($celula)? $celula->nome : 'todos' ?> </th>
+				</tr>
+			</table>
 
 			<table class = "table table-bordered table-condensed tablesorter" >
 				<thead>
+
 				<tr>
 					<th>Nº total</th>
 					<th colspan = "2" >Nome</th>
 					<th>Sexo</th>
 					<th>Endereço</th>
-					<th>Status</th>
 					<th>Telefone</th>
 					<th>Data Nasc. </th>
+					<th>Status</th>
 				</tr>
+
 				</thead>
 				<tbody>
 				<?php $contador = 0 ?>
@@ -63,9 +75,9 @@ $(document).ready(function()
 							  <td><a href="/discipulo/atualizar/id/<?php echo $l->id ; ?>"><?php echo  $l->nome ; ?></a></td>
 							  <td><?php echo  ($l->sexo == 'm')? 'Masculino' : 'Feminino' ; ?></td>
 							  <td><?php echo  $l->endereco ; ?></td>
-							  <td><?php echo  $status['nome'] ; ?></td>
 							  <td><?php echo  $l->telefone ; ?></td>
 							  <td><?php echo  $l->getDataNascimento()->format('d/m/Y') ; ?></td>
+							  <td><?php echo  $status['nome'] ; ?></td>
 						  </tr>
 						  <?php endif ; ?>
 					<?php endforeach ; ?>

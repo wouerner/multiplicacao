@@ -322,6 +322,13 @@ class discipulo{
 			 $funcaoRedes = $funcaoRedes->listarTodos();
 			 $redeAtual = $rede->listarUm();
 
+			//ministerio da pessoa.
+			 $ministerio = new \ministerio\modelo\ministerio() ;
+			 $ministerio = $ministerio->listarTodos() ; 
+
+			 $funcaoMinisterio = new \ministerio\modelo\funcao() ;
+			 $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
+
 			 //escala de exito
 		  	$eventos = new \evento\modelo\evento();
 		
@@ -430,7 +437,7 @@ class discipulo{
 				$discipulo =	new \discipulo\Modelo\Discipulo();
 				$discipulo->id = $url[3]; 
 				$discipulo->excluir();
-				header ('location:/discipulo');
+				header ('location:/discipulo/listarAtualizar');
 				exit();
 		
 		}
@@ -438,24 +445,24 @@ class discipulo{
 
 		public function detalhar ($url) {
 
-			$discipulo = new \discipulo\modelo\discipulo() ;
-			$eventosdiscipulo = new \evento\modelo\eventodiscipulo();
-			$ministerios = new \ministerio\modelo\ministeriotemdiscipulo();
-			$statuscelular = new \statuscelular\modelo\statuscelular();
+			$discipulo = new \discipulo\Modelo\Discipulo() ;
+			$eventoDiscipulo = new \evento\modelo\eventoDiscipulo();
+			$ministerios = new \ministerio\modelo\ministerioTemDiscipulo();
+			$statusCelular = new \statusCelular\modelo\statusCelular();
 
 			$discipulo->id = $url[3] ; 
 
-			$lidercelula = $discipulo->lidercelula();
-			$participacelula = $discipulo->participacelula();
-			$ministerios->discipuloid = $discipulo->id;
-			$ministerios = $ministerios->pegarministeriodiscipulo();
-			$statuscelular->discipuloid = $discipulo->id ;
-			$statuscelular = $statuscelular->pegarstatuscelular() ;
+			$liderCelula = $discipulo->liderCelula();
+			$participaCelula = $discipulo->participaCelula();
+			$ministerios->discipuloId = $discipulo->id;
+			$ministerios = $ministerios->pegarMinisterioDiscipulo();
+			$statusCelular->discipuloId = $discipulo->id ;
+			$statusCelular = $statusCelular->pegarstatuscelular() ;
 
 
-			$eventosdiscipulo = $eventosdiscipulo->listartodosdiscipulo($discipulo->id);
+			$eventoDiscipulo = $eventoDiscipulo->listarTodosDiscipulo($discipulo->id);
 
-			$discipulo = $discipulo->listarum() ;
+			$discipulo = $discipulo->listarUm() ;
 
 			require 'discipulo/visao/detalhar.php' ;	
 		
@@ -505,16 +512,25 @@ class discipulo{
 			 $tipoRede = new \rede\modelo\tipoRede();
 			 $funcaoRede = new \rede\modelo\funcaoRede();
 
+
 			 $tiposRedes = $tipoRede->listarTodos();
-			 $funcoesRedes = $funcaoRede->listarTodos();
+			 $funcaoRedes = $funcaoRede->listarTodos();
 			 $redeAtual = $rede->listarUm();
 
+			//ministerio da pessoa.
+			 $ministerio = new \ministerio\modelo\ministerio() ;
+			 $ministerio = $ministerio->listarTodos() ; 
+
+			 $funcaoMinisterio = new \ministerio\modelo\funcao() ;
+			 $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
+
+		
 			 //escala de exito
 		  	$eventos = new \evento\modelo\evento();
 		
-		  //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
-			$eventos = $eventos->listarTodos();
-			require_once 'discipulo/visao/chamar.php' ;
+		   //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
+			 $eventos = $eventos->listarTodos();
+			 require_once 'discipulo/visao/chamar.php' ;
 
 		
 		}
@@ -755,6 +771,26 @@ class discipulo{
 			
 			require 'discipulo/visao/fichas/fichaPorStatus.php' ;
 		
+		
+		}
+
+		public function cracha($url){
+
+			$discipulos = new \discipulo\Modelo\Discipulo() ;
+
+			$discipulos = $discipulos->fichaPorStatus($url[3]) ;
+			
+			require 'discipulo/visao/fichas/cracha.php' ;
+		
+		}
+
+		public function crachaIndividual($url){
+
+			$discipulo = new \discipulo\Modelo\Discipulo() ;
+			$discipulo->id = ($url[3]);
+			$discipulos[0] = $discipulo->listarUm($url[3]) ;
+				
+			require 'discipulo/visao/fichas/cracha.php' ;
 		
 		}
 			

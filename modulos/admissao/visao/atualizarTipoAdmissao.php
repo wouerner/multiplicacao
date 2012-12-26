@@ -28,8 +28,8 @@
 						<input type = "hidden" name = "id"  value = "<?php echo $tipoAdmissao['id'] ; ?>" >
 
 						<div class = "form-actions" >
+						<a class = "btn" href = "/admissao/listarTipoAdmissao"  ><i class = "icon-chevron-left" ></i></a>
 						<button type = "submit" class = "btn btn-primary " >Atualizar</button>
-						<a class = "btn btn-danger" href = "/admissao"  >Cancelar</a>
 							</div>
 						</fieldset>
 

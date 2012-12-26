@@ -7,13 +7,15 @@ class discipulos{
 
 			  function ordenar($a, $b) { return strnatcmp($a['lastname'], $b['lastname']); } 
 
-	public function discipulosResumido($idadeMaxima,$idadeMinima,$sexo, $estadoCivil,$status){
+	public function discipulosResumido($idadeMaxima,$idadeMinima,$sexo, $estadoCivil,$status , $celula , $rede=NULL ){
 		
 			  $pdo = new \PDO(DSN,USER,PASSWD);
 
 			  $s=$sexo;
 			  $estado=$estadoCivil;
 			  $st=$status;
+			  $c=$celula;
+				$r = $rede ;
 
 			  if ($sexo == 'todos' ){
 			  $sexo ='';
@@ -33,18 +35,40 @@ class discipulos{
 			  $status='AND	StatusCelular.tipoStatusCelular = :status ';
 			  }
 
+			  if ($celula == 'todos' ){
+			  $celula ='';
+			  }else{
+			  $celula ='AND d.celula = :celula' ;
+			  }
+
+			  if ($rede == 'todos' ){
+			  $rede ='';
+			  }else{
+			  $rede ='AND  r.tipoRedeId = :rede ';
+			  }
+
 			  $sql = 'SELECT DISTINCT 
-						 d.id, d.nome , d.dataNascimento, d.sexo, d.estadoCivilId, d.telefone, d.email, d.endereco, d.lider, d.celula, 
-						 StatusCelular.id as StatusId    
+						 d.id, d.nome , d.dataNascimento, d.sexo, d.estadoCivilId, d.telefone, d.email, d.endereco, d.lider, d.celula
+						 -- , 
+						 -- StatusCelular.id as StatusId    
 						 FROM 
-						 Discipulo AS d,  StatusCelular
+						 Discipulo AS d,  StatusCelular , Redes AS r , TipoRede AS tpRede , FuncaoRede AS fRede
 						 WHERE 
 						 d.dataNascimento between :idadeMax and :idadeMin 
 						 '.$sexo.' 
 						 '.$estadoCivil.'
-				  		 '.$status.'
-				  		AND StatusCelular.discipuloId = d.id ORDER BY d.nome';
+				  	 '.$status.'
+				  	 '.$celula.'
+				  	 '.$rede.'
+				  		AND StatusCelular.discipuloId = d.id
+							AND r.tipoRedeId = tpRede.id AND d.id = r.discipuloId 
+							AND fRede.id = r.funcaoRedeId	
+							AND StatusCelular.ativo = 1
+							
+						 ORDER BY d.nome';
 
+
+				//echo $sql; exit();
 
 			  $stm = $pdo->prepare($sql);
 
@@ -54,8 +78,13 @@ class discipulos{
 			  if ($sexo != '' ) $stm->bindValue(':sexo',$s);
 			  if ($estadoCivil != '' ) $stm->bindValue(':estadoCivil',$estado);
 			  if ($status != '' ) $stm->bindValue(':status',$st);
+			  if ($celula != '' ) $stm->bindValue(':celula',$c);
+			  if ($rede != '' ) $stm->bindValue(':rede',$r);
 
 			  $stm->execute();
+
+				$erro = $stm->errorInfo();
+				//exit();
 
 			  $res = array();
 
@@ -100,7 +129,7 @@ class discipulos{
 				
 				}
 
-				//var_dump($resposta);
+				//print("<pre>".var_dump($resposta)."</pre>"); exit();
 
 				return $resposta;
 	
@@ -165,16 +194,21 @@ ORDER BY TipoStatusCelular.nome';
 
 	public function aniversarianteMes(  $mes ){
 			$pdo = new \PDO(DSN,USER,PASSWD);
-			$sql = ' SELECT nome, dataNascimento
+			$sql = ' SELECT *
 						FROM Discipulo
-						WHERE month( dataNascimento ) = ?';
+						WHERE month( dataNascimento ) = ? order by dayofmonth(dataNascimento)';
 
 			$stm = $pdo->prepare($sql);
 			$stm->bindParam( 1, $mes ) ;
 
 			$stm->execute() ;	  
 
-			return $stm->fetchAll() ;
+			$resposta = array();
+			while ( $obj = $stm->fetchObject('\discipulo\Modelo\Discipulo') ){
+				$resposta[$obj->id] = $obj ;
+
+			}
+			return $resposta ;
 	
 	}
 

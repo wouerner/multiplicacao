@@ -40,10 +40,11 @@ unset($_SESSION['mensagem']) ;
 				<div class = "span12" >	
 						<table class = "table bordered-table">
 						<caption><h3>Lista de Ministérios</h3></caption>
+						<tr><th><a class = "btn btn-success" href= "/ministerio/novoMinisterio" ><i class = "icon-plus icon-white" ></i> Novo</a></th></tr>
 
 						<?php foreach ( $ministerios as $ministerio) : ?>
 
-						<tr><td><a href="/ministerio/detalharMinisterio/id/<?php echo $ministerio['id']?>" ><h2><?php echo $ministerio['nome'] ; ?> </h2></a></td>
+						<tr><td><a href="/ministerio/detalharMinisterio/id/<?php echo $ministerio['id']?>" ><?php echo $ministerio['nome'] ; ?> </a></td>
 							<?php require 'ministerio/visao/menuMinisterio.inc.php' ; ?>
 						</tr>
 						

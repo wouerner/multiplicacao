@@ -31,21 +31,21 @@
 						<div class = "control-group" >
 						<label class = "control-label" >Nome:</label>
 						<div class = "controls" >
-						<input name = "nome"  value = "<?php echo $celula['nome'] ; ?>" >
+						<input name = "nome"  value = "<?php echo $celula->nome ; ?>" >
 						</div>
 						</div>
 
 						<div class = "control-group" >
 						<label class = "control-label" >Horario:</label>
 						<div class = "controls" >
-						<input name = "horarioFuncionamento" value = "<?php echo $celula['horarioFuncionamento']?>">
+						<input name = "horarioFuncionamento" value = "<?php echo $celula->horarioFuncionamento ; ?>">
 						</div>
 						</div>
 
 						<div class = "control-group" >
 						<label class = "control-label" >Endereço:</label>
 						<div class = "controls" >
-						<input name = "endereco" value = "<?php echo $celula['endereco']?>">
+						<input name = "endereco" value = "<?php echo $celula->endereco ; ?>">
 						</div>
 						</div>
 
@@ -69,7 +69,7 @@
 						</div>
 						</div>
 
-							<input type = "hidden" value="<?php echo $celula['id']?>" name = "id" >
+							<input type = "hidden" value="<?php echo $celula->id ; ?>" name = "id" >
 
 						
 						<div class = "form-actions" >

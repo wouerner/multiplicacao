@@ -1,9 +1,7 @@
 <?php 
 $mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL ;
 unset($_SESSION['mensagem']) ;
-
 ?>
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -23,7 +21,6 @@ unset($_SESSION['mensagem']) ;
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
 		</nav>
 			
-
 		<section>		
 			<article>
 
@@ -41,10 +38,18 @@ unset($_SESSION['mensagem']) ;
 				<div class = "span12" >	
 						<table class = "table bordered-table">
 						<caption><h3>Lista de Tipo de Status Celular</h3></caption>
+								<tr>
+								<th colspan = "3" ><a class = "btn btn-success" href="/statusCelular/novoTipoStatusCelular">Novo Status</a></th>
+								</tr>
+							<tr>
+								<th>Tipo</th>
+								<th>Ações</th>
+							</tr>
 
 						<?php foreach ( $tipoStatusCelulares as $status) : ?>
-
-						<tr><td><a href="/statusCelular/detalhar/id/<?php echo $status['id']?>" ><h2><?php echo $status['nome'] ; ?> </h2></a></td>
+	
+						<tr>
+							<td><a href="/statusCelular/detalhar/id/<?php echo $status->id ?>" ><?php echo $status->nome ; ?></a></td>
 							<?php require 'statusCelular/visao/menuTipoStatusCelular.inc.php' ; ?>
 						</tr>
 						

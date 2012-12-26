@@ -55,7 +55,7 @@
 								 <select id = "combobox" class = "combobox lider span3" name = "lider"  >
 
 									  <option value = ""></option>
-									  <?php foreach($lideres as $lider) : ?><option value = "<?php echo $lider['id']?>"><?php echo $lider['nome']?></option>
+									  <?php foreach($lideres as $lider) : ?><option value = "<?php echo $lider->id ; ?>"><?php echo $lider->nome ; ?></option>
 									  <?php endforeach ; ?>
 
 								 </select>

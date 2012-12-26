@@ -40,19 +40,16 @@ namespace statusCelular\controlador;
 				$post = $url['post'] ;
 				$statusCelular->discipuloId = $post['discipuloId'];
 				$statusCelular->tipoStatusCelular = $post['tipoStatusCelular'];
-	
 
-		if ($statusCelular->salvar()){
-
-				header ('location:/statusCelular/novo/id/'.$statusCelular->discipuloId);
-				exit();
-		}else {
-				  $statusCelular->atualizar();
-				header ('location:/discipulo/detalhar/id/'.$statusCelular->discipuloId);
-				exit();
+					if ($statusCelular->salvar()){
+						header ('location:/statusCelular/novo/id/'.$statusCelular->discipuloId);
+						exit();
+					}else {
+						$statusCelular->atualizar();
+						header ('location:/discipulo/detalhar/id/'.$statusCelular->discipuloId);
+						exit();
 		
-		
-		}
+					}
 			}
 			
 
@@ -69,9 +66,12 @@ namespace statusCelular\controlador;
 	
 			$post = $url['post'] ;
 			$tipoStatusCelular->nome = $post['nome'] ;
+			$tipoStatusCelular->descricao = $post['descricao'] ;
+			$tipoStatusCelular->ordem = $post['ordem'] ;
+			$tipoStatusCelular->cor = $post['cor'] ;
 
 			$tipoStatusCelular->salvar();
-			header ('location:/statusCelular/listarTipoStatusCelular') ;
+				header ('location:/statusCelular/listarTipoStatusCelular') ;
 				exit();
 			}
 			
@@ -153,9 +153,11 @@ namespace statusCelular\controlador;
 
 				$tipoStatusCelular->id = $post['id'];	
 				$tipoStatusCelular->nome = $post['nome'];
-
+				$tipoStatusCelular->descricao = $post['descricao'];
+				$tipoStatusCelular->ordem = $post['ordem'];
+				$tipoStatusCelular->cor = $post['cor'];
+				
 				$tipoStatusCelular->atualizar();
-
 				header ('location:/statusCelular/atualizarTipoStatusCelular/id/'.$tipoStatusCelular->id);
 				exit();
 			}
@@ -247,6 +249,22 @@ namespace statusCelular\controlador;
 		
 		
 		}
+
+		public function listarDiscipulosPorStatus($url){
+			$id = $url[3] ;
+
+			$status = new \statusCelular\modelo\statusCelular() ;
+			$status->tipoStatusCelular = (int)$id ;
+			$discipulos = $status->listarStatusCelularPorTipo();
+			$totalDiscipulos = count($discipulos);
+
+			$tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
+			$tipoStatus->id = $url[3] ; 
+			$tipoStatus = $tipoStatus->listarUm() ;
+
+			require 'statusCelular/visao/discipuloPorStatus.php' ;	
+
+		}	
 	
 	}	
 

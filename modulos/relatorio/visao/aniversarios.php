@@ -41,7 +41,7 @@
 						<option value="12">Dezembro</option>
 					</select>
 
-					<button class = "btn" type = "sunmit" >Ok</button>
+					<button class = "btn" type = "sunmit" >Gerar</button>
 			</form>
 
 				

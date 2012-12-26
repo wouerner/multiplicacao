@@ -5,71 +5,77 @@
 		<style type="text/css">
 		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
 		   @import url("../../../incluidos/css/estilo.css");
-			@import url("../../../ext/jquery-ui/css/ui-lightness/jquery-ui.css");
+		@import url("../../../ext/jquery-ui/css/bootstrap/jquery-ui.css");
 		</style>
 		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
 		<script src="../../../ext/jquery-ui/js/jquery-ui.js"></script>
 		<script src="../../../ext/jquery-ui/development-bundle/ui/i18n/jquery.ui.datepicker-pt-BR.js"></script>
 		<script src = "/modulos/discipulo/visao/js/pesquisa.js" ></script>
+		<script src="/modulos/discipulo/visao/js/combobox.js"></script>
+		<script src="/modulos/discipulo/visao/js/comboboxCelula.js"></script>
 <script type="text/javascript">
+
    $(document).ready(function() {
-			  //$(".oculto form").hide();
-
-	/*		  $(".mostra").click(
-			  					function($this){
-										  //alert('oi');
-										  //alert($this);
-										  $(this).next(".oculto").toggle();
-										  //$(this).toggle(function ($this) {
-										  	//	$(this).next(".oculto").hide();
-										  
-										 // });
-
-								}
-					);
-	});*/
 
 		$(function() {
 
 				  $( ".dataNascimento" ).datepicker();
-		});
+	});
 
-		/*$(function() {
 
-				  $( ".oculto" ).dialog({autoOpen:false, 
-							 modal:true });
-	});*/
-
-		/*$( ".mostra" )
-			//.button()
-			.click(function() {
-				$( this ).next("div.oculto").dialog( { width : 960} );
-			});
-	*/
 
 jQuery(function($) {
-  $('.table').each(function() {  
+  $('.editar').each(function() {  
+
     $.data(this, 'dialog', 
-      $(this).next('.table + div.oculto').dialog({
+      $(this).next('.editar + div.oculto').dialog({
         autoOpen: false,  
         modal: true,  
         width: 960,  
-        draggable: false  
+        draggable: false ,
+				buttons : { 
+							Excluir: function(){
+							var id = $(this).find("#idDiscipulo").val() ; 	
+						$(function() {
+        		$( "#dialog-confirm" ).dialog({
+            resizable: false,
+            height:240,
+            modal: true,
+            buttons: {
+                Excluir: function() {
+										$(location).attr('href', '/discipulo/excluir/id/'+id);
+                },
+                Cancelar: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+    });	
+					} }
 
       })
     );  
+//teste
+		
+//
+
   }).click(function() {  
       $.data(this, 'dialog').dialog('open');  
       return false;  
   });  
-}); 
+	}); 
+
+
+
 	});
-	</script>
-		<script src="/modulos/discipulo/visao/js/combobox.js"></script>
-		<script src="/modulos/discipulo/visao/js/comboboxCelula.js"></script>
+</script>
+
 	</head>
 
 	<body>
+<div id="dialog-confirm" title="Empty the recycle bin?" style = "display:none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente excluir?</p>
+</div>
 		<section class = "container">
 
 		<nav> 

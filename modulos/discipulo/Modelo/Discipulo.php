@@ -38,6 +38,11 @@ class Discipulo{
 	
 	}
 
+	public function getNomeAbreviado(){
+			  $nome = explode(' ',$this->nome	) ;
+			  $nome = $nome[0].' '.$nome[count($nome)-1]; 
+			  return $nome ;
+	}
 
 	public function setDataNascimento($valor){
 	try
@@ -367,8 +372,13 @@ class Discipulo{
 
 		$stm->execute();
 
-		return $stm->fetchAll();
-	
+		$resposta = array();
+
+		while($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')){
+			$resposta[$ob->id] = $ob ;
+		}
+
+		return $resposta ;
 	}
 
 	public function liderCelula(){
@@ -778,10 +788,34 @@ class Discipulo{
 
 			  $pdo = new \PDO ( DSN, USER, PASSWD ) ;
 	
-		$sql = "SELECT *
+		$sql = "
+
+
+SELECT *
 		  FROM Discipulo AS d, StatusCelular st
 		  WHERE d.id = st.discipuloId
 		  AND st.tipoStatusCelular =? order by d.nome" ;  		
+
+/*$sql = ' 
+				select s2.id AS idStatus, ultimo, nome , ,s3.id  from StatusCelular s2 inner join 
+
+				(select 
+				d.id AS id , d.nome AS nome ,
+				(
+				SELECT  id 
+				FROM StatusCelular AS s1 
+				WHERE s1.discipuloId = d.id
+				ORDER BY dataInicio DESC
+				limit 1
+				)  AS ultimo
+				from Discipulo AS d 
+				where  1
+				group by d.id
+				) AS s3 on ultimo = s2.id
+
+				WHERE s2.tipoStatusCelular = ?
+				order by nome
+';*/
 
 			  $stm = $pdo->prepare($sql);
 

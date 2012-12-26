@@ -21,28 +21,23 @@
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 				<div class = "row" >	
+				<span class = "span3"><p>Total Discipulos: <strong><?php echo $totalDiscipulos ; ?></strong></p></span>
 
 				<div class = "span12" >
 				<table class = "table bordered-table">
-				<caption><h3>Aniversariantes do mês </h3></caption>
-				<thead>	
-					<tr>
-					<th>Data</th><th>Nome</th><th>Lider</th> <th>Status</th>
-					</tr>
-				</thead>
+				<caption><h3><?php echo $tipoStatus->nome?></h3></caption>
 
-				<?php foreach ( $relatorios as $r) : ?>
+				<?php foreach ( $discipulos as $discipulo) : ?>
 
-				<tr>	
-					<td><?php echo $r->dataNascimento->format('d-m-Y') ; ?></td>
-					<td><a href= "/discipulo/atualizar/id/<?php echo $r->id ?>" ><?php echo $r->nome ; ?></a></td>
-					<td><?php echo $r->getLider()->nome ?></td>
-					<td><?php $l = $r->getStatusCelular() ; echo $l['nome'] ?></td>
+				<tr>
+						<td><a href="/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><?php echo $discipulo->nome ; ?></a></td>
 				</tr>
-				
+				</tr>
+				 
 				<?php endforeach ; ?>
 				</table>
 
+						<?php //discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos ,$quantidadePorPagina ,$pagina ) ; ?>
 				</div>
 			</div>
 			</article>

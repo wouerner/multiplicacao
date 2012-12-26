@@ -42,6 +42,7 @@ unset($_SESSION['mensagem']) ;
 
 							<caption><h3>Lista de Líderes de Células</h3></caption>
 							<thead>
+								<th>Nº</th>
 								<th>Nome</th>
 								<th>Total</th>
 							</thead>
@@ -49,8 +50,9 @@ unset($_SESSION['mensagem']) ;
 							<?php foreach ( $lideres as $lider) : ?>
 
 							<tr>
+								<td><?php echo !isset($cont) ? $cont=1 : ++$cont ; ?></td>
 								<td>
-									<h2><a href ="/discipulo/detalhar/id/<?php echo $lider['id']?>" ><?php echo $lider['nome'] ; ?></a></h2>
+									<a href ="/discipulo/detalhar/id/<?php echo $lider['id']?>" ><?php echo $lider['nome'] ; ?></a>
 								</td>
 								<td>
 								<?php echo $lider['totalCelulas'] ; ?>	

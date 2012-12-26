@@ -37,9 +37,14 @@ unset($_SESSION['mensagem']) ;
 				   </div>
 				<?php endif ; ?>
 
-						<table class = "table bordered-table">
+						<table class = "table table-condensed">
 						<caption><h3>Lista de Tipos de Admissão</h3></caption>
-
+						<tr>
+							<th colspan = "2" ><a class = "btn btn-success" href = "/admissao/novoTipoAdmissao" >Novo</a></th>
+						</tr>
+						<tr>
+							<th>Tipo</th><th>Ações</th>
+						</tr>
 						<?php foreach ( $tipoAdmissoes as $tipoAdmissao) : ?>
 
 						<tr><td><a href="/admissao/detalhar/id/<?php echo $tipoAdmissao['id']?>" ><h:2><?php echo $tipoAdmissao['nome'] ; ?> </h2></a></td>

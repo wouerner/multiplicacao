@@ -5,10 +5,10 @@
 							<legend>Dados Pessoais</legend>
 							<div class = "control-group" >
 
-							  <div class="control-group span3">
+							  <div class="control-group span2">
 								  	<label class = "control-label" for = "nome" >Nome:</label>
 									<div class = "controls" >
-									<input id = "nome" class = "span3" name = "nome"  value = "<?php echo $dados['nome']?>" required autofocus>
+									<input id = "nome" class = "span2" name = "nome"  value = "<?php echo $dados['nome']?>" required autofocus>
 									</div>
 								</div>
 									

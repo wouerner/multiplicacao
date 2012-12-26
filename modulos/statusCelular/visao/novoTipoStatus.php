@@ -24,15 +24,36 @@
 					<form action = "/statusCelular/novoTipoStatusCelular" method = "post"  class = "form-horizontal">
 				<fieldset>
 						<div class = "control-group" >
-
 						<label class = "control-label" >Nome do Status:</label>
 						<div class = "controls" >
 							<input name = "nome" autofocus alt = "Nome" placeholder= "" required>
 						</div>
 						</div>
+
+						<div class = "control-group" >
+						<label class = "control-label" >Descrição:</label>
+						<div class = "controls" >
+							<textarea name = "descricao" alt = "descricao do StatusCelular" placeholder= "Descrição do StatusCelular " required></textarea>
+						</div>
+						</div>
+
+						<div class = "control-group" >
+						<label class = "control-label" >Ordem:</label>
+						<div class = "controls" >
+							<input name = "ordem" autofocus alt = "ordem do StatusCelular" placeholder= "" required>
+						</div>
+						</div>
+
+						<div class = "control-group" >
+						<label class = "control-label" >Cor:</label>
+						<div class = "controls" >
+							<input name = "cor" autofocus alt = "Cor do StatusCelular" placeholder= "" required>
+						</div>
+						</div>
 						
 						<div class = "form-actions" >
-						<button type = "submit" class = "btn btn-success" >Criar</button>
+						<a class = "btn" href="/statusCelular/listarTipoStatusCelular"><i class = "icon-chevron-left" ></i></a>
+						<button type = "submit" class = "btn btn-success" >Salvar</button>
 						<button type = "reset" class = "btn" >Limpar</button>
 						</div>
 						</div>

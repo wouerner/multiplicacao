@@ -17,7 +17,6 @@
 		</nav>
 			
 		<header>
-		
 		</header>
 
 		<section>		
@@ -30,15 +29,15 @@
 						<legend>Relátorio Resumido</legend>
 							<div class = "control-group " >
 							<div class = "control-group span2" >
-							<label>Idade Minima:</label> 
+							<label>Idade </label> 
 							<input class = "span1" value = "0" type = "" name = "idadeMinima" >
+							<input class = "span1" value = "100" type = "" name = "idadeMaxima" >
 							</div>
 
-							<div class = "control-group span2" >
-							<label>Idade Maxima:</label> 
-							<input class = "span1" value = "100" type = "" name = "idadeMaxima" >
+							<!-- <div class = "control-group span1" >
+							 <label>Idade Maxima:</label> 
 						
-							</div>
+							</div> -->
 
 							<div class = "control-group span2" >
 							<label>Sexo:</label>
@@ -65,7 +64,29 @@
 								<select class = "span2" name = "tipoStatusCelular" >
 									<option value = "todos" >Todos</option>
 								<?php foreach ( $tipoStatusCelulares as $status) : ?>
-									<option value = "<?php echo $status['id'] ;?>" ><?php echo $status['nome']?></option>
+									<option value = "<?php echo $status->id  ;?>" ><?php echo $status->nome?></option>
+									<?php endforeach ; ?>
+
+							</select>
+							</div>
+
+							<div class = "control-group span2" >
+							<label>Célula:</label>	
+								<select class = "span2" name = "celula" >
+									<option value = "todos" >Todos</option>
+								<?php foreach ( $celulas as $c) : ?>
+									<option value = "<?php echo $c['id']  ;?>" ><?php echo $c['nome'] ?></option>
+									<?php endforeach ; ?>
+
+							</select>
+							</div>
+
+							<div class = "control-group span2" >
+							<label>Rede:</label>	
+								<select class = "span2" name = "rede" >
+									<option value = "todos" >Todos</option>
+								<?php foreach ( $tipoRedes as $tp) : ?>
+									<option value = "<?php echo $tp['id']  ;?>" ><?php echo $tp['nome'] ?></option>
 									<?php endforeach ; ?>
 
 							</select>
@@ -77,11 +98,7 @@
 					</div>
 				</fieldset>
 		</form>
-
-								
-							
 				
-						<?php // discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos['total'] ,3 ,$pagina ) ; ?>
 	</div>		
 	</div>		
 			</article>

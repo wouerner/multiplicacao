@@ -1,16 +1,18 @@
 body {
-	background : url('../img/agua_bg.png');
+	background : url('../img/agua_bg.jpg');
 
 
 }
 
 .borda{
-	border	: 1px solid gray;
+	border	: 1px solid #fff;
 	margin-top : 3px;
 	margin-bottom : 3px;
 	border-radius: 3px ;
 	padding-top : 3px;
 	padding-bottom : 3px;
+	background: rgba(227,229,255,0.6) ;
+
 
 }
 

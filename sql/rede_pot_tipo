@@ -1,0 +1,3 @@
+SELECT * FROM Discipulo AS d inner join Redes AS r ON d.id = r.discipuloId 
+                             inner join TipoRede AS tp ON r.tipoRedeId = tp.id 
+WHERE r.tipoRedeId = 2

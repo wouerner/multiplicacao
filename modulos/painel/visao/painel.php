@@ -42,13 +42,21 @@
 
 				<div class = "well">
 						  <a class = "btn btn-success btn-large" href = "/discipulo/novoCompleto" >
-									<i class = "icon-user icon-white" ></i> Novo Discípulo
+									<i class = "icon-plus icon-white" ></i> Novo Discípulo
 							</a>
 						  <a class = "btn btn-warning btn-large" href = "/celula/novo" >
 									<i class = "icon-plus icon-white" ></i> Nova Célula
 							</a>
 				</div>
-		
+				<table class = "table table-condensed" >
+				<?php foreach($status as $s) : ?>
+						<tr>
+						<td><a href="/statusCelular/listarDiscipulosPorStatus/id/<?php echo $s['tipoStatusCelular'] ; ?>" ><?php echo $s['tipoNome'] ; ?></a></td>
+						<td><h3><?php echo $s['total'] ; ?></h3></td>
+						</tr>
+				<?php endforeach ; ?>
+						<tr><td>Total</td><td><h3><?php echo $totalDiscipulos ; ?></h3></td></tr>
+				</table>
 			</article>
 		
 		</section>

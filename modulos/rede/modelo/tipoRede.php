@@ -92,7 +92,7 @@ class  tipoRede{
 
 		$stm->execute();
 
-		return $stm->fetch();
+		return $stm->fetchObject();
 
 	}
 

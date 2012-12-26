@@ -28,11 +28,11 @@
 						<caption><h3>Célula do <a href = "/discipulo/atualizar/id/<?php echo $lider->id?>" ><?php echo $lider->nome?></h3></a></caption>
 
 
-							<tr><td class = "span6" ><h4>Nome da Célula: <?php echo $celula['nome'] ; ?> </h4></td>
+							<tr><td class = "span6" ><h4>Nome da Célula: <?php echo $celula->nome ; ?> </h4></td>
 								<?php require 'celula/visao/menuCelula.inc.php' ; ?></tr>
 							<tr>
-								<td>Endereço:<?php echo $celula['endereco'] ; ?>	</td> 
-								<td>Horario:<?php echo $celula['horarioFuncionamento'] ; ?></td>
+								<td>Endereço:<?php echo $celula->endereco ; ?>	</td> 
+								<td>Horario:<?php echo $celula->horarioFuncionamento ; ?></td>
 							</tr>
 								
 							
@@ -51,19 +51,16 @@
 											<tr>
 										<?php endif; ?>
 
-											<td> <a href = "/discipulo/detalhar/id/<?php echo $discipulo['id'] ?>"> <?php echo $discipulo['nome'] ;?></a></td>
+											<td> <a href = "/discipulo/detalhar/id/<?php echo $discipulo['id'] ; ?>"> <?php echo $discipulo['nome'] ;?></a></td>
 
 										<?php if ($cont ==4) :?>
 											</tr>
 											<?php $cont=0?>
 										<?php endif; ?>
-					
 									
 							<?php endforeach ; ?>
 						</table>
 				
-						<?php // discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos['total'] ,3 ,$pagina ) ; ?>
-			
 			</article>
 		
 		</section>

@@ -1,0 +1,2 @@
+SELECT tp.nome, count(*) FROM Redes AS r , TipoRede AS tp 
+WHERE r.tipoRedeId = tp.id GROUP BY tp.id

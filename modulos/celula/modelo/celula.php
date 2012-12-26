@@ -292,7 +292,7 @@ class celula{
 
 		$stm->execute();
 
-		return $stm->fetch();
+		return $stm->fetchObject();
 
 	}
 
