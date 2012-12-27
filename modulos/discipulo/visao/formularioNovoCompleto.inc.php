@@ -6,14 +6,25 @@
 							<div class = "row" >
 							<div class = "span12" >
 
-							  <div class="control-group span3">
+					
+
+							<div class = "row">
+							<div class = "span12" >
+							  <div class="control-group span4">
 									<i class = "icon-user" ></i>
 								  	<label class = "control-label" for = "nome" >Nome:</label>
 									<div class = "controls" >
-									<input id = "nome" class = "span3" name = "nome"  value = "<?php echo $dados['nome']?>" required autofocus>
+									<input id = "nome" class = "span4" name = "nome"  value = "<?php echo $dados['nome']?>" required autofocus>
 									</div>
 								</div>
-									
+
+							  <div class="control-group span6">
+								  	<label class = "control-label" for = "nome" >Alcunha:</label>
+									<div class = "controls" >
+									<input id = "alcunha" class = "span4" name = "alcunha"  value = "<?php echo $dados['alcunha']?>" required>
+									</div>
+								</div>
+
 							  <div class="control-group span1">
 								  	<label class = "control-label" for = "ativo" >Ativo:</label>
 									<div class = "controls" >
@@ -21,6 +32,9 @@
 										  value = ""  >
 									</div>
 								</div>
+							</div>
+							</div>
+									
 
 							  <div class="control-group span2">
 									<i class = "icon-calendar" ></i>

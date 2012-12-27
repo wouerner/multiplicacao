@@ -4,6 +4,7 @@ class Discipulo{
 
 	private $id ;
 	private $nome ;
+	private $alcunha ;
 	private $dataNascimento ;
 	private $sexo = 'm' ; // padrão da classe é sexo masculino
 	private $estadoCivilId ;
@@ -42,6 +43,10 @@ class Discipulo{
 			  $nome = explode(' ',$this->nome	) ;
 			  $nome = $nome[0].' '.$nome[count($nome)-1]; 
 			  return $nome ;
+	}
+
+	public function getNome(){
+			  return  $this->nome ? $this->nome : $this->alcunha ;
 	}
 
 	public function setDataNascimento($valor){
@@ -160,9 +165,9 @@ class Discipulo{
 			  //cria sql
 			  $sql = "INSERT INTO Discipulo (
 							  nome, telefone, email,endereco, nivel, 
-							  lider, celula,  senha
+							  lider, celula,  senha, alcunha
 							  )
-				  VALUES (?,?,?,?,?,?,?,?)";
+				  VALUES (?,?,?,?,?,?,?,?,?)";
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
@@ -174,6 +179,7 @@ class Discipulo{
 			  $stm->bindParam(6, $this->lider);
 			  $stm->bindParam(7, $this->celula);
 			  $stm->bindParam(8, md5($this->senha));
+			  $stm->bindParam(9, $this->alcunha);
 
 			  $resposta = $stm->execute();
 				
@@ -197,9 +203,9 @@ class Discipulo{
 			  //cria sql
 			  $sql = "INSERT INTO Discipulo (
 							  nome, ativo, datanascimento, sexo, estadoCivilId, telefone, email,endereco,  
-							  lider, celula,  senha
+							  lider, celula,  senha, alcunha
 							  )
-				  VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+				  VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
@@ -214,6 +220,7 @@ class Discipulo{
 			  $stm->bindParam(9, $this->lider);
 			  $stm->bindParam(10, $this->celula);
 			  $stm->bindParam(11, md5($this->senha));
+			  $stm->bindParam(12, $this->alcunha);
 
 			  $resposta = $stm->execute();
 				
@@ -222,6 +229,7 @@ class Discipulo{
 			  $erro =  $stm->errorInfo();
 
 			  $this->erro = $erro[0];
+
 
 			  //fechar conexão
 			  $pdo = null ;
@@ -259,7 +267,7 @@ class Discipulo{
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
 			  $sql = "UPDATE Discipulo SET 	nome = ? , telefone = ? , email = ? ,endereco = ? , nivel = ?, 
-				  lider = ?, celula = ? ,  ativo = ?, dataNascimento = ? , estadoCivilId = ? ,sexo = ?
+				  lider = ?, celula = ? ,  ativo = ?, dataNascimento = ? , estadoCivilId = ? ,sexo = ? , alcunha = ?
 				  WHERE id = ?
 							  ";
 			  //prepara sql
@@ -276,7 +284,8 @@ class Discipulo{
 			  $stm->bindParam(9 , $this->dataNascimento->format('Y-m-d')) ;
 			  $stm->bindParam(10 , $this->estadoCivilId) ;
 			  $stm->bindParam(11 , $this->sexo ) ;
-			  $stm->bindParam(12, $this->id);
+			  $stm->bindParam(12 , $this->alcunha ) ;
+			  $stm->bindParam(13, $this->id);
 
 			  $resposta = $stm->execute();
 			  $erro = $stm->errorCode();

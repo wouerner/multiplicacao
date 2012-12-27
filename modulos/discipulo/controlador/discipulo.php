@@ -99,11 +99,10 @@ class discipulo{
 
 		public function novoCompleto($url){
 
-					 if ( empty ( $url['post'] ) ) {
-				$estadosCivies = new \discipulo\Modelo\estadoCivil();
+		 if ( empty ( $url['post'] ) ) {
+			$estadosCivies = new \discipulo\Modelo\estadoCivil();
 
 				$estadosCivies = $estadosCivies->listarTodos();
-
 
 				$lideres =	new \discipulo\Modelo\Discipulo();
 				$lideres =	$lideres->listarlideres();
@@ -156,6 +155,7 @@ class discipulo{
 
 
 				$discipulo->nome = $post['nome'] ;
+				$discipulo->alcunha = $post['alcunha'] ;
 				$discipulo->setDataNascimento($post['dataNascimento']) ;
 				$discipulo->telefone = $post['telefone'];
 				$discipulo->sexo = $post['sexo'] ;
@@ -173,7 +173,6 @@ class discipulo{
 									 												'mensagem'	=> 'Cadastro Realizado com Sucesso!',
 									 												'classe'		=> 'success'
 						  																				) );
-
 				}else {
 
 				$_SESSION['dados']['nome'] = $post['nome'] ;
@@ -350,6 +349,7 @@ class discipulo{
 
 				$discipulo->id = $post['discipuloId'] ;	
 				$discipulo->nome = $post['nome'] ;
+				$discipulo->alcunha = $post['alcunha'] ;
 				$discipulo->setDataNascimento($post['dataNascimento']) ;
 				$discipulo->telefone = $post['telefone'];
 				$discipulo->sexo = $post['sexo'] ;

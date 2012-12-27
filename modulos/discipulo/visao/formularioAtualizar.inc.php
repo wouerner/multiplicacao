@@ -13,6 +13,13 @@
 											<input id = "nome" class = "span4" name = "nome"  value = "<?php echo $discipulo->nome ; ?>" required autofocus>
 									</div>
 								</div>
+
+							  <div class="control-group span4">
+								  	<label class = "control-label" for = "alcunha" >Alcunha:</label>
+										<div class = "controls" >
+											<input id = "nome" class = "span4" name = "alcunha"  value = "<?php echo $discipulo->alcunha ; ?>" required autofocus>
+									</div>
+								</div>
 									
 							  <div class="control-group span1">
 								  	<label class = "control-label" for = "ativo" >Ativo:</label>

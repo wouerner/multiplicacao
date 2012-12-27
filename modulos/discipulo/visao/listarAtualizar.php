@@ -169,7 +169,7 @@ jQuery(function($) {
 							<div class = "row" >
 							  <div class = "span12 borda" >
 
-								<h3 class = "span8 piscar" ><?php echo $discipulo->nome ; ?></h3>
+								<h3 class = "span8 piscar" ><?php echo $discipulo->nome ; ?> <?php echo $discipulo->alcunha ? '( '.$discipulo->alcunha.' )' : ''; ?> </h3>
 									<a href = "/statusCelular/novo/id/<?php echo $discipulo->id?>" ><span class = "badge "  >Status:<?php echo $status['nome']; ?></span></a>
 										<h5 class = "span8" >
 											<a href= "/discipulo/atualizar/id/<?php echo is_object($lider) ? $lider->id : '';?>">
