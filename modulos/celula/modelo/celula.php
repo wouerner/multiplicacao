@@ -1,4 +1,5 @@
 <?php
+use discipulo\Modelo\Discipulo;
 namespace celula\modelo;
 class celula{
 
@@ -9,7 +10,17 @@ class celula{
 	private $lider;
 	private $erro;
 
-	public function __construct (){
+	public function __construct ( $id = NULL ){
+		
+		if (!is_null($id) ) {
+			$this->id = $id ;
+		 	$obj = $this->listarUm() ;
+
+			$this->nome = $obj->nome ;
+			$this->horarioFuncionamento = $obj->horarioFuncionamento ;
+			$this->endereco = $obj->endereco ;
+			$this->lider = $obj->lider ;
+		}
 	}
 
 	public function __get($prop){
@@ -19,6 +30,16 @@ class celula{
 	
 	public function __set($prop , $valor){
 		$this->$prop = $valor;
+	
+	}
+
+	public function pegaLider(){
+		
+		$discipulo = new \discipulo\Modelo\Discipulo();
+		$discipulo->id = $this->lider ;
+		$discipulo = $discipulo->listarUm();
+
+		return $discipulo;
 	
 	}
 
@@ -124,6 +145,21 @@ class celula{
 					 GROUP BY Discipulo.id ORDER BY Discipulo.nome';
 
 		$stm = $pdo->prepare($sql);
+
+		$stm->execute();
+
+		return $stm->fetchAll();
+	
+	}
+
+	public function listarCelulasLider(){
+	
+		$pdo = new \PDO(DSN , USER , PASSWD) ;
+
+		$sql = 'SELECT * FROM Celula WHERE lider = ? ' ; 
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam( 1 , $this->lider ) ;
 
 		$stm->execute();
 
@@ -292,7 +328,12 @@ class celula{
 
 		$stm->execute();
 
-		return $stm->fetchObject();
+		//var_dump ( $this->id);
+		//var_dump ( $stm->errorInfo());
+		//var_dump ( $stm->fetchObject());
+
+		return $stm->fetchObject('\celula\modelo\celula');
+			
 
 	}
 

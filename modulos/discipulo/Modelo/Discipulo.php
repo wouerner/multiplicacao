@@ -704,7 +704,6 @@ class Discipulo{
 
 	
 	public function entrar(){
-
 		
 		try {
 		//conectar ao banco de dados
@@ -844,6 +843,27 @@ SELECT *
 	
 	}
 
+	public function listarDiscipulos(){
+	
+		$pdo = new \PDO (DSN, USER,PASSWD) ;
+
+		$sql = 'SELECT * FROM Discipulo WHERE lider = ? ORDER BY nome' ;
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->bindParam(1,$this->id);
+
+		$stm->execute();
+
+		$resposta = array();
+
+		while($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')){
+			$resposta[$ob->id] = $ob ;
+		
+		}
+		return $resposta ;
+	
+	}
 
 }
 ?> 

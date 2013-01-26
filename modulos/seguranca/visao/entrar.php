@@ -28,7 +28,7 @@ unset($_SESSION['mensagem']);
 				<?php endif ; ?>
 
 
-				<form class="form-horizontal" method="post" accept-charset="utf-8" action ="/seguranca/entrar" >
+				<form class="form-horizontal" method="post" accept-charset="utf-8" action ="/seguranca/seguranca/entrar" >
 				<fieldset>
 
 							<img src= "/modulos/seguranca/visao/img/logo.png" >

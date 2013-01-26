@@ -6,15 +6,11 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<style type="text/css">
-	   	@import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		@import url("../../../ext/jquery-ui/css/bootstrap/jquery-ui.css");
-		@import url("../../../incluidos/css/estilo.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
-		<script src="../../../ext/jquery-ui/js/jquery-ui.js"></script>
-		<script src="../../../ext/jquery-ui/development-bundle/ui/i18n/jquery.ui.datepicker-pt-BR.js"></script>
-		<script src="../../../ext/jquery/jquery.maskedinput.js"></script>
+
+		<?php include 'modulos/../incluidos/css.inc.php' ; ?>
+		<?php include 'modulos/../incluidos/js.inc.php' ; ?>
+
+		
 		<script src="../modulos/discipulo/visao/js/novo.js"></script>
 		<script src = "/modulos/discipulo/visao/js/pesquisa.js" ></script>
 
@@ -25,8 +21,6 @@
 
 				  $( ".dataNascimento" ).datepicker();
 	});
-
-
 
 jQuery(function($) {
   $('.editar').each(function() {  
@@ -47,7 +41,7 @@ jQuery(function($) {
             modal: true,
             buttons: {
                 Excluir: function() {
-										$(location).attr('href', '/discipulo/excluir/id/'+id);
+										$(location).attr('href', '/discipulo/discipulo/excluir/id/'+id);
                 },
                 Cancelar: function() {
                     $( this ).dialog( "close" );
@@ -72,7 +66,8 @@ jQuery(function($) {
 
 
 	});
-	</script>
+</script>
+
 <script>
    $(document).ready(function() {
 
@@ -132,20 +127,19 @@ jQuery(function($) {
 </div>
 
 
-		<section class = "container">
+		<section class = "container-fluid">
 
 		<nav> 
 			
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
 		</nav>
-		<section>		
+		<section class = "row-fluid" >		
 			<article>
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
-
 				<?php if ( $mensagem ) : ?>
-			  <div class = "row" >
+			  <div class = "row-fluid" >
 					<div class = "span12" >
 					<div class = "alert alert-<?php echo $mensagem[000]['classe'] ; ?>" >	
 					<strong>Mensagem:</strong> <?php echo $mensagem[000]['mensagem'] ; ?> 
@@ -157,8 +151,8 @@ jQuery(function($) {
 				</div>
 				<?php endif ; ?>
 
-			  <div class = "row" >
-						<h3 class = "span12" > Total de discípulos: <?php echo $totalDiscipulos?></h3>
+			  <div class = "row-fluid" >
+						<h3 class = "" > Total de discípulos: <?php echo $totalDiscipulos?></h3>
 				</div>
 		
 						<?php foreach ( $discipulos as $discipulo ) : ?>
@@ -166,7 +160,7 @@ jQuery(function($) {
 							<?php $status = $discipulo->getStatusCelular() ; ?>
 							<?php $dataN = $discipulo->getDataNascimento()->format('d/m/Y') ; ?>
 
-							<div class = "row" >
+							<div class = "row-fluid" >
 							  <div class = "span12 borda" >
 
 								<h3 class = "span8 piscar" ><?php echo $discipulo->nome ; ?> <?php echo $discipulo->alcunha ? '( '.$discipulo->alcunha.' )' : ''; ?> </h3>

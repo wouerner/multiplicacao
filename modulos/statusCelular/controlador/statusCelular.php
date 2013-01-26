@@ -22,14 +22,14 @@ namespace statusCelular\controlador;
 
 			 	$tiposStatusCelulares = $tiposStatusCelulares->listarTodos();	
 			
-				$statusCelularDiscipulo->discipuloId= $url[3];
+				$statusCelularDiscipulo->discipuloId= $url[4];
 				
 				$historico = $statusCelularDiscipulo->listarTodosStatus();
 
 				$statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
 
 				$discipulo = new \discipulo\Modelo\Discipulo() ;
-				$discipulo->id = $url[3] ;
+				$discipulo->id = $url[4] ;
 				$discipulo = $discipulo->listarUm();
 
 				require_once  'modulos/statusCelular/visao/novo.php';
@@ -251,7 +251,7 @@ namespace statusCelular\controlador;
 		}
 
 		public function listarDiscipulosPorStatus($url){
-			$id = $url[3] ;
+			$id = $url[4] ;
 
 			$status = new \statusCelular\modelo\statusCelular() ;
 			$status->tipoStatusCelular = (int)$id ;
@@ -259,7 +259,7 @@ namespace statusCelular\controlador;
 			$totalDiscipulos = count($discipulos);
 
 			$tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
-			$tipoStatus->id = $url[3] ; 
+			$tipoStatus->id = (int)$id ; 
 			$tipoStatus = $tipoStatus->listarUm() ;
 
 			require 'statusCelular/visao/discipuloPorStatus.php' ;	

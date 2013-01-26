@@ -4,20 +4,32 @@ use discipulo\Modelo\Discipulo;
 namespace celula\controlador; 
 
 
-	class celula{
-	
-		public function index(){
+class celula{
 
-		//$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
+	/*Metodo padrão para o controler
+	 *
+	 * */	
+	public function index(){
+
 		$celulas =	new \celula\modelo\celula();
-		$celulas = $celulas->listarTodos();
-		$totalCelulas = \celula\modelo\celula::totalCelulas();
-		//$totalDiscipulos --;
 
-			require_once  'modulos/celula/visao/listar.php';
-
+		include("seguranca/ACL/assets/php/database.php"); 
+		$acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+			
+		if ($acl->hasPermission('admin_acesso') == true){
+			$celulas = $celulas->listarTodos();
+			$totalCelulas = \celula\modelo\celula::totalCelulas();
+		}else {
+			$celulas->lider = $_SESSION['usuario_id'];
+			$celulas = $celulas->listarCelulasLider();
+			
 		
 		}
+
+		require_once  'modulos/celula/visao/listar.php';
+
+		
+	}
 		public function novo($url){
 			if ( empty ( $url['post'] ) ) {
 				

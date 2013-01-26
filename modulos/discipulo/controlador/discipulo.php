@@ -4,6 +4,7 @@ use discipulo\Modelo\estadoCivil;
 use celula\modelo\celula;
 use evento\modelo\evento;
 use evento\modelo\eventoDiscipulo;
+use seguranca\modelo\acl;
 
 namespace discipulo\controlador; 
 
@@ -269,7 +270,7 @@ class discipulo{
 				$discipulo =	new \discipulo\Modelo\Discipulo();
 				$lideres = $discipulo->listarLideres();
 
-				$discipulo->id =  $url[3] ;
+				$discipulo->id =  $url[4] ;
 				$discipulo = $discipulo->listarUm();
 				
 				//estado civil
@@ -299,7 +300,7 @@ class discipulo{
 
 			 $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();	
 			
-			 $statusCelularDiscipulo->discipuloId= $url[3];
+			 $statusCelularDiscipulo->discipuloId= $url[4];
 			 $statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
 			//
 
@@ -308,7 +309,7 @@ class discipulo{
 			 $tiposAdmissoes = $tipoAdmissao->listarTodos();	 
 
 			 $tipoAdmissaoAtual = new \admissao\modelo\admissao();
-			 $tipoAdmissaoAtual->discipuloId = $url[3] ;
+			 $tipoAdmissaoAtual->discipuloId = $url[4] ;
 			 $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
 
 
@@ -422,10 +423,10 @@ class discipulo{
 				
 			// verifica de onde veio a requisição e enviar para a pagina da visão correta.	
 				if (!$caminho=='listarAtualizar') {	
-					header ('location:/discipulo/atualizar/id/'.$discipulo->id) ;
+					header ('location:/discipulo/discipulo/atualizar/id/'.$discipulo->id) ;
 					exit();
 				}else{
-					header ('location:/discipulo/listarAtualizar') ;
+					header ('location:/discipulo/discipulo/listarAtualizar') ;
 					exit();
 				
 				}
@@ -434,10 +435,19 @@ class discipulo{
 		}
 
 		public function excluir($url){
+
+			include("seguranca/ACL/assets/php/database.php"); 
+			$acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+
+			if ($acl->hasPermission('admin_acesso') == true){
+
 				$discipulo =	new \discipulo\Modelo\Discipulo();
-				$discipulo->id = $url[3]; 
+				$discipulo->id = $url[4]; 
+				//echo $url[4];exit;
 				$discipulo->excluir();
-				header ('location:/discipulo/listarAtualizar');
+			}
+
+				header ('location:/discipulo/discipulo/listarAtualizar');
 				exit();
 		
 		}
@@ -680,12 +690,24 @@ class discipulo{
 		  $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
 		  $discipulos =	new \discipulo\Modelo\Discipulo();
-		  $quantidadePorPagina = 12;
+		  $quantidadePorPagina = 30;
 
-		  $discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
-		  
-		  $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
-		  $totalDiscipulos = (int)$totalDiscipulos['total'] ;
+			
+			include("seguranca/ACL/assets/php/database.php"); 
+			$acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+			
+			if ($acl->hasPermission('admin_acesso') == true){
+		  	$discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
+			}else{
+				$discipulos->id = $_SESSION['usuario_id']; 
+		  	$discipulos = $discipulos->listarDiscipulos();
+				
+			
+			}
+
+		  //$totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
+		  //$totalDiscipulos = (int)$totalDiscipulos['total'] ;
+		  $totalDiscipulos = count($discipulos) ;
 
 
 				$estadosCivies = new \discipulo\Modelo\estadoCivil();

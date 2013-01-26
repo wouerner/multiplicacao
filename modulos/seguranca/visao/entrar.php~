@@ -20,6 +20,7 @@ unset($_SESSION['mensagem']);
 	
 		<div class = "container">
 			<div class = "row" >
+				<div class = "span6" >
 				<?php if ( !is_null($mensagem) ) :?>
 				<div class="alert">
 						<?php echo $mensagem ; ?>
@@ -27,7 +28,7 @@ unset($_SESSION['mensagem']);
 				<?php endif ; ?>
 
 
-				<form class="form-horizontal" method="post" accept-charset="utf-8" action ="/seguranca/entrar" >
+				<form class="form-horizontal" method="post" accept-charset="utf-8" action ="/seguranca/seguranca/entrar" >
 				<fieldset>
 
 							<img src= "/modulos/seguranca/visao/img/logo.png" >
@@ -51,6 +52,7 @@ unset($_SESSION['mensagem']);
 							</div>
 			</fieldset>	
 				</form>
+			</div>
 			</div>
 			</div>
 

@@ -12,14 +12,12 @@ use discipulo\modelo\role;
 		}
 
 		public function entrar(){
-			
 		$discipulo = new Discipulo();
 
 		//recuperar dados do post e atribuir ao objeto
 
 		$discipulo->email = $_POST['email'];
 		$discipulo->senha = $_POST['senha'];
-
 
 		$discipuloLogado = $discipulo->entrar();
 
@@ -29,13 +27,13 @@ use discipulo\modelo\role;
 			$_SESSION['usuario_id'] = $discipuloLogado['id'];
 			$_SESSION['logado'] = TRUE;
 
-			header('Location:../painel');
+			header('Location:/painel/painel');
 			exit();
 
 		}else{
 
 			$_SESSION['mensagem'] = 'E-mail/senha incorretos!';
-			header('Location:/seguranca');
+			header('Location:/seguranca/seguranca');
 			exit();
 
 			

@@ -208,6 +208,21 @@ class relatorio {
 	
 	}
 
+	public function relatorioCelula($url){
+		if ($url['post']){
+
+		$inicio = explode('/',$url['post']['inicio']);
+		$inicio =$inicio[2]. '-' .$inicio[1].'-'.$inicio[0];
+		$fim = explode('/',$url['post']['fim']);
+		$fim = $fim[2].'-'.$fim[1].'-'.$fim[0];
+
+		$relatorios = \celula\modelo\relatorioCelula::porData($inicio,$fim);
+		}
+
+		require 'relatorio/visao/relatorioCelula.php' ;	
+	
+	}
+
 
 } 
 

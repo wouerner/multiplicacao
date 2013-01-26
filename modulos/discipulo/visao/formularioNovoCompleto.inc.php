@@ -1,31 +1,28 @@
-				<form action = "/discipulo/novoCompleto" method = "post"  class = "form-inline">
+				<form action = "/discipulo/novoCompleto" method = "post"  class = "form-inline well">
 					<fieldset class = "f_fieldset" >
 
 						<fieldset>
 							<legend>Dados Pessoais</legend>
-							<div class = "row" >
+
+							<div class = "row-fluid" >
 							<div class = "span12" >
 
-					
-
-							<div class = "row">
-							<div class = "span12" >
 							  <div class="control-group span4">
 									<i class = "icon-user" ></i>
 								  	<label class = "control-label" for = "nome" >Nome:</label>
 									<div class = "controls" >
-									<input id = "nome" class = "span4" name = "nome"  value = "<?php echo $dados['nome']?>" required autofocus>
+									<input id = "nome" type = "text" class = "input-block-level" name = "nome"  value = "<?php echo $dados['nome']?>" required autofocus>
 									</div>
 								</div>
 
-							  <div class="control-group span6">
+							  <div class="control-group span4">
 								  	<label class = "control-label" for = "nome" >Alcunha:</label>
 									<div class = "controls" >
-									<input id = "alcunha" class = "span4" name = "alcunha"  value = "<?php echo $dados['alcunha']?>" required>
+									<input id = "alcunha" type = "text" class = "input-block-level" name = "alcunha"  value = "<?php echo $dados['alcunha']?>" >
 									</div>
 								</div>
 
-							  <div class="control-group span1">
+							  <div class="control-group span2">
 								  	<label class = "control-label" for = "ativo" >Ativo:</label>
 									<div class = "controls" >
 								  	<input id = "ativo" name = "ativo" type = "checkbox"  
@@ -35,52 +32,67 @@
 							</div>
 							</div>
 									
+							<div class = "row-fluid" >
+								<div class = "span12" >
 
-							  <div class="control-group span2">
+							  <div class="control-group span4">
 									<i class = "icon-calendar" ></i>
 									<label class = "control-label" for = "dataNascimento" >Data Nasc.:</label>
-									<input id = "dataNascimento" class = "span2 dataNascimento" name = "dataNascimento"  value = "<?php echo $dados['dataNascimento']?>" required >
+									<div class = "controls" >
+										<input id = "dataNascimento" type = "date" class = "dataNascimento" name = "dataNascimento"  value = "<?php echo $dados['dataNascimento']?>" required >
+								</div>
 								</div>
 
-							  <div class="control-group span2">
+							  <div class="control-group span4">
 								  	<label class = "control-label" for = "sexo" >Sexo:</label>
-									<select id = "sexo" class = "span2" name = "sexo" required >
+										<div class = "controls" >
+										<select id = "sexo" class = "" name = "sexo" required >
 										  	<option value = "m" >Masculino</option>
 									  		<option value = "f" >Femenino</option>
 									 </select>
 								</div>
+								</div>
 
-							  <div class="control-group span2">
+							  <div class="control-group span4">
 								  	<label class = "control-label" for = "estadoCivilId" >Estado Civil:</label>
-									<select id = "estadoCivilId" class = "span2" name = "estadoCivilId" >
+										<div class = "controls" >
+									<select id = "estadoCivilId" class = "" name = "estadoCivilId" >
 												 <option value = ""></option>
 									  <?php foreach($estadosCivies as $estadoCivil) : ?>
 										  <option value = "<?php echo $estadoCivil['id']?>"><?php echo $estadoCivil['nome']?> </option>
 									  <?php endforeach ; ?>
 									</select>
 							</div>
+							</div>
 
 
 					</div>
 					</div>
+				</div>
+				</div>
 
-					<div class = "row" >
+					<div class = "row-fluid" >
 					<div class = "span12" >
-						  <div class="control-group span2">
-
-								  <label class = "control-label" for = "telefone" >Telefone:</label>
-								  <input id = "telefone" class = "span2" type="tel" value = "<?php echo $dados['telefone']?>"  maxlength="14" 
+					  <div class="control-group span4">
+						  <label class = "control-label" for = "telefone" >Telefone:</label>
+							<div class = "controls" >
+							  <input id = "telefone" class = "" type="tel" value = "<?php echo $dados['telefone']?>"  maxlength="14" 
 										pattern="\([0-9]{2}\) [0-9]{4}\-[0-9]{4}" placeholder="(00) 9999-9999" value="" name="telefone" id="telefone">
+						</div>
+						</div>
+
+					<div class = "control-group span4" >
+						  <label class = "control-label" for = "endereco" >Endereço:</label>
+							<div class = "controls" >
+							  <input id = "endereco" type = "text" class = "input-block-level" name = "endereco" value = "<?php echo $dados['endereco']?>" required >
+							</div>
 							</div>
 
-							<div class = "control-group span5" >
-								  <label class = "control-label" for = "endereco" >Endereço:</label>
-								  <input id = "endereco" class = "span5" name = "endereco" value = "<?php echo $dados['endereco']?>" required >
-							</div>
-
-							<div class = "control-group span3" >
-								  <label class = "control-label" for = "email" >E-mail:</label>
-								  <input id = "email" class = "span3" name = "email" type = "email" value = "<?php echo $dados['email']?>" required >
+							<div class = "control-group span2" >
+								<label class = "control-label" for = "email" >E-mail:</label>
+								<div class = "controls" >
+								  <input id = "email" class = "" name = "email" type = "email" value = "<?php echo $dados['email']?>" required >
+								</div>
 							</div>
 						</div>
 						</div>

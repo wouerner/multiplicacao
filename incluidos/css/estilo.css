@@ -16,12 +16,12 @@ body {
 
 }
 
-.container{
+.container, .container-fluid{
 	background : url(../img/rough_diagonal.png) white;
-	border-radius : 4px;
+	/*border-radius : 4px;
 	padding : 3px;
 	margin-top: 0.2em;
-	box-shadow: 1px 10px 10px #000;
+	box-shadow: 1px 10px 10px #000;*/
 
 }
 
@@ -288,3 +288,4 @@ form {
 	margin-left: -5px;
 
 }
+

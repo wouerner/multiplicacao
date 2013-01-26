@@ -8,15 +8,12 @@ unset($_SESSION['mensagem']) ;
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../incluidos/css/estilo.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
+			<?php include 'incluidos/css.inc.php' ?>
+			<?php include 'incluidos/js.inc.php' ?>
 	</head>
 
 	<body>
-		<section class = "container">
+		<section class = "container-fluid">
 
 		<nav> 
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
@@ -38,14 +35,14 @@ unset($_SESSION['mensagem']) ;
 					</h4>
 				   </div>
 				<?php endif ; ?>
-				<h3>Total de Células: <?php echo $totalCelulas ; ?>		</h3>
+				<h3>Total de Células: <?php //echo $totalCelulas ; ?>		</h3>
 						<table class = "table">
 
 							<caption><h3>Lista de Células</h3></caption>
 
 							<?php foreach ( $celulas as $celula) : ?>
 
-							<tr><td><h2><a href ="/celula/detalhar/id/<?php echo $celula['id']?>" ><?php echo $celula['nome'] ; ?> </a></h2></td>
+							<tr><td><h2><a href ="#" ><?php echo $celula['nome'] ; ?> </a></h2></td>
 
 								<?php require 'celula/visao/menuCelula.inc.php' ; ?>
 
@@ -59,8 +56,6 @@ unset($_SESSION['mensagem']) ;
 						<?php endforeach ; ?>
 						</table>
 				
-						<?php // discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos['total'] ,3 ,$pagina ) ; ?>
-			
 			</article>
 		
 		</section>

@@ -6,23 +6,17 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-			@import url("../../../ext/jquery-ui/css/bootstrap/jquery-ui.css");
-		   @import url("../../../incluidos/css/estilo.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
-		<script src="../../../ext/jquery-ui/js/jquery-ui.js"></script>
-		<script src="../../../ext/jquery-ui/development-bundle/ui/i18n/jquery.ui.datepicker-pt-BR.js"></script>
-		<script src="../../../ext/jquery/jquery.maskedinput.js"></script>
-		<script src="../modulos/discipulo/visao/js/novo.js"></script>
 
-<script src = "modulos/discipulo/visao/js/pesquisa.js" ></script>
+		<?php include 'modulos/../incluidos/css.inc.php' ; ?>
+		<?php include 'modulos/../incluidos/js.inc.php' ; ?>
+
+		<script src="../modulos/discipulo/visao/js/novo.js"></script>
+		<script src = "modulos/discipulo/visao/js/pesquisa.js" ></script>
 
 	</head>
 
 	<body>
-		<section class = "container">
+		<section class = "container-fluid">
 		<nav> 
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
 		</nav>
@@ -38,24 +32,30 @@
 				<?php endif ; ?>
 				</div>
 
+				<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 				<?php require_once 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
 				<div class = "well">
-						  <a class = "btn btn-success btn-large" href = "/discipulo/novoCompleto" >
+						  <a class = "btn btn-success " href = "/discipulo/novoCompleto" >
 									<i class = "icon-plus icon-white" ></i> Novo Discípulo
 							</a>
-						  <a class = "btn btn-warning btn-large" href = "/celula/novo" >
+						  <a class = "btn btn-warning " href = "/celula/novo" >
 									<i class = "icon-plus icon-white" ></i> Nova Célula
 							</a>
 				</div>
-				<table class = "table table-condensed" >
+					<?php endif ; ?>
+				<table class = "table" >
 				<?php foreach($status as $s) : ?>
 						<tr>
-						<td><a href="/statusCelular/listarDiscipulosPorStatus/id/<?php echo $s['tipoStatusCelular'] ; ?>" ><?php echo $s['tipoNome'] ; ?></a></td>
-						<td><h3><?php echo $s['total'] ; ?></h3></td>
+						<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+						<td><a href="/statusCelular/statusCelular/listarDiscipulosPorStatus/id/<?php echo $s['tipoStatusCelular'] ; ?>" ><?php echo $s['tipoNome'] ; ?></a></td>
+						<?php else :?>
+						<td><?php echo $s['tipoNome'] ; ?></td>
+						<?php endif ; ?>	
+						<td><?php echo $s['total'] ; ?></td>
 						</tr>
 				<?php endforeach ; ?>
-						<tr><td>Total</td><td><h3><?php echo $totalDiscipulos ; ?></h3></td></tr>
+						<tr><td>Total</td><td><?php echo $totalDiscipulos ; ?></td></tr>
 				</table>
 			</article>
 		

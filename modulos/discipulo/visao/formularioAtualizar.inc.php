@@ -1,4 +1,4 @@
-<form action = "/discipulo/atualizar" method = "post"  class = "form-inline">
+<form action = "/discipulo/discipulo/atualizar" method = "post"  class = "form-inline">
 											<input id = "idDiscipulo" type = "hidden"   value = "<?php echo $discipulo->id ; ?>" >
 		<fieldset class = "f_fieldset" >
 			<legend>Dados Pessoais</legend>
@@ -10,14 +10,14 @@
 							  <div class="control-group span4">
 								  	<label class = "control-label" for = "nome" >Nome:</label>
 										<div class = "controls" >
-											<input id = "nome" class = "span4" name = "nome"  value = "<?php echo $discipulo->nome ; ?>" required autofocus>
+											<input id = "nome" type = "text" class = "span4" name = "nome"  value = "<?php echo $discipulo->nome ; ?>" required autofocus>
 									</div>
 								</div>
 
 							  <div class="control-group span4">
 								  	<label class = "control-label" for = "alcunha" >Alcunha:</label>
 										<div class = "controls" >
-											<input id = "nome" class = "span4" name = "alcunha"  value = "<?php echo $discipulo->alcunha ; ?>" required autofocus>
+											<input id = "nome" type = "text" class = "span4" name = "alcunha"  value = "<?php echo $discipulo->alcunha ; ?>">
 									</div>
 								</div>
 									
@@ -31,7 +31,7 @@
 
 							  <div class="control-group span2">
 								  	<label class = "control-label" for = "dataNascimento" >Data Nasc.:</label>
-										<input id = "dataNascimento" class = "span2 dataNascimento" name = "dataNascimento" value = "<?php echo $dataN ; ?>" required >
+										<input id = "dataNascimento" type = "text" class = "span2 dataNascimento" name = "dataNascimento" value = "<?php echo $dataN ; ?>" required >
 								</div>
 
 							  <div class="control-group span2">
@@ -77,7 +77,7 @@
 
 							<div class = "control-group span6" >
 								  <label class = "control-label" for = "endereco" >Endereço:</label>
-								  <input id = "endereco" class = "span6" name = "endereco" value = "<?php echo $discipulo->endereco ; ?>" required >
+								  <input id = "endereco" type = "text" class = "span6" name = "endereco" value = "<?php echo $discipulo->endereco ; ?>" required >
 							</div>
 
 							<div class = "control-group span3" >
@@ -132,7 +132,7 @@
 				<label class = "control-label span2" ></strong>Atualizar Status:</label>
 				<div class = "controls " >
 							<span class ="span3" >
-								<a class = "btn" href = "/statusCelular/novo/id/<?php  echo $discipulo->id ; ?>"  ><?php echo $status ['nome'] ; ?></a>
+								<a class = "btn" href = "/statusCelular/statusCelular/novo/id/<?php  echo $discipulo->id ; ?>"  ><?php echo $status ['nome'] ; ?></a>
 							</span>
 				</div>
 			</div> 

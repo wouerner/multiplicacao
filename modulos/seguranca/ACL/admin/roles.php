@@ -1,10 +1,10 @@
 <?php 
-include("../assets/php/database.php"); 
-include("../assets/php/class.acl.php");
+//include("../assets/php/database.php"); 
+//include("../assets/php/class.acl.php");
 $_GET['action'] = isset($_GET['action']) ? $_GET['action'] : '';
 $_GET['roleID'] = isset($_GET['roleID']) ? $_GET['roleID'] : ''; 
 
-$myACL = new ACL();
+//$myACL = new ACL();
 if (isset($_POST['action']))
 {
 	switch($_POST['action'])
@@ -33,7 +33,7 @@ if (isset($_POST['action']))
 					mysql_query($strSQL);
 				}
 			}
-			header("location: roles.php");
+			header("location: /seguranca/acl/roles");
 		break;
 		case 'delRole':
 			$strSQL = sprintf("DELETE FROM `roles` WHERE `ID` = %u LIMIT 1",$_POST['roleID']);
@@ -42,28 +42,29 @@ if (isset($_POST['action']))
 			mysql_query($strSQL);
 			$strSQL = sprintf("DELETE FROM `role_perms` WHERE `roleID` = %u",$_POST['roleID']);
 			mysql_query($strSQL);
-			header("location: roles.php");
+			header("location: /seguranca/acl/roles");
 		break;
 	}
 }
-if ($myACL->hasPermission('access_admin') != true)
+/*if ($myACL->hasPermission('access_admin') != true)
 {
 	header("location: ../index.php");
-}
+}*/
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>ACL Test</title>
-<link href="../assets/css/styles.css" rel="stylesheet" type="text/css" />
+<link href="/modulos/seguranca/ACL/assets/css/styles.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="header"></div>
-<div id="adminButton"><a href="../">Main Screen</a> | <a href="index.php">Admin Home</a></div>
+<div id="adminButton"><a href="/seguranca/acl">Main Screen</a> | <a href="/seguranca/acl/admin">Admin Home</a></div>
 <div id="page">
-	<? if ($_GET['action'] == '') { ?>
+
+	<?php if ($_GET['action'] == '') { ?>
     	<h2>Select a Role to Manage:</h2>
-        <? 
+        <?php 
 		$roles = $myACL->getAllRoles('full');
 		foreach ($roles as $k => $v)
 		{
@@ -74,49 +75,73 @@ if ($myACL->hasPermission('access_admin') != true)
 			echo "No roles yet.<br />";
 		} ?>
         <input type="button" name="New" value="New Role" onclick="window.location='?action=role'" />
-    <? } 
+    <?php } 
     if ($_GET['action'] == 'role') { 
 		if ($_GET['roleID'] == '') { 
 		?>
     	<h2>New Role:</h2>
-        <? } else { ?>
-    	<h2>Manage Role: (<?= $myACL->getRoleNameFromID($_GET['roleID']); ?>)</h2><? } ?>
-        <form action="roles.php" method="post">
-        	<label for="roleName">Name:</label><input type="text" name="roleName" id="roleName" value="<?= $myACL->getRoleNameFromID($_GET['roleID']); ?>" />
+        <?php } else { ?>
+    	<h2>Manage Role: (<?php echo $myACL->getRoleNameFromID($_GET['roleID']); ?>)</h2><?php } ?>
+
+        <form action="/seguranca/acl/roles" method="post">
+        	<label for="roleName">Name:</label><input type="text" name="roleName" id="roleName" value="<?php echo  $myACL->getRoleNameFromID($_GET['roleID']); ?>" />
             <table border="0" cellpadding="5" cellspacing="0">
             <tr><th></th><th>Allow</th><th>Deny</th><th>Ignore</th></tr>
-            <? 
+            <?php 
             $rPerms = $myACL->getRolePerms($_GET['roleID']);
-            $aPerms = $myACL->getAllPerms('full');
-            foreach ($aPerms as $k => $v)
-            {
-                echo "<tr><td><label>" . $v['Name'] . "</label></td>";
-                echo "<td><input type=\"radio\" name=\"perm_" . $v['ID'] . "\" id=\"perm_" . $v['ID'] . "_1\" value=\"1\"";
-                if ($rPerms[$v['Key']]['value'] === true && $_GET['roleID'] != '') { echo " checked=\"checked\""; }
-                echo " /></td>";
-                echo "<td><input type=\"radio\" name=\"perm_" . $v['ID'] . "\" id=\"perm_" . $v['ID'] . "_0\" value=\"0\"";
-                if ($rPerms[$v['Key']]['value'] != true && $_GET['roleID'] != '') { echo " checked=\"checked\""; }
-                echo " /></td>";
-				echo "<td><input type=\"radio\" name=\"perm_" . $v['ID'] . "\" id=\"perm_" . $v['ID'] . "_X\" value=\"X\"";
-                if ($_GET['roleID'] == '' || !array_key_exists($v['Key'],$rPerms)) { echo " checked=\"checked\""; }
-                echo " /></td>";
-                echo "</tr>";
-            }
-        ?>
+						$aPerms = $myACL->getAllPerms('full');
+						//var_dump($rPerms);
+						//var_dump($aPerms);
+
+						?>
+
+						<?php foreach ($aPerms as $k => $v): ?>
+						<tr><td><label>
+								<?php  echo  $v['Name'] ;?>
+							</label></td>
+						
+						<td>
+							<input type="radio" name="perm_<?php echo $v['ID'] ?>" id="perm_<?php echo $v['ID'] ?>_1" value="1"
+
+								<?php	if (isset($rPerms[$v['Key']]['value']) && $rPerms[$v['Key']]['value'] === true && $_GET['roleID'] != '') : ?>
+									checked="checked" 
+								<?php endif; ?> 
+								/>
+						</td>
+
+						<td>
+							<input type="radio" name="perm_<?php echo $v['ID'] ?>"  id="perm_<?php echo $v['ID'] ?>_0" value="0"
+								<?php if (isset($rPerms[$v['Key']]['value']) && $rPerms[$v['Key']]['value'] != true && $_GET['roleID'] != ''): ?> 
+									checked="checked"
+								<?php endif; ?>
+						/></td>
+
+						<td>
+							<input type="radio" name="perm_<?php echo $v['ID'] ; ?>" id="perm_<?php echo $v['ID'] ?>_X" value="X"
+
+								<?php  if ($_GET['roleID'] == '' || !array_key_exists($v['Key'],$rPerms)) : ?>
+									 checked="checked" 		
+								<?php endif ; ?>
+
+								 />
+							</td>
+                </tr>
+						
+					<?php endforeach ; ?>
     	</table>
     	<input type="hidden" name="action" value="saveRole" />
-        <input type="hidden" name="roleID" value="<?= $_GET['roleID']; ?>" />
+        <input type="hidden" name="roleID" value="<?php echo $_GET['roleID']; ?>" />
     	<input type="submit" name="Submit" value="Submit" />
     </form>
-    <form action="roles.php" method="post">
+    <form action="/seguranca/acl/roles" method="post">
          <input type="hidden" name="action" value="delRole" />
-         <input type="hidden" name="roleID" value="<?= $_GET['roleID']; ?>" />
+         <input type="hidden" name="roleID" value="<?php echo $_GET['roleID']; ?>" />
     	<input type="submit" name="Delete" value="Delete" />
     </form>
-    <form action="roles.php" method="post">
+    <form action="/seguranca/acl/roles" method="post">
     	<input type="submit" name="Cancel" value="Cancel" />
     </form>
-    <? } ?>
+    <?php } ?>
 </div>
 </body>
 </html>

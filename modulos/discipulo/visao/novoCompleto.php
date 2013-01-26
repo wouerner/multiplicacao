@@ -11,12 +11,7 @@ $_SESSION['dados'] = isset($_SESSION['dados']) ? NULL : NULL;
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../incluidos/css/estilo.css");
-			@import url("../../../ext/jquery-ui/css/bootstrap/jquery-ui.css");
-		</style>
-
+		<?php include 'incluidos/css.inc.php'?>
 		<script src= "../../../ext/jquery/jquery-1.7.1.min.js"></script>
 		<script src= "../../../ext/jquery/jquery.maskedinput.js"> </script>
 
@@ -89,7 +84,7 @@ $_SESSION['dados'] = isset($_SESSION['dados']) ? NULL : NULL;
 	</head>
 
 	<body>
-		<section class = "container">
+		<section class = "container-fluid">
 		<header>
 			<nav>
 				<?php require 'modulos/menu/visao/menu.inc.php' ; ?>
