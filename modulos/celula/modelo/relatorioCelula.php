@@ -324,7 +324,7 @@ class relatorioCelula{
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'SELECT * FROM Celula WHERE id = ?';
+		$sql = 'SELECT * FROM RelatorioCelula WHERE id = ?';
 
 		$stm = $pdo->prepare($sql);
 
@@ -332,7 +332,7 @@ class relatorioCelula{
 
 		$stm->execute();
 
-		return $stm->fetchObject();
+		return $stm->fetchObject('\celula\modelo\relatorioCelula');
 
 	}
 

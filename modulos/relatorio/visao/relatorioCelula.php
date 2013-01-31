@@ -66,7 +66,7 @@ unset($_SESSION['mensagem']) ;
 							<tr>
 								<td class = "span3" >
 									<?php echo date_format(date_create($r->dataEnvio),'d/m/Y  H:i:s')  ; ?></td>
-								<td><h4><?php echo $r->titulo ; ?></h4></td>
+								<td><h4><a href = "/celula/relatorio/detalhar/id/<?php echo $r->id ; ?>" ><?php echo $r->titulo ; ?></h4></td>
 								<td><?php echo $r->getLider()->nome ; ?></td>
 							</tr>
 

@@ -42,7 +42,7 @@ unset($_SESSION['mensagem']) ;
 
 							<?php foreach ( $celulas as $celula) : ?>
 
-							<tr><td><h2><a href ="#" ><?php echo $celula['nome'] ; ?> </a></h2></td>
+							<tr><td><a href ="#" ><?php echo $celula['nome'] ; ?></td>
 
 								<?php require 'celula/visao/menuCelula.inc.php' ; ?>
 

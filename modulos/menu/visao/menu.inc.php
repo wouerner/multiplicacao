@@ -9,8 +9,6 @@ $usuario = $usuario[0] ;
 
 ?>
 
-
-
 <div class="navbar navbar-static">
   <div class="navbar-inner ">
     <div class="">
@@ -20,10 +18,10 @@ $usuario = $usuario[0] ;
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Discipulo<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<ul>	
-								<li><a href = "/discipulo/discipulo/listarAtualizar" ><i class = "icon-list-alt icon-white" ></i> Listar Discípulos</a></li>
+								<li><a href = "/discipulo/discipulo/listarAtualizar" ><i class = "icon-list-alt " ></i> Listar</a></li>
 								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-								<li><a href = "/discipulo/discipulo/novoCompleto" ><i class = "icon-plus icon-white" ></i> Novo Discípulo</a></li>
-								<li><a href = "/discipulo/discipulo/chamar" ><i class = "icon-search icon-white" ></i> Pesquisar</a></li>
+								<li><a href = "/discipulo/discipulo/novoCompleto" ><i class = "icon-plus " ></i> Novo</a></li>
+								<li><a href = "/discipulo/discipulo/chamar" ><i class = "icon-search " ></i> Pesquisar</a></li>
 
 								<li class="dropdown-submenu">
 									<a href = "#" class="dropdown-toggle" data-toggle="dropdown">StatusCelular</a>
@@ -85,11 +83,10 @@ $usuario = $usuario[0] ;
 					<li class = "dropdown"><a href = "#" class="dropdown-toggle" data-toggle="dropdown"><i class = "" ></i> Célula<b class="caret"></b></a>
 						<ul  class="dropdown-menu">	
 							<ul>
-								<li><a href = "/celula/celula" ><i class = "icon-list " ></i>Lista Células</a></li>
+								<li><a href = "/celula/celula" ><i class = "icon-list " ></i> Listar</a></li>
 
 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-								<li><a href = "/celula" class="dropdown-toggle" data-toggle="dropdown"><i class = "" ></i> Célula</a></li>
-								<li><a href = "/celula/celula/novo" ><i class = "icon-plus icon-white" ></i> Nova Célula</a></li>
+								<li><a href = "/celula/celula/novo" ><i class = "icon-plus " ></i> Nova</a></li>
 								<li><a href = "/celula/celula/lideresCelula" >Líderes de Célula</a></li>
 								<li><a href = "/celula/celula/chamar">Pesquisar</a></li>
 <?php endif ; ?>
@@ -101,14 +98,14 @@ $usuario = $usuario[0] ;
 
 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 					<li class = "dropdown" >
-						<a href = "#" class="dropdown-toggle" data-toggle="dropdown"><i class = "icon-file icon-white" ></i> Relatorios<b class="caret"></b></a>
+						<a href = "#" class="dropdown-toggle" data-toggle="dropdown"><i class = " " ></i> Relatorios<b class="caret"></b></a>
 						<ul class = "dropdown-menu" >	
 							<ul>
 								<li><a href = "/relatorio/relatorio/relatorioResumido" >Resumido</a></li>
 								<li><a href = "/discipulo/discipulo/fichaPorStatus/id/8" >Ficha Encontro</a></li>
 								<li><a href = "/discipulo/discipulo/cracha/id/8" >Cracha</a></li>
-								<li><a href = "/relatorio/relatorio/aniversariantes" ><i class = "icon-gift icon-white" ></i> Aniversariantes</a></li>
-								<li><a href = "/relatorio/relatorio/relatorioCelula" ><i class = "icon-gift icon-white" ></i> Relatorio de Célula</a></li>
+								<li><a href = "/relatorio/relatorio/aniversariantes" ><i class = "icon-gift " ></i> Aniversariantes</a></li>
+								<li><a href = "/relatorio/relatorio/relatorioCelula" ><i class = "" ></i> Relatorio de Célula</a></li>
 	  					</ul>
 						</ul>
 					</li>

@@ -23,7 +23,7 @@
 		    <form class="well " action = "/celula/relatorio/novo" method = "post"  >
 						<div class="row-fluid">
 						<div class="span3">
-							<label>Título</label>
+							<label>Tema</label>
 							<input name = "titulo" type="text" class="input-block-level" placeholder="Título do Relatório">
 							<label>Data Envio</label>
 							<input name = "dataEnvio" type="text" class="input-block-level" placeholder="" value = "<?php echo $dataEnvio ; ?>" disabled >

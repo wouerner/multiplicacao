@@ -1,10 +1,8 @@
 body {
 	background : url('../img/agua_bg.jpg');
-
-
 }
 
-.borda{
+/*.borda{
 	border	: 1px solid #fdfdfd;
 	margin-top : 3px;
 	margin-bottom : 3px;
@@ -14,7 +12,7 @@ body {
 	background: rgba(227,229,255,0.6) ;
 
 
-}
+}*/
 
 .container, .container-fluid{
 	background : url(../img/rough_diagonal.png) white;
@@ -30,28 +28,28 @@ legend{
 
 }
 
-h2{
+/*h2{
 	display:block;
 	float : left ;
 
 }
 
 .f_fieldset{
-/*	border-radius : 4px ;
+	border-radius : 4px ;
 	margin : 3px ;
 	border : 1px solid black;
 	margin-top : -1px ;
-	margin-bottom : 0px ;*/
+	margin-bottom : 0px ;
 
-}
+}*/
 
-.f_fieldset legend{
+/*.f_fieldset legend{
 }
 
 form {
 	margin-bottom : 5px;
 
-}
+}*/
 
 .oculto{
 	display : none ;
@@ -63,7 +61,7 @@ form {
 }
 
 /* Main */
-#menu
+/*#menu
 {
         width: 100%;
         margin: 0;
@@ -107,7 +105,7 @@ form {
         color: #fafafa;
 }
 
-*html #menu li a:hover /* IE6 */
+*html #menu li a:hover 
 {
         color: #fafafa;
 }
@@ -116,10 +114,10 @@ form {
 {
         display: block;
 }
-
+*/
 /* Sub-menu */
 
-#menu ul
+/*#menu ul
 {
     list-style: none;
     margin: 0;
@@ -168,14 +166,14 @@ form {
     float: none;
         text-transform: none;
 }
-
-*html #menu ul a /* IE6 */
+*/
+/* *html #menu ul a 
 {
         height: 10px;
         width: 150px;
 }
 
-*:first-child+html #menu ul a /* IE7 */
+*:first-child+html #menu ul a 
 {
         height: 10px;
         width: 150px;
@@ -200,7 +198,7 @@ form {
 
 #menu ul li:first-child a:after
 {
-/*    content: '';
+    content: '';
     position: absolute;
     left: 30px;
     top: -8px;
@@ -208,7 +206,7 @@ form {
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-bottom: 8px solid #444;*/
+    border-bottom: 8px solid #444;
 }
 
 #menu ul li:first-child a:hover:after
@@ -226,7 +224,7 @@ form {
 		  position : absolute;
 			left: 100% ;
 			top: 0 ;
-  /*      width: 100%;*/
+      width: 100%;
         margin: 0;
         padding: 10px 0 0 0;
         list-style: none;
@@ -245,7 +243,7 @@ form {
 
 
 
-/* Clear floated elements */
+ Clear floated elements 
 #menu:after
 {
         visibility: hidden;
@@ -256,8 +254,8 @@ form {
         height: 0;
 }
 
-* html #menu             { zoom: 1; } /* IE6 */
-*:first-child+html #menu { zoom: 1; } /* IE7 */
+* html #menu             { zoom: 1; } 
+*:first-child+html #menu { zoom: 1; } */
 
 
 #dataNacimento{
@@ -266,7 +264,6 @@ form {
 }
 
 #dataNascimento input.span2, textarea.span2, .uneditable-input.span2{
-	
 
 }
 
@@ -277,7 +274,6 @@ form {
 
 
 #pesquisa {
-
 	font-size: 16pt;
 }
 #pesquisaLabel {
@@ -289,3 +285,7 @@ form {
 
 }
 
+li ul {
+	list-style : none;
+
+}

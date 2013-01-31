@@ -24,7 +24,7 @@ unset($_SESSION['mensagem']) ;
 		
 		</header>
 
-		<section>		
+		<section>	ssss
 			<article>
 
 			<?php if (isset($mensagem)) : ?>
@@ -42,7 +42,7 @@ unset($_SESSION['mensagem']) ;
 
 							<tr>
 								<td class = "span3" ><?php echo date_format(date_create($r->dataEnvio),'d/m/Y  H:i:s')  ; ?></td>
-								<td><h4><?php echo $r->titulo ; ?></h4></td>
+								<td><h4><a href = "/celula/relatorio/detalhar/id/<?php echo $r->id ; ?>" ><?php echo $r->titulo ; ?></a></h4></td>
 							</tr>
 							<tr>
 								<td colspan = "2" ><?php echo $r->texto ; ?></td>

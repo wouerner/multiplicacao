@@ -100,18 +100,13 @@ class relatorio{
 
 		public function detalhar($url){
 
-			$celula =	new \celula\modelo\celula() ;
-			$celula->id = $url[3] ; 
-			$discipulos= $celula->listarDiscipulos() ;
-			$celula = $celula->listarUm() ;
-
-				$lider =	new \discipulo\Modelo\Discipulo() ;
-				$lider->id = $celula->lider ;
-				$lider = $lider->listarUm($celula->lider) ;
+			$relatorio =	new \celula\modelo\relatorioCelula() ;
+			$relatorio->id = $url[4] ; 
+			$relatorio = $relatorio->listarUm() ;
 
 //				var_dump($discipulos);
 				
-			require 'celula/visao/detalhar.php' ;
+			require 'celula/visao/relatorioCelula/detalhar.php' ;
 				
 		
 		}
