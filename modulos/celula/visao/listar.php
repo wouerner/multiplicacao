@@ -35,21 +35,24 @@ unset($_SESSION['mensagem']) ;
 					</h4>
 				   </div>
 				<?php endif ; ?>
-				<h3>Total de Células: <?php //echo $totalCelulas ; ?>		</h3>
-						<table class = "table">
+						<table class = "table well table-striped ">
 
-							<caption><h3>Lista de Células</h3></caption>
+							<caption><h3>Lista de Células: <?php echo $totalCelulas ; ?></h3></caption>
+
+							<thead>
+								<td>Nome</td>
+								<td>Endereço</td>
+								<td>Horário</td>
+								<td>Ações</td>
+							</thead>
 
 							<?php foreach ( $celulas as $celula) : ?>
 
-							<tr><td><a href ="#" ><?php echo $celula['nome'] ; ?></td>
-
-								<?php require 'celula/visao/menuCelula.inc.php' ; ?>
-
-							</tr>
 							<tr>
-								<td>Endereço:<?php echo $celula['endereco'] ; ?>	</td> 
-								<td>Horario:<?php echo $celula['horarioFuncionamento'] ; ?></td>
+								<td><a href ="#" ><?php echo $celula['nome'] ; ?></td>
+								<td><?php echo $celula['endereco'] ; ?>	</td> 
+								<td><?php echo $celula['horarioFuncionamento'] ; ?></td>
+								<?php require 'celula/visao/menuCelula.inc.php' ; ?>
 							</tr>
 								
 							

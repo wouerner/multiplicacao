@@ -32,19 +32,19 @@
 				<?php endif ; ?>
 				</div>
 
-				<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 				<?php require_once 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
+				<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 				<div class = "well">
-						  <a class = "btn btn-success " href = "/discipulo/novoCompleto" >
+						  <a class = "btn btn-success " href = "/discipulo/discipulo/novoCompleto" >
 									<i class = "icon-plus icon-white" ></i> Novo Discípulo
 							</a>
-						  <a class = "btn btn-warning " href = "/celula/novo" >
+						  <a class = "btn btn-warning " href = "/celula/celula/novo" >
 									<i class = "icon-plus icon-white" ></i> Nova Célula
 							</a>
 				</div>
 					<?php endif ; ?>
-				<table class = "table" >
+				<table class = "table table-striped table-hover well" >
 				<?php foreach($status as $s) : ?>
 						<tr>
 						<?php if ($acesso->hasPermission('admin_acesso') == true): ?>

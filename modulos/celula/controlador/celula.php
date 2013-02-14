@@ -18,12 +18,12 @@ class celula{
 			
 		if ($acl->hasPermission('admin_acesso') == true){
 			$celulas = $celulas->listarTodos();
-			$totalCelulas = \celula\modelo\celula::totalCelulas();
+			//$totalCelulas = \celula\modelo\celula::totalCelulas();
+			$totalCelulas = count($celulas);
 		}else {
 			$celulas->lider = $_SESSION['usuario_id'];
 			$celulas = $celulas->listarCelulasLider();
-			
-		
+			$totalCelulas = count($celulas);
 		}
 
 		require_once  'modulos/celula/visao/listar.php';
@@ -62,7 +62,7 @@ class celula{
 				$celula =	new \celula\modelo\celula();
 				$lideres = $celula->listarLideres();
 
-				$celula->id =  $url[3] ;
+				$celula->id =  $url[4] ;
 				$celula = $celula->listarUm() ;
 
 				$lider =	new \discipulo\Modelo\Discipulo() ;

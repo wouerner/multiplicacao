@@ -1,3 +1,4 @@
+				<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 <div class = "row-fluid" >
 	<div class = "span12" >
 	<form action = "/discipulo/discipulo/chamar" method = "GET" class = "well form-search" >
@@ -15,3 +16,4 @@
 	</form>
 	</div>
 </div>
+<?php endif ; ?>

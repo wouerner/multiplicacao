@@ -460,7 +460,7 @@ class discipulo{
 			$ministerios = new \ministerio\modelo\ministerioTemDiscipulo();
 			$statusCelular = new \statusCelular\modelo\statusCelular();
 
-			$discipulo->id = $url[3] ; 
+			$discipulo->id = $url[4] ; 
 
 			$liderCelula = $discipulo->liderCelula();
 			$participaCelula = $discipulo->participaCelula();

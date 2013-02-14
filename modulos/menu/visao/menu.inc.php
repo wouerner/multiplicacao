@@ -12,6 +12,7 @@ $usuario = $usuario[0] ;
 <div class="navbar navbar-static">
   <div class="navbar-inner ">
     <div class="">
+
       <a class="brand" href="/painel/painel">MGA</a>
         <ul class="nav" role="navigation">
 					<li class="divider-vertical"></li>

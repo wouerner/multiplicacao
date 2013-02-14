@@ -2,15 +2,13 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../incluidos/css/estilo.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
+
+		<?php include 'incluidos/css.inc.php' ; ?>
+		<?php include 'incluidos/js.inc.php' ; ?>
 	</head>
 
 	<body>
-		<section class = "container">
+		<section class = "container-fluid">
 
 		<nav> 
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
@@ -24,7 +22,7 @@
 			<article>
 	
 
-			<form action = "/relatorio/aniversariantes" method= "post">	
+			<form action = "/relatorio/relatorio/aniversariantes" method= "post">	
 					<label>Mês</label>
 					<select name = "data" >
 						<option value="1">Janeiro</option>

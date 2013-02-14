@@ -2,18 +2,13 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../incluidos/css/estilo.css");
-			@import url("../../../ext/jquery-ui/css/ui-lightness/jquery-ui.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
-		<script src="../../../ext/jquery-ui/js/jquery-ui.js"></script>
+		<?php include 'incluidos/css.inc.php'?>
+		<?php include 'incluidos/js.inc.php'?>
 		<script src="/modulos/discipulo/visao/js/combobox.js"></script>
 	</head>
 
 	<body>
-		<section class = "container">
+		<section class = "container-fluid">
 		<header>
 			<nav>
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	

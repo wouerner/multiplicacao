@@ -12,11 +12,8 @@ $_SESSION['dados'] = isset($_SESSION['dados']) ? NULL : NULL;
 	<head>
 		<meta charset="UTF-8" />
 		<?php include 'incluidos/css.inc.php'?>
-		<script src= "../../../ext/jquery/jquery-1.7.1.min.js"></script>
-		<script src= "../../../ext/jquery/jquery.maskedinput.js"> </script>
+		<?php include 'incluidos/js.inc.php'?>
 
-		<script src= "../../../ext/jquery-ui/js/jquery-ui.js"> </script>
-		<script src= "../../../ext/jquery-ui/development-bundle/ui/i18n/jquery.ui.datepicker-pt-BR.js"> </script>
 		<script src="/modulos/discipulo/visao/js/combobox.js"></script>
 		<script src="/modulos/discipulo/visao/js/comboboxCelula.js"></script>
 

@@ -238,13 +238,13 @@ namespace statusCelular\controlador;
 		public function excluir($url){
 
 				
-			$id = $url[3] ;
-			$discipulo = $url[5] ;
+			$id = $url[4] ;
+			$discipulo = $url[6] ;
 
 			$status = new \statusCelular\modelo\statusCelular() ;
 			$status->id = $id ;
 			$status->excluir();
-			header ('location:/statusCelular/novo/id/'.$discipulo);
+			header ('location:/statusCelular/statusCelular/novo/id/'.$discipulo);
 			exit();
 		
 		

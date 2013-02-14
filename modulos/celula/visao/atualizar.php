@@ -2,20 +2,15 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../incluidos/css/estilo.css");
-			@import url("../../../ext/jquery-ui/css/ui-lightness/jquery-ui.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
-		<script src="../../../ext/jquery-ui/js/jquery-ui.js"></script>
+		<?php include 'incluidos/css.inc.php' ?>
+		<?php include 'incluidos/js.inc.php' ?>
 		<script src="/modulos/discipulo/visao/js/combobox.js"></script>
 		<script src="/modulos/discipulo/visao/js/comboboxCelula.js"></script>
 
 	</head>
 
 	<body>
-		<section class = "container">
+		<section class = "container-fluid">
 		<header>
 			<nav>
 				<?php require 'modulos/menu/visao/menu.inc.php' ; ?>
@@ -31,21 +26,21 @@
 						<div class = "control-group" >
 						<label class = "control-label" >Nome:</label>
 						<div class = "controls" >
-						<input name = "nome"  value = "<?php echo $celula->nome ; ?>" >
+						<input type = "text" name = "nome"  value = "<?php echo $celula->nome ; ?>" >
 						</div>
 						</div>
 
 						<div class = "control-group" >
 						<label class = "control-label" >Horario:</label>
 						<div class = "controls" >
-						<input name = "horarioFuncionamento" value = "<?php echo $celula->horarioFuncionamento ; ?>">
+						<input type = "text" name = "horarioFuncionamento" value = "<?php echo $celula->horarioFuncionamento ; ?>">
 						</div>
 						</div>
 
 						<div class = "control-group" >
 						<label class = "control-label" >Endereço:</label>
 						<div class = "controls" >
-						<input name = "endereco" value = "<?php echo $celula->endereco ; ?>">
+						<input type = "text" name = "endereco" value = "<?php echo $celula->endereco ; ?>">
 						</div>
 						</div>
 

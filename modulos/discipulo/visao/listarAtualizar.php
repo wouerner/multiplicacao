@@ -133,7 +133,7 @@ jQuery(function($) {
 			
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
 		</nav>
-		<section class = "row-fluid" >		
+		<section class = "" >		
 			<article>
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
@@ -160,12 +160,10 @@ jQuery(function($) {
 							<?php $status = $discipulo->getStatusCelular() ; ?>
 							<?php $dataN = $discipulo->getDataNascimento()->format('d/m/Y') ; ?>
 
-							<div class = "row-fluid" >
-							  <div class = "span12 borda" >
-
-								<h3 class = "span8 piscar" ><?php echo $discipulo->nome ; ?> <?php echo $discipulo->alcunha ? '( '.$discipulo->alcunha.' )' : ''; ?> </h3>
+							<div class = "row-fluid " >
+								<h3 class = " piscar" ><?php echo $discipulo->nome ; ?> <?php echo $discipulo->alcunha ? '( '.$discipulo->alcunha.' )' : ''; ?> </h3>
 									<a href = "/statusCelular/novo/id/<?php echo $discipulo->id?>" ><span class = "badge "  >Status:<?php echo $status['nome']; ?></span></a>
-										<h5 class = "span8" >
+										<h5 class = "" >
 											<a href= "/discipulo/atualizar/id/<?php echo is_object($lider) ? $lider->id : '';?>">
 												Líder:<?php echo is_object($lider) ? $lider->nome : ''; ?></h5>
 									</a>
@@ -177,11 +175,9 @@ jQuery(function($) {
 									<button class = "btn btn-mini span1 editar" ><i class = "icon-pencil" ></i></button>
 									<div class = "oculto ui-widget" >
 						  			<?php include 'discipulo/visao/formularioAtualizar.inc.php' ; ?>
-									</div>
 							</div>
 			</div>
 			</div>
-
 				<?php endforeach ; ?>
 					<div class = "span12" >
 						<?php  discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos ,

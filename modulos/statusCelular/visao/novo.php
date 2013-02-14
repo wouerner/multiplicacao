@@ -20,7 +20,7 @@
 		<section>		
 			<article>
 					<legend> Atualizar Status</legend>
-					<form action = "/statusCelular/novo" method = "post"  class = "form-inline" >
+					<form action = "/statusCelular/statusCelular/novo" method = "post"  class = "form-inline" >
 						<fieldset>
 			
 						<div class = "span2" >
@@ -52,7 +52,7 @@
 									<td><?php echo isset($cont)? ++$cont : $cont=1 ?></td>
 									<td><a href = "/statusCelular/detalhar/id/<?php echo $h->tipoId ; ?>" ><?php echo  $h->nome ; ?></a></td> 
 									<td><?php echo  $h->getDataInicio()->format('d-m-Y') ; ?></td> 
-									<td><a class = "btn btn-danger" href="/statusCelular/excluir/id/<?php echo $h->statusId?>/discipulo/<?php echo $discipulo->id ;?>" ><i class="icon-remove"></i></a> </td>
+									<td><a class = "btn btn-danger" href="/statusCelular/statusCelular/excluir/id/<?php echo $h->statusId?>/discipulo/<?php echo $discipulo->id ;?>" ><i class="icon-remove"></i></a> </td>
 
 									</tr>
 								<?php endforeach ; ?>

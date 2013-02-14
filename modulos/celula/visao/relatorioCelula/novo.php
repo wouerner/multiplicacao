@@ -5,7 +5,21 @@
 		<?php include 'incluidos/css.inc.php' ; ?>
 		<?php include 'incluidos/js.inc.php' ; ?>
 
+<link rel="stylesheet" type="text/css" href="/ext/markitup/markitup/skins/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="/ext/markitup/markitup/sets/default/style.css" />
+
 		<script src="/modulos/discipulo/visao/js/combobox.js"></script>
+
+<script type="text/javascript" src="/ext/markitup/markitup/jquery.markitup.js"></script>
+<script type="text/javascript" src="/ext/markitup/markitup/sets/default/set.js"></script>
+
+<script type="text/javascript" >
+   $(document).ready(function() {
+      $("#markItUp").markItUp(mySettings);
+   });
+</script>
+
+
 	</head>
 
 	<body>
@@ -39,7 +53,7 @@
 
 						<div class="span9">
 							<label>Relatório</label>
-							<textarea name="texto" id="" class="input-block-level" rows="10"></textarea>
+							<textarea id = "markItUp" name="texto"  class="input-block-level" rows="10"></textarea>
 						</div>
 
 						<div class = "span12" >	
@@ -49,7 +63,8 @@
 						</table>
 						</div>
 
-						<button type="submit" class="btn btn-primary pull-right">enviar</button>
+						<button type="submit" class="btn btn-primary ">enviar</button>
+						<a href="/celula/celula"  class="btn  right">voltar</a>
 						</div>
     </form>	
 			</article>
