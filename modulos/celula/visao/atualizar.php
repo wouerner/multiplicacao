@@ -21,7 +21,7 @@
 			<article>
 				<fieldset>
 					<legend>Atualizar Célula</legend>
-					<form action = "/celula/atualizar" method = "post"  class = "form-horizontal">
+					<form action = "/celula/celula/atualizar" method = "post"  class = "form-horizontal">
 						
 						<div class = "control-group" >
 						<label class = "control-label" >Nome:</label>
@@ -69,7 +69,7 @@
 						
 						<div class = "form-actions" >
 						<button type = "submit" class = "btn btn-primary" >Salvar</button>
-						<button type = "reset" class = "btn" >Cancelar</button>
+						<a href = "/celula/celula"  class = "btn" >Cancelar</a>
 						</div>
 						
 

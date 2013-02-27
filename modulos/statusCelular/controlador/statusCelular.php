@@ -42,11 +42,11 @@ namespace statusCelular\controlador;
 				$statusCelular->tipoStatusCelular = $post['tipoStatusCelular'];
 
 					if ($statusCelular->salvar()){
-						header ('location:/statusCelular/novo/id/'.$statusCelular->discipuloId);
+						header ('location:/statusCelular/statusCelular/novo/id/'.$statusCelular->discipuloId);
 						exit();
 					}else {
 						$statusCelular->atualizar();
-						header ('location:/discipulo/detalhar/id/'.$statusCelular->discipuloId);
+						header ('location:/discipulo/discipulo/detalhar/id/'.$statusCelular->discipuloId);
 						exit();
 		
 					}

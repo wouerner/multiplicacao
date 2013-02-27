@@ -31,6 +31,36 @@ class discipulo{
 
 		}
 
+		public function inativos(){
+
+		  $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
+
+		  $discipulos =	new \discipulo\Modelo\Discipulo();
+		  $quantidadePorPagina = 12;
+
+		  //$discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
+		  $discipulos = $discipulos->inativos() ;
+			$total = count($discipulos);
+		  
+		  $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
+		  $totalDiscipulos = (int)$totalDiscipulos['total'] ;
+
+		  require_once  'modulos/discipulo/visao/inativos.php';
+
+		}
+
+		public function ativar($url){
+		  $discipulo =	new \discipulo\Modelo\Discipulo();
+
+		  $discipulo->id = $url[4] ;
+		  $discipulo->ativar() ;
+			header ('location:/discipulo/discipulo/inativos');
+			exit();
+
+
+		}
+
+
 		public function semCelula(){
 
 		  $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1 ;

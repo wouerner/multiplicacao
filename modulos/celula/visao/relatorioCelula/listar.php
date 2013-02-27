@@ -24,7 +24,7 @@ unset($_SESSION['mensagem']) ;
 		
 		</header>
 
-		<section>	ssss
+		<section>	
 			<article>
 
 			<?php if (isset($mensagem)) : ?>
@@ -34,22 +34,22 @@ unset($_SESSION['mensagem']) ;
 					</h4>
 				   </div>
 				<?php endif ; ?>
-						<table class = "table">
 
 							<caption><h3>Relatorios </h3></caption>
 
 							<?php foreach ( $relatorios as $r ) : ?>
+						<table class = "table well">
 
 							<tr>
-								<td class = "span3" ><?php echo date_format(date_create($r->dataEnvio),'d/m/Y  H:i:s')  ; ?></td>
+								<td class = "span3" ><h4><?php echo date_format(date_create($r->dataEnvio),'d/m/Y  H:i')  ; ?></h4></td>
 								<td><h4><a href = "/celula/relatorio/detalhar/id/<?php echo $r->id ; ?>" ><?php echo $r->titulo ; ?></a></h4></td>
 							</tr>
 							<tr>
 								<td colspan = "2" ><?php echo $r->texto ; ?></td>
 							</tr>
 
-						<?php endforeach ; ?>
 						</table>
+						<?php endforeach ; ?>
 				
 			</article>
 		

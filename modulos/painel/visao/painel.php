@@ -7,11 +7,18 @@
 	<head>
 		<meta charset="UTF-8">
 
-		<?php include 'modulos/../incluidos/css.inc.php' ; ?>
-		<?php include 'modulos/../incluidos/js.inc.php' ; ?>
+		<?php include 'incluidos/css.inc.php' ; ?>
+		<?php include 'incluidos/js.inc.php' ; ?>
 
 		<script src="../modulos/discipulo/visao/js/novo.js"></script>
-		<script src = "modulos/discipulo/visao/js/pesquisa.js" ></script>
+		<script src = "/modulos/discipulo/visao/js/pesquisa.js" ></script>
+		<script>
+			$(document).ready(function() 
+    		{ 
+    	    $("table").tablesorter(); 
+    		} 
+				);		
+		</script>
 
 	</head>
 
@@ -44,7 +51,17 @@
 							</a>
 				</div>
 					<?php endif ; ?>
-				<table class = "table table-striped table-hover well" >
+
+				<table id = "tabelaStatus" class = "table table-striped well tablesorter" >
+					<caption><h4>Status da Igreja</h4></caption>
+					<thead>
+						<tr>
+						<th>Nome</th>
+						<th>Quantidade</th>
+						<th>%</th>
+						</tr>
+					</thead>
+					<tbody>
 				<?php foreach($status as $s) : ?>
 						<tr>
 						<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
@@ -53,9 +70,12 @@
 						<td><?php echo $s['tipoNome'] ; ?></td>
 						<?php endif ; ?>	
 						<td><?php echo $s['total'] ; ?></td>
+
+						<td><?php echo round($s['porcentagem'],1).'%' ; ?></td>
 						</tr>
 				<?php endforeach ; ?>
-						<tr><td>Total</td><td><?php echo $totalDiscipulos ; ?></td></tr>
+						<tr  class = "info" ><td>Total</td><td colspan = "2"><?php echo $totalDiscipulos ; ?></td></tr>
+					</tbody>
 				</table>
 			</article>
 		

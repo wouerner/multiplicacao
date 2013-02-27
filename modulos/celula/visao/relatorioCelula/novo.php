@@ -38,7 +38,7 @@
 						<div class="row-fluid">
 						<div class="span3">
 							<label>Tema</label>
-							<input name = "titulo" type="text" class="input-block-level" placeholder="Título do Relatório">
+							<input name = "titulo" type="text" class="input-block-level" maxlength = "45" placeholder="Tema do Relatório" required>
 							<label>Data Envio</label>
 							<input name = "dataEnvio" type="text" class="input-block-level" placeholder="" value = "<?php echo $dataEnvio ; ?>" disabled >
 							<label>Líder</label>
@@ -53,7 +53,7 @@
 
 						<div class="span9">
 							<label>Relatório</label>
-							<textarea id = "markItUp" name="texto"  class="input-block-level" rows="10"></textarea>
+							<textarea id = "markItUp" name="texto"  class="input-block-level" rows="10" required ></textarea>
 						</div>
 
 						<div class = "span12" >	

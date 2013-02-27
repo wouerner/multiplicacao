@@ -201,9 +201,10 @@ class statusCelular{
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
-			  $sql = "SELECT Discipulo.nome AS discipulo , TipoStatusCelular.nome AS status FROM Discipulo,StatusCelular, TipoStatusCelular  
-						 WHERE Discipulo.id = StatusCelular.discipuloId And StatusCelular.tipoStatusCelular = TipoStatusCelular.id ORDER BY discipulo";
-
+				$sql = "SELECT Discipulo.nome AS discipulo , TipoStatusCelular.nome AS status 
+								FROM Discipulo,StatusCelular, TipoStatusCelular  
+						 		WHERE Discipulo.id = StatusCelular.discipuloId And 
+								StatusCelular.tipoStatusCelular = TipoStatusCelular.id ORDER BY discipulo";
 
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);
@@ -250,7 +251,7 @@ class statusCelular{
 				" ;*/
 			  $sql = 'SELECT d.*  ,sc.id AS idStatus, tpsc.nome AS tipoNome
 				  FROM Discipulo AS d inner join StatusCelular AS sc 
-				  ON d.id = sc.discipuloId
+				  ON d.id = sc.discipuloId and d.ativo = 1 
 				INNER JOIN TipoStatusCelular AS tpsc ON sc.tipoStatusCelular = tpsc.id
 WHERE 1
 AND sc.ativo =1 AND sc.tipoStatusCelular = ?
@@ -306,11 +307,23 @@ inner join TipoStatusCelular AS ts on s2.tipoStatusCelular = ts.id
 				ORDER BY nome
 				';*/
 
-			  $sql = 'SELECT sc.id AS idStatus, tpsc.nome AS tipoNome, count( * ) AS total, sc.tipoStatusCelular
+/*			  $sql = 'SELECT sc.id AS idStatus, tpsc.nome AS tipoNome, count( * ) AS total, sc.tipoStatusCelular
 FROM `StatusCelular` AS sc
 INNER JOIN TipoStatusCelular tpsc ON sc.tipoStatusCelular = tpsc.id
 WHERE 1
 AND sc.ativo =1
+GROUP BY sc.tipoStatusCelular';*/
+
+$sql = 'SELECT sc.id AS idStatus, tpsc.nome AS tipoNome, count( * ) AS total, sc.tipoStatusCelular
+FROM 
+Discipulo 		AS d 
+INNER JOIN
+StatusCelular	AS sc
+ON d.id = sc.discipuloId AND d.ativo = 1 
+INNER JOIN 
+TipoStatusCelular tpsc ON sc.tipoStatusCelular = tpsc.id
+WHERE 1
+AND sc.ativo = 1
 GROUP BY sc.tipoStatusCelular';
 
 			  $stm = $pdo->prepare($sql);

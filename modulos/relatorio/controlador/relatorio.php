@@ -223,6 +223,21 @@ class relatorio {
 	
 	}
 
+	public function relatorioCelulaEnvio($url){
+		if ($url['post']){
+
+		$inicio = explode('/',$url['post']['inicio']);
+		$inicio =$inicio[2]. '-' .$inicio[1].'-'.$inicio[0].' '.$url['post']['tempoInicio'];
+		$fim = explode('/',$url['post']['fim']);
+		$fim = $fim[2].'-'.$fim[1].'-'.$fim[0].' '.$url['post']['tempoFim'] ;
+		
+		$relatorios = \celula\modelo\relatorioCelula::envioPorCelula($inicio,$fim);
+		}
+
+		require 'relatorio/visao/relatorioCelulaEnvio.php' ;	
+	
+	}
+
 
 } 
 

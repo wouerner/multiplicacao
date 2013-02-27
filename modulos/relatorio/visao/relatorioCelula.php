@@ -15,7 +15,7 @@ unset($_SESSION['mensagem']) ;
 		<script>
 		$(function() {
 
-		  $( ".data" ).datepicker();
+		  $( ".data" ).datepicker({showWeek:true});
 		});
 	
 		</script>

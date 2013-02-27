@@ -19,7 +19,14 @@ $usuario = $usuario[0] ;
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Discipulo<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<ul>	
-								<li><a href = "/discipulo/discipulo/listarAtualizar" ><i class = "icon-list-alt " ></i> Listar</a></li>
+								<li class = "dropdown-submenu" ><a href = "/discipulo/discipulo/listarAtualizar" ><i class = "icon-list-alt " ></i> Listar</a>
+								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+									<ul class="dropdown-menu">	
+										<li><a href = "/discipulo/discipulo/inativos" >Inativos</a></li>
+									</ul>
+								<?php endif ; ?>
+								</li>
+
 								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 								<li><a href = "/discipulo/discipulo/novoCompleto" ><i class = "icon-plus " ></i> Novo</a></li>
 								<li><a href = "/discipulo/discipulo/chamar" ><i class = "icon-search " ></i> Pesquisar</a></li>
@@ -107,6 +114,7 @@ $usuario = $usuario[0] ;
 								<li><a href = "/discipulo/discipulo/cracha/id/8" >Cracha</a></li>
 								<li><a href = "/relatorio/relatorio/aniversariantes" ><i class = "icon-gift " ></i> Aniversariantes</a></li>
 								<li><a href = "/relatorio/relatorio/relatorioCelula" ><i class = "" ></i> Relatorio de Célula</a></li>
+								<li><a href = "/relatorio/relatorio/relatorioCelulaEnvio" ><i class = "" ></i> Envio de Relatorio de Célula</a></li>
 	  					</ul>
 						</ul>
 					</li>

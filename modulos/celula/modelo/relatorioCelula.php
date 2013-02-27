@@ -133,6 +133,36 @@ class relatorioCelula{
 
 	}
 
+	public static function envioPorCelula($inicio, $fim){
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql =  'select c.id AS celulaID, c.nome AS celulaNome, r.id AS relatorioId, r.titulo, r.dataEnvio, c.id AS id
+						from 
+						Celula AS c left join RelatorioCelula AS r 
+						on 
+						c.id = r.celulaId and r.dataEnvio between ? and ?
+						WHERE 1
+						group by c.id
+						order by  c.nome' ;
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->bindParam(1,$inicio);
+		$stm->bindParam(2,$fim);
+
+		$stm->execute();
+
+		$resposta = array();
+
+		while($ob = $stm->fetchObject('\celula\modelo\relatorioCelula')){
+			$resposta[$ob->id] = $ob ;
+		}
+
+		return $resposta ; 
+
+	}
+
 
 	/*Listar todos os lideres do sistema
 	 * mostra apenas os id e nomes.
@@ -331,6 +361,7 @@ class relatorioCelula{
 		$stm->bindParam(1, $this->id);
 
 		$stm->execute();
+
 
 		return $stm->fetchObject('\celula\modelo\relatorioCelula');
 

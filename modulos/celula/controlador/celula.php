@@ -84,7 +84,7 @@ class celula{
 
 				$celula->atualizar();
 
-				header ('location:/celula/atualizar/id/'.$celula->id);
+				header ('location:/celula/celula/atualizar/id/'.$celula->id);
 				exit();
 			}
 

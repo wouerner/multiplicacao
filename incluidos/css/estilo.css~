@@ -243,7 +243,7 @@ form {
 
 
 
- Clear floated elements 
+/* Clear floated elements */
 #menu:after
 {
         visibility: hidden;
@@ -264,7 +264,6 @@ form {
 }
 
 #dataNascimento input.span2, textarea.span2, .uneditable-input.span2{
-	
 
 }
 
@@ -275,7 +274,6 @@ form {
 
 
 #pesquisa {
-
 	font-size: 16pt;
 }
 #pesquisaLabel {
@@ -287,3 +285,7 @@ form {
 
 }
 
+li ul {
+	list-style : none;
+
+}

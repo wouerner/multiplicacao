@@ -104,10 +104,7 @@ class relatorio{
 			$relatorio->id = $url[4] ; 
 			$relatorio = $relatorio->listarUm() ;
 
-//				var_dump($discipulos);
-				
 			require 'celula/visao/relatorioCelula/detalhar.php' ;
-				
 		
 		}
 

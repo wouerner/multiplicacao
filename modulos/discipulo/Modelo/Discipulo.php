@@ -364,6 +364,34 @@ class Discipulo{
 
 	}
 
+	public function inativos(){
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT * FROM Discipulo WHERE ativo = 0 order by nome';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->execute();
+
+		$resposta = array();
+
+		while($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')){
+			$resposta[$ob->id] = $ob ;
+		}
+
+		return $resposta ;
+	}
+
+	public function ativar(){
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'UPDATE Discipulo SET  ativo = 1 WHERE id = ?';
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(1, $this->id );
+
+		return $stm->execute() ;
+	}
 
 	/*Listar todos os lideres do sistema
 	 * mostra apenas os id e nomes.
@@ -847,7 +875,7 @@ SELECT *
 	
 		$pdo = new \PDO (DSN, USER,PASSWD) ;
 
-		$sql = 'SELECT * FROM Discipulo WHERE lider = ? ORDER BY nome' ;
+		$sql = 'SELECT * FROM Discipulo WHERE lider = ?  and ativo = 1 ORDER BY nome' ;
 
 		$stm = $pdo->prepare($sql);
 
