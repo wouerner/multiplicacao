@@ -25,21 +25,27 @@ class relatorio{
 				$celulaId = $url[4];
 
 				$celula = new \celula\modelo\celula($celulaId);
+				$temas = new \celula\modelo\temaRelatorioCelula();
+
+				$temas = $temas->listarTodosAtivos();
 				$lider = $celula->pegaLider();	
+				
+				$discipulos = $celula->listarDiscipulos();  
 				require_once  'modulos/celula/visao/relatorioCelula/novo.php';
 			}else{
 				
-				echo $dataEnvio;	
 				$relatorioCelula = new \celula\modelo\relatorioCelula() ;
 				$relatorioCelula->dataEnvio = date('Y-m-d H:i:s') ;
 				$relatorioCelula->texto = $post ['texto'] ;
 				$relatorioCelula->titulo = $post ['titulo'] ;
 				$relatorioCelula->lider = $post ['lider'] ;
 				$relatorioCelula->celulaId = $post ['celulaId'] ;
-
-				//var_dump($relatorioCelula);
+				$relatorioCelula->temaRelatorioCelulaId = $post ['temaRelatorioCelulaId'] ;
+				$discipulos = $post['discipulos'] ;
 
 				$relatorioCelula->salvar();
+				$relatorioCelula->salvarParticipacao($discipulos);
+
 				header ('location:/celula/relatorio/index/celulaId/'.$relatorioCelula->celulaId) ;
 
 			
@@ -102,7 +108,17 @@ class relatorio{
 
 			$relatorio =	new \celula\modelo\relatorioCelula() ;
 			$relatorio->id = $url[4] ; 
+
+
+			$participacao = $relatorio->listarParticipacao() ; 
+
 			$relatorio = $relatorio->listarUm() ;
+
+			$tema = $relatorio->pegarTemaRelatorio() ;
+
+			//var_dump($tema);
+			//var_dump($participacao);
+			//exit;
 
 			require 'celula/visao/relatorioCelula/detalhar.php' ;
 		

@@ -20,25 +20,32 @@
 
 		<section>		
 			<article>
-
+					<div class = "well" >
 						<table class = "table table-bordered">
 
 						<caption><h3></h3></a></caption>
 
 
-							<tr><td class = "span6" ><h4>Tema: <?php echo $relatorio->titulo ; ?> </h4></td>
-
+							<tr><td class = "span6" ><h4>Tema:<?php echo $tema->nome ; ?>  </h4></td>
+							<tr><td><h5>Titulo: <?php echo $relatorio->titulo ; ?><h5></td> </tr>
 							<tr>
 								<td>Data:<?php echo $relatorio->dataEnvio ; ?>	</td> 
 							</tr>
 							<tr>
 								<td>Relatório: <?php echo $relatorio->texto ; ?></td>
 							</tr>
-								
+							<tr>
+								<td> <strong>Participação </strong></td>
+							</tr>
+							<?php foreach ( $participacao as $p ) : ?>
+							<tr>
+								<td> <?php echo $p->nome ; ?></td>
+							</tr>
+							<?php endforeach ; ?>
 							
 							<tr>
 							</table>
-
+						</div>
 				
 			</article>
 		

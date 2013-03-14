@@ -210,9 +210,6 @@ class celula{
 		$stm->execute();
 
 		return $stm->fetchAll() ;
-
-
-	
 	
 	}
 	
@@ -231,6 +228,33 @@ class celula{
 		$resposta = $stm->fetch();
 
 		return $resposta['total'] ;
+		
+
+	}
+
+	public  function listarParticipacao(){
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'select 
+d.nome , p.discipuloId, p.relatorioCelulaId , count(*) as total
+from 
+Discipulo AS d 		inner join 
+ParticipacaoCelula as p on p.discipuloId = d.id inner join 
+RelatorioCelula as r on r.id = p.relatorioCelulaId
+
+Where r.celulaId = ?
+group by d.id
+						';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->bindParam(1,$this->id);
+
+		$stm->execute();
+		$resposta = $stm->fetchAll();
+
+		return $resposta ;
 		
 
 	}

@@ -98,6 +98,66 @@ class rede{
 			  return $stm->fetchAll();
 				}
 
+			  public static function pegarTodasRedes(){
+
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = 'select tr.nome, count(*) as total from Discipulo AS d 
+inner join 
+Redes AS r on d.id = r.discipuloId 
+inner join 
+TipoRede AS tr on r.tipoRedeId = tr.id 
+and d.ativo = 1
+group by r.tipoRedeId
+							';
+
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+
+
+			  $stm->execute();
+
+			  //fechar conexÃ£o
+			  $pdo = null ;
+
+			  return $stm->fetchAll();
+				}
+
+
+
+	public static function pegarTodasRedesPorLider($id){
+
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = 'select tr.nome, count(*) as total from Discipulo AS d 
+inner join 
+Redes AS r on d.id = r.discipuloId 
+inner join 
+TipoRede AS tr on r.tipoRedeId = tr.id 
+
+Where d.lider = ?
+and d.ativo = 1
+group by r.tipoRedeId
+							';
+
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $id);
+
+
+			  $stm->execute();
+
+			  //fechar conexÃ£o
+			  $pdo = null ;
+
+			  return $stm->fetchAll();
+				}
+
+
 			  public function excluir(){
 
 			  //abrir conexao com o banco

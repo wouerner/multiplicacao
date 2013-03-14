@@ -2,15 +2,12 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../incluidos/css/estilo.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
+		<?php include 'incluidos/css.inc.php' ; ?>
+		<?php include 'incluidos/js.inc.php' ; ?>
 	</head>
 
 	<body>
-		<section class = "container">
+		<section class = "container-fluid">
 
 		<nav> 
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
@@ -28,10 +25,31 @@
 				<fieldset>
 						<legend>Relátorio Resumido</legend>
 							<div class = "control-group " >
+
+							<div class = "control-group span2" >
+							<label>Ativo:</label>
+							
+							<select class = "span2" name = "ativo" >
+									<option value = "todos"  >Todos</option>
+									<option value = "1" >Ativo</option>
+									<option value = "0" >Inativo</option>
+							</select>
+							</div>
+
+							<div class = "control-group span2" >
+							<label>líder:</label>
+							<select class = "span2" name = "lider" >
+								<option value = "todos" >todos</option>
+								<?php foreach($lideres as $l) : ?>
+								<option value = "<?php echo $l['id'] ; ?>" ><?php echo $l['nome'] ?></option>
+								<?php endforeach ; ?>
+							</select>
+							</div>
+
 							<div class = "control-group span2" >
 							<label>Idade </label> 
-							<input class = "span1" value = "0" type = "" name = "idadeMinima" >
-							<input class = "span1" value = "100" type = "" name = "idadeMaxima" >
+							<input type = "text" class = "span1" value = "0" type = "" name = "idadeMinima" >
+							<input type = "text" class = "span1" value = "100" type = "" name = "idadeMaxima" >
 							</div>
 
 							<!-- <div class = "control-group span1" >

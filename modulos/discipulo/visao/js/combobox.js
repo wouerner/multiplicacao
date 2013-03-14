@@ -8,7 +8,7 @@
 					selected = select.children( ":selected" ),
 					value = selected.val() ? selected.text() : "",
 					wrapper = $( "<span>" )
-						.addClass( "ui-combobox" )
+						//.addClass( "ui-combobox" )
 						.insertAfter( select );
 
 				input = $( "<input>" )
@@ -61,7 +61,7 @@
 							}
 						}
 					})
-					.addClass( "ui-widget ui-widget-content ui-corner-left" );
+					.addClass( "ui-widget ui-widget-content ui-corner-left " );
 
 				input.data( "autocomplete" )._renderItem = function( ul, item ) {
 					return $( "<li></li>" )

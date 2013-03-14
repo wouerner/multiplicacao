@@ -18,28 +18,28 @@
 
 		<section>		
 			<article>
-					<form action = "/celula/novo" method = "post"  class = "form-horizontal">
+					<form action = "/celula/celula/novo" method = "post"  class = "form-horizontal">
 				<fieldset>
 					<legend>Criar Célula</legend>
 
 					<div class = "control-group" >
 						<label class = "control-label" >Nome:</label>
 						<div class = "controls" >
-						<input name = "nome" autofocus alt = "Nome" placeholder= "Nome da Célula" required>
+						<input type = "text" name = "nome" autofocus alt = "Nome" placeholder= "Nome da Célula" required>
 						</div>
 					</div>	
 
 					<div class = "control-group" >
 						<label class = "control-label" >Horario:</label>
 						<div class = "controls" >
-						<input name = "horarioFuncionamento" >
+						<input  type = "text" name = "horarioFuncionamento" >
 						</div>
 					</div>	
 
 					<div class = "control-group" >
 						<label class = "control-label" >Endereço:</label>
 						<div class = "controls" >
-						<input name = "endereco" >
+						<input  type = "text" name = "endereco" >
 						</div>
 					</div>	
 

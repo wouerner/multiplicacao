@@ -2,16 +2,13 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../../incluidos/css/estilo.css");
-		</style>
+		<?php include 'incluidos/css.inc.php' ; ?>
+		<?php include 'incluidos/js.inc.php' ; ?>
 
-		<script src="../../../../ext/jquery/jquery-1.7.1.min.js"></script>
 	</head>
 
 	<body>
-		<section class = "container">
+		<section class = "container-fluid">
 		<header>
 			<nav>
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
@@ -40,10 +37,11 @@
 						</div>
 						</fieldset>
 					</form>
-
+		
+				<div class = "well" >
 					<table class = "table table-condensed table-striped" >		
 					<thead>
-						<caption><h4>Historico</h4></caption>
+						<caption><h4>Histórico</h4></caption>
 						<tr><th>Nº</th><th>Status</th><th>Data</th><th>Ações</th>
 						</tr>
 					</thead>
@@ -52,11 +50,12 @@
 									<td><?php echo isset($cont)? ++$cont : $cont=1 ?></td>
 									<td><a href = "/statusCelular/detalhar/id/<?php echo $h->tipoId ; ?>" ><?php echo  $h->nome ; ?></a></td> 
 									<td><?php echo  $h->getDataInicio()->format('d-m-Y') ; ?></td> 
-									<td><a class = "btn btn-danger" href="/statusCelular/statusCelular/excluir/id/<?php echo $h->statusId?>/discipulo/<?php echo $discipulo->id ;?>" ><i class="icon-remove"></i></a> </td>
+									<td><a class = "btn btn-mini btn-danger" href="/statusCelular/statusCelular/excluir/id/<?php echo $h->statusId?>/discipulo/<?php echo $discipulo->id ;?>" ><i class="icon-remove"></i></a> </td>
 
 									</tr>
 								<?php endforeach ; ?>
 					</table>
+				</div>
 			</article>
 		
 		</section>

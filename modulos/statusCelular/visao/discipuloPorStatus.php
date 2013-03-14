@@ -7,7 +7,7 @@
 	</head>
 
 	<body>
-		<section class = "container">
+		<section class = "container-fluid">
 
 		<nav> 
 			
@@ -17,16 +17,22 @@
 			<article>
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
-				<div class = "row" >	
-				<span class = "span3"><p>Total Discipulos: <strong><?php echo $totalDiscipulos ; ?></strong></p></span>
+				<div class = "row-fluid" >	
 
 				<div class = "span12" >
+				<div class = "well" >
 				<table class = "table bordered-table">
-				<caption><h3><?php echo $tipoStatus->nome ?></h3></caption>
+				<caption><h3><?php echo $tipoStatus->nome ?>
+				Total Discipulos: <strong><?php echo $totalDiscipulos ; ?></h3></caption>
+				<thead>
+						<th>Líder</th>
+						<th>Nome</th>
+				</thead>
 
 				<?php foreach ( $discipulos as $discipulo) : ?>
 
 				<tr>
+						<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->getLider()->id ; ?>" ><?php echo $discipulo->getLider()->nome ; ?></a></td>
 						<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ; ?>" ><?php echo $discipulo->nome ; ?></a></td>
 				</tr>
 				</tr>
@@ -34,6 +40,7 @@
 				<?php endforeach ; ?>
 				</table>
 
+				</div>
 				</div>
 			</div>
 			</article>

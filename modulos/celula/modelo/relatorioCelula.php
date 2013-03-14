@@ -10,6 +10,7 @@ class relatorioCelula{
 	private $titulo;
 	private $lider;
 	private $celulaId;
+	private $temaRelatorioCelulaId;
 
 	public function __construct (){
 	}
@@ -29,6 +30,13 @@ class relatorioCelula{
 		$discipulo->id = $this->lider ;
 		return $discipulo->listarUm() ;
 	}
+
+	public function pegarTemaRelatorio(){
+		$tema = new \celula\modelo\temaRelatorioCelula() ;
+		$tema->id = $this->temaRelatorioCelulaId ;
+		$resposta = $tema->listarUm() ;
+		return $resposta ;
+	}
 		
 	public function salvar(){
 
@@ -37,8 +45,8 @@ class relatorioCelula{
 	//cria sql
 	$sql = "INSERT INTO RelatorioCelula (
 					dataEnvio, texto, titulo, 
-					lider, celulaId	)
-		VALUES (?,?,?,?,?)";
+					lider, celulaId, temaRelatorioCelulaId	)
+		VALUES (?,?,?,?,?,?)";
 
 	$stm = $pdo->prepare($sql);
 
@@ -47,8 +55,11 @@ class relatorioCelula{
 	$stm->bindParam(3, $this->titulo );
 	$stm->bindParam(4, $this->lider );
 	$stm->bindParam(5, $this->celulaId );
+	$stm->bindParam(6, $this->temaRelatorioCelulaId );
 
 	$resposta = $stm->execute();
+
+	$this->id = $pdo->lastInsertId() ; 
 
 	//fechar conexÃ£o
 	$pdo = null ;
@@ -56,6 +67,34 @@ class relatorioCelula{
 	return $resposta;
 	
 	}
+
+	/*Salvar a participação dos discipulos no relatorio*/
+	public function salvarParticipacao($ids){
+
+	//abrir conexao com o banco
+	$pdo = new \PDO(DSN, USER, PASSWD);
+	//cria sql
+
+	foreach( $ids as $id ){
+
+	$sql = "INSERT INTO ParticipacaoCelula ( relatorioCelulaId , discipuloId	) VALUES (?,?)" ;
+	$stm = $pdo->prepare($sql);
+	$stm->bindParam(1, $this->id );
+	$stm->bindParam(2, $id );
+
+	$resposta = $stm->execute();
+
+	}
+
+	//fechar conexÃ£o
+	$pdo = null ;
+
+	return $resposta;
+	
+	}
+
+
+
 
 	public function atualizar(){
 
@@ -105,6 +144,64 @@ class relatorioCelula{
 			$resposta[$ob->id] = $ob ;
 		
 		}
+
+		return $resposta ; 
+
+	}
+
+	public function listarParticipacao(){
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT * FROM  ParticipacaoCelula WHERE relatorioCelulaId = ?';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->bindParam(1,$this->id);
+
+		$stm->execute();
+
+		$resposta = array();
+
+		while($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')){
+			$ob->id = $ob->discipuloId   ;
+			$resposta[$ob->discipuloId] = $ob->listarUm()  ;
+		
+		}
+
+		return $resposta ; 
+
+	}
+
+	public function listarTodosPorTema(){
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = '
+						SELECT d.nome AS lider, c.nome AS celulaNome,  r.dataEnvio AS dataEnvioRelatorio, 
+tr.nome AS nomeTema, tr.dataInicio AS inicio , tr.dataFim AS fim  
+FROM 
+Discipulo AS d right join 
+Celula AS c on d.id = c.lider
+LEFT JOIN 
+RelatorioCelula AS r ON c.id = r.celulaId AND  r.temaRelatorioCelulaId = ?
+left join 
+TemaRelatorioCelula AS tr 
+	ON tr.id = r.temaRelatorioCelulaId AND 
+	r.dataEnvio between tr.dataInicio and  tr.dataFim 
+	AND temaRelatorioCelulaId = ?
+	group by c.id
+	order by c.nome
+						';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->bindParam(1,$this->temaRelatorioCelulaId);
+		$stm->bindParam(2,$this->temaRelatorioCelulaId);
+
+		$stm->execute();
+
+		$resposta = $stm->fetchAll();
 
 		return $resposta ; 
 

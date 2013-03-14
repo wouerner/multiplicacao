@@ -9,7 +9,7 @@ namespace painel\controlador;
 	
 		public function index(){
 
-
+					$usuarioId= $_SESSION['usuario_id'];
 					$status = new \statusCelular\modelo\statusCelular() ;	
 					$status = $status->quantidadePorStatusCelular();
 
@@ -26,6 +26,43 @@ namespace painel\controlador;
 					$status = $porc ;
 
 					//$porcentagem = (100 * $totalDiscipulos)/$totalDiscipulos ; 
+
+					$statusDiscipulos = new \statusCelular\modelo\statusCelular() ;	
+					$statusDiscipulos = $statusDiscipulos->pegarStatusCelularPorLider($_SESSION['usuario_id']);
+					$statusDiscipulosTotal = null ; 
+
+					foreach($statusDiscipulos as $st){
+						$statusDiscipulosTotal += $st['total'];
+					
+					}
+
+					$totalAtivos =  \discipulo\Modelo\Discipulo::totalAtivos() ;
+					$totalInativos = \discipulo\Modelo\Discipulo::totalInativos() ;
+
+					$totalAtivosLider =  \discipulo\Modelo\Discipulo::totalAtivosLider($usuarioId) ;
+					$totalInativosLider = \discipulo\Modelo\Discipulo::totalInativosLider($usuarioId) ;
+
+
+					$totalRedes =  \rede\modelo\rede::pegarTodasRedes();
+					$totalRedesLideres =  \rede\modelo\rede::pegarTodasRedesPorLider($usuarioId);
+					
+					$somaRede=NULL;
+					foreach($totalRedes as $t){
+						$somaRede += $t['total'];
+					}
+
+					$somaRedeDiscipulos=NULL;
+					foreach($totalRedesLideres as $t){
+						$somaRedeDiscipulos += $t['total'];
+					}
+					
+					$ultimosAvisos = new \aviso\modelo\aviso();
+					$ultimosAvisos = $ultimosAvisos->listarUltimos();
+
+					$celulas =	new \celula\modelo\celula();
+					$celulas->lider = $usuarioId;
+					$celulas = $celulas->listarCelulasLider();
+					$totalCelulas = count($celulas);
 
 				  require_once  'modulos/painel/visao/painel.php';
 		}

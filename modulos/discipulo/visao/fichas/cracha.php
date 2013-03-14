@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
+		   @import url("/ext/twitter-bootstrap/bootstrap.css");
 		</style>
 		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
 		

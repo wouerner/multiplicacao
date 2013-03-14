@@ -7,7 +7,7 @@ class discipulos{
 
 			  function ordenar($a, $b) { return strnatcmp($a['lastname'], $b['lastname']); } 
 
-	public function discipulosResumido($idadeMaxima,$idadeMinima,$sexo, $estadoCivil,$status , $celula , $rede=NULL ){
+	public function discipulosResumido($idadeMaxima,$idadeMinima,$sexo, $estadoCivil,$status , $celula , $rede=NULL , $ativo,$lider ){
 		
 			  $pdo = new \PDO(DSN,USER,PASSWD);
 
@@ -16,6 +16,7 @@ class discipulos{
 			  $st=$status;
 			  $c=$celula;
 				$r = $rede ;
+				$l = $lider ;
 
 			  if ($sexo == 'todos' ){
 			  $sexo ='';
@@ -47,10 +48,23 @@ class discipulos{
 			  $rede ='AND  r.tipoRedeId = :rede ';
 			  }
 
-			  $sql = 'SELECT DISTINCT 
+			  if ($ativo == 'todos' ){
+			  $ativo ='';
+			  }else if($ativo == 1 ){
+			  $ativo ='AND d.ativo = 1' ;
+				}else{
+			  $ativo ='AND d.ativo = 0' ;
+				}
+
+			  if ($lider == 'todos' ){
+			  $lider ='';
+			  }else{
+			  $lider ='AND  d.lider = :lider ';
+			  }
+
+				/*$sql = '
+						 SELECT DISTINCT 
 						 d.id, d.nome , d.dataNascimento, d.sexo, d.estadoCivilId, d.telefone, d.email, d.endereco, d.lider, d.celula
-						 -- , 
-						 -- StatusCelular.id as StatusId    
 						 FROM 
 						 Discipulo AS d,  StatusCelular , Redes AS r , TipoRede AS tpRede , FuncaoRede AS fRede
 						 WHERE 
@@ -64,10 +78,37 @@ class discipulos{
 							AND r.tipoRedeId = tpRede.id AND d.id = r.discipuloId 
 							AND fRede.id = r.funcaoRedeId	
 							AND StatusCelular.ativo = 1
+							'.$ativo.'
+							'.$lider.'
 							
-						 ORDER BY d.nome';
+							ORDER BY d.nome';*/
 
+					$sql='SELECT DISTINCT 
+								d.id, d.nome , d.dataNascimento, d.sexo, d.estadoCivilId, d.telefone, d.email, d.endereco, d.lider, d.celula
+								FROM 
+									Discipulo AS d 
+								left join 
+									StatusCelular on StatusCelular.discipuloId = d.id and StatusCelular.ativo = 1 
+								 left join  	
+									Redes AS r on r.discipuloId = d.id 
+								 left join 	
+									TipoRede AS tpRede on tpRede.id = r.tipoRedeId 
+								 left join
+								 FuncaoRede AS fRede on r.funcaoRedeId = fRede.id
+						 WHERE 
+						 d.dataNascimento between :idadeMax and :idadeMin 
+						 '.$sexo.' 
+						 '.$estadoCivil.'
+				  	 '.$status.'
+				  	 '.$celula.'
+				  	 '.$rede.'
+						 '.$ativo.'
+						 '.$lider.'
+							ORDER BY d.nome
+ 						';
 
+				//var_dump($lider);
+				//var_dump($l);
 				//echo $sql; exit();
 
 			  $stm = $pdo->prepare($sql);
@@ -80,6 +121,7 @@ class discipulos{
 			  if ($status != '' ) $stm->bindValue(':status',$st);
 			  if ($celula != '' ) $stm->bindValue(':celula',$c);
 			  if ($rede != '' ) $stm->bindValue(':rede',$r);
+			  if ($lider != '' ) $stm->bindValue(':lider',$l);
 
 			  $stm->execute();
 
@@ -92,17 +134,18 @@ class discipulos{
 			  
 			  		//$resposta[$s->id] =$s ;
 
-					$lider = $s->getLider();
+					//$lider = $s->getLider();
 
-			  		$res[$s->lider]['lider'] = $lider->nome ;
-			  		$res[$s->lider][] = $s ;
+			  		//$res[$s->lider]['lider'] = $lider->nome ;
+			  		//$res[$s->lider][] = $s ;
+			  		$res[$s->id] = $s ;
 			  
 			  }
 			
 				/*var_dump($sql);
 				var_dump($res);
 				exit();*/
-			  usort($res, function($a, $b) { return strnatcmp($a['lider'], $b['lider']); });
+			  //usort($res, function($a, $b) { return strnatcmp($a['lider'], $b['lider']); });
 
 				return $res;	
 	

@@ -40,10 +40,10 @@ unset($_SESSION['mensagem']) ;
 							<caption><h3>Lista de Células: <?php echo $totalCelulas ; ?></h3></caption>
 
 							<thead>
-								<td>Nome</td>
-								<td>Endereço</td>
-								<td>Horário</td>
-								<td>Ações</td>
+								<th>Nome</th>
+								<th>Endereço</th>
+								<th>Horário</th>
+								<th>Ações</th>
 							</thead>
 
 							<?php foreach ( $celulas as $celula) : ?>

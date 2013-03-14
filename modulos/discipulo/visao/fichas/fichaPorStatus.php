@@ -3,9 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
+		   @import url("/ext/twitter-bootstrap/bootstrap.css");
 		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
 		
 		<style>
 				body{
@@ -52,8 +51,8 @@
 			<article>
 
 			<?php foreach ( $discipulos as $discipulo ) : ?>
-			<table class = " table" >
-				<tr><td><img src="/modulos/discipulo/visao/img/mga.jpg"> </img></td><td><h2>Encontro com Deus dias 07, 08 e 09/12/2012</h2></td></tr>
+			<table class = " table " >
+				<tr><td><img src="/modulos/discipulo/visao/img/mga.jpg"> </img></td><td><h2>Encontro com Deus dias 15, 16 e 17/03/2013</h2></td></tr>
 
 			<tr>
 
@@ -93,7 +92,7 @@
 <p>b) Valor do Encontro para crianças até 11 anos de idade: R$ 40,00 – à vista; R$ 50,00 – a prazo;</p>
 <p>c) O pagamento a prazo e/ou parcelamento somente será aceito em CHEQUE OU CARTÃO.</p>
 <p>OBS: Não haverá ressarcimento ou alteração dos valores acordados, bem como das formas de pagamento.</p>
-<p>Estou <strong>CIENTE</strong> da minha participação no <strong>ENCONTRO COM DEUS</strong> e concordo em realizar o pagamento <br/>até o dia <strong>07/12/2012</strong>.</p>
+<p>Estou <strong>CIENTE</strong> da minha participação no <strong>ENCONTRO COM DEUS</strong> e concordo em realizar o pagamento <br/>até o dia <strong>15/03/2013</strong>.</p>
 <p>Assinatura do Encontrista:_______________________________________________________________</p>
 <p>Menor de Idade (Ass. do Responsável):_____________________________________________________</p>
 <p>Membro de outra Igreja (Ass. do Pastor):____________________________________________________</p>

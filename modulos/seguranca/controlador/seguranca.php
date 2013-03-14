@@ -73,4 +73,24 @@ use discipulo\modelo\role;
 		
 		
 		}
+
+		public function trocarSenha($url){
+			$discipulo = new \discipulo\Modelo\Discipulo() ;
+
+			if (empty($url['post'])){
+				$discipulo->id = $url[4] ;
+				$discipulo = $discipulo->listarUm() ;
+				require 'modulos/seguranca/visao/trocarSenha.php' ;
+				exit();
+			}
+			
+		$discipulo->senha = $url['post']['senha'];	
+		$discipulo->email = $url['post']['email'];	
+		$discipulo->trocarSenha();	
+		$mens = "Senha trocada." ;
+		require 'modulos/seguranca/visao/trocarSenha.php' ;
+			exit();
+		
+		
+		}
 }

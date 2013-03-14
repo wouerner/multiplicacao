@@ -2,12 +2,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../incluidos/css/estilo.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="../../../../ext/jquery.tablesorter/jquery.tablesorter.js"></script> 
+		<?php include 'incluidos/css.inc.php'?>
+		<?php include 'incluidos/js.inc.php'?>
 
 <script>
 $(document).ready(function() 
@@ -18,7 +14,7 @@ $(document).ready(function()
 	</head>
 
 	<body>
-		<section class = "container">
+		<section class = "container-fluid">
 
 		<nav> 
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
@@ -31,10 +27,8 @@ $(document).ready(function()
 		<section>		
 			<article>
 
-				<?php $cont = 0 ; ?>
-				<?php $lidCont = 0 ; ?>
 			<table class = "table table-bordered table-condensed" >
-					<caption><h3>Relatório</h3></caption>
+					<caption><h3>Relatório: <?php echo $total?></h3></caption>
 				<tr>
 					<th>Sexo :  <?php  echo $sexo ?></th>
 					<th>Estado Civil : <?php echo is_object($estadoCivil) ? $estadoCivil->nome : 'todos' ?></th>
@@ -44,46 +38,33 @@ $(document).ready(function()
 				</tr>
 			</table>
 
-			<table class = "table table-bordered table-condensed tablesorter" >
+			<table class = "table table-condensed tablesorter well" >
 				<thead>
-
 				<tr>
-					<th>Nº total</th>
-					<th colspan = "2" >Nome</th>
+					<th>Nome</th>
+					<th>Lider</th>
 					<th>Sexo</th>
 					<th>Endereço</th>
-					<th>Telefone</th>
 					<th>Data Nasc. </th>
 					<th>Status</th>
 				</tr>
-
 				</thead>
+
 				<tbody>
-				<?php $contador = 0 ?>
 				<?php foreach($relatorio as $r ) : ?>
-				<?php ++$lidCont ; ?>
-					<tr><td><?php  echo ++$contador  ;?></td>	<td colspan = "7" ><h4><?php echo $lidCont ; ?> - Líder: <?php echo $r['lider'] ; ?> </h4></td></tr>
 
-						<?php foreach($r as  $l ) : ?>
-							<tr>	
-								<?php if (  is_object($l) ) : ?>
-							  <?php $status =  $l->getStatusCelular() ; ?>
+							  <?php  $status =  $r->getStatusCelular() ; ?>
+							  <?php  $lider =  is_object($r->getLider()) ? $r->getLider():'' ; ?>
 						  <tr>	
-							  <?php ++$cont ; ?>
-<td><?php echo ++$contador?></td>
-							  <td><?php echo  $cont ; ?></td>
-							  <td><a href="/discipulo/atualizar/id/<?php echo $l->id ; ?>"><?php echo  $l->nome ; ?></a></td>
-							  <td><?php echo  ($l->sexo == 'm')? 'Masculino' : 'Feminino' ; ?></td>
-							  <td><?php echo  $l->endereco ; ?></td>
-							  <td><?php echo  $l->telefone ; ?></td>
-							  <td><?php echo  $l->getDataNascimento()->format('d/m/Y') ; ?></td>
-							  <td><?php echo  $status['nome'] ; ?></td>
+							  <td><a href="/discipulo/discipulo/atualizar/id/<?php echo $r->id ; ?>"><?php echo  $r->nome ; ?></a></td>
+							  <td><a href="/discipulo/discipulo/atualizar/id/<?php echo is_object($lider) ? $lider->id : '' ; ?>"><?php echo  is_object($lider) ? $lider->nome : ''; ?></a></td>
+							  <td><?php echo  ($r->sexo == 'm')? 'M' : 'F' ; ?></td>
+							  <td><?php echo  $r->endereco ; ?></td>
+							  <td><?php echo  $r->getDataNascimento()->format('d/m/Y') ; ?></td>
+							  <td><?php echo $status['nome'] ; ?></td>
 						  </tr>
-						  <?php endif ; ?>
 					<?php endforeach ; ?>
-					<?php $cont = 0 ?>
 
-				<?php endforeach ; ?>
 				</tbody>
 			</table>
 	

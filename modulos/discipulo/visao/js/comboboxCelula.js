@@ -8,13 +8,13 @@
 					selected = select.children( ":selected" ),
 					value = selected.val() ? selected.text() : "",
 					wrapper = $( "<span>" )
-						.addClass( "ui-combobox " )
+						.addClass( "ui-combobox input-block-level" )
 						.insertAfter( select );
 
 				input = $( "<input>" )
 					.appendTo( wrapper )
 					.val( value )
-					.addClass( "ui-state-default span2" )
+					.addClass( "ui-state-default  input-block-level" )
 					.autocomplete({
 						delay: 0,
 						minLength: 0,

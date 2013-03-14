@@ -4,9 +4,42 @@
 		<meta charset="UTF-8">
 			<?php include 'incluidos/css.inc.php' ; ?>
 			<?php include 'incluidos/js.inc.php' ; ?>
+<script>
+$(document).ready(function () {
+$(".btn-warning").click( function(){
+				var id = this.id ;
+
+				$( "#dialog-confirm" ).dialog({
+				resizable: false,
+				height:240,
+				modal: true,
+				buttons: {
+			Cancelar: function() {
+				$( this ).dialog( "close" );
+			},
+      Desativar: function() {
+										$(location).attr('href', '/discipulo/discipulo/desativar/id/'+id);
+       },
+}
+
+});
+
+
+}
+
+); });
+</script>
 	</head>
 
 	<body>
+
+<div id="dialog-confirm" title="deseja desativar?" style = "display:none" >
+<p>
+	<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;">
+	</span>Se desativar o discipulo, só terá acesso após comunicar ao seu líder.
+	</p>
+</div>
+
 		<section class = "container-fluid">
 
 		<nav> 
@@ -20,9 +53,12 @@
 				<div class = "row-fluid" >	
 				<div class = "span12" >
 
-				<table class = "table bordered-table well ">
+				<table class = "table table-condensed well ">
 				<caption><h3>Lista de Discipulos</h3></caption>
 					<thead>
+<?php if ($acl->hasPermission('admin_acesso') == true) :  ?>
+						<th>líder</th>
+<?php endif; ?>
 						<th>nome</th>
 						<th>Telefone</th>
 						<th>E-mail</th>
@@ -32,7 +68,13 @@
 				<?php foreach ( $discipulos as $discipulo) : ?>
 
 				<tr>
-					<td><a href="/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><?php echo $discipulo->nome ; ?></a></td>
+
+<?php if ($acl->hasPermission('admin_acesso') == true) :  ?>
+					<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->getLider()->id?>" ><?php echo $discipulo->getLider()->nome ; ?></a></td>
+<?php endif; ?>
+
+
+					<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><?php echo $discipulo->nome ; ?></a></td>
 				<td><?php echo $discipulo->telefone ; ?></td> <td><?php echo $discipulo->email ; ?></td>
 				 <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
 				</tr>

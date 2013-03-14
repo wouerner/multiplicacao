@@ -2,14 +2,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../incluidos/css/estilo.css");
-		@import url("../../../ext/jquery-ui/css/bootstrap/jquery-ui.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
-		<script src="../../../ext/jquery-ui/js/jquery-ui.js"></script>
-		<script src="../../../ext/jquery-ui/development-bundle/ui/i18n/jquery.ui.datepicker-pt-BR.js"></script>
+		<?php include 'incluidos/css.inc.php' ?>
+		<?php include 'incluidos/js.inc.php' ?>
 		<script src = "/modulos/discipulo/visao/js/pesquisa.js" ></script>
 		<script src="/modulos/discipulo/visao/js/combobox.js"></script>
 		<script src="/modulos/discipulo/visao/js/comboboxCelula.js"></script>
@@ -76,7 +70,7 @@ jQuery(function($) {
 <div id="dialog-confirm" title="Empty the recycle bin?" style = "display:none">
     <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente excluir?</p>
 </div>
-		<section class = "container">
+		<section class = "container-fluid">
 
 		<nav> 
 			<?php require 'modulos/menu/visao/menu.inc.php' ; ?>	
@@ -88,7 +82,7 @@ jQuery(function($) {
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 			<div class = "row" >	
-						<?php if (is_null($nome)) : ?>
+						<?php if (is_null($nome) ) : ?>
 							<div class = "span12" >
 							<h3>Faça sua pesquisa!</h3>
 							</div>

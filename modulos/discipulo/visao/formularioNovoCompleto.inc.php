@@ -1,5 +1,5 @@
-				<form action = "/discipulo/novoCompleto" method = "post"  class = "form-inline well">
-					<fieldset class = "f_fieldset" >
+				<form action = "/discipulo/discipulo/novoCompleto" method = "post"  class = "form-inline well">
+					<fieldset >
 
 						<fieldset>
 							<legend>Dados Pessoais</legend>
@@ -11,53 +11,46 @@
 									<i class = "icon-user" ></i>
 								  	<label class = "control-label" for = "nome" >Nome:</label>
 									<div class = "controls" >
-									<input id = "nome" type = "text" class = "input-block-level" name = "nome"  value = "<?php echo $dados['nome']?>" required autofocus>
-									</div>
-								</div>
-
-							  <div class="control-group span4">
-								  	<label class = "control-label" for = "nome" >Alcunha:</label>
-									<div class = "controls" >
-									<input id = "alcunha" type = "text" class = "input-block-level" name = "alcunha"  value = "<?php echo $dados['alcunha']?>" >
+									<input id = "nome" type = "text" class = "input-block-level" name = "nome" placeholder = "nome completo" value = "<?php echo $dados['nome']?>" required autofocus>
 									</div>
 								</div>
 
 							  <div class="control-group span2">
-								  	<label class = "control-label" for = "ativo" >Ativo:</label>
+								  	<label class = "control-label" for = "nome" >Alcunha:</label>
 									<div class = "controls" >
-								  	<input id = "ativo" name = "ativo" type = "checkbox"  
-										  value = ""  >
+									<input id = "alcunha" type = "text" class = "input-block-level" name = "alcunha" placeholder = "Ou apelido"  value = "<?php echo $dados['alcunha']?>" >
 									</div>
 								</div>
-							</div>
-							</div>
-									
-							<div class = "row-fluid" >
-								<div class = "span12" >
 
-							  <div class="control-group span4">
-									<i class = "icon-calendar" ></i>
-									<label class = "control-label" for = "dataNascimento" >Data Nasc.:</label>
+							  <div class="control-group span1">
+								  <label class = "control-label" for = "ativo" >Ativo:</label>
 									<div class = "controls" >
-										<input id = "dataNascimento" type = "date" class = "dataNascimento" name = "dataNascimento"  value = "<?php echo $dados['dataNascimento']?>" required >
+								  	<input id = "ativo" name = "ativo" type = "checkbox"  value = ""  >
+									</div>
+								</div>
+
+							  <div class="control-group span1">
+									<i class = "icon-calendar" ></i>
+									<label class = "control-label" for = "dataNascimento" >Nasc.:</label>
+									<div class = "controls" >
+										<input id = "dataNascimento" type = "text" placeholder = "dd/mm/aaaa" class = "dataNascimento input-block-level" name = "dataNascimento"  value = "<?php echo $dados['dataNascimento']?>" required >
 								</div>
 								</div>
 
-							  <div class="control-group span4">
+							  <div class="control-group span2">
 								  	<label class = "control-label" for = "sexo" >Sexo:</label>
 										<div class = "controls" >
-										<select id = "sexo" class = "" name = "sexo" required >
+										<select id = "sexo" class = "input-block-level" name = "sexo" required >
 										  	<option value = "m" >Masculino</option>
 									  		<option value = "f" >Femenino</option>
 									 </select>
 								</div>
 								</div>
 
-							  <div class="control-group span4">
+							  <div class="control-group span2">
 								  	<label class = "control-label" for = "estadoCivilId" >Estado Civil:</label>
 										<div class = "controls" >
-									<select id = "estadoCivilId" class = "" name = "estadoCivilId" >
-												 <option value = ""></option>
+									<select id = "estadoCivilId" class = "input-block-level" name = "estadoCivilId" required >
 									  <?php foreach($estadosCivies as $estadoCivil) : ?>
 										  <option value = "<?php echo $estadoCivil['id']?>"><?php echo $estadoCivil['nome']?> </option>
 									  <?php endforeach ; ?>
@@ -65,9 +58,10 @@
 							</div>
 							</div>
 
+							</div>
+							</div>
+									
 
-					</div>
-					</div>
 				</div>
 				</div>
 
@@ -91,7 +85,7 @@
 							<div class = "control-group span2" >
 								<label class = "control-label" for = "email" >E-mail:</label>
 								<div class = "controls" >
-								  <input id = "email" class = "" name = "email" type = "email" value = "<?php echo $dados['email']?>" required >
+								  <input id = "email" class = "" name = "email" type = "email" placeholder = "exemplo@exemplo.com"  value = "<?php echo $dados['email']?>" required >
 								</div>
 							</div>
 						</div>
@@ -100,26 +94,27 @@
 
 							<fieldset>
 								<legend>Dados Ministériais</legend>
-									  <div class = "row " >
+									  <div class = "row-fluid " >
 									  <div class = "span12 " >
 									 
-										 <div class = "control-group span3" >
-									  			<div class = "ui-widget" >
+										 <div class = "control-group span2" >
+
+									  		<!-- <div class = "ui-widget" >-->
 												<i class = "icon-user" ></i>
 								  				<label class = "control-label " for = "lider" >Nome do Líder:</label>
-									  				<select id = "combobox" class = "combobox lider " name = "lider"  >
+									  				<select id = "combobox" class = "combobox lider " name = "lider" required >
 												 		<option value = "" selected> </option>
 												 			<?php foreach($lideres as $lider) : ?>
 												 				<option value = "<?php echo $lider->id ; ?>"><?php echo $lider->nome ; ?> </option>
 												 			<?php endforeach ; ?>
 									 				</select>
-												</div>	
+												<!-- </div>	-->
 										</div>	
 
-										<div class = "control-group span3" >
+										<div class = "control-group span2" >
 									  		<div class = "ui-widget-celula" >
 								  				<label class = "control-label " for = "celula" >Célula que Participa:</label>
-									  			<select id = "comboboxCelula" class = "comboboxCelula" name = "celula"  >
+									  			<select id = "comboboxCelula" class = "comboboxCelula" name = "celula"  required >
 														<option value = "" ></option>
 											  				<?php foreach($celulas as $celula) : ?>
 												  		<option value = "<?php echo $celula['id']?>"><?php echo $celula['nome']?> </option>
@@ -129,10 +124,10 @@
 										</div>
 
 				<!-- Formulario de atualização do STATUS CELULAR -->
-										<div class = "control-group span3" >
+										<div class = "control-group span2" >
 											<label class = "control-label" ></strong>Status Celular:</label>
 											<div class = "controls" >
-												<select class = "span2" name = "tipoStatusCelular" >
+												<select class = "input-block-level" name = "tipoStatusCelular" required >
 												 <option value = ""></option>
 													<?php foreach ($tiposStatusCelulares as $tipoStatusCelular) : ?>
 														<option value = "<?php echo $tipoStatusCelular->id ; ?>" >
@@ -144,10 +139,10 @@
 										</div>
 						
 
-					<div class = "control-group " >
+					<div class = "control-group span2" >
 						<label class = "control-label" >Admissão:</label>
 						<div class = "controls" >
-							<select class = "span2" name = "tipoAdmissao" >
+							<select class = "input-block-level" name = "tipoAdmissao" >
 								 <option value = ""></option>
 									<?php foreach ($tiposAdmissoes as $tipoAdmissao) : ?>
 										<option value = "<?php echo $tipoAdmissao['id'] ; ?>" >
@@ -156,15 +151,11 @@
 							</select>
 						</div>	
 					</div>	
-				</div>
-				</div>
 
-				<div class = "row " >
-				<div class = "span12" >
-				<div class = "control-group span3" >
+				<div class = "control-group span2" >
 						<label class = "control-label" ></strong>Função</label>
 						<div class = "controls" >
-							<select class = "" name = "funcaoRedeId" >
+							<select class = "input-block-level" name = "funcaoRedeId" >
 												 <option value = ""></option>
 									<?php foreach ($funcoesRedes as $funcaoRede) : ?>
 											<option value = "<?php echo $funcaoRede['id'] ; ?>" ><?php echo $funcaoRede['nome'] ; ?></option>
@@ -174,10 +165,10 @@
 						</div>
 				</div>
 
-				<div class = "control-group span3" >
+				<div class = "control-group span2" >
 					<label class = "control-label" >Rede:</label>
 					<div class = "controls" >
-						<select class = "span3" name = "tipoRedeId" >
+						<select class = "input-block-level" name = "tipoRedeId" >
 												 <option value = ""></option>
 								<?php foreach ($tiposRedes as $tipoRede) : ?>
 										<option value = "<?php echo $tipoRede['id'] ; ?>" ><?php echo $tipoRede['nome'] ; ?></option>
@@ -185,9 +176,10 @@
 						</select>
 					</div>
 				</div>
-			</div>
 
-			</div>
+				</div>
+				</div>
+
 			</div>
 			</div>
 			

@@ -112,7 +112,7 @@ namespace rede\controlador;
 		}
 
 		public function listarMembrosRede($url){
-					$redeId = $url[3];
+					$redeId = $url[4];
 
 				  $rede =	new \rede\modelo\rede();
 					$tipoRede = new \rede\modelo\tipoRede();
@@ -121,6 +121,7 @@ namespace rede\controlador;
 					$rede->tipoRedeId = $redeId;
 				  $redeMembros = $rede->pegarMembros();
 					$cont = 1 ;
+
 				  require 'modulos/rede/visao/rede/listar.php' ; 
 		
 		}

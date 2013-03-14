@@ -37,8 +37,16 @@
 		    <form class="well " action = "/celula/relatorio/novo" method = "post"  >
 						<div class="row-fluid">
 						<div class="span3">
-							<label>Tema</label>
-							<input name = "titulo" type="text" class="input-block-level" maxlength = "45" placeholder="Tema do Relatório" required>
+							<label>Titulo</label>
+							<input name = "titulo" type="text" class="input-block-level" maxlength = "45" placeholder="Título do Relatório" required>
+
+							<label>Tema Relatório Célula</label>
+							<select class="input-block-level" name = "temaRelatorioCelulaId" required>
+								<?php foreach( $temas as $t ) : ?>
+								<option value = "<?php echo $t->id ?>" ><?php echo $t->nome ; ?></option>
+								<?php endforeach ; ?>
+							</select>							
+
 							<label>Data Envio</label>
 							<input name = "dataEnvio" type="text" class="input-block-level" placeholder="" value = "<?php echo $dataEnvio ; ?>" disabled >
 							<label>Líder</label>
@@ -55,12 +63,15 @@
 							<label>Relatório</label>
 							<textarea id = "markItUp" name="texto"  class="input-block-level" rows="10" required ></textarea>
 						</div>
-
+						<div class = "row-fluid" >
 						<div class = "span12" >	
 						<table class = "table" >
 							<caption>Paticipação Discipulos</caption>
-							<tr> <td><input type = "checkbox" ></td> </tr>
+							<?php foreach ( $discipulos as $d ) : ?>
+							<tr> <td><input name = "discipulos[]" type = "checkbox" value = "<?php echo $d['id'] ; ?>" > <?php echo $d['nome'] ; ?> </td> </tr>
+							<?php endforeach ; ?>
 						</table>
+						</div>
 						</div>
 
 						<button type="submit" class="btn btn-primary ">enviar</button>

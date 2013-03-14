@@ -177,7 +177,7 @@ class statusCelular{
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
 			  $sql = "SELECT * FROM StatusCelular AS s, TipoStatusCelular 
-								WHERE  s.discipuloId = ? AND tipoStatusCelular = TipoStatusCelular.id 
+								WHERE  s.discipuloId = ? AND tipoStatusCelular = TipoStatusCelular.id and s.ativo=1 
 								ORDER BY s.dataInicio DESC";
 
 			  //prepara sql
@@ -338,6 +338,36 @@ GROUP BY sc.tipoStatusCelular';
 				
 
 		}
+
+	public function pegarStatusCelularPorLider($lider){
+	
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+$sql = 'SELECT sc.id AS idStatus, tpsc.nome AS tipoNome, count( * ) AS total, sc.tipoStatusCelular
+FROM 
+Discipulo 		AS d 
+INNER JOIN
+StatusCelular	AS sc
+ON d.id = sc.discipuloId 
+INNER JOIN 
+TipoStatusCelular tpsc ON sc.tipoStatusCelular = tpsc.id
+WHERE 1
+AND sc.ativo = 1
+AND d.lider = ?
+GROUP BY sc.tipoStatusCelular';
+
+			  $stm = $pdo->prepare($sql);
+				$stm->bindParam(1 , $lider);
+
+			  $resposta = $stm->execute();
+
+			  $resposta = $stm->fetchAll();
+
+			  $pdo = null ;
+
+			  return $resposta;
+	
+	
+	}
 
 		  
 			  public function excluir(){

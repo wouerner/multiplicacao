@@ -67,6 +67,9 @@ class relatorio {
 		$tipoRedes = new \rede\modelo\tipoRede();
 		$tipoRedes = $tipoRedes->listarTodos();
 
+		$lideres = new \discipulo\Modelo\Discipulo();
+		$lideres = $lideres->listarTodosDiscipulos();
+
 		require 'relatorio/visao/discipulosResumido.php' ;	
 	}else{
 	
@@ -81,10 +84,12 @@ class relatorio {
 		$status = $post['tipoStatusCelular'];
 		$celula = $post['celula'];
 		$rede = $post['rede'];
+		$ativo = $post['ativo'];
+		$lider = $post['lider'];
 
 		$relatorio = new \relatorio\modelo\discipulos();
 
-		$relatorio = $relatorio->discipulosResumido($idadeMaxima->format('Y-m-d'), $idadeMinima->format('Y-m-d') ,$sexo,$estadoCivil,$status , $celula , $rede);
+		$relatorio = $relatorio->discipulosResumido($idadeMaxima->format('Y-m-d'), $idadeMinima->format('Y-m-d') ,$sexo,$estadoCivil,$status , $celula , $rede,$ativo , $lider);
 		
 		if ($sexo != 'todos'){	
 			$sexo = ($post['sexo']=='m') ? "Masculino" : "Feminino";
@@ -123,7 +128,9 @@ class relatorio {
 	//	$status = $post['tipoStatusCelular'];
 	//	$celula = $post['celula'];
 	//	$rede = $post['rede'];
-
+	//var_dump($relatorio);
+		//
+		$total = count($relatorio);
 		require 'relatorio/visao/discipulosResumidoRelatorio.php' ;	
 	}
 	
@@ -235,6 +242,28 @@ class relatorio {
 		}
 
 		require 'relatorio/visao/relatorioCelulaEnvio.php' ;	
+	
+	}
+
+	public function relatorioCelulaEnvioPorTema($url){
+
+		$tema = new \celula\modelo\temaRelatorioCelula() ;			
+		//$temas = $tema->listarTodosAtivos();
+		$temas = $tema->listarTodos();
+
+		if ( $url['post'] ){
+
+			$tema->id = $url['post']['temaId'];
+			$tema = $tema->listarUm();
+
+			$relatorio = new \celula\modelo\relatorioCelula() ;			
+			$relatorio->temaRelatorioCelulaId = $url['post']['temaId'] ;			
+			$relatorios = $relatorio->listarTodosPorTema() ;			
+			$cont=0;
+//			var_dump($relatorios);
+		}
+
+		require 'modulos/relatorio/visao/relatorioCelulaPorTema.php' ;	
 	
 	}
 

@@ -7,15 +7,12 @@ unset($_SESSION['mensagem']) ;
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../incluidos/css/estilo.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
+		<?php include 'incluidos/css.inc.php' ?>
+		<?php include 'incluidos/js.inc.php' ?>
 	</head>
 
 	<body>
-		<section class = "container">
+		<section class = "container-fluid">
 
 		<nav> 
 			
@@ -29,24 +26,31 @@ unset($_SESSION['mensagem']) ;
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
 
-				<div class = "row" >	
+				<div class = "row-fluid" >	
 				<div class = "span12" >	
-			
-						<table class = "table bordered-table">
-						<caption><h3>Lista de Tipo de Rede</h3></caption>
-						<tr><th><a class = "btn btn-success" href= "/rede/novoTipoRede" ><i class = "icon-plus icon-white" ></i> Novo</a></th></tr>
-
+						<div class = "well" >	
+						<table class = "table table-condensed">
+						<caption>
+							<h3>Lista de Tipo de Rede</h3>
+						</caption>
+						<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Ações</th>
+						</tr>
+						</thead>
+						<tbody>
 						<?php foreach ( $redes as $rede) : ?>
 
-						<tr><td><a href="/rede/detalharTipoRede/id/<?php echo $rede['id']?>" ><?php echo $rede['nome'] ; ?> </a></td>
+						<tr><td><a href="/rede/rede/detalharTipoRede/id/<?php echo $rede['id']?>" ><?php echo $rede['nome'] ; ?> </a></td>
 							<?php require 'rede/visao/tipoRede/menu.inc.php' ; ?>
 						</tr>
 						
 						<?php endforeach ; ?>
+						</tbody>
 						</table>
-					<div class = "form-actions" >	
-						<?php //discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos['total'] ,3 ,$pagina ) ; ?>
 					</div>
+			</div>
 			</div>
 			</div>
 			</article>

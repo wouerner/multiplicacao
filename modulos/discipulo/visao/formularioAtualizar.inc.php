@@ -1,4 +1,4 @@
-<form action = "/discipulo/discipulo/atualizar" method = "post"  class = "form-inline">
+<form action = "/discipulo/discipulo/atualizar" method = "post"  class = "form-inline" accept-charset = "UTF-8" >
 											<input id = "idDiscipulo" type = "hidden"   value = "<?php echo $discipulo->id ; ?>" >
 		<fieldset style = "width:960px" class = "" >
 			<legend style = "width:inherit" >Dados Pessoais</legend>
@@ -25,7 +25,7 @@
 								  	<label class = "control-label" for = "ativo" >Ativo:</label>
 										<div class = "controls" >
 								  		<input id = "ativo" name = "ativo" type = "checkbox"  
-										  	value = "<?php echo ($discipulo->ativo != TRUE )? TRUE : 0 ; ?>" <?php  echo ($discipulo->ativo == TRUE )? "checked" :"" ; ?> >
+										  	value = "1" <?php  echo ($discipulo->ativo == TRUE )? "checked" :"" ; ?> >
 									</div>
 								</div>
 
@@ -244,7 +244,7 @@
 				<div class = "form-actions " >
 							<input type = "hidden" name = "discipuloId" value = "<?php echo $discipulo->id ; ?>" >
 				  		<button type = "submit" class = "btn btn-success" ><i class = "icon-pencil icon-white" ></i> Salvar</button>
-							<a class = "btn" href = "/discipulo/encontroComDeus/id/<?php echo $discipulo->id ; ?>" target = "blank" >Ficha encontro</a>
-							<a class = "btn" href = "/discipulo/crachaIndividual/id/<?php echo $discipulo->id ; ?>" target = "blank" >cracha</a>
+							<a class = "btn" href = "/discipulo/discipulo/encontroComDeus/id/<?php echo $discipulo->id ; ?>" target = "blank" >Ficha encontro</a>
+							<a class = "btn" href = "/discipulo/discipulo/crachaIndividual/id/<?php echo $discipulo->id ; ?>" target = "blank" >cracha</a>
 			  </div>
 </form>

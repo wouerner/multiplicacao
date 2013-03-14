@@ -48,7 +48,7 @@ class celula{
 				$celula->lider = $post['lider'];
 
 				$celula->salvar();
-				header ('location:/celula');
+				header ('location:/celula/celula');
 				exit();
 			}
 			
@@ -94,11 +94,11 @@ class celula{
 
 		public function excluir($url){
 				$celula =	new \celula\modelo\celula();
-				$celula->id = $url[3]; 
+				$celula->id = $url[4]; 
 				$celula->excluir();
 
 				$_SESSION['mensagem'] = !is_null($celula->erro) ? $celula->erro : NULL ;
-				header ('location:/celula');
+				header ('location:/celula/celula');
 				exit();
 		
 			
@@ -146,6 +146,15 @@ class celula{
 		
 		}
 	
+	public function participacao($url){
+
+		$celulas =	new \celula\modelo\celula();
+		$celulas->id =	$url[4];
+		$participacao =	$celulas->listarParticipacao() ;
+
+		require_once  'modulos/celula/visao/participacao.php';
+		
+	}
 	
 	
 	}	

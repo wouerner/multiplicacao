@@ -7,8 +7,8 @@
 	<head>
 		<meta charset="UTF-8">
 
-		<?php include 'modulos/../incluidos/css.inc.php' ; ?>
-		<?php include 'modulos/../incluidos/js.inc.php' ; ?>
+		<?php include 'incluidos/css.inc.php' ; ?>
+		<?php include 'incluidos/js.inc.php' ; ?>
 
 		
 		<script src="../modulos/discipulo/visao/js/novo.js"></script>
@@ -141,8 +141,8 @@ jQuery(function($) {
 				<?php if ( $mensagem ) : ?>
 			  <div class = "row-fluid" >
 					<div class = "span12" >
-					<div class = "alert alert-<?php echo $mensagem[000]['classe'] ; ?>" >	
-					<strong>Mensagem:</strong> <?php echo $mensagem[000]['mensagem'] ; ?> 
+					<div class = "alert alert-<?php //echo $mensagem[000]['classe'] ; ?>" >	
+					<strong>Mensagem:</strong> <?php //echo $mensagem[000]['mensagem'] ; ?> 
 						<?php if (isset($mensagem['discipulo'])) : ?>
 								<a href = "/discipulo/atualizar/id/<?php echo $mensagem['discipulo']['id']?>" ><?php echo $mensagem['discipulo']['nome']?></a>
 						<?php endif ; ?>
@@ -161,10 +161,10 @@ jQuery(function($) {
 							<?php $dataN = $discipulo->getDataNascimento()->format('d/m/Y') ; ?>
 
 							<div class = "row-fluid " >
-								<h3 class = " piscar" ><?php echo $discipulo->nome ; ?> <?php echo $discipulo->alcunha ? '( '.$discipulo->alcunha.' )' : ''; ?> </h3>
+								<h3 class = " piscar" ><a href = "/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ; ?>" ><?php echo $discipulo->nome ; ?></a> <?php echo $discipulo->alcunha ? '( '.$discipulo->alcunha.' )' : ''; ?> </h3>
 									<a href = "/statusCelular/novo/id/<?php echo $discipulo->id?>" ><span class = "badge "  >Status:<?php echo $status['nome']; ?></span></a>
 										<h5 class = "" >
-											<a href= "/discipulo/atualizar/id/<?php echo is_object($lider) ? $lider->id : '';?>">
+											<a href= "/discipulo/discipulo/detalhar/id/<?php echo is_object($lider) ? $lider->id : '';?>">
 												Líder:<?php echo is_object($lider) ? $lider->nome : ''; ?></h5>
 									</a>
 							

@@ -160,8 +160,12 @@ class Discipulo{
 
 	public function salvar(){
 
+$options = array(
+    \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+); 
+
 			  //abrir conexao com o banco
-			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  $pdo = new \PDO(DSN, USER, PASSWD, $options);
 			  //cria sql
 			  $sql = "INSERT INTO Discipulo (
 							  nome, telefone, email,endereco, nivel, 
@@ -198,8 +202,11 @@ class Discipulo{
 
 	public function salvarCompleto(){
 
+$options = array(
+    \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+); 
 			  //abrir conexao com o banco
-			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  $pdo = new \PDO(DSN, USER, PASSWD, $options);
 			  //cria sql
 			  $sql = "INSERT INTO Discipulo (
 							  nome, ativo, datanascimento, sexo, estadoCivilId, telefone, email,endereco,  
@@ -263,8 +270,12 @@ class Discipulo{
 	public function atualizar(){
 		try {
 
+$options = array(
+    \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+); 
+
 			  //abrir conexao com o banco
-			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  $pdo = new \PDO(DSN, USER, PASSWD, $options);
 			  //cria sql
 			  $sql = "UPDATE Discipulo SET 	nome = ? , telefone = ? , email = ? ,endereco = ? , nivel = ?, 
 				  lider = ?, celula = ? ,  ativo = ?, dataNascimento = ? , estadoCivilId = ? ,sexo = ? , alcunha = ?
@@ -290,6 +301,9 @@ class Discipulo{
 			  $resposta = $stm->execute();
 			  $erro = $stm->errorCode();
 
+			//var_dump($stm->errorInfo());
+			//var_dump($this);
+			//exit();
 
 			  if ($erro != '0000'){
 
@@ -303,10 +317,23 @@ class Discipulo{
 			}
 		  //fechar conexão
 		  $pdo = null ;
-
 		  return $resposta;
 	
 	}
+
+	public function trocarSenha(){
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'UPDATE Discipulo SET  senha = md5(?) WHERE email = ?';
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(1,$this->senha);
+		$stm->bindParam(2,$this->email);
+
+		return $stm->execute();
+	}
+
 	/*Recebe o id para não listar este cadastro.
 	 *
 	 * */
@@ -354,7 +381,7 @@ class Discipulo{
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'SELECT * FROM Discipulo';
+		$sql = 'SELECT * FROM Discipulo order by nome';
 
 		$stm = $pdo->prepare($sql);
 
@@ -382,6 +409,60 @@ class Discipulo{
 		return $resposta ;
 	}
 
+	public static function totalAtivos(){
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT count(*) AS total FROM Discipulo WHERE ativo = 1 ';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->execute();
+
+		return $stm->fetch() ;
+	
+	}
+
+	public static function totalInativos(){
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT count(*) AS total FROM Discipulo WHERE ativo = 0 ';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->execute();
+
+		return $stm->fetch() ;
+	
+	}
+
+	public static function totalAtivosLider($id){
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT count(*) AS total FROM Discipulo WHERE ativo = 1 and lider=? ';
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(1, $id);
+
+		$stm->execute();
+
+		return $stm->fetch() ;
+	
+	}
+
+	public static function totalInativosLider($id){
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT count(*) AS total FROM Discipulo WHERE ativo = 0 and lider=? ';
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(1, $id);
+
+		$stm->execute();
+
+		return $stm->fetch() ;
+	
+	}
+
 	public function ativar(){
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
@@ -392,6 +473,47 @@ class Discipulo{
 
 		return $stm->execute() ;
 	}
+
+	public function desativar(){
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'UPDATE Discipulo SET  ativo = 0 WHERE id = ?';
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(1, $this->id );
+
+		return $stm->execute() ;
+	}
+
+	public static function rank(){
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT   l.nome as lider, d.nome as nome , count(d.id) as total
+						FROM `Discipulo` as l  inner join Discipulo as d on d.lider = l.id and d.ativo = 1 WHERE 1
+						group by l.id
+						order by total DESC, l.nome ';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->execute() ;
+		return $stm->fetchAll() ;
+	}
+
+	public static function rankInativos(){
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT   l.nome as lider, d.nome as nome , count(d.id) as total
+						FROM `Discipulo` as l  inner join Discipulo as d on d.lider = l.id and d.ativo = 0 WHERE 1
+						group by l.id
+						order by total DESC, l.nome ';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->execute() ;
+		return $stm->fetchAll() ;
+	}
+	
+
 
 	/*Listar todos os lideres do sistema
 	 * mostra apenas os id e nomes.
@@ -798,14 +920,49 @@ class Discipulo{
 	public function chamar($nome){
 
 		$nome = "%$nome%" ; // os '%%' funcionam como curingas na expressão revelando mais resultados.
+		//$nome = utf8_decode($nome);
+		//var_dump($nome);exit();
 
-		$pdo = new \PDO (DSN,USER,PASSWD);	
+$options = array(
+    \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+); 
+		$pdo = new \PDO (DSN,USER,PASSWD, $options);	
+		//var_dump($pdo);exit;
 
-		$sql = 'SELECT * FROM Discipulo WHERE nome LIKE ?';
+		$sql = 'SELECT * FROM Discipulo WHERE nome  LIKE  ?	  ';
 
 		$stm = $pdo->prepare($sql);
 
 		$stm->bindParam(1, $nome);
+
+		$stm->execute();
+
+		$resposta = array();
+
+		while($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')){
+			$resposta[$ob->id] = $ob ;
+		
+		}
+
+		return $resposta ; 
+
+	}
+
+	public function chamarPorId($id){
+
+		 // os '%%' funcionam como curingas na expressão revelando mais resultados.
+
+$options = array(
+    \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+); 
+		$pdo = new \PDO (DSN,USER,PASSWD, $options);	
+		//var_dump($pdo);exit;
+
+		$sql = 'SELECT * FROM Discipulo WHERE nome  LIKE  ?	  ';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->bindParam(1, $id);
 
 		$stm->execute();
 
@@ -830,7 +987,7 @@ class Discipulo{
 SELECT *
 		  FROM Discipulo AS d, StatusCelular st
 		  WHERE d.id = st.discipuloId
-		  AND st.tipoStatusCelular =? order by d.nome" ;  		
+		  AND st.tipoStatusCelular = ? and st.ativo = 1 order by d.nome" ;  		
 
 /*$sql = ' 
 				select s2.id AS idStatus, ultimo, nome , ,s3.id  from StatusCelular s2 inner join 

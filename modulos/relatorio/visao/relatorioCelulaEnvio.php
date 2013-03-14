@@ -55,11 +55,11 @@ unset($_SESSION['mensagem']) ;
 					<div class = "row-fluid" >
 						<form method = "post" action = "/relatorio/relatorio/relatorioCelulaEnvio" class = "form-inline"  >
 							<label>Inicio</label>
-							<input type = "date"  name = "inicio" class = "data"  >
-							<input type = "date"  name = "tempoInicio" class = "tempo" value = "00:00"   >
+							<input type = ""  name = "inicio" class = "data"  >
+							<input type = ""  name = "tempoInicio" class = "tempo" value = "00:00"   >
 							<label>Fim</label>
-							<input type = "date" name = "fim" class = "data" >
-							<input type = "date"  name = "tempoFim" class = "tempo" value = "00:00"   >
+							<input type = "" name = "fim" class = "data" >
+							<input type = ""  name = "tempoFim" class = "tempo" value = "00:00"   >
 							<div class = "form-actions" >
 							<button  type = "submit" class = "btn" >Gerar</button>
 							</div>
