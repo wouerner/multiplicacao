@@ -19,9 +19,18 @@
 
 		<section>		
 			<article>
+
+				<div class = "well" >
 				<fieldset>
 					<legend>Atualizar Célula</legend>
 					<form action = "/celula/celula/atualizar" method = "post"  class = "form-horizontal">
+
+					<div class = "control-group" >
+						<label class = "control-label" >Ativa:</label>
+						<div class = "controls" >
+						<input type = "checkbox" name = "ativa" value = "1" autofocus alt = "" placeholder= "" <?php echo $celula->ativa == 1 ? 'checked' : '' ; ?>>
+						</div>
+					</div>	
 						
 						<div class = "control-group" >
 						<label class = "control-label" >Nome:</label>
@@ -43,6 +52,18 @@
 						<input type = "text" name = "endereco" value = "<?php echo $celula->endereco ; ?>">
 						</div>
 						</div>
+
+						 <div class = "control-group " >
+								 <label class = "control-label" for = "" >Tipo de Rede:</label>
+								<div class = "controls" >
+								 <select id = "" class = "span3" name = "tipoRedeId"  >
+								 <option value = "<?php echo $tipoRede->id ; ?>"><?php echo $tipoRede->nome ; ?></option>
+										<?php foreach($tiposRedes as $r) : ?>
+												<option value = "<?php echo $r->id ; ?>"><?php echo $r->nome ; ?></option>
+									  <?php endforeach ; ?>
+								 </select>
+							</div>
+						 </div>	
 
 						 <div class = "control-group " >
 							<div class = "ui-widget" >
@@ -76,7 +97,7 @@
 					</form>
 				
 				</fieldset>
-			
+			</div>			
 			</article>
 		
 		</section>

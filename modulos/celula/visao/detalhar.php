@@ -2,15 +2,12 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../incluidos/css/estilo.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
+		<?php include 'incluidos/css.inc.php' ?>
+		<?php include 'incluidos/js.inc.php' ?>
 	</head>
 
 	<body>
-		<section class = "container">
+		<section class = "container-fluid">
 
 		<nav> 
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
@@ -22,13 +19,15 @@
 
 		<section>		
 			<article>
-
+						<div class = "well" >
 						<table class = "table table-bordered">
 
-						<caption><h3>Célula do <a href = "/discipulo/atualizar/id/<?php echo $lider->id?>" ><?php echo $lider->nome?></h3></a></caption>
+						<caption><h3>Célula: <?php echo $celula->nome?></h3></a></caption>
 
 
-							<tr><td class = "span6" ><h4>Nome da Célula: <?php echo $celula->nome ; ?> </h4></td>
+							<tr>
+								<td class = "" ><h4><a href= "/discipulo/discipulo/detalhar/id/<?php echo $celula->pegaLider()->id ; ?>" >Líder: <?php echo $celula->pegaLider()->nome ; ?> </a></h4></td>
+								<td class = "span6" ><h4>Célula: <?php echo $celula->nome ; ?> </h4></td>
 								<?php require 'celula/visao/menuCelula.inc.php' ; ?></tr>
 							<tr>
 								<td>Endereço:<?php echo $celula->endereco ; ?>	</td> 
@@ -51,7 +50,7 @@
 											<tr>
 										<?php endif; ?>
 
-											<td> <a href = "/discipulo/detalhar/id/<?php echo $discipulo['id'] ; ?>"> <?php echo $discipulo['nome'] ;?></a></td>
+											<td> <a target = "blank" href = "/discipulo/discipulo/detalhar/id/<?php echo $discipulo['id'] ; ?>"> <strong><?php echo $discipulo['nome'] ;?></strong></a></td>
 
 										<?php if ($cont ==4) :?>
 											</tr>
@@ -60,7 +59,7 @@
 									
 							<?php endforeach ; ?>
 						</table>
-				
+			</div>	
 			</article>
 		
 		</section>

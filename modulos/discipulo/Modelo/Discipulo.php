@@ -1,6 +1,7 @@
 <?php
 namespace discipulo\Modelo;
-class Discipulo{
+use \framework\modelo\modeloFramework;
+class Discipulo extends modeloFramework{
 
 	private $id ;
 	private $nome ;
@@ -18,20 +19,23 @@ class Discipulo{
 	private $senha ;
 	private $statusCelular ;
 	private $admissao ;
+	private $arquivo ;
 	private $erro ;
 	private $rede;
 
 	public function __construct (){
 	}
 
-	public function __get($prop){
-		if ($prop == 'dataNascimento'  ){  
-				return $this->getDataNascimento();
 
-		}else{
-				  return $this->$prop;
-		}
+	public function __get($prop){
+		switch ( $prop ){
+		case 'dataNascimento': 		
+			return $this->getDataNascimento() ;
+			break ;
+		default: 
+		  return $this->$prop;
 	
+		}
 	}
 	
 	public function __set($prop , $valor){
@@ -46,7 +50,11 @@ class Discipulo{
 	}
 
 	public function getNome(){
-			  return  $this->nome ? $this->nome : $this->alcunha ;
+			  return  $this->nome ;
+	}
+
+	public function getAlcunha(){
+			  return  $this->alcunha ? $this->alcunha : $this->nome ;
 	}
 
 	public function setDataNascimento($valor){
@@ -270,17 +278,16 @@ $options = array(
 	public function atualizar(){
 		try {
 
-$options = array(
-    \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-); 
-
 			  //abrir conexao com o banco
-			  $pdo = new \PDO(DSN, USER, PASSWD, $options);
+			  $pdo = self::pegarConexao();
 			  //cria sql
 			  $sql = "UPDATE Discipulo SET 	nome = ? , telefone = ? , email = ? ,endereco = ? , nivel = ?, 
-				  lider = ?, celula = ? ,  ativo = ?, dataNascimento = ? , estadoCivilId = ? ,sexo = ? , alcunha = ?
+				  lider = ?, celula = ? , dataNascimento = ? , estadoCivilId = ? ,sexo = ? , alcunha = ?
 				  WHERE id = ?
 							  ";
+
+
+				//var_dump($this);exit;
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
@@ -291,12 +298,11 @@ $options = array(
 			  $stm->bindParam(5, $this->nivel);
 			  $stm->bindParam(6, $this->lider);
 			  $stm->bindParam(7, $this->celula);
-			  $stm->bindParam(8 , $this->ativo) ;
-			  $stm->bindParam(9 , $this->dataNascimento->format('Y-m-d')) ;
-			  $stm->bindParam(10 , $this->estadoCivilId) ;
-			  $stm->bindParam(11 , $this->sexo ) ;
-			  $stm->bindParam(12 , $this->alcunha ) ;
-			  $stm->bindParam(13, $this->id);
+			  $stm->bindParam(8 , $this->dataNascimento->format('Y-m-d')) ;
+			  $stm->bindParam(9 , $this->estadoCivilId) ;
+			  $stm->bindParam(10 , $this->sexo ) ;
+			  $stm->bindParam(11 , $this->alcunha ) ;
+			  $stm->bindParam(12, $this->id);
 
 			  $resposta = $stm->execute();
 			  $erro = $stm->errorCode();
@@ -341,14 +347,18 @@ $options = array(
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'SELECT * FROM Discipulo WHERE id != ?';
+		$sql = 'SELECT * FROM Discipulo WHERE id != ? ORDER BY nome';
 
 		$stm = $pdo->prepare($sql);
 		$stm->bindParam(1,$id);
-
 		$stm->execute();
+	
+		$resposta = array();
+		while ($obj = $stm->fetchObject ( get_class() ) ) {
+			$resposta[$obj->id] = $obj ; 	
+		}
 
-		return $stm->fetchAll();
+		return $resposta ;
 
 	}
 
@@ -392,9 +402,47 @@ $options = array(
 	}
 
 	public function inativos(){
+		$pdo = self::pegarConexao();	
+
+		$sql = 'SELECT * FROM Discipulo WHERE ativo = 0 AND arquivo = 0 order by nome';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->execute();
+
+		$resposta = array();
+
+		while($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')){
+			$resposta[$ob->id] = $ob ;
+		}
+
+		return $resposta ;
+	}
+
+	public function inativosPorLider(){
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'SELECT * FROM Discipulo WHERE ativo = 0 order by nome';
+		$sql = 'SELECT * FROM Discipulo WHERE ativo = 0 AND arquivo = 0 AND lider = ? order by nome';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->BindParam(1, $this->lider);
+
+		$stm->execute();
+
+		$resposta = array();
+
+		while($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')){
+			$resposta[$ob->id] = $ob ;
+		}
+
+		return $resposta ;
+	}
+
+	public function arquivados(){
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT * FROM Discipulo WHERE arquivo = 1 order by nome';
 
 		$stm = $pdo->prepare($sql);
 
@@ -478,6 +526,28 @@ $options = array(
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
 		$sql = 'UPDATE Discipulo SET  ativo = 0 WHERE id = ?';
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(1, $this->id );
+
+		return $stm->execute() ;
+	}
+
+	public function arquivar(){
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'UPDATE Discipulo SET  arquivo = 1 WHERE id = ?';
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(1, $this->id );
+
+		return $stm->execute() ;
+	}
+
+	public function desarquivar(){
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'UPDATE Discipulo SET  arquivo = 0 WHERE id = ?';
 
 		$stm = $pdo->prepare($sql);
 		$stm->bindParam(1, $this->id );
@@ -826,9 +896,11 @@ $options = array(
 
 		$stm = $pdo->prepare($sql);
 
+
 		$stm->bindParam(1, $this->id);
 
 		$stm->execute();
+		//var_dump($stm->errorInfo());exit();
 
 	}
 
@@ -838,7 +910,8 @@ $options = array(
 
 	public function listarUm(){
 
-		$pdo = new \PDO (DSN,USER,PASSWD);	
+		$pdo =self::pegarConexao() ;	
+
 
 		$sql = 'SELECT * FROM Discipulo WHERE id = ?';
 
@@ -929,7 +1002,7 @@ $options = array(
 		$pdo = new \PDO (DSN,USER,PASSWD, $options);	
 		//var_dump($pdo);exit;
 
-		$sql = 'SELECT * FROM Discipulo WHERE nome  LIKE  ?	  ';
+		$sql = 'SELECT * FROM Discipulo WHERE nome  LIKE  ?	 ORDER BY nome ';
 
 		$stm = $pdo->prepare($sql);
 
@@ -979,7 +1052,11 @@ $options = array(
 
 	public function fichaPorStatus($idStatus){
 
-			  $pdo = new \PDO ( DSN, USER, PASSWD ) ;
+$options = array(
+    \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+); 
+
+			  $pdo = new \PDO ( DSN, USER, PASSWD, $options ) ;
 	
 		$sql = "
 

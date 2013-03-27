@@ -41,22 +41,6 @@
 
 				<?php require_once 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
-				<?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
-				<div class = "well">
-						  <a class = "btn btn-success " href = "/discipulo/discipulo/novoCompleto" >
-									<i class = "icon-plus icon-white" ></i> Novo Discípulo
-							</a>
-				</div>
-			
-					<?php endif ; ?>
-
-					<div class = "well" >	
-					Relatório de Célula :
-				<?php foreach ( $celulas as $c ) : ?>
-						<a class = "btn" href="/celula/relatorio/novo/id/<?php echo $c['id']?>" > <?php echo $c['nome'] ; ?></a>
-					<?php endforeach ; ?>
-				</div>
-
 <div class = "row-fluid" >
 <div class = "span12" >
 
@@ -78,41 +62,63 @@
 
 						<?php foreach ( $ultimosAvisos as $a ) : ?>
 						<tr>
-						<td> <?php echo date_format(date_create($a['dataAviso']), 'd-M-Y H:m') ; ?></td><td><?php echo $a['nome'] ; ?> fez <?php echo $a['acao'] ; ?>
-								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
- 									<a href= "/<?php echo $a['modulo'] ; ?>/<?php echo $a['modulo'] ; ?>/detalhar/id/<?php echo $a['identificacao'] ; ?>"> 
+							<td><?php echo date_format(date_create($a['dataAviso']), 'd-M-Y H:m') ; ?></td>
+							<td><?php echo $a['nome'] ; ?> fez <?php echo $a['acao'] ; ?>
+							<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+ 								<a href= "/<?php echo $a['modulo'] ; ?>/<?php echo $a['modulo'] ; ?>/detalhar/id/<?php echo $a['identificacao'] ; ?>"> 
 												<?php echo $a['modulo'] ; ?> 
 									</a>
-								<?php  else :  ?>
- 									 
+							<?php  else :  ?>
 												<?php echo $a['modulo'] ; ?> 
-									
-								<?php endif ; ?>
+							<?php endif ; ?>
 						</td>
-						</tr>
-							
-						
+						</tr>						
 						<?php endforeach ; ?>
 						</table>
-</div>
-</div>
-</div>
-
-</div>
-</div>
+		</div>
+		</div>
 </div>
 </div>
 
+</div>
+</div>
+
+<div class = "row-fluid" >
+				<div class = "span6">
+				<div class = "well">
+				<strong>Discipulos: </strong>
+				<?php foreach( $discipulos as $d ) : ?>
+					<a class = "btn " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>"  ><?php echo $d->getAlcunha() ; ?></a>
+				<?php endforeach ; ?>
+
+				<?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
+						  <a class = "btn btn-success " href = "/discipulo/discipulo/novoCompleto" >
+									<i class = "icon-plus icon-white" ></i> Novo Discípulo
+							</a>
+					<?php endif ; ?>
+				</div>
+				</div>
+
+					<div class = "span6" >	
+					<div class = "well" >	
+					<h4>Relatório de Célula:</h4>
+				<?php foreach ( $celulas as $c ) : ?>
+						<a class = "btn" href="/celula/relatorio/novo/id/<?php echo $c->id ; ?>" > <?php echo $c->nome ; ?></a>
+					<?php endforeach ; ?>
+				</div>
+				</div>
+				</div>
+
+
+<div class = "row-fluid" >
 <div class = "span6" >
 <div class = "well" >
 
 <div class="accordion" id="accordion2">
-
 	<div class="accordion-group">
 		<div class="accordion-heading">
 			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Status da Igreja <b class="caret pull-right"></b></a>
 		</div>
-
 		<div id="collapseOne" class="accordion-body collapse">
 		<div class="accordion-inner">
 					<table id = "tabelaStatus" class = "table table-striped  tablesorter " >
@@ -139,8 +145,8 @@
 						</tbody>
 					</table>
 		</div>
-		</div>
 	</div>
+</div>
 
 	<div class="accordion-group">
 		<div class="accordion-heading">
@@ -152,14 +158,22 @@
 				<table class = "table " >
 					<caption><h5>Total Redes</h5></caption>
 					<thead>
-						<th>Status</th>
+						<th>Nome</th>
 						<th>Quantidade</th>
 					</thead>
 					<tbody>
 						<?php foreach( $totalRedes as $s) :?>
 						<tr>
-							<td><?php echo $s['nome']?></td>
-							<td><?php echo $s['total']?></td>
+							<td>
+								<a href = "/rede/rede/listarMembrosRede/id/<?php echo $s['id'] ; ?>"><?php echo $s['nome']?></a> 
+							</td>
+							<td>
+								<a href = "/rede/rede/listarMembrosRede/id/<?php echo $s['id'] ; ?>">Discipulos -<?php echo $s['total']?></a>
+							</td>
+							<td>
+								<a href = "/rede/rede/listarCelulas/id/<?php echo $s['id'] ; ?>">Células</a>
+							</td>
+							<td></td>
 						</tr>
 						<?php endforeach ; ?>
 						<tr class = "info" ><td>Total</td><td><?php echo $somaRede ; ?></td></tr>
@@ -199,7 +213,6 @@
 
 </div>
 
-</div>
 </div>
 
 
@@ -286,7 +299,6 @@
 						</tr>
 					</tbody>
 				</table>
-
 			</div>
 		</div>
 	</div>
@@ -295,8 +307,9 @@
 </div>
 
 
-			</div>
-			</div>
+</div>
+</div>
+</div>
 
 			</article>
 		

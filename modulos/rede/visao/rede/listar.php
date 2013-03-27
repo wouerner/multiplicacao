@@ -34,8 +34,13 @@
 
 						<tr>
 							<td><?php echo  $cont++  ?></td>
+								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 							<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->getLider()->id ?>" ><?php echo $discipulo->getLider()->nome ; ?></a></td>
 							<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ?>" ><?php echo $discipulo->nome ; ?></a></td>
+							<?php else : ?>
+							<td><?php echo $discipulo->getLider()->nome ; ?></td>
+							<td><?php echo $discipulo->nome ; ?></td>
+							<?php endif ; ?>
 						</tr>
 							
 						

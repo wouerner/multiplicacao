@@ -46,7 +46,7 @@ $(".btn-warning").click( function(){
 			
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
 		</nav>
-		<section>		
+		<section id = "discipulo" >		
 			<article>
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
@@ -57,9 +57,9 @@ $(".btn-warning").click( function(){
 				<caption><h3>Lista de Discipulos</h3></caption>
 					<thead>
 <?php if ($acl->hasPermission('admin_acesso') == true) :  ?>
-						<th>líder</th>
+						<th>Líder</th>
 <?php endif; ?>
-						<th>nome</th>
+						<th>Nome</th>
 						<th>Telefone</th>
 						<th>E-mail</th>
 						<th>Ações</th>
@@ -70,11 +70,21 @@ $(".btn-warning").click( function(){
 				<tr>
 
 <?php if ($acl->hasPermission('admin_acesso') == true) :  ?>
-					<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->getLider()->id?>" ><?php echo $discipulo->getLider()->nome ; ?></a></td>
+					<td><a href="/discipulo/discipulo/detalhar/id/<?php echo is_object ($discipulo->getLider()) ? $discipulo->getLider()->id : '' ?>" >
+							<?php echo is_object ($discipulo->getLider()) ? $discipulo->getLider()->nome : ''; ?></a></td>
 <?php endif; ?>
 
 
-					<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><?php echo $discipulo->nome ; ?></a></td>
+					<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><strong><?php echo $discipulo->nome ; ?></strong>
+
+					<?php if ($discipulo->ativo == 1 ) : ?>
+						<span class="label label-success">Ativo</span> </a></td>
+					<?php elseif ($discipulo->arquivo == 1 ) : ?>
+						<span class="label label-inverse">Arquivo</span> </a></td>
+					<?php else : ?>
+						<span class="label label-warning">Inativo</span> </a></td>
+					<?php endif ; ?>
+
 				<td><?php echo $discipulo->telefone ; ?></td> <td><?php echo $discipulo->email ; ?></td>
 				 <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
 				</tr>

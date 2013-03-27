@@ -45,7 +45,7 @@ namespace painel\controlador;
 
 					$totalRedes =  \rede\modelo\rede::pegarTodasRedes();
 					$totalRedesLideres =  \rede\modelo\rede::pegarTodasRedesPorLider($usuarioId);
-					
+				//var_dump($totalRedes);	
 					$somaRede=NULL;
 					foreach($totalRedes as $t){
 						$somaRede += $t['total'];
@@ -63,6 +63,10 @@ namespace painel\controlador;
 					$celulas->lider = $usuarioId;
 					$celulas = $celulas->listarCelulasLider();
 					$totalCelulas = count($celulas);
+
+					$discipulos = new \discipulo\Modelo\Discipulo();	
+					$discipulos->id = $usuarioId ; 
+		  		$discipulos = $discipulos->listarDiscipulos();
 
 				  require_once  'modulos/painel/visao/painel.php';
 		}

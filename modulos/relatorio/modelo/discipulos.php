@@ -62,29 +62,9 @@ class discipulos{
 			  $lider ='AND  d.lider = :lider ';
 			  }
 
-				/*$sql = '
-						 SELECT DISTINCT 
-						 d.id, d.nome , d.dataNascimento, d.sexo, d.estadoCivilId, d.telefone, d.email, d.endereco, d.lider, d.celula
-						 FROM 
-						 Discipulo AS d,  StatusCelular , Redes AS r , TipoRede AS tpRede , FuncaoRede AS fRede
-						 WHERE 
-						 d.dataNascimento between :idadeMax and :idadeMin 
-						 '.$sexo.' 
-						 '.$estadoCivil.'
-				  	 '.$status.'
-				  	 '.$celula.'
-				  	 '.$rede.'
-				  		AND StatusCelular.discipuloId = d.id
-							AND r.tipoRedeId = tpRede.id AND d.id = r.discipuloId 
-							AND fRede.id = r.funcaoRedeId	
-							AND StatusCelular.ativo = 1
-							'.$ativo.'
-							'.$lider.'
-							
-							ORDER BY d.nome';*/
 
 					$sql='SELECT DISTINCT 
-								d.id, d.nome , d.dataNascimento, d.sexo, d.estadoCivilId, d.telefone, d.email, d.endereco, d.lider, d.celula
+								d.id, d.nome , d.alcunha , d.dataNascimento, d.sexo, d.estadoCivilId, d.telefone, d.email, d.endereco, d.lider, d.celula
 								FROM 
 									Discipulo AS d 
 								left join 
@@ -107,10 +87,6 @@ class discipulos{
 							ORDER BY d.nome
  						';
 
-				//var_dump($lider);
-				//var_dump($l);
-				//echo $sql; exit();
-
 			  $stm = $pdo->prepare($sql);
 
 			  $stm->bindParam(':idadeMax',$idadeMaxima);
@@ -126,7 +102,6 @@ class discipulos{
 			  $stm->execute();
 
 				$erro = $stm->errorInfo();
-				//exit();
 
 			  $res = array();
 
@@ -142,9 +117,9 @@ class discipulos{
 			  
 			  }
 			
-				/*var_dump($sql);
-				var_dump($res);
-				exit();*/
+				//var_dump($sql);
+				//var_dump($res);
+				/*exit();*/
 			  //usort($res, function($a, $b) { return strnatcmp($a['lider'], $b['lider']); });
 
 				return $res;	
@@ -255,7 +230,111 @@ ORDER BY TipoStatusCelular.nome';
 	
 	}
 
+	public function statusPorLider($liderId, $statusId){
+	
+			$pdo = new \PDO(DSN,USER,PASSWD);
 
+			$sql = '
+-- lider com discipulos em consolidacao
+select 
+l.id, l.nome as nome, 1 as situacao, count(d.id) as total 
+from Discipulo as d inner join StatusCelular as sc 
+on sc.discipuloId = d.id and sc.ativo = 1 and sc.tipoStatusCelular = :statusCelularId
+
+inner join Discipulo as l on l.id = d.lider
+
+where d.lider in 
+(
+-- ids dos 12
+SELECT 
+d.id 
+FROM `Discipulo` as l left join Discipulo as d ON l.id = d.lider 
+WHERE d.lider = :liderId )
+group by d.lider
+
+union
+
+-- não tem discipulos em consolicação
+select 
+l.id  , l.nome as nome, 2 as situacao , 0 as total 
+from Discipulo as d inner join StatusCelular as sc 
+on sc.discipuloId = d.id and sc.ativo = 1 and sc.tipoStatusCelular != :statusCelularId
+inner join Discipulo as l on l.id = d.lider
+where d.lider in 
+(
+-- ids dos 12
+SELECT 
+d.id 
+FROM `Discipulo`
+
+ as l left join Discipulo as d ON l.id = d.lider 
+WHERE d.lider = :liderId  )
+-- group by d.lider
+and d.lider not in (
+
+select -- d.id, d.nome , sc.tipoStatusCelular , 
+-- d.lider , 
+l.id -- , l.nome, \'tem\'
+from Discipulo as d inner join StatusCelular as sc 
+on sc.discipuloId = d.id and sc.ativo = 1 and sc.tipoStatusCelular = :statusCelularId
+inner join Discipulo as l on l.id = d.lider
+where d.lider in 
+(
+-- ids dos 12
+SELECT 
+d.id 
+FROM `Discipulo`
+
+ as l left join Discipulo as d ON l.id = d.lider 
+WHERE d.lider = :liderId )
+group by d.lider
+)
+
+group by d.lider
+
+union 
+
+SELECT 
+l.id , l.nome as nome , 3, 0 as total
+FROM Discipulo as l left join Discipulo as d on d.lider = l.id
+where
+l.id  in (  
+-- id dos 12
+SELECT 
+d.id 
+FROM `Discipulo` as l left join Discipulo as d ON l.id = d.lider WHERE d.lider = :liderId
+) 
+-- group by l.id
+and l.id not in (
+-- lider com discipulos
+SELECT 
+l.id -- , l.nome, d.id ,d.nome
+FROM Discipulo as l inner join Discipulo as d on d.lider = l.id
+where
+l.id  in (  
+-- id dos 12
+SELECT 
+d.id 
+FROM `Discipulo` as l left join Discipulo as d ON l.id = d.lider WHERE d.lider = :liderId
+) 
+group by l.id
+)
+
+order by nome
+							
+							
+							';
+
+			
+			$stm = $pdo->prepare($sql);
+			$stm->bindParam( ':liderId',$liderId ) ;
+			$stm->bindParam( ':statusCelularId', $statusId ) ;
+
+			$stm->execute() ;	  
+
+			return $stm->fetchAll();
+	
+	}
 
 
 }

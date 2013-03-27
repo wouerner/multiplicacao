@@ -28,13 +28,13 @@ unset($_SESSION['mensagem']) ;
 
 				<div class = "row-fluid" >	
 				<div class = "span12" >	
-						<div class = "well" >	
-						<table class = "table table-condensed">
+						<table class = "well table table-condensed">
 						<caption>
 							<h3>Lista de Tipo de Rede</h3>
 						</caption>
 						<thead>
 						<tr>
+							<th>#</th>
 							<th>Nome</th>
 							<th>Ações</th>
 						</tr>
@@ -42,14 +42,15 @@ unset($_SESSION['mensagem']) ;
 						<tbody>
 						<?php foreach ( $redes as $rede) : ?>
 
-						<tr><td><a href="/rede/rede/detalharTipoRede/id/<?php echo $rede['id']?>" ><?php echo $rede['nome'] ; ?> </a></td>
+						<tr>
+							<td><?php echo !isset($c) ? $c=1 : ++$c ; ?></td>
+							<td><a href="/rede/rede/detalharTipoRede/id/<?php echo $rede->id?>" ><?php echo $rede->nome ; ?> </a></td>
 							<?php require 'rede/visao/tipoRede/menu.inc.php' ; ?>
 						</tr>
 						
 						<?php endforeach ; ?>
 						</tbody>
 						</table>
-					</div>
 			</div>
 			</div>
 			</div>

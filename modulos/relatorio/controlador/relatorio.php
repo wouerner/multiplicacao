@@ -131,6 +131,7 @@ class relatorio {
 	//var_dump($relatorio);
 		//
 		$total = count($relatorio);
+		$count = 0 ;
 		require 'relatorio/visao/discipulosResumidoRelatorio.php' ;	
 	}
 	
@@ -251,19 +252,49 @@ class relatorio {
 		//$temas = $tema->listarTodosAtivos();
 		$temas = $tema->listarTodos();
 
+		$tipoRede = new \rede\modelo\tipoRede();
+		$tipoRede = $tipoRede->listarTodos() ;
+
+
 		if ( $url['post'] ){
 
 			$tema->id = $url['post']['temaId'];
+			$tipoRedeId = $url['post']['tipoRedeId'];
 			$tema = $tema->listarUm();
 
 			$relatorio = new \celula\modelo\relatorioCelula() ;			
 			$relatorio->temaRelatorioCelulaId = $url['post']['temaId'] ;			
-			$relatorios = $relatorio->listarTodosPorTema() ;			
+			$relatorios = $relatorio->listarTodosPorTemaRede($tipoRedeId) ;			
 			$cont=0;
 //			var_dump($relatorios);
 		}
 
 		require 'modulos/relatorio/visao/relatorioCelulaPorTema.php' ;	
+	
+	}
+
+  public function statusPorLider($url){
+
+		$post=$url['post'];
+
+		$lideres = new \discipulo\Modelo\Discipulo();
+		$lideres = $lideres->listarTodosDiscipulos();
+
+		$tiposStatus = new \statusCelular\modelo\tipoStatusCelular();
+		$tiposStatus =  $tiposStatus->listarTodos(); 
+
+		if (!empty($post)) {
+
+		$liderId = 	$post['liderId'] ;
+		$statusCelularId = $post['statusCelularId'] 	;
+		$relatorio = new \relatorio\modelo\discipulos();
+		$relatorio = $relatorio->statusPorLider($liderId, $statusCelularId);
+
+		}
+		$total = 0 ;
+		require 'modulos/relatorio/visao/statusPorLider.php' ;	
+//		var_dump($relatorio);
+
 	
 	}
 

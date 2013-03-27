@@ -6,15 +6,12 @@ unset($_SESSION['mensagem']) ;
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../incluidos/css/estilo.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
+		<?php include  'incluidos/css.inc.php' ?>
+		<?php include  'incluidos/js.inc.php' ?>
 	</head>
 
 	<body>
-		<section class = "container">
+		<section class = "container-fluid">
 
 		<nav> 
 			
@@ -34,29 +31,28 @@ unset($_SESSION['mensagem']) ;
 				   </div>
 				<?php endif ; ?>
 
-				<div class = "row" >	
+				<div class = "row-fluid" >	
 				<div class = "span12" >	
-						<table class = "table bordered-table">
+						<table class = " well table bordered-table table-condensed">
 						<caption><h3>Lista de Tipo de Status Celular</h3></caption>
-								<tr>
-								<th colspan = "3" ><a class = "btn btn-success" href="/statusCelular/novoTipoStatusCelular">Novo Status</a></th>
-								</tr>
-							<tr>
+							<thead>
+								<th>#</th>
 								<th>Tipo</th>
 								<th>Ações</th>
-							</tr>
+							</thead>
+							<tbody>
 
 						<?php foreach ( $tipoStatusCelulares as $status) : ?>
 	
 						<tr>
-							<td><a href="/statusCelular/detalhar/id/<?php echo $status->id ?>" ><?php echo $status->nome ; ?></a></td>
+							<td><?php echo !isset($c)? $c=1 : ++$c ; ?></td>
+							<td><a href="/statusCelular/statusCelular/detalhar/id/<?php echo $status->id ?>" ><?php echo $status->nome ; ?></a></td>
 							<?php require 'statusCelular/visao/menuTipoStatusCelular.inc.php' ; ?>
 						</tr>
 						
 						<?php endforeach ; ?>
+							</tbody>
 						</table>
-					<div class = "form-actions" >	
-						<?php //discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos['total'] ,3 ,$pagina ) ; ?>
 					</div>
 			</div>
 			</div>

@@ -38,7 +38,7 @@
 						<div class="row-fluid">
 						<div class="span3">
 							<label>Titulo</label>
-							<input name = "titulo" type="text" class="input-block-level" maxlength = "45" placeholder="Título do Relatório" required>
+							<input name = "titulo" type="text" class="input-block-level" maxlength = "45" placeholder="Título do Relatório" >
 
 							<label>Tema Relatório Célula</label>
 							<select class="input-block-level" name = "temaRelatorioCelulaId" required>

@@ -30,6 +30,12 @@ if( $_GET['url'] == 'discipulo/novoAnonimo' ){
 
 }
 
+if( $_GET['url'] == 'discipulo/discipulo/cracha/id/8' ){
+
+	$url = $_GET['url'];
+
+}
+
 
 $url = explode('/' ,$url) ;
 
@@ -40,7 +46,11 @@ $acao = ( array_key_exists(2, $url) ) ? $url[2] : 'index' ;
 $url['post'] = isset($_POST) ? $_POST : NULL;
 require_once 'config/autoload.php' ;
 
+include 'modulos/seguranca/ACL/assets/php/database.php';
+include 'modulos/seguranca/ACL/assets/php/acl.php';
+
 require_once $modulo.'/controlador/'.$controlador.'.php' ;
+
 
 $controlador = $modulo.'\controlador\\'.$controlador ;
 

@@ -130,7 +130,7 @@ class relatorioCelula{
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'SELECT * FROM RelatorioCelula WHERE celulaId = ? ORDER BY dataEnvio';
+		$sql = 'SELECT * FROM RelatorioCelula WHERE celulaId = ? ORDER BY year(dataEnvio) DESC, month(dataEnvio) DESC, day(dataEnvio) DESC ';
 
 		$stm = $pdo->prepare($sql);
 
@@ -178,7 +178,7 @@ class relatorioCelula{
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
 		$sql = '
-						SELECT d.nome AS lider, c.nome AS celulaNome,  r.dataEnvio AS dataEnvioRelatorio, 
+						SELECT d.nome AS lider, c.nome AS celulaNome, c.id AS celulaId, r.dataEnvio AS dataEnvioRelatorio, 
 tr.nome AS nomeTema, tr.dataInicio AS inicio , tr.dataFim AS fim  
 FROM 
 Discipulo AS d right join 
@@ -200,6 +200,54 @@ TemaRelatorioCelula AS tr
 		$stm->bindParam(2,$this->temaRelatorioCelulaId);
 
 		$stm->execute();
+
+		$resposta = $stm->fetchAll();
+
+		return $resposta ; 
+
+	}
+
+	public function listarTodosPorTemaRede($redeId){
+					$rede= '';
+					$total = count($redeId);
+					$cont = 0 ;
+
+		foreach($redeId as $r){
+			$rede.= $r ;
+			$rede .= ($total-1 >= ++$cont) ? ',' : '' ;
+		}
+
+		//var_dump($rede);exit;
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = '
+						SELECT d.nome AS lider, c.nome AS celulaNome, c.id AS celulaId, r.dataEnvio AS dataEnvioRelatorio, 
+tr.nome AS nomeTema, tr.dataInicio AS inicio , tr.dataFim AS fim  
+FROM 
+Discipulo AS d right join 
+Celula AS c on d.id = c.lider
+LEFT JOIN 
+RelatorioCelula AS r ON c.id = r.celulaId AND  r.temaRelatorioCelulaId = ?
+left join 
+TemaRelatorioCelula AS tr 
+	ON tr.id = r.temaRelatorioCelulaId AND 
+	r.dataEnvio between tr.dataInicio and  tr.dataFim 
+	AND temaRelatorioCelulaId = ?
+where c.tipoRedeId in ('.$rede.' )
+
+	group by c.id
+	order by c.nome
+						';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->bindParam(1,$this->temaRelatorioCelulaId);
+		$stm->bindParam(2,$this->temaRelatorioCelulaId);
+
+		$stm->execute();
+
+		//var_dump($stm->errorInfo());
 
 		$resposta = $stm->fetchAll();
 

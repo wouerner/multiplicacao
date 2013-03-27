@@ -117,7 +117,7 @@
 									  			<select id = "comboboxCelula" class = "comboboxCelula" name = "celula"  required >
 														<option value = "" ></option>
 											  				<?php foreach($celulas as $celula) : ?>
-												  		<option value = "<?php echo $celula['id']?>"><?php echo $celula['nome']?> </option>
+												  		<option value = "<?php echo $celula->id ; ?>"><?php echo $celula->nome ; ?> </option>
 												  			<?php endforeach ; ?>
 								 		 		</select>
 											</div>
@@ -171,7 +171,7 @@
 						<select class = "input-block-level" name = "tipoRedeId" >
 												 <option value = ""></option>
 								<?php foreach ($tiposRedes as $tipoRede) : ?>
-										<option value = "<?php echo $tipoRede['id'] ; ?>" ><?php echo $tipoRede['nome'] ; ?></option>
+										<option value = "<?php echo $tipoRede->id ; ?>" ><?php echo $tipoRede->nome ; ?></option>
 								<?php endforeach ; ?>
 						</select>
 					</div>

@@ -227,31 +227,10 @@ class statusCelular{
 
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
-			  //cria sql
-			  /*$sql = "
 
-				select s2.id AS idStatus, ultimo, nome , s3.id  from StatusCelular s2 inner join 
-
-				(select 
-				d.id AS id , d.nome AS nome ,
-				(
-				SELECT  id 
-				FROM StatusCelular AS s1 
-				WHERE s1.discipuloId = d.id
-				ORDER BY dataInicio DESC
-				limit 1
-				)  AS ultimo
-				from Discipulo AS d 
-				where  1
-				group by d.id
-				) AS s3 on ultimo = s2.id
-
-				WHERE s2.tipoStatusCelular = ?
-				order by nome
-				" ;*/
 			  $sql = 'SELECT d.*  ,sc.id AS idStatus, tpsc.nome AS tipoNome
 				  FROM Discipulo AS d inner join StatusCelular AS sc 
-				  ON d.id = sc.discipuloId and d.ativo = 1 
+				  ON d.id = sc.discipuloId and d.ativo = 1 AND d.arquivo = 0
 				INNER JOIN TipoStatusCelular AS tpsc ON sc.tipoStatusCelular = tpsc.id
 WHERE 1
 AND sc.ativo =1 AND sc.tipoStatusCelular = ?
@@ -273,9 +252,68 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
 			  $pdo = null ;
 
 				return $resposta ;
+	}
 
-			  //fechar conexÃ£o
+			  public function discipulosInativos(){
 
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+
+			  $sql = 'SELECT d.*  ,sc.id AS idStatus, tpsc.nome AS tipoNome
+				  FROM Discipulo AS d inner join StatusCelular AS sc 
+				  ON d.id = sc.discipuloId and d.ativo = 0 AND d.arquivo = 0
+				INNER JOIN TipoStatusCelular AS tpsc ON sc.tipoStatusCelular = tpsc.id
+WHERE 1
+AND sc.ativo =1 AND sc.tipoStatusCelular = ?
+';
+
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->tipoStatusCelular);
+				
+				$stm->execute();
+
+				$resposta = array();
+
+				while($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')){
+					$resposta[$ob->id] = $ob ;
+				}
+
+			  $pdo = null ;
+
+				return $resposta ;
+	}
+
+			  public function discipulosArquivo(){
+
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+
+			  $sql = 'SELECT d.*  ,sc.id AS idStatus, tpsc.nome AS tipoNome
+				  FROM Discipulo AS d inner join StatusCelular AS sc 
+				  ON d.id = sc.discipuloId and d.arquivo = 1
+				INNER JOIN TipoStatusCelular AS tpsc ON sc.tipoStatusCelular = tpsc.id
+WHERE 1
+AND sc.ativo =1 AND sc.tipoStatusCelular = ?
+';
+
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->tipoStatusCelular);
+				
+				$stm->execute();
+
+				$resposta = array();
+
+				while($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')){
+					$resposta[$ob->id] = $ob ;
+				}
+
+			  $pdo = null ;
+
+				return $resposta ;
 	}
 
 	public function  quantidadePorStatusCelular() {

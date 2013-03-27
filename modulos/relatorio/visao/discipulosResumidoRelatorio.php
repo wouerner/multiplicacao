@@ -41,8 +41,9 @@ $(document).ready(function()
 			<table class = "table table-condensed tablesorter well" >
 				<thead>
 				<tr>
-					<th>Nome</th>
+					<th>#</th>
 					<th>Lider</th>
+					<th>Nome</th>
 					<th>Sexo</th>
 					<th>Endereço</th>
 					<th>Data Nasc. </th>
@@ -56,8 +57,9 @@ $(document).ready(function()
 							  <?php  $status =  $r->getStatusCelular() ; ?>
 							  <?php  $lider =  is_object($r->getLider()) ? $r->getLider():'' ; ?>
 						  <tr>	
-							  <td><a href="/discipulo/discipulo/atualizar/id/<?php echo $r->id ; ?>"><?php echo  $r->nome ; ?></a></td>
-							  <td><a href="/discipulo/discipulo/atualizar/id/<?php echo is_object($lider) ? $lider->id : '' ; ?>"><?php echo  is_object($lider) ? $lider->nome : ''; ?></a></td>
+								<td> <?php echo ++$cont ; ?></td>
+							  <td><a href="/discipulo/discipulo/atualizar/id/<?php echo is_object($lider) ? $lider->id : '' ; ?>"><?php echo  is_object($lider) ? $lider->getAlcunha() : ''; ?></a></td>
+							  <td><a target = "blank" href="/discipulo/discipulo/atualizar/id/<?php echo $r->id ; ?>"><strong><?php echo  $r->getAlcunha() ; ?></strong></a></td>
 							  <td><?php echo  ($r->sexo == 'm')? 'M' : 'F' ; ?></td>
 							  <td><?php echo  $r->endereco ; ?></td>
 							  <td><?php echo  $r->getDataNascimento()->format('d/m/Y') ; ?></td>

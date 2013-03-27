@@ -1,5 +1,5 @@
 <?php
-include("modulos/seguranca/ACL/assets/php/database.php"); 
+//include("modulos/seguranca/ACL/assets/php/database.php"); 
 use \seguranca\modelo\acl;
 
 $acesso = new acl($_SESSION['usuario_id']);
@@ -9,43 +9,70 @@ $usuario = $usuario[0] ;
 
 ?>
 
-<div class="navbar ">
+<div class="navbar navbar-fixed-top">
   <div class="navbar-inner ">
-    <div class="">
 
-      <a class="brand" href="/painel/painel">MGA</a>
+							<a class="brand" href="/painel/painel"> MGA<sup>Beta</sup></a>
         <ul class="nav" role="navigation">
 
 					<li class="divider-vertical"></li>
 
-								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-								<li><a href = "/aviso/aviso" ><i class = "icon-plus " ></i>Avisos</a></li>
+								
+								<?php if ($acesso->hasPermission('aviso_acesso') == true): ?>
+								<li><a href = "/aviso/aviso" ><i class = " icon-bullhorn " ></i> Avisos</a></li>
+								<?php endif ; ?>
+
+								<?php if ($acesso->hasPermission('rede_acesso') == true): ?>
 								<li class = "dropdown">
-									<a href = "#" class="dropdown-toggle" data-toggle="dropdown" role = "button">Rede<b class="caret"></b></a>
+									<a href = "#" class="dropdown-toggle" data-toggle="dropdown" role = "button"><i class = "icon-flag" ></i> Rede <b class="caret"></b></a>
 									<ul class="dropdown-menu">	
+								<?php if ($acesso->hasPermission('rede_criar') == true): ?>
 										<li><a href = "/rede/rede/novoTipoRede"><i class = "icon-plus " ></i > Nova</a></li>
+								<?php endif ; ?>
 										<li><a href = "/rede/rede/listarTipoRede"><i class = "icon-list-alt " ></i> Listar</a></li>
+								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 										<li class="divider"></li>
 										<li><a href = "/rede/rede/novaFuncaoRede" >Nova Função</a></li>
 										<li><a href = "/rede/rede/listarFuncaoRede" >Listar Função</a></li>
+								<?php endif ; ?>
 									</ul>
 								</li>
 								<?php endif ; ?>
 
+								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+								<li class="dropdown">
+									<a href = "#" class="dropdown-toggle" data-toggle="dropdown"><i class = "icon-tag" ></i> StatusCelular <b class="caret"></b></a>
+									<ul class="dropdown-menu">	
+										<li><a href = "/statusCelular/statusCelular/novoTipoStatusCelular">Novo</a></li>
+										<li><a href = "/statusCelular/statusCelular/listarTipoStatusCelular" >Lista</a></li>
+									</ul>
+								</li>
+						
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role = "button" ><i class = "" ></i> Encontro <b class="caret"></b></a>
+									<ul class="  dropdown-menu" role="menu" aria-labelledby="dLabel" >
+									<li><a href = "/encontroComDeus/encontroComDeus/novo" ><i class = " " ></i> Novo</a></li>
+									<li><a href = "/encontroComDeus/encontroComDeus" ><i class = " " ></i> Listar</a></li>
+									</ul>
+								</li>
+						<?php endif ; ?>
+
 					<li class = "dropdown" >
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role = "button" >Discipulo<b class="caret"></b></a>
-						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" >
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role = "button" ><i class = "icon-user" ></i> Discipulo<b class="caret"></b></a>
+						<ul class="  dropdown-menu" role="menu" aria-labelledby="dLabel" >
 								<?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
 								<li><a href = "/discipulo/discipulo/novoCompleto" ><i class = "icon-plus " ></i> Novo</a></li>
 								<?php endif ; ?>
 								<li class = "dropdown-submenu" role = "presentation">
-									<a href = "/discipulo/discipulo" role="menuitem" ><i class = "icon-list-alt " ></i> Listar</a>
+									<a href = "#" role="menuitem" ><i class = "icon-list-alt " ></i> Listar</a>
 
-								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 									<ul class="dropdown-menu">	
+										<li><a href = "/discipulo/discipulo" ><i class = "icon-arrow-up" ></i>Ativos</a></li>
 										<li><a href = "/discipulo/discipulo/inativos" ><i class = "icon-arrow-down" ></i>Inativos</a></li>
-									</ul>
+								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+										<li><a href = "/discipulo/discipulo/arquivo" ><i class = "icon-inbox" ></i> Arquivo</a></li>
 								<?php endif ; ?>
+									</ul>
 
 								</li>
 
@@ -102,7 +129,7 @@ $usuario = $usuario[0] ;
           </li>
 
 <?php if ($acesso->hasPermission('celula_acesso') == true): ?>
-					<li class = "dropdown"><a href = "#" class="dropdown-toggle" data-toggle="dropdown"><i class = "" ></i> Célula<b class="caret"></b></a>
+					<li class = "dropdown"><a href = "#" class="dropdown-toggle" data-toggle="dropdown"><i class = "icon-home" ></i> Célula<b class="caret"></b></a>
 						<ul  class="dropdown-menu">	
 								<li><a href = "/celula/celula" ><i class = "icon-list " ></i> Listar</a></li>
 
@@ -131,6 +158,10 @@ $usuario = $usuario[0] ;
 								<li><a href = "/discipulo/discipulo/fichaPorStatus/id/8" >Ficha Encontro</a></li>
 								<li><a href = "/discipulo/discipulo/cracha/id/8" >Cracha</a></li>
 								<li><a href = "/relatorio/relatorio/aniversariantes" ><i class = "icon-gift " ></i> Aniversariantes</a></li>
+								<li><a href = "/celula/celula/listarPorStatus" ><i class = " " ></i> Lider por Status</a></li>
+								<li><a href = "/celula/celula/listarPorStatusTodos" ><i class = " " ></i> Lider por Status Geral</a></li>
+								<li><a href = "/relatorio/relatorio/statusPorLider" ><i class = " " ></i> Status Por Lider</a></li>
+								<li><a href = "/celula/celula/statusPorLiderCelula" ><i class = " " ></i> Status Por Lider Célula</a></li>
 
 								<li class = "dropdown-submenu" >
 									<a href = "#" ><i class = "" ></i>Relatorio de Célula</a>
@@ -146,6 +177,7 @@ $usuario = $usuario[0] ;
         </ul>
 
 				<div class = "nav pull-right" >
+					<li class="divider-vertical"></li>
 					<li class = "dropdown" >
 						<a href = "#" class="dropdown-toggle" data-toggle="dropdown"><i class = "icon-user" ></i> <?php echo $usuario?>
 						<b class="caret"></b></a>

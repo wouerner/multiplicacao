@@ -16,7 +16,7 @@ class discipulo{
 			* */
 	
 		public function index(){
-			include("seguranca/ACL/assets/php/database.php"); 
+			//include("seguranca/ACL/assets/php/database.php"); 
 			$acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
 
 		  $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
@@ -43,15 +43,41 @@ class discipulo{
 
 		}
 
+		public function listarPorLider($url){
+			include("seguranca/ACL/assets/php/database.php"); 
+			$acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+		  $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
+
+		  $quantidadePorPagina = 50;
+		  
+		  $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
+		  $totalDiscipulos = (int)$totalDiscipulos['total'] ;
+
+		  $discipulos =	new \discipulo\Modelo\Discipulo();
+			$discipulos->id = $url[4]; 
+		 	$discipulos = $discipulos->listarDiscipulos();
+				
+		  require_once  'modulos/discipulo/visao/listar.php';
+
+		}
+
 		public function inativos(){
+
+			$acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
 
 		  $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
 		  $discipulos =	new \discipulo\Modelo\Discipulo();
 		  $quantidadePorPagina = 12;
 
-		  //$discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
-		  $discipulos = $discipulos->inativos() ;
+			if ( $acl->hasPermission('admin_acesso') == true ) { 
+					$discipulos = $discipulos->inativos() ;
+				//	var_dump($discipulos);
+			}else{
+					$discipulos->lider = $_SESSION['usuario_id'];
+					$discipulos = $discipulos->inativosPorLider() ;
+			}
+
 			$total = count($discipulos);
 		  
 		  $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
@@ -87,6 +113,41 @@ class discipulo{
 		  $discipulo->desativar() ;
 			header ('location:/discipulo/discipulo');
 			exit();
+		}
+
+		public function arquivar($url){
+		  $discipulo =	new \discipulo\Modelo\Discipulo();
+
+		  $discipulo->id = $url[4] ;
+		  $discipulo->arquivar() ;
+			header ('location:/discipulo/discipulo/inativos');
+			exit();
+		}
+
+		public function desarquivar($url){
+		  $discipulo =	new \discipulo\Modelo\Discipulo();
+
+		  $discipulo->id = $url[4] ;
+		  $discipulo->desarquivar() ;
+			header ('location:/discipulo/discipulo/arquivo');
+			exit();
+		}
+
+		public function arquivo(){
+
+		  $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
+
+		  $discipulos =	new \discipulo\Modelo\Discipulo();
+		  $quantidadePorPagina = 12;
+
+		  $discipulos = $discipulos->arquivados() ;
+			$total = count($discipulos);
+		  
+		  $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
+		  $totalDiscipulos = (int)$totalDiscipulos['total'] ;
+
+		  require_once  'modulos/discipulo/visao/arquivo/listar.php';
+
 		}
 
 
@@ -330,6 +391,7 @@ class discipulo{
 
 
 		public function atualizar($url){
+			$acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
 
 			if ( empty ( $url['post'] ) ) {
 				
@@ -415,7 +477,6 @@ class discipulo{
 
 				$post = $url['post'] ;
 
-
 				$discipulo->id = $post['discipuloId'] ;	
 				$discipulo->nome = $post['nome'] ;
 				$discipulo->alcunha = $post['alcunha'] ;
@@ -426,7 +487,13 @@ class discipulo{
 				$discipulo->endereco = $post['endereco'] ;
 				$discipulo->email = $post['email'] ;
 				$discipulo->celula = $post['celula'] ;
-				$discipulo->ativo =isset( $post['ativo']) ? $post['ativo']: 0 ;
+
+				//if ($acl->hasPermission('admin_acesso') == true){
+				//$discipulo->ativo =isset( $post['ativo']) && ($post['ativo'] == 1 )  ? $post['ativo']: 0 ;
+				//var_dump($post['ativo']);
+				//var_dump($discipulo->ativo);
+				//exit();
+				//}
 				$discipulo->lider = $post['lider'] ;
 
 			//	var_dump($discipulo);
@@ -496,7 +563,7 @@ class discipulo{
 					header ('location:/discipulo/discipulo/atualizar/id/'.$discipulo->id) ;
 					exit();
 				}else{
-					header ('location:/discipulo/discipulo/listarAtualizar') ;
+					header ('location:/discipulo/discipulo') ;
 					exit();
 				
 				}
@@ -516,7 +583,7 @@ class discipulo{
 				$discipulo->excluir();
 			}
 
-				header ('location:/discipulo/discipulo/inativos');
+				header ('location:/discipulo/discipulo');
 				exit();
 		
 		}
@@ -554,6 +621,7 @@ class discipulo{
 
 
 		public function chamar () {
+		$acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
 
 			$nome = (!empty($_GET['nome'])) ? $_GET['nome'] : NULL;
 			$discipulo =	new \discipulo\Modelo\Discipulo();
@@ -614,13 +682,15 @@ class discipulo{
 		
 		   //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
 			 $eventos = $eventos->listarTodos();
-			 require_once 'discipulo/visao/chamar.php' ;
+			 //require_once 'discipulo/visao/chamar.php' ;
+			 require_once 'discipulo/visao/listar.php' ;
 
 		
 		}
 
 		public function chamarPorId () {
 
+		$acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
 			$discipulo =	new \discipulo\Modelo\Discipulo();
 			$discipulo->id = isset( $_GET['id'] )? $_GET['id']: '' ; 
 			$discipulos = $discipulo->listarUm() ;	
@@ -681,7 +751,8 @@ class discipulo{
 		
 		   //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
 			 $eventos = $eventos->listarTodos();
-			 require_once 'discipulo/visao/chamar.php' ;
+			 //require_once 'discipulo/visao/chamar.php' ;
+			 require_once 'discipulo/visao/listar.php' ;
 
 		
 		}
@@ -843,7 +914,7 @@ class discipulo{
 		  $quantidadePorPagina = 30;
 
 			
-			include("seguranca/ACL/assets/php/database.php"); 
+			//include("seguranca/ACL/assets/php/database.php"); 
 			$acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
 			
 			if ($acl->hasPermission('admin_acesso') == true){

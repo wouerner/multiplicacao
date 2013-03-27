@@ -34,7 +34,7 @@
 					
 					}
 					table{
-						margin-top:25px;
+					/*	margin-top:5px;*/
 		
 					}
 					.cracha{
@@ -72,8 +72,8 @@
 <div class ="container">
 <?php $cont =0 ; ?>
 <?php foreach( $discipulos as $discipulo ) : ?>
-			<div class = "span6" style = "margin:4px ; width: 420px ;  " >
-			<table class = "  table table-bordered table-condensed cracha" style = "border:1px solid black; " >
+			<div class = "span6" style = "margin-bottom:40px ; width: 420px ;;  " >
+			<table class = "  table table-bordered table-condensed cracha" style = " border:1px solid black; " >
 				 <tr>
 				<!--	<td class = "foto" ><img src="/modulos/discipulo/visao/img/mga.jpg"> </img></td> -->
 				</tr>

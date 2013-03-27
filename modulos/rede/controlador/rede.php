@@ -119,10 +119,24 @@ namespace rede\controlador;
 					$tipoRede->id = $redeId;
 					$tipoRede = $tipoRede->listarUm();
 					$rede->tipoRedeId = $redeId;
-				  $redeMembros = $rede->pegarMembros();
+
+
+				  $redeMembros = $rede->pegarMembrosAtivos();
 					$cont = 1 ;
 
 				  require 'modulos/rede/visao/rede/listar.php' ; 
+		
+		}
+
+		public function listarCelulas($url){
+					$redeId = $url[4];
+
+					$tipoRede = new \rede\modelo\tipoRede();
+					$tipoRede->id = $redeId;
+					$celulas = $tipoRede->listarCelulas();
+					$cont = 0 ;
+
+				  require 'modulos/rede/visao/tipoRede/celulas.php' ; 
 		
 		}
 		
@@ -229,19 +243,19 @@ namespace rede\controlador;
 		
 		}
 
-		public function excluirtipoRede($url){
-				$rede =	new \rede\modelo\rede();
-				$rede->id = $url[3]; 
+		public function excluirTipoRede($url){
+				$rede =	new \rede\modelo\tipoRede();
+				$rede->id = $url[4]; 
 				$rede->excluir();
 
 				$_SESSION['mensagem'] = !is_null($rede->erro) ? $rede->erro : null ;
-				header ('location:/rede/listartipoRede');
+				header ('location:/rede/rede/listartipoRede');
 				exit();
 		}
 
 		public function excluirFuncaoRede($url){
 				$funcao =	new \rede\modelo\funcaoRede();
-				$funcao->id = $url[3]; 
+				$funcao->id = $url[4]; 
 				$funcao->excluir();
 
 				$_SESSION['mensagem'] = !is_null($funcao->erro) ? $funcao->erro : null ;
@@ -251,7 +265,7 @@ namespace rede\controlador;
 
 		public function excluir($url){
 				$rede =	new \rede\modelo\redeTemDiscipulo();
-				$rede->discipuloId = $url[3]; 
+				$rede->discipuloId = $url[4]; 
 				$rede->redeId = $url[4]; 
 				$rede->excluir();
 				header ('location:/rede/novo/id/'.$rede->discipuloId);
@@ -263,7 +277,7 @@ namespace rede\controlador;
 
 			$discipulo = new \discipulo\Modelo\Discipulo() ;
 
-			$discipulo->id = $url[3] ; 
+			$discipulo->id = $url[4] ; 
 			$discipulo = $discipulo->listarUm() ;
 		
 			require 'discipulo/visao/detalhar.php' ;	
@@ -274,7 +288,7 @@ namespace rede\controlador;
 
 			$funcao = new \rede\modelo\funcao() ;
 
-			$funcao->id = $url[3] ; 
+			$funcao->id = $url[4] ; 
 			$funcao = $funcao->listarUm() ;
 		
 			require 'rede/visao/detalharFuncao.php' ;	
@@ -285,7 +299,7 @@ namespace rede\controlador;
 
 			$rede = new \rede\modelo\tipoRede() ;
 
-			$rede->id = $url[3] ; 
+			$rede->id = $url[4] ; 
 			$rede = $rede->listarUm() ;
 		
 			require 'rede/visao/tipoRede/detalhar.php' ;	

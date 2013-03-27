@@ -1,10 +1,14 @@
 body {
-	background : url('../img/agua_bg.jpg');
+	margin-top:40px;
+	background : url(../img/brillant.png) white;
 }
 
+.navbar-inner{
+/*	background : url('../img/honey.png') ;*/
+
+}
 
 .container, .container-fluid{
-	background : url(../img/rough_diagonal.png) white;
 	/*border-radius : 4px;
 	padding : 3px;
 	margin-top: 0.2em;
@@ -39,9 +43,6 @@ body {
 }
 
 
-#pesquisa {
-	font-size: 16pt;
-}
 #pesquisaLabel {
 	font-size: 16pt;
 }

@@ -74,21 +74,30 @@ $(".btn-danger").click( function(){
 				<table class = "table bordered-table well table-condensed table-hover ">
 				<caption><h3>Lista de Discipulos: Inativos <?php echo $total?> </h3></caption>
 					<thead>
+						<?php if ($acesso->hasPermission('admin_acesso') == true) : ?>
 						<th class = "info" >Líder</th>
+						<?php endif ; ?>
 						<th>Nome</th>
 						<th>Telefone</th>
-						<th>E-mail</th>
+						<?php if ($acesso->hasPermission('admin_acesso') == true) : ?>
 						<th>Ações</th>
+						<?php endif ; ?>
 					</thead>
 
 				<?php foreach ( $discipulos as $discipulo) : ?>
 
 				<tr>
-					<td><a href="/discipulo/discipulo/detalhar/id/<?php $lider = $discipulo->getLider() ; echo $lider->id ?>" ><?php echo $lider->nome ; ?></a></td>
-					<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><?php echo $discipulo->nome ; ?></a></td>
-				<td><?php echo $discipulo->telefone ; ?></td> <td><?php echo $discipulo->email ; ?></td>
+						<?php if ($acesso->hasPermission('admin_acesso') == true) : ?>
+					<td><a href="/discipulo/discipulo/detalhar/id/<?php $lider = $discipulo->getLider() ; echo  is_object($lider)?$lider->id: '' ?>" ><?php echo is_object ($lider) ? $lider->nome : '' ; ?></a></td>
+						<?php endif ; ?>
+					<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><strong><?php echo $discipulo->nome ; ?></strong></a></td>
+				<td><?php echo $discipulo->telefone ; ?></td> 
+
+						<?php if ($acesso->hasPermission('admin_acesso') == true) : ?>
 				<td><button class = "btn btn-success btn-mini" id ="<?php echo $discipulo->id ; ?>" ><i class = "icon-arrow-up icon-white" ></i>Ativar</button></td>
+				<td><a href="/discipulo/discipulo/arquivar/id/<?php echo $discipulo->id ; ?>" class = "btn btn-inverse btn-mini" id ="<?php echo $discipulo->id ; ?>" ><i class = "icon-inbox icon-white" ></i>Arquivar</button></td>
 				<td><button class = "btn btn-danger btn-mini" id ="<?php echo $discipulo->id ; ?>" ><i class = "icon-remove icon-white" ></i>Excluir</button></td>
+					<?php endif ;?>
 				</tr>
 
 

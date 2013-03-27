@@ -44,7 +44,7 @@ class aviso{
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'SELECT d.nome, a.identificacao, a.dataAviso, ta.modulo, ta.acao FROM 
+		$sql = 'SELECT d.nome, a.id, a.identificacao, a.dataAviso, ta.modulo, ta.acao FROM 
 Discipulo AS d 
 inner join 
 Avisos AS a on d.id = a.emissor
@@ -93,12 +93,11 @@ limit 5
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'DELETE FROM DiscipuloTemEvento WHERE discipuloId = ? AND eventoId = ?';
+		$sql = 'DELETE FROM Avisos WHERE id = ?';
 
 		$stm = $pdo->prepare($sql);
 
-		$stm->bindParam(1, $this->discipuloId);
-		$stm->bindParam(2, $this->eventoId);
+		$stm->bindParam(1, $this->id);
 
 		$stm->execute();
 

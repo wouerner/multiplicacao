@@ -7,7 +7,8 @@
 
 <script>
 $(document).ready(function () {
-$(".btn-warning").click( function(){
+
+	$(".btn-warning").click( function(){
 				var id = this.id ;
 
 				$( "#dialog-confirm" ).dialog({
@@ -15,27 +16,51 @@ $(".btn-warning").click( function(){
 				height:240,
 				modal: true,
 				buttons: {
-			Cancelar: function() {
-				$( this ).dialog( "close" );
-			},
-      Desativar: function() {
-										$(location).attr('href', '/discipulo/discipulo/desativar/id/'+id);
-       },
-}
+					Cancelar: function() {
+						$( this ).dialog( "close" );
+					},
+      		Desativar: function() {
+						$(location).attr('href', '/discipulo/discipulo/desativar/id/'+id);
+       		},
+				}
+
+		});
+	}); 
+
+	$(".btn-success").click( function(){
+				var id = this.id ;
+
+				$( "#dialog-success" ).dialog({
+				resizable: false,
+				height:240,
+				modal: true,
+				buttons: {
+					Cancelar: function() {
+						$( this ).dialog( "close" );
+					},
+      		Ativar: function() {
+						$(location).attr('href', '/discipulo/discipulo/ativar/id/'+id);
+       		},
+				}
+
+		});
+	}); 
+
 
 });
-
-
-}
-
-); });
 </script>
 	</head>
 
-	<body>
+<body>
+
 <div id="dialog-confirm" title="Deseja desativar?" style = "display:none">
     <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente excluir?</p>
 </div>
+
+<div id="dialog-success" title="Deseja ativar?" style = "display:none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente ativar?</p>
+</div>
+
 		<section class = "container-fluid">
 
 		<nav> 
@@ -53,7 +78,7 @@ $(".btn-warning").click( function(){
 <div class = "well" >
 
 			<table class = "table" >
-				<caption><h3>Detalhes do Discipulo</h3></caption>
+				<caption><h3><?php echo $discipulo->nome ; ?></h3></caption>
 
 				<tr>	
 					<td  >

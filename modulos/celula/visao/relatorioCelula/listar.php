@@ -35,7 +35,7 @@ unset($_SESSION['mensagem']) ;
 				   </div>
 				<?php endif ; ?>
 
-							<caption><h3>Relatorios </h3></caption>
+							<caption><h3>Relatorios de Célula</h3></caption>
 
 							<?php foreach ( $relatorios as $r ) : ?>
 						<table class = "table well">

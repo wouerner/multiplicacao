@@ -8,6 +8,7 @@ class aviso{
 
 		$avisos =	new \aviso\modelo\aviso();
 		$avisos = $avisos->listarTodos();
+		//var_dump($avisos);
 
 		require_once  'modulos/aviso/visao/listar.php';
 	
@@ -91,13 +92,12 @@ class aviso{
 		
 		}
 
-		public function excluirTipoAdmissao($url){
-				$tipoAdmissao =	new \admissao\modelo\tipoAdmissao();
-				$tipoAdmissao->id = $url[3]; 
-				$tipoAdmissao->excluir();
+		public function excluir($url){
+				$aviso =	new \aviso\modelo\aviso();
+				$aviso->id = $url[4]; 
+				$aviso->excluir();
 
-				$_SESSION['mensagem'] = !is_null($tipoAdmissao->erro) ? $tipoAdmissao->erro : null ;
-				header ('location:/admissao/listarTipoAdmissao');
+				header ('location:/aviso/aviso');
 				exit();
 		}
 

@@ -76,7 +76,13 @@ class  tipoRede{
 
 		$stm->execute();
 
-		return $stm->fetchAll();
+		$resposta = array();
+
+		while($obj = $stm->fetchObject('\rede\modelo\tipoRede') ){
+			$resposta[$obj->id] = $obj ;
+		}
+
+		return $resposta;
 
 	}
 
@@ -94,6 +100,26 @@ class  tipoRede{
 
 		return $stm->fetchObject();
 
+	}
+
+	public function listarCelulas(){
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT * FROM Celula WHERE tipoRedeId = ?';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->bindParam(1, $this->id);
+
+		$stm->execute();
+		$resposta = array(); 
+
+		while ( $obj = $stm->fetchObject('\celula\modelo\celula') ) {
+			$resposta[$obj->id] = $obj ; 
+		}
+
+		return $resposta ; 
 	}
 
 	public function atualizar(){

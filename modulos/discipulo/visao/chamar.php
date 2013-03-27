@@ -95,7 +95,7 @@ jQuery(function($) {
 
 						  <div class = "span12 borda" >
 
-								<h3 class = "span8" ><?php echo $discipulo->nome ; ?></h3>
+								<h3 class = "span8" ><a href = "/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ; ?>" ><?php echo $discipulo->nome ; ?></a></h3>
 									<a href = "/statusCelular/novo/id/<?php echo $discipulo->id?>" ><span class = "badge "  >Status: <?php echo $status['nome']; ?></span></a>
 									<h5 class = "span8" >
 										<a href= "/discipulo/atualizar/id/<?php echo is_object($lider) ? $lider->id : '';?>">

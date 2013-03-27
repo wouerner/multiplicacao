@@ -21,16 +21,14 @@
 			<article>
 
 			<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
-
-			<table>
+			<table class = "table well" >
 				<caption><h3>Rede</h3></caption>
 
 
-				<tr><td colspan = "2" ><h2><?php echo $rede['nome'] ; ?> </h2></td></tr>
+				<tr><td><h2><?php echo $rede->nome ; ?> </h2></td></tr>
 
 					<?php require 'rede/visao/tipoRede/menu.inc.php' ; ?>
 				</table>
-				
 			
 			</article>
 		

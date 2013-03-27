@@ -40,6 +40,7 @@ unset($_SESSION['mensagem']) ;
 							<caption><h3>Lista de Células: <?php echo $totalCelulas ; ?></h3></caption>
 
 							<thead>
+								<th>Rede</th>
 								<th>Nome</th>
 								<th>Endereço</th>
 								<th>Horário</th>
@@ -49,9 +50,10 @@ unset($_SESSION['mensagem']) ;
 							<?php foreach ( $celulas as $celula) : ?>
 
 							<tr>
-								<td><a href ="#" ><?php echo $celula['nome'] ; ?></td>
-								<td><?php echo $celula['endereco'] ; ?>	</td> 
-								<td><?php echo $celula['horarioFuncionamento'] ; ?></td>
+								<td><a href ="#" ><?php  $rede =$celula->pegaRede() ; echo is_object($rede) ? $rede->nome : '' ; ?>  </td>
+								<td><a href ="/celula/celula/detalhar/id/<?php echo $celula->id ; ?>" ><?php echo $celula->nome ; ?></td>
+								<td><?php echo $celula->endereco ; ?>	</td> 
+								<td><?php echo $celula->horarioFuncionamento ; ?></td>
 								<?php require 'celula/visao/menuCelula.inc.php' ; ?>
 							</tr>
 								

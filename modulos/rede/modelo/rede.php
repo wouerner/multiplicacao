@@ -103,7 +103,7 @@ class rede{
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
-			  $sql = 'select tr.nome, count(*) as total from Discipulo AS d 
+			  $sql = 'select tr.id, tr.nome, count(*) as total from Discipulo AS d -- , r.tipoRedeId as tipoRede 
 inner join 
 Redes AS r on d.id = r.discipuloId 
 inner join 
@@ -164,18 +164,19 @@ group by r.tipoRedeId
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
 			  $sql = "DELETE FROM Redes WHERE discipuloId = ?  
-				  AND tipoRede = ?
+				  AND tipoRedeId = ?
 							  ";
 
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
 			  $stm->bindParam(1, $this->discipuloId );
-			  $stm->bindParam(2, $this->tipoRede );
+			  $stm->bindParam(2, $this->tipoRedeId );
 
 			  $resposta = $stm->execute();
 
 			  $erro = $stm->errorInfo();
+				//var_dump($erro); exit;
 	
 			  //fechar conexÃ£o
 			  $pdo = null ;
@@ -221,6 +222,35 @@ group by r.tipoRedeId
 					FROM Discipulo AS d inner join Redes AS r ON d.id = r.discipuloId 
 		                          inner join TipoRede AS tp ON r.tipoRedeId = tp.id
 					WHERE r.tipoRedeId = ?	
+						";
+
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->tipoRedeId );
+
+			  $resposta = $stm->execute();
+
+			  //fechar conexÃ£o
+			  $pdo = null ;
+				$resposta = array();
+				while ( $obj = $stm->fetchObject('\discipulo\Modelo\Discipulo') ){
+						$resposta[ $obj->id ] = $obj ;
+				}
+			  return $resposta ;
+	}
+			  public function pegarMembrosAtivos(){
+
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "
+					SELECT 
+								d.id AS id , d.nome AS nome, d.telefone , d.endereco , d.email , d.lider AS lider 
+					FROM Discipulo AS d inner join Redes AS r ON d.id = r.discipuloId AND d.ativo = 1  
+		                          inner join TipoRede AS tp ON r.tipoRedeId = tp.id
+					WHERE r.tipoRedeId = ?	
+					ORDER BY nome
 						";
 
 			  //prepara sql

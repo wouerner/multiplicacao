@@ -24,7 +24,7 @@
 
 			<div class = "row-fluid" >
 			<div class = "span12" >
-			<table>
+			<table class = "table table-condensed well" >
 				<caption><h3>Descrição do StatusCelular</h3></caption>
 				<tr><th>Nome: </th><td ><?php echo $status->nome ; ?></td></tr>
 				<tr><th>Descrição: </th><td ><?php echo $status->descricao ; ?> </td></tr>

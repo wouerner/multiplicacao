@@ -94,7 +94,7 @@ namespace statusCelular\controlador;
 				$discipulo =	new \discipulo\Modelo\Discipulo();
 				$lideres = $discipulo->listarLideres();
 
-				$discipulo->id =  $url[3] ;
+				$discipulo->id =  $url[4] ;
 				$discipulo = $discipulo->listarUm();
 
 				$lider =	new \discipulo\Modelo\Discipulo();
@@ -141,7 +141,7 @@ namespace statusCelular\controlador;
 
 
 				$tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular();
-				$tipoStatusCelular->id = $url[3] ;
+				$tipoStatusCelular->id = $url[4] ;
 				$tipoStatusCelular = $tipoStatusCelular->listarUm();
 
 				require_once  'modulos/statusCelular/visao/atualizarTipoStatus.php';
@@ -166,12 +166,12 @@ namespace statusCelular\controlador;
 
 		public function excluirTipoStatusCelular($url){
 				$tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular();
-				$tipoStatusCelular->id = $url[3]; 
+				$tipoStatusCelular->id = $url[4]; 
 				$tipoStatusCelular->excluir();
 
 				$_SESSION['mensagem'] = !is_null($tipoStatusCelular->erro) ? $tipoStatusCelular->erro : null ;
 				
-				header ('location:/statusCelular/listarTipoStatusCelular');
+				header ('location:/statusCelular/statusCelular/listarTipoStatusCelular');
 				exit();
 		}
 
@@ -180,7 +180,7 @@ namespace statusCelular\controlador;
 
 			$status = new \statusCelular\modelo\tipoStatusCelular() ;
 
-			$status->id = $url[3] ; 
+			$status->id = $url[4] ; 
 			$status = $status->listarUm() ;
 		
 			require 'statusCelular/visao/detalhar.php' ;	
@@ -255,8 +255,17 @@ namespace statusCelular\controlador;
 
 			$status = new \statusCelular\modelo\statusCelular() ;
 			$status->tipoStatusCelular = (int)$id ;
+
 			$discipulos = $status->listarStatusCelularPorTipo();
+
+			$discipulosInativos = $status->discipulosInativos();
+			$discipulosArquivo = $status->discipulosArquivo();
+
 			$totalDiscipulos = count($discipulos);
+			$totalArquivo = count($discipulosArquivo);
+			$totalInativos = count($discipulosInativos);
+
+			$cont = 0 ;
 
 			$tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
 			$tipoStatus->id = (int)$id ; 

@@ -21,13 +21,6 @@
 									</div>
 								</div>
 									
-							  <div class="control-group span3">
-								  	<label class = "control-label" for = "ativo" >Ativo:</label>
-										<div class = "controls" >
-								  		<input id = "ativo" name = "ativo" type = "checkbox"  
-										  	value = "1" <?php  echo ($discipulo->ativo == TRUE )? "checked" :"" ; ?> >
-									</div>
-								</div>
 
 							</div>
 
@@ -126,7 +119,7 @@
 												<option value = "<?php echo $celula->id ; ?>" ><?php echo $celula->nome ; ?></option>
 									  		<option>--------- </option>
 											  	<?php foreach($celulas as $celula) : ?>
-												  	<option value = "<?php echo $celula['id']?>"><?php echo $celula['nome']?> </option>
+												  	<option value = "<?php echo $celula->id ; ?>"><?php echo $celula->nome ; ?> </option>
 											  	<?php endforeach ; ?>
 							  		</select>
 						</div>
@@ -184,7 +177,7 @@
 							<option value = "<?php echo $rede[0]['tpRedeId'] ; ?>" ><?php echo $rede[0]['tipoRede'] ; ?></option>
 							<option value = "" >-------------</option>
 								<?php foreach ($tiposRedes as $tipoRede) : ?>
-										<option value = "<?php echo $tipoRede['id'] ; ?>" ><?php echo $tipoRede['nome'] ; ?></option>
+										<option value = "<?php echo $tipoRede->id ; ?>" ><?php echo $tipoRede->nome ; ?></option>
 								<?php endforeach ; ?>
 						</select>
 					</div>

@@ -54,8 +54,19 @@ unset($_SESSION['mensagem']) ;
 
 					<div class = "row-fluid" >
 						<div class = "well" >
-						<form method = "post" action = "/relatorio/relatorio/relatorioCelulaEnvioPorTema" class = "form-inline"  >
+						<form method = "post" action = "/relatorio/relatorio/relatorioCelulaEnvioPorTema" class = "form-horizontal"  >
+
 							<legend>Relatório por Tema</legend>
+							<label>Rede: </label>
+							<select name = "tipoRedeId[]" class = "span4" multiple size = "6" >
+								<?php foreach ($tipoRede as $t ) : ?>
+									<option value="<?php echo $t->id ; ?>" >
+														<?php echo $t->nome ; ?>
+									</option>
+								<?php endforeach ; ?>
+							</select>
+
+							<label>Tema: </label>
 							<select name = "temaId"class = "span4"  >
 								<?php foreach ($temas as $t ) : ?>
 									<option value="<?php echo $t->id ; ?>" >
@@ -94,7 +105,7 @@ unset($_SESSION['mensagem']) ;
 								<td><?php echo ++$cont  ; ?></td>
 								<td><?php echo $r['nomeTema'] ? 'sim' : 'não'  ; ?></td>
 								<td><?php echo $r['lider'] ; ?></td>
-								<td><?php echo $r['celulaNome'] ; ?></td>
+								<td><a href = "/celula/relatorio/index/id/<?php echo $r['celulaId']?>" ><?php echo $r['celulaNome'] ; ?></a></td>
 								<td class = "" >	<?php echo $r['dataEnvioRelatorio'] ? date_format(date_create($r['dataEnvioRelatorio']),'d/m/Y  H:i:s')  : '' ; ?></td>
 								</td>
 							</tr>

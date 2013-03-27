@@ -21,6 +21,7 @@
 
 <div class = "row" >
 	<div class = "span12" >
+<div class = "well" >
 		<form method="post">	
 				<fieldset>
 						<legend>Relátorio Resumido</legend>
@@ -93,7 +94,7 @@
 								<select class = "span2" name = "celula" >
 									<option value = "todos" >Todos</option>
 								<?php foreach ( $celulas as $c) : ?>
-									<option value = "<?php echo $c['id']  ;?>" ><?php echo $c['nome'] ?></option>
+									<option value = "<?php echo $c->id ; ?>" ><?php echo $c->nome ; ?></option>
 									<?php endforeach ; ?>
 
 							</select>
@@ -104,7 +105,7 @@
 								<select class = "span2" name = "rede" >
 									<option value = "todos" >Todos</option>
 								<?php foreach ( $tipoRedes as $tp) : ?>
-									<option value = "<?php echo $tp['id']  ;?>" ><?php echo $tp['nome'] ?></option>
+									<option value = "<?php echo $tp->id  ;?>" ><?php echo $tp->nome ?></option>
 									<?php endforeach ; ?>
 
 							</select>
@@ -117,6 +118,7 @@
 				</fieldset>
 		</form>
 				
+	</div>		
 	</div>		
 	</div>		
 			</article>

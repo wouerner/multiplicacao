@@ -8,6 +8,8 @@ class celula{
 	private $horarioFuncionamento;
 	private $endereco;
 	private $lider;
+	private $ativa;
+	private $tipoRedeId;
 	private $erro;
 
 	public function __construct ( $id = NULL ){
@@ -40,6 +42,18 @@ class celula{
 		$discipulo = $discipulo->listarUm();
 
 		return $discipulo;
+	
+	}
+
+	public function pegaRede(){
+		
+		$tipoRede = new \rede\modelo\tipoRede();
+		$tipoRede->id = $this->tipoRedeId ;
+		$this->tipoRedeId = $tipoRede->listarUm();
+
+		//var_dump($this->tipoRedeId);
+
+		return $this->tipoRedeId ;
 	
 	}
 
@@ -76,7 +90,7 @@ class celula{
 	$pdo = new \PDO(DSN, USER, PASSWD);
 	//cria sql
 	$sql = "UPDATE Celula SET 	nome = ? , horarioFuncionamento = ? , endereco = ?, 
-		lider = ?
+		lider = ? , tipoRedeId = ? , ativa = ?
 		WHERE id = ?
 					";
 	//prepara sql
@@ -86,7 +100,9 @@ class celula{
 	$stm->bindParam(2, $this->horarioFuncionamento);
 	$stm->bindParam(3, $this->endereco);
 	$stm->bindParam(4, $this->lider);
-	$stm->bindParam(5, $this->id);
+	$stm->bindParam(5, $this->tipoRedeId );
+	$stm->bindParam(6, $this->ativa );
+	$stm->bindParam(7, $this->id);
 
 	$resposta = $stm->execute();
 
@@ -110,7 +126,13 @@ class celula{
 
 		$stm->execute();
 
-		return $stm->fetchAll();
+		$resposta = array();
+
+		while ( $obj = $stm->fetchObject('\celula\modelo\celula') ){
+			$resposta[$obj->id] = $obj ;
+		}
+
+		return $resposta ;
 
 	}
 
@@ -134,6 +156,250 @@ class celula{
 		return $stm->fetchAll();
 	
 	}
+
+	public function lideresPorStatus($id){
+		$pdo = new \PDO(DSN , USER , PASSWD) ;
+
+		$sql = '
+						SELECT	l.id AS liderId, l.nome AS lider , d.id as discipuloId,d.nome AS discipulo, ts.nome AS status 
+						FROM 
+						Discipulo AS d INNER JOIN 
+						Discipulo AS l ON d.lider = l.id AND d.ativo = 1
+						INNER JOIN 
+						StatusCelular AS sc ON sc.ativo =1 AND sc.discipuloId = d.id
+						INNER JOIN 
+							TipoStatusCelular AS ts 
+						ON ts.id = sc.tipoStatusCelular
+
+						WHERE sc.tipoStatusCelular = ?
+						ORDER BY lider, discipulo
+						';
+		
+
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(1,$id);
+
+		var_dump($stm->errorInfo());
+
+		$stm->execute();
+
+		return $stm->fetchAll();
+	
+	
+	}
+
+	/*public function lideresSemStatus($id){
+		$pdo = new \PDO(DSN , USER , PASSWD) ;
+
+		$sql = '
+SELECT 
+l.id AS liderId, l.nome AS lider , d.nome AS discipulo, ts.nome AS status 
+FROM 
+Discipulo AS d INNER JOIN 
+Discipulo AS l ON d.lider = l.id
+INNER JOIN 
+StatusCelular AS sc ON sc.ativo =1 AND sc.discipuloId = d.id
+INNER JOIN 
+TipoStatusCelular AS ts 
+ON ts.id = sc.tipoStatusCelular
+
+WHERE sc.tipoStatusCelular != ? AND l.id not in ( 
+
+SELECT 
+l.id 
+-- AS liderId, l.nome AS lider , d.nome AS discipulo, sc.tipoStatusCelular
+FROM 
+Discipulo AS d INNER JOIN 
+Discipulo AS l ON d.lider = l.id
+INNER JOIN 
+StatusCelular AS sc ON sc.ativo = 1 AND sc.discipuloId = d.id
+WHERE sc.tipoStatusCelular = ? 
+
+
+)
+ORDER BY lider, discipulo
+
+
+						';
+		
+
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(1,$id);
+		$stm->bindParam(2,$id);
+
+		$stm->execute();
+
+		return $stm->fetchAll();
+	
+	
+	}*/
+
+	public function lideresSemStatus($id){
+		$pdo = new \PDO(DSN , USER , PASSWD) ;
+
+/*		$sql = '
+SELECT 
+l.id AS liderId, l.nome AS lider , d.nome AS discipulo, ts.nome AS status 
+FROM 
+Discipulo AS d INNER JOIN 
+Discipulo AS l ON d.lider = l.id
+INNER JOIN 
+StatusCelular AS sc ON sc.ativo =1 AND sc.discipuloId = d.id
+INNER JOIN 
+TipoStatusCelular AS ts 
+ON ts.id = sc.tipoStatusCelular
+
+WHERE sc.tipoStatusCelular != ? AND l.id not in ( 
+
+SELECT 
+l.id 
+-- AS liderId, l.nome AS lider , d.nome AS discipulo, sc.tipoStatusCelular
+FROM 
+Discipulo AS d INNER JOIN 
+Discipulo AS l ON d.lider = l.id
+INNER JOIN 
+StatusCelular AS sc ON sc.ativo = 1 AND sc.discipuloId = d.id
+WHERE sc.tipoStatusCelular =? 
+
+)
+
+union 
+
+select d.id , d.nome  as lider , \'não lider\' , \'não tem sttus\' from Discipulo AS d 
+WHERE d.id not in (
+SELECT 
+l.id
+FROM 
+Discipulo AS l INNER JOIN 
+Discipulo AS d ON d.lider = l.id
+)
+
+order by lider
+';*/
+		$sql = '
+						SELECT l.id AS liderId, l.nome AS lider , d.nome AS discipulo, ts.nome AS status 
+FROM 
+	Discipulo AS d 
+INNER JOIN 
+	Discipulo AS l ON d.lider = l.id and d.ativo = 1
+INNER JOIN 
+	StatusCelular AS sc ON sc.ativo = 1 AND sc.discipuloId = d.id
+INNER JOIN 
+	TipoStatusCelular AS ts ON ts.id = sc.tipoStatusCelular
+
+WHERE sc.tipoStatusCelular != ?
+	AND l.id not in ( 
+
+	SELECT l.id
+	FROM 
+			Discipulo AS d INNER JOIN 
+			Discipulo AS l ON d.lider = l.id AND d.ativo = 1
+		INNER JOIN 
+			StatusCelular AS sc ON sc.ativo = 1 AND sc.discipuloId = d.id
+		WHERE sc.tipoStatusCelular = ?
+	)
+						
+						' ;
+
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(1,$id);
+		$stm->bindParam(2,$id);
+
+		$stm->execute();
+
+		return $stm->fetchAll();
+	
+	
+	}
+
+
+	public function lideresPorTodosStatus(){
+		$pdo = new \PDO(DSN , USER , PASSWD) ;
+
+		$sql = '
+						SELECT 
+							l.id AS liderId, l.nome AS lider , d.nome AS discipulo, ts.nome AS status FROM 
+Discipulo AS d INNER JOIN 
+Discipulo AS l ON d.lider = l.id
+INNER JOIN 
+StatusCelular AS sc ON sc.ativo =1 AND sc.discipuloId = d.id
+INNER JOIN 
+TipoStatusCelular AS ts 
+ON ts.id = sc.tipoStatusCelular
+
+ORDER BY lider, discipulo
+						';
+		
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->execute();
+
+		return $stm->fetchAll();
+	
+	}
+
+	public function statusPorLiderCelula($id){
+		$pdo = new \PDO(DSN , USER , PASSWD) ;
+
+		$sql = '
+-- Discipulos que não tem pessoas em consolidacao
+Select did, dnome, if (d.id=4,null,null) as id , if (d.nome=4, null ,null ) as nome  , if ( sc.tipoStatusCelular= 4 ,NULL , NULL ) as tipoStatusCelular, 0 as tem	 
+from (
+	-- lideres de celula
+	select disc.id as did , disc.nome as dnome , cel.id as cid from
+	Discipulo AS disc inner join Celula AS cel on disc.id = cel.lider and disc.ativo = 1
+	group by did
+ ) as l 
+left join Discipulo AS d ON d.lider = l.did and d.ativo = 1 
+left join StatusCelular as sc ON sc.discipuloId = d.id and sc.ativo =1  and sc.tipoStatusCelular !=  :statusId
+where l.did not in (
+-- lider com discipulo em consolidacao
+select did -- , dnome, cid,d.nome  , sc.tipoStatusCelular 
+from (
+-- lideres de celula
+select disc.id as did , disc.nome as dnome , cel.id as cid from
+Discipulo AS disc inner join Celula AS cel on disc.id = cel.lider and disc.ativo = 1
+group by did
+ ) as l left join Discipulo AS d ON d.lider = l.did and d.ativo = 1 
+
+  inner join StatusCelular as sc ON sc.discipuloId = d.id and sc.ativo =1  and sc.tipoStatusCelular =  :statusId
+group by did
+-- 
+)
+
+union
+
+-- lider com discipulos em consolidacao
+Select did, dnome, d.id , d.nome  , sc.tipoStatusCelular , 1 as t
+from (
+-- lideres de celula
+	select disc.id as did , disc.nome as dnome , cel.id as cid from
+	Discipulo AS disc inner join Celula AS cel on disc.id = cel.lider and disc.ativo = 1
+	group by did
+	) as l 
+left join Discipulo AS d ON d.lider = l.did and d.ativo = 1 
+inner join StatusCelular as sc ON sc.discipuloId = d.id and sc.ativo =1  and sc.tipoStatusCelular =  :statusId
+order by dnome
+						';
+		
+
+
+		$stm = $pdo->prepare($sql);
+		$stm->bindParam(':statusId',$id);
+
+		//var_dump($stm->errorInfo());
+
+		$stm->execute();
+
+		return $stm->fetchAll();
+	
+	
+	}
+
 
 	public function listarLideresCelula(){
 	
@@ -162,8 +428,13 @@ class celula{
 		$stm->bindParam( 1 , $this->lider ) ;
 
 		$stm->execute();
+		$resposta = array();
 
-		return $stm->fetchAll();
+		while ( $obj = $stm->fetchObject ('\celula\modelo\celula') ) {
+			$resposta[$obj->id] = $obj ;
+		}
+
+		return $resposta;
 	
 	}
 
