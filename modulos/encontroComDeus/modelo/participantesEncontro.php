@@ -219,32 +219,170 @@ class participantesEncontro extends modeloFramework{
 
 	}
 
+	public function preEncontroAtivos(){
+	
+	 $pdo = self::pegarConexao() ;
 
-			  public function excluir(){
+	 $sql = 'SELECT * 
+				 FROM Discipulo AS d inner join ParticipantesEncontro AS pe ON pe.discipuloId = d.id AND pe.preEncontro = 1 AND pe.desistiu = 0
+				 WHERE pe.encontroComDeusId = ?
+				 ORDER BY d.nome ' ;
 
-			  //abrir conexao com o banco
-			  $pdo = new \PDO(DSN, USER, PASSWD);
+	 $stm = $pdo->prepare($sql);
+	 $stm->bindParam(1, $this->encontroComDeusId ) ;
+
+	 $stm->execute();
+	 $resposta = array();
+
+		while ( $obj = $stm->fetchObject ('discipulo\Modelo\Discipulo')  ) {
+			$resposta[$obj->id] = $obj ;	
+		}
+
+	  $pdo = null ;
+	  return $resposta ;
+
+	}
+	public function encontroAtivos(){
+	
+	 $pdo = self::pegarConexao() ;
+
+	 $sql = 'SELECT * 
+				 FROM Discipulo AS d inner join ParticipantesEncontro AS pe ON pe.discipuloId = d.id AND pe.encontro = 1 AND pe.desistiu = 0
+				 WHERE pe.encontroComDeusId = ?
+				 ORDER BY d.nome ' ;
+
+	 $stm = $pdo->prepare($sql);
+	 $stm->bindParam(1, $this->encontroComDeusId ) ;
+
+	 $stm->execute();
+	 $resposta = array();
+
+		while ( $obj = $stm->fetchObject ('discipulo\Modelo\Discipulo')  ) {
+			$resposta[$obj->id] = $obj ;	
+		}
+
+	  $pdo = null ;
+	  return $resposta ;
+
+	}
+
+	public function posEncontroAtivos(){
+	
+	 $pdo = self::pegarConexao() ;
+
+	 $sql = 'SELECT * 
+				 FROM Discipulo AS d inner join ParticipantesEncontro AS pe ON pe.discipuloId = d.id AND pe.posEncontro = 1  AND pe.desistiu = 0
+				 WHERE pe.encontroComDeusId = ?
+				 ORDER BY d.nome ' ;
+
+	 $stm = $pdo->prepare($sql);
+	 $stm->bindParam(1, $this->encontroComDeusId ) ;
+
+	 $stm->execute();
+	 $resposta = array();
+
+		while ( $obj = $stm->fetchObject ('discipulo\Modelo\Discipulo')  ) {
+			$resposta[$obj->id] = $obj ;	
+		}
+
+	  $pdo = null ;
+	  return $resposta ;
+
+	}
+
+	public function preEncontroInativos(){
+	
+	 $pdo = self::pegarConexao() ;
+
+	 $sql = 'SELECT * 
+				 FROM Discipulo AS d inner join ParticipantesEncontro AS pe ON pe.discipuloId = d.id AND pe.preEncontro = 0 AND pe.desistiu = 0
+				 WHERE pe.encontroComDeusId = ?
+				 ORDER BY d.nome ' ;
+
+	 $stm = $pdo->prepare($sql);
+	 $stm->bindParam(1, $this->encontroComDeusId ) ;
+
+	 $stm->execute();
+	 $resposta = array();
+
+		while ( $obj = $stm->fetchObject ('discipulo\Modelo\Discipulo')  ) {
+			$resposta[$obj->id] = $obj ;	
+		}
+
+	  $pdo = null ;
+	  return $resposta ;
+
+	}
+
+	public function encontroInativos(){
+	
+	 $pdo = self::pegarConexao() ;
+
+	 $sql = 'SELECT * 
+				 FROM Discipulo AS d inner join ParticipantesEncontro AS pe ON pe.discipuloId = d.id AND pe.encontro = 0 AND pe.desistiu = 0
+				 WHERE pe.encontroComDeusId = ?
+				 ORDER BY d.nome ' ;
+
+	 $stm = $pdo->prepare($sql);
+	 $stm->bindParam(1, $this->encontroComDeusId ) ;
+
+	 $stm->execute();
+	 $resposta = array();
+
+		while ( $obj = $stm->fetchObject ('discipulo\Modelo\Discipulo')  ) {
+			$resposta[$obj->id] = $obj ;	
+		}
+
+	  $pdo = null ;
+	  return $resposta ;
+
+	}
+
+	public function posEncontroInativos(){
+	
+	 $pdo = self::pegarConexao() ;
+
+	 $sql = 'SELECT * 
+				 FROM Discipulo AS d inner join ParticipantesEncontro AS pe ON pe.discipuloId = d.id AND pe.posEncontro = 0 AND pe.desistiu = 0 
+				 WHERE pe.encontroComDeusId = ?
+				 ORDER BY d.nome ' ;
+
+	 $stm = $pdo->prepare($sql);
+	 $stm->bindParam(1, $this->encontroComDeusId ) ;
+
+	 $stm->execute();
+	 $resposta = array();
+
+		while ( $obj = $stm->fetchObject ('discipulo\Modelo\Discipulo')  ) {
+			$resposta[$obj->id] = $obj ;	
+		}
+
+	  $pdo = null ;
+	  return $resposta ;
+
+	}
+
+  public function excluir(){
+
+	 $pdo = self::pegarConexao() ;
 			  //cria sql
-			  $sql = "DELETE FROM MinisterioTemDiscipulo WHERE discipuloId = ?  
-				  AND ministerioId = ?
+	 $sql = "DELETE FROM ParticipantesEncontro WHERE id = ?  
 							  ";
 
 			  //prepara sql
-			  $stm = $pdo->prepare($sql);
+	  $stm = $pdo->prepare($sql);
 			  //trocar valores
-			  $stm->bindParam(1, $this->discipuloId );
-			  $stm->bindParam(2, $this->ministerioId );
+		$stm->bindParam(1, $this->id );
 
-			  $resposta = $stm->execute();
+		$resposta = $stm->execute();
 
-			  $erro = $stm->errorInfo();
+		$erro = $stm->errorInfo();
 	
-			  //fechar conexÃ£o
-			  $pdo = null ;
-
-			  return $resposta;
+	  $pdo = null ;
+ 
+		return $resposta;
 			  
-			  }
+	}
 
 			  public function listarStatusCelularTodos(){
 

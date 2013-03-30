@@ -29,7 +29,7 @@
 
 				<?php foreach ( $rank as $r ) : ?>
 				<tr>
-					<td><?php echo ++$n ; ?></td>
+					<td><?php echo !isset($n) ? $n = 1 : ++$n ; ?></td>
 					<td><?php echo $r['lider'] ; ?></td>
 					<td><?php echo $r['total'] ; ?></td>
 				</tr>

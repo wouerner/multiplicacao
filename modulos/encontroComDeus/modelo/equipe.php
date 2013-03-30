@@ -7,7 +7,7 @@ class equipe extends modeloFramework{
   private $id ;
   private $encontroComDeusId ;
   private $tipoEquipeId ;
-  private $discipuloId ;
+  private $ativo ;
 
   public function __get($prop){
 
@@ -42,6 +42,44 @@ class equipe extends modeloFramework{
 
 	}
 
+  public function salvar(){
+
+	  $pdo = self::pegarConexao() ;
+	  $sql = "INSERT INTO  Equipe ( encontroComDeusId, tipoEquipeId )
+				  			VALUES (?,?)";
+
+	  $stm = $pdo->prepare($sql);
+
+
+	  $stm->bindParam(1, $this->encontroComDeusId) ;
+	  $stm->bindParam(2, $this->tipoEquipeId) ;
+			
+	  $stm->execute();
+		//var_dump($stm->errorInfo());exit();
+		
+	  $pdo = null ;
+
+	}
+
+  public function salvarMembro($id){
+
+	  $pdo = self::pegarConexao() ;
+	  $sql = "INSERT INTO  EquipeDiscipulos ( equipeId, discipuloId )
+				  			VALUES (?,?)";
+
+	  $stm = $pdo->prepare($sql);
+
+
+	  $stm->bindParam(1, $this->id) ;
+	  $stm->bindParam(2, $id ) ;
+			
+	  $stm->execute();
+		//var_dump($stm->errorInfo());exit();
+		
+	  $pdo = null ;
+
+	}
+
 			  public function atualizar(){
 
 			  //abrir conexao com o banco
@@ -71,17 +109,72 @@ class equipe extends modeloFramework{
 			  
 			  }
 
-			  public function listarEquipe(){
+			  public function listarEquipes(){
+
+			  $pdo = self::pegarConexao() ;
+
+			  $sql = 'SELECT e.id AS id, e.encontroComDeusId as encontroComDeusId , te.id as tipoId , te.nome AS nome, ecd.nome AS encontroNome
+								FROM
+								Equipe AS e 
+								inner join TipoEquipe AS te on te.id = e.tipoEquipeId
+								inner join EncontroComDeus as ecd ON ecd.id = e.encontroComDeusId
+						 ORDER BY nome ' ;
+
+			  $stm = $pdo->prepare($sql);
+			  $resposta = $stm->execute();
+
+			  $pdo = null ;
+				$resposta = array();
+
+				while ( $obj = $stm->fetchObject ('\encontroComDeus\modelo\equipe')  ) {
+					$resposta[$obj->id] = $obj ;	
+				}
+
+				//var_dump($stm->errorInfo());
+
+			  return $resposta ;
+				}
+
+
+			  public function listarEquipeEncontro(){
+
+			  $pdo = self::pegarConexao() ;
+
+			  $sql = 'SELECT e.id AS id, e.encontroComDeusId as encontroComDeusId , te.id as tipoId , te.nome AS nome 
+								FROM
+								Equipe AS e 
+								inner join TipoEquipe AS te on te.id = e.tipoEquipeId
+								WHERE e.encontroComDeusId =  ? 
+						 ORDER BY nome ' ;
+
+			  $stm = $pdo->prepare($sql);
+				$stm->bindParam(1, $this->encontroComDeusId );
+			  $resposta = $stm->execute();
+
+			  $pdo = null ;
+				$resposta = array();
+
+				while ( $obj = $stm->fetchObject ('\encontroComDeus\modelo\equipe')  ) {
+					$resposta[$obj->id] = $obj ;	
+				}
+
+				//var_dump($stm->errorInfo());
+
+			  return $resposta ;
+				}
+
+			  public function membros(){
 
 			  $pdo = self::pegarConexao() ;
 
 			  $sql = 'SELECT * 
-								FROM Discipulo as d inner join Equipe AS e on d.id = e.discipuloId
-								WHERE e.tipo
-						 ORDER BY d.nome ' ;
+								FROM
+								Discipulo AS d inner join EquipeDiscipulos AS ed ON d.id = ed.discipuloId
+								WHERE ed.equipeId =  ? 
+						 ORDER BY nome ' ;
 
 			  $stm = $pdo->prepare($sql);
-				$stm->bindParam(1, );
+				$stm->bindParam(1, $this->id );
 			  $resposta = $stm->execute();
 
 			  $pdo = null ;
@@ -99,15 +192,15 @@ class equipe extends modeloFramework{
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
-			  $sql = "DELETE FROM MinisterioTemDiscipulo WHERE discipuloId = ?  
-				  AND ministerioId = ?
+			  $sql = "DELETE FROM EquipeDiscipulos WHERE discipuloId = ?  
+				  AND equipeId = ?
 							  ";
 
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
 			  $stm->bindParam(1, $this->discipuloId );
-			  $stm->bindParam(2, $this->ministerioId );
+			  $stm->bindParam(2, $this->equipeId );
 
 			  $resposta = $stm->execute();
 
@@ -119,6 +212,29 @@ class equipe extends modeloFramework{
 			  return $resposta;
 			  
 			  }
+
+			  public function excluirEquipe(){
+
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "DELETE FROM Equipe WHERE id = ?  
+							  ";
+
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->equipeId );
+
+			  $resposta = $stm->execute();
+
+			  $erro = $stm->errorInfo();
+	
+			  //fechar conexÃ£o
+			  $pdo = null ;
+
+				return $resposta;
+				}
 
 			  public function listarStatusCelularTodos(){
 

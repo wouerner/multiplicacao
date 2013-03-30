@@ -21,15 +21,15 @@
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
 				<div class = "row-fluid" >	
-					<form class = "well form-horizontal" action = "/encontroComDeus/equipe/novoEquipe" method = "post">
-						<input name = "encontroId" type = "hidden" value = "<?php echo $encontroId ; ?>" >
-
+					<form class = "well form-horizontal" action = "/encontroComDeus/equipe/novoMembro" method = "post">
+						<input name = "discipuloId" type = "hidden" value = "<?php echo $id ; ?>" >
+						<legend>Equipe encontro: <?php echo $discipulo->nome ?></legend>
 							<div class = "control-group">
-								<label class = "control-label" >Tipo Equipe: </label>
+								<label class = "control-label" >Equipe: </label>
 								<div class = "controls">
-							<select name = "tipoEquipeId" >
-							<?php foreach ( $tiposEquipe as $t ) :?>
-								<option  value = "<?php echo $t->id ; ?>" ><?php echo $t->nome?></option>
+							<select name = "equipeId" class = "span5" >
+							<?php foreach ( $equipes as $t ) :?>
+							<option  value = "<?php echo $t->id ; ?>" ><?php echo $t->nome?> - <?php echo $t->encontroNome ?></option>
 							<?php endforeach ; ?>
 						</select>
 						</div>

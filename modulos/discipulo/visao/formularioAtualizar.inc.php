@@ -1,39 +1,37 @@
 <form action = "/discipulo/discipulo/atualizar" method = "post"  class = "form-inline" accept-charset = "UTF-8" >
 											<input id = "idDiscipulo" type = "hidden"   value = "<?php echo $discipulo->id ; ?>" >
-		<fieldset style = "width:960px" class = "" >
-			<legend style = "width:inherit" >Dados Pessoais</legend>
+		<fieldset  class = "" >
+			<legend  >Dados Pessoais</legend>
 
 							<!-- linha 1-->
-							<div class = "row" > 
+							<div class = "row-fluid" > 
 								<div class = "span12" >
 
 							  <div class="control-group span3">
 								  	<label class = "control-label" for = "nome" >Nome:</label>
 										<div class = "controls" >
-											<input id = "nome" type = "text" class = "span3" name = "nome"  value = "<?php echo $discipulo->nome ; ?>" required autofocus>
+											<input id = "nome" type = "text" class = "input-block-level" name = "nome"  value = "<?php echo $discipulo->nome ; ?>" required autofocus>
 									</div>
 								</div>
 
 							  <div class="control-group span3">
 								  	<label class = "control-label" for = "alcunha" >Alcunha:</label>
 										<div class = "controls" >
-											<input id = "nome" type = "text" class = "span3" name = "alcunha"  value = "<?php echo $discipulo->alcunha ; ?>">
+											<input id = "nome" type = "text" class = "input-block-level" name = "alcunha"  value = "<?php echo $discipulo->alcunha ; ?>">
 									</div>
 								</div>
 									
 
-							</div>
 
-							<div class = "span12" >
 
-							  <div class="control-group span2">
+							  <div class="control-group span1">
 								  	<label class = "control-label" for = "dataNascimento" >Data Nasc.:</label>
-										<input id = "dataNascimento" type = "text" class = "span2 dataNascimento" name = "dataNascimento" value = "<?php echo $dataN ; ?>" required >
+										<input id = "dataNascimento" type = "text" class = "input-block-level dataNascimento" name = "dataNascimento" value = "<?php echo $dataN ; ?>" required >
 								</div>
 
-							  <div class="control-group span2">
+							  <div class="control-group span1">
 								  	<label class = "control-label" for = "sexo" >Sexo:</label>
-										<select id = "sexo" class = "span2" name = "sexo" required >
+										<select id = "sexo" class = "input-block-level" name = "sexo" required >
 										<?php if ($discipulo->sexo == 'm' ) : ?>
 										  	<option value = "m" >Masculino</option>
 									  		<option value = "f" >Feminino</option>
@@ -47,7 +45,7 @@
 								<?php $estadoCivil = $discipulo->getEstatoCivil() ; ?> 
 							  <div class="control-group span2">
 								  	<label class = "control-label" for = "estadoCivilId" >Estado Civil:</label>
-										<select id = "estadoCivilId" class = "span2" name = "estadoCivilId" >
+										<select id = "estadoCivilId" class = "input-block-level" name = "estadoCivilId" >
 
 									  <option value = "<?php echo is_object($estadoCivil)? $estadoCivil->id : '' ; ?>" >
 												<?php echo is_object($estadoCivil)? $estadoCivil->nome : '' ; ?> </option>
@@ -63,23 +61,23 @@
 				</div>
 
 				<!-- linha 2 -->
-				<div class = "row" >
+				<div class = "row-fluid" >
 					<div class = "span12" >
 
 						  <div class="control-group span2">
 								  <label class = "control-label" for = "telefone" >Telefone:</label>
-								  <input id = "telefone" class = "span2" type="tel" value = "<?php echo $discipulo->telefone ; ?>"  maxlength="14" 
+								  <input id = "telefone" class = "input-block-level" type="tel" value = "<?php echo $discipulo->telefone ; ?>"  maxlength="14" 
 										pattern="\([0-9]{2}\) [0-9]{4}\-[0-9]{4}" placeholder="(00) 9999-9999" value="" name="telefone" id="telefone">
 							</div>
 
 							<div class = "control-group span3" >
 								  <label class = "control-label" for = "endereco" >Endereço:</label>
-								  <input id = "endereco" type = "text" class = "span3" name = "endereco" value = "<?php echo $discipulo->endereco ; ?>" required >
+								  <input id = "endereco" type = "text" class = "input-block-level" name = "endereco" value = "<?php echo $discipulo->endereco ; ?>" required >
 							</div>
 
 							<div class = "control-group span3" >
 								  <label class = "control-label" for = "email" >E-mail:</label>
-								  <input id = "email" class = "span3" name = "email" type = "email" value = "<?php echo $discipulo->email ; ?>" required >
+								  <input id = "email" class = "input-block-level" name = "email" type = "email" value = "<?php echo $discipulo->email ; ?>" required >
 							</div>
 
 					</div>
@@ -91,13 +89,13 @@
 		<legend>Dados Ministériais</legend>
 		
 		<!-- Linha 3-->
-		<div class = "row" >
+		<div class = "row-fluid" >
 			<div class = "span12" >
 
 					<div class = "control-group span3" >
 						  <div class = "ui-widget" >
 								  			<label class = "control-label" for = "lider" >Nome do Líder:</label>
-									  		<select id = "combobox" class = "combobox lider " name = "lider"  >
+									  		<select id = "combobox" class = "input-block-level combobox lider " name = "lider"  >
 
 												<option value = "<?php echo is_object($lider) ? $lider->id  : '' ; ?>" selected><?php echo is_object($lider) ? $lider->getNomeAbreviado() : ''; ?></option>
 									  			<option>--------- </option>
@@ -112,7 +110,6 @@
 
 				<?php $celula = $discipulo->getCelula(); ?>
 
-			  <div class = "ui-widget-celula" >
 						<div class = "control-group span3" >
 								  		<label class = "control-label " for = "celula" >Célula que Participa:</label>
 									  	<select id = "comboboxCelula" class = "comboboxCelula" name = "celula"  >
@@ -123,28 +120,23 @@
 											  	<?php endforeach ; ?>
 							  		</select>
 						</div>
-			</div>
 
 			<div class = "control-group span3" >
-				<label class = "control-label span2" ></strong>Atualizar Status:</label>
-				<div class = "controls " >
-							<span class ="span3" >
+				<label class = "control-label " ></strong>Atualizar Status:</label>
+				<div class = "controls input-block-level" >
 								<a class = "btn" href = "/statusCelular/statusCelular/novo/id/<?php  echo $discipulo->id ; ?>"  ><?php echo $status ['nome'] ; ?></a>
-							</span>
 				</div>
 			</div> 
 
 
 				<!-- Linha 4-->			
 				<!-- Formulario de atualização do STATUS CELULAR -->
-	 <div class = "row" >
-		<div class = "span12" >
 
 									<?php $admissao = $discipulo->getAdmissao() ; ?>
-					<div class = "control-group span2" >
+					<div class = "control-group span2 "  >
 						<label class = "control-label" >Admissão:</label>
 						<div class = "controls" >
-							<select class = "span2" name = "tipoAdmissao" >
+							<select class = "input-block-level" name = "tipoAdmissao" >
 								<option value = "<?php echo $admissao['id'] ; ?>" ><?php echo $admissao['nome'] ; ?></option>
 								<option value = "" >-------------</option>
 								<?php foreach ($tiposAdmissoes as $tipoAdmissao) : ?>
@@ -154,13 +146,13 @@
 						</div>	
 					</div>	
 
-
+	<div class = "row-fluid" >
 
 			<?php $rede = $discipulo->getRede() ; ?>
 				<div class = "control-group span2" >
 						<label class = "control-label" ></strong>Função na Rede</label>
 						<div class = "controls" >
-							<select class = "span2" name = "funcaoRedeId" >
+							<select class = "input-block-level" name = "funcaoRedeId" >
 								<option value = "<?php echo $rede[0]['funcaoId'] ; ?>" ><?php echo $rede[0]['funcaoRede']  ?></option>
 								<option value = "" >-------------</option>
 									<?php foreach ($funcaoRedes as $f) : ?>
@@ -173,7 +165,7 @@
 				<div class = "control-group span2" >
 					<label class = "control-label" >Rede:</label>
 					<div class = "controls" >
-						<select class = "span2" name = "tipoRedeId" >
+						<select class = "input-block-level" name = "tipoRedeId" >
 							<option value = "<?php echo $rede[0]['tpRedeId'] ; ?>" ><?php echo $rede[0]['tipoRede'] ; ?></option>
 							<option value = "" >-------------</option>
 								<?php foreach ($tiposRedes as $tipoRede) : ?>
@@ -182,14 +174,12 @@
 						</select>
 					</div>
 				</div>
-		</div>
-</div>
-	<div class = "row" >
+
 				<?php $mi = $discipulo->getMinisterio() ; ?>
 				<div class = "control-group span2" >
 					<label class = "control-label" >Ministério que Participa:</label>
 					<div class = "controls" >
-						<select class = "span2" name = "ministerio" >
+						<select class = "input-block-level" name = "ministerio" >
 										<option value = "<?php echo $mi[0]['ministerioId'] ; ?>" ><?php echo $mi[0]['ministerio'] ; ?></option>
 								<?php foreach ($ministerio as $m) : ?>
 										<option value = "<?php echo $m['id'] ; ?>" ><?php echo $m['nome'] ; ?></option>
@@ -201,7 +191,7 @@
 				<div class = "control-group span2" >
 					<label class = "control-label" >Função no Ministério:</label>
 					<div class = "controls" >
-						<select class = "span2" name = "fministerio" >
+						<select class = "input-block-level" name = "fministerio" >
 										<option value = "<?php echo $mi[0]['funcaoId'] ; ?>" ><?php echo $mi[0]['funcao'] ; ?></option>
 								<option value = "" >-------------</option>
 								<?php foreach ($funcaoMinisterio as $fMinisterio) : ?>
@@ -213,6 +203,8 @@
 				
 			</div>
 		</div>
+		</div>
+
 	</fieldset>
 
 	<fieldset>

@@ -7,13 +7,94 @@ class equipe{
 	
 	public function index($url){
 
-		$equipe = new \encontroComDeus\modelo\equipe() ;
+		$encontroId = $url['4'] ;
+		$encontro = new \encontroComDeus\modelo\equipe() ;
+		$encontro->encontroComDeusId = $encontroId ;
 
-		$discipulos = $equipe->listarTodos();
+		$equipes = $encontro->listarEquipeEncontro();
 
-		require_once  'modulos/encontroComDeus/visao/encontroComDeus/listar.php';
+		require_once  'modulos/encontroComDeus/visao/equipe/listar.php';
 
 	}
+
+
+	public function listarEquipe($url){
+
+		$tipoEquipe = new \encontroComDeus\modelo\tipoEquipe() ;
+		$tiposEquipe = $tipoEquipe->listarUm();
+		$encontroId = $url[6] ;
+
+		require_once  'modulos/encontroComDeus/visao/equipe/listar.php';
+
+	}
+
+	public function membros($url){
+
+		$equipe = new \encontroComDeus\modelo\equipe() ;
+		$equipe->id = $url[4] ;
+		$membros = $equipe->membros();
+		//var_dump($membros);
+
+		require_once  'modulos/encontroComDeus/visao/equipe/membros.php';
+
+	}
+
+	public function novoEquipe($url){
+
+	  if ( empty ( $url['post'] ) ) {
+			$encontroId = $url[4] ;
+
+			$tipoEquipe = new \encontroComDeus\modelo\tipoEquipe();
+			$tiposEquipe = $tipoEquipe->listarTodos() ;
+
+			require_once  'modulos/encontroComDeus/visao/equipe/novo.php';
+		}else {
+
+		$post = $url['post'] ;
+
+		$equipe = new \encontroComDeus\modelo\equipe() ;
+
+		$equipe->tipoEquipeId = $post['tipoEquipeId'] ;
+		$equipe->encontroComDeusId = $post['encontroId'] ;
+		$equipe->salvar() ;
+
+		header ('location:/encontroComDeus/equipe/index/id/'.$equipe->encontroComDeusId );
+		exit();
+		}
+
+	}
+
+	public function novoMembro($url){
+
+	  if ( empty ( $url['post'] ) ) {
+			$id = $url[4] ;
+			$discipulo = new discipulo() ;
+			$discipulo->id = $id ;
+			$discipulo = $discipulo->listarUm();
+
+			$encontro = new \encontroComDeus\modelo\encontroComDeus();
+			$equipe = new \encontroComDeus\modelo\equipe();
+			$equipes = $equipe->listarEquipes() ;
+
+			//var_dump($equipes);
+
+			require_once  'modulos/encontroComDeus/visao/equipe/novoMembro.php';
+		}else {
+
+		$post = $url['post'] ;
+
+		$equipe = new \encontroComDeus\modelo\equipe() ;
+		$equipe->id = $post['equipeId'] ;
+		$equipe->salvarMembro($post['discipuloId']) ;
+
+		//$redirecionar = $_SERVER['HTTP_REFERER'];
+		//header ('location:'.$redirecionar );
+		header ('location:/discipulo/discipulo' );
+		exit();
+		}
+
+	}
+
 	public function novo($url){
 
 	  if ( empty ( $url['post'] ) ) {
@@ -202,13 +283,23 @@ class equipe{
 		
 		}
 
-		public function excluirMinisterio($url){
-				$ministerio =	new \ministerio\modelo\ministerio();
-				$ministerio->id = $url[3]; 
-				$ministerio->excluir();
+		public function excluirMembro($url){
+				$equipe =	new \encontroComDeus\modelo\equipe();
+				$equipe->equipeId = $url[4]; 
+				$equipe->discipuloId = $url[6]; 
+				$equipe->excluir();
 
-				$_SESSION['mensagem'] = !is_null($ministerio->erro) ? $ministerio->erro : null ;
-				header ('location:/ministerio/listarMinisterio');
+				header ('location:/encontroComDeus/equipe/membros/id/'.$equipe->equipeId );
+				exit();
+		}
+
+		public function excluirEquipe($url){
+				$encontroId = $url[6] ;
+				$equipe =	new \encontroComDeus\modelo\equipe();
+				$equipe->equipeId = $url[4]; 
+				$equipe->excluirEquipe();
+
+				header ('location:/encontroComDeus/equipe/index/id/'.$encontroId );
 				exit();
 		}
 

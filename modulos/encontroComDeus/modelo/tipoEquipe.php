@@ -95,26 +95,15 @@ class  tipoEquipe extends modeloFramework{
 	}
 
 	public function excluir(){
-	try{
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'DELETE FROM Funcao WHERE id = ?';
+		$sql = 'DELETE FROM TipoEquipe WHERE id = ?';
 
 		$stm = $pdo->prepare($sql);
 
 		$stm->bindParam(1, $this->id);
 
-		$resposta = $stm->execute();
-		$erro = $stm->errorCode();
-		 
-		if ($erro != '0000'){
-
-			 throw new \Exception ('Existe discípulos cadastrados') ;
-		}
-		}catch ( \Exception $e ) {
-		
-				  $this->erro= $e->getMessage();
-	}
+		 $stm->execute();
 
 	}
 

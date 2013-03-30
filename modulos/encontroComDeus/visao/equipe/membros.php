@@ -22,13 +22,14 @@
 
 				<div class = "row-fluid" >	
 						<table class = "table bordered-table">
-						<caption><h3>Tipo de Equipe</h3></caption>
+						<caption><h3>Membros</h3></caption>
 
-						<?php foreach ( $tipoEquipes as $t) : ?>
-
+						<?php foreach ( $membros as $e) : ?>
 						<tr>
-							<td><?php echo $t->nome ; ?></td>
-							<td><a class = "btn btn-mini btn-danger" href="/encontroComDeus/tipoEquipe/excluir/id/<?php echo $t->id ; ?>"> <i class = "icon-remove icon-white" ></i>Excluir</a></td>
+							<td><?php echo  !isset($c) ? $c=1 : ++$c ; ?></td>
+							<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $e->id ; ?>"><?php echo  $e->nome ?></a></td>
+							<td><a class = "btn btn-mini btn-danger"  href="/encontroComDeus/equipe/excluirMembro/equipeId/<?php echo $equipe->id?>/discipuloId/<?php echo $e->id?>">
+										<i class = "icon-remove - icon-white" ></i>Excluir</a></td>
 						</tr>
 						
 						<?php endforeach ; ?>

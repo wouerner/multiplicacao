@@ -24,6 +24,7 @@ class encontroComDeus{
 
 		$encontro = new \encontroComDeus\modelo\encontroComDeus() ;
 		$encontro->nome = $post['nome'];
+		$encontro->dataEncontroComDeus = implode ('-',array_reverse(explode('/',$post['dataEncontroComDeus'])));
 		$encontro->dataEncontroComDeus = $post['dataEncontroComDeus'];
 		$encontro->endereco = $post['endereco'];
 
@@ -217,11 +218,10 @@ class encontroComDeus{
 		}
 
 		public function excluir($url){
-				$ministerio =	new \ministerio\modelo\ministerioTemDiscipulo();
-				$ministerio->discipuloId = $url[3]; 
-				$ministerio->ministerioId = $url[4]; 
-				$ministerio->excluir();
-				header ('location:/ministerio/novo/id/'.$ministerio->discipuloId);
+				$encontro =	new \encontroComDeus\modelo\encontroComDeus();
+				$encontro->id = $url[4]; 
+				$encontro->excluir();
+				header ('location:/encontroComDeus/encontroComDeus');
 				exit();
 		}
 

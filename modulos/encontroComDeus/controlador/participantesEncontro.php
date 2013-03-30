@@ -12,9 +12,10 @@ class participantesEncontro {
 		$discipulos = $participante->listarTodos();
 
 		$total = count ($discipulos) ;
+		$ativo = 'active' ;
 
 
-		require_once  'modulos/encontroComDeus/visao/participantesEncontro/listar.php';
+		require_once  'modulos/encontroComDeus/visao/participantesEncontro/listarTodos.php';
 
 	}
 
@@ -75,7 +76,9 @@ class participantesEncontro {
 		$participante = new \encontroComDeus\modelo\participantesEncontro();
 		$participante->id = $url[4] ;
 		$participante->preEncontroAtivar();
-		header ('location:/encontroComDeus/participantesEncontro/index/id/'.$url[6] );
+		$redirecionar = $_SERVER['HTTP_REFERER'];
+		//var_dump($redirecionar);exit();
+		header ('location:'.$redirecionar );
 	}
 
 	public function preEncontroDesativar($url){
@@ -83,7 +86,9 @@ class participantesEncontro {
 		$participante = new \encontroComDeus\modelo\participantesEncontro();
 		$participante->id = $url[4] ;
 		$participante->preEncontroDesativar();
-		header ('location:/encontroComDeus/participantesEncontro/index/id/'.$url[6] );
+		$redirecionar = $_SERVER['HTTP_REFERER'];
+		//var_dump($redirecionar);exit();
+		header ('location:'.$redirecionar );
 	}
 
 	public function encontroAtivar($url){
@@ -91,7 +96,9 @@ class participantesEncontro {
 		$participante = new \encontroComDeus\modelo\participantesEncontro();
 		$participante->id = $url[4] ;
 		$participante->encontroAtivar();
-		header ('location:/encontroComDeus/participantesEncontro/index/id/'.$url[6] );
+		$redirecionar = $_SERVER['HTTP_REFERER'];
+		//var_dump($redirecionar);exit();
+		header ('location:'.$redirecionar );
 	}
 
 	public function encontroDesativar($url){
@@ -99,7 +106,8 @@ class participantesEncontro {
 		$participante = new \encontroComDeus\modelo\participantesEncontro();
 		$participante->id = $url[4] ;
 		$participante->encontroDesativar();
-		header ('location:/encontroComDeus/participantesEncontro/index/id/'.$url[6] );
+		$redirecionar = $_SERVER['HTTP_REFERER'];
+		header ('location:'.$redirecionar );
 	}
 
 	public function posEncontroAtivar($url){
@@ -107,7 +115,8 @@ class participantesEncontro {
 		$participante = new \encontroComDeus\modelo\participantesEncontro();
 		$participante->id = $url[4] ;
 		$participante->posEncontroAtivar();
-		header ('location:/encontroComDeus/participantesEncontro/index/id/'.$url[6] );
+		$redirecionar = $_SERVER['HTTP_REFERER'];
+		header ('location:'.$redirecionar );
 	}
 
 	public function posEncontroDesativar($url){
@@ -115,7 +124,8 @@ class participantesEncontro {
 		$participante = new \encontroComDeus\modelo\participantesEncontro();
 		$participante->id = $url[4] ;
 		$participante->posEncontroDesativar();
-		header ('location:/encontroComDeus/participantesEncontro/index/id/'.$url[6] );
+		$redirecionar = $_SERVER['HTTP_REFERER'];
+		header ('location:'.$redirecionar );
 	}
 
 	public function desistiuAtivar($url){
@@ -123,7 +133,8 @@ class participantesEncontro {
 		$participante = new \encontroComDeus\modelo\participantesEncontro();
 		$participante->id = $url[4] ;
 		$participante->desistiuAtivar();
-		header ('location:/encontroComDeus/participantesEncontro/index/id/'.$url[6] );
+		$redirecionar = $_SERVER['HTTP_REFERER'];
+		header ('location:'.$redirecionar );
 	}
 
 	public function desistiuDesativar($url){
@@ -131,7 +142,45 @@ class participantesEncontro {
 		$participante = new \encontroComDeus\modelo\participantesEncontro();
 		$participante->id = $url[4] ;
 		$participante->desistiuDesativar();
-		header ('location:/encontroComDeus/participantesEncontro/index/id/'.$url[6] );
+		$redirecionar = $_SERVER['HTTP_REFERER'];
+		header ('location:'.$redirecionar );
+	}
+
+	public function preEncontro($url){
+					
+		$participante = new \encontroComDeus\modelo\participantesEncontro();
+		$participante->encontroComDeusId = $url[4] ;
+		$discipulos = $participante->preEncontroAtivos();
+		$discipulosInativos = $participante->preEncontroInativos();
+		$total = count ($discipulos) ;
+		$totalInativos = count ($discipulosInativos) ;
+		$preEncontro= 'active';
+		require_once  'modulos/encontroComDeus/visao/participantesEncontro/listar.php';
+		//header ('location:/encontroComDeus/participantesEncontro/x/id/'.$url[4] );
+	}
+	public function encontro($url){
+					
+		$participante = new \encontroComDeus\modelo\participantesEncontro();
+		$participante->encontroComDeusId = $url[4] ;
+		$discipulos = $participante->encontroAtivos();
+		$discipulosInativos = $participante->encontroInativos();
+		$total = count ($discipulos) ;
+		$totalInativos = count ($discipulosInativos) ;
+		$encontro= 'active';
+		require_once  'modulos/encontroComDeus/visao/participantesEncontro/listar.php';
+		//header ('location:/encontroComDeus/participantesEncontro/x/id/'.$url[4] );
+	}
+	public function posEncontro($url){
+					
+		$participante = new \encontroComDeus\modelo\participantesEncontro();
+		$participante->encontroComDeusId = $url[4] ;
+		$discipulos = $participante->posEncontroAtivos();
+		$discipulosInativos = $participante->posEncontroInativos();
+		$total = count ($discipulos) ;
+		$totalInativos = count ($discipulosInativos) ;
+		$posEncontro= 'active';
+		require_once  'modulos/encontroComDeus/visao/participantesEncontro/listar.php';
+		//header ('location:/encontroComDeus/participantesEncontro/x/id/'.$url[4] );
 	}
 
 		public function novoMinisterio($url){
@@ -294,13 +343,13 @@ class participantesEncontro {
 		
 		}
 
-		public function excluirMinisterio($url){
-				$ministerio =	new \ministerio\modelo\ministerio();
-				$ministerio->id = $url[3]; 
-				$ministerio->excluir();
+		public function excluir($url){
+				$participante =	new \encontroComDeus\modelo\participantesEncontro();
+				$participante->id = $url[4]; 
+				$participante->excluir();
 
-				$_SESSION['mensagem'] = !is_null($ministerio->erro) ? $ministerio->erro : null ;
-				header ('location:/ministerio/listarMinisterio');
+				$redirecionar = $_SERVER['HTTP_REFERER'];
+				header ('location:'.$redirecionar );
 				exit();
 		}
 
@@ -314,14 +363,6 @@ class participantesEncontro {
 				exit();
 		}
 
-		public function excluir($url){
-				$ministerio =	new \ministerio\modelo\ministerioTemDiscipulo();
-				$ministerio->discipuloId = $url[3]; 
-				$ministerio->ministerioId = $url[4]; 
-				$ministerio->excluir();
-				header ('location:/ministerio/novo/id/'.$ministerio->discipuloId);
-				exit();
-		}
 
 
 		public function detalhar ($url) {

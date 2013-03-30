@@ -95,15 +95,13 @@ class encontroComDeus extends modeloFramework{
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
-			  $sql = "DELETE FROM MinisterioTemDiscipulo WHERE discipuloId = ?  
-				  AND ministerioId = ?
+			  $sql = "DELETE FROM EncontroComDeus WHERE id = ?  
 							  ";
 
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
-			  $stm->bindParam(1, $this->discipuloId );
-			  $stm->bindParam(2, $this->ministerioId );
+			  $stm->bindParam(1, $this->id );
 
 			  $resposta = $stm->execute();
 

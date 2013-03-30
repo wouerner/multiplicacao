@@ -189,13 +189,12 @@ namespace encontroComDeus\controlador;
 		
 		}
 
-		public function excluirMinisterio($url){
-				$ministerio =	new \ministerio\modelo\ministerio();
-				$ministerio->id = $url[3]; 
-				$ministerio->excluir();
+		public function excluir($url){
+				$tipoEquipe =	new \encontroComDeus\modelo\tipoEquipe();
+				$tipoEquipe->id = $url[4]; 
+				$tipoEquipe->excluir();
 
-				$_SESSION['mensagem'] = !is_null($ministerio->erro) ? $ministerio->erro : null ;
-				header ('location:/ministerio/listarMinisterio');
+				header ('location:/encontroComDeus/tipoEquipe');
 				exit();
 		}
 
@@ -209,14 +208,6 @@ namespace encontroComDeus\controlador;
 				exit();
 		}
 
-		public function excluir($url){
-				$ministerio =	new \ministerio\modelo\ministerioTemDiscipulo();
-				$ministerio->discipuloId = $url[3]; 
-				$ministerio->ministerioId = $url[4]; 
-				$ministerio->excluir();
-				header ('location:/ministerio/novo/id/'.$ministerio->discipuloId);
-				exit();
-		}
 
 
 		public function detalhar ($url) {

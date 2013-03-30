@@ -4,6 +4,12 @@
 		<meta charset="UTF-8">
 		<?php include 'incluidos/css.inc.php' ; ?>
 		<?php include 'incluidos/js.inc.php' ; ?>
+		<script>
+		$(function() {
+
+				  $( ".data" ).datepicker();
+		});
+		</script>
 	</head>
 
 	<body>
@@ -18,7 +24,7 @@
 		<section>		
 			<article>
 				<form action = "/encontroComDeus/encontroComDeus/novo" method = "post"  class = "form-horizontal">
-					<legend>Novo EncontroComDeus </legend>
+					<legend>Nova Equipe </legend>
 					<fieldset>
 
 						<div class = "control-group" >
@@ -31,7 +37,7 @@
 						<div class = "control-group" >
 						<label class = "control-label" >Data: </label>
 						<div class = "controls" >
-							<input name = "dataEncontroComDeus" type = "text" autofocus alt = "Nome" placeholder= "">
+							<input class = "data" name = "dataEncontroComDeus" type = "text" autofocus alt = "Nome" placeholder= "">
 						</div>
 						</div>
 
