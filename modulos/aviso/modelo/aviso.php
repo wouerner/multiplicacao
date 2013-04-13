@@ -2,7 +2,9 @@
 
 namespace aviso\modelo;
 
-class aviso{
+use \framework\modelo\modeloFramework;
+
+class aviso extends modeloFramework {
 
 		  private $id;
 		  private $emissor;
@@ -21,7 +23,7 @@ class aviso{
 
 		  public function salvar(){
 
-			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  $pdo = self::pegarConexao();
 
 			  $sql = "INSERT INTO Avisos (emissor , tipoAvisoId, dataAviso ,  identificacao )
 				  			VALUES (?, ?, NOW(),?)";
@@ -42,9 +44,11 @@ class aviso{
 
 		  public function listarTodos(){
 
-		$pdo = new \PDO (DSN,USER,PASSWD);	
+		$pdo = self::pegarConexao();	
 
-		$sql = 'SELECT d.nome, a.id, a.identificacao, a.dataAviso, ta.modulo, ta.acao FROM 
+		$sql = '
+						SELECT d.nome, a.id, a.identificacao, a.dataAviso, ta.modulo, ta.controlador, ta.acao, ta.link,ta.mensagem, ta.icone 
+					 	FROM 
 Discipulo AS d 
 inner join 
 Avisos AS a on d.id = a.emissor
@@ -63,17 +67,20 @@ order by a.dataAviso DESC
 	}
 		public function listarUltimos(){
 
-		$pdo = new \PDO (DSN,USER,PASSWD);	
+		$pdo = self::pegarConexao();
 
-		$sql = 'SELECT d.nome, a.identificacao, a.dataAviso, ta.modulo, ta.acao FROM 
+		$sql = 'SELECT d.nome , d.alcunha , a.id, a.identificacao, a.dataAviso, ta.modulo, ta.controlador, ta.acao, ta.link,ta.mensagem, ta.icone, f.url FROM 
 Discipulo AS d 
 inner join 
 Avisos AS a on d.id = a.emissor
 inner join 
 TipoAviso AS ta 
 on a.tipoAvisoId = ta.id 
+left join 
+Foto as f
+on d.id = f.discipuloId 
 order by a.dataAviso DESC
-limit 5 
+limit 10 
 ';
 
 		$stm = $pdo->prepare($sql);

@@ -4,6 +4,8 @@
 		<meta charset="UTF-8">
 		<?php include 'incluidos/css.inc.php' ; ?>
 		<?php include 'incluidos/js.inc.php' ; ?>
+		<script src="/modulos/discipulo/visao/js/combobox.js"></script>
+		<script src="/modulos/discipulo/visao/js/comboboxCelula.js"></script>
 	</head>
 
 	<body>
@@ -37,7 +39,7 @@
 							</select>
 							</div>
 
-							<div class = "control-group span2" >
+							<!--<div class = "control-group span2" >
 							<label>líder:</label>
 							<select class = "span2" name = "lider" >
 								<option value = "todos" >todos</option>
@@ -45,7 +47,19 @@
 								<option value = "<?php echo $l['id'] ; ?>" ><?php echo $l['nome'] ?></option>
 								<?php endforeach ; ?>
 							</select>
-							</div>
+							</div>-->
+
+							<div class = "control-group span3" >
+							  <div class = "ui-widget" >
+								  			<label class = "control-label" for = "lider" >Nome do Líder:</label>
+									  		<select id = "combobox" class = "input-block-level combobox lider " name = "lider"  >
+												<option value = "todos" selected >todos</option>
+												 <?php foreach($lideres as $lider) : ?>
+												 		<option value = "<?php echo $lider['id'] ?>"><?php echo $lider['nome'] ?> </option>
+												 <?php endforeach ; ?>
+									 		</select>
+							</div>	
+							</div>	
 
 							<div class = "control-group span2" >
 							<label>Idade </label> 

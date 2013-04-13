@@ -1,47 +1,23 @@
 <?php
 namespace discipulo\Modelo;
 use \framework\modelo\modeloFramework;
-class Discipulo extends modeloFramework{
+
+class foto extends modeloFramework{
 
 	private $id ;
-	private $nome ;
-	private $alcunha ;
-	private $dataNascimento ;
-	private $sexo = 'm' ; // padrão da classe é sexo masculino
-	private $estadoCivilId ;
-	private $ativo ;
-	private $telefone ;
-	private $email ;
-	private $endereco ;
-	private $nivel ;
-	private $lider ;
-	private $celula ;
-	private $senha ;
-	private $statusCelular ;
-	private $admissao ;
-	private $arquivo ;
-	private $erro ;
-	private $rede;
-	private $foto;
+	private $url ;
+	private $discipuloId ;
 
 	public function __construct (){
 	}
 
 
 	public function __get($prop){
-		switch ( $prop ){
-		case 'dataNascimento': 		
-			return $this->getDataNascimento() ;
-			break ;
-		default: 
 		  return $this->$prop;
-	
-		}
 	}
 	
 	public function __set($prop , $valor){
 			  $this->$prop = $valor;
-	
 	}
 
 	public function getNomeAbreviado(){
@@ -165,14 +141,6 @@ class Discipulo extends modeloFramework{
 	
 	}
 
-	public function getFoto(){
-		$foto = new \discipulo\Modelo\foto();
-		$foto->discipuloId = $this->id;
-		$this->foto = $foto->listarUm();
-		return $this->foto	;
-	
-	}
-
 
 	public function eLider(){
 
@@ -219,23 +187,15 @@ class Discipulo extends modeloFramework{
 	public function salvar(){
 
 	  $pdo = self::pegarConexao() ;
-	  $sql = "INSERT INTO Discipulo (
-							  nome, telefone, email,endereco, nivel, 
-							  lider, celula,  senha, alcunha
+	  $sql = "INSERT INTO Foto (
+							  url, discipuloId
 							  )
-				  VALUES (?,?,?,?,?,?,?,?,?)";
+				  VALUES (?,?)";
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
-		 $stm->bindParam(1, $this->nome);
-		 $stm->bindParam(2, $this->telefone);
-		 $stm->bindParam(3, $this->email);
-		 $stm->bindParam(4, $this->endereco);
-		 $stm->bindParam(5, $this->nivel);
-		 $stm->bindParam(6, $this->lider);
-		 $stm->bindParam(7, $this->celula);
-		 $stm->bindParam(8, md5($this->senha));
-		 $stm->bindParam(9, $this->alcunha);
+		 $stm->bindParam(1, $this->url);
+		 $stm->bindParam(2, $this->discipuloId);
 
 		 $resposta = $stm->execute();
 				
@@ -245,68 +205,14 @@ class Discipulo extends modeloFramework{
 
 		 $this->erro = $erro[0];
 
-			  //fechar conexão
+		  //fechar conexão
 		 $pdo = null ;
+		 //var_dump($resposta);exit;
 
 		 return $resposta;
 	}
 
-	public function salvarCompleto(){
 
-	  $pdo = self::pegarConexao() ;
-	  $sql = "INSERT INTO Discipulo (
-							  nome, ativo, datanascimento, sexo, estadoCivilId, telefone, email,endereco,  
-							  lider, celula,  senha, alcunha
-							  )
-				  VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-			  //prepara sql
-	  $stm = $pdo->prepare($sql);
-			  //trocar valores
-	  $stm->bindParam(1, $this->nome);
-	  $stm->bindParam(2, $this->ativo);
-	  $stm->bindParam(3, $this->dataNascimento->format('Y-m-d') );
-	  $stm->bindParam(4, $this->sexo);
-	  $stm->bindParam(5, $this->estadoCivilId);
-	  $stm->bindParam(6, $this->telefone);
-	  $stm->bindParam(7, $this->email);
-	  $stm->bindParam(8, $this->endereco);
-	  $stm->bindParam(9, $this->lider);
-	  $stm->bindParam(10, $this->celula);
-	  $stm->bindParam(11, md5($this->senha));
-	  $stm->bindParam(12, $this->alcunha);
-
-	  $resposta = $stm->execute();
-			
-	  $this->id = $pdo->lastInsertId();
-
-	  $erro =  $stm->errorInfo();
-
-	  $this->erro = $erro[0];
-
-	  $pdo = null ;
-
-	  return $resposta;
-	}
-
-	public function emailUnico(){
-
-	 	$pdo = self::pegarConexao() ;
-			  //cria sql
-	  $sql = "SELECT email FROM Discipulo WHERE email = ?";
-			  //prepara sql
-	  $stm = $pdo->prepare($sql);
-			  //trocar valores
-	  $stm->bindParam(1, $this->email);
-
-	  $stm->execute();
-
-	  if ($stm->fetch() == false){
-		  		return true ;
-			  
-	  }
-		return false ;
-		
-	}
 
 
 	public function atualizar(){
@@ -315,35 +221,17 @@ class Discipulo extends modeloFramework{
 			  //abrir conexao com o banco
 			  $pdo = self::pegarConexao();
 			  //cria sql
-			  $sql = "UPDATE Discipulo SET 	nome = ? , telefone = ? , email = ? ,endereco = ? , nivel = ?, 
-				  lider = ?, celula = ? , dataNascimento = ? , estadoCivilId = ? ,sexo = ? , alcunha = ?
-				  WHERE id = ?
+			  $sql = "UPDATE Foto SET url=?	  WHERE discipuloId = ?
 							  ";
 
-
-				//var_dump($this);exit;
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
-			  $stm->bindParam(1, $this->nome);
-			  $stm->bindParam(2, $this->telefone);
-			  $stm->bindParam(3, $this->email);
-			  $stm->bindParam(4, $this->endereco);
-			  $stm->bindParam(5, $this->nivel);
-			  $stm->bindParam(6, $this->lider);
-			  $stm->bindParam(7, $this->celula);
-			  $stm->bindParam(8 , $this->dataNascimento->format('Y-m-d')) ;
-			  $stm->bindParam(9 , $this->estadoCivilId) ;
-			  $stm->bindParam(10 , $this->sexo ) ;
-			  $stm->bindParam(11 , $this->alcunha ) ;
-			  $stm->bindParam(12, $this->id);
+			  $stm->bindParam(1, $this->url);
+			  $stm->bindParam(2, $this->discipuloId);
 
 			  $resposta = $stm->execute();
 			  $erro = $stm->errorCode();
-
-			//var_dump($stm->errorInfo());
-			//var_dump($this);
-			//exit();
 
 			  if ($erro != '0000'){
 
@@ -361,18 +249,6 @@ class Discipulo extends modeloFramework{
 	
 	}
 
-	public function trocarSenha(){
-
-		$pdo = new \PDO (DSN,USER,PASSWD);	
-
-		$sql = 'UPDATE Discipulo SET  senha = md5(?) WHERE email = ?';
-
-		$stm = $pdo->prepare($sql);
-		$stm->bindParam(1,$this->senha);
-		$stm->bindParam(2,$this->email);
-
-		return $stm->execute();
-	}
 
 	/*Recebe o id para nÃ£o listar este cadastro.
 	 *
@@ -740,51 +616,6 @@ class Discipulo extends modeloFramework{
 	
 	}
 
-	public function semLider($numPagina, $pagina){
-
-		$numPagina = (int)$numPagina;
-		$pagina = (int)$pagina;
-
-
-		(int)$primeiroRegistro = ( $pagina * $numPagina ) - $numPagina ;
-
-		$pdo = new \PDO(DSN , USER , PASSWD) ;
-
-		$sql = 'SELECT * FROM Discipulo AS d WHERE ISNULL(d.lider) LIMIT ? , ?' ;
-
-		$stm = $pdo->prepare($sql);
-		$stm->bindParam(1, $primeiroRegistro ,\PDO::PARAM_INT);
-		$stm->bindParam(2, $numPagina , \PDO::PARAM_INT );
-
-		$stm->execute();
-
-		$resposta = array();
-
-		while($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')){
-			$resposta[$ob->id] = $ob ;
-		
-		}
-
-		return $resposta ;
-	
-	}
-
-	public function participaCelula(){
-	
-		$pdo = self::pegarConexao();
-
-		$sql = 'SELECT c.nome AS nomeCelula FROM Discipulo AS d , Celula AS c WHERE c.id = d.celula and d.id = ? ' ;
-
-		$stm = $pdo->prepare($sql);
-		$stm->bindParam(1,$this->id);
-
-		$stm->execute();
-
-		return $stm->fetch();
-	
-	}
-
-
 	/* listar todos menos os usuario logado atualmente, e com paginação
 	 *
 	 * */
@@ -819,114 +650,12 @@ class Discipulo extends modeloFramework{
 		return $resposta ; 
 	}
 	
-	/* total de discipulos cadastrados no sistema*/
-
-	public static function totalDiscipulos(){
-
-		$pdo = new \PDO (DSN,USER,PASSWD);	
-
-		$sql = 'SELECT COUNT(*) AS total FROM Discipulo';
-
-		$stm = $pdo->prepare($sql);
-
-		$stm->execute();
-
-		return $stm->fetch();
-		
-
-	}
-
-	public static function totalDiscipulosSemCelula(){
-
-		$pdo = new \PDO (DSN,USER,PASSWD);	
-
-		$sql = 'SELECT COUNT(*) AS total FROM Discipulo AS d WHERE ISNULL(d.celula) ';
-
-		$stm = $pdo->prepare($sql);
-
-		$stm->execute();
-
-		return $stm->fetch();
-		
-
-	}
-
-	public static function totalDiscipulosSemLider(){
-
-		$pdo = new \PDO (DSN,USER,PASSWD);	
-
-		$sql = 'SELECT COUNT(*) AS total FROM Discipulo AS d WHERE ISNULL(d.lider) ';
-
-		$stm = $pdo->prepare($sql);
-
-		$stm->execute();
-
-		return $stm->fetch();
-
-	}
-
-	/* recebe total de registros, e numero por pagina de registros.*/
-	public static function mostrarPaginacao( $total ,  $numPagina, $pagina){
-
-	$total_paginas = $total/$numPagina;
-
-	
-
-	$prev = $pagina - 1 ;
-	$next = $pagina + 1 ;
-
-	// se página maior que 1 (um), então temos link para a página anterior
-	if ($pagina > 1) 
-		{
-			$prev_link = '<a class = "btn" href=' ;
-			$prev_link .= $_SERVER['REDIRECT_URL'];
-			$prev_link .= "?pagina=$prev> Anterior </a>";
-		} 
-	else { // senão não há link para a página anterior
-    		$prev_link = '<a href="#" class = "btn disabled" >Anterior<a>';
-	}
-
-	// se número total de páginas for maior que a página corrente, 
-	// então temos link para a próxima página 
-	 if ($total_paginas > $pagina) {
-    		$next_link = '<a  class = "btn" href='.$_SERVER['REDIRECT_URL'].'?pagina='.$next.'>Proxima</a>';
-	  } else { 
-	// senão não há link para a próxima página
-	    $next_link = '<a class = "btn disabled" href="#">Proxima</a>';
-	  }
-
-	// vamos arredondar para o alto o número de páginas  que serão necessárias para exibir todos os 
-	// registros. Por exemplo, se  temos 20 registros e mostramos 6 por página, nossa variável  
-	// $total_paginas será igual a 20/6, que resultará em 3.33. Para exibir os  2 registros 
-	// restantes dos 18 mostrados nas primeiras 3 páginas (0.33),  será necessária a quarta página. 
-	// Logo, sempre devemos arredondar uma  fração de número real para um inteiro de cima e isto é 
-	// feito com a  função ceil()/  
-	$total_paginas = ceil($total_paginas);
-
-	  $painel = '';
-
-	  for ($x=1; $x<= $total_paginas; $x++) {
-		  if ($x==$pagina) { 
-		// se estivermos na página corrente, não exibir o link para visualização desta página 
-	      	$painel .= '<a class = "btn disabled" > '.$x.'</a> ';
-	    	} else {
-			$painel .= ' <a  class = "btn" href=' ; 
-			$painel .= $_SERVER['REDIRECT_URL'] ;
-			$painel .= '?pagina='.$x.'>'.$x.'</a>';
-	    }
-	  }
-	// exibir painel na tela
-	  echo ''.$prev_link.' | '.$painel.' | '.$next_link.'';
-
-  }
-
-
 
 	public function excluir(){
 
 		$pdo = self::pegarConexao();
 
-		$sql = 'DELETE FROM Discipulo WHERE id = ?';
+		$sql = 'DELETE FROM Foto WHERE id = ?';
 
 		$stm = $pdo->prepare($sql);
 
@@ -947,15 +676,15 @@ class Discipulo extends modeloFramework{
 		$pdo =self::pegarConexao() ;	
 
 
-		$sql = 'SELECT * FROM Discipulo WHERE id = ?';
+		$sql = 'SELECT * FROM Foto WHERE discipuloId = ?';
 
 		$stm = $pdo->prepare($sql);
 
-		$stm->bindParam(1, $this->id);
+		$stm->bindParam(1, $this->discipuloId );
 
 		$stm->execute();
 
-		return $stm->fetchObject('\discipulo\Modelo\Discipulo');
+		return $stm->fetchObject('\discipulo\Modelo\foto');
 
 	}
 

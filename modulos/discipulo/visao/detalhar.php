@@ -81,9 +81,14 @@ $(document).ready(function () {
 				<caption><h3><?php echo $discipulo->nome ; ?></h3></caption>
 
 				<tr>	
+					<td class = "span2" rowspan = "4">
+						<img src = "<?php $foto = $discipulo->getFoto() ; echo is_object($foto) ? $foto->url: '' ; ?>"class = "img-rounded" style="height: 150px;"  width = "150"  > 
+					</td>
+
 					<td  >
 					<strong>Nome:</strong>	<?php echo $discipulo->nome ; ?>
 					</td>
+
 					<td  >
 					<strong>Líder: </strong>	<?php echo $discipulo->getLider()->nome ; ?>
 					</td>
@@ -93,7 +98,7 @@ $(document).ready(function () {
 				</tr>
 
 				<tr>
-					<td><strong>Endereço: </strong><?php  echo $discipulo->endereco ; ?></td>
+					<td  ><strong>Endereço: </strong><?php  echo $discipulo->endereco ; ?></td>
 					<td><strong>Telefone: </strong><?php echo $discipulo->telefone ; ?></td>
 					<td><strong>E-mail: </strong><?php echo $discipulo->email ; ?></td>
 				</tr>

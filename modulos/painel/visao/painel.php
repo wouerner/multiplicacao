@@ -42,76 +42,10 @@
 				<?php require_once 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
 <div class = "row-fluid" >
-<div class = "span12" >
+	<div class = "span6" >
+	
+				<?php require 'modulos/aviso/visao/tabAviso.inc.php' ; ?>
 
-<div class = "well" >
-<div class="accordion" id="accordion1">
-
-	<div class="accordion-group">
-		<div class="accordion-heading">
-			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseAviso">
-						Ultimos Avisos <b class="caret pull-right"></b>
-			</a>
-		</div>
-
-		<div id="collapseAviso" class="accordion-body collapse">
-		<div class="accordion-inner">
-
-						<table class = "table bordered-table">
-						<caption><h3>Aviso</h3></caption>
-
-						<?php foreach ( $ultimosAvisos as $a ) : ?>
-						<tr>
-							<td><?php echo date_format(date_create($a['dataAviso']), 'd-M-Y H:m') ; ?></td>
-							<td><?php echo $a['nome'] ; ?> fez <?php echo $a['acao'] ; ?>
-							<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
- 								<a href= "/<?php echo $a['modulo'] ; ?>/<?php echo $a['modulo'] ; ?>/detalhar/id/<?php echo $a['identificacao'] ; ?>"> 
-												<?php echo $a['modulo'] ; ?> 
-									</a>
-							<?php  else :  ?>
-												<?php echo $a['modulo'] ; ?> 
-							<?php endif ; ?>
-						</td>
-						</tr>						
-						<?php endforeach ; ?>
-						</table>
-		</div>
-		</div>
-</div>
-</div>
-
-</div>
-</div>
-
-<div class = "row-fluid" >
-				<div class = "span6">
-				<div class = "well">
-				<strong>Discipulos: </strong>
-				<?php foreach( $discipulos as $d ) : ?>
-					<a class = "btn " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>"  ><?php echo $d->getAlcunha() ; ?></a>
-				<?php endforeach ; ?>
-
-				<?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
-						  <a class = "btn btn-success " href = "/discipulo/discipulo/novoCompleto" >
-									<i class = "icon-plus icon-white" ></i> Novo Discípulo
-							</a>
-					<?php endif ; ?>
-				</div>
-				</div>
-
-					<div class = "span6" >	
-					<div class = "well" >	
-					<h4>Relatório de Célula:</h4>
-				<?php foreach ( $celulas as $c ) : ?>
-						<a class = "btn" href="/celula/relatorio/novo/id/<?php echo $c->id ; ?>" > <?php echo $c->nome ; ?></a>
-					<?php endforeach ; ?>
-				</div>
-				</div>
-				</div>
-
-
-<div class = "row-fluid" >
-<div class = "span6" >
 <div class = "well" >
 
 <div class="accordion" id="accordion2">
@@ -212,12 +146,54 @@
 </div>
 
 </div>
+</div>
+
+<div class = "span6 " >
+<div class = "row-fluid" >
+				<div class = "span12 well well-small">
+				<div class = "row-fluid" >
+				<h5><strong> <?php echo $totalDiscipulos ; ?>  Discipulos: </strong></h5>
+				
+				<?php foreach( $discipulos as $d ) : ?>
+					<div class = "span2   "  >	
+					 <a class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
+						<img src = "<?php echo is_object($d->getFoto()) ? $d->getFoto()->url : '' ; ?>" class = "img-circle span12"  >
+						<i class = "<?php echo $d->eLider() ? 'icon-certificate': '' ?>"></i><i class = "<?php echo $d->eLiderCelula() ? 'icon-home': '' ?>"></i>
+						<small class = "" ><?php echo !isset($c) ? $c=1 : ++$c ; ?>-<?php echo $d->getAlcunha() ; ?></small>
+				</a>
+				</div>
+				<?php endforeach ; ?>
+
+				<?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
+							<div class = "span3 " >
+						  <a class = "span12 btn bnt-mini btn-success" href = "/discipulo/discipulo/novoCompleto" >
+									<i class = "icon-plus icon-white" ></i>Novo Discípulo
+							</a>
+							</div>
+					<?php endif ; ?>
+				</div>
+				</div>
+</div>
+
+<div class = "row-fluid" >
+					<div class = "span12" >	
+					<div class = "well" >	
+					<strong>Relatório de Célula:</strong>
+				<?php foreach ( $celulas as $c ) : ?>
+						<a class = "btn" href="/celula/relatorio/novo/id/<?php echo $c->id ; ?>" > <?php echo $c->nome ; ?></a>
+					<?php endforeach ; ?>
+				</div>
+				</div>
+	</div>
+
+
+<div class = "row-fluid" >
+<div class = "span12" >
 
 </div>
 
-
-
-			<div class = "span6 " >
+<div class = "row-fluid" >
+<div class = "span12 " >
 <div class = "well" >
 <div class="accordion" id="accordion3">
 
@@ -305,8 +281,11 @@
 
 </div>
 </div>
+</div>
 
 
+</div>
+</div>
 </div>
 </div>
 </div>

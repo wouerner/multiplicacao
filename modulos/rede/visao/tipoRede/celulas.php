@@ -37,6 +37,8 @@ unset($_SESSION['mensagem']) ;
 						<tr>
 							<th>#</th>
 							<th>Nome</th>
+							<th>Endereço</th>
+							<th>Horário</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -46,8 +48,12 @@ unset($_SESSION['mensagem']) ;
 							<td><?php echo ++$cont ; ?></td>
 								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 								<td><a href="/celula/celula/detalhar/id/<?php echo $c->id?>" ><?php echo $c->nome ; ?> </a></td>
+								<td><?php echo $c->endereco ; ?></td>
+								<td><?php echo $c->horarioFuncionamento ; ?></td>
 								<?php else : ?>
 								<td><?php echo $c->nome ; ?></td>
+								<td><?php echo $c->endereco ; ?></td>
+								<td><?php echo $c->horarioFuncionamento ; ?></td>
 								<?php endif ; ?>
 						</tr>
 						

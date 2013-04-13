@@ -19,23 +19,8 @@
 			<article>
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+				<?php require 'modulos/aviso/visao/tabAviso.inc.php' ; ?>
 
-				<div class = "row-fluid" >	
-					<div class = "well" >
-						<table class = "table bordered-table">
-						<caption><h3>Aviso</h3></caption>
-
-						<?php foreach ( $avisos as $a ) : ?>
-						<tr>
-						<td> <?php echo $a['dataAviso'] ; ?></td><td><?php echo $a['nome'] ; ?> fez <?php echo $a['acao'] ; ?> <a href= "/<?php echo $a['modulo'] ; ?>/<?php echo $a['modulo'] ; ?>/detalhar/id/<?php echo $a['identificacao'] ; ?>"> <?php echo $a['modulo'] ; ?> </a></td>
-						<td>  <a class = "btn btn-mini btn-danger" href= "/aviso/aviso/excluir/id/<?php echo $a['id'] ; ?>"><i class = "icon-remove icon-white" > </i></a></td>
-						</tr>
-							
-						
-						<?php endforeach ; ?>
-						</table>
-					</div>
-			</div>
 			</article>
 		
 		</section>

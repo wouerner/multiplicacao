@@ -8,18 +8,9 @@ class aviso{
 
 		$avisos =	new \aviso\modelo\aviso();
 		$avisos = $avisos->listarTodos();
-		//var_dump($avisos);
 
 		require_once  'modulos/aviso/visao/listar.php';
 	
-	}
-
-	public function listarTipoAdmissao(){
-
-		$tipoAdmissoes =	new \admissao\modelo\tipoAdmissao();
-		$tipoAdmissoes = $tipoAdmissoes->listarTodos();
-
-		require_once  'modulos/admissao/visao/listarTipoAdmissao.php';
 	}
 
 	public function novo($url){
@@ -45,53 +36,7 @@ class aviso{
 			}
 	}
 
-	public function novoTipoAdmissao($url){
 	
-			if ( empty ( $url['post'] ) ) {
-		    	 require_once  'modulos/admissao/visao/novoTipoAdmissao.php';
-			
-			}else {
-				 $admissao =	new \admissao\modelo\tipoAdmissao();
-
-				 $post = $url['post'] ;
-				 $admissao->nome = $post['nome'] ;
-
-				 $admissao->salvar();
-				 header ('location:/admissao/listarTipoAdmissao');
-				 exit();
-			}
-	}
-	
-	public function atualizarTipoAdmissao($url){
-
-			if ( empty ( $url['post'] ) ) {
-
-				$tipoAdmissao =	new \admissao\modelo\tipoAdmissao();
-
-				$tipoAdmissao->id =  $url[3] ;
-				$tipoAdmissao = $tipoAdmissao->listarUm();
-
-				require_once  'modulos/admissao/visao/atualizarTipoAdmissao.php';
-			
-			}else {
-				$tipoAdmissao =	new \admissao\modelo\tipoAdmissao();
-
-				$post = $url['post'] ;
-
-				$tipoAdmissao->id = $post['id'];	
-				$tipoAdmissao->nome = $post['nome'];
-
-				$tipoAdmissao->atualizar();
-
-
-				header ('location:/admissao/atualizarTipoAdmissao/id/'.$tipoAdmissao->id);
-				exit();
-			}
-
-		
-		
-		}
-
 		public function excluir($url){
 				$aviso =	new \aviso\modelo\aviso();
 				$aviso->id = $url[4]; 

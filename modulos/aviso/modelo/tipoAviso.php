@@ -1,8 +1,11 @@
 <?php
 
-namespace admissao\modelo;
+namespace aviso\modelo;
 
-class TipoAdmissao{
+class tipoAviso{
+
+			const temaRelatorioNovo = 3;
+			const relatorioNovo = 4;
 	
 		  private $id;
 		  private $nome;

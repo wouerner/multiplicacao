@@ -56,8 +56,9 @@ namespace painel\controlador;
 						$somaRedeDiscipulos += $t['total'];
 					}
 					
-					$ultimosAvisos = new \aviso\modelo\aviso();
-					$ultimosAvisos = $ultimosAvisos->listarUltimos();
+					$avisos = new \aviso\modelo\aviso();
+					$avisos = $avisos->listarUltimos();
+					//var_dump($avisos);
 
 					$celulas =	new \celula\modelo\celula();
 					$celulas->lider = $usuarioId;
@@ -67,6 +68,8 @@ namespace painel\controlador;
 					$discipulos = new \discipulo\Modelo\Discipulo();	
 					$discipulos->id = $usuarioId ; 
 		  		$discipulos = $discipulos->listarDiscipulos();
+
+					$totalDiscipulos = count($discipulos) ;
 
 				  require_once  'modulos/painel/visao/painel.php';
 		}

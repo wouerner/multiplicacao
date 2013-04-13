@@ -4,6 +4,9 @@ use discipulo\Modelo\Discipulo;
 
 namespace celula\controlador; 
 
+use aviso\modelo\tipoAviso;
+use aviso\modelo\aviso;
+
 
 class relatorio{
 	
@@ -45,6 +48,13 @@ class relatorio{
 
 				$relatorioCelula->salvar();
 				$relatorioCelula->salvarParticipacao($discipulos);
+
+				$aviso = new aviso();
+
+				$aviso->tipoAviso = tipoAviso::relatorioNovo ; 
+				$aviso->identificacao = $relatorioCelula->id ; 
+				$aviso->emissor = $_SESSION['usuario_id'];
+				$aviso->salvar();
 
 				header ('location:/celula/relatorio/index/celulaId/'.$relatorioCelula->celulaId) ;
 

@@ -2,6 +2,7 @@
 //inicia a sessão
 session_start();
 
+
 $sessao = isset ($_SESSION) ? $_SESSION : NULL ; 
 
 

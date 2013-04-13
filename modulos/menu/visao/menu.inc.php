@@ -135,6 +135,14 @@ $usuario = $usuario[0] ;
 								<li><a href = "/celula/celula/chamar">Pesquisar</a></li>
 
 								<li class = "dropdown-submenu" >
+									<a href = "#" ><i class = "" ></i>Relatorio de Célula</a>
+									<ul class = "dropdown-menu" >
+										<li><a href = "/relatorio/relatorio/relatorioCelulaEnvio" ><i class = "" ></i> Por Data</a></li>
+										<li><a href="/relatorio/relatorio/relatorioCelulaEnvioPorTema">Por Tema</a></li>
+									</ul>
+								</li>
+
+								<li class = "dropdown-submenu" >
 									<a class="" data-toggle="" href ="/celula/temaRelatorioCelula">Tema Relatório</a>
 									<ul class = "dropdown-menu" >
 										<li><a href = "/celula/temaRelatorioCelula/novo">Novo Tema</a></li>
@@ -158,13 +166,6 @@ $usuario = $usuario[0] ;
 								<li><a href = "/celula/celula/listarPorStatusTodos" ><i class = " " ></i> Lider por Status Geral</a></li>
 								<li><a href = "/relatorio/relatorio/statusPorLider" ><i class = " " ></i> Status Por Lider</a></li>
 
-								<li class = "dropdown-submenu" >
-									<a href = "#" ><i class = "" ></i>Relatorio de Célula</a>
-									<ul class = "dropdown-menu" >
-										<li><a href = "/relatorio/relatorio/relatorioCelulaEnvio" ><i class = "" ></i> Por Data</a></li>
-										<li><a href="/relatorio/relatorio/relatorioCelulaEnvioPorTema">Por Tema</a></li>
-									</ul>
-								</li>
 						</ul>
 					</li>
 <?php endif ; ?>

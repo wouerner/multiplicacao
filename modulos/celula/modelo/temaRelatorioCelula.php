@@ -60,6 +60,7 @@ class temaRelatorioCelula{
 		$resposta = $stm->execute();
 	
 		//var_dump($stm->errorInfo() );exit();
+		$this->id = $pdo->lastInsertId();
 		$pdo = null ;
 
 		return $resposta;

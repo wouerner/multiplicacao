@@ -3,6 +3,8 @@ use celula\modelo\celula;
 use discipulo\Modelo\Discipulo;
 namespace celula\controlador; 
 
+use \aviso\modelo\tipoAviso;
+use \aviso\modelo\aviso;
 
 class temaRelatorioCelula{
 
@@ -33,6 +35,15 @@ class temaRelatorioCelula{
 				$tema->dataFim = implode ('-',(array_reverse (explode('/',$post['dataFim'])))).' '.$post['tempoFim'];
 
 				$tema->salvar();
+
+				$aviso = new aviso();
+
+				$aviso->tipoAviso = tipoAviso::temaRelatorioNovo ; 
+				$aviso->identificacao = $tema->id ; 
+				$aviso->emissor = $_SESSION['usuario_id'];
+				$aviso->salvar();
+
+				
 				header ('location:/celula/temaRelatorioCelula');
 				exit();
 			}

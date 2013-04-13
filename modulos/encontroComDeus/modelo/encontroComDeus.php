@@ -2,6 +2,7 @@
 
 namespace encontroComDeus\modelo ;
 use \framework\modelo\modeloFramework ; 
+
 class encontroComDeus extends modeloFramework{
 
   private $id ;

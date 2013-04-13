@@ -75,7 +75,9 @@ $(".btn-warning").click( function(){
 <?php endif; ?>
 
 
-					<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><strong><?php echo $discipulo->nome ; ?></strong>
+					<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><strong><i class = "<?php echo $discipulo->eLider() ? 'icon-certificate' : '' ;  ?>"></i>
+						<i class = "<?php echo $discipulo->eLiderCelula() ? 'icon-home': '' ?>"></i>
+							<?php echo $discipulo->nome ; ?></strong>
 
 					<?php if ($discipulo->ativo == 1 ) : ?>
 						<span class="label label-success">Ativo</span> </a></td>
