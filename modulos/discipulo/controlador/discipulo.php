@@ -619,6 +619,37 @@ class discipulo{
 		
 		}
 
+		public function perfil ($url) {
+
+			//var_dump($_SESSION);
+			$discipulo = new \discipulo\Modelo\Discipulo() ;
+			$eventoDiscipulo = new \evento\modelo\eventoDiscipulo();
+			$ministerios = new \ministerio\modelo\ministerioTemDiscipulo();
+			$statusCelular = new \statusCelular\modelo\statusCelular();
+
+			$discipulo->id = $url[4] ; 
+
+			$liderCelula = $discipulo->liderCelula();
+			$participaCelula = $discipulo->participaCelula();
+			$ministerios->discipuloId = $discipulo->id;
+			$ministerios = $ministerios->pegarMinisterioDiscipulo();
+			$statusCelular->discipuloId = $discipulo->id ;
+			$statusCelular = $statusCelular->pegarstatuscelular() ;
+
+
+			$eventoDiscipulo = $eventoDiscipulo->listarTodosDiscipulo($discipulo->id);
+
+			$discipulo = $discipulo->listarUm() ;
+
+			$totalAtivosLider =  \discipulo\Modelo\Discipulo::totalAtivosLider($url['4']) ;
+			$totalInativosLider = \discipulo\Modelo\Discipulo::totalInativosLider($url['4']) ;
+
+			$totalRedesLideres =  \rede\modelo\rede::pegarTodasRedesPorLider($url['4']);
+
+			require 'discipulo/visao/perfil.php' ;	
+		
+		}
+
 
 		public function chamar () {
 		$acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);

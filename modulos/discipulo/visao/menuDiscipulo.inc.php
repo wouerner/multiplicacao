@@ -22,6 +22,11 @@
 	
 		<a id = "<?php echo $discipulo->id ?>" href="/encontroComDeus/participantesEncontro/novoParticipante/id/<?php echo $discipulo->id ?>" class = "btn btn-mini" alt = "" > Enc. com Deus</a>
 		<a id = "<?php echo $discipulo->id ?>" href="/encontroComDeus/equipe/novoMembro/id/<?php echo $discipulo->id ?>" class = "btn btn-mini" alt = "" > Equipe Encontro</a>
+
+<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+		<a id = "<?php echo $discipulo->id ?>" href="/metas/metas/novo/id/<?php echo $discipulo->id ?>" class = "btn btn-mini " alt = "excluir" ><i class="icon-screenshot "></i>Metas</a>
+<?php endif ; ?>
+
 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 		<a id = "<?php echo $discipulo->id ?>" href="/discipulo/discipulo/excluir/id/<?php echo $discipulo->id ?>" class = "btn btn-mini btn-danger" alt = "excluir" ><i class="icon-remove icon-white"></i></a>
 <?php endif ; ?>

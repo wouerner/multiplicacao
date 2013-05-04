@@ -40,6 +40,20 @@ $usuario = $usuario[0] ;
 								<?php endif ; ?>
 
 								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+								<li class = "dropdown">
+									<a href = "#" class="dropdown-toggle" data-toggle="dropdown" role = "button"><i class = "icon-screenshot" ></i> Metas<b class="caret"></b></a>
+									<ul class="dropdown-menu">	
+										<li><a href = "/metas/intervaloMetas/novo"><i class = "icon-plus " ></i > novo intervalo</a></li>
+										<li><a href = "/rede/rede/listarTipoRede"><i class = "icon-list-alt " ></i> Listarintervalo</a></li>
+									</ul>
+								</li>
+								<?php endif ; ?>
+
+
+
+
+
+								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 								<li class="dropdown">
 									<a href = "#" class="dropdown-toggle" data-toggle="dropdown"><i class = "icon-tag" ></i>Status<b class="caret"></b></a>
 									<ul class="dropdown-menu">	
@@ -134,6 +148,8 @@ $usuario = $usuario[0] ;
 								<li><a href = "/celula/celula/lideresCelula" >Líderes de Célula</a></li>
 								<li><a href = "/celula/celula/chamar">Pesquisar</a></li>
 
+<?php endif ; ?>
+								<?php if ($acesso->hasPermission('celulaRelatorioAcesso') == true) : ?>
 								<li class = "dropdown-submenu" >
 									<a href = "#" ><i class = "" ></i>Relatorio de Célula</a>
 									<ul class = "dropdown-menu" >
@@ -141,6 +157,9 @@ $usuario = $usuario[0] ;
 										<li><a href="/relatorio/relatorio/relatorioCelulaEnvioPorTema">Por Tema</a></li>
 									</ul>
 								</li>
+								<?php endif ; ?>
+
+<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 
 								<li class = "dropdown-submenu" >
 									<a class="" data-toggle="" href ="/celula/temaRelatorioCelula">Tema Relatório</a>
@@ -158,13 +177,11 @@ $usuario = $usuario[0] ;
 					<li class = "dropdown" >
 						<a href = "#" class="dropdown-toggle" data-toggle="dropdown"><i class = "icon-briefcase " ></i> Relatorios<b class="caret"></b></a>
 						<ul class = "dropdown-menu" >	
-								<li><a href = "/relatorio/relatorio/relatorioResumido" >Resumido</a></li>
-								<li><a href = "/discipulo/discipulo/fichaPorStatus/id/8" >Ficha Encontro</a></li>
-								<li><a href = "/discipulo/discipulo/cracha/id/8" >Cracha</a></li>
+								<li><a href = "/relatorio/relatorio/relatorioResumido" >Gerar Relatorios</a></li>
 								<li><a href = "/relatorio/relatorio/aniversariantes" ><i class = "icon-gift " ></i> Aniversariantes</a></li>
-								<li><a href = "/celula/celula/listarPorStatus" ><i class = " " ></i> Lider por Status</a></li>
+								<!--<li><a href = "/celula/celula/listarPorStatus" ><i class = " " ></i> Lider por Status</a></li>
 								<li><a href = "/celula/celula/listarPorStatusTodos" ><i class = " " ></i> Lider por Status Geral</a></li>
-								<li><a href = "/relatorio/relatorio/statusPorLider" ><i class = " " ></i> Status Por Lider</a></li>
+								<li><a href = "/relatorio/relatorio/statusPorLider" ><i class = " " ></i> Status Por Lider</a></li>-->
 
 						</ul>
 					</li>
@@ -178,6 +195,8 @@ $usuario = $usuario[0] ;
 						<a href = "#" class="dropdown-toggle" data-toggle="dropdown"><strong><i>Oi</i>, <?php echo $usuario?></strong>
 						<b class="caret"></b></a>
 						<ul class = "dropdown-menu" >	
+						<li><a href="/discipulo/discipulo/perfil/id/<?php echo $_SESSION['usuario_id']?>" class = "" ><i class = "icon-user" ></i> Perfil</a></li>
+						<li><a href="/discipulo/foto/novo/id/<?php echo $_SESSION['usuario_id']?>" class = "" ><i class = "icon-picture" ></i> Foto</a></li>
 						<li><a href="/seguranca/seguranca/trocarSenha/id/<?php echo $_SESSION['usuario_id']?>" class = "" ><i class = "icon-lock" ></i> trocar senha</a></li>
 								<li><a href="/seguranca/seguranca/sair" class = "" ><i class = "icon-off" ></i> Sair</a></li>
 						</ul>

@@ -31,7 +31,9 @@ if( $_GET['url'] == 'discipulo/novoAnonimo' ){
 
 }
 
-if( $_GET['url'] == 'discipulo/discipulo/cracha/id/8' ){
+$perfil = explode('/',$_GET['url']);
+//var_dump($perfil);exit;
+if(isset($perfil[2]) && $perfil[2] == 'perfil' ){
 
 	$url = $_GET['url'];
 

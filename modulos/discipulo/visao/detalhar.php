@@ -78,18 +78,18 @@ $(document).ready(function () {
 <div class = "well" >
 
 			<table class = "table" >
-				<caption><h3><?php echo $discipulo->nome ; ?></h3></caption>
+				<caption><h3><?php echo $discipulo->nome ; ?> <a href="/metas/metas/detalhar/id/<?php echo $discipulo->id ?>">metas</a></h3></caption>
 
 				<tr>	
 					<td class = "span2" rowspan = "4">
 						<img src = "<?php $foto = $discipulo->getFoto() ; echo is_object($foto) ? $foto->url: '' ; ?>"class = "img-rounded" style="height: 150px;"  width = "150"  > 
 					</td>
 
-					<td  >
+					<td>
 					<strong>Nome:</strong>	<?php echo $discipulo->nome ; ?>
 					</td>
 
-					<td  >
+					<td>
 					<strong>Líder: </strong>	<?php echo $discipulo->getLider()->nome ; ?>
 					</td>
 					<td>

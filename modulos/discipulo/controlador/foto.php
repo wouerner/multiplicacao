@@ -59,8 +59,9 @@ class foto{
  
 						$foto->atualizar();
 					}
-						header('location:/discipulo/discipulo/detalhar/id/'.$id);
-						exit();
+					$redirecionar = '/discipulo/discipulo/perfil/id/'.$id;
+					header ('location:'.$redirecionar );
+					exit();
 				} 
 
 			}

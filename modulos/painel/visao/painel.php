@@ -43,6 +43,25 @@
 
 <div class = "row-fluid" >
 	<div class = "span6" >
+		<div class = "well" >
+		<h4>Temos <?php echo $totalAniver ; ?> Aniversariantes hoje:</h4>
+						<?php foreach($discipulosAniver as $da) : ?>
+							<?php ++$contator ?>
+							<a href = "/discipulo/discipulo/perfil/id/<?php echo $da->id ; ?>" >
+							<?php if ( isset($da->alcunha) || $da->alcunha!=''): ?>
+							<?php echo $da->alcunha ; ?>
+							<?php else : ?>
+							<?php echo $da->nome ; ?>
+
+							<?php endif ; ?>
+							</a>
+
+							<?php if ($totalAniver > $contator ) : ?>
+								-
+							<?php endif ; ?>
+						<?php endforeach ; ?>
+
+		</div>
 	
 				<?php require 'modulos/aviso/visao/tabAviso.inc.php' ; ?>
 

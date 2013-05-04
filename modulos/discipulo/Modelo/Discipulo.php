@@ -173,6 +173,18 @@ class Discipulo extends modeloFramework{
 	
 	}
 
+	public function getMeta(){
+		$meta = new \metas\modelo\metas();
+		$meta->discipuloId = $this->id;
+		$this->meta = $meta->listarUm();
+		if ($this->meta){
+						return $this->meta	;
+		}else{
+			return 0 ;
+		}
+	
+	}
+
 
 	public function eLider(){
 
@@ -395,6 +407,27 @@ class Discipulo extends modeloFramework{
 		return $resposta ;
 
 	}
+
+	public function aniversarioHoje(){
+
+		$pdo = self::pegarConexao();
+
+		$sql = '
+						select * 
+						From Discipulo as d where day(d.dataNascimento) = day(curdate()) and month(d.dataNascimento) = month(curdate())	
+						'						;
+
+		$stm = $pdo->prepare($sql);
+		$stm->execute();
+	
+		$resposta = array();
+		while ($obj = $stm->fetchObject ( get_class() ) ) {
+			$resposta[$obj->id] = $obj ; 	
+		}
+
+		return $resposta ;
+	}
+
 
 	/*Pesquisa os nome dos discipulos.
 	 *Retorna apenas os nomes.

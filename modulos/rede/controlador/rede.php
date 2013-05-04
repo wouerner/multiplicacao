@@ -123,6 +123,8 @@ namespace rede\controlador;
 
 				  $redeMembros = $rede->pegarMembrosAtivos();
 					$cont = 1 ;
+					$metaTotal=0;
+					$metaTotalLider=0;
 
 				  require 'modulos/rede/visao/rede/listar.php' ; 
 		

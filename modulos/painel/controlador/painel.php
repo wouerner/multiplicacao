@@ -71,6 +71,13 @@ namespace painel\controlador;
 
 					$totalDiscipulos = count($discipulos) ;
 
+					//aniversarios
+					
+					$discipulosAniver = new \discipulo\Modelo\Discipulo();	
+					$discipulosAniver = $discipulosAniver->aniversarioHoje();	
+					$totalAniver = count($discipulosAniver);	
+					$contator = 0 ;
+
 				  require_once  'modulos/painel/visao/painel.php';
 		}
 

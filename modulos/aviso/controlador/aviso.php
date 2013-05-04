@@ -13,28 +13,6 @@ class aviso{
 	
 	}
 
-	public function novo($url){
-	
-				 $post = $url['post'] ;
-			if ( empty ( $url['post'] ) ) {
-		    	 require_once  'modulos/admissao/visao/novo.php';
-			
-			}else {
-				 $admissao =	new \admissao\modelo\admissao();
-
-				 $admissao->discipuloId = $post['discipuloId'] ;
-				 $admissao->tipoAdmissao = $post['tipoAdmissao'] ;
-
-				 if($admissao->salvar()){
-				 
-				 }else {
-				 	$admissao->atualizar();
-				 
-				 }
-				 header ('location:/discipulo/detalhar/id/'.$post['discipuloId']);
-				 exit();
-			}
-	}
 
 	
 		public function excluir($url){
@@ -46,27 +24,20 @@ class aviso{
 				exit();
 		}
 
-		public function excluirEventoDiscipulo($url){
-				$admissao =	new \admissao\modelo\admissaoDiscipulo();
-				$admissao->admissaoId = $url[3];
-				$admissao->discipuloId = $url[4];
+	public function email($url){
+// O remetente deve ser um e-mail do seu domínio conforme determina a RFC 822.
+// O return-path deve ser ser o mesmo e-mail do remetente.
+$headers = "MIME-Version: 1.1\n";
+$headers .= "Content-type: text/plain; charset=utf-8\n";
+$headers .= "From: Multiplicação12 <multiplicaca12@mga12.org>"."\n"; // remetente
+$headers .= "Return-Path: Meu Nome <multiplicacao@mga12.org>"."\n"; // return-path
+$envio = mail("wouerner@gmail.com", "Aviso", "Texto", $headers,"-r multiplicacao12@mga12.org");
+ 
+if($envio)
+ echo "Mensagem enviada com sucesso";
+else
+ echo "A mensagem não pode ser enviada";
 
-				$admissao->excluir();
-				header ('location:/discipulo/admissao/id/'.$admissao->discipuloId);
-				exit();
-		
-		}
-
-
-		public function detalhar ($url) {
-
-			$admissao = new \admissao\modelo\admissao() ;
-
-			$admissao->id = $url[3] ; 
-			$admissao = $admissao->listarUm() ;
-		
-			require 'admissao/visao/detalhar.php' ;	
-		
-		}
+	}
 
 }
