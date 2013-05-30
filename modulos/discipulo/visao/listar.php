@@ -1,3 +1,7 @@
+<?php
+$mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL;
+$_SESSION['mensagem'] = isset($_SESSION['mensagem']) ? NULL : NULL;
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -50,6 +54,15 @@ $(".btn-warning").click( function(){
 			<article>
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+
+      <div class = "row-fluid" >
+			<?php if ($mensagem) : ?>
+			<div class = "<?php echo $mensagem['class']?>" >
+						<?php echo $mensagem['mensagem'] ; ?>
+				</div>
+			<?php endif ; ?>
+     </div>
+
 				<div class = "row-fluid" >	
 				<div class = "span12" >
 

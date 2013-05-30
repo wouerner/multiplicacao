@@ -101,7 +101,8 @@ class temaRelatorioCelula{
 
 		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-		$sql = 'SELECT * FROM TemaRelatorioCelula ORDER BY month(dataInicio) DESC, DAY(dataInicio) DESC ';
+		$sql = 'SELECT * FROM TemaRelatorioCelula 
+						ORDER BY month(dataInicio) DESC, DAY(dataInicio) DESC';
 
 		$stm = $pdo->prepare($sql);
 

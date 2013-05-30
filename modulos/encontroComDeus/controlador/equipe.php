@@ -28,6 +28,21 @@ class equipe{
 
 	}
 
+	public function listarTodasEquipes($url){
+		$encontroId = $url['4'] ;
+		$equipe = new \encontroComDeus\modelo\equipe() ;
+		$equipe->encontroComDeusId = $encontroId ; 
+		$equipes = $equipe->listarTodasEquipes() ;
+
+		foreach( $equipes as $e ){
+		 $eq[$e['eNome']][] = $e ;
+		}
+//var_dump($eq);
+
+		require_once  'modulos/encontroComDeus/visao/equipe/listarTodos.php';
+
+	}
+
 	public function membros($url){
 
 		$equipe = new \encontroComDeus\modelo\equipe() ;

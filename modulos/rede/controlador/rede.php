@@ -97,6 +97,8 @@ namespace rede\controlador;
 
 				  $redes =	new \rede\modelo\tipoRede();
 				  $redes = $redes->listarTodos();
+					$totalMeta= 0 ;
+					$totalDisc= 0 ;
 
 				  require 'modulos/rede/visao/tipoRede/listar.php' ; 
 		

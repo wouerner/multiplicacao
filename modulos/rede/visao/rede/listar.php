@@ -28,9 +28,8 @@
 						<tr>
 							<th>Nº</th>
 							<th>Líder</th>
-							<th>Meta Lider</th>
 							<th>Nome</th>
-							<th>Meta Discipulo</th>
+							<th>Meta </th>
 						</tr>
 						<?php foreach ( $redeMembros as $discipulo) : ?>
 
@@ -38,25 +37,20 @@
 							<td><?php echo  $cont++  ?></td>
 								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 							<td><a href="/discipulo/discipulo/detalhar/id/<?php echo is_object($lider=$discipulo->getLider()) ? $lider->id : '' ; ?>"><?php echo $lider->nome ; ?></a></td>
-							<td><?php echo is_object($meta = $lider->getMeta()) ? $meta->quantidade : 0 ?></td> 
-	             <?php $metaTotal+= is_object($meta) ? $meta->quantidade : 0?>
 							<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ?>" ><?php echo $discipulo->nome ; ?></a></td>
 							<td><?php echo is_object($meta = $discipulo->getMeta()) ? $meta->quantidade : 0 ?></td> 
 							<?php $metaTotal+= is_object($meta) ? $meta->quantidade : 0?>
 
 							<?php else : ?>
 							<td><?php echo is_object($lider=$discipulo->getLider()) ? $lider->nome : '' ; ?></td>
-							<td><?php echo is_object($meta = $lider->getMeta()) ? $meta->quantidade : 0 ?></td> <?php //$metaTotal+= $meta->quantidade ?>
 							<td><?php echo $discipulo->nome ; ?></td>
-							<td><?php echo is_object($meta = $discipulo->getMeta()) ? $meta->quantidade : 0 ?></td> <?php $metaTotal+= $meta->quantidade ?>
+							<td><?php echo is_object($meta = $discipulo->getMeta()) ? $meta->quantidade : 0 ?></td> <?php $metaTotal+= is_object($meta)? $meta->quantidade : 0 ?>
 							<?php endif ; ?>
 						</tr>
 						
 						<?php endforeach ; ?>
 						<tr>
 	           <td colspan = "" ></td>
-	           <td colspan = "" >Total</td>
-	           <td colspan = "" ><?php echo $metaTotalLider?></td>
 	           <td colspan = "" >Total</td>
 	           <td colspan = "" ><?php echo $metaTotal?></td>
             </tr>

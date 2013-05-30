@@ -14,7 +14,7 @@ class discipulo{
 		  /* Mostra a lista de todos os discipulos cadastrados no sistema
 			*
 			* */
-	
+
 		public function index(){
 			//include("seguranca/ACL/assets/php/database.php"); 
 			$acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
@@ -24,11 +24,10 @@ class discipulo{
 		  $quantidadePorPagina = 50;
 
 		  //$discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
-		  
+
 		  $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
 		  $totalDiscipulos = (int)$totalDiscipulos['total'] ;
 
-			
 		  $discipulos =	new \discipulo\Modelo\Discipulo();
 			if ($acl->hasPermission('admin_acesso') == true){
 		  	$discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
@@ -186,10 +185,10 @@ class discipulo{
 		  * */
 		  public function novo($url){
 					 if ( empty ( $url['post'] ) ) {
-		
+
 					 require_once  'modulos/discipulo/visao/novo.php';
-			
-			}else {
+
+			     }else {
 					 $discipulo =	new \discipulo\Modelo\Discipulo();
 
 					 $post = $url['post'] ;
@@ -202,58 +201,49 @@ class discipulo{
 
 					 if ($discipulo->salvar() ) {
 
-
 								header ('location:/discipulo/detalhar/id/'.$discipulo->id);
 								exit();
 
-					 
 					 }else {
 								$mensagem = ($discipulo->erro== '23000') ? 'E-mail já cadastrado' :  'ok' ; 
 								require_once  'modulos/discipulo/visao/novo.php';
-					 
+
 					 }
 
 			}
-			
 
 		}
 
 		public function novoCompleto($url){
 
 		 if ( empty ( $url['post'] ) ) {
-			$estadosCivies = new \discipulo\Modelo\estadoCivil();
-
+			  $estadosCivies = new \discipulo\Modelo\estadoCivil();
 				$estadosCivies = $estadosCivies->listarTodos();
-
 				$lideres =	new \discipulo\Modelo\Discipulo();
 				$lideres =	$lideres->listarlideres();
-
 				$celula = new \celula\modelo\celula();
-
 				$celulas = new \celula\modelo\celula();
 				$celulas = $celulas->listarTodos();
 
-			//status celular da pessoa	
-			 $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ; 
-			 $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
+			  //status celular da pessoa
+			  $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
+			  $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
 
+        $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
 
-			 $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();	
-			
 			 //$statusCelularDiscipulo->discipuloId= $url[3];
 			 $statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
-			//
 
 			 //Tipos de admissão e admissão atual
 			 $tipoAdmissao = new \admissao\modelo\tipoAdmissao();
-			 $tiposAdmissoes = $tipoAdmissao->listarTodos();	 
+			 $tiposAdmissoes = $tipoAdmissao->listarTodos();
 
 			 $tipoAdmissaoAtual = new \admissao\modelo\admissao();
 			 //$tipoAdmissaoAtual->discipuloId = $url[3] ;
 			 $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
 
 			 //tipos de rede e rede atual da pessoa
-			 $rede = new \rede\modelo\rede(); 
+			 $rede = new \rede\modelo\rede();
 			 $tipoRede = new \rede\modelo\tipoRede();
 			 $funcaoRede = new \rede\modelo\funcaoRede();
 
@@ -261,19 +251,17 @@ class discipulo{
 			 $funcoesRedes = $funcaoRede->listarTodos();
 			 $redeAtual = $rede->listarUm();
 
-
 			 //escala de exito
-		  	$eventos = new \evento\modelo\evento();
-		
-		  //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
-			$eventos = $eventos->listarTodos();
+		   $eventos = new \evento\modelo\evento();
 
-			require_once  'modulos/discipulo/visao/novoCompleto.php';
+		   //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
+			 $eventos = $eventos->listarTodos();
+
+			 require_once  'modulos/discipulo/visao/novoCompleto.php';
 		}else{
 				$discipulo =	new \discipulo\Modelo\Discipulo();
 
 				$post = $url['post'] ;
-
 
 				$discipulo->nome = $post['nome'] ;
 				$discipulo->alcunha = $post['alcunha'] ;
@@ -299,10 +287,8 @@ class discipulo{
 							$aviso->emissor = $_SESSION['usuario_id'];
 							$aviso->salvar();
 
-						  $_SESSION['mensagem'] = array( 000 => array ( 
-									 												'mensagem'	=> 'Cadastro Realizado com Sucesso!',
-									 												'classe'		=> 'success'
-						  																				) );
+							$_SESSION['mensagem'] = array('mensagem'	=> 'Cadastro Realizado com Sucesso!',
+											                      'class' => 'alert alert-success');
 				}else {
 
 				$_SESSION['dados']['nome'] = $post['nome'] ;
@@ -311,10 +297,10 @@ class discipulo{
 				$_SESSION['dados']['endereco'] = $post['endereco'] ;
 				$_SESSION['dados']['email'] = $post['email'] ;
 
-					$_SESSION['mensagem'] ="E-mail já cadastrado" ;
-				  	header ('location:/discipulo/discipulo/novoCompleto');
-					exit();
-				
+				$_SESSION['mensagem'] ="E-mail já cadastrado" ;
+				header ('location:/discipulo/discipulo/novoCompleto');
+				exit();
+
 				}
 
 
@@ -333,26 +319,24 @@ class discipulo{
 
 
 				//tipos de rede e rede atual da pessoa
-				$rede = new \rede\modelo\rede(); 
+				$rede = new \rede\modelo\rede();
 
 			 	$rede->discipuloId = $discipulo->id;
 			 	$rede->tipoRedeId = $post['tipoRedeId'];
 			 	$rede->funcaoRedeId = $post['funcaoRedeId'];
 				if (!$rede->salvar()) $rede->atualizar();
 
-				
 				$discipuloEventos = new \evento\modelo\evento();
-			  	$eventos = isset($post['eventos']) ? $post['eventos'] : NULL ;		
+			  	$eventos = isset($post['eventos']) ? $post['eventos'] : NULL ;
 				if ($eventos){
 						  $discipuloEventos->salvarEventos($eventos,$discipulo->id);
 				}
 
-				header('location:/discipulo/discipulo/listarAtualizar');
+				header('location:/discipulo/discipulo/novoCompleto');
 				exit();
 
 		}
 
-		
 		}
 
 		  public function novoAnonimo($url){

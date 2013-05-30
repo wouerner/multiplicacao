@@ -9,6 +9,7 @@ class metas extends modeloFramework{
   private $quantidade ;
   private $discipuloId ;
   private $intervaloMetasId ;
+  private $tipoRedeId ;
 
   public function __get($prop){
 
@@ -20,6 +21,33 @@ class metas extends modeloFramework{
 		 $this->$prop = $valor ;
 		  
   }
+
+    public  function metaPorRede(){
+		
+			  $pdo = self::pegarConexao() ;
+
+				$sql =' 
+								SELECT sum(m.quantidade) FROM Metas as m inner join TipoRede as tr on tr.id = m.tipoRedeId WHERE tr.id = ? 
+								group by tr.id
+								';
+
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+				//var_dump($this);
+				$id = $this->id ;
+
+			  $stm->bindParam(1, $id);
+
+			  $stm->execute();
+			  $resposta = $stm->fetch();
+
+			  $pdo = null ;
+
+			  return $resposta;
+		
+		}	
+
+
   public function salvar(){
 
 			  self::insert($this) ;
@@ -54,13 +82,14 @@ class metas extends modeloFramework{
 			  
 			  }
 
-			  public function listarTodos(){
+			  public static function listarPorTodos(){
 
 			  $pdo = self::pegarConexao() ;
 
-			  $sql = 'SELECT * 
-						 FROM EncontroComDeus 
-						 ORDER BY nome ' ;
+				$sql = '
+								SELECT d.id as id , d.nome AS nome, m.quantidade AS quantidade, m.id AS metaId FROM Discipulo as d inner join Metas as m on d.id = m.discipuloId
+WHERE 1 order by nome
+						 ' ;
 
 			  $stm = $pdo->prepare($sql);
 
@@ -69,7 +98,7 @@ class metas extends modeloFramework{
 			  $pdo = null ;
 				$resposta = array();
 
-				while ( $obj = $stm->fetchObject (get_class($this))  ) {
+				while ( $obj = $stm->fetchObject ('\discipulo\Modelo\Discipulo')  ) {
 					$resposta[$obj->id] = $obj ;	
 				}
 
@@ -98,25 +127,7 @@ class metas extends modeloFramework{
 
 			  public function excluir(){
 
-			  //abrir conexao com o banco
-			  $pdo = new \PDO(DSN, USER, PASSWD);
-			  //cria sql
-			  $sql = "DELETE FROM EncontroComDeus WHERE id = ?  
-							  ";
-
-			  //prepara sql
-			  $stm = $pdo->prepare($sql);
-			  //trocar valores
-			  $stm->bindParam(1, $this->id );
-
-			  $resposta = $stm->execute();
-
-			  $erro = $stm->errorInfo();
-	
-			  //fechar conexÃ£o
-			  $pdo = null ;
-
-			  return $resposta;
+			     return self::delete($this) ;
 			  
 			  }
 

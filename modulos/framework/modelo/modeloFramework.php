@@ -1,6 +1,7 @@
 <?php 
 
 namespace framework\modelo ;
+use PDO ; 
 
 class modeloFramework{
 
@@ -75,6 +76,28 @@ class modeloFramework{
 				var_dump($stm->debugDumpParams());
 
 				var_dump($stm->errorInfo());
+        return $pdo->lastInsertId();
+
+    }
+
+    public static function delete($data)
+    {
+				$id = $data->id;
+				$reflect = new \ReflectionClass($data);
+				$class = ucfirst ($reflect->getShortName());
+				$props   = $reflect->getProperties();
+
+				$pdo = self::pegarConexao();
+
+				$sql = 'DELETE FROM '.$class.' WHERE id  = ? ' ;
+			  $stm = $pdo->prepare($sql);
+
+				$stm->bindParam(1, $id , PDO::PARAM_INT);
+
+			  $stm->execute();
+				//var_dump($stm->debugDumpParams());
+
+				//var_dump($stm->errorInfo()); die();
         return $pdo->lastInsertId();
 
     }

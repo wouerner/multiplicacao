@@ -4,7 +4,7 @@ body {
 }
 
 .navbar-inner{
-	background : url('../img/honey.png') ;
+/*	background : url('../img/honey.png') ;*/
 
 }
 

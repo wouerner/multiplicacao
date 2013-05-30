@@ -9,10 +9,17 @@ $usuario = $usuario[0] ;
 
 ?>
 
-<div class="navbar navbar-fixed-top">
+<div class="navbar ">
   <div class="navbar-inner ">
 
+<a class="btn btn-navbar " data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+
 							<a class="brand" href="/painel/painel"> MGA<sup>Beta</sup></a>
+<div class="nav-collapse collapse">
         <ul class="nav" role="navigation">
 
 					<li class="divider-vertical"></li>
@@ -43,8 +50,9 @@ $usuario = $usuario[0] ;
 								<li class = "dropdown">
 									<a href = "#" class="dropdown-toggle" data-toggle="dropdown" role = "button"><i class = "icon-screenshot" ></i> Metas<b class="caret"></b></a>
 									<ul class="dropdown-menu">	
+										<li><a href = "/metas/metas"><i class = "icon-plus " ></i > Discipulos Com Metas</a></li>
 										<li><a href = "/metas/intervaloMetas/novo"><i class = "icon-plus " ></i > novo intervalo</a></li>
-										<li><a href = "/rede/rede/listarTipoRede"><i class = "icon-list-alt " ></i> Listarintervalo</a></li>
+										<li><a href = "/rede/rede/listarTipoRede"><i class = "icon-list-alt " ></i> Listar intervalo</a></li>
 									</ul>
 								</li>
 								<?php endif ; ?>
@@ -155,6 +163,7 @@ $usuario = $usuario[0] ;
 									<ul class = "dropdown-menu" >
 										<li><a href = "/relatorio/relatorio/relatorioCelulaEnvio" ><i class = "" ></i> Por Data</a></li>
 										<li><a href="/relatorio/relatorio/relatorioCelulaEnvioPorTema">Por Tema</a></li>
+										<li><a href="/celula/relatorio/porMes">Por Mês</a></li>
 									</ul>
 								</li>
 								<?php endif ; ?>
@@ -202,7 +211,7 @@ $usuario = $usuario[0] ;
 						</ul>
 					</li>
 				</div>
-
+</div>
       </div><!-- /.nav-collapse -->
     </div>
   </div><!-- /navbar-inner -->

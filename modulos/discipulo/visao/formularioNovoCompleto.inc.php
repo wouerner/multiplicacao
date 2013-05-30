@@ -60,7 +60,6 @@
 
 							</div>
 							</div>
-									
 
 				</div>
 				</div>
@@ -96,7 +95,6 @@
 								<legend>Dados Ministériais</legend>
 									  <div class = "row-fluid " >
 									  <div class = "span12 " >
-									 
 										 <div class = "control-group span2" >
 
 									  		<!-- <div class = "ui-widget" >-->
@@ -185,27 +183,24 @@
 			
 		</fieldset>
 
-		<fieldset>
+<!--		<fieldset>
 			<legend>Escala Exito</legend>
-							  <div class="control-group">
-			
-						
+					 <div class="control-group">
 						<?php foreach ( $eventos as $evento) : ?>
-
 							  <div class="control-group span2">
 									<label class = "checkbox"  ><?php  echo $evento['nome'] ?>:
 									<input  name = "eventos[]" type = "checkbox"  
 										  value = "<?php echo $evento['id'] ; ?>" <?php  echo (array_key_exists('discipuloId',$evento))? "checked" :"" ; ?> >
 									</label>
 								</div>
-
 						<?php endforeach ; ?>
 					</div>
 		</fieldset>
+-->
 
 				<div class = "form-actions " >
 				  		<button type = "submit" class = "btn btn-success" ><i class = "icon-ok icon-white" ></i> Salvar</button>
 				  		<a href = "/discipulo/listarAtualizar" class = "" ><i class = "icon-ban-circle" ></i>Cancelar</a>
 			  </div>
 	</fieldset>
-					</form>
+</form>

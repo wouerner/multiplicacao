@@ -9,6 +9,7 @@ class encontroComDeus extends modeloFramework{
   private $nome ;
   private $dataEncontroComDeus ;
   private $endereco ;
+  private $ativo ;
 
   public function __get($prop){
 
@@ -69,12 +70,89 @@ class encontroComDeus extends modeloFramework{
 			  
 			  }
 
+			  public function ativar(){
+
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "UPDATE EncontroComDeus SET 	 ativo = 1
+				  WHERE id = ?
+							  ";
+
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->id );
+
+			  $resposta = $stm->execute();
+
+			  $erro = $stm->errorInfo();
+			  //var_dump($erro);
+			  //exit();
+
+			  //fechar conexÃ£o
+			  $pdo = null ;
+
+			  return $resposta;
+			  }
+
+			  public function desativar(){
+
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "UPDATE EncontroComDeus SET 	 ativo = 0
+				  WHERE id = ?
+							  ";
+
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->id );
+
+			  $resposta = $stm->execute();
+
+			  $erro = $stm->errorInfo();
+			  //var_dump($erro);
+			  //exit();
+
+			  //fechar conexÃ£o
+			  $pdo = null ;
+
+			  return $resposta;
+			  }
+
+
+
 			  public function listarTodos(){
 
 			  $pdo = self::pegarConexao() ;
 
 			  $sql = 'SELECT * 
 						 FROM EncontroComDeus 
+						 ORDER BY nome ' ;
+
+			  $stm = $pdo->prepare($sql);
+
+			  $resposta = $stm->execute();
+
+			  $pdo = null ;
+				$resposta = array();
+
+				while ( $obj = $stm->fetchObject (get_class($this))  ) {
+					$resposta[$obj->id] = $obj ;	
+				}
+
+			  return $resposta ;
+				}
+
+			  public function listarTodosAtivos(){
+
+			  $pdo = self::pegarConexao() ;
+
+			  $sql = 'SELECT * 
+						 FROM EncontroComDeus 
+						 WHERE ativo = 1
 						 ORDER BY nome ' ;
 
 			  $stm = $pdo->prepare($sql);

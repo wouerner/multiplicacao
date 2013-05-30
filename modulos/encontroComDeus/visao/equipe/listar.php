@@ -20,9 +20,10 @@
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 				<a class = "btn btn-success" href = "/encontroComDeus/equipe/novoEquipe/id/<?php echo $encontroId ; ?>" ><i class = "icon-plus icon-white" ></i>Nova Equipe</a>
+				<a class = "btn btn-primary" href = "/encontroComDeus/equipe/listarTodasEquipes/id/<?php echo $encontroId ; ?>" ><i class = "icon-plus icon-white" ></i>Todas Equipe</a>
 				<div class = "row-fluid" >	
 						<table class = "table bordered-table">
-						<caption><h3>Encontro com Deus</h3></caption>
+						<caption><h3>Encontro: </h3></caption>
 
 						<?php foreach ( $equipes as $e) : ?>
 						<tr>
@@ -30,7 +31,6 @@
 							<td><a href="/encontroComDeus/equipe/membros/id/<?php echo $e->id?> ">Participantes</a></td>
 							<td><a class = "btn btn-mini btn-danger" href="/encontroComDeus/equipe/excluirEquipe/id/<?php echo $e->id?>/encontroId/<?php echo $encontroId?> "><i class = "icon-remove icon-white" ></i>Excluir</a></td>
 						</tr>
-						
 						<?php endforeach ; ?>
 						</table>
 			</div>

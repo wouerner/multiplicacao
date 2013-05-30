@@ -1,15 +1,14 @@
 <?php
 use celula\modelo\celula;
 use discipulo\Modelo\Discipulo;
-
-namespace celula\controlador; 
-
+namespace celula\controlador;
 use aviso\modelo\tipoAviso;
 use aviso\modelo\aviso;
-
+use celula\modelo\relatorioCelula as relatorioModelo;
+use celula\modelo\temaRelatorioCelula as temaModelo;
 
 class relatorio{
-	
+
 	public function index($url){
 
 		$relatorioCelula = new \celula\modelo\relatorioCelula();
@@ -31,12 +30,12 @@ class relatorio{
 				$temas = new \celula\modelo\temaRelatorioCelula();
 
 				$temas = $temas->listarTodosAtivos();
-				$lider = $celula->pegaLider();	
-				
-				$discipulos = $celula->listarDiscipulos();  
+				$lider = $celula->pegaLider();
+
+				$discipulos = $celula->listarDiscipulos();
 				require_once  'modulos/celula/visao/relatorioCelula/novo.php';
 			}else{
-				
+
 				$relatorioCelula = new \celula\modelo\relatorioCelula() ;
 				$relatorioCelula->dataEnvio = date('Y-m-d H:i:s') ;
 				$relatorioCelula->texto = $post ['texto'] ;
@@ -51,14 +50,13 @@ class relatorio{
 
 				$aviso = new aviso();
 
-				$aviso->tipoAviso = tipoAviso::relatorioNovo ; 
-				$aviso->identificacao = $relatorioCelula->id ; 
+				$aviso->tipoAviso = tipoAviso::relatorioNovo ;
+				$aviso->identificacao = $relatorioCelula->id ;
 				$aviso->emissor = $_SESSION['usuario_id'];
 				$aviso->salvar();
 
 				header ('location:/celula/relatorio/index/celulaId/'.$relatorioCelula->celulaId) ;
 
-			
 			}
 
 		}
@@ -78,7 +76,7 @@ class relatorio{
 				$lider = $lider->listarUm($celula->lider) ;
 
 				require_once  'modulos/celula/visao/atualizar.php' ;
-			
+
 			}else {
 
 				$celula =	new \celula\modelo\celula();
@@ -139,23 +137,51 @@ class relatorio{
 
 			$nome = isset($_GET['nome']) ? $_GET['nome'] : NULL ;
 			$celula =	new \celula\modelo\celula();
-			$celula->nome = $nome; 
-			$celulas = $celula->chamar($nome);	
+			$celula->nome = $nome;
+			$celulas = $celula->chamar($nome);
 			require_once 'celula/visao/chamar.php' ;
 
-		
 		}
 
 		public function lideresCelula(){
-		
+
 			$lideres = new \celula\modelo\celula();
 			$lideres = $lideres->listarLideresCelula() ;
 
 			require_once 'celula/visao/listarLideresCelula.php' ;
 
-		
 		}
-	
-	
-	
-}	
+    /*
+		 * Relatorio de Célula por mês.
+		 * */
+		public function porMes($url){
+			$ids = isset($url['post']['temasId']) ? $url['post']['temasId']: '';
+
+			if ( $ids){
+      foreach($ids as $id ){
+				$t = new temaModelo();
+				$t->id = $id;
+			  $tem[] = $t->listarUm();
+			}}
+      //var_dump($tem);
+
+      $temas = new temaModelo();
+      $temas = $temas->listarTodos();
+
+			$relatorio = new relatorioModelo();
+			$relatorios = $relatorio->porMes($ids);
+			//var_dump($relatorios);
+
+			$rel = array();
+			foreach($relatorios as $celula){
+				$rel[$celula['celulaNome']][$celula['tId']] = $celula['tId'] ;
+			}
+
+			//var_dump($ids);
+			//var_dump($rel);
+			//die();
+			require_once 'celula/visao/relatorioCelula/porMes.php' ;
+
+		}
+
+}

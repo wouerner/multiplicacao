@@ -2,7 +2,10 @@
 
 namespace rede\modelo ;
 
-class  tipoRede{
+use \framework\modelo\modeloFramework ; 
+use \metas\modelo\metas as Metas; 
+
+class  tipoRede extends modeloFramework {
 
 	private $id ;
 	private $nome ;
@@ -20,6 +23,15 @@ class  tipoRede{
 					 $this->$prop = $valor ;
 		  
 		  }
+
+			public function getMeta(){
+				$meta = new Metas();
+				$meta->tipoRedeId = $this->id;
+				$meta = $meta::metaPorRede();			
+				//var_dump($meta);
+				return $meta[0] ;
+			
+			}
 
 			  public function salvar(){
 
@@ -85,6 +97,32 @@ class  tipoRede{
 		return $resposta;
 
 	}
+
+    public  function totalDiscipulosPorRede(){
+		
+			  $pdo = self::pegarConexao() ;
+
+				$sql =' 
+								SELECT count(*) FROM Discipulo as d 
+inner join Redes as r on d.id = r.discipuloId and d.ativo = 1
+WHERE r.tipoRedeId = ? 
+								';
+
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+				//var_dump($this);
+				$id = $this->id ;
+
+			  $stm->bindParam(1, $id);
+
+			  $stm->execute();
+			  $resposta = $stm->fetch();
+
+			  $pdo = null ;
+
+			  return $resposta[0];
+		
+		}	
 
 	public function listarUm(){
 

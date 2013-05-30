@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<?php include 'incluidos/css.inc.php' ; ?>
 		<?php include 'incluidos/js.inc.php' ; ?>
 
@@ -62,8 +62,19 @@
 						<?php endforeach ; ?>
 
 		</div>
+<div class="accordion" id="accordion2">
+	<div class="accordion-group">
+		<div class="accordion-heading">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Avisos <b class="caret pull-right"></b></a>
+		</div>
+		<div id="collapseOne" class="accordion-body collapse">
+		<div class="accordion-inner">
 	
 				<?php require 'modulos/aviso/visao/tabAviso.inc.php' ; ?>
+</div>
+</div>
+</div>
+</div>
 
 <div class = "well" >
 

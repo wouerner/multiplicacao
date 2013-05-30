@@ -36,6 +36,8 @@ unset($_SESSION['mensagem']) ;
 						<tr>
 							<th>#</th>
 							<th>Nome</th>
+							<th>Total Discipulos</th>
+							<th>Metas</th>
 							<th>Ações</th>
 						</tr>
 						</thead>
@@ -45,10 +47,15 @@ unset($_SESSION['mensagem']) ;
 						<tr>
 							<td><?php echo !isset($c) ? $c=1 : ++$c ; ?></td>
 							<td><a href="/rede/rede/detalharTipoRede/id/<?php echo $rede->id?>" ><?php echo $rede->nome ; ?> </a></td>
+							<td><?php echo $rede->totalDiscipulosPorRede() ; ?> </td>
+							<td><?php echo $rede->getMeta() ; ?> </td>
+							<?php $totalMeta += $rede->getMeta() ; ?> 
+							<?php $totalDisc += $rede->totalDiscipulosPorRede() ; ?> 
 							<?php require 'rede/visao/tipoRede/menu.inc.php' ; ?>
 						</tr>
 						
 						<?php endforeach ; ?>
+						<tr><td colspan= "2">Total</td><td><?php echo $totalDisc ?></td><td colspan=""><?php echo $totalMeta ?></td></tr>
 						</tbody>
 						</table>
 			</div>

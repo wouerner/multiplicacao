@@ -8,7 +8,7 @@
 						<td> 
 							<span class="label label-info"> 
 								<?php echo date_format(date_create($a['dataAviso']), 'd/m') ; ?><br>
-								<?php echo date_format(date_create($a['dataAviso']), 'H:m') ; ?></span>
+								<?php echo date_format(date_create($a['dataAviso']), 'H:i') ; ?></span>
 							
 							</td>	<td>
 										<?php if ( isset($a['url']) ) : ?>

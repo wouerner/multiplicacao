@@ -33,7 +33,28 @@ class encontroComDeus{
 		header ('location:/encontroComDeus/encontroComDeus' );
 		exit();
 		}
-			
+
+		}
+
+	public function ativar($url){
+	  if ( isset ( $url['post'] ) ) {
+						$encontro = new \encontroComDeus\modelo\encontroComDeus() ;
+						$encontro->id = $url[4];
+						$encontro->ativar() ;
+						header ('location:/encontroComDeus/encontroComDeus' );
+						exit();
+		}
+
+		}
+
+	public function desativar($url){
+	  if ( isset ( $url['post'] ) ) {
+						$encontro = new \encontroComDeus\modelo\encontroComDeus() ;
+						$encontro->id = $url[4];
+						$encontro->desativar() ;
+						header ('location:/encontroComDeus/encontroComDeus' );
+						exit();
+		}
 
 		}
 

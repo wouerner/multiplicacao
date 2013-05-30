@@ -40,21 +40,22 @@ class participantesEncontro {
 		header ('location:/encontroComDeus/encontroComDeus' );
 		exit();
 		}
-			
+
 
 		}
 
 	public function novoParticipante($url){
 		$id = $url[4] ;
-		
+
 	  if ( empty ( $url['post'] ) ) {
 		$discipulo = new discipulo();
-		$discipulo->id = $id ; 
+		$discipulo->id = $id ;
 		$discipulo = $discipulo->listarUm();
 
 		$encontro = new \encontroComDeus\modelo\encontroComDeus();
-		$encontro = $encontro->listarTodos();
-		
+		//$encontro = $encontro->listarTodos();
+		$encontro = $encontro->listarTodosAtivos();
+
 		}else{
 		$post = $url['post'] ;
 		$participantes = new \encontroComDeus\modelo\participantesEncontro() ;
@@ -62,6 +63,9 @@ class participantesEncontro {
 		$participantes->encontroComDeusId = $post['encontroId'] ;
 		$participantes->discipuloId = $post['id'] ;
 		$participantes->salvar() ;
+
+		$_SESSION['mensagem'] = array('mensagem'	=> 'Cadastro Realizado com Sucesso!',
+											                      'class' => 'alert alert-success');
 
 		header ('location:/discipulo/discipulo' );
 		exit();

@@ -49,6 +49,13 @@
 
 							</div>
 							</div>
+
+								<div class = "controls">
+								<select name="tipoRedeId">
+						<?php foreach ( $tiposRede as $i) : ?>
+								<option value = "<?php echo $i->id ?>" ><?php echo $i->nome ?></option>
+						<?php endforeach ; ?>
+								</select>
 					<button class = "btn" type="submit">Salvar</button>
 					</form>
 			</div>

@@ -19,8 +19,8 @@
 	<?php if ($discipulo->eLider() ) : ?>
 	<a target="blank" id = "" href="/discipulo/discipulo/listarPorLider/id/<?php echo $discipulo->id ?>" class = "btn btn-mini btn-info " alt = "Discipulos por líder" ><i class="icon-user icon-white"></i> Discs</a>
 	<?php endif ; ?>
-	
-		<a id = "<?php echo $discipulo->id ?>" href="/encontroComDeus/participantesEncontro/novoParticipante/id/<?php echo $discipulo->id ?>" class = "btn btn-mini" alt = "" > Enc. com Deus</a>
+
+		<a id = "<?php echo $discipulo->id ?>" href="/encontroComDeus/participantesEncontro/novoParticipante/id/<?php echo $discipulo->id ?>" class = "btn btn-mini" alt = "" > Encontro</a>
 		<a id = "<?php echo $discipulo->id ?>" href="/encontroComDeus/equipe/novoMembro/id/<?php echo $discipulo->id ?>" class = "btn btn-mini" alt = "" > Equipe Encontro</a>
 
 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>

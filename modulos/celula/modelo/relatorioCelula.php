@@ -1,8 +1,8 @@
 <?php
-
 namespace celula\modelo;
+use \framework\modelo\modeloFramework;
 
-class relatorioCelula{
+class relatorioCelula extends modeloFramework{
 
 	private $id;
 	private $dataEnvio;
@@ -17,12 +17,10 @@ class relatorioCelula{
 
 	public function __get($prop){
 		return $this->$prop;
-	
 	}
-	
+
 	public function __set($prop , $valor){
 		$this->$prop = $valor;
-	
 	}
 
 	public function getLider(){
@@ -37,7 +35,7 @@ class relatorioCelula{
 		$resposta = $tema->listarUm() ;
 		return $resposta ;
 	}
-		
+
 	public function salvar(){
 
 	//abrir conexao com o banco
@@ -552,29 +550,9 @@ where c.tipoRedeId in ('.$rede.' )
 
 		catch(\Exception $e){
 			$this->erros['banco'] = $e->getMessage();
-		
-		
 		}
 
-
-	
-	
 	}
-
-	/* destroi a sessÃ£o do usuario
-	 *
-	 * */
-	public function sair(){
-	
-		session_start();
-		session_destroy();
-	
-	}
-
-
-	/* devolve uma lista de discipulos com nome especificado.
-	 *
-	 * */
 
 	public function chamar($nome){
 
@@ -591,12 +569,41 @@ where c.tipoRedeId in ('.$rede.' )
 		$stm->execute();
 
 		return $stm->fetchAll();
-		
+	}
 
-	
-	
+	public function porMes($ids = null)
+	{
+
+		//var_dump($ids);
+		$ids = implode(',',$ids);
+		//var_dump($ids);
+	  $pdo = self::pegarConexao() ;
+
+		$sql = '
+				SELECT DISTINCT
+						c.id AS cId,
+						c.nome AS celulaNome,
+						tema.id AS tId,
+						IFNULL(tema.nome, \'sem\') AS temaNome
+				FROM
+						TemaRelatorioCelula AS tema
+								inner JOIN
+						RelatorioCelula AS relatorio ON relatorio.temaRelatorioCelulaId = tema.id
+								AND tema.id in ('.$ids.')
+								RIGHT JOIN
+						Celula AS c ON c.id = relatorio.celulaId
+						order by c.nome
+						';
+
+		$stm = $pdo->prepare($sql);
+
+		//$stm->bindParam(1, $nome);
+
+		$stm->execute();
+
+		return $stm->fetchAll();
 	}
 
 
+
 }
-?> 

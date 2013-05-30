@@ -10,12 +10,11 @@
 		<section class = "container-fluid">
 
 		<nav> 
-			
+
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
 		</nav>
-			
 
-		<section>		
+		<section>
 			<article>
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
@@ -41,9 +40,19 @@
 								<a class = "btn btn-mini btn-danger" href="/encontroComDeus/encontroComDeus/excluir/id/<?php echo $e->id?>">
 									<i class = "icon-remove icon-white" ></i> Excluir
 								</a>
+              <?php if ( !$e->ativo): ?>
+								<a class = "btn btn-mini " href="/encontroComDeus/encontroComDeus/ativar/id/<?php echo $e->id?>">
+									<i class = "icon-arrow-up icon-white" ></i> Ativar
+								</a>
+              <?php else: ?>
+								</a>
+								<a class = "btn btn-mini " href="/encontroComDeus/encontroComDeus/desativar/id/<?php echo $e->id?>">
+									<i class = "icon-arrow-down icon-white" ></i> Desativar
+								</a>
+              <?php endif ; ?>
 							</td>
 						</tr>
-						
+
 						<?php endforeach ; ?>
 						</table>
 			</div>

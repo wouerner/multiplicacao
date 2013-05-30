@@ -24,7 +24,7 @@
 					<form class = "well form-horizontal" action = "/encontroComDeus/participantesEncontro/novoParticipante" method = "post">
 						<legend><?php echo $discipulo->nome ; ?></legend>
 						<input type = "hidden" name = "id" value = "<?php echo $discipulo->id ; ?>" >
-						<label>Encontro com Deus: </label>
+						<label>Encontro: </label>
 						<select name = "encontroId" >
 						<?php foreach ( $encontro as $e) : ?>
 

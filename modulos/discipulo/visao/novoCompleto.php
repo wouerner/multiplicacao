@@ -1,12 +1,11 @@
 <?php 
-
 $mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL;
 $dados = isset($_SESSION['dados']) ? $_SESSION['dados'] : NULL;
 $_SESSION['mensagem'] = isset($_SESSION['mensagem']) ? NULL : NULL;
 $_SESSION['dados'] = isset($_SESSION['dados']) ? NULL : NULL;
 
+//var_dump($mensagem);
 ?>
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -88,16 +87,15 @@ $_SESSION['dados'] = isset($_SESSION['dados']) ? NULL : NULL;
 			</nav>
 		</header>
 
-		<section>		
+		<section>
 
 			<article>
 
-			<?php if ($mensagem) : ?>	
-				<div class = "alert" >
-						<?php echo $mensagem ; ?>
+			<?php if ($mensagem) : ?>
+			<div class = "<?php echo $mensagem['class']?>" >
+						<?php echo $mensagem['mensagem'] ; ?>
 				</div>
 			<?php endif ; ?>
-			
 
 				<?php include 'discipulo/visao/formularioNovoCompleto.inc.php' ; ?>
 			</article>

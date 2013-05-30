@@ -1,22 +1,20 @@
 <?php
 namespace metas\controlador;
-
+use \metas\modelo\metas as metasModelo;
 use \discipulo\Modelo\Discipulo as discipulo;
+use \rede\modelo\tipoRede as TipoRede;
+
 
 class Metas
 {
 	
-	public function index($url){
+	public function index(){
 
-		$participante = new \encontroComDeus\modelo\participantesEncontro() ;
-		$participante->encontroComDeusId =$url[4] ;
-		$discipulos = $participante->listarTodos();
+		$metas =  metasModelo::listarPorTodos() ;
 
-		$total = count ($discipulos) ;
-		$ativo = 'active' ;
+		$total = count ($metas) ;
 
-
-		require_once  'modulos/encontroComDeus/visao/participantesEncontro/listarTodos.php';
+		require_once  'modulos/metas/visao/metas/listar.php';
 
 	}
 
@@ -31,6 +29,10 @@ class Metas
 
 			$intervalo = new \metas\modelo\intervaloMetas();
 			$intervalos = $intervalo->listarTodos();
+
+			$tipoRede = new TipoRede();
+			$tiposRede = $tipoRede -> listarTodos();
+
 			require_once  'modulos/metas/visao/metas/novo.php';
 			
 		}else {
@@ -42,6 +44,8 @@ class Metas
 		 $metas->quantidade = $post['quantidade'] ;
 		 $metas->discipuloId = $post['discipuloId'] ;
 		 $metas->intervaloMetasId=$post['intervaloMetas'];
+		 $metas->tipoRedeId=$post['tipoRedeId'];
+		 //var_dump($metas);die();
 		 $metas->salvar();
 
 		 header ('location:/discipulo/discipulo' );
@@ -342,9 +346,9 @@ class Metas
 		}
 
 		public function excluir($url){
-				$participante =	new \encontroComDeus\modelo\participantesEncontro();
-				$participante->id = $url[4]; 
-				$participante->excluir();
+				$meta =	new metasModelo();
+				$meta->id = $url[4]; 
+				$meta->excluir();
 
 				$redirecionar = $_SERVER['HTTP_REFERER'];
 				header ('location:'.$redirecionar );
@@ -362,7 +366,6 @@ class Metas
 		}
 
 
-
 		public function detalhar ($url) {
 
 			$discipulo = new \discipulo\Modelo\Discipulo() ;
@@ -372,7 +375,8 @@ class Metas
 
 			$meta = new \metas\modelo\metas() ;
 			$meta->discipuloId = $url[4] ; 
-			$meta = $meta->listarUm() ;
+			$metas = $meta->listar() ;
+			//var_dump($metas);
 		
 			require 'metas/visao/metas/detalhar.php' ;	
 		
