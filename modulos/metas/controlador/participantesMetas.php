@@ -1,12 +1,13 @@
 <?php
+namespace metas\controlador;
 
-namespace encontroComDeus\controlador;
-use \discipulo\Modelo\Discipulo as discipulo;
+use \discipulo\Modelo\Discipulo 		as discipulo;
+use \metas\modelo\metas					as metas;
+use \metas\modelo\participantesMetas 	as participantesMetasModelo;
 
-class equipe
+class participantesMetas
 {
-	
-    public function index($url){
+	public function index($url){
 
 		$encontroId = $url['4'] ;
 		$encontro = new \encontroComDeus\modelo\equipe() ;
@@ -19,13 +20,13 @@ class equipe
 	}
 
 
-	public function listarEquipe($url){
+	public function listar($url){
 
-		$tipoEquipe = new \encontroComDeus\modelo\tipoEquipe() ;
-		$tiposEquipe = $tipoEquipe->listarUm();
-		$encontroId = $url[6] ;
-
-		require_once  'modulos/encontroComDeus/visao/equipe/listar.php';
+		$participante = new participantesMetasModelo() ;
+		$participante->metasId = $url[4];
+		$participantes = $participante->listar();
+		$total = count($participantes);
+		require_once  'modulos/metas/visao/participantesMetas/listar.php';
 
 	}
 
@@ -97,31 +98,28 @@ class equipe
 	}
 
 	public function novo($url){
+		if( !empty($url[4] )) {
+			$discipulo = new discipulo();
+			$discipulo->id = $url[4];
+			$discipulo = $discipulo->listarUm();
 
-	  if ( empty ( $url['post'] ) ) {
-			$encontroId = $url[4] ;
-			$discipulos = new discipulo(); 
-			$discipulos = $discipulos->listarTodos($_SESSION['usuario_id']);
+			$meta = new metas() ;
+			$meta->discipuloId =$_SESSION['usuario_id']  ; 
+			$metas = $meta->listar() ;
 
-			$tipoEquipe = new \encontroComDeus\modelo\tipoEquipe();
-			$tipoEquipe =$tipoEquipe->listarTodos() ;
+		//var_dump($metas);
 
-			require_once  'modulos/encontroComDeus/visao/equipe/novo.php';
-		}else {
-
-		$post = $url['post'] ;
-
-		$equipe = new \encontroComDeus\modelo\equipe() ;
-
-		$discipulos= $post['equipe'] ;
-		$equipe->tipoEquipeId = $post['tipoEquipeId'] ;
-		$equipe->encontroComDeusId = $post['encontroId'] ;
-		$equipe->salvarMuitos($discipulos) ;
-
-		header ('location:/encontroComDeus/equipe/index/id/'.$quipe->id );
-		exit();
+			require_once 'modulos/metas/visao/participantesMetas/novo.php';
+			exit;
+		}else{
+			$post = $url['post'];
+			$participante = new participantesMetasModelo();
+			$participante->discipuloId =$post['discipuloId'] ;
+			$participante->metasId =  $post['metaId'];
+			$participante->salvar();
+			header ('location:/discipulo/discipulo' );
+			exit();
 		}
-
 	}
 
 		public function novoMinisterio($url){
@@ -330,9 +328,8 @@ class equipe
 
 			$discipulo->id = $url[3] ; 
 			$discipulo = $discipulo->listarUm() ;
-		
-			require 'discipulo/visao/detalhar.php' ;	
-		
+
+			require 'discipulo/visao/detalhar.php' ;
 		}
 
 		public function detalharFuncao ($url) {

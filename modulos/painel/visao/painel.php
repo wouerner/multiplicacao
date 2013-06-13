@@ -183,16 +183,27 @@
 				<div class = "span12 well well-small">
 				<div class = "row-fluid" >
 				<h5><strong> <?php echo $totalDiscipulos ; ?>  Discipulos: </strong></h5>
-				
+
+				<ul class="thumbnails">
 				<?php foreach( $discipulos as $d ) : ?>
-					<div class = "span2   "  >	
+          <li class="span4">
+           <div class="thumbnail">
 					 <a class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
-						<img src = "<?php echo is_object($d->getFoto()) ? $d->getFoto()->url : '' ; ?>" class = "img-circle span12"  >
-						<i class = "<?php echo $d->eLider() ? 'icon-certificate': '' ?>"></i><i class = "<?php echo $d->eLiderCelula() ? 'icon-home': '' ?>"></i>
-						<small class = "" ><?php echo !isset($c) ? $c=1 : ++$c ; ?>-<?php echo $d->getAlcunha() ; ?></small>
-				</a>
-				</div>
+					  <img  src="<?php echo is_object($d->getFoto()) ? $d->getFoto()->url : '' ; ?>" alt="">
+           </a>
+           <div class = "caption" >
+					 <a class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
+              <i class = "<?php echo $d->eLider() ? 'icon-certificate': '' ?>"></i>
+              <i class = "<?php echo $d->eLiderCelula() ? 'icon-home': '' ?>"></i>
+						  <small class = "" ><?php echo !isset($c) ? $c=1 : ++$c ; ?>-
+                 <?php echo $d->getAlcunha() ; ?>
+              </small>
+            </a>
+           </div>
+        </div>
+       </li>
 				<?php endforeach ; ?>
+     </ul>
 
 				<?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
 							<div class = "span3 " >

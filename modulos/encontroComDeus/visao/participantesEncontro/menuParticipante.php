@@ -1,6 +1,6 @@
     <ul class="nav nav-pills">
 		<li class="<?php echo isset($ativo) ? $ativo : '' ; ?>">
-			<a href = "/encontroComDeus/participantesEncontro/index/id/<?php echo $participante->encontroComDeusId ; ?>" >Encontro com Deus</a>
+			<a href = "/encontroComDeus/participantesEncontro/index/id/<?php echo $participante->encontroComDeusId ; ?>" >Participantes</a>
     </li>
 		<li class="<?php echo isset($preEncontro) ? $preEncontro : '' ; ?>">
 			<a href = "/encontroComDeus/participantesEncontro/preEncontro/id/<?php echo $participante->encontroComDeusId ; ?>" >Pré-Encontro</a>

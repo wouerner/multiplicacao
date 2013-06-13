@@ -130,7 +130,7 @@ class Metas
 	}
 
 	public function posEncontroDesativar($url){
-					
+
 		$participante = new \encontroComDeus\modelo\participantesEncontro();
 		$participante->id = $url[4] ;
 		$participante->posEncontroDesativar();
@@ -139,7 +139,7 @@ class Metas
 	}
 
 	public function desistiuAtivar($url){
-					
+
 		$participante = new \encontroComDeus\modelo\participantesEncontro();
 		$participante->id = $url[4] ;
 		$participante->desistiuAtivar();
@@ -148,7 +148,7 @@ class Metas
 	}
 
 	public function desistiuDesativar($url){
-					
+
 		$participante = new \encontroComDeus\modelo\participantesEncontro();
 		$participante->id = $url[4] ;
 		$participante->desistiuDesativar();

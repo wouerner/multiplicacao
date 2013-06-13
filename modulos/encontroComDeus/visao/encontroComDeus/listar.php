@@ -21,7 +21,7 @@
 
 				<div class = "row-fluid" >	
 						<table class = "table bordered-table">
-						<caption><h3>Encontro com Deus</h3></caption>
+						<caption><h3>Encontro </h3></caption>
 						<thead>
 							<th>Nome</th>
 							<th>Ações</th>

@@ -74,7 +74,6 @@ $(".btn-warning").click( function(){
 <?php endif; ?>
 						<th>Nome</th>
 						<th>Telefone</th>
-						<th>E-mail</th>
 						<th>Ações</th>
 					</thead>
 
@@ -88,23 +87,54 @@ $(".btn-warning").click( function(){
 <?php endif; ?>
 
 
-					<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><strong><i class = "<?php echo $discipulo->eLider() ? 'icon-certificate' : '' ;  ?>"></i>
+					<td>
+				 <?php if ( $discipulo->eLider()): ?>
+                <h5>
+					<?php endif ; ?>
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_<?php echo $discipulo->id?>" href="#collapse_<?php echo $discipulo->id?>">
+  <i class = "<?php echo $discipulo->eLider() ? 'icon-certificate' : '' ;  ?>"></i>                
+                 </a>
+  
 						<i class = "<?php echo $discipulo->eLiderCelula() ? 'icon-home': '' ?>"></i>
-							<?php echo $discipulo->nome ; ?></strong>
-
-					<?php if ($discipulo->ativo == 1 ) : ?>
-						<span class="label label-success">Ativo</span> </a></td>
-					<?php elseif ($discipulo->arquivo == 1 ) : ?>
-						<span class="label label-inverse">Arquivo</span> </a></td>
-					<?php else : ?>
-						<span class="label label-warning">Inativo</span> </a></td>
+             <a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id?>" >
+							<?php echo $discipulo->nome ; ?>
+				 <?php if ( $discipulo->eLider()): ?>
 					<?php endif ; ?>
 
-				<td><?php echo $discipulo->telefone ; ?></td> <td><?php echo $discipulo->email ; ?></td>
+					<?php if ($discipulo->ativo == 1 ) : ?>
+						<span class="label label-success"><i class ="icon-arrow-up"></i></span> 
+					<?php elseif ($discipulo->arquivo == 1 ) : ?>
+						<span class="label label-inverse">A</span>
+					<?php else : ?>
+						<span class="label label-warning">I</span> 
+					<?php endif ; ?>
+					</a>
+                </h5>
+        </td>
+
+				<td>
+					<?php echo $discipulo->telefone ; ?></td>
 				 <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
 				</tr>
-				 
-				
+
+				 <?php if ( $discipulo->eLider()): ?>
+<tr  >
+<td colspan = "5">
+				 <div class="accordion" id="accordion_<?php echo $discipulo->id?>">
+            <div class="accordion-group">
+            <div id="collapse_<?php echo $discipulo->id?>" class="accordion-body collapse ">
+            <div class="accordion-inner">
+				      <?php foreach ($discipulo->listarDiscipulos()  as $discipulo) : ?>
+                 <?php echo $discipulo->nome ?> | 
+              <?php endforeach ; ?>
+
+           </div>
+            </div>
+					 </div>
+</td>
+</tr>
+         <?php endif;?>
+
 				<?php endforeach ; ?>
 				</table>
 

@@ -27,6 +27,7 @@
 		<a id = "<?php echo $discipulo->id ?>" href="/metas/metas/novo/id/<?php echo $discipulo->id ?>" class = "btn btn-mini " alt = "excluir" ><i class="icon-screenshot "></i>Metas</a>
 <?php endif ; ?>
 
+		<a id = "<?php echo $discipulo->id ?>" href="/metas/participantesMetas/novo/id/<?php echo $discipulo->id ?>" class = "btn btn-mini " alt = "" ><i class="icon-group icon-white"></i></a>
 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 		<a id = "<?php echo $discipulo->id ?>" href="/discipulo/discipulo/excluir/id/<?php echo $discipulo->id ?>" class = "btn btn-mini btn-danger" alt = "excluir" ><i class="icon-remove icon-white"></i></a>
 <?php endif ; ?>

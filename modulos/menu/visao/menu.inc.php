@@ -46,16 +46,17 @@ $usuario = $usuario[0] ;
 								</li>
 								<?php endif ; ?>
 
-								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 								<li class = "dropdown">
 									<a href = "#" class="dropdown-toggle" data-toggle="dropdown" role = "button"><i class = "icon-screenshot" ></i> Metas<b class="caret"></b></a>
 									<ul class="dropdown-menu">	
+									<li><a href = "/metas/metas/detalhar/id/<?php echo $_SESSION['usuario_id']?>"><i class = "icon-list-alt " ></i>Minhas metas</a></li>
+								<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
 										<li><a href = "/metas/metas"><i class = "icon-plus " ></i > Discipulos Com Metas</a></li>
 										<li><a href = "/metas/intervaloMetas/novo"><i class = "icon-plus " ></i > novo intervalo</a></li>
 										<li><a href = "/rede/rede/listarTipoRede"><i class = "icon-list-alt " ></i> Listar intervalo</a></li>
+								<?php endif ; ?>
 									</ul>
 								</li>
-								<?php endif ; ?>
 
 
 
@@ -70,7 +71,8 @@ $usuario = $usuario[0] ;
 										<li><a href = "/celula/celula/statusPorLiderCelula" ><i class = " " ></i> Status Por Lider Célula</a></li>
 									</ul>
 								</li>
-						
+						<?php endif ; ?>
+						<?php if ($acesso->hasPermission('encontro') == true): ?>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role = "button" ><i class = "icon-fire " ></i>Encontro <b class="caret"></b></a>
 									<ul class="  dropdown-menu" role="menu" aria-labelledby="dLabel" >
@@ -156,6 +158,8 @@ $usuario = $usuario[0] ;
 								<li><a href = "/celula/celula/lideresCelula" >Líderes de Célula</a></li>
 								<li><a href = "/celula/celula/chamar">Pesquisar</a></li>
 
+								<li><a href = "/celula/relatorio/lerPorTema" ><i class = "icon-plus " ></i> Ler Relatórios</a></li>
+								<li><a href = "/celula/relatorio/lerPorCelula" ><i class = " " ></i> Ler Relatórios Por Celula</a></li>
 <?php endif ; ?>
 								<?php if ($acesso->hasPermission('celulaRelatorioAcesso') == true) : ?>
 								<li class = "dropdown-submenu" >

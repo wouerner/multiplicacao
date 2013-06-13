@@ -91,9 +91,6 @@ class relatorioCelula extends modeloFramework{
 	
 	}
 
-
-
-
 	public function atualizar(){
 
 	//abrir conexao com o banco
@@ -604,6 +601,61 @@ where c.tipoRedeId in ('.$rede.' )
 		return $stm->fetchAll();
 	}
 
+	public  function lerPorTema(){
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = '
+					SELECT rc.id as id , rc.titulo, rc.texto, rc.temaRelatorioCelulaId, rc.lider FROM
+RelatorioCelula as rc
+inner join
+TemaRelatorioCelula as tr on tr.id = rc.temaRelatorioCelulaId
+WHERE tr.id =  ?	
+						' ;
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->bindParam(1,$this->temaRelatorioCelulaId);
+
+		$stm->execute();
+
+		$resposta = array();
+
+		while($ob = $stm->fetchObject('\celula\modelo\relatorioCelula')){
+			$resposta[$ob->id] = $ob ;
+		}
+
+		return $resposta ; 
+
+	}
+
+	public  function lerPorCelula(){
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = '
+					SELECT rc.id as id , rc.titulo, rc.texto, rc.temaRelatorioCelulaId, rc.lider FROM
+RelatorioCelula as rc
+inner join
+TemaRelatorioCelula as tr on tr.id = rc.temaRelatorioCelulaId
+WHERE  rc.celulaId = ?
+						' ;
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->bindParam(1,$this->celulaId);
+
+		$stm->execute();
+
+		$resposta = array();
+
+		while($ob = $stm->fetchObject('\celula\modelo\relatorioCelula')){
+			$resposta[$ob->id] = $ob ;
+		}
+
+		return $resposta ; 
+
+	}
 
 
 }

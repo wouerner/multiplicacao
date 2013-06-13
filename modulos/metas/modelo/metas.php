@@ -1,7 +1,7 @@
 <?php 
-
 namespace metas\modelo ;
 use \framework\modelo\modeloFramework ; 
+use \metas\modelo\participantesMetas 	as participantesMetasModelo;
 
 class metas extends modeloFramework{
 
@@ -20,6 +20,14 @@ class metas extends modeloFramework{
 
 		 $this->$prop = $valor ;
 		  
+  }
+
+  public function participantesTotal(){
+	$participante = new participantesMetasModelo() ;
+	$participante->metasId = $this->id ;
+	$participante = $participante->listar() ;
+	return count($participante) ;
+
   }
 
     public  function metaPorRede(){
@@ -44,8 +52,8 @@ class metas extends modeloFramework{
 			  $pdo = null ;
 
 			  return $resposta;
-		
-		}	
+
+		}
 
 
   public function salvar(){
@@ -122,6 +130,33 @@ WHERE 1 order by nome
 			  $pdo = null ;
 				//var_dump($stm->errorInfo());
 			  return $stm->fetchObject() ;
+				}
+
+			  public function listar(){
+
+			  $pdo = self::pegarConexao() ;
+
+			  $sql = '
+				  SELECT  m.id , im.nome, m.intervaloMetasId, im.id as intervaloId, im.dataInicio, im.dataFim, m.quantidade 
+FROM Metas as m
+inner join IntervaloMetas as im on im.id = m.intervaloMetasId
+WHERE discipuloId = ?
+						  ' ;
+
+			  $stm = $pdo->prepare($sql);
+			  $stm->bindParam(1, $this->discipuloId ) ;
+
+			  $stm->execute();
+
+			  $pdo = null ;
+				//var_dump($stm->errorInfo());
+			  $resposta = array();
+
+			while ( $obj = $stm->fetchObject ('\metas\modelo\metas')  ) {
+					$resposta[$obj->id] = $obj ;	
+				}
+
+			  return $resposta ;
 				}
 
 

@@ -17,16 +17,13 @@ $('.table').tab('show');
 		<section class = "container-fluid">
 
 		<nav> 
-			
+
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
 		</nav>
-			
-
-		<section>		
+		<section>
 			<article>
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
-
 
 				<div class = "row-fluid" >	
 					<table class = "table" >

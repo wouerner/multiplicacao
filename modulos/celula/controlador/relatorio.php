@@ -1,11 +1,11 @@
 <?php
-use celula\modelo\celula;
 use discipulo\Modelo\Discipulo;
 namespace celula\controlador;
 use aviso\modelo\tipoAviso;
 use aviso\modelo\aviso;
 use celula\modelo\relatorioCelula as relatorioModelo;
 use celula\modelo\temaRelatorioCelula as temaModelo;
+use celula\modelo\celula as celulaModelo;
 
 class relatorio{
 
@@ -182,6 +182,26 @@ class relatorio{
 			//die();
 			require_once 'celula/visao/relatorioCelula/porMes.php' ;
 
+		}
+
+		public function lerPorTema($url)
+		{
+      $temas = new temaModelo();
+      $temas = $temas->listarTodos();
+			$relatorio = new relatorioModelo();
+			$relatorio->temaRelatorioCelulaId = isset($url['post']['temaId']) ? $url['post']['temaId'] : $url[4] ;
+			$relatorios = $relatorio->lerPorTema();
+		    require_once 'celula/visao/relatorioCelula/lerPorTema.php' ;
+		}
+
+		public function lerPorCelula($url)
+		{
+      $celula = new celulaModelo();
+      $celulas = $celula->listarTodos();
+			$relatorio = new relatorioModelo();
+			$relatorio->celulaId = isset($url['post']['temaId']) ? $url['post']['temaId'] : $url[4] ;
+			$relatorios = $relatorio->lerPorCelula();
+		    require_once 'celula/visao/relatorioCelula/lerPorCelula.php' ;
 		}
 
 }
