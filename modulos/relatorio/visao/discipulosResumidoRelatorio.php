@@ -1,81 +1,78 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<?php include 'incluidos/css.inc.php'?>
-		<?php include 'incluidos/js.inc.php'?>
+    <head>
+        <meta charset="UTF-8">
+        <?php include 'incluidos/css.inc.php'?>
+        <?php include 'incluidos/js.inc.php'?>
 
 <script>
-$(document).ready(function() 
-    { 
-        $(".table").tablesorter(); 
-    } 
+$(document).ready(function() {
+        $(".table").tablesorter();
+    }
 ); </script>
-	</head>
+    </head>
 
-	<body>
-		<section class = "container-fluid">
+    <body>
+        <section class = "container-fluid">
 
-		<nav> 
-			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
-		</nav>
-			
-		<header>
-		
-		</header>
+        <nav>
+            <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
+        </nav>
 
-		<section>		
-			<article>
+        <header>
 
-			<table class = "table table-bordered table-condensed" >
-					<caption><h3>Relatório: <?php echo $total?></h3></caption>
-				<tr>
-					<th>Sexo :  <?php  echo $sexo ?></th>
-					<th>Estado Civil : <?php echo is_object($estadoCivil) ? $estadoCivil->nome : 'todos' ?></th>
-					<th>Rede : <?php echo is_object($rede) ? $rede->nome : 'todos' ?></th>
-					<th>Status :<?php echo is_object($status) ? $status->nome : 'todos' ?> </th>
-					<th>célula :<?php echo is_object($celula)? $celula->nome : 'todos' ?> </th>
-				</tr>
-			</table>
+        </header>
 
-			<table class = "table table-condensed tablesorter well" >
-				<thead>
-				<tr>
-					<th>#</th>
-					<th>Lider</th>
-					<th>Nome</th>
-					<th>Sexo</th>
-					<th>Endereço</th>
-					<th>Data Nasc. </th>
-					<th>Status</th>
-				</tr>
-				</thead>
+        <section>
+            <article>
 
-				<tbody>
-				<?php foreach($relatorio as $r ) : ?>
+            <table class = "table table-bordered table-condensed" >
+                    <caption><h3>Relatório: <?php echo $total?></h3></caption>
+                <tr>
+                    <th>Sexo :  <?php  echo $sexo ?></th>
+                    <th>Estado Civil : <?php echo is_object($estadoCivil) ? $estadoCivil->nome : 'todos' ?></th>
+                    <th>Rede : <?php echo is_object($rede) ? $rede->nome : 'todos' ?></th>
+                    <th>Status :<?php echo is_object($status) ? $status->nome : 'todos' ?> </th>
+                    <th>célula :<?php echo is_object($celula)? $celula->nome : 'todos' ?> </th>
+                </tr>
+            </table>
 
-							  <?php  $status =  $r->getStatusCelular() ; ?>
-							  <?php  $lider =  is_object($r->getLider()) ? $r->getLider():'' ; ?>
-						  <tr>	
-								<td> <?php echo ++$cont ; ?></td>
-							  <td><a href="/discipulo/discipulo/atualizar/id/<?php echo is_object($lider) ? $lider->id : '' ; ?>"><?php echo  is_object($lider) ? $lider->getAlcunha() : ''; ?></a></td>
-							  <td><a target = "blank" href="/discipulo/discipulo/atualizar/id/<?php echo $r->id ; ?>"><strong><?php echo  $r->getAlcunha() ; ?></strong></a></td>
-							  <td><?php echo  ($r->sexo == 'm')? 'M' : 'F' ; ?></td>
-							  <td><?php echo  $r->endereco ; ?></td>
-							  <td><?php echo  $r->getDataNascimento()->format('d/m/Y') ; ?></td>
-							  <td><?php echo $status['nome'] ; ?></td>
-						  </tr>
-					<?php endforeach ; ?>
+            <table class = "table table-condensed tablesorter well" >
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Lider</th>
+                    <th>Nome</th>
+                    <th>Sexo</th>
+                    <th>Endereço</th>
+                    <th>Data Nasc. </th>
+                    <th>Status</th>
+                </tr>
+                </thead>
 
-				</tbody>
-			</table>
-	
-			
-			</article>
-		
-		</section>
+                <tbody>
+                <?php foreach($relatorio as $r ) : ?>
 
-		</section>
-	</body>
+                              <?php  $status =  $r->getStatusCelular() ; ?>
+                              <?php  $lider =  is_object($r->getLider()) ? $r->getLider():'' ; ?>
+                          <tr>
+                                <td> <?php echo ++$cont ; ?></td>
+                              <td><a href="/discipulo/discipulo/atualizar/id/<?php echo is_object($lider) ? $lider->id : '' ; ?>"><?php echo  is_object($lider) ? $lider->getAlcunha() : ''; ?></a></td>
+                              <td><a target = "blank" href="/discipulo/discipulo/atualizar/id/<?php echo $r->id ; ?>"><strong><?php echo  $r->getAlcunha() ; ?></strong></a></td>
+                              <td><?php echo  ($r->sexo == 'm')? 'M' : 'F' ; ?></td>
+                              <td><?php echo  $r->endereco ; ?></td>
+                              <td><?php echo  $r->getDataNascimento()->format('d/m/Y') ; ?></td>
+                              <td><?php echo $status['nome'] ; ?></td>
+                          </tr>
+                    <?php endforeach ; ?>
+
+                </tbody>
+            </table>
+
+            </article>
+
+        </section>
+
+        </section>
+    </body>
 </html>
-

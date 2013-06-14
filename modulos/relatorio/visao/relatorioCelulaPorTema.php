@@ -1,4 +1,4 @@
-<?php 
+<?php
 $mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL ;
 unset($_SESSION['mensagem']) ;
 
@@ -6,119 +6,118 @@ unset($_SESSION['mensagem']) ;
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
+    <head>
+        <meta charset="UTF-8">
 
-		<?php include 'incluidos/css.inc.php' ?>
-		<?php include 'incluidos/js.inc.php' ?>
+        <?php include 'incluidos/css.inc.php' ?>
+        <?php include 'incluidos/js.inc.php' ?>
 
-		<script>
-		$(function() {
+        <script>
+        $(function() {
 
-		  $( ".data" ).datepicker({showWeek:true});
-		});
-	
-		</script>
+          $( ".data" ).datepicker({showWeek:true});
+        });
 
-		<script>
-		$(function() {
+        </script>
 
-		  $( ".tempo" ).timepicker();
-		});
-	
-		</script>
+        <script>
+        $(function() {
 
-	</head>
+          $( ".tempo" ).timepicker();
+        });
 
-	<body>
-		<section class = "container-fluid">
+        </script>
 
-		<nav> 
-			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
-		</nav>
-			
-		<header>
-		
-		</header>
+    </head>
 
-		<section>		
-			<article>
+    <body>
+        <section class = "container-fluid">
 
-			<?php if (isset($mensagem)) : ?>
-					<div class="alert <?php echo ($mensagem=='ok') ? 'alert-success' : 'alert-error' ; ?>">
-				  	<h4 class="alert-heading">
-						<?php echo $mensagem ?>!
-					</h4>
-				   </div>
-				<?php endif ; ?>
+        <nav>
+            <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
+        </nav>
 
-					<div class = "row-fluid" >
-						<div class = "well" >
-						<form method = "post" action = "/relatorio/relatorio/relatorioCelulaEnvioPorTema" class = "form-horizontal"  >
+        <header>
 
-							<legend>Relatório por Tema</legend>
-							<label>Rede: </label>
-							<select name = "tipoRedeId[]" class = "span4" multiple size = "6" >
-								<?php foreach ($tipoRede as $t ) : ?>
-									<option value="<?php echo $t->id ; ?>" >
-														<?php echo $t->nome ; ?>
-									</option>
-								<?php endforeach ; ?>
-							</select>
+        </header>
 
-							<label>Tema: </label>
-							<select name = "temaId"class = "span4"  >
-								<?php foreach ($temas as $t ) : ?>
-									<option value="<?php echo $t->id ; ?>" >
-														<?php echo $t->ativo ? 'ativo' : 'inativo' ?> - 
-														<?php echo $t->nome?> - 
-														<?php echo date_format(date_create($t->dataInicio),'d/m/Y') ; ?> - 
-														<?php echo date_format(date_create($t->dataFim),'d/m/Y') ; ?>
-									</option>
-								<?php endforeach ; ?>
-							</select>
+        <section>
+            <article>
 
-							<button  type = "submit" class = "btn" >Gerar</button>
-							</div>
-						</form>
-					</div>
+            <?php if (isset($mensagem)) : ?>
+                    <div class="alert <?php echo ($mensagem=='ok') ? 'alert-success' : 'alert-error' ; ?>">
+                      <h4 class="alert-heading">
+                        <?php echo $mensagem ?>!
+                    </h4>
+                   </div>
+                <?php endif ; ?>
 
-						<?php if (isset($relatorios)) :?>
-						<div class = "well" >
-						<table class = "table table-condensed">
+                    <div class = "row-fluid" >
+                        <div class = "well" >
+                        <form method = "post" action = "/relatorio/relatorio/relatorioCelulaEnvioPorTema" class = "form-horizontal"  >
 
-						<caption>
-							<h3>Tema:  <?php echo $tema->nome ; ?> </h3>
-							<h4>Data: <?php echo date_format(date_create($tema->dataInicio),'d/m/Y  H:i:s') ; ?> - 
-														<?php echo date_format(date_create($tema->dataFim),'d/m/Y  H:i:s') ; ?></h4></caption>
-								<thead>
-									<th>#</th>
-									<th>Relatorio</th>
-									<th>Líder</th>
-									<th>Celula</th>
-									<th>Data Envio</th>
-								</thead>
+                            <legend>Relatório por Tema</legend>
+                            <label>Rede: </label>
+                            <select name = "tipoRedeId[]" class = "span4" multiple size = "6" >
+                                <?php foreach ($tipoRede as $t ) : ?>
+                                    <option value="<?php echo $t->id ; ?>" >
+                                                        <?php echo $t->nome ; ?>
+                                    </option>
+                                <?php endforeach ; ?>
+                            </select>
 
-							<?php foreach ( $relatorios as $r ) : ?>
+                            <label>Tema: </label>
+                            <select name = "temaId"class = "span4"  >
+                                <?php foreach ($temas as $t ) : ?>
+                                    <option value="<?php echo $t->id ; ?>" >
+                                                        <?php echo $t->ativo ? 'ativo' : 'inativo' ?> -
+                                                        <?php echo $t->nome?> -
+                                                        <?php echo date_format(date_create($t->dataInicio),'d/m/Y') ; ?> -
+                                                        <?php echo date_format(date_create($t->dataFim),'d/m/Y') ; ?>
+                                    </option>
+                                <?php endforeach ; ?>
+                            </select>
 
-							<tr class = "<?php echo $r['nomeTema']? 'success' : 'error' ?>" >
-								<td><?php echo ++$cont  ; ?></td>
-								<td><?php echo $r['nomeTema'] ? 'sim' : 'não'  ; ?></td>
-								<td><?php echo $r['lider'] ; ?></td>
-								<td><a href = "/celula/relatorio/index/id/<?php echo $r['celulaId']?>" ><?php echo $r['celulaNome'] ; ?></a></td>
-								<td class = "" >	<?php echo $r['dataEnvioRelatorio'] ? date_format(date_create($r['dataEnvioRelatorio']),'d/m/Y  H:i:s')  : '' ; ?></td>
-								</td>
-							</tr>
+                            <button  type = "submit" class = "btn" >Gerar</button>
+                            </div>
+                        </form>
+                    </div>
 
-						<?php endforeach ; ?>
-						</table>
-						</div>
-										<?php endif ; ?>	
-			</article>
-		
-		</section>
+                        <?php if (isset($relatorios)) :?>
+                        <div class = "well" >
+                        <table class = "table table-condensed">
 
-		</section>
-	</body>
+                        <caption>
+                            <h3>Tema:  <?php echo $tema->nome ; ?> </h3>
+                            <h4>Data: <?php echo date_format(date_create($tema->dataInicio),'d/m/Y  H:i:s') ; ?> -
+                                                        <?php echo date_format(date_create($tema->dataFim),'d/m/Y  H:i:s') ; ?></h4></caption>
+                                <thead>
+                                    <th>#</th>
+                                    <th>Relatorio</th>
+                                    <th>Líder</th>
+                                    <th>Celula</th>
+                                    <th>Data Envio</th>
+                                </thead>
+
+                            <?php foreach ( $relatorios as $r ) : ?>
+
+                            <tr class = "<?php echo $r['nomeTema']? 'success' : 'error' ?>" >
+                                <td><?php echo ++$cont  ; ?></td>
+                                <td><?php echo $r['nomeTema'] ? 'sim' : 'não'  ; ?></td>
+                                <td><?php echo $r['lider'] ; ?></td>
+                                <td><a href = "/celula/relatorio/index/id/<?php echo $r['celulaId']?>" ><?php echo $r['celulaNome'] ; ?></a></td>
+                                <td class = "" >	<?php echo $r['dataEnvioRelatorio'] ? date_format(date_create($r['dataEnvioRelatorio']),'d/m/Y  H:i:s')  : '' ; ?></td>
+                                </td>
+                            </tr>
+
+                        <?php endforeach ; ?>
+                        </table>
+                        </div>
+                                        <?php endif ; ?>
+            </article>
+
+        </section>
+
+        </section>
+    </body>
 </html>
-

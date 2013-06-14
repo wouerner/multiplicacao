@@ -1,291 +1,277 @@
 <?php
 use celula\modelo\celula;
 use discipulo\Modelo\Discipulo;
-namespace celula\controlador; 
+namespace celula\controlador;
 
+class celula
+{
+    /*Metodo padrão para o controler
+     *
+     * */
+    public function index()
+    {
+        $celulas =	new \celula\modelo\celula();
 
-class celula{
+        //include("seguranca/ACL/assets/php/database.php");
+        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
 
-	/*Metodo padrão para o controler
-	 *
-	 * */	
-	public function index(){
+        if ($acl->hasPermission('admin_acesso') == true) {
+            $celulas = $celulas->listarTodos();
+            //$totalCelulas = \celula\modelo\celula::totalCelulas();
+            $totalCelulas = count($celulas);
+        } else {
+            $celulas->lider = $_SESSION['usuario_id'];
+            $celulas = $celulas->listarCelulasLider();
+            $totalCelulas = count($celulas);
+        }
 
-		$celulas =	new \celula\modelo\celula();
+        require_once 'modulos/celula/visao/listar.php';
 
-		//include("seguranca/ACL/assets/php/database.php"); 
-		$acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
-			
-		if ($acl->hasPermission('admin_acesso') == true){
-			$celulas = $celulas->listarTodos();
-			//$totalCelulas = \celula\modelo\celula::totalCelulas();
-			$totalCelulas = count($celulas);
-		}else {
-			$celulas->lider = $_SESSION['usuario_id'];
-			$celulas = $celulas->listarCelulasLider();
-			$totalCelulas = count($celulas);
-		}
+    }
+        public function novo($url)
+        {
+            if ( empty ( $url['post'] ) ) {
 
-		require_once  'modulos/celula/visao/listar.php';
+                $lideres = new \discipulo\Modelo\Discipulo();
+                $lideres = $lideres->listarLideres();
 
-		
-	}
-		public function novo($url){
-			if ( empty ( $url['post'] ) ) {
-				
-				$lideres = new \discipulo\Modelo\Discipulo(); 
-				$lideres = $lideres->listarLideres();
+                $tiposRedes = new \rede\modelo\tipoRede() ;
+                $tiposRedes = $tiposRedes->listarTodos() ;
 
-				$tiposRedes = new \rede\modelo\tipoRede() ;
-				$tiposRedes = $tiposRedes->listarTodos() ;
-	
-				require_once  'modulos/celula/visao/novo.php';
-			
-			}else {
-				$celula =	new \celula\modelo\celula();
+                require_once 'modulos/celula/visao/novo.php';
 
-				$post = $url['post'] ;
-				$celula->nome = $post['nome'];
-				$celula->horarioFuncionamento = $post['horarioFuncionamento'];
-				$celula->endereco = $post['endereco'];
-				$celula->lider = $post['lider'];
+            } else {
+                $celula =	new \celula\modelo\celula();
 
-				$celula->salvar();
-				header ('location:/celula/celula');
-				exit();
-			}
-			
+                $post = $url['post'] ;
+                $celula->nome = $post['nome'];
+                $celula->horarioFuncionamento = $post['horarioFuncionamento'];
+                $celula->endereco = $post['endereco'];
+                $celula->lider = $post['lider'];
 
-		}
+                $celula->salvar();
+                header ('location:/celula/celula');
+                exit();
+            }
 
-		public function atualizar($url){
+        }
 
-			if ( empty ( $url['post'] ) ) {
+        public function atualizar($url)
+        {
+            if ( empty ( $url['post'] ) ) {
 
-				$celula =	new \celula\modelo\celula();
-				$lideres = $celula->listarLideres();
+                $celula =	new \celula\modelo\celula();
+                $lideres = $celula->listarLideres();
 
-				$celula->id =  $url[4] ;
-				$celula = $celula->listarUm() ;
+                $celula->id =  $url[4] ;
+                $celula = $celula->listarUm() ;
 
-				$lider =	new \discipulo\Modelo\Discipulo() ;
-				$lider->id = $celula->lider ;
-				$lider = $lider->listarUm($celula->lider) ;
+                $lider =	new \discipulo\Modelo\Discipulo() ;
+                $lider->id = $celula->lider ;
+                $lider = $lider->listarUm($celula->lider) ;
 
-				$tipoRede = new \rede\modelo\tipoRede();
-				$tipoRede->id = $celula->tipoRedeId;
-				$tiposRedes = $tipoRede->listarTodos();
-				$tipoRede = $tipoRede->listarUm();
+                $tipoRede = new \rede\modelo\tipoRede();
+                $tipoRede->id = $celula->tipoRedeId;
+                $tiposRedes = $tipoRede->listarTodos();
+                $tipoRede = $tipoRede->listarUm();
 
-				require_once  'modulos/celula/visao/atualizar.php' ;
-			
-			}else {
+                require_once 'modulos/celula/visao/atualizar.php';
 
-				$celula =	new \celula\modelo\celula();
+            } else {
 
-				$post = $url['post'] ;
-				$celula->nome = $post['nome'];
-				$celula->horarioFuncionamento = $post['horarioFuncionamento'];
-				$celula->endereco = $post['endereco'];
-				$celula->lider = $post['lider'];
-				$celula->ativa = $post['ativa']== 1 ? 1 : 0 ;
-				$celula->tipoRedeId = $post['tipoRedeId'];
-				$celula->id = $post['id'];
+                $celula =	new \celula\modelo\celula();
 
-				$celula->atualizar();
+                $post = $url['post'] ;
+                $celula->nome = $post['nome'];
+                $celula->horarioFuncionamento = $post['horarioFuncionamento'];
+                $celula->endereco = $post['endereco'];
+                $celula->lider = $post['lider'];
+                $celula->ativa = $post['ativa']== 1 ? 1 : 0 ;
+                $celula->tipoRedeId = $post['tipoRedeId'];
+                $celula->id = $post['id'];
 
-				header ('location:/celula/celula/atualizar/id/'.$celula->id);
-				exit();
-			}
+                $celula->atualizar();
 
-		
-		
-		}
+                header ('location:/celula/celula/atualizar/id/'.$celula->id);
+                exit();
+            }
 
-		public function excluir($url){
-				$celula =	new \celula\modelo\celula();
-				$celula->id = $url[4]; 
-				$celula->excluir();
+        }
 
-				$_SESSION['mensagem'] = !is_null($celula->erro) ? $celula->erro : NULL ;
-				header ('location:/celula/celula');
-				exit();
-		
-			
-		
-		
-		}
+        public function excluir($url)
+        {
+                $celula =	new \celula\modelo\celula();
+                $celula->id = $url[4];
+                $celula->excluir();
 
-		public function detalhar($url){
+                $_SESSION['mensagem'] = !is_null($celula->erro) ? $celula->erro : NULL ;
+                header ('location:/celula/celula');
+                exit();
 
-			$celula =	new \celula\modelo\celula() ;
-			$celula->id = $url[4] ; 
-			$discipulos= $celula->listarDiscipulos() ;
-			$celula = $celula->listarUm() ;
+        }
 
-				$lider =	new \discipulo\Modelo\Discipulo() ;
-				$lider->id = $celula->lider ;
-				$lider = $lider->listarUm($celula->lider) ;
+        public function detalhar($url)
+        {
+            $celula =	new \celula\modelo\celula() ;
+            $celula->id = $url[4] ;
+            $discipulos= $celula->listarDiscipulos() ;
+            $celula = $celula->listarUm() ;
+
+                $lider =	new \discipulo\Modelo\Discipulo() ;
+                $lider->id = $celula->lider ;
+                $lider = $lider->listarUm($celula->lider) ;
 
 //				var_dump($discipulos);
-				
-			require 'celula/visao/detalhar.php' ;
-				
-		
-		}
 
+            require 'celula/visao/detalhar.php';
 
-		public function chamar () {
+        }
 
-			$nome = isset($_GET['nome']) ? $_GET['nome'] : NULL ;
-			$celula =	new \celula\modelo\celula();
-			$celula->nome = $nome; 
-			$celulas = $celula->chamar($nome);	
-			require_once 'celula/visao/chamar.php' ;
+        public function chamar ()
+        {
+            $nome = isset($_GET['nome']) ? $_GET['nome'] : NULL ;
+            $celula =	new \celula\modelo\celula();
+            $celula->nome = $nome;
+            $celulas = $celula->chamar($nome);
+            require_once 'celula/visao/chamar.php';
 
-		
-		}
+        }
 
-		public function lideresCelula(){
-		
-			$lideres = new \celula\modelo\celula();
-			$lideres = $lideres->listarLideresCelula() ;
+        public function lideresCelula()
+        {
+            $lideres = new \celula\modelo\celula();
+            $lideres = $lideres->listarLideresCelula() ;
 
-			require_once 'celula/visao/listarLideresCelula.php' ;
+            require_once 'celula/visao/listarLideresCelula.php';
 
-		
-		}
-	
-	public function participacao($url){
+        }
 
-		$celulas =	new \celula\modelo\celula();
-		$celulas->id =	$url[4];
-		$participacao =	$celulas->listarParticipacao() ;
+    public function participacao($url)
+    {
+        $celulas =	new \celula\modelo\celula();
+        $celulas->id =	$url[4];
+        $participacao =	$celulas->listarParticipacao() ;
 
-		require_once  'modulos/celula/visao/participacao.php';
-		
-	}
+        require_once 'modulos/celula/visao/participacao.php';
 
-		public function listarPorStatus($url){
-			$post = $url['post'] ;
-			$tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
-			$tipoStatus = $tipoStatus->listarTodos() ;
+    }
 
-			if (empty($post)) {
+        public function listarPorStatus($url)
+        {
+            $post = $url['post'] ;
+            $tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
+            $tipoStatus = $tipoStatus->listarTodos() ;
 
-				require_once  'modulos/celula/visao/lideresPorStatus.php';
-			}else {
-				$id = $post['statusId'] ;
-				$celula = new \celula\modelo\celula();
-				$lideres = $celula->lideresPorStatus($id);			
-				$lideresSem = $celula->lideresSemStatus($id);			
+            if (empty($post)) {
 
-				//var_dump($lideres);
+                require_once 'modulos/celula/visao/lideresPorStatus.php';
+            } else {
+                $id = $post['statusId'] ;
+                $celula = new \celula\modelo\celula();
+                $lideres = $celula->lideresPorStatus($id);
+                $lideresSem = $celula->lideresSemStatus($id);
 
-				$resposta = array() ;
-				$lider= array();
+                //var_dump($lideres);
 
-				foreach( $lideres as $l ){
-					$lider[$l['lider']][$l['discipulo']] = array($l['status'], $l['discipuloId']);  
-					//$lider[$l['lider']][$l['discipulo']] = $l['discipuloId'];  
-					$lider[$l['lider']]['total'] = !isset($lider[$l['lider']]['total']) ? $t=1 : ++$t ;  
-						
-				}
-				$cont = 0 ;
-				$totalDiscipulos=0;
-				foreach( $lider as $l ){
-					$totalDiscipulos += $l['total'] ;
-				}
+                $resposta = array() ;
+                $lider= array();
 
-				$liderSem= array() ;
-				foreach( $lideresSem as $l ){
-					$liderSem[$l['lider']][$l['discipulo']] = $l['status'];  
-					$liderSem[$l['lider']]['total'] = !isset($liderSem[$l['lider']]['total']) ? $t=1 : ++$t ;  
-						
-				}
+                foreach ($lideres as $l) {
+                    $lider[$l['lider']][$l['discipulo']] = array($l['status'], $l['discipuloId']);
+                    //$lider[$l['lider']][$l['discipulo']] = $l['discipuloId'];
+                    $lider[$l['lider']]['total'] = !isset($lider[$l['lider']]['total']) ? $t=1 : ++$t ;
 
-				$totalDiscipulosSem=0;
-				foreach( $liderSem as $ls ){
-					$totalDiscipulosSem += $ls['total'] ;
-				}
+                }
+                $cont = 0 ;
+                $totalDiscipulos=0;
+                foreach ($lider as $l) {
+                    $totalDiscipulos += $l['total'] ;
+                }
 
-					require_once  'modulos/celula/visao/lideresPorStatus.php';
-			}
-		}
+                $liderSem= array() ;
+                foreach ($lideresSem as $l) {
+                    $liderSem[$l['lider']][$l['discipulo']] = $l['status'];
+                    $liderSem[$l['lider']]['total'] = !isset($liderSem[$l['lider']]['total']) ? $t=1 : ++$t ;
 
-		public function statusPorLiderCelula($url){
-			$post = $url['post'] ;
-			$tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
-			$tipoStatus = $tipoStatus->listarTodos() ;
+                }
 
-			if (empty($post)) {
+                $totalDiscipulosSem=0;
+                foreach ($liderSem as $ls) {
+                    $totalDiscipulosSem += $ls['total'] ;
+                }
 
-			}else {
-				$id = $post['statusId'] ;
-				$celula = new \celula\modelo\celula();
-				$lideres = $celula->statusPorLiderCelula($id);			
+                    require_once 'modulos/celula/visao/lideresPorStatus.php';
+            }
+        }
 
-				//var_dump($lideres);
+        public function statusPorLiderCelula($url)
+        {
+            $post = $url['post'] ;
+            $tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
+            $tipoStatus = $tipoStatus->listarTodos() ;
 
-				$resposta = array() ;
-				$lider= array();
+            if (empty($post)) {
 
-				foreach( $lideres as $l ){
-					$lider[$l['dnome']][$l['nome']] = array('id'=>$l['id'], 'nome'=>$l['nome'],'tem'=>$l['tem']);  
+            } else {
+                $id = $post['statusId'] ;
+                $celula = new \celula\modelo\celula();
+                $lideres = $celula->statusPorLiderCelula($id);
 
-					//$lider[$l['dnome']]['total'] = !isset ($i)? $i =1 : ++$i ;  
-					
-				}
+                //var_dump($lideres);
 
-				$totalDiscipulos=0;
-				$total = 0 ;
-				foreach( $lider as $k => $l ){
-					foreach( $l as $d ){
-						//var_dump($l);
-						$total = is_null ($d['id']) ? 0 : count($l);
-						break;
-					}
-					$lider[$k]['total'] = $total ;
-					$totalDiscipulos+= $total;
-					
-				}
+                $resposta = array() ;
+                $lider= array();
 
-				$cont = 0 ;
-				//var_dump($lider); 
-				//exit();
+                foreach ($lideres as $l) {
+                    $lider[$l['dnome']][$l['nome']] = array('id'=>$l['id'], 'nome'=>$l['nome'],'tem'=>$l['tem']);
 
+                    //$lider[$l['dnome']]['total'] = !isset ($i)? $i =1 : ++$i ;
 
-			}
-					require_once  'modulos/celula/visao/statusPorLiderCelula.php';
-		}
+                }
 
-		public function listarPorStatusTodos($url){
-			$tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
-			$tipoStatus = $tipoStatus->listarTodos() ;
+                $totalDiscipulos=0;
+                $total = 0 ;
+                foreach ($lider as $k => $l) {
+                    foreach ($l as $d) {
+                        //var_dump($l);
+                        $total = is_null ($d['id']) ? 0 : count($l);
+                        break;
+                    }
+                    $lider[$k]['total'] = $total ;
+                    $totalDiscipulos+= $total;
 
+                }
 
-				$celula = new \celula\modelo\celula();
-				$lideres = $celula->lideresPorTodosStatus();			
+                $cont = 0 ;
+                //var_dump($lider);
+                //exit();
 
-				$resposta = array() ;
+            }
+                    require_once 'modulos/celula/visao/statusPorLiderCelula.php';
+        }
 
-				foreach( $lideres as $l ){
-					$lider[$l['lider']][$l['discipulo']] = $l['status'];  
-					$lider[$l['lider']]['total'] = !isset($lider[$l['lider']]['total']) ? $t=1 : ++$t ;  
-				}
-				$cont = 0 ;
+        public function listarPorStatusTodos($url)
+        {
+            $tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
+            $tipoStatus = $tipoStatus->listarTodos() ;
 
-				$totalDiscipulos=0;
-				foreach( $lider as $l ){
-					$totalDiscipulos += $l['total'] ;
-				}
-					require_once  'modulos/celula/visao/lideresPorStatus.php';
-			
-			}
-				
-		
-	
-	
-	}	
+                $celula = new \celula\modelo\celula();
+                $lideres = $celula->lideresPorTodosStatus();
 
-?>
+                $resposta = array() ;
+
+                foreach ($lideres as $l) {
+                    $lider[$l['lider']][$l['discipulo']] = $l['status'];
+                    $lider[$l['lider']]['total'] = !isset($lider[$l['lider']]['total']) ? $t=1 : ++$t ;
+                }
+                $cont = 0 ;
+
+                $totalDiscipulos=0;
+                foreach ($lider as $l) {
+                    $totalDiscipulos += $l['total'] ;
+                }
+                    require_once 'modulos/celula/visao/lideresPorStatus.php';
+
+            }
+
+    }

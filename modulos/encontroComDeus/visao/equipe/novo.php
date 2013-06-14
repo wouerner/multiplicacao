@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<?php include 'incluidos/css.inc.php' ; ?>
-		<?php include 'incluidos/js.inc.php' ; ?>
-	</head>
+    <head>
+        <meta charset="UTF-8">
+        <?php include 'incluidos/css.inc.php' ; ?>
+        <?php include 'incluidos/js.inc.php' ; ?>
+    </head>
 
-	<body>
-		<section class = "container-fluid">
+    <body>
+        <section class = "container-fluid">
 
-		<nav> 
-			
-			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
-		</nav>
-			
+        <nav>
 
-		<section>		
-			<article>
+            <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
+        </nav>
 
-				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+        <section>
+            <article>
 
-				<div class = "row-fluid" >	
-					<form class = "well form-horizontal" action = "/encontroComDeus/equipe/novoEquipe" method = "post">
-						<input name = "encontroId" type = "hidden" value = "<?php echo $encontroId ; ?>" >
+                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
-							<div class = "control-group">
-								<label class = "control-label" >Tipo Equipe: </label>
-								<div class = "controls">
-							<select name = "tipoEquipeId" >
-							<?php foreach ( $tiposEquipe as $t ) :?>
-								<option  value = "<?php echo $t->id ; ?>" ><?php echo $t->nome?></option>
-							<?php endforeach ; ?>
-						</select>
-						</div>
-						</div>
+                <div class = "row-fluid" >
+                    <form class = "well form-horizontal" action = "/encontroComDeus/equipe/novoEquipe" method = "post">
+                        <input name = "encontroId" type = "hidden" value = "<?php echo $encontroId ; ?>" >
 
-					<button class = "btn" type="submit">Salvar</button>
-					</form>
-			</div>
-			</article>
-		
-		</section>
+                            <div class = "control-group">
+                                <label class = "control-label" >Tipo Equipe: </label>
+                                <div class = "controls">
+                            <select name = "tipoEquipeId" >
+                            <?php foreach ( $tiposEquipe as $t ) :?>
+                                <option  value = "<?php echo $t->id ; ?>" ><?php echo $t->nome?></option>
+                            <?php endforeach ; ?>
+                        </select>
+                        </div>
+                        </div>
 
-		</section>
-	</body>
+                    <button class = "btn" type="submit">Salvar</button>
+                    </form>
+            </div>
+            </article>
+
+        </section>
+
+        </section>
+    </body>
 </html>
-

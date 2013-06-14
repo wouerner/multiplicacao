@@ -1,10 +1,9 @@
-<?php 
-//include("../assets/php/database.php"); 
+<?php
+//include("../assets/php/database.php");
 //include("../assets/php/class.acl.php");
 //$myACL = new ACL();
-/*if ($myACL->hasPermission('access_admin') != true)
-{
-	header("location: ../index.php");
+/*if ($myACL->hasPermission('access_admin') != true) {
+    header("location: ../index.php");
 }*/
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

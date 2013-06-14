@@ -1,55 +1,54 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<?php include 'incluidos/css.inc.php' ; ?>
-		<?php include 'incluidos/js.inc.php' ; ?>
+    <head>
+        <meta charset="UTF-8">
+        <?php include 'incluidos/css.inc.php' ; ?>
+        <?php include 'incluidos/js.inc.php' ; ?>
 
 <script>
 $(document).ready(function () {
 
-	$(".btn-warning").click( function(){
-				var id = this.id ;
+    $(".btn-warning").click( function(){
+                var id = this.id ;
 
-				$( "#dialog-confirm" ).dialog({
-				resizable: false,
-				height:240,
-				modal: true,
-				buttons: {
-					Cancelar: function() {
-						$( this ).dialog( "close" );
-					},
-      		Desativar: function() {
-						$(location).attr('href', '/discipulo/discipulo/desativar/id/'+id);
-       		},
-				}
+                $( "#dialog-confirm" ).dialog({
+                resizable: false,
+                height:240,
+                modal: true,
+                buttons: {
+                    Cancelar: function() {
+                        $( this ).dialog( "close" );
+                    },
+              Desativar: function() {
+                        $(location).attr('href', '/discipulo/discipulo/desativar/id/'+id);
+               },
+                }
 
-		});
-	}); 
+        });
+    });
 
-	$(".btn-success").click( function(){
-				var id = this.id ;
+    $(".btn-success").click( function(){
+                var id = this.id ;
 
-				$( "#dialog-success" ).dialog({
-				resizable: false,
-				height:240,
-				modal: true,
-				buttons: {
-					Cancelar: function() {
-						$( this ).dialog( "close" );
-					},
-      		Ativar: function() {
-						$(location).attr('href', '/discipulo/discipulo/ativar/id/'+id);
-       		},
-				}
+                $( "#dialog-success" ).dialog({
+                resizable: false,
+                height:240,
+                modal: true,
+                buttons: {
+                    Cancelar: function() {
+                        $( this ).dialog( "close" );
+                    },
+              Ativar: function() {
+                        $(location).attr('href', '/discipulo/discipulo/ativar/id/'+id);
+               },
+                }
 
-		});
-	}); 
-
+        });
+    });
 
 });
 </script>
-	</head>
+    </head>
 
 <body>
 
@@ -61,120 +60,119 @@ $(document).ready(function () {
     <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente ativar?</p>
 </div>
 
-		<section class = "container-fluid">
+        <section class = "container-fluid">
 
-		<nav> 
-			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
-		</nav>
-			
-		<header>
-		
-		</header>
+        <nav>
+            <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
+        </nav>
 
-		<section>		
-			<article>
+        <header>
 
-			<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+        </header>
+
+        <section>
+            <article>
+
+            <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 <div class = "well" >
 
-			<table class = "table" >
-				<caption><h3><?php echo $discipulo->nome ; ?> <a href="/metas/metas/detalhar/id/<?php echo $discipulo->id ?>">metas</a></h3></caption>
+            <table class = "table" >
+                <caption><h3><?php echo $discipulo->nome ; ?> <a href="/metas/metas/detalhar/id/<?php echo $discipulo->id ?>">metas</a></h3></caption>
 
-				<tr>	
-					<td class = "span2" rowspan = "4">
-						<img src = "<?php $foto = $discipulo->getFoto() ; echo is_object($foto) ? $foto->url: '' ; ?>"class = "img-rounded" style="height: 150px;"  width = "150"  > 
-					</td>
+                <tr>
+                    <td class = "span2" rowspan = "4">
+                        <img src = "<?php $foto = $discipulo->getFoto() ; echo is_object($foto) ? $foto->url: '' ; ?>"class = "img-rounded" style="height: 150px;"  width = "150"  >
+                    </td>
 
-					<td>
-					<strong>Nome:</strong>	<?php echo $discipulo->nome ; ?>
-					</td>
+                    <td>
+                    <strong>Nome:</strong>	<?php echo $discipulo->nome ; ?>
+                    </td>
 
-					<td>
-					<strong>Líder: </strong>	<?php echo $discipulo->getLider()->nome ; ?>
-					</td>
-					<td>
-						 <strong>Status Celular: </strong> <?php  echo $statusCelular['nome'] ; ?>
-					</td>
-				</tr>
+                    <td>
+                    <strong>Líder: </strong>	<?php echo $discipulo->getLider()->nome ; ?>
+                    </td>
+                    <td>
+                         <strong>Status Celular: </strong> <?php  echo $statusCelular['nome'] ; ?>
+                    </td>
+                </tr>
 
-				<tr>
-					<td  ><strong>Endereço: </strong><?php  echo $discipulo->endereco ; ?></td>
-					<td><strong>Telefone: </strong><?php echo $discipulo->telefone ; ?></td>
-					<td><strong>E-mail: </strong><?php echo $discipulo->email ; ?></td>
-				</tr>
+                <tr>
+                    <td  ><strong>Endereço: </strong><?php  echo $discipulo->endereco ; ?></td>
+                    <td><strong>Telefone: </strong><?php echo $discipulo->telefone ; ?></td>
+                    <td><strong>E-mail: </strong><?php echo $discipulo->email ; ?></td>
+                </tr>
 
-				<tr >
+                <tr >
 
-				<td colspan = "3" ><strong>Participa da Célula: </strong>
-						<a href="/celula/detalhar/id/<?php echo $discipulo->celula ; ?>">
-							<?php echo $participaCelula['nomeCelula'] ; ?>
-						</a>
-					</td>
-				</tr>
-				<tr >
-					<td colspan = "3" ><strong>Líder da Célula: </strong>
-						<?php foreach ( $liderCelula as $celula) :?>
-						<a href="/celula/detalhar/id/<?php echo $celula['id'] ; ?>">
-							<?php echo $celula['nomeCelula'] ; ?> 
-						</a> |
-						<?php endforeach ; ?>
-						  </a>
-					</td>
-				</tr>
-				<tr>
-					<td colspan = "3" > 
-				<strong>Eventos:</strong> 
-				<?php foreach ( $eventoDiscipulo as $evento) :?>
-						<a href="/celula/detalhar/id/<?php echo $evento['id'] ; ?>">
-							<?php echo $evento['nome'] ; ?> 
-						</a> |
-				<?php endforeach ; ?>
-					</td>
-				</tr>
+                <td colspan = "3" ><strong>Participa da Célula: </strong>
+                        <a href="/celula/detalhar/id/<?php echo $discipulo->celula ; ?>">
+                            <?php echo $participaCelula['nomeCelula'] ; ?>
+                        </a>
+                    </td>
+                </tr>
+                <tr >
+                    <td colspan = "3" ><strong>Líder da Célula: </strong>
+                        <?php foreach ( $liderCelula as $celula) :?>
+                        <a href="/celula/detalhar/id/<?php echo $celula['id'] ; ?>">
+                            <?php echo $celula['nomeCelula'] ; ?>
+                        </a> |
+                        <?php endforeach ; ?>
+                          </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan = "3" >
+                <strong>Eventos:</strong>
+                <?php foreach ( $eventoDiscipulo as $evento) :?>
+                        <a href="/celula/detalhar/id/<?php echo $evento['id'] ; ?>">
+                            <?php echo $evento['nome'] ; ?>
+                        </a> |
+                <?php endforeach ; ?>
+                    </td>
+                </tr>
 
-				<tr  >
-					<td colspan = "3" >Ministerios:  
-				<?php foreach ( $ministerios as $ministerio) :?>
-							<?php echo $ministerio['funcao'] ; ?>  
-							<?php echo $ministerio['ministerio'] ; ?> 
-						 |
-				<?php endforeach ; ?>
-					</td>
-				</tr>
+                <tr  >
+                    <td colspan = "3" >Ministerios:
+                <?php foreach ( $ministerios as $ministerio) :?>
+                            <?php echo $ministerio['funcao'] ; ?>
+                            <?php echo $ministerio['ministerio'] ; ?>
+                         |
+                <?php endforeach ; ?>
+                    </td>
+                </tr>
 
-				<tr>
-				<td>
-					<table class = "table" >
-						<caption>Discipulos nas Redes</caption>
-						<?php foreach( $totalRedesLideres as $s) :?>
-						<tr>
-							<td><?php echo $s['nome']?></td>
-							<td><?php echo $s['total']?></td>
-						</tr>
-						<?php endforeach ; ?>
-					</table>
-				</td>
+                <tr>
+                <td>
+                    <table class = "table" >
+                        <caption>Discipulos nas Redes</caption>
+                        <?php foreach( $totalRedesLideres as $s) :?>
+                        <tr>
+                            <td><?php echo $s['nome']?></td>
+                            <td><?php echo $s['total']?></td>
+                        </tr>
+                        <?php endforeach ; ?>
+                    </table>
+                </td>
 
-				<td>
-					<table class = "table" >
-						<caption>Discipulos Ativos/Inativos</caption>
-						<tr>
-							<td>Discipulos ativos: <?php echo $totalAtivosLider['total'] ;  ?> </td>
-							<td>Discipulos inativos: <?php echo $totalInativosLider['total'] ;  ?> </td>
-						</tr>
-					</table>
-				</td>
-				</tr>
+                <td>
+                    <table class = "table" >
+                        <caption>Discipulos Ativos/Inativos</caption>
+                        <tr>
+                            <td>Discipulos ativos: <?php echo $totalAtivosLider['total'] ;  ?> </td>
+                            <td>Discipulos inativos: <?php echo $totalInativosLider['total'] ;  ?> </td>
+                        </tr>
+                    </table>
+                </td>
+                </tr>
 
-					<?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
-				</table>
-</div>	
-			
-			</article>
-		
-		</section>
+                    <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
+                </table>
+</div>
 
-		</section>
-	</body>
+            </article>
+
+        </section>
+
+        </section>
+    </body>
 </html>
-

@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<?php include 'incluidos/css.inc.php' ?>
-		<?php include 'incluidos/js.inc.php' ?>
-	</head>
+    <head>
+        <meta charset="UTF-8">
+        <?php include 'incluidos/css.inc.php' ?>
+        <?php include 'incluidos/js.inc.php' ?>
+    </head>
 
-	<body>
-		<section class = "container-fluid">
+    <body>
+        <section class = "container-fluid">
 
-		<nav> 
-			
-			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
-		</nav>
-			
+        <nav>
 
-		<section>		
-			<article>
+            <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
+        </nav>
 
-				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
-				<?php require 'modulos/aviso/visao/tabAviso.inc.php' ; ?>
+        <section>
+            <article>
 
-			</article>
-		
-		</section>
+                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+                <?php require 'modulos/aviso/visao/tabAviso.inc.php' ; ?>
 
-		</section>
-	</body>
+            </article>
+
+        </section>
+
+        </section>
+    </body>
 </html>
-

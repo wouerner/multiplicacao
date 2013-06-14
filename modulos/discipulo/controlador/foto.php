@@ -7,782 +7,725 @@ use evento\modelo\eventoDiscipulo;
 use framework\visao\visao ;
 use discipulo\Modelo\foto;
 
-namespace discipulo\controlador; 
+namespace discipulo\controlador;
 
-class foto{
+class foto
+{
+            const DIR_FOTO = '/../visao/foto/upload/' ;
 
-			const DIR_FOTO = '/../visao/foto/upload/' ;
+          /* Mostra a lista de todos os discipulos cadastrados no sistema
+            *
+            * */
 
-		  /* Mostra a lista de todos os discipulos cadastrados no sistema
-			*
-			* */
-	
-		public function index(){
+        public function index()
+        {
+        }
 
+        public function novo($url)
+        {
+            if (!$_FILES) {
 
-		}
+                $discipuloId = $url[4] ;
+              require_once 'modulos/discipulo/visao/foto/novo.php';
+            } else {
 
-		public function novo($url){		
+                $id = $url['post']['discipuloId'] ;
 
-			if (!$_FILES) {
+                $foto = $_FILES['arquivo'] ;
+                //var_dump($foto);
+                $nomeArquivo = str_replace(" ", "",microtime()).".".strtolower(end(explode(".", $foto['name'])));
+                //echo $nomeArquivo;
+                $dir = dirname(__FILE__).self::DIR_FOTO;
+                //echo $dir;
 
-				$discipuloId = $url[4] ;
-		  	require_once  'modulos/discipulo/visao/foto/novo.php';
-			}else{
+                if (move_uploaded_file($foto['tmp_name'], $dir.$nomeArquivo)) {
+                //echo "Arquivo enviado com sucesso!";
 
-				$id = $url['post']['discipuloId'] ;
+                    $foto = new \discipulo\Modelo\foto();
+                    $foto->discipuloId = $id ;
+                    $foto->url = '/modulos/discipulo/visao/foto/upload/'.$nomeArquivo ;
 
-				$foto = $_FILES['arquivo'] ;	
-				//var_dump($foto);
-				$nomeArquivo = str_replace(" ", "",microtime()).".".strtolower(end(explode(".", $foto['name'])));  
-				//echo $nomeArquivo;  
-				$dir = dirname(__FILE__).self::DIR_FOTO; 
-				//echo $dir;
+                    if ( !$foto->salvar()) {
 
-				if(move_uploaded_file($foto['tmp_name'], $dir.$nomeArquivo)) {  
-  			  //echo "Arquivo enviado com sucesso!";  
+                        $foto = $foto->listarUm();
+                        //var_dump($foto);
 
-					$foto = new \discipulo\Modelo\foto();
-					$foto->discipuloId = $id ;
-					$foto->url = '/modulos/discipulo/visao/foto/upload/'.$nomeArquivo ; 
+                        $arq = $_SERVER['DOCUMENT_ROOT'].$foto->url ;
+                        //var_dump($arq);
+                        //var_dump($nomeArquivo) ;
+                        //unlink($arq ) ;
+                        $foto->url ='/modulos/discipulo/visao/foto/upload/'.$nomeArquivo ;
 
-					if( !$foto->salvar()){
+                        $foto->atualizar();
+                    }
+                    $redirecionar = '/discipulo/discipulo/perfil/id/'.$id;
+                    header ('location:'.$redirecionar );
+                    exit();
+                }
 
-						$foto = $foto->listarUm();
-						//var_dump($foto);
+            }
+        }
 
-						$arq = $_SERVER['DOCUMENT_ROOT'].$foto->url ;
-						//var_dump($arq);
-						//var_dump($nomeArquivo) ;
-						//unlink($arq ) ;
-						$foto->url ='/modulos/discipulo/visao/foto/upload/'.$nomeArquivo ; 
- 
-						$foto->atualizar();
-					}
-					$redirecionar = '/discipulo/discipulo/perfil/id/'.$id;
-					header ('location:'.$redirecionar );
-					exit();
-				} 
+        public function semLider()
+        {
+          $pagina = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1 ;
+          $quantidadePorPagina = 12;
 
-			}
-		}
+          $discipulos =	new \discipulo\Modelo\Discipulo();
+          $discipulos = $discipulos->semLider($quantidadePorPagina , $pagina);
 
-		public function semLider(){
+          $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulosSemLider() ;
+          $totalDiscipulos = (int) $totalDiscipulos['total'] ;
+
+          require_once 'modulos/discipulo/visao/listar.php';
 
-		  $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1 ;
-		  $quantidadePorPagina = 12;
+        }
+
+          /*Cria um NOVO discipulo
+          * */
+        public function novoCompleto($url)
+        {
+         if ( empty ( $url['post'] ) ) {
+            $estadosCivies = new \discipulo\Modelo\estadoCivil();
 
-		  $discipulos =	new \discipulo\Modelo\Discipulo();
-		  $discipulos = $discipulos->semLider($quantidadePorPagina , $pagina);
-		  
-		  $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulosSemLider() ;
-		  $totalDiscipulos = (int)$totalDiscipulos['total'] ;
+                $estadosCivies = $estadosCivies->listarTodos();
+
+                $lideres =	new \discipulo\Modelo\Discipulo();
+                $lideres =	$lideres->listarlideres();
+
+                $celula = new \celula\modelo\celula();
+
+                $celulas = new \celula\modelo\celula();
+                $celulas = $celulas->listarTodos();
+
+            //status celular da pessoa
+             $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
+             $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
+
+             $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
 
-		  require_once  'modulos/discipulo/visao/listar.php';
+             //$statusCelularDiscipulo->discipuloId= $url[3];
+             $statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
+            //
 
-		}
+             //Tipos de admissão e admissão atual
+             $tipoAdmissao = new \admissao\modelo\tipoAdmissao();
+             $tiposAdmissoes = $tipoAdmissao->listarTodos();
+
+             $tipoAdmissaoAtual = new \admissao\modelo\admissao();
+             //$tipoAdmissaoAtual->discipuloId = $url[3] ;
+             $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
 
-		  /*Cria um NOVO discipulo
-		  * */
-		public function novoCompleto($url){
+             //tipos de rede e rede atual da pessoa
+             $rede = new \rede\modelo\rede();
+             $tipoRede = new \rede\modelo\tipoRede();
+             $funcaoRede = new \rede\modelo\funcaoRede();
+
+             $tiposRedes = $tipoRede->listarTodos();
+             $funcoesRedes = $funcaoRede->listarTodos();
+             $redeAtual = $rede->listarUm();
+
+             //escala de exito
+              $eventos = new \evento\modelo\evento();
 
-		 if ( empty ( $url['post'] ) ) {
-			$estadosCivies = new \discipulo\Modelo\estadoCivil();
+          //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
+            $eventos = $eventos->listarTodos();
 
-				$estadosCivies = $estadosCivies->listarTodos();
+            require_once 'modulos/discipulo/visao/novoCompleto.php';
+        } else {
+                $discipulo =	new \discipulo\Modelo\Discipulo();
 
-				$lideres =	new \discipulo\Modelo\Discipulo();
-				$lideres =	$lideres->listarlideres();
+                $post = $url['post'] ;
 
-				$celula = new \celula\modelo\celula();
+                $discipulo->nome = $post['nome'] ;
+                $discipulo->alcunha = $post['alcunha'] ;
+                $discipulo->setDataNascimento($post['dataNascimento']) ;
+                $discipulo->telefone = $post['telefone'];
+                $discipulo->sexo = $post['sexo'] ;
+                $discipulo->estadoCivilId = $post['estadoCivilId'] ;
+                $discipulo->endereco = $post['endereco'] ;
+                $discipulo->email = $post['email'] ;
+                $discipulo->celula = $post['celula'] ;
+                $discipulo->ativo =isset( $post['ativo']) ? $post['ativo']: 0 ;
+                $discipulo->lider = $post['lider'] ;
 
-				$celulas = new \celula\modelo\celula();
-				$celulas = $celulas->listarTodos();
+                if ( $discipulo->emailUnico() ) {
 
-			//status celular da pessoa	
-			 $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ; 
-			 $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
+                          $discipulo->salvarCompleto() ;
+                          $_SESSION['mensagem'] = array( 000 => array (
+                                                                                     'mensagem'	=> 'Cadastro Realizado com Sucesso!',
+                                                                                     'classe'		=> 'success'
+                                                                                                          ) );
+                } else {
 
+                $_SESSION['dados']['nome'] = $post['nome'] ;
+                $_SESSION['dados']['dataNascimento'] = $post['dataNascimento'] ;
+                $_SESSION['dados']['telefone'] = $post['telefone'];
+                $_SESSION['dados']['endereco'] = $post['endereco'] ;
+                $_SESSION['dados']['email'] = $post['email'] ;
 
-			 $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();	
-			
-			 //$statusCelularDiscipulo->discipuloId= $url[3];
-			 $statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
-			//
-
-			 //Tipos de admissão e admissão atual
-			 $tipoAdmissao = new \admissao\modelo\tipoAdmissao();
-			 $tiposAdmissoes = $tipoAdmissao->listarTodos();	 
-
-			 $tipoAdmissaoAtual = new \admissao\modelo\admissao();
-			 //$tipoAdmissaoAtual->discipuloId = $url[3] ;
-			 $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
-
-			 //tipos de rede e rede atual da pessoa
-			 $rede = new \rede\modelo\rede(); 
-			 $tipoRede = new \rede\modelo\tipoRede();
-			 $funcaoRede = new \rede\modelo\funcaoRede();
-
-			 $tiposRedes = $tipoRede->listarTodos();
-			 $funcoesRedes = $funcaoRede->listarTodos();
-			 $redeAtual = $rede->listarUm();
-
-
-			 //escala de exito
-		  	$eventos = new \evento\modelo\evento();
-		
-		  //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
-			$eventos = $eventos->listarTodos();
-
-			require_once  'modulos/discipulo/visao/novoCompleto.php';
-		}else{
-				$discipulo =	new \discipulo\Modelo\Discipulo();
-
-				$post = $url['post'] ;
-
-
-				$discipulo->nome = $post['nome'] ;
-				$discipulo->alcunha = $post['alcunha'] ;
-				$discipulo->setDataNascimento($post['dataNascimento']) ;
-				$discipulo->telefone = $post['telefone'];
-				$discipulo->sexo = $post['sexo'] ;
-				$discipulo->estadoCivilId = $post['estadoCivilId'] ;
-				$discipulo->endereco = $post['endereco'] ;
-				$discipulo->email = $post['email'] ;
-				$discipulo->celula = $post['celula'] ;
-				$discipulo->ativo =isset( $post['ativo']) ? $post['ativo']: 0 ;
-				$discipulo->lider = $post['lider'] ;
-
-				if ( $discipulo->emailUnico() ) {
+                    $_SESSION['mensagem'] ="E-mail já cadastrado" ;
+                      header ('location:/discipulo/novoCompleto');
+                    exit();
 
-						  $discipulo->salvarCompleto() ;
-						  $_SESSION['mensagem'] = array( 000 => array ( 
-									 												'mensagem'	=> 'Cadastro Realizado com Sucesso!',
-									 												'classe'		=> 'success'
-						  																				) );
-				}else {
-
-				$_SESSION['dados']['nome'] = $post['nome'] ;
-				$_SESSION['dados']['dataNascimento'] = $post['dataNascimento'] ;
-				$_SESSION['dados']['telefone'] = $post['telefone'];
-				$_SESSION['dados']['endereco'] = $post['endereco'] ;
-				$_SESSION['dados']['email'] = $post['email'] ;
+                }
 
-					$_SESSION['mensagem'] ="E-mail já cadastrado" ;
-				  	header ('location:/discipulo/novoCompleto');
-					exit();
-				
-				}
+                //status celular
+                 $tipoStatusCelular =	$post['tipoStatusCelular'] ;
+                 $statusCelular =	new \statusCelular\modelo\statusCelular() ;
+                $statusCelular->tipoStatusCelular = $tipoStatusCelular;
+                $statusCelular->discipuloId = $discipulo->id;
+                if (!$statusCelular->salvar()) $statusCelular->atualizar();
 
+                //admissão
+                 $admissao = new \admissao\modelo\admissao();
+                 $admissao->tipoAdmissao = $post['tipoAdmissao'] ;
+                 $admissao->discipuloId = $discipulo->id ;
+                 if (!$admissao->salvar()) $admissao->atualizar() ;
 
-				//status celular 
-			 	$tipoStatusCelular =	$post['tipoStatusCelular'] ; 
-			 	$statusCelular =	new \statusCelular\modelo\statusCelular() ;
-				$statusCelular->tipoStatusCelular = $tipoStatusCelular;
-				$statusCelular->discipuloId = $discipulo->id;
-				if (!$statusCelular->salvar()) $statusCelular->atualizar();
+                //tipos de rede e rede atual da pessoa
+                $rede = new \rede\modelo\rede();
 
-				//admissão
-			 	$admissao = new \admissao\modelo\admissao();
-			 	$admissao->tipoAdmissao = $post['tipoAdmissao'] ;
-			 	$admissao->discipuloId = $discipulo->id ;
-			 	if (!$admissao->salvar()) $admissao->atualizar() ;
+                 $rede->discipuloId = $discipulo->id;
+                 $rede->tipoRedeId = $post['tipoRedeId'];
+                 $rede->funcaoRedeId = $post['funcaoRedeId'];
+                if (!$rede->salvar()) $rede->atualizar();
 
+                $discipuloEventos = new \evento\modelo\evento();
+                  $eventos = isset($post['eventos']) ? $post['eventos'] : NULL ;
+                if ($eventos) {
+                          $discipuloEventos->salvarEventos($eventos,$discipulo->id);
+                }
 
-				//tipos de rede e rede atual da pessoa
-				$rede = new \rede\modelo\rede(); 
+                header('location:/discipulo/listarAtualizar');
+                exit();
 
-			 	$rede->discipuloId = $discipulo->id;
-			 	$rede->tipoRedeId = $post['tipoRedeId'];
-			 	$rede->funcaoRedeId = $post['funcaoRedeId'];
-				if (!$rede->salvar()) $rede->atualizar();
+        }
 
-				
-				$discipuloEventos = new \evento\modelo\evento();
-			  	$eventos = isset($post['eventos']) ? $post['eventos'] : NULL ;		
-				if ($eventos){
-						  $discipuloEventos->salvarEventos($eventos,$discipulo->id);
-				}
+        }
 
-				header('location:/discipulo/listarAtualizar');
-				exit();
+          public function novoAnonimo($url)
+          {
+                     if ( empty ( $url['post'] ) ) {
 
-		}
+                     require_once 'modulos/discipulo/visao/novoAnonimo.php';
 
-		
-		}
+            } else {
+                     $discipulo =	new \discipulo\Modelo\Discipulo();
 
-		  public function novoAnonimo($url){
-					 if ( empty ( $url['post'] ) ) {
-		
-					 require_once  'modulos/discipulo/visao/novoAnonimo.php';
-			
-			}else {
-					 $discipulo =	new \discipulo\Modelo\Discipulo();
+                     $post = $url['post'] ;
 
-					 $post = $url['post'] ;
+                     $discipulo->nome			= $post['nome'];
+                     $discipulo->telefone	= $post['telefone'];
+                     $discipulo->endereco 	= $post['endereco'];
+                     $discipulo->email 		= $post['email'];
+                     $discipulo->senha		= $post['senha'];
 
-					 $discipulo->nome			= $post['nome'];
-					 $discipulo->telefone	= $post['telefone'];
-					 $discipulo->endereco 	= $post['endereco'];
-					 $discipulo->email 		= $post['email'];
-					 $discipulo->senha		= $post['senha'];
+                     if ($discipulo->salvar() ) {
 
-					 if ($discipulo->salvar() ) {
+                                header ('location:/modulos/discipulo/visao/agradecimento.php');
+                                exit();
 
+                     } else {
+                                $mensagem = ($discipulo->erro== '23000') ? 'E-mail já cadastrado' :  'ok' ;
+                                require_once 'modulos/discipulo/visao/novoAnonimo.php';
 
-								header ('location:/modulos/discipulo/visao/agradecimento.php');
-								exit();
+                     }
 
-					 
-					 }else {
-								$mensagem = ($discipulo->erro== '23000') ? 'E-mail já cadastrado' :  'ok' ; 
-								require_once  'modulos/discipulo/visao/novoAnonimo.php';
-					 
-					 }
+            }
 
-			}
-			
+        }
 
-		}
+        public function atualizar($url)
+        {
+            if ( empty ( $url['post'] ) ) {
 
+                $discipulo =	new \discipulo\Modelo\Discipulo();
+                $lideres = $discipulo->listarLideres();
 
-		public function atualizar($url){
+                $discipulo->id =  $url[3] ;
+                $discipulo = $discipulo->listarUm();
 
-			if ( empty ( $url['post'] ) ) {
-				
-				
+                //estado civil
+                $estadosCivies = new \discipulo\Modelo\estadoCivil();
+                $estadosCivies->id = $discipulo->estadoCivilId ;
 
-				$discipulo =	new \discipulo\Modelo\Discipulo();
-				$lideres = $discipulo->listarLideres();
+                $estadoCivil = $estadosCivies->listarUm();
 
-				$discipulo->id =  $url[3] ;
-				$discipulo = $discipulo->listarUm();
-				
-				//estado civil
-				$estadosCivies = new \discipulo\Modelo\estadoCivil();
-				$estadosCivies->id = $discipulo->estadoCivilId ;
+                $estadosCivies = $estadosCivies->listarTodos();
 
-				$estadoCivil = $estadosCivies->listarUm();
+                $lider =	new \discipulo\Modelo\Discipulo();
+                $lider->id = $discipulo->lider ;
+                $lider = $lider->listarUm($discipulo->lider);
 
-				$estadosCivies = $estadosCivies->listarTodos();
+                $celula = new \celula\modelo\celula();
+                $celula->id = $discipulo->celula;
+                $celula = $celula->listarUm();
 
+                $celulas = new \celula\modelo\celula();
+                $celulas = $celulas->listarTodos();
 
-				$lider =	new \discipulo\Modelo\Discipulo();
-				$lider->id = $discipulo->lider ;
-				$lider = $lider->listarUm($discipulo->lider);
+            //status celular da pessoa
+             $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
+             $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
 
-				$celula = new \celula\modelo\celula();
-				$celula->id = $discipulo->celula;
-				$celula = $celula->listarUm();
+             $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
 
-				$celulas = new \celula\modelo\celula();
-				$celulas = $celulas->listarTodos();
+             $statusCelularDiscipulo->discipuloId= $url[3];
+             $statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
+            //
 
-			//status celular da pessoa	
-			 $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ; 
-			 $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
+             //Tipos de admissão e admissão atual
+             $tipoAdmissao = new \admissao\modelo\tipoAdmissao();
+             $tiposAdmissoes = $tipoAdmissao->listarTodos();
 
+             $tipoAdmissaoAtual = new \admissao\modelo\admissao();
+             $tipoAdmissaoAtual->discipuloId = $url[3] ;
+             $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
 
-			 $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();	
-			
-			 $statusCelularDiscipulo->discipuloId= $url[3];
-			 $statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
-			//
+             //tipos de rede e rede atual da pessoa
+             $rede = new \rede\modelo\rede();
+             $tipoRede = new \rede\modelo\tipoRede();
+             $funcaoRedes = new \rede\modelo\funcaoRede();
 
-			 //Tipos de admissão e admissão atual
-			 $tipoAdmissao = new \admissao\modelo\tipoAdmissao();
-			 $tiposAdmissoes = $tipoAdmissao->listarTodos();	 
+             $tiposRedes = $tipoRede->listarTodos();
+             $funcaoRedes = $funcaoRedes->listarTodos();
+             $redeAtual = $rede->listarUm();
 
-			 $tipoAdmissaoAtual = new \admissao\modelo\admissao();
-			 $tipoAdmissaoAtual->discipuloId = $url[3] ;
-			 $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
+            //ministerio da pessoa.
+             $ministerio = new \ministerio\modelo\ministerio() ;
+             $ministerio = $ministerio->listarTodos() ;
 
+             $funcaoMinisterio = new \ministerio\modelo\funcao() ;
+             $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
 
-			 //tipos de rede e rede atual da pessoa
-			 $rede = new \rede\modelo\rede(); 
-			 $tipoRede = new \rede\modelo\tipoRede();
-			 $funcaoRedes = new \rede\modelo\funcaoRede();
+             //escala de exito
+              $eventos = new \evento\modelo\evento();
 
-			 $tiposRedes = $tipoRede->listarTodos();
-			 $funcaoRedes = $funcaoRedes->listarTodos();
-			 $redeAtual = $rede->listarUm();
+          $id = $url[3];
+          $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
+            $eventos = $eventos->listarTodos();
 
-			//ministerio da pessoa.
-			 $ministerio = new \ministerio\modelo\ministerio() ;
-			 $ministerio = $ministerio->listarTodos() ; 
+            $dataN = $discipulo->getDataNascimento()->format('d/m/Y');
+            $status = $discipulo->getStatusCelular();
+            $rede = $discipulo->getRede();
 
-			 $funcaoMinisterio = new \ministerio\modelo\funcao() ;
-			 $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
+             require_once 'modulos/discipulo/visao/atualizar.php';
 
-			 //escala de exito
-		  	$eventos = new \evento\modelo\evento();
-		
-		  $id = $url[3];
-		  $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
-			$eventos = $eventos->listarTodos();
-
-			$dataN = $discipulo->getDataNascimento()->format('d/m/Y');
-			$status = $discipulo->getStatusCelular();
-			$rede = $discipulo->getRede();
-
-			 require_once  'modulos/discipulo/visao/atualizar.php';
-			
-			}else {
-				$discipulo =	new \discipulo\Modelo\Discipulo();
-
-				$post = $url['post'] ;
-
-
-				$discipulo->id = $post['discipuloId'] ;	
-				$discipulo->nome = $post['nome'] ;
-				$discipulo->alcunha = $post['alcunha'] ;
-				$discipulo->setDataNascimento($post['dataNascimento']) ;
-				$discipulo->telefone = $post['telefone'];
-				$discipulo->sexo = $post['sexo'] ;
-				$discipulo->estadoCivilId = $post['estadoCivilId'] ;
-				$discipulo->endereco = $post['endereco'] ;
-				$discipulo->email = $post['email'] ;
-				$discipulo->celula = $post['celula'] ;
-				$discipulo->ativo =isset( $post['ativo']) ? $post['ativo']: null ;
-				$discipulo->lider = $post['lider'] ;
-
+            } else {
+                $discipulo =	new \discipulo\Modelo\Discipulo();
 
-				//status celular 
-			 /*	$tipoStatusCelular =	$post['tipoStatusCelular'] ; 
-			 	$statusCelular =	new \statusCelular\modelo\statusCelular() ;
-				$statusCelular->discipuloId = $post['discipuloId'];
-				$statusCelular->tipoStatusCelular = $tipoStatusCelular;
-				if (!$statusCelular->salvar()) $statusCelular->atualizar();*/
+                $post = $url['post'] ;
 
-				//admissão
-			 	$admissao = new \admissao\modelo\admissao();
-			 	$admissao->discipuloId = $post['discipuloId'] ;
-			 	$admissao->tipoAdmissao = $post['tipoAdmissao'] ;
-			 	if (!$admissao->salvar()) $admissao->atualizar() ;
+                $discipulo->id = $post['discipuloId'] ;
+                $discipulo->nome = $post['nome'] ;
+                $discipulo->alcunha = $post['alcunha'] ;
+                $discipulo->setDataNascimento($post['dataNascimento']) ;
+                $discipulo->telefone = $post['telefone'];
+                $discipulo->sexo = $post['sexo'] ;
+                $discipulo->estadoCivilId = $post['estadoCivilId'] ;
+                $discipulo->endereco = $post['endereco'] ;
+                $discipulo->email = $post['email'] ;
+                $discipulo->celula = $post['celula'] ;
+                $discipulo->ativo =isset( $post['ativo']) ? $post['ativo']: null ;
+                $discipulo->lider = $post['lider'] ;
 
+                //status celular
+             /*	$tipoStatusCelular =	$post['tipoStatusCelular'] ;
+                 $statusCelular =	new \statusCelular\modelo\statusCelular() ;
+                $statusCelular->discipuloId = $post['discipuloId'];
+                $statusCelular->tipoStatusCelular = $tipoStatusCelular;
+                if (!$statusCelular->salvar()) $statusCelular->atualizar();*/
 
-				//tipos de rede e rede atual da pessoa
-				$rede = new \rede\modelo\rede(); 
+                //admissão
+                 $admissao = new \admissao\modelo\admissao();
+                 $admissao->discipuloId = $post['discipuloId'] ;
+                 $admissao->tipoAdmissao = $post['tipoAdmissao'] ;
+                 if (!$admissao->salvar()) $admissao->atualizar() ;
 
-			 	$rede->discipuloId = $post['discipuloId'];
-			 	$rede->tipoRedeId = $post['tipoRedeId'];
-			 	$rede->funcaoRedeId = $post['funcaoRedeId'];
-				if (!$rede->salvar()) $rede->atualizar();
+                //tipos de rede e rede atual da pessoa
+                $rede = new \rede\modelo\rede();
 
-				
-				$discipuloEventos = new \evento\modelo\evento();
-			  $eventos = isset($post['eventos']) ? $post['eventos'] : NULL ;		
-				if (!is_null($eventos)) $discipuloEventos->salvarEventos($eventos,$discipulo->id);
+                 $rede->discipuloId = $post['discipuloId'];
+                 $rede->tipoRedeId = $post['tipoRedeId'];
+                 $rede->funcaoRedeId = $post['funcaoRedeId'];
+                if (!$rede->salvar()) $rede->atualizar();
 
-				//ministerio
+                $discipuloEventos = new \evento\modelo\evento();
+              $eventos = isset($post['eventos']) ? $post['eventos'] : NULL ;
+                if (!is_null($eventos)) $discipuloEventos->salvarEventos($eventos,$discipulo->id);
 
-				$ministerio = new \ministerio\modelo\ministerioTemDiscipulo();
-				$ministerio->discipuloId = $discipulo->id ;
-				$ministerio->funcaoId = $post['fministerio'] ;
-				$ministerio->ministerioId = $post['ministerio'] ;
-				if (!$ministerio->salvar()) $ministerio->atualizar(); 
+                //ministerio
 
+                $ministerio = new \ministerio\modelo\ministerioTemDiscipulo();
+                $ministerio->discipuloId = $discipulo->id ;
+                $ministerio->funcaoId = $post['fministerio'] ;
+                $ministerio->ministerioId = $post['ministerio'] ;
+                if (!$ministerio->salvar()) $ministerio->atualizar();
 
-				
+                $discipulo->atualizar() ;
 
-				$discipulo->atualizar() ;
+                $estadosCivies = new \discipulo\Modelo\estadoCivil();
+                $estadosCivies->id = $discipulo->estadoCivilId ;
 
-				$estadosCivies = new \discipulo\Modelo\estadoCivil();
-				$estadosCivies->id = $discipulo->estadoCivilId ;
+                $estadoCivil = $estadosCivies->listarUm();
 
-				$estadoCivil = $estadosCivies->listarUm();
+                $estadosCivies = $estadosCivies->listarTodos();
 
-				$estadosCivies = $estadosCivies->listarTodos();
-				
-				$_SESSION['mensagem'] = ($discipulo->erro) ? $discipulo->erro : array(  
-						  																					000 => array( 
-						  																							'mensagem' => 'Atualizado com Sucesso' , 
-																													'classe' => "success" )	,
-																											'discipulo' => array(
-																													  		'id' => $discipulo->id, 
-																									'nome' => $discipulo->nome ) 
-																						 					);	
+                $_SESSION['mensagem'] = ($discipulo->erro) ? $discipulo->erro : array(
+                                                                                                              000 => array(
+                                                                                                                      'mensagem' => 'Atualizado com Sucesso' ,
+                                                                                                                    'classe' => "success" )	,
+                                                                                                            'discipulo' => array(
+                                                                                                                              'id' => $discipulo->id,
+                                                                                                    'nome' => $discipulo->nome )
+                                                                                                             );
 
+                $caminho = explode('/',$_SERVER['HTTP_REFERER']) ;
 
-				$caminho = explode('/',$_SERVER['HTTP_REFERER']) ;
-				
-			// verifica de onde veio a requisição e enviar para a pagina da visão correta.	
-				if (!$caminho=='listarAtualizar') {	
-					header ('location:/discipulo/atualizar/id/'.$discipulo->id) ;
-					exit();
-				}else{
-					header ('location:/discipulo/listarAtualizar') ;
-					exit();
-				
-				}
-			}
-		
-		}
+            // verifica de onde veio a requisição e enviar para a pagina da visão correta.
+                if (!$caminho=='listarAtualizar') {
+                    header ('location:/discipulo/atualizar/id/'.$discipulo->id) ;
+                    exit();
+                } else {
+                    header ('location:/discipulo/listarAtualizar') ;
+                    exit();
 
-		public function excluir($url){
-				$discipulo =	new \discipulo\Modelo\Discipulo();
-				$discipulo->id = $url[3]; 
-				$discipulo->excluir();
-				header ('location:/discipulo/listarAtualizar');
-				exit();
-		
-		}
+                }
+            }
 
+        }
 
-		public function detalhar ($url) {
+        public function excluir($url)
+        {
+                $discipulo =	new \discipulo\Modelo\Discipulo();
+                $discipulo->id = $url[3];
+                $discipulo->excluir();
+                header ('location:/discipulo/listarAtualizar');
+                exit();
 
-			$discipulo = new \discipulo\Modelo\Discipulo() ;
-			$eventoDiscipulo = new \evento\modelo\eventoDiscipulo();
-			$ministerios = new \ministerio\modelo\ministerioTemDiscipulo();
-			$statusCelular = new \statusCelular\modelo\statusCelular();
+        }
 
-			$discipulo->id = $url[3] ; 
+        public function detalhar ($url)
+        {
+            $discipulo = new \discipulo\Modelo\Discipulo() ;
+            $eventoDiscipulo = new \evento\modelo\eventoDiscipulo();
+            $ministerios = new \ministerio\modelo\ministerioTemDiscipulo();
+            $statusCelular = new \statusCelular\modelo\statusCelular();
 
-			$liderCelula = $discipulo->liderCelula();
-			$participaCelula = $discipulo->participaCelula();
-			$ministerios->discipuloId = $discipulo->id;
-			$ministerios = $ministerios->pegarMinisterioDiscipulo();
-			$statusCelular->discipuloId = $discipulo->id ;
-			$statusCelular = $statusCelular->pegarstatuscelular() ;
+            $discipulo->id = $url[3] ;
 
+            $liderCelula = $discipulo->liderCelula();
+            $participaCelula = $discipulo->participaCelula();
+            $ministerios->discipuloId = $discipulo->id;
+            $ministerios = $ministerios->pegarMinisterioDiscipulo();
+            $statusCelular->discipuloId = $discipulo->id ;
+            $statusCelular = $statusCelular->pegarstatuscelular() ;
 
-			$eventoDiscipulo = $eventoDiscipulo->listarTodosDiscipulo($discipulo->id);
+            $eventoDiscipulo = $eventoDiscipulo->listarTodosDiscipulo($discipulo->id);
 
-			$discipulo = $discipulo->listarUm() ;
+            $discipulo = $discipulo->listarUm() ;
 
-			require 'discipulo/visao/detalhar.php' ;	
-		
-		}
+            require 'discipulo/visao/detalhar.php';
 
+        }
 
-		public function chamar () {
+        public function chamar ()
+        {
+            $nome = (!empty($_GET['nome'])) ? $_GET['nome'] : NULL;
+            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo->nome = $nome;
+            $discipulos = $discipulo->chamar($nome);
 
-			$nome = (!empty($_GET['nome'])) ? $_GET['nome'] : NULL;
-			$discipulo =	new \discipulo\Modelo\Discipulo();
-			$discipulo->nome = $nome; 
-			$discipulos = $discipulo->chamar($nome);	
+                $estadosCivies = new \discipulo\Modelo\estadoCivil();
 
-				$estadosCivies = new \discipulo\Modelo\estadoCivil();
+                $estadosCivies = $estadosCivies->listarTodos();
 
-				$estadosCivies = $estadosCivies->listarTodos();
+                $lideres =	new \discipulo\Modelo\Discipulo();
+                $lideres =	$lideres->listarlideres();
 
+                $celula = new \celula\modelo\celula();
 
-				$lideres =	new \discipulo\Modelo\Discipulo();
-				$lideres =	$lideres->listarlideres();
+                $celulas = new \celula\modelo\celula();
+                $celulas = $celulas->listarTodos();
 
-				$celula = new \celula\modelo\celula();
+            //status celular da pessoa
+             $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
+             $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
 
-				$celulas = new \celula\modelo\celula();
-				$celulas = $celulas->listarTodos();
+             $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
 
-			//status celular da pessoa	
-			 $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ; 
-			 $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
+             //$statusCelularDiscipulo->discipuloId= $url[3];
+             $statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
+            //
 
+             //Tipos de admissão e admissão atual
+             $tipoAdmissao = new \admissao\modelo\tipoAdmissao();
+             $tiposAdmissoes = $tipoAdmissao->listarTodos();
 
-			 $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();	
-			
-			 //$statusCelularDiscipulo->discipuloId= $url[3];
-			 $statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
-			//
+             $tipoAdmissaoAtual = new \admissao\modelo\admissao();
+             $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
 
-			 //Tipos de admissão e admissão atual
-			 $tipoAdmissao = new \admissao\modelo\tipoAdmissao();
-			 $tiposAdmissoes = $tipoAdmissao->listarTodos();	 
+             //tipos de rede e rede atual da pessoa
+             $rede = new \rede\modelo\rede();
+             $tipoRede = new \rede\modelo\tipoRede();
+             $funcaoRede = new \rede\modelo\funcaoRede();
 
-			 $tipoAdmissaoAtual = new \admissao\modelo\admissao();
-			 $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
+             $tiposRedes = $tipoRede->listarTodos();
+             $funcaoRedes = $funcaoRede->listarTodos();
+             $redeAtual = $rede->listarUm();
 
-			 //tipos de rede e rede atual da pessoa
-			 $rede = new \rede\modelo\rede(); 
-			 $tipoRede = new \rede\modelo\tipoRede();
-			 $funcaoRede = new \rede\modelo\funcaoRede();
+            //ministerio da pessoa.
+             $ministerio = new \ministerio\modelo\ministerio() ;
+             $ministerio = $ministerio->listarTodos() ;
 
+             $funcaoMinisterio = new \ministerio\modelo\funcao() ;
+             $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
 
-			 $tiposRedes = $tipoRede->listarTodos();
-			 $funcaoRedes = $funcaoRede->listarTodos();
-			 $redeAtual = $rede->listarUm();
+             //escala de exito
+              $eventos = new \evento\modelo\evento();
 
-			//ministerio da pessoa.
-			 $ministerio = new \ministerio\modelo\ministerio() ;
-			 $ministerio = $ministerio->listarTodos() ; 
+           //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
+             $eventos = $eventos->listarTodos();
+             require_once 'discipulo/visao/chamar.php';
 
-			 $funcaoMinisterio = new \ministerio\modelo\funcao() ;
-			 $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
+        }
 
-		
-			 //escala de exito
-		  	$eventos = new \evento\modelo\evento();
-		
-		   //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
-			 $eventos = $eventos->listarTodos();
-			 require_once 'discipulo/visao/chamar.php' ;
+        public function pesquisaJson($url)
+        {
+            $termo = $_GET['term'];
+            $pesquisa = new \discipulo\Modelo\Discipulo() ;
+            $pesquisa = $pesquisa->pesquisaJson($termo);
+            echo json_encode($pesquisa) ;
 
-		
-		}
+        }
 
-		public function pesquisaJson($url){
-			$termo = $_GET['term'];
-			$pesquisa = new \discipulo\Modelo\Discipulo() ;
-			$pesquisa = $pesquisa->pesquisaJson($termo);	
-			echo json_encode($pesquisa) ;
-					
-		
-		} 
-	
-		public function evento($url){
-			
+        public function evento($url)
+        {
+            if ( empty ( $url['post'] ) ) {
 
-			if ( empty ( $url['post'] ) ) {
+            $discipulo = new \discipulo\Modelo\Discipulo() ;
 
-			$discipulo = new \discipulo\Modelo\Discipulo() ;
+            $discipulo->id = $url[3] ;
+            $discipulo = $discipulo->listarUm() ;
 
-			$discipulo->id = $url[3] ; 
-			$discipulo = $discipulo->listarUm() ;
+                  $eventos = new \evento\modelo\evento();
 
+                  $id = $url[3];
+                  $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
+                $eventos = $eventos->listarTodos();
 
-				  $eventos = new \evento\modelo\evento();
-				
-				  $id = $url[3];
-				  $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
-				$eventos = $eventos->listarTodos();
+                require_once 'modulos/discipulo/visao/evento.php';
+            } else {
+                      $post = $url['post'];
+                     $discipuloEvento = new \evento\modelo\evento();
+                      $eventoId = $post['eventoId'];
+                        $discipuloId = $post['discipuloId'];
 
+                     $discipuloEvento->salvarDiscipuloEvento($discipuloId, $eventoId );
 
-				require_once 'modulos/discipulo/visao/evento.php' ;
-			}else {
-					  $post = $url['post'];
-					 $discipuloEvento = new \evento\modelo\evento();
-					  $eventoId = $post['eventoId'];
-						$discipuloId = $post['discipuloId'];
+                     $id = $post['discipuloId'];
 
-					 $discipuloEvento->salvarDiscipuloEvento($discipuloId, $eventoId );	
+                     header ('location:/discipulo/evento/id/'.$id);
+                     exit();
 
-					 $id = $post['discipuloId'];
+            }
 
-					 header ('location:/discipulo/evento/id/'.$id);
-					 exit();
-			
-				
-			
-			
-			}
-				
-		
-		}	
-	
-	public function novoEstadoCivil($url){
-	
-		  if ( empty ( $url['post'] ) ) {
+        }
 
-					 require_once  'modulos/discipulo/visao/estadoCivil/novo.php';
- 
-			}else {
-					 $estadoCivil =	new \discipulo\Modelo\estadoCivil();
+    public function novoEstadoCivil($url)
+    {
+          if ( empty ( $url['post'] ) ) {
 
-					 $post = $url['post'] ;
+                     require_once 'modulos/discipulo/visao/estadoCivil/novo.php';
 
-					 $estadoCivil->nome = $post['nome'];
-			
+            } else {
+                     $estadoCivil =	new \discipulo\Modelo\estadoCivil();
 
-		 			 if ($estadoCivil->salvar() ) {
+                     $post = $url['post'] ;
 
+                     $estadoCivil->nome = $post['nome'];
 
-					 	header ('location:/discipulo/listarEstadoCivil');
-					 	exit();
+                      if ($estadoCivil->salvar() ) {
 
-		  
-		  			}else {
-						 require_once  'modulos/discipulo/visao/estadoCivil/novo.php';
-		  
-		  			}
+                         header ('location:/discipulo/listarEstadoCivil');
+                         exit();
 
- 		}
- 
+                      } else {
+                         require_once 'modulos/discipulo/visao/estadoCivil/novo.php';
 
-		}
+                      }
 
+         }
 
-		public function listarEstadoCivil(){
-		
-			$estadosCivies = new \discipulo\Modelo\estadoCivil();	
-			$estadosCivies = $estadosCivies->listarTodos();
+        }
 
-			require_once  'modulos/discipulo/visao/estadoCivil/listar.php';
-		
-		}
+        public function listarEstadoCivil()
+        {
+            $estadosCivies = new \discipulo\Modelo\estadoCivil();
+            $estadosCivies = $estadosCivies->listarTodos();
 
-		public function atualizarEstadoCivil($url){
+            require_once 'modulos/discipulo/visao/estadoCivil/listar.php';
 
-			if ( empty ( $url['post'] ) ) {
+        }
 
-				$estadoCivil = new \discipulo\Modelo\estadoCivil();
-				$estadoCivil->id = $url[3] ;
-				$estadoCivil = $estadoCivil->listarUm();
+        public function atualizarEstadoCivil($url)
+        {
+            if ( empty ( $url['post'] ) ) {
 
+                $estadoCivil = new \discipulo\Modelo\estadoCivil();
+                $estadoCivil->id = $url[3] ;
+                $estadoCivil = $estadoCivil->listarUm();
 
-				require_once  'modulos/discipulo/visao/estadoCivil/atualizar.php';
-			
-			}else {
-				$estadoCivil =	new \discipulo\Modelo\estadoCivil();
+                require_once 'modulos/discipulo/visao/estadoCivil/atualizar.php';
 
-				$post = $url['post'] ;
+            } else {
+                $estadoCivil =	new \discipulo\Modelo\estadoCivil();
 
-				$estadoCivil->id = $post['id'] ;	
-				$estadoCivil->nome = $post['nome'] ;
-	
-				$estadoCivil->atualizar() ;
+                $post = $url['post'] ;
 
-				
-				$_SESSION['mensagem'] = ($estadoCivil->erro) ? $estadoCivil->erro : 'ok' ;	
+                $estadoCivil->id = $post['id'] ;
+                $estadoCivil->nome = $post['nome'] ;
 
-				header ('location:/discipulo/listarEstadoCivil') ;
-				exit();
-			}
-		
-		}
+                $estadoCivil->atualizar() ;
 
-		public function excluirEstadoCivil($url){
-				$estadoCivil =	new \discipulo\Modelo\estadoCivil();
-				$estadoCivil->id = $url[3]; 
-				$estadoCivil->excluir();
-				header ('location:/discipulo/listarEstadoCivil');
-				exit();
-		
-		}
+                $_SESSION['mensagem'] = ($estadoCivil->erro) ? $estadoCivil->erro : 'ok' ;
 
-		public function discipulosPorLider(){
-		
-				$discipulo = new \discipulo\Modelo\Discipulo();	
+                header ('location:/discipulo/listarEstadoCivil') ;
+                exit();
+            }
 
-				$discipulo = $discipulo->discipulosPorLider();
+        }
 
-				//xdebug_var_dump($discipulo);
+        public function excluirEstadoCivil($url)
+        {
+                $estadoCivil =	new \discipulo\Modelo\estadoCivil();
+                $estadoCivil->id = $url[3];
+                $estadoCivil->excluir();
+                header ('location:/discipulo/listarEstadoCivil');
+                exit();
 
-		
-		}
+        }
 
-		public function listarAtualizar(){
-		
-		  $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
+        public function discipulosPorLider()
+        {
+                $discipulo = new \discipulo\Modelo\Discipulo();
 
-		  $discipulos =	new \discipulo\Modelo\Discipulo();
-		  $quantidadePorPagina = 12;
+                $discipulo = $discipulo->discipulosPorLider();
 
-		  $discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
-		  
-		  $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
-		  $totalDiscipulos = (int)$totalDiscipulos['total'] ;
+                //xdebug_var_dump($discipulo);
 
+        }
 
-				$estadosCivies = new \discipulo\Modelo\estadoCivil();
+        public function listarAtualizar()
+        {
+          $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
-				$estadosCivies = $estadosCivies->listarTodos();
+          $discipulos =	new \discipulo\Modelo\Discipulo();
+          $quantidadePorPagina = 12;
 
+          $discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
 
-				$lideres =	new \discipulo\Modelo\Discipulo();
-				$lideres =	$lideres->listarlideres();
+          $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
+          $totalDiscipulos = (int) $totalDiscipulos['total'] ;
 
-				$celula = new \celula\modelo\celula();
+                $estadosCivies = new \discipulo\Modelo\estadoCivil();
 
-				$celulas = new \celula\modelo\celula();
-				$celulas = $celulas->listarTodos();
+                $estadosCivies = $estadosCivies->listarTodos();
 
-			//status celular da pessoa	
-			 $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ; 
-			 $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
+                $lideres =	new \discipulo\Modelo\Discipulo();
+                $lideres =	$lideres->listarlideres();
 
+                $celula = new \celula\modelo\celula();
 
-			 $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();	
-			 $cores = array('verde','amarelo','cinza','laranja','','');
+                $celulas = new \celula\modelo\celula();
+                $celulas = $celulas->listarTodos();
 
-			 //colocando cores na tabela.
+            //status celular da pessoa
+             $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
+             $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
 
+             $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
+             $cores = array('verde','amarelo','cinza','laranja','','');
 
+             //colocando cores na tabela.
 
-			
-			 //$statusCelularDiscipulo->discipuloId= $url[3];
-			 $statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
-			//
+             //$statusCelularDiscipulo->discipuloId= $url[3];
+             $statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
+            //
 
-			 //Tipos de admissão e admissão atual
-			 $tipoAdmissao = new \admissao\modelo\tipoAdmissao();
-			 $tiposAdmissoes = $tipoAdmissao->listarTodos();	 
+             //Tipos de admissão e admissão atual
+             $tipoAdmissao = new \admissao\modelo\tipoAdmissao();
+             $tiposAdmissoes = $tipoAdmissao->listarTodos();
 
-			 $tipoAdmissaoAtual = new \admissao\modelo\admissao();
-			 $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
+             $tipoAdmissaoAtual = new \admissao\modelo\admissao();
+             $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
 
-			 //tipos de rede e rede atual da pessoa
-			 $rede = new \rede\modelo\rede(); 
+             //tipos de rede e rede atual da pessoa
+             $rede = new \rede\modelo\rede();
 
-			 $tipoRede = new \rede\modelo\tipoRede();
-			 $funcaoRedes = new \rede\modelo\funcaoRede();
+             $tipoRede = new \rede\modelo\tipoRede();
+             $funcaoRedes = new \rede\modelo\funcaoRede();
 
-			 $tiposRedes = $tipoRede->listarTodos();
-			 $funcaoRedes = $funcaoRedes->listarTodos();
+             $tiposRedes = $tipoRede->listarTodos();
+             $funcaoRedes = $funcaoRedes->listarTodos();
 
-			//ministerio da pessoa.
-			 $ministerio = new \ministerio\modelo\ministerio() ;
-			 $ministerio = $ministerio->listarTodos() ; 
+            //ministerio da pessoa.
+             $ministerio = new \ministerio\modelo\ministerio() ;
+             $ministerio = $ministerio->listarTodos() ;
 
-			 $funcaoMinisterio = new \ministerio\modelo\funcao() ;
-			 $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
+             $funcaoMinisterio = new \ministerio\modelo\funcao() ;
+             $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
 
-			 //escala de exito
-		  	$eventos = new \evento\modelo\evento();
-		
-		  //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
-			$eventos = $eventos->listarTodos();
+             //escala de exito
+              $eventos = new \evento\modelo\evento();
 
-			require 'discipulo/visao/listarAtualizar.php' ;
+          //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
+            $eventos = $eventos->listarTodos();
 
-		}
+            require 'discipulo/visao/listarAtualizar.php';
 
-		public function encontroComDeus($url){
+        }
 
-			$discipulo = new \discipulo\Modelo\Discipulo() ;
+        public function encontroComDeus($url)
+        {
+            $discipulo = new \discipulo\Modelo\Discipulo() ;
 
-			$discipulo->id = $url[3] ; 
-			$discipulo = $discipulo->listarum() ;
-			
-			require 'discipulo/visao/fichas/encontroComDeus.php' ;
-		
-		
-		}
+            $discipulo->id = $url[3] ;
+            $discipulo = $discipulo->listarum() ;
 
-		public function fichaPorStatus($url){
+            require 'discipulo/visao/fichas/encontroComDeus.php';
 
-			$discipulos = new \discipulo\Modelo\Discipulo() ;
+        }
 
-			$discipulos = $discipulos->fichaPorStatus($url[3]) ;
-			
-			require 'discipulo/visao/fichas/fichaPorStatus.php' ;
-		
-		
-		}
+        public function fichaPorStatus($url)
+        {
+            $discipulos = new \discipulo\Modelo\Discipulo() ;
 
-		public function cracha($url){
+            $discipulos = $discipulos->fichaPorStatus($url[3]) ;
 
-			$discipulos = new \discipulo\Modelo\Discipulo() ;
+            require 'discipulo/visao/fichas/fichaPorStatus.php';
 
-			$discipulos = $discipulos->fichaPorStatus($url[3]) ;
-			
-			require 'discipulo/visao/fichas/cracha.php' ;
-		
-		}
+        }
 
-		public function crachaIndividual($url){
+        public function cracha($url)
+        {
+            $discipulos = new \discipulo\Modelo\Discipulo() ;
 
-			$discipulo = new \discipulo\Modelo\Discipulo() ;
-			$discipulo->id = ($url[3]);
-			$discipulos[0] = $discipulo->listarUm($url[3]) ;
-				
-			require 'discipulo/visao/fichas/cracha.php' ;
-		
-		}
-			
-	
-	
+            $discipulos = $discipulos->fichaPorStatus($url[3]) ;
+
+            require 'discipulo/visao/fichas/cracha.php';
+
+        }
+
+        public function crachaIndividual($url)
+        {
+            $discipulo = new \discipulo\Modelo\Discipulo() ;
+            $discipulo->id = ($url[3]);
+            $discipulos[0] = $discipulo->listarUm($url[3]) ;
+
+            require 'discipulo/visao/fichas/cracha.php';
+
+        }
+
 }
-
-

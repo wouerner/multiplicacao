@@ -1,219 +1,212 @@
-<?php 
+<?php
 namespace metas\modelo ;
-use \framework\modelo\modeloFramework ; 
+use \framework\modelo\modeloFramework ;
 use \metas\modelo\participantesMetas 	as participantesMetasModelo;
 
-class metas extends modeloFramework{
-
+class metas extends modeloFramework
+{
   private $id ;
   private $quantidade ;
   private $discipuloId ;
   private $intervaloMetasId ;
   private $tipoRedeId ;
 
-  public function __get($prop){
-
-		 return $this->$prop ;
+  public function __get($prop)
+  {
+         return $this->$prop ;
   }
 
-  public function __set($prop, $valor){
-
-		 $this->$prop = $valor ;
-		  
-  }
-
-  public function participantesTotal(){
-	$participante = new participantesMetasModelo() ;
-	$participante->metasId = $this->id ;
-	$participante = $participante->listar() ;
-	return count($participante) ;
+  public function __set($prop, $valor)
+  {
+         $this->$prop = $valor ;
 
   }
 
-    public  function metaPorRede(){
-		
-			  $pdo = self::pegarConexao() ;
+  public function participantesTotal()
+  {
+    $participante = new participantesMetasModelo() ;
+    $participante->metasId = $this->id ;
+    $participante = $participante->listar() ;
 
-				$sql =' 
-								SELECT sum(m.quantidade) FROM Metas as m inner join TipoRede as tr on tr.id = m.tipoRedeId WHERE tr.id = ? 
-								group by tr.id
-								';
+    return count($participante) ;
 
-			  //prepara sql
-			  $stm = $pdo->prepare($sql);
-				//var_dump($this);
-				$id = $this->id ;
+  }
 
-			  $stm->bindParam(1, $id);
+    public function metaPorRede()
+    {
+              $pdo = self::pegarConexao() ;
 
-			  $stm->execute();
-			  $resposta = $stm->fetch();
+                $sql ='
+                                SELECT sum(m.quantidade) FROM Metas as m inner join TipoRede as tr on tr.id = m.tipoRedeId WHERE tr.id = ?
+                                group by tr.id
+                                ';
 
-			  $pdo = null ;
+              //prepara sql
+              $stm = $pdo->prepare($sql);
+                //var_dump($this);
+                $id = $this->id ;
 
-			  return $resposta;
+              $stm->bindParam(1, $id);
 
-		}
+              $stm->execute();
+              $resposta = $stm->fetch();
 
+              $pdo = null ;
 
-  public function salvar(){
+              return $resposta;
 
-			  self::insert($this) ;
-	}
+        }
 
-			  public function atualizar(){
+  public function salvar()
+  {
+              self::insert($this) ;
+    }
 
-			  //abrir conexao com o banco
-			  $pdo = new \PDO(DSN, USER, PASSWD);
-			  //cria sql
-			  $sql = "UPDATE MinisterioTemDiscipulo SET 	 ministerioId= ?  , funcaoId = ?
-				  WHERE discipuloId = ?
-							  ";
+              public function atualizar()
+              {
+              //abrir conexao com o banco
+              $pdo = new \PDO(DSN, USER, PASSWD);
+              //cria sql
+              $sql = "UPDATE MinisterioTemDiscipulo SET 	 ministerioId= ?  , funcaoId = ?
+                  WHERE discipuloId = ?
+                              ";
 
-			  //prepara sql
-			  $stm = $pdo->prepare($sql);
-			  //trocar valores
-			  $stm->bindParam(1, $this->ministerioId );
-			  $stm->bindParam(2, $this->funcaoId );
-			  $stm->bindParam(3, $this->discipuloId );
+              //prepara sql
+              $stm = $pdo->prepare($sql);
+              //trocar valores
+              $stm->bindParam(1, $this->ministerioId );
+              $stm->bindParam(2, $this->funcaoId );
+              $stm->bindParam(3, $this->discipuloId );
 
-			  $resposta = $stm->execute();
+              $resposta = $stm->execute();
 
-			  $erro = $stm->errorInfo();
-			  //var_dump($erro);
-			  //exit();
+              $erro = $stm->errorInfo();
+              //var_dump($erro);
+              //exit();
 
-			  //fechar conexÃ£o
-			  $pdo = null ;
+              //fechar conexÃ£o
+              $pdo = null ;
 
-			  return $resposta;
-			  
-			  }
+              return $resposta;
 
-			  public static function listarPorTodos(){
+              }
 
-			  $pdo = self::pegarConexao() ;
+              public static function listarPorTodos()
+              {
+              $pdo = self::pegarConexao() ;
 
-				$sql = '
-								SELECT d.id as id , d.nome AS nome, m.quantidade AS quantidade, m.id AS metaId FROM Discipulo as d inner join Metas as m on d.id = m.discipuloId
+                $sql = '
+                                SELECT d.id as id , d.nome AS nome, m.quantidade AS quantidade, m.id AS metaId FROM Discipulo as d inner join Metas as m on d.id = m.discipuloId
 WHERE 1 order by nome
-						 ' ;
+                         ' ;
 
-			  $stm = $pdo->prepare($sql);
+              $stm = $pdo->prepare($sql);
 
-			  $resposta = $stm->execute();
+              $resposta = $stm->execute();
 
-			  $pdo = null ;
-				$resposta = array();
+              $pdo = null ;
+                $resposta = array();
 
-				while ( $obj = $stm->fetchObject ('\discipulo\Modelo\Discipulo')  ) {
-					$resposta[$obj->id] = $obj ;	
-				}
+                while ( $obj = $stm->fetchObject ('\discipulo\Modelo\Discipulo')  ) {
+                    $resposta[$obj->id] = $obj ;
+                }
 
-			  return $resposta ;
-				}
+              return $resposta ;
+                }
 
-			  public function listarUm(){
+              public function listarUm()
+              {
+              $pdo = self::pegarConexao() ;
 
-			  $pdo = self::pegarConexao() ;
+              $sql = 'SELECT *
+                                FROM Metas
+                                WHERE discipuloId = ?
+                          ' ;
 
-			  $sql = 'SELECT * 
-								FROM Metas
-								WHERE discipuloId = ?
-						  ' ;
+              $stm = $pdo->prepare($sql);
+              $stm->bindParam(1, $this->discipuloId ) ;
 
-			  $stm = $pdo->prepare($sql);
-			  $stm->bindParam(1, $this->discipuloId ) ;
+              $stm->execute();
 
-			  $stm->execute();
+              $pdo = null ;
+                //var_dump($stm->errorInfo());
+              return $stm->fetchObject() ;
+                }
 
-			  $pdo = null ;
-				//var_dump($stm->errorInfo());
-			  return $stm->fetchObject() ;
-				}
+              public function listar()
+              {
+              $pdo = self::pegarConexao() ;
 
-			  public function listar(){
-
-			  $pdo = self::pegarConexao() ;
-
-			  $sql = '
-				  SELECT  m.id , im.nome, m.intervaloMetasId, im.id as intervaloId, im.dataInicio, im.dataFim, m.quantidade 
+              $sql = '
+                  SELECT  m.id , im.nome, m.intervaloMetasId, im.id as intervaloId, im.dataInicio, im.dataFim, m.quantidade
 FROM Metas as m
 inner join IntervaloMetas as im on im.id = m.intervaloMetasId
 WHERE discipuloId = ?
-						  ' ;
+                          ' ;
 
-			  $stm = $pdo->prepare($sql);
-			  $stm->bindParam(1, $this->discipuloId ) ;
+              $stm = $pdo->prepare($sql);
+              $stm->bindParam(1, $this->discipuloId ) ;
 
-			  $stm->execute();
+              $stm->execute();
 
-			  $pdo = null ;
-				//var_dump($stm->errorInfo());
-			  $resposta = array();
+              $pdo = null ;
+                //var_dump($stm->errorInfo());
+              $resposta = array();
 
-			while ( $obj = $stm->fetchObject ('\metas\modelo\metas')  ) {
-					$resposta[$obj->id] = $obj ;	
-				}
+            while ( $obj = $stm->fetchObject ('\metas\modelo\metas')  ) {
+                    $resposta[$obj->id] = $obj ;
+                }
 
-			  return $resposta ;
-				}
+              return $resposta ;
+                }
 
+              public function excluir()
+              {
+                 return self::delete($this) ;
 
-			  public function excluir(){
+              }
 
-			     return self::delete($this) ;
-			  
-			  }
+              public function listarStatusCelularTodos()
+              {
+              //abrir conexao com o banco
+              $pdo = new \PDO(DSN, USER, PASSWD);
+              //cria sql
+              $sql = "SELECT Discipulo.nome AS discipulo , TipoStatusCelular.nome AS status FROM Discipulo,StatusCelular, TipoStatusCelular
+                         WHERE Discipulo.id = StatusCelular.discipuloId And StatusCelular.tipoOferta = TipoStatusCelular.id ORDER BY discipulo";
 
-			  public function listarStatusCelularTodos(){
+              //prepara sql
+              $stm = $pdo->prepare($sql);
+              //trocar valores
 
-			  //abrir conexao com o banco
-			  $pdo = new \PDO(DSN, USER, PASSWD);
-			  //cria sql
-			  $sql = "SELECT Discipulo.nome AS discipulo , TipoStatusCelular.nome AS status FROM Discipulo,StatusCelular, TipoStatusCelular  
-						 WHERE Discipulo.id = StatusCelular.discipuloId And StatusCelular.tipoOferta = TipoStatusCelular.id ORDER BY discipulo";
+              $resposta = $stm->execute();
 
+              //fechar conexÃ£o
+              $pdo = null ;
 
-			  //prepara sql
-			  $stm = $pdo->prepare($sql);
-			  //trocar valores
+              return $stm->fetchAll();
+    }
 
-			  $resposta = $stm->execute();
+              public function listarStatusCelularPorTipo()
+              {
+              //abrir conexao com o banco
+              $pdo = new \PDO(DSN, USER, PASSWD);
+              //cria sql
+              $sql = "SELECT Discipulo.nome AS discipulo , TipoStatusCelular.nome AS status
+ FROM Discipulo,StatusCelular, TipoStatusCelular  WHERE
+Discipulo.id = StatusCelular.discipuloId AND TipoStatusCelular.id = ?  AND TipoStatusCelular.id = StatusCelular.tipoOferta" ;
 
-			  //fechar conexÃ£o
-			  $pdo = null ;
+              //prepara sql
+              $stm = $pdo->prepare($sql);
+              //trocar valores
+              //
+              $stm->bindParam(1, $this->tipoOferta);
 
-			  return $stm->fetchAll();
-	}
+              $resposta = $stm->execute();
 
+              //fechar conexÃ£o
+              $pdo = null ;
 
-			  public function listarStatusCelularPorTipo(){
-
-			  //abrir conexao com o banco
-			  $pdo = new \PDO(DSN, USER, PASSWD);
-			  //cria sql
-			  $sql = "SELECT Discipulo.nome AS discipulo , TipoStatusCelular.nome AS status 
- FROM Discipulo,StatusCelular, TipoStatusCelular  WHERE 
-Discipulo.id = StatusCelular.discipuloId AND TipoStatusCelular.id = ?  AND TipoStatusCelular.id = StatusCelular.tipoOferta" ; 
-
-
-			  //prepara sql
-			  $stm = $pdo->prepare($sql);
-			  //trocar valores
-			  //
-			  $stm->bindParam(1, $this->tipoOferta);
-
-			  $resposta = $stm->execute();
-
-			  //fechar conexÃ£o
-			  $pdo = null ;
-
-			  return $stm->fetchAll();
-	}
-
-		  
-
-
+              return $stm->fetchAll();
+    }
 
 }

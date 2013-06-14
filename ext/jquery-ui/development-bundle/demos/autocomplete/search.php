@@ -569,31 +569,31 @@ $items = array(
 "Heuglin's Gull"=>"Larus heuglini"
 );
 
-function array_to_json( $array ){
-
-    if( !is_array( $array ) ){
+function array_to_json( $array )
+{
+    if ( !is_array( $array ) ) {
         return false;
     }
 
     $associative = count( array_diff( array_keys($array), array_keys( array_keys( $array )) ));
-    if( $associative ){
+    if ($associative) {
 
         $construct = array();
-        foreach( $array as $key => $value ){
+        foreach ($array as $key => $value) {
 
             // We first copy each key/value pair into a staging array,
             // formatting each key and value properly as we go.
 
             // Format the key:
-            if( is_numeric($key) ){
+            if ( is_numeric($key) ) {
                 $key = "key_$key";
             }
             $key = "\"".addslashes($key)."\"";
 
             // Format the value:
-            if( is_array( $value )){
+            if ( is_array( $value )) {
                 $value = array_to_json( $value );
-            } else if( !is_numeric( $value ) || is_string( $value ) ){
+            } elseif ( !is_numeric( $value ) || is_string( $value ) ) {
                 $value = "\"".addslashes($value)."\"";
             }
 
@@ -607,12 +607,12 @@ function array_to_json( $array ){
     } else { // If the array is a vector (not associative):
 
         $construct = array();
-        foreach( $array as $value ){
+        foreach ($array as $value) {
 
             // Format the value:
-            if( is_array( $value )){
+            if ( is_array( $value )) {
                 $value = array_to_json( $value );
-            } else if( !is_numeric( $value ) || is_string( $value ) ){
+            } elseif ( !is_numeric( $value ) || is_string( $value ) ) {
                 $value = "'".addslashes($value)."'";
             }
 
@@ -629,12 +629,10 @@ function array_to_json( $array ){
 
 $result = array();
 foreach ($items as $key=>$value) {
-	if (strpos(strtolower($key), $q) !== false) {
-		array_push($result, array("id"=>$value, "label"=>$key, "value" => strip_tags($key)));
-	}
-	if (count($result) > 11)
-		break;
+    if (strpos(strtolower($key), $q) !== false) {
+        array_push($result, array("id"=>$value, "label"=>$key, "value" => strip_tags($key)));
+    }
+    if (count($result) > 11)
+        break;
 }
 echo array_to_json($result);
-
-?>

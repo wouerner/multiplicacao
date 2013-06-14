@@ -9,36 +9,33 @@
 <div id="header"></div>
 <div id="adminButton"><a href="/seguranca/acl/admin">Admin Screen</a></div>
 <div id="page">
-	<h2>Permissions for <?php $myACL->getUsername($userID); ?>:</h2>
+    <h2>Permissions for <?php $myACL->getUsername($userID); ?>:</h2>
 
-	<?php 
-		$aPerms = $userACL->getAllPerms('full');
-		echo 'ID user: '.$userID.' <br>' ;
+    <?php
+        $aPerms = $userACL->getAllPerms('full');
+        echo 'ID user: '.$userID.' <br>' ;
 
-		foreach ($aPerms as $k => $v)
-		{
-			echo "<strong>" . $v['Name'] . ": </strong>";
-			echo "<img src=\"/modulos/seguranca/ACL/assets/img/";
-			if ($userACL->hasPermission($v['Key']) === true)
-			{
-				echo "allow.png";
-				$pVal = "Allow";
-			} else {
-				echo "deny.png";
-				$pVal = "Deny";
-			}
-			echo "\" width=\"16\" height=\"16\" alt=\"$pVal\" /><br />";
-		}
-	?>
+        foreach ($aPerms as $k => $v) {
+            echo "<strong>" . $v['Name'] . ": </strong>";
+            echo "<img src=\"/modulos/seguranca/ACL/assets/img/";
+            if ($userACL->hasPermission($v['Key']) === true) {
+                echo "allow.png";
+                $pVal = "Allow";
+            } else {
+                echo "deny.png";
+                $pVal = "Deny";
+            }
+            echo "\" width=\"16\" height=\"16\" alt=\"$pVal\" /><br />";
+        }
+    ?>
     <h3>Change User:</h3>
 
-    <?php 
-		$strSQL = "SELECT * FROM `Discipulo` ORDER BY `nome` ASC";
-		$data = mysql_query($strSQL);
-		while ($row = mysql_fetch_assoc($data))
-		{
-			echo "<a href=\"?userID=" . $row['id'] . "\">" . $row['email'] . "</a><br />";
-		}
+    <?php
+        $strSQL = "SELECT * FROM `Discipulo` ORDER BY `nome` ASC";
+        $data = mysql_query($strSQL);
+        while ($row = mysql_fetch_assoc($data)) {
+            echo "<a href=\"?userID=" . $row['id'] . "\">" . $row['email'] . "</a><br />";
+        }
 ?>
 
 </div>

@@ -1,96 +1,90 @@
-<?php 
-namespace seguranca\controlador ; 
+<?php
+namespace seguranca\controlador ;
 use discipulo\Modelo\Discipulo;
 use discipulo\modelo\role;
 
-	class seguranca{
-	
-		public function index(){
-			
+    class seguranca
+    {
+        public function index()
+        {
+            require 'modulos/seguranca/visao/entrar.php';
+        }
 
-			require 'modulos/seguranca/visao/entrar.php' ;
-		}
+        public function entrar()
+        {
+        $discipulo = new Discipulo();
 
-		public function entrar(){
-		$discipulo = new Discipulo();
+        //recuperar dados do post e atribuir ao objeto
 
-		//recuperar dados do post e atribuir ao objeto
+        $discipulo->email = $_POST['email'];
+        $discipulo->senha = $_POST['senha'];
 
-		$discipulo->email = $_POST['email'];
-		$discipulo->senha = $_POST['senha'];
+        $discipuloLogado = $discipulo->entrar();
 
-		$discipuloLogado = $discipulo->entrar();
+        if ($discipuloLogado) {
+            $_SESSION['usuario_nome'] = $discipuloLogado['nome'];
+            $_SESSION['usuario_id'] = $discipuloLogado['id'];
+            $_SESSION['logado'] = TRUE;
 
+            header('Location:/painel/painel');
+            exit();
 
-		if($discipuloLogado){
-			$_SESSION['usuario_nome'] = $discipuloLogado['nome'];
-			$_SESSION['usuario_id'] = $discipuloLogado['id'];
-			$_SESSION['logado'] = TRUE;
+        } else {
 
-			header('Location:/painel/painel');
-			exit();
+            $_SESSION['mensagem'] = 'E-mail/senha incorretos!';
+            header('Location:/seguranca/seguranca');
+            exit();
 
-		}else{
+            }
 
-			$_SESSION['mensagem'] = 'E-mail/senha incorretos!';
-			header('Location:/seguranca/seguranca');
-			exit();
+        }
 
-			
-			}
-	
-		}	
-		
-		public function novoPapel($url){
+        public function novoPapel($url)
+        {
+            if ( empty ( $url['post'] ) ) {
 
-			if ( empty ( $url['post'] ) ) {
-		
-				require_once  'seguranca/visao/novoPapel.php' ;
-			
-			}else{
+                require_once 'seguranca/visao/novoPapel.php';
 
-			$role =	new \seguranca\modelo\role() ; 
+            } else {
 
-			$post = $url['post'] ;
+            $role =	new \seguranca\modelo\role() ;
 
-			$role->roleName = $post['roleName'] ;
+            $post = $url['post'] ;
 
-			$role->salvar();
-			header ('location:/seguranca/novoPapel') ;
-			exit();
-			}
-		
-		
-		}
+            $role->roleName = $post['roleName'] ;
 
+            $role->salvar();
+            header ('location:/seguranca/novoPapel') ;
+            exit();
+            }
 
+        }
 
-		public function sair(){
-		
-			session_destroy();
-			header('location:/seguranca');
-			exit();
-		
-		
-		}
+        public function sair()
+        {
+            session_destroy();
+            header('location:/seguranca');
+            exit();
 
-		public function trocarSenha($url){
-			$discipulo = new \discipulo\Modelo\Discipulo() ;
+        }
 
-			if (empty($url['post'])){
-				$discipulo->id = $url[4] ;
-				$discipulo = $discipulo->listarUm() ;
-				require 'modulos/seguranca/visao/trocarSenha.php' ;
-				exit();
-			}
-			
-		$discipulo->senha = $url['post']['senha'];	
-		$discipulo->email = $url['post']['email'];	
-		$discipulo->trocarSenha();	
-		$mens = "Senha trocada." ;
-		require 'modulos/seguranca/visao/trocarSenha.php' ;
-			exit();
-		
-		
-		}
+        public function trocarSenha($url)
+        {
+            $discipulo = new \discipulo\Modelo\Discipulo() ;
+
+            if (empty($url['post'])) {
+                $discipulo->id = $url[4] ;
+                $discipulo = $discipulo->listarUm() ;
+                require 'modulos/seguranca/visao/trocarSenha.php';
+                exit();
+            }
+
+        $discipulo->senha = $url['post']['senha'];
+        $discipulo->email = $url['post']['email'];
+        $discipulo->trocarSenha();
+        $mens = "Senha trocada." ;
+        require 'modulos/seguranca/visao/trocarSenha.php';
+            exit();
+
+        }
 }

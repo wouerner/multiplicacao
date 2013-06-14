@@ -21,11 +21,11 @@ $_SESSION['captcha_id'] = $str;
  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
  <meta name="keywords" content="AJAX,JHR,PHP,CAPTCHA,download,PHP CAPTCHA,AJAX CAPTCHA,AJAX PHP CAPTCHA,download AJAX CAPTCHA,download AJAX PHP CAPTCHA" />
  <meta name="description" content="An AJAX CAPTCHA script, written in PHP" />
- 
+
  <script type="text/javascript" src="../../lib/jquery.js"></script>
  <script type="text/javascript" src="../../jquery.validate.js"></script>
  <script type="text/javascript" src="captcha.js"></script>
- 
+
  <link rel="stylesheet" type="text/css" href="style.css" />
  <style type="text/css">
   img { border: 1px solid #eee; }
@@ -36,12 +36,12 @@ $_SESSION['captcha_id'] = $str;
   fieldset input#captcha { width: 25%; border: 1px solid #ddd; padding: 2px; }
   fieldset input#submit { display: block; margin: 2% 0% 0% 0%; }
   #captcha.success {
-  	border: 1px solid #49c24f;
-	background: #bcffbf;
+      border: 1px solid #49c24f;
+    background: #bcffbf;
   }
   #captcha.error {
-  	border: 1px solid #c24949;
-	background: #ffbcbc;
+      border: 1px solid #c24949;
+    background: #ffbcbc;
   }
  </style>
 </head>

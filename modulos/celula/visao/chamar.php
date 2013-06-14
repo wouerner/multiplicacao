@@ -1,51 +1,49 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../incluidos/css/estilo.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
-	</head>
+    <head>
+        <meta charset="UTF-8">
+        <style type="text/css">
+           @import url("../../../ext/twitter-bootstrap/bootstrap.css");
+           @import url("../../../incluidos/css/estilo.css");
+        </style>
+        <script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
+    </head>
 
-	<body>
-		<section class = "container">
+    <body>
+        <section class = "container">
 
-		<nav> 
-			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
-		</nav>
-			
-		<header>
-		
-		</header>
+        <nav>
+            <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
+        </nav>
 
-		<section>		
-			<article>
-					<?php require 'modulos/celula/visao/chamarCelula.php' ; ?>
+        <header>
 
-						<table class = "table table-bordered">
-						<caption>Lista de Discipulos</caption>
-			
-						<?php if (is_null($nome)) : ?>
-							<p>Faça sua pesquisa!</p>
-						<?php else : ?>
+        </header>
 
-						<?php foreach ( $celulas as $celula) : ?>
+        <section>
+            <article>
+                    <?php require 'modulos/celula/visao/chamarCelula.php' ; ?>
 
-						<tr><td colspan = "2" ><h2><a href="/celula/detalhar/id/<?php echo $celula['id']; ?>"><?php echo $celula['nome'] ; ?></a> </h2></td></tr>
-						<tr><td>Endereco:<?php echo $celula['endereco'] ; ?></td> <td>Horario:<?php echo $celula['horarioFuncionamento'] ; ?></td></tr>
-							<?php require 'celula/visao/menuCelula.inc.php' ; ?>
-						<?php endforeach ; ?>
-						<?php endif ; ?>
-						</table>
-				
-			
-			</article>
-		
-		</section>
+                        <table class = "table table-bordered">
+                        <caption>Lista de Discipulos</caption>
 
-		</section>
-	</body>
+                        <?php if (is_null($nome)) : ?>
+                            <p>Faça sua pesquisa!</p>
+                        <?php else : ?>
+
+                        <?php foreach ( $celulas as $celula) : ?>
+
+                        <tr><td colspan = "2" ><h2><a href="/celula/detalhar/id/<?php echo $celula['id']; ?>"><?php echo $celula['nome'] ; ?></a> </h2></td></tr>
+                        <tr><td>Endereco:<?php echo $celula['endereco'] ; ?></td> <td>Horario:<?php echo $celula['horarioFuncionamento'] ; ?></td></tr>
+                            <?php require 'celula/visao/menuCelula.inc.php' ; ?>
+                        <?php endforeach ; ?>
+                        <?php endif ; ?>
+                        </table>
+
+            </article>
+
+        </section>
+
+        </section>
+    </body>
 </html>
-

@@ -1,126 +1,124 @@
-<?php 
+<?php
 
 namespace seguranca\modelo ;
 
-class role{
+class role
+{
+    private $id ;
+    private $roleName;
 
-	private $id ;
-	private $roleName;
+          public function __get($prop)
+          {
+                     return $this->$prop ;
 
+          }
 
-		  public function __get($prop){
+          public function __set($prop, $valor)
+          {
+                     $this->$prop = $valor ;
 
-					 return $this->$prop ;
-		  
-		  }
+          }
 
-		  public function __set($prop, $valor){
+              public function salvar()
+              {
+              //abrir conexao com o banco
+              $pdo = new \PDO(DSN, USER, PASSWD);
+              //cria sql
+              $sql = "INSERT INTO roles ( roleName )
+                  VALUES (?)";
 
-					 $this->$prop = $valor ;
-		  
-		  }
+              //prepara sql
+              $stm = $pdo->prepare($sql);
+              //trocar valores
+              $stm->bindParam(1, $this->roleName);
 
-			  public function salvar(){
+              $resposta = $stm->execute();
 
-			  //abrir conexao com o banco
-			  $pdo = new \PDO(DSN, USER, PASSWD);
-			  //cria sql
-			  $sql = "INSERT INTO roles ( roleName )
-				  VALUES (?)";
+              //fechar conexÃ£o
+              $pdo = null ;
 
-			  //prepara sql
-			  $stm = $pdo->prepare($sql);
-			  //trocar valores
-			  $stm->bindParam(1, $this->roleName);
+              return $resposta;
+    }
 
-			  $resposta = $stm->execute();
+    public function listarTodos()
+    {
+        $pdo = new \PDO (DSN,USER,PASSWD);
 
+        $sql = 'SELECT * FROM TipoOferta';
 
-			  //fechar conexÃ£o
-			  $pdo = null ;
+        $stm = $pdo->prepare($sql);
 
-			  return $resposta;
-	}
+        $stm->execute();
 
-	public function listarTodos(){
+        return $stm->fetchAll();
 
-		$pdo = new \PDO (DSN,USER,PASSWD);	
+    }
 
-		$sql = 'SELECT * FROM TipoOferta';
+    public function listarUm()
+    {
+        $pdo = new \PDO (DSN,USER,PASSWD);
 
-		$stm = $pdo->prepare($sql);
+        $sql = 'SELECT * FROM TipoOferta WHERE id = ?';
 
-		$stm->execute();
+        $stm = $pdo->prepare($sql);
 
-		return $stm->fetchAll();
+        $stm->bindParam(1, $this->id);
 
-	}
+        $stm->execute();
 
-	public function listarUm(){
+        return $stm->fetch();
 
-		$pdo = new \PDO (DSN,USER,PASSWD);	
+    }
 
-		$sql = 'SELECT * FROM TipoOferta WHERE id = ?';
+    public function atualizar()
+    {
+    //abrir conexao com o banco
+    $pdo = new \PDO(DSN, USER, PASSWD);
+    //cria sql
+    $sql = " UPDATE TipoOferta SET 	nome = ?
+        WHERE id = ? ";
+    //prepara sql
+    $stm = $pdo->prepare($sql);
+    //trocar valores
+    $stm->bindParam(1, $this->nome);
+    $stm->bindParam(2, $this->id);
 
-		$stm = $pdo->prepare($sql);
+    $resposta = $stm->execute();
 
-		$stm->bindParam(1, $this->id);
+    //$erro = $stm->errorInfo();
+    //var_dump($erro);
+    //exit();
 
-		$stm->execute();
+    //fechar conexÃ£o
+    $pdo = null ;
 
-		return $stm->fetch();
+    return $resposta;
 
-	}
+    }
 
-	public function atualizar(){
+    public function excluir()
+    {
+    try {
+        $pdo = new \PDO (DSN,USER,PASSWD);
 
-	//abrir conexao com o banco
-	$pdo = new \PDO(DSN, USER, PASSWD);
-	//cria sql
-	$sql = " UPDATE TipoOferta SET 	nome = ? 
-		WHERE id = ? ";
-	//prepara sql
-	$stm = $pdo->prepare($sql);
-	//trocar valores
-	$stm->bindParam(1, $this->nome);
-	$stm->bindParam(2, $this->id);
+        $sql = 'DELETE FROM TipoOferta WHERE id = ?';
 
-	$resposta = $stm->execute();
+        $stm = $pdo->prepare($sql);
 
-	//$erro = $stm->errorInfo();
-	//var_dump($erro);
-	//exit();
+        $stm->bindParam(1, $this->id);
 
-	//fechar conexÃ£o
-	$pdo = null ;
+        $resposta = $stm->execute();
+        $erro = $stm->errorCode();
 
-	return $resposta;
-	
-	}
+        if ($erro != '0000') {
 
-	public function excluir(){
-	try{
-		$pdo = new \PDO (DSN,USER,PASSWD);	
+             throw new \Exception ('Existe discípulos cadastrados') ;
+        }
+        } catch ( \Exception $e ) {
 
-		$sql = 'DELETE FROM TipoOferta WHERE id = ?';
+                  $this->erro= $e->getMessage();
+    }
 
-		$stm = $pdo->prepare($sql);
-
-		$stm->bindParam(1, $this->id);
-
-		$resposta = $stm->execute();
-		$erro = $stm->errorCode();
-		 
-		if ($erro != '0000'){
-
-			 throw new \Exception ('Existe discípulos cadastrados') ;
-		}
-		}catch ( \Exception $e ) {
-		
-				  $this->erro= $e->getMessage();
-	}
-
-	}
-
+    }
 
 }

@@ -4,14 +4,13 @@
 session_start();
 
 //verificar se tem post
-if( ! $_POST){
-	///header('Location:cadastro.php');
-	exit();
+if (! $_POST) {
+    ///header('Location:cadastro.php');
+    exit();
 }
 
 //importar discipulo
 require '../../../config/autoload.php';
-
 
 //criar o objeto ususario
 
@@ -27,9 +26,6 @@ $discipulo->email = $_POST['email'];
 $discipulo->usuario = $_POST['usuario'];
 $discipulo->senha = $_POST['senha'];
 
-
 $discipulo->salvar();
 
 header('location:../acao/listar.php');
-
-?> 

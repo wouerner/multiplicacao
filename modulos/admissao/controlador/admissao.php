@@ -1,132 +1,129 @@
-<?php 
+<?php
 
-namespace admissao\controlador; 
+namespace admissao\controlador;
 
-class admissao{
-	
-	public function index(){
+class admissao
+{
+    public function index()
+    {
+        //$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
+        $admissaos =	new \admissao\modelo\tipoAdmissao();
+        //$admissaos =	$admissaos->listarTodos(8);
+        $admissaos = $admissaos->listarTodos();
+        ///$totalDiscipulos = \admissao\Modelo\Discipulo::totalDiscipulos();
+        //$totalDiscipulos --;
 
-		//$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
-		$admissaos =	new \admissao\modelo\tipoAdmissao();
-		//$admissaos =	$admissaos->listarTodos(8);
-		$admissaos = $admissaos->listarTodos();
-		///$totalDiscipulos = \admissao\Modelo\Discipulo::totalDiscipulos();
-		//$totalDiscipulos --;
+            require_once 'modulos/admissao/visao/listar.php';
 
-			require_once  'modulos/admissao/visao/listar.php';
-	
-	
-	}
+    }
 
-	public function listarTipoAdmissao(){
+    public function listarTipoAdmissao()
+    {
+        $tipoAdmissoes =	new \admissao\modelo\tipoAdmissao();
+        $tipoAdmissoes = $tipoAdmissoes->listarTodos();
 
-		$tipoAdmissoes =	new \admissao\modelo\tipoAdmissao();
-		$tipoAdmissoes = $tipoAdmissoes->listarTodos();
+        require_once 'modulos/admissao/visao/listarTipoAdmissao.php';
+    }
 
-		require_once  'modulos/admissao/visao/listarTipoAdmissao.php';
-	}
+    public function novo($url)
+    {
+                 $post = $url['post'] ;
+            if ( empty ( $url['post'] ) ) {
+                 require_once 'modulos/admissao/visao/novo.php';
 
-	public function novo($url){
-	
-				 $post = $url['post'] ;
-			if ( empty ( $url['post'] ) ) {
-		    	 require_once  'modulos/admissao/visao/novo.php';
-			
-			}else {
-				 $admissao =	new \admissao\modelo\admissao();
+            } else {
+                 $admissao =	new \admissao\modelo\admissao();
 
-				 $admissao->discipuloId = $post['discipuloId'] ;
-				 $admissao->tipoAdmissao = $post['tipoAdmissao'] ;
+                 $admissao->discipuloId = $post['discipuloId'] ;
+                 $admissao->tipoAdmissao = $post['tipoAdmissao'] ;
 
-				 if($admissao->salvar()){
-				 
-				 }else {
-				 	$admissao->atualizar();
-				 
-				 }
-				 header ('location:/discipulo/detalhar/id/'.$post['discipuloId']);
-				 exit();
-			}
-	}
+                 if ($admissao->salvar()) {
 
-	public function novoTipoAdmissao($url){
-	
-			if ( empty ( $url['post'] ) ) {
-		    	 require_once  'modulos/admissao/visao/novoTipoAdmissao.php';
-			
-			}else {
-				 $admissao =	new \admissao\modelo\tipoAdmissao();
+                 } else {
+                     $admissao->atualizar();
 
-				 $post = $url['post'] ;
-				 $admissao->nome = $post['nome'] ;
+                 }
+                 header ('location:/discipulo/detalhar/id/'.$post['discipuloId']);
+                 exit();
+            }
+    }
 
-				 $admissao->salvar();
-				 header ('location:/admissao/listarTipoAdmissao');
-				 exit();
-			}
-	}
-	
-	public function atualizarTipoAdmissao($url){
+    public function novoTipoAdmissao($url)
+    {
+            if ( empty ( $url['post'] ) ) {
+                 require_once 'modulos/admissao/visao/novoTipoAdmissao.php';
 
-			if ( empty ( $url['post'] ) ) {
+            } else {
+                 $admissao =	new \admissao\modelo\tipoAdmissao();
 
-				$tipoAdmissao =	new \admissao\modelo\tipoAdmissao();
+                 $post = $url['post'] ;
+                 $admissao->nome = $post['nome'] ;
 
-				$tipoAdmissao->id =  $url[3] ;
-				$tipoAdmissao = $tipoAdmissao->listarUm();
+                 $admissao->salvar();
+                 header ('location:/admissao/listarTipoAdmissao');
+                 exit();
+            }
+    }
 
-				require_once  'modulos/admissao/visao/atualizarTipoAdmissao.php';
-			
-			}else {
-				$tipoAdmissao =	new \admissao\modelo\tipoAdmissao();
+    public function atualizarTipoAdmissao($url)
+    {
+            if ( empty ( $url['post'] ) ) {
 
-				$post = $url['post'] ;
+                $tipoAdmissao =	new \admissao\modelo\tipoAdmissao();
 
-				$tipoAdmissao->id = $post['id'];	
-				$tipoAdmissao->nome = $post['nome'];
+                $tipoAdmissao->id =  $url[3] ;
+                $tipoAdmissao = $tipoAdmissao->listarUm();
 
-				$tipoAdmissao->atualizar();
+                require_once 'modulos/admissao/visao/atualizarTipoAdmissao.php';
 
+            } else {
+                $tipoAdmissao =	new \admissao\modelo\tipoAdmissao();
 
-				header ('location:/admissao/atualizarTipoAdmissao/id/'.$tipoAdmissao->id);
-				exit();
-			}
+                $post = $url['post'] ;
 
-		
-		
-		}
+                $tipoAdmissao->id = $post['id'];
+                $tipoAdmissao->nome = $post['nome'];
 
-		public function excluirTipoAdmissao($url){
-				$tipoAdmissao =	new \admissao\modelo\tipoAdmissao();
-				$tipoAdmissao->id = $url[3]; 
-				$tipoAdmissao->excluir();
+                $tipoAdmissao->atualizar();
 
-				$_SESSION['mensagem'] = !is_null($tipoAdmissao->erro) ? $tipoAdmissao->erro : null ;
-				header ('location:/admissao/listarTipoAdmissao');
-				exit();
-		}
+                header ('location:/admissao/atualizarTipoAdmissao/id/'.$tipoAdmissao->id);
+                exit();
+            }
 
-		public function excluirEventoDiscipulo($url){
-				$admissao =	new \admissao\modelo\admissaoDiscipulo();
-				$admissao->admissaoId = $url[3];
-				$admissao->discipuloId = $url[4];
+        }
 
-				$admissao->excluir();
-				header ('location:/discipulo/admissao/id/'.$admissao->discipuloId);
-				exit();
-		
-		}
+        public function excluirTipoAdmissao($url)
+        {
+                $tipoAdmissao =	new \admissao\modelo\tipoAdmissao();
+                $tipoAdmissao->id = $url[3];
+                $tipoAdmissao->excluir();
 
+                $_SESSION['mensagem'] = !is_null($tipoAdmissao->erro) ? $tipoAdmissao->erro : null ;
+                header ('location:/admissao/listarTipoAdmissao');
+                exit();
+        }
 
-		public function detalhar ($url) {
+        public function excluirEventoDiscipulo($url)
+        {
+                $admissao =	new \admissao\modelo\admissaoDiscipulo();
+                $admissao->admissaoId = $url[3];
+                $admissao->discipuloId = $url[4];
 
-			$admissao = new \admissao\modelo\admissao() ;
+                $admissao->excluir();
+                header ('location:/discipulo/admissao/id/'.$admissao->discipuloId);
+                exit();
 
-			$admissao->id = $url[3] ; 
-			$admissao = $admissao->listarUm() ;
-		
-			require 'admissao/visao/detalhar.php' ;	
-		
-		}
+        }
+
+        public function detalhar ($url)
+        {
+            $admissao = new \admissao\modelo\admissao() ;
+
+            $admissao->id = $url[3] ;
+            $admissao = $admissao->listarUm() ;
+
+            require 'admissao/visao/detalhar.php';
+
+        }
 
 }

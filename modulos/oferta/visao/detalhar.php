@@ -1,46 +1,43 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../incluidos/css/estilo.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
-	</head>
+    <head>
+        <meta charset="UTF-8">
+        <style type="text/css">
+           @import url("../../../ext/twitter-bootstrap/bootstrap.css");
+           @import url("../../../incluidos/css/estilo.css");
+        </style>
+        <script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
+    </head>
 
-	<body>
-		<section class = "container">
+    <body>
+        <section class = "container">
 
-		<nav> 
-			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
-		</nav>
-			
-		<header>
-		
-		</header>
+        <nav>
+            <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
+        </nav>
 
-		<section>		
-			<article>
+        <header>
 
-			<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+        </header>
 
-			<table>
-				<caption><h3>Oferta</h3></caption>
+        <section>
+            <article>
 
+            <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
-				<tr><td colspan = "2" ><h2><?php echo $oferta['nome'] ; ?> </h2></td></tr>
-				</tr>
-					<?php require 'oferta/visao/menuTipoOferta.inc.php' ; ?>
+            <table>
+                <caption><h3>Oferta</h3></caption>
 
-				</table>
-				
-			
-			</article>
-		
-		</section>
+                <tr><td colspan = "2" ><h2><?php echo $oferta['nome'] ; ?> </h2></td></tr>
+                </tr>
+                    <?php require 'oferta/visao/menuTipoOferta.inc.php' ; ?>
 
-		</section>
-	</body>
+                </table>
+
+            </article>
+
+        </section>
+
+        </section>
+    </body>
 </html>
-

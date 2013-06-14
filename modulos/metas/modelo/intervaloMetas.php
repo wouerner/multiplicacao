@@ -2,102 +2,102 @@
 namespace metas\modelo ;
 use framework\modelo\modeloFramework;
 
-class  intervaloMetas extends modeloFramework{
+class  intervaloMetas extends modeloFramework
+{
+    private $id ;
+    private $nome ;
+    private $dataInicio ;
+    private $dataFim ;
 
-	private $id ;
-	private $nome ;
-	private $dataInicio ;
-	private $dataFim ;
+          public function __get($prop)
+          {
+                     return $this->$prop ;
 
+          }
 
-		  public function __get($prop){
+          public function __set($prop, $valor)
+          {
+                     $this->$prop = $valor ;
 
-					 return $this->$prop ;
-		  
-		  }
+          }
 
-		  public function __set($prop, $valor){
+         public function salvar()
+         {
+                         self::insert($this);
+    }
 
-					 $this->$prop = $valor ;
-		  
-		  }
+    public function setDataInicio(){}
+    public function setDataFim(){}
 
-		 public function salvar(){
+    public function listarTodos()
+    {
+      $pdo = self::pegarConexao() ;
 
-						 self::insert($this);
-	}
+        $sql = 'SELECT * FROM IntervaloMetas ORDER BY nome ';
 
-	public function setDataInicio(){} 
-	public function setDataFim(){} 
+        $stm = $pdo->prepare($sql);
 
-	public function listarTodos(){
+        $stm->execute();
 
-	  $pdo = self::pegarConexao() ;
+        $resposta = array();
+        while ( $obj = $stm->fetchObject('\metas\modelo\intervaloMetas') ) {
+            $resposta[$obj->id] = $obj ;
+        }
 
-		$sql = 'SELECT * FROM IntervaloMetas ORDER BY nome ';
+        return $resposta ;
 
-		$stm = $pdo->prepare($sql);
+    }
 
-		$stm->execute();
+    public function listarUm()
+    {
+        $pdo = new \PDO (DSN,USER,PASSWD);
 
-		$resposta = array();	
-		while ( $obj = $stm->fetchObject('\metas\modelo\intervaloMetas') ){
-			$resposta[$obj->id] = $obj ; 	
-		}
-		return $resposta ; 
+        $sql = 'SELECT * FROM Funcao WHERE id = ?';
 
-	}
+        $stm = $pdo->prepare($sql);
 
-	public function listarUm(){
+        $stm->bindParam(1, $this->id);
 
-		$pdo = new \PDO (DSN,USER,PASSWD);	
+        $stm->execute();
 
-		$sql = 'SELECT * FROM Funcao WHERE id = ?';
+        return $stm->fetch();
 
-		$stm = $pdo->prepare($sql);
+    }
 
-		$stm->bindParam(1, $this->id);
+    public function atualizarFuncao()
+    {
+    //abrir conexao com o banco
+    $pdo = new \PDO(DSN, USER, PASSWD);
+    //cria sql
+    $sql = " UPDATE Funcao SET 	nome = ?
+        WHERE id = ? ";
+    //prepara sql
+    $stm = $pdo->prepare($sql);
+    //trocar valores
+    $stm->bindParam(1, $this->nome);
+    $stm->bindParam(2, $this->id);
 
-		$stm->execute();
+    $resposta = $stm->execute();
 
-		return $stm->fetch();
+    //fechar conexÃ£o
+    $pdo = null ;
 
-	}
+    return $resposta;
 
-	public function atualizarFuncao(){
+    }
 
-	//abrir conexao com o banco
-	$pdo = new \PDO(DSN, USER, PASSWD);
-	//cria sql
-	$sql = " UPDATE Funcao SET 	nome = ? 
-		WHERE id = ? ";
-	//prepara sql
-	$stm = $pdo->prepare($sql);
-	//trocar valores
-	$stm->bindParam(1, $this->nome);
-	$stm->bindParam(2, $this->id);
+    public function excluir()
+    {
+        $pdo = new \PDO (DSN,USER,PASSWD);
 
-	$resposta = $stm->execute();
+        $sql = 'DELETE FROM TipoEquipe WHERE id = ?';
 
-	//fechar conexÃ£o
-	$pdo = null ;
+        $stm = $pdo->prepare($sql);
 
-	return $resposta;
-	
-	}
+        $stm->bindParam(1, $this->id);
 
-	public function excluir(){
-		$pdo = new \PDO (DSN,USER,PASSWD);	
+         $stm->execute();
 
-		$sql = 'DELETE FROM TipoEquipe WHERE id = ?';
-
-		$stm = $pdo->prepare($sql);
-
-		$stm->bindParam(1, $this->id);
-
-		 $stm->execute();
-
-	}
-
+    }
 
 }

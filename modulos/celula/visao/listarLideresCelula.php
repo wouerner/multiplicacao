@@ -1,4 +1,4 @@
-<?php 
+<?php
 $mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL ;
 unset($_SESSION['mensagem']) ;
 
@@ -6,68 +6,67 @@ unset($_SESSION['mensagem']) ;
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../incluidos/css/estilo.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
-	</head>
+    <head>
+        <meta charset="UTF-8">
+        <style type="text/css">
+           @import url("../../../ext/twitter-bootstrap/bootstrap.css");
+           @import url("../../../incluidos/css/estilo.css");
+        </style>
+        <script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
+    </head>
 
-	<body>
-		<section class = "container">
+    <body>
+        <section class = "container">
 
-		<nav> 
-			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
-		</nav>
-			
-		<header>
-		
-		</header>
+        <nav>
+            <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
+        </nav>
 
-		<section>		
-			<article>
+        <header>
 
-					<?php require 'modulos/celula/visao/chamarCelula.php' ; ?>
+        </header>
 
-			<?php if (isset($mensagem)) : ?>
-					<div class="alert <?php echo ($mensagem=='ok') ? 'alert-success' : 'alert-error' ; ?>">
-				  	<h4 class="alert-heading">
-						<?php echo $mensagem ?>!
-					</h4>
-				   </div>
-				<?php endif ; ?>
-						<table class = "table">
+        <section>
+            <article>
 
-							<caption><h3>Lista de Líderes de Células</h3></caption>
-							<thead>
-								<th>Nº</th>
-								<th>Nome</th>
-								<th>Total</th>
-							</thead>
+                    <?php require 'modulos/celula/visao/chamarCelula.php' ; ?>
 
-							<?php foreach ( $lideres as $lider) : ?>
+            <?php if (isset($mensagem)) : ?>
+                    <div class="alert <?php echo ($mensagem=='ok') ? 'alert-success' : 'alert-error' ; ?>">
+                      <h4 class="alert-heading">
+                        <?php echo $mensagem ?>!
+                    </h4>
+                   </div>
+                <?php endif ; ?>
+                        <table class = "table">
 
-							<tr>
-								<td><?php echo !isset($cont) ? $cont=1 : ++$cont ; ?></td>
-								<td>
-									<a href ="/discipulo/detalhar/id/<?php echo $lider['id']?>" ><?php echo $lider['nome'] ; ?></a>
-								</td>
-								<td>
-								<?php echo $lider['totalCelulas'] ; ?>	
-								</td>
-							</tr>
-						<?php endforeach ; ?>
-						</table>
-				
-						<?php // discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos['total'] ,3 ,$pagina ) ; ?>
-			
-			</article>
-		
-		</section>
+                            <caption><h3>Lista de Líderes de Células</h3></caption>
+                            <thead>
+                                <th>Nº</th>
+                                <th>Nome</th>
+                                <th>Total</th>
+                            </thead>
 
-		</section>
-	</body>
+                            <?php foreach ( $lideres as $lider) : ?>
+
+                            <tr>
+                                <td><?php echo !isset($cont) ? $cont=1 : ++$cont ; ?></td>
+                                <td>
+                                    <a href ="/discipulo/detalhar/id/<?php echo $lider['id']?>" ><?php echo $lider['nome'] ; ?></a>
+                                </td>
+                                <td>
+                                <?php echo $lider['totalCelulas'] ; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach ; ?>
+                        </table>
+
+                        <?php // discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos['total'] ,3 ,$pagina ) ; ?>
+
+            </article>
+
+        </section>
+
+        </section>
+    </body>
 </html>
-

@@ -1,49 +1,46 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-		   @import url("../../../incluidos/css/estilo.css");
-		</style>
-		<script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
-	</head>
+    <head>
+        <meta charset="UTF-8">
+        <style type="text/css">
+           @import url("../../../ext/twitter-bootstrap/bootstrap.css");
+           @import url("../../../incluidos/css/estilo.css");
+        </style>
+        <script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
+    </head>
 
-	<body>
-		<section class = "container">
+    <body>
+        <section class = "container">
 
-		<nav> 
-			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
-		</nav>
-			
-		<header>
-		
-		</header>
+        <nav>
+            <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
+        </nav>
 
-		<section>		
-			<article>
+        <header>
 
-			<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+        </header>
 
-			<table>
-				<caption><h3>Detalhes do Discipulos</h3></caption>
+        <section>
+            <article>
 
+            <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
-				<tr><td colspan = "2" ><h2><?php echo $discipulo['nome'] ; ?> </h2></td></tr>
-				<tr><td>Telefone:<?php echo $discipulo['telefone'] ; ?></td>
-					 <td>E-mail:<?php echo $discipulo['email'] ; ?></td>
-				</tr>
+            <table>
+                <caption><h3>Detalhes do Discipulos</h3></caption>
 
-				<tr><td colspan = "2" >Endereço: <?php  echo $discipulo['endereco'] ; ?></td></tr>
-					<?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
-				</table>
-				
-			
-			</article>
-		
-		</section>
+                <tr><td colspan = "2" ><h2><?php echo $discipulo['nome'] ; ?> </h2></td></tr>
+                <tr><td>Telefone:<?php echo $discipulo['telefone'] ; ?></td>
+                     <td>E-mail:<?php echo $discipulo['email'] ; ?></td>
+                </tr>
 
-		</section>
-	</body>
+                <tr><td colspan = "2" >Endereço: <?php  echo $discipulo['endereco'] ; ?></td></tr>
+                    <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
+                </table>
+
+            </article>
+
+        </section>
+
+        </section>
+    </body>
 </html>
-

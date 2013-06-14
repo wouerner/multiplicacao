@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<?php include 'incluidos/css.inc.php'?> 
-		<?php include 'incluidos/js.inc.php'?> 
-	</head>
+    <head>
+        <meta charset="UTF-8">
+        <?php include 'incluidos/css.inc.php'?>
+        <?php include 'incluidos/js.inc.php'?>
+    </head>
 
-	<body>
-		<section class = "container-fluid">
+    <body>
+        <section class = "container-fluid">
 
-		<nav> 
-			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>	
-		</nav>
-			
-		<header>
-		
-		</header>
+        <nav>
+            <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
+        </nav>
 
-		<section>		
-			<article>
+        <header>
 
-			<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
-			<table class = "table well" >
-				<caption><h3>Rede</h3></caption>
+        </header>
 
+        <section>
+            <article>
 
-				<tr><td><h2><?php echo $rede->nome ; ?> </h2></td></tr>
+            <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+            <table class = "table well" >
+                <caption><h3>Rede</h3></caption>
 
-					<?php require 'rede/visao/tipoRede/menu.inc.php' ; ?>
-				</table>
-			
-			</article>
-		
-		</section>
+                <tr><td><h2><?php echo $rede->nome ; ?> </h2></td></tr>
 
-		</section>
-	</body>
+                    <?php require 'rede/visao/tipoRede/menu.inc.php' ; ?>
+                </table>
+
+            </article>
+
+        </section>
+
+        </section>
+    </body>
 </html>
-

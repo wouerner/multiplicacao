@@ -1,296 +1,281 @@
 <?php
-namespace encontroComDeus\controlador; 
-	class tipoEquipe{
-	
-		public function index(){
+namespace encontroComDeus\controlador;
+    class tipoEquipe
+    {
+        public function index()
+        {
+            $tipoEquipes =	new \encontroComDeus\modelo\tipoEquipe();
+            $tipoEquipes = $tipoEquipes->listarTodos();
+            require_once 'modulos/encontroComDeus/visao/tipoEquipe/listar.php';
 
-			$tipoEquipes =	new \encontroComDeus\modelo\tipoEquipe();
-			$tipoEquipes = $tipoEquipes->listarTodos();
-			require_once  'modulos/encontroComDeus/visao/tipoEquipe/listar.php';
+        }
 
-		}
+        public function novo($url)
+        {
+          if ( empty ( $url['post'] ) ) {
 
-		public function novo($url){
-		  if ( empty ( $url['post'] ) ) {
+            require_once 'modulos/encontroComDeus/visao/tipoEquipe/novo.php';
 
-			require_once  'modulos/encontroComDeus/visao/tipoEquipe/novo.php';
-			
-			}else {
-				$tipoEquipe =	new \encontroComDeus\modelo\tipoEquipe();
+            } else {
+                $tipoEquipe =	new \encontroComDeus\modelo\tipoEquipe();
 
-				$post = $url['post'] ;
-				$tipoEquipe->nome = $post['nome'];
+                $post = $url['post'] ;
+                $tipoEquipe->nome = $post['nome'];
 
+                $tipoEquipe->salvar() ;
+                header ('location:/encontroComDeus/tipoEquipe') ;
+                exit();
+            }
 
-				$tipoEquipe->salvar() ;
-				header ('location:/encontroComDeus/tipoEquipe') ;
-				exit();
-			}	
+        }
 
-		}
+        public function novoMinisterio($url)
+        {
+            if ( empty ( $url['post'] ) ) {
 
-		public function novoMinisterio($url){
-			if ( empty ( $url['post'] ) ) {
-		
-				require_once  'modulos/ministerio/visao/novoMinisterio.php' ;
-			
-			}else{
+                require_once 'modulos/ministerio/visao/novoMinisterio.php';
 
-			$ministerio =	new \ministerio\modelo\ministerio() ; 
+            } else {
 
-			$post = $url['post'] ;
-			$ministerio->nome = $post['nome'] ;
+            $ministerio =	new \ministerio\modelo\ministerio() ;
 
-			$ministerio->salvar();
-			header ('location:/ministerio/listarMinisterio') ;
-			exit();
-			}
-			
+            $post = $url['post'] ;
+            $ministerio->nome = $post['nome'] ;
 
-		}
+            $ministerio->salvar();
+            header ('location:/ministerio/listarMinisterio') ;
+            exit();
+            }
 
-		public function novaFuncao($url){
-			if ( empty ( $url['post'] ) ) {
-		
-				require_once  'modulos/ministerio/visao/novaFuncao.php' ;
-			
-			}else{
+        }
 
-			$funcao =	new \ministerio\modelo\funcao() ; 
+        public function novaFuncao($url)
+        {
+            if ( empty ( $url['post'] ) ) {
 
-			$post = $url['post'] ;
-			$funcao->nome = $post['nome'] ;
+                require_once 'modulos/ministerio/visao/novaFuncao.php';
 
-			$funcao->salvar();
-			header ('location:/ministerio/listarFuncao') ;
-			exit();
-			}
-			
+            } else {
 
-		}
+            $funcao =	new \ministerio\modelo\funcao() ;
 
-		public function listarMinisterio(){
+            $post = $url['post'] ;
+            $funcao->nome = $post['nome'] ;
 
-				  $ministerios =	new \ministerio\modelo\ministerio();
-				  $ministerios = $ministerios->listarTodos();
+            $funcao->salvar();
+            header ('location:/ministerio/listarFuncao') ;
+            exit();
+            }
 
-				  require 'modulos/ministerio/visao/listarMinisterio.php' ; 
-		
-		}
+        }
 
-		public function listarFuncao(){
+        public function listarMinisterio()
+        {
+                  $ministerios =	new \ministerio\modelo\ministerio();
+                  $ministerios = $ministerios->listarTodos();
 
-				  $funcoes =	new \ministerio\modelo\funcao();
-				  $funcoes = $funcoes->listarTodos();
+                  require 'modulos/ministerio/visao/listarMinisterio.php';
 
-				  require 'modulos/ministerio/visao/listarFuncao.php' ; 
-		
-		}
+        }
 
-		public function atualizar($url){
+        public function listarFuncao()
+        {
+                  $funcoes =	new \ministerio\modelo\funcao();
+                  $funcoes = $funcoes->listarTodos();
 
-			if ( empty ( $url['post'] ) ) {
+                  require 'modulos/ministerio/visao/listarFuncao.php';
 
-				$discipulo =	new \discipulo\Modelo\Discipulo();
-				$lideres = $discipulo->listarLideres();
+        }
 
-				$discipulo->id =  $url[3] ;
-				$discipulo = $discipulo->listarUm();
+        public function atualizar($url)
+        {
+            if ( empty ( $url['post'] ) ) {
 
-				$lider =	new \discipulo\Modelo\Discipulo();
-				$lider->id = $discipulo['lider'] ;
-				$lider = $lider->listarUm($discipulo['lider']);
+                $discipulo =	new \discipulo\Modelo\Discipulo();
+                $lideres = $discipulo->listarLideres();
 
-				$celula = new \celula\modelo\celula();
-				$celula->id = $discipulo['celula'];
-				$celula = $celula->listarUm();
+                $discipulo->id =  $url[3] ;
+                $discipulo = $discipulo->listarUm();
 
-				$celulas = new \celula\modelo\celula();
-				$celulas = $celulas->listarTodos();
+                $lider =	new \discipulo\Modelo\Discipulo();
+                $lider->id = $discipulo['lider'] ;
+                $lider = $lider->listarUm($discipulo['lider']);
 
+                $celula = new \celula\modelo\celula();
+                $celula->id = $discipulo['celula'];
+                $celula = $celula->listarUm();
 
+                $celulas = new \celula\modelo\celula();
+                $celulas = $celulas->listarTodos();
 
+                require_once 'modulos/discipulo/visao/atualizar.php';
 
-				require_once  'modulos/discipulo/visao/atualizar.php';
-			
-			}else {
-				$discipulo =	new \discipulo\Modelo\Discipulo();
+            } else {
+                $discipulo =	new \discipulo\Modelo\Discipulo();
 
-				$post = $url['post'] ;
+                $post = $url['post'] ;
 
-				$discipulo->id = $post['id'];	
-				$discipulo->nome = $post['nome'];
-				$discipulo->telefone = $post['telefone'];
-				$discipulo->endereco = $post['endereco'];
-				$discipulo->email = $post['email'];
-				$discipulo->celula = $post['celula'];
-				$discipulo->ativo =isset( $post['ativo']) ? $post['ativo']: null;
-				$discipulo->lider = $post['lider'];
+                $discipulo->id = $post['id'];
+                $discipulo->nome = $post['nome'];
+                $discipulo->telefone = $post['telefone'];
+                $discipulo->endereco = $post['endereco'];
+                $discipulo->email = $post['email'];
+                $discipulo->celula = $post['celula'];
+                $discipulo->ativo =isset( $post['ativo']) ? $post['ativo']: null;
+                $discipulo->lider = $post['lider'];
 
-				$discipulo->atualizar();
+                $discipulo->atualizar();
 
-				header ('location:/discipulo/atualizar/id/'.$discipulo->id);
-				exit();
-			}
-		
-		}
+                header ('location:/discipulo/atualizar/id/'.$discipulo->id);
+                exit();
+            }
 
-		public function atualizarMinisterio($url){
+        }
 
-			if ( empty ( $url['post'] ) ) {
+        public function atualizarMinisterio($url)
+        {
+            if ( empty ( $url['post'] ) ) {
 
+                $ministerio =	new \ministerio\modelo\ministerio();
+                $ministerio->id = $url[3] ;
+                $ministerio = $ministerio->listarUm();
 
-				$ministerio =	new \ministerio\modelo\ministerio();
-				$ministerio->id = $url[3] ;
-				$ministerio = $ministerio->listarUm();
+                require_once 'modulos/ministerio/visao/atualizarMinisterio.php';
 
-				require_once  'modulos/ministerio/visao/atualizarMinisterio.php';
-			
-			}else {
-				$ministerio =	new \ministerio\modelo\ministerio();
+            } else {
+                $ministerio =	new \ministerio\modelo\ministerio();
 
-				$post = $url['post'] ;
+                $post = $url['post'] ;
 
-				$ministerio->id = $post['id'];	
-				$ministerio->nome = $post['nome'];
+                $ministerio->id = $post['id'];
+                $ministerio->nome = $post['nome'];
 
-				$ministerio->atualizarMinisterio();
+                $ministerio->atualizarMinisterio();
 
-				header ('location:/ministerio/atualizarMinisterio/id/'.$ministerio->id);
-				exit();
-			}
-		
-		}
+                header ('location:/ministerio/atualizarMinisterio/id/'.$ministerio->id);
+                exit();
+            }
 
-		public function atualizarFuncao($url){
+        }
 
-			if ( empty ( $url['post'] ) ) {
+        public function atualizarFuncao($url)
+        {
+            if ( empty ( $url['post'] ) ) {
 
+                $funcao =	new \ministerio\modelo\funcao();
+                $funcao->id = $url[3] ;
+                $funcao = $funcao->listarUm();
 
-				$funcao =	new \ministerio\modelo\funcao();
-				$funcao->id = $url[3] ;
-				$funcao = $funcao->listarUm();
+                require_once 'modulos/ministerio/visao/atualizarFuncao.php';
 
-				require_once  'modulos/ministerio/visao/atualizarFuncao.php';
-			
-			}else {
-				$funcao =	new \ministerio\modelo\funcao();
+            } else {
+                $funcao =	new \ministerio\modelo\funcao();
 
-				$post = $url['post'] ;
+                $post = $url['post'] ;
 
-				$funcao->id = $post['id'];	
-				$funcao->nome = $post['nome'];
+                $funcao->id = $post['id'];
+                $funcao->nome = $post['nome'];
 
-				$funcao->atualizarFuncao();
+                $funcao->atualizarFuncao();
 
-				header ('location:/ministerio/atualizarFuncao/id/'.$funcao->id);
-				exit();
-			}
-		
-		}
+                header ('location:/ministerio/atualizarFuncao/id/'.$funcao->id);
+                exit();
+            }
 
-		public function excluir($url){
-				$tipoEquipe =	new \encontroComDeus\modelo\tipoEquipe();
-				$tipoEquipe->id = $url[4]; 
-				$tipoEquipe->excluir();
+        }
 
-				header ('location:/encontroComDeus/tipoEquipe');
-				exit();
-		}
+        public function excluir($url)
+        {
+                $tipoEquipe =	new \encontroComDeus\modelo\tipoEquipe();
+                $tipoEquipe->id = $url[4];
+                $tipoEquipe->excluir();
 
-		public function excluirFuncao($url){
-				$funcao =	new \ministerio\modelo\funcao();
-				$funcao->id = $url[3]; 
-				$funcao->excluir();
+                header ('location:/encontroComDeus/tipoEquipe');
+                exit();
+        }
 
-				$_SESSION['mensagem'] = !is_null($funcao->erro) ? $funcao->erro : null ;
-				header ('location:/ministerio/listarFuncao');
-				exit();
-		}
+        public function excluirFuncao($url)
+        {
+                $funcao =	new \ministerio\modelo\funcao();
+                $funcao->id = $url[3];
+                $funcao->excluir();
 
+                $_SESSION['mensagem'] = !is_null($funcao->erro) ? $funcao->erro : null ;
+                header ('location:/ministerio/listarFuncao');
+                exit();
+        }
 
+        public function detalhar ($url)
+        {
+            $discipulo = new \discipulo\Modelo\Discipulo() ;
 
-		public function detalhar ($url) {
+            $discipulo->id = $url[3] ;
+            $discipulo = $discipulo->listarUm() ;
 
-			$discipulo = new \discipulo\Modelo\Discipulo() ;
+            require 'discipulo/visao/detalhar.php';
 
-			$discipulo->id = $url[3] ; 
-			$discipulo = $discipulo->listarUm() ;
-		
-			require 'discipulo/visao/detalhar.php' ;	
-		
-		}
+        }
 
-		public function detalharFuncao ($url) {
+        public function detalharFuncao ($url)
+        {
+            $funcao = new \ministerio\modelo\funcao() ;
 
-			$funcao = new \ministerio\modelo\funcao() ;
+            $funcao->id = $url[3] ;
+            $funcao = $funcao->listarUm() ;
 
-			$funcao->id = $url[3] ; 
-			$funcao = $funcao->listarUm() ;
-		
-			require 'ministerio/visao/detalharFuncao.php' ;	
-		
-		}
+            require 'ministerio/visao/detalharFuncao.php';
 
-		public function detalharMinisterio ($url) {
+        }
 
-			$ministerio = new \ministerio\modelo\ministerio() ;
+        public function detalharMinisterio ($url)
+        {
+            $ministerio = new \ministerio\modelo\ministerio() ;
 
-			$ministerio->id = $url[3] ; 
-			$ministerio = $ministerio->listarUm() ;
-		
-			require 'ministerio/visao/detalharMinisterio.php' ;	
-		
-		}
+            $ministerio->id = $url[3] ;
+            $ministerio = $ministerio->listarUm() ;
 
+            require 'ministerio/visao/detalharMinisterio.php';
 
-		public function chamar () {
+        }
 
-			$nome = (!empty($_GET['nome'])) ? $_GET['nome'] : NULL;
-			$discipulo =	new \discipulo\Modelo\Discipulo();
-			$discipulo->nome = $nome; 
-			$discipulos = $discipulo->chamar($nome);	
-			require_once 'discipulo/visao/chamar.php' ;
+        public function chamar ()
+        {
+            $nome = (!empty($_GET['nome'])) ? $_GET['nome'] : NULL;
+            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo->nome = $nome;
+            $discipulos = $discipulo->chamar($nome);
+            require_once 'discipulo/visao/chamar.php';
 
-		
-		}
-	
-		public function evento($url){
-			
+        }
 
-			if ( empty ( $url['post'] ) ) {
+        public function evento($url)
+        {
+            if ( empty ( $url['post'] ) ) {
 
-				  $eventos = new \evento\modelo\evento();
-				
-				  $id = $url[3];
-				  $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
-				$eventos = $eventos->listarTodos();
+                  $eventos = new \evento\modelo\evento();
 
+                  $id = $url[3];
+                  $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
+                $eventos = $eventos->listarTodos();
 
-			require_once 'modulos/discipulo/visao/evento.php' ;
-			}else {
-					  $post = $url['post'];
-					 $discipuloEvento = new \evento\modelo\evento();
-					  $eventoId = $post['eventoId'];
-						$discipuloId = $post['discipuloId'];
+            require_once 'modulos/discipulo/visao/evento.php';
+            } else {
+                      $post = $url['post'];
+                     $discipuloEvento = new \evento\modelo\evento();
+                      $eventoId = $post['eventoId'];
+                        $discipuloId = $post['discipuloId'];
 
-					 $discipuloEvento->salvarDiscipuloEvento($discipuloId, $eventoId );	
+                     $discipuloEvento->salvarDiscipuloEvento($discipuloId, $eventoId );
 
-					  echo "url" ;
-					 var_dump($url);
-					 $id = $post['discipuloId'];
+                      echo "url" ;
+                     var_dump($url);
+                     $id = $post['discipuloId'];
 
-					 header ('location:/discipulo/evento/id/'.$id);
-					 exit();
-			
-				
-			
-			
-			}
-				
-		
-		}	
-	
-	}	
+                     header ('location:/discipulo/evento/id/'.$id);
+                     exit();
 
-?>
+            }
+
+        }
+
+    }

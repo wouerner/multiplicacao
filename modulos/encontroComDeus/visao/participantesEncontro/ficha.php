@@ -1,91 +1,88 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<style type="text/css">
-		   @import url("/ext/twitter-bootstrap/bootstrap.css");
-		</style>
-		
-		<style>
-				body{
+    <head>
+        <meta charset="UTF-8">
+        <style type="text/css">
+           @import url("/ext/twitter-bootstrap/bootstrap.css");
+        </style>
 
-					font-size: 14pt;
+        <style>
+                body{
 
-					} 
+                    font-size: 14pt;
 
-					p{
-					
-					font-size: 14pt;
-					line-height: 100%;
+                    }
 
+                    p{
 
-					}
-					h1{
-						font-size:30pt;
+                    font-size: 14pt;
+                    line-height: 100%;
 
-					
-					}
-					h2{
-						font-size:24pt;
+                    }
+                    h1{
+                        font-size:30pt;
 
-					
-					}
-					table{
-						margin-top:20px;
-		
-					}
-		</style>
-	</head>
+                    }
+                    h2{
+                        font-size:24pt;
 
-	<body>
-		<section class = "container">
+                    }
+                    table{
+                        margin-top:20px;
 
-		<nav> 
-		</nav>
-			
-		<header>
-		
-		</header>
+                    }
+        </style>
+    </head>
 
-		<section>		
-			<article>
+    <body>
+        <section class = "container">
 
-			<?php foreach ( $discipulos as $discipulo ) : ?>
-			<table class = " table " >
-				<tr><td><img src="/modulos/discipulo/visao/img/mga.jpg"> </img></td><td><h2>Encontro com Deus dias 15, 16 e 17/03/2013</h2></td></tr>
+        <nav>
+        </nav>
 
-			<tr>
+        <header>
 
-			<table class = " table table-bordered" >
-				<tr >	
-					<td class = "span8"> Nome: <?php echo $discipulo->nome ; ?></td>
-					<td class = "" > Data Nasc.: <?php echo $discipulo->getDataNascimento()->format('d/m/Y') ; ?></td>
-				</tr>
-			</table>
+        </header>
 
-			</tr>
+        <section>
+            <article>
 
-			<tr>
+            <?php foreach ( $discipulos as $discipulo ) : ?>
+            <table class = " table " >
+                <tr><td><img src="/modulos/discipulo/visao/img/mga.jpg"> </img></td><td><h2>Encontro com Deus dias 15, 16 e 17/03/2013</h2></td></tr>
 
-			<table class = "table table-bordered" >
-				<tr>
-					<td colspan = "2" class = "">Endereço: <?php echo $discipulo->endereco; ?></td>
-				</tr>
+            <tr>
 
-				<tr>
-					<td  class = "span7">Telefone: <?php echo $discipulo->telefone ; ?></td>
-					<td  class = "">Líder: <?php $d = $discipulo->getLider() ; ?> <?php echo $d->nome ; ?></td>
-				</tr>
-			</table>
+            <table class = " table table-bordered" >
+                <tr >
+                    <td class = "span8"> Nome: <?php echo $discipulo->nome ; ?></td>
+                    <td class = "" > Data Nasc.: <?php echo $discipulo->getDataNascimento()->format('d/m/Y') ; ?></td>
+                </tr>
+            </table>
 
-			</tr>
+            </tr>
 
-			<tr><td></td></tr>
+            <tr>
 
-			<tr>
-				<table class="table table-bordered">
-					<tr>
-					<td   >
+            <table class = "table table-bordered" >
+                <tr>
+                    <td colspan = "2" class = "">Endereço: <?php echo $discipulo->endereco; ?></td>
+                </tr>
+
+                <tr>
+                    <td  class = "span7">Telefone: <?php echo $discipulo->telefone ; ?></td>
+                    <td  class = "">Líder: <?php $d = $discipulo->getLider() ; ?> <?php echo $d->nome ; ?></td>
+                </tr>
+            </table>
+
+            </tr>
+
+            <tr><td></td></tr>
+
+            <tr>
+                <table class="table table-bordered">
+                    <tr>
+                    <td   >
 
 <p><h3>Condições de Pagamento:</h3></p>
 <p>a) Valor do encontro para encontrista: R$ 100,00 - à vista; R$ 120,00 - a prazo;</p>
@@ -96,22 +93,21 @@
 <p>Assinatura do Encontrista:_______________________________________________________________</p>
 <p>Menor de Idade (Ass. do Responsável):_____________________________________________________</p>
 <p>Membro de outra Igreja (Ass. do Pastor):____________________________________________________</p>
-				</td>
-				</table>
-				</tr>
+                </td>
+                </table>
+                </tr>
 
-				</table>
-<table class = "table table-bordered" >	
+                </table>
+<table class = "table table-bordered" >
 <tr>
 </tr>
 <table>
 
 <?php endforeach ; ?>
-			</article>
-		
-		</section>
+            </article>
 
-		</section>
-	</body>
+        </section>
+
+        </section>
+    </body>
 </html>
-

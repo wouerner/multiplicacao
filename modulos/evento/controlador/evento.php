@@ -1,106 +1,101 @@
-<?php 
+<?php
 
 use evento\modelo\evento;
 use evento\modelo\eventoDiscipulo;
-namespace evento\controlador; 
+namespace evento\controlador;
 
-class evento{
-	
-	public function index(){
+class evento
+{
+    public function index()
+    {
+        //$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
+        $eventos =	new \evento\modelo\evento();
+        //$eventos =	$eventos->listarTodos(8);
+        $eventos = $eventos->listarTodos();
+        ///$totalDiscipulos = \evento\Modelo\Discipulo::totalDiscipulos();
+        //$totalDiscipulos --;
 
-		//$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
-		$eventos =	new \evento\modelo\evento();
-		//$eventos =	$eventos->listarTodos(8);
-		$eventos = $eventos->listarTodos();
-		///$totalDiscipulos = \evento\Modelo\Discipulo::totalDiscipulos();
-		//$totalDiscipulos --;
+            require_once 'modulos/evento/visao/listar.php';
 
-			require_once  'modulos/evento/visao/listar.php';
-	
-	
-	}
+    }
 
-	public function novo($url){
-	
-			if ( empty ( $url['post'] ) ) {
-		
-					  require_once  'modulos/evento/visao/novo.php';
-			
-			}else {
-				 $evento =	new \evento\modelo\evento();
+    public function novo($url)
+    {
+            if ( empty ( $url['post'] ) ) {
 
-				  $post = $url['post'] ;
-				 $evento->nome = $post['nome'] ;
+                      require_once 'modulos/evento/visao/novo.php';
 
-				  $evento->salvar();
-				header ('location:/evento');
-				exit();
-			}
-			
-	
-	
-	}
-		public function atualizar($url){
+            } else {
+                 $evento =	new \evento\modelo\evento();
 
-			if ( empty ( $url['post'] ) ) {
+                  $post = $url['post'] ;
+                 $evento->nome = $post['nome'] ;
 
-				$evento =	new \evento\modelo\evento();
+                  $evento->salvar();
+                header ('location:/evento');
+                exit();
+            }
 
-				$evento->id =  $url[3] ;
-				$evento = $evento->listarUm();
+    }
+        public function atualizar($url)
+        {
+            if ( empty ( $url['post'] ) ) {
 
-				require_once  'modulos/evento/visao/atualizar.php';
-			
-			}else {
-				$evento =	new \evento\modelo\evento();
+                $evento =	new \evento\modelo\evento();
 
-				$post = $url['post'] ;
+                $evento->id =  $url[3] ;
+                $evento = $evento->listarUm();
 
-				$evento->id = $post['id'];	
-				$evento->nome = $post['nome'];
+                require_once 'modulos/evento/visao/atualizar.php';
 
-				$evento->atualizar();
+            } else {
+                $evento =	new \evento\modelo\evento();
 
+                $post = $url['post'] ;
 
-				header ('location:/evento/atualizar/id/'.$evento->id);
-				exit();
-			}
+                $evento->id = $post['id'];
+                $evento->nome = $post['nome'];
 
-		
-		
-		}
+                $evento->atualizar();
 
-		public function excluir($url){
-				$evento =	new \evento\modelo\evento();
-				$evento->id = $url[3]; 
-				$evento->excluir();
+                header ('location:/evento/atualizar/id/'.$evento->id);
+                exit();
+            }
 
-				$_SESSION['mensagem'] = !is_null($evento->erro) ? $evento->erro : null ;
-				header ('location:/evento');
-				exit();
-		}
+        }
 
-		public function excluirEventoDiscipulo($url){
-				$evento =	new \evento\modelo\eventoDiscipulo();
-				$evento->eventoId = $url[3];
-				$evento->discipuloId = $url[4];
+        public function excluir($url)
+        {
+                $evento =	new \evento\modelo\evento();
+                $evento->id = $url[3];
+                $evento->excluir();
 
-				$evento->excluir();
-				header ('location:/discipulo/evento/id/'.$evento->discipuloId);
-				exit();
-		
-		}
+                $_SESSION['mensagem'] = !is_null($evento->erro) ? $evento->erro : null ;
+                header ('location:/evento');
+                exit();
+        }
 
+        public function excluirEventoDiscipulo($url)
+        {
+                $evento =	new \evento\modelo\eventoDiscipulo();
+                $evento->eventoId = $url[3];
+                $evento->discipuloId = $url[4];
 
-		public function detalhar ($url) {
+                $evento->excluir();
+                header ('location:/discipulo/evento/id/'.$evento->discipuloId);
+                exit();
 
-			$evento = new \evento\modelo\evento() ;
+        }
 
-			$evento->id = $url[3] ; 
-			$evento = $evento->listarUm() ;
-		
-			require 'evento/visao/detalhar.php' ;	
-		
-		}
+        public function detalhar ($url)
+        {
+            $evento = new \evento\modelo\evento() ;
+
+            $evento->id = $url[3] ;
+            $evento = $evento->listarUm() ;
+
+            require 'evento/visao/detalhar.php';
+
+        }
 
 }

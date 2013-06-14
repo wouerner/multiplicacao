@@ -7,201 +7,197 @@ use celula\modelo\relatorioCelula as relatorioModelo;
 use celula\modelo\temaRelatorioCelula as temaModelo;
 use celula\modelo\celula as celulaModelo;
 
-class relatorio{
+class relatorio
+{
+    public function index($url)
+    {
+        $relatorioCelula = new \celula\modelo\relatorioCelula();
+        $relatorioCelula->celulaId  = $url[4];
+        $relatorios = $relatorioCelula->listarTodos();
 
-	public function index($url){
+        require_once 'modulos/celula/visao/relatorioCelula/listar.php';
 
-		$relatorioCelula = new \celula\modelo\relatorioCelula();
-		$relatorioCelula->celulaId  = $url[4];
-		$relatorios = $relatorioCelula->listarTodos();
+    }
 
-		require_once  'modulos/celula/visao/relatorioCelula/listar.php';
+        public function novo($url)
+        {
+            $dataEnvio = date('d/m/Y');
+            $post = $url['post'] ? $url['post'] : '' ;
 
-	}
+            if ( empty ( $post ) ) {
+                $celulaId = $url[4];
 
-		public function novo($url){
-			$dataEnvio = date('d/m/Y');
-			$post = $url['post'] ? $url['post'] : '' ;
+                $celula = new \celula\modelo\celula($celulaId);
+                $temas = new \celula\modelo\temaRelatorioCelula();
 
-			if ( empty ( $post ) ) {
-				$celulaId = $url[4];
+                $temas = $temas->listarTodosAtivos();
+                $lider = $celula->pegaLider();
 
-				$celula = new \celula\modelo\celula($celulaId);
-				$temas = new \celula\modelo\temaRelatorioCelula();
+                $discipulos = $celula->listarDiscipulos();
+                require_once 'modulos/celula/visao/relatorioCelula/novo.php';
+            } else {
 
-				$temas = $temas->listarTodosAtivos();
-				$lider = $celula->pegaLider();
+                $relatorioCelula = new \celula\modelo\relatorioCelula() ;
+                $relatorioCelula->dataEnvio = date('Y-m-d H:i:s') ;
+                $relatorioCelula->texto = $post ['texto'] ;
+                $relatorioCelula->titulo = $post ['titulo'] ;
+                $relatorioCelula->lider = $post ['lider'] ;
+                $relatorioCelula->celulaId = $post ['celulaId'] ;
+                $relatorioCelula->temaRelatorioCelulaId = $post ['temaRelatorioCelulaId'] ;
+                $discipulos = $post['discipulos'] ;
 
-				$discipulos = $celula->listarDiscipulos();
-				require_once  'modulos/celula/visao/relatorioCelula/novo.php';
-			}else{
+                $relatorioCelula->salvar();
+                $relatorioCelula->salvarParticipacao($discipulos);
 
-				$relatorioCelula = new \celula\modelo\relatorioCelula() ;
-				$relatorioCelula->dataEnvio = date('Y-m-d H:i:s') ;
-				$relatorioCelula->texto = $post ['texto'] ;
-				$relatorioCelula->titulo = $post ['titulo'] ;
-				$relatorioCelula->lider = $post ['lider'] ;
-				$relatorioCelula->celulaId = $post ['celulaId'] ;
-				$relatorioCelula->temaRelatorioCelulaId = $post ['temaRelatorioCelulaId'] ;
-				$discipulos = $post['discipulos'] ;
+                $aviso = new aviso();
 
-				$relatorioCelula->salvar();
-				$relatorioCelula->salvarParticipacao($discipulos);
+                $aviso->tipoAviso = tipoAviso::relatorioNovo ;
+                $aviso->identificacao = $relatorioCelula->id ;
+                $aviso->emissor = $_SESSION['usuario_id'];
+                $aviso->salvar();
 
-				$aviso = new aviso();
+                header ('location:/celula/relatorio/index/celulaId/'.$relatorioCelula->celulaId) ;
 
-				$aviso->tipoAviso = tipoAviso::relatorioNovo ;
-				$aviso->identificacao = $relatorioCelula->id ;
-				$aviso->emissor = $_SESSION['usuario_id'];
-				$aviso->salvar();
+            }
 
-				header ('location:/celula/relatorio/index/celulaId/'.$relatorioCelula->celulaId) ;
+        }
 
-			}
+        public function atualizar($url)
+        {
+            if ( empty ( $url['post'] ) ) {
 
-		}
+                $celula =	new \celula\modelo\celula();
+                $lideres = $celula->listarLideres();
 
-		public function atualizar($url){
+                $celula->id =  $url[3] ;
+                $celula = $celula->listarUm() ;
 
-			if ( empty ( $url['post'] ) ) {
+                $lider =	new \discipulo\Modelo\Discipulo() ;
+                $lider->id = $celula->lider ;
+                $lider = $lider->listarUm($celula->lider) ;
 
-				$celula =	new \celula\modelo\celula();
-				$lideres = $celula->listarLideres();
+                require_once 'modulos/celula/visao/atualizar.php';
 
-				$celula->id =  $url[3] ;
-				$celula = $celula->listarUm() ;
+            } else {
 
-				$lider =	new \discipulo\Modelo\Discipulo() ;
-				$lider->id = $celula->lider ;
-				$lider = $lider->listarUm($celula->lider) ;
+                $celula =	new \celula\modelo\celula();
 
-				require_once  'modulos/celula/visao/atualizar.php' ;
+                $post = $url['post'] ;
+                $celula->nome = $post['nome'];
+                $celula->horarioFuncionamento = $post['horarioFuncionamento'];
+                $celula->endereco = $post['endereco'];
+                $celula->lider = $post['lider'];
+                $celula->id = $post['id'];
 
-			}else {
+                $celula->atualizar();
 
-				$celula =	new \celula\modelo\celula();
+                header ('location:/celula/atualizar/id/'.$celula->id);
+                exit();
+            }
 
-				$post = $url['post'] ;
-				$celula->nome = $post['nome'];
-				$celula->horarioFuncionamento = $post['horarioFuncionamento'];
-				$celula->endereco = $post['endereco'];
-				$celula->lider = $post['lider'];
-				$celula->id = $post['id'];
+        }
 
-				$celula->atualizar();
+        public function excluir($url)
+        {
+                $celula =	new \celula\modelo\celula();
+                $celula->id = $url[3];
+                $celula->excluir();
 
-				header ('location:/celula/atualizar/id/'.$celula->id);
-				exit();
-			}
+                $_SESSION['mensagem'] = !is_null($celula->erro) ? $celula->erro : NULL ;
+                header ('location:/celula');
+                exit();
 
-		
-		
-		}
+        }
 
-		public function excluir($url){
-				$celula =	new \celula\modelo\celula();
-				$celula->id = $url[3]; 
-				$celula->excluir();
+        public function detalhar($url)
+        {
+            $relatorio =	new \celula\modelo\relatorioCelula() ;
+            $relatorio->id = $url[4] ;
 
-				$_SESSION['mensagem'] = !is_null($celula->erro) ? $celula->erro : NULL ;
-				header ('location:/celula');
-				exit();
-		
-			
-		
-		
-		}
+            $participacao = $relatorio->listarParticipacao() ;
 
-		public function detalhar($url){
+            $relatorio = $relatorio->listarUm() ;
 
-			$relatorio =	new \celula\modelo\relatorioCelula() ;
-			$relatorio->id = $url[4] ; 
+            $tema = $relatorio->pegarTemaRelatorio() ;
 
+            //var_dump($tema);
+            //var_dump($participacao);
+            //exit;
 
-			$participacao = $relatorio->listarParticipacao() ; 
+            require 'celula/visao/relatorioCelula/detalhar.php';
 
-			$relatorio = $relatorio->listarUm() ;
+        }
 
-			$tema = $relatorio->pegarTemaRelatorio() ;
+        public function chamar ()
+        {
+            $nome = isset($_GET['nome']) ? $_GET['nome'] : NULL ;
+            $celula =	new \celula\modelo\celula();
+            $celula->nome = $nome;
+            $celulas = $celula->chamar($nome);
+            require_once 'celula/visao/chamar.php';
 
-			//var_dump($tema);
-			//var_dump($participacao);
-			//exit;
+        }
 
-			require 'celula/visao/relatorioCelula/detalhar.php' ;
-		
-		}
+        public function lideresCelula()
+        {
+            $lideres = new \celula\modelo\celula();
+            $lideres = $lideres->listarLideresCelula() ;
 
+            require_once 'celula/visao/listarLideresCelula.php';
 
-		public function chamar () {
-
-			$nome = isset($_GET['nome']) ? $_GET['nome'] : NULL ;
-			$celula =	new \celula\modelo\celula();
-			$celula->nome = $nome;
-			$celulas = $celula->chamar($nome);
-			require_once 'celula/visao/chamar.php' ;
-
-		}
-
-		public function lideresCelula(){
-
-			$lideres = new \celula\modelo\celula();
-			$lideres = $lideres->listarLideresCelula() ;
-
-			require_once 'celula/visao/listarLideresCelula.php' ;
-
-		}
+        }
     /*
-		 * Relatorio de Célula por mês.
-		 * */
-		public function porMes($url){
-			$ids = isset($url['post']['temasId']) ? $url['post']['temasId']: '';
+         * Relatorio de Célula por mês.
+         * */
+        public function porMes($url)
+        {
+            $ids = isset($url['post']['temasId']) ? $url['post']['temasId']: '';
 
-			if ( $ids){
-      foreach($ids as $id ){
-				$t = new temaModelo();
-				$t->id = $id;
-			  $tem[] = $t->listarUm();
-			}}
+            if ($ids) {
+      foreach ($ids as $id) {
+                $t = new temaModelo();
+                $t->id = $id;
+              $tem[] = $t->listarUm();
+            }}
       //var_dump($tem);
 
       $temas = new temaModelo();
       $temas = $temas->listarTodos();
 
-			$relatorio = new relatorioModelo();
-			$relatorios = $relatorio->porMes($ids);
-			//var_dump($relatorios);
+            $relatorio = new relatorioModelo();
+            $relatorios = $relatorio->porMes($ids);
+            //var_dump($relatorios);
 
-			$rel = array();
-			foreach($relatorios as $celula){
-				$rel[$celula['celulaNome']][$celula['tId']] = $celula['tId'] ;
-			}
+            $rel = array();
+            foreach ($relatorios as $celula) {
+                $rel[$celula['celulaNome']][$celula['tId']] = $celula['tId'] ;
+            }
 
-			//var_dump($ids);
-			//var_dump($rel);
-			//die();
-			require_once 'celula/visao/relatorioCelula/porMes.php' ;
+            //var_dump($ids);
+            //var_dump($rel);
+            //die();
+            require_once 'celula/visao/relatorioCelula/porMes.php';
 
-		}
+        }
 
-		public function lerPorTema($url)
-		{
+        public function lerPorTema($url)
+        {
       $temas = new temaModelo();
       $temas = $temas->listarTodos();
-			$relatorio = new relatorioModelo();
-			$relatorio->temaRelatorioCelulaId = isset($url['post']['temaId']) ? $url['post']['temaId'] : $url[4] ;
-			$relatorios = $relatorio->lerPorTema();
-		    require_once 'celula/visao/relatorioCelula/lerPorTema.php' ;
-		}
+            $relatorio = new relatorioModelo();
+            $relatorio->temaRelatorioCelulaId = isset($url['post']['temaId']) ? $url['post']['temaId'] : $url[4] ;
+            $relatorios = $relatorio->lerPorTema();
+            require_once 'celula/visao/relatorioCelula/lerPorTema.php';
+        }
 
-		public function lerPorCelula($url)
-		{
+        public function lerPorCelula($url)
+        {
       $celula = new celulaModelo();
       $celulas = $celula->listarTodos();
-			$relatorio = new relatorioModelo();
-			$relatorio->celulaId = isset($url['post']['temaId']) ? $url['post']['temaId'] : $url[4] ;
-			$relatorios = $relatorio->lerPorCelula();
-		    require_once 'celula/visao/relatorioCelula/lerPorCelula.php' ;
-		}
+            $relatorio = new relatorioModelo();
+            $relatorio->celulaId = isset($url['post']['temaId']) ? $url['post']['temaId'] : $url[4] ;
+            $relatorios = $relatorio->lerPorCelula();
+            require_once 'celula/visao/relatorioCelula/lerPorCelula.php';
+        }
 
 }

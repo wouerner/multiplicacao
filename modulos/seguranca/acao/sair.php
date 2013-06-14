@@ -14,4 +14,3 @@ $discipulo = new discipulo\Modelo\Discipulo() ;
 
 $discipulo->sair();
 header('location:../formularios/index.php');
-?> 

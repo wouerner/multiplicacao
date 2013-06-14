@@ -1,87 +1,84 @@
 <?php
 
-namespace painel\controlador; 
+namespace painel\controlador;
 
-	class painel{
-		/* Mostra a lista de todos os discipulos cadastrados no sistema
-		*
-		* */
-	
-		public function index(){
+    class painel
+    {
+        /* Mostra a lista de todos os discipulos cadastrados no sistema
+        *
+        * */
 
-					$usuarioId= $_SESSION['usuario_id'];
-					$status = new \statusCelular\modelo\statusCelular() ;	
-					$status = $status->quantidadePorStatusCelular();
+        public function index()
+        {
+                    $usuarioId= $_SESSION['usuario_id'];
+                    $status = new \statusCelular\modelo\statusCelular() ;
+                    $status = $status->quantidadePorStatusCelular();
 
-					$totalDiscipulos = null;
-					foreach($status as $s){
-							$totalDiscipulos += (int) $s['total'] ;
-					}
+                    $totalDiscipulos = null;
+                    foreach ($status as $s) {
+                            $totalDiscipulos += (int) $s['total'] ;
+                    }
 
-					foreach($status as $k => $v){
-							$porc [$k]= $v ;
-							$porc [$k]['porcentagem']= (100 *  $porc[$k]['total'])/$totalDiscipulos ;
-					}
+                    foreach ($status as $k => $v) {
+                            $porc [$k]= $v ;
+                            $porc [$k]['porcentagem']= (100 *  $porc[$k]['total'])/$totalDiscipulos ;
+                    }
 
-					$status = $porc ;
+                    $status = $porc ;
 
-					//$porcentagem = (100 * $totalDiscipulos)/$totalDiscipulos ; 
+                    //$porcentagem = (100 * $totalDiscipulos)/$totalDiscipulos ;
 
-					$statusDiscipulos = new \statusCelular\modelo\statusCelular() ;	
-					$statusDiscipulos = $statusDiscipulos->pegarStatusCelularPorLider($_SESSION['usuario_id']);
-					$statusDiscipulosTotal = null ; 
+                    $statusDiscipulos = new \statusCelular\modelo\statusCelular() ;
+                    $statusDiscipulos = $statusDiscipulos->pegarStatusCelularPorLider($_SESSION['usuario_id']);
+                    $statusDiscipulosTotal = null ;
 
-					foreach($statusDiscipulos as $st){
-						$statusDiscipulosTotal += $st['total'];
-					
-					}
+                    foreach ($statusDiscipulos as $st) {
+                        $statusDiscipulosTotal += $st['total'];
 
-					$totalAtivos =  \discipulo\Modelo\Discipulo::totalAtivos() ;
-					$totalInativos = \discipulo\Modelo\Discipulo::totalInativos() ;
+                    }
 
-					$totalAtivosLider =  \discipulo\Modelo\Discipulo::totalAtivosLider($usuarioId) ;
-					$totalInativosLider = \discipulo\Modelo\Discipulo::totalInativosLider($usuarioId) ;
+                    $totalAtivos =  \discipulo\Modelo\Discipulo::totalAtivos() ;
+                    $totalInativos = \discipulo\Modelo\Discipulo::totalInativos() ;
 
+                    $totalAtivosLider =  \discipulo\Modelo\Discipulo::totalAtivosLider($usuarioId) ;
+                    $totalInativosLider = \discipulo\Modelo\Discipulo::totalInativosLider($usuarioId) ;
 
-					$totalRedes =  \rede\modelo\rede::pegarTodasRedes();
-					$totalRedesLideres =  \rede\modelo\rede::pegarTodasRedesPorLider($usuarioId);
-				//var_dump($totalRedes);	
-					$somaRede=NULL;
-					foreach($totalRedes as $t){
-						$somaRede += $t['total'];
-					}
+                    $totalRedes =  \rede\modelo\rede::pegarTodasRedes();
+                    $totalRedesLideres =  \rede\modelo\rede::pegarTodasRedesPorLider($usuarioId);
+                //var_dump($totalRedes);
+                    $somaRede=NULL;
+                    foreach ($totalRedes as $t) {
+                        $somaRede += $t['total'];
+                    }
 
-					$somaRedeDiscipulos=NULL;
-					foreach($totalRedesLideres as $t){
-						$somaRedeDiscipulos += $t['total'];
-					}
-					
-					$avisos = new \aviso\modelo\aviso();
-					$avisos = $avisos->listarUltimos();
-					//var_dump($avisos);
+                    $somaRedeDiscipulos=NULL;
+                    foreach ($totalRedesLideres as $t) {
+                        $somaRedeDiscipulos += $t['total'];
+                    }
 
-					$celulas =	new \celula\modelo\celula();
-					$celulas->lider = $usuarioId;
-					$celulas = $celulas->listarCelulasLider();
-					$totalCelulas = count($celulas);
+                    $avisos = new \aviso\modelo\aviso();
+                    $avisos = $avisos->listarUltimos();
+                    //var_dump($avisos);
 
-					$discipulos = new \discipulo\Modelo\Discipulo();	
-					$discipulos->id = $usuarioId ; 
-		  		$discipulos = $discipulos->listarDiscipulos();
+                    $celulas =	new \celula\modelo\celula();
+                    $celulas->lider = $usuarioId;
+                    $celulas = $celulas->listarCelulasLider();
+                    $totalCelulas = count($celulas);
 
-					$totalDiscipulos = count($discipulos) ;
+                    $discipulos = new \discipulo\Modelo\Discipulo();
+                    $discipulos->id = $usuarioId ;
+                  $discipulos = $discipulos->listarDiscipulos();
 
-					//aniversarios
-					
-					$discipulosAniver = new \discipulo\Modelo\Discipulo();	
-					$discipulosAniver = $discipulosAniver->aniversarioHoje();	
-					$totalAniver = count($discipulosAniver);	
-					$contator = 0 ;
+                    $totalDiscipulos = count($discipulos) ;
 
-				  require_once  'modulos/painel/visao/painel.php';
-		}
+                    //aniversarios
 
-	
-	}
+                    $discipulosAniver = new \discipulo\Modelo\Discipulo();
+                    $discipulosAniver = $discipulosAniver->aniversarioHoje();
+                    $totalAniver = count($discipulosAniver);
+                    $contator = 0 ;
 
+                  require_once 'modulos/painel/visao/painel.php';
+        }
 
+    }

@@ -1,103 +1,106 @@
-<?php 
+<?php
 
 namespace framework\modelo ;
-use PDO ; 
+use PDO ;
 
-class modeloFramework{
+class modeloFramework
+{
+    private static $con = false ;
 
-	private  static $con = false ;
+    public function __construct(){}
 
-	function __construct(){}
+    public static function criarConexao()
+    {
+        $options = array( \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',);
 
-	public static function criarConexao(){
-					
-		$options = array( \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',); 
+        if (false === self::$con) {
+        self::$con = new \PDO(DSN, USER, PASSWD, $options);
+      }
 
-		if (false === self::$con) {
-    	self::$con = new \PDO(DSN, USER, PASSWD, $options);
-  	}
   return self::$con;
-	}
+    }
 
-	public static function pegarConexao(){
-		return self::criarConexao() ;
-	
-	}
+    public static function pegarConexao()
+    {
+        return self::criarConexao() ;
 
-	 /**@todo
+    }
+
+     /**@todo
      * Perform an INSERT statement
-     */ 
+     */
     public static function insert($data)
     {
-				$reflect = new \ReflectionClass($data);
-				$class = ucfirst ($reflect->getShortName());
-				$props   = $reflect->getProperties();
+                $reflect = new \ReflectionClass($data);
+                $class = ucfirst ($reflect->getShortName());
+                $props   = $reflect->getProperties();
 
-				$values = array();
-				$fields = array();
-				$numFields = '';
-				$map = array();
+                $values = array();
+                $fields = array();
+                $numFields = '';
+                $map = array();
 
-				foreach($props as $d){
-					$prop = $d->name;
-						if( $data->$prop ){
-							$fields = $d->name; 
-							$values = $data->$prop; 
-							$map[$fields] = $values;
-					}
-				}
+                foreach ($props as $d) {
+                    $prop = $d->name;
+                        if ($data->$prop) {
+                            $fields = $d->name;
+                            $values = $data->$prop;
+                            $map[$fields] = $values;
+                    }
+                }
 
-				$numFields = count($map);
-				$num = 0;
+                $numFields = count($map);
+                $num = 0;
 
-				$fields = '';
-				$values = '';
-				$int = '';
-				foreach($map as $k => $v ){
-					++$num;
-					$fields .= ($num < $numFields ) ? $k.', ' : $k ;
-					$values .= ($num < $numFields ) ? $v.', ' : $v ;
-					$int[] = ':'.$k ;
-				}
-				
-				$int = implode(',',$int);
+                $fields = '';
+                $values = '';
+                $int = '';
+                foreach ($map as $k => $v) {
+                    ++$num;
+                    $fields .= ($num < $numFields ) ? $k.', ' : $k ;
+                    $values .= ($num < $numFields ) ? $v.', ' : $v ;
+                    $int[] = ':'.$k ;
+                }
 
-				$pdo = self::pegarConexao();
+                $int = implode(',',$int);
 
-				$sql = 'INSERT INTO '.$class.' ('.$fields.') VALUES ('.$int.')';
-			  $stm = $pdo->prepare($sql);
+                $pdo = self::pegarConexao();
 
-				foreach( $map as $k => $v ){
-								$parameter = ':'.$k;
-								$stm->bindValue($parameter, $v , \PDO::PARAM_STR);
-				}
+                $sql = 'INSERT INTO '.$class.' ('.$fields.') VALUES ('.$int.')';
+              $stm = $pdo->prepare($sql);
 
-			  $stm->execute();
-				var_dump($stm->debugDumpParams());
+                foreach ($map as $k => $v) {
+                                $parameter = ':'.$k;
+                                $stm->bindValue($parameter, $v , \PDO::PARAM_STR);
+                }
 
-				var_dump($stm->errorInfo());
+              $stm->execute();
+                var_dump($stm->debugDumpParams());
+
+                var_dump($stm->errorInfo());
+
         return $pdo->lastInsertId();
 
     }
 
     public static function delete($data)
     {
-				$id = $data->id;
-				$reflect = new \ReflectionClass($data);
-				$class = ucfirst ($reflect->getShortName());
-				$props   = $reflect->getProperties();
+                $id = $data->id;
+                $reflect = new \ReflectionClass($data);
+                $class = ucfirst ($reflect->getShortName());
+                $props   = $reflect->getProperties();
 
-				$pdo = self::pegarConexao();
+                $pdo = self::pegarConexao();
 
-				$sql = 'DELETE FROM '.$class.' WHERE id  = ? ' ;
-			  $stm = $pdo->prepare($sql);
+                $sql = 'DELETE FROM '.$class.' WHERE id  = ? ' ;
+              $stm = $pdo->prepare($sql);
 
-				$stm->bindParam(1, $id , PDO::PARAM_INT);
+                $stm->bindParam(1, $id , PDO::PARAM_INT);
 
-			  $stm->execute();
-				//var_dump($stm->debugDumpParams());
+              $stm->execute();
+                //var_dump($stm->debugDumpParams());
 
-				//var_dump($stm->errorInfo()); die();
+                //var_dump($stm->errorInfo()); die();
         return $pdo->lastInsertId();
 
     }
