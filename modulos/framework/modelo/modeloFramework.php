@@ -1,13 +1,23 @@
 <?php
 
 namespace framework\modelo ;
-use PDO ;
+use \PDO ;
 
 class modeloFramework
 {
     private static $con = false ;
 
     public function __construct(){}
+
+    public function __get($prop)
+    {
+         return $this->$prop ;
+    }
+
+    public function __set($prop, $valor)
+    {
+         $this->$prop = $valor ;
+    }
 
     public static function criarConexao()
     {
@@ -17,7 +27,7 @@ class modeloFramework
         self::$con = new \PDO(DSN, USER, PASSWD, $options);
       }
 
-  return self::$con;
+      return self::$con;
     }
 
     public static function pegarConexao()
@@ -67,7 +77,7 @@ class modeloFramework
                 $pdo = self::pegarConexao();
 
                 $sql = 'INSERT INTO '.$class.' ('.$fields.') VALUES ('.$int.')';
-              $stm = $pdo->prepare($sql);
+                $stm = $pdo->prepare($sql);
 
                 foreach ($map as $k => $v) {
                                 $parameter = ':'.$k;

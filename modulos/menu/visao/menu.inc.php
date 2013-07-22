@@ -18,7 +18,7 @@ $usuario = $usuario[0] ;
 <span class="icon-bar"></span>
 </a>
 
-                            <a class="brand" href="/painel/painel"> MGA<sup>Beta</sup></a>
+                            <a class="brand" href="/painel/painel"> MGA</a>
 <div class="nav-collapse collapse">
         <ul class="nav" role="navigation">
 

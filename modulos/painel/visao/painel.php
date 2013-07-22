@@ -43,7 +43,7 @@
 <div class = "row-fluid" >
     <div class = "span6" >
         <div class = "well" >
-        <h4>Temos <?php echo $totalAniver ; ?> Aniversariantes hoje:</h4>
+        <h4><i class="icon-gift "></i> <?php echo $totalAniver ; ?> Aniversariantes hoje:</h4>
                         <?php foreach($discipulosAniver as $da) : ?>
                             <?php ++$contator ?>
                             <a href = "/discipulo/discipulo/perfil/id/<?php echo $da->id ; ?>" >
@@ -61,12 +61,12 @@
                         <?php endforeach ; ?>
 
         </div>
-<div class="accordion" id="accordion2">
+<div class="accordion" id="avisosCollapse">
     <div class="accordion-group">
         <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Avisos <b class="caret pull-right"></b></a>
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#avisos" href="#avisos"><i class="icon-bullhorn"></i> Avisos <b class="caret pull-right"></b></a>
         </div>
-        <div id="collapseOne" class="accordion-body collapse">
+        <div id="avisos" class="accordion-body collapse">
         <div class="accordion-inner">
 
                 <?php require 'modulos/aviso/visao/tabAviso.inc.php' ; ?>
