@@ -31,7 +31,7 @@
                                   <label class="radio">Sim
                                  <input name ="batismo" type = "radio" value = "1" checked></label>
                                   <label class="radio">Não
-                                 <input name ="batismo" type = "radio" value = "2" ></label>
+                                 <input name ="batismo" type = "radio" value = "0" ></label>
                               </div>
                             </div>
 

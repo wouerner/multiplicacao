@@ -30,18 +30,18 @@ class batismo
 
         } else {
 
-         $post = $url['post'] ;
+            $post = $url['post'] ;
 
-         $batismo = new batismoModelo() ;
-         
-         if ($post['batismo'] == 1 )
-         {
-             $batismo->discipuloId = $post['discipuloId'] ;
-             $batismo->salvar();
-         }
+            $batismo = new batismoModelo() ;
 
-         header ('location:/discipulo/discipulo' );
-         exit();
+            if ($post['batismo'] == 1 )
+            {
+                $batismo->discipuloId = $post['discipuloId'] ;
+                $batismo->salvar();
+            }
+
+            header ('location:/discipulo/discipulo' );
+            exit();
         }
 
     }
@@ -333,7 +333,7 @@ class batismo
 
         public function excluir($url)
         {
-                $meta =	new metasModelo();
+                $meta =	new batismoModelo();
                 $meta->id = $url[4];
                 $meta->excluir();
 
