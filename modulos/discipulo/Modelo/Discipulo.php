@@ -538,7 +538,7 @@ class Discipulo extends modeloFramework
     {
         $pdo = self::pegarConexao();
 
-        $sql = 'SELECT count(*) AS total FROM Discipulo WHERE ativo = 1 ';
+        $sql = 'SELECT count(*) AS total FROM Discipulo WHERE ativo = 1 and arquivo=0 ';
 
         $stm = $pdo->prepare($sql);
 
@@ -553,6 +553,20 @@ class Discipulo extends modeloFramework
         $pdo = self::pegarConexao();
 
         $sql = 'SELECT count(*) AS total FROM Discipulo WHERE ativo = 0 ';
+
+        $stm = $pdo->prepare($sql);
+
+        $stm->execute();
+
+        return $stm->fetch();
+
+    }
+
+    public static function totalArquivados()
+    {
+        $pdo = self::pegarConexao();
+
+        $sql = 'SELECT count(*) AS total FROM Discipulo WHERE arquivo = 1 ';
 
         $stm = $pdo->prepare($sql);
 

@@ -122,19 +122,24 @@
                     <caption><h5>Total Redes</h5></caption>
                     <thead>
                         <th>Nome</th>
-                        <th>Quantidade</th>
+                        <th>Discipulos</th>
+                        <th>Celulas</th>
+                        <th>Metas</th>
                     </thead>
                     <tbody>
-                        <?php foreach( $totalRedes as $s) :?>
+                        <?php foreach( $tiposRedes as $s) :?>
                         <tr>
                             <td>
-                                <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s['id'] ; ?>"><?php echo $s['nome']?></a>
+                                <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->nome ?></a>
                             </td>
                             <td>
-                                <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s['id'] ; ?>">Discipulos -<?php echo $s['total']?></a>
+                            <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->totalDiscipulosPorRede() ?></a>
                             </td>
                             <td>
-                                <a href = "/rede/rede/listarCelulas/id/<?php echo $s['id'] ; ?>">Células</a>
+                                <a href = "/rede/rede/listarCelulas/id/<?php echo $s->id ; ?>"><?php echo $s->listarCelulasTotal() ?></a>
+                            </td>
+                            <td>
+                                <a href = "#"><?php echo $s->getMeta() ?></a>
                             </td>
                             <td></td>
                         </tr>
@@ -150,7 +155,7 @@
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTree">
-                Discipulos Ativos/Inativos<b class="caret pull-right"></b>
+                Discipulos Ativos/Inativos/Arquivados<b class="caret pull-right"></b>
             </a>
         </div>
 
@@ -160,11 +165,13 @@
                     <thead>
                         <th>Ativos</th>
                         <th>Inativos</th>
+                        <th>Arquivados</th>
                     </thead>
                     <tbody>
                         <tr>
                             <td><?php echo $totalAtivos['total'] ; ?></td>
                             <td><?php echo $totalInativos['total'] ; ?></td>
+                            <td><?php echo $totalArquivados['total'] ; ?></td>
                         </tr>
                     </tbody>
                 </table>

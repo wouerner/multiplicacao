@@ -1,6 +1,7 @@
 <?php
-
 namespace painel\controlador;
+
+use \rede\modelo\tipoRede as TipoRede;
 
     class painel
     {
@@ -26,8 +27,6 @@ namespace painel\controlador;
 
                     $status = $porc ;
 
-                    //$porcentagem = (100 * $totalDiscipulos)/$totalDiscipulos ;
-
                     $statusDiscipulos = new \statusCelular\modelo\statusCelular() ;
                     $statusDiscipulos = $statusDiscipulos->pegarStatusCelularPorLider($_SESSION['usuario_id']);
                     $statusDiscipulosTotal = null ;
@@ -39,6 +38,7 @@ namespace painel\controlador;
 
                     $totalAtivos =  \discipulo\Modelo\Discipulo::totalAtivos() ;
                     $totalInativos = \discipulo\Modelo\Discipulo::totalInativos() ;
+                    $totalArquivados =  \discipulo\Modelo\Discipulo::totalArquivados() ;
 
                     $totalAtivosLider =  \discipulo\Modelo\Discipulo::totalAtivosLider($usuarioId) ;
                     $totalInativosLider = \discipulo\Modelo\Discipulo::totalInativosLider($usuarioId) ;
@@ -46,6 +46,10 @@ namespace painel\controlador;
                     $totalRedes =  \rede\modelo\rede::pegarTodasRedes();
                     $totalRedesLideres =  \rede\modelo\rede::pegarTodasRedesPorLider($usuarioId);
                 //var_dump($totalRedes);
+
+                    $tiposRedes = new TipoRede();
+                    $tiposRedes = $tiposRedes->listarTodos();
+
                     $somaRede=NULL;
                     foreach ($totalRedes as $t) {
                         $somaRede += $t['total'];
@@ -67,7 +71,7 @@ namespace painel\controlador;
 
                     $discipulos = new \discipulo\Modelo\Discipulo();
                     $discipulos->id = $usuarioId ;
-                  $discipulos = $discipulos->listarDiscipulos();
+                    $discipulos = $discipulos->listarDiscipulos();
 
                     $totalDiscipulos = count($discipulos) ;
 

@@ -23,16 +23,19 @@
         <a id = "<?php echo $discipulo->id ?>" href="/metas/participantesMetas/novo/id/<?php echo $discipulo->id ?>" class = "btn btn-mini " alt = "" ><i class="icon-group icon-white"></i>Participantes da Meta</a>
 
     <div class="btn-group">
-    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-        Encontro 
-    <span class="caret"></span>
-    </a>
+        <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+            Encontro 
+            <span class="caret"></span>
+        </a>
     <ul class="dropdown-menu">
         <a id = "<?php echo $discipulo->id ?>" href="/encontroComDeus/participantesEncontro/novoParticipante/id/<?php echo $discipulo->id ?>" class = "btn btn-mini" alt = "" > Encontro</a>
         <a id = "<?php echo $discipulo->id ?>" href="/encontroComDeus/equipe/novoMembro/id/<?php echo $discipulo->id ?>" class = "btn btn-mini" alt = "" > Equipe Encontro</a>
 
     </ul>
     </div>
+
+        <a id="<?php echo $discipulo->id ?>" href="/batismo/batismo/novo/id/<?php echo $discipulo->id ?>" class = "btn btn-mini" alt = "" > Batismo</a>
+
         <?php if ($discipulo->ativo == 1 ) : ?>
     <a id = "<?php echo $discipulo->id ?>" href="#" class = "btn btn-mini btn-warning " alt = "Desativar" ><i class="icon-arrow-down icon-white"></i>Desativar</a>
         <?php else : ?>
