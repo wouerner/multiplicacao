@@ -100,8 +100,8 @@ $usuario = $usuario[0] ;
                                 </li>
 
                                 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                                <li><a href = "/discipulo/discipulo/rank" role="menuitem" ><i class = "icon-list-alt " ></i> Rank Ativos</a>
-                                <li><a href = "/discipulo/discipulo/rankInativos" role="menuitem" ><i class = "icon-list-alt " ></i> Rank Inativos</a>
+                                <!--<li><a href = "/discipulo/discipulo/rank" role="menuitem" ><i class = "icon-list-alt " ></i> Rank Ativos</a>
+                                <li><a href = "/discipulo/discipulo/rankInativos" role="menuitem" ><i class = "icon-list-alt " ></i> Rank Inativos</a>-->
                                 <li><a href = "/discipulo/discipulo/chamar" ><i class = "icon-search " ></i> Pesquisar</a></li>
 
                                         <li class="divider"></li>
@@ -149,7 +149,7 @@ $usuario = $usuario[0] ;
 
 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                                 <li><a href = "/celula/celula/novo" ><i class = "icon-plus " ></i> Nova</a></li>
-                                <li><a href = "/celula/celula/lideresCelula" >Líderes de Célula</a></li>
+                                <li><a href = "/celula/celula/lideresCelula" >Líderes e Discipulos</a></li>
                                 <li><a href = "/celula/celula/chamar">Pesquisar</a></li>
 
                                 <li><a href = "/celula/relatorio/lerPorTema" ><i class = "icon-plus " ></i> Ler Relatórios</a></li>
@@ -184,7 +184,8 @@ $usuario = $usuario[0] ;
                     <li class = "dropdown" >
                         <a href = "#" class="dropdown-toggle" data-toggle="dropdown"><i class = "icon-briefcase " ></i> Relatorios<b class="caret"></b></a>
                         <ul class = "dropdown-menu" >
-                                <li><a href = "/relatorio/relatorio/relatorioResumido" >Gerar Relatorios</a></li>
+                                <li><a href = "/relatorio/relatorio/relatorioResumido" >Dinamico</a></li>
+                                <li><a href = "/celula/celula/lideresCelula" >Líderes e Discipulos</a></li>
                                 <li><a href = "/relatorio/relatorio/aniversariantes" ><i class = "icon-gift " ></i> Aniversariantes</a></li>
                                 <!--<li><a href = "/celula/celula/listarPorStatus" ><i class = " " ></i> Lider por Status</a></li>
                                 <li><a href = "/celula/celula/listarPorStatusTodos" ><i class = " " ></i> Lider por Status Geral</a></li>
