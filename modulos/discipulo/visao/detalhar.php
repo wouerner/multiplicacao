@@ -82,7 +82,13 @@ $(document).ready(function () {
                 <tr>
                     <td class = "span2" rowspan = "4">
                         <img src = "<?php $foto = $discipulo->getFoto() ; echo is_object($foto) ? $foto->url: '' ; ?>"class = "img-rounded" style="height: 150px;"  width = "150"  >
+                    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                        <a id = "" href="/discipulo/foto/novo/id/<?php echo $discipulo->id ; ?>" class = "btn btn-mini " alt = "" >
+                            <i class="icon-picture "></i> Alterar Foto
+                        </a>
+                    <?php endif ; ?>
                     </td>
+
 
                     <td>
                     <strong>Nome:</strong>	<?php echo $discipulo->nome ; ?>

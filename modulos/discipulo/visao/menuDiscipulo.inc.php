@@ -4,13 +4,6 @@
         <i class="icon-edit icon-white"></i> Atualizar
     </a>
 
-    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-        <a id = "" href="/discipulo/foto/novo/id/<?php echo $discipulo->id ; ?>" class = "btn btn-mini " alt = "" >
-            <i class="icon-picture "></i> Foto
-        </a>
-
-    <?php endif ; ?>
-
     <?php if ($discipulo->eLider() ) : ?>
     <a target="blank" id = "" href="/discipulo/discipulo/listarPorLider/id/<?php echo $discipulo->id ?>" class = "btn btn-mini btn-info " alt = "Discipulos por líder" ><i class="icon-user icon-white"></i> Discs</a>
     <?php endif ; ?>
