@@ -4,6 +4,7 @@
         <i class="icon-edit icon-white"></i> Atualizar
     </a>
 
+<<<<<<< HEAD
     <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
         <a id = "" href="/discipulo/foto/novo/id/<?php echo $discipulo->id ; ?>" class = "btn btn-mini " alt = "" >
             <i class="icon-picture "></i> Foto
@@ -11,6 +12,8 @@
 
     <?php endif ; ?>
 
+=======
+>>>>>>> a91d75d21800040bb3a064bffad7d64e7951a1d1
     <?php if ($discipulo->eLider() ) : ?>
     <a target="blank" id = "" href="/discipulo/discipulo/listarPorLider/id/<?php echo $discipulo->id ?>" class = "btn btn-mini btn-info " alt = "Discipulos por líder" ><i class="icon-user icon-white"></i> Discs</a>
     <?php endif ; ?>
@@ -23,16 +26,29 @@
         <a id = "<?php echo $discipulo->id ?>" href="/metas/participantesMetas/novo/id/<?php echo $discipulo->id ?>" class = "btn btn-mini " alt = "" ><i class="icon-group icon-white"></i>Participantes da Meta</a>
 
     <div class="btn-group">
+<<<<<<< HEAD
     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
         Encontro 
     <span class="caret"></span>
     </a>
+=======
+        <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+            Encontro 
+            <span class="caret"></span>
+        </a>
+>>>>>>> a91d75d21800040bb3a064bffad7d64e7951a1d1
     <ul class="dropdown-menu">
         <a id = "<?php echo $discipulo->id ?>" href="/encontroComDeus/participantesEncontro/novoParticipante/id/<?php echo $discipulo->id ?>" class = "btn btn-mini" alt = "" > Encontro</a>
         <a id = "<?php echo $discipulo->id ?>" href="/encontroComDeus/equipe/novoMembro/id/<?php echo $discipulo->id ?>" class = "btn btn-mini" alt = "" > Equipe Encontro</a>
 
     </ul>
     </div>
+<<<<<<< HEAD
+=======
+
+        <a id="<?php echo $discipulo->id ?>" href="/batismo/batismo/novo/id/<?php echo $discipulo->id ?>" class = "btn btn-mini" alt = "" > Batismo</a>
+
+>>>>>>> a91d75d21800040bb3a064bffad7d64e7951a1d1
         <?php if ($discipulo->ativo == 1 ) : ?>
     <a id = "<?php echo $discipulo->id ?>" href="#" class = "btn btn-mini btn-warning " alt = "Desativar" ><i class="icon-arrow-down icon-white"></i>Desativar</a>
         <?php else : ?>

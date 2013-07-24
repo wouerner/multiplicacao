@@ -99,28 +99,27 @@ class rede
 
               public static function pegarTodasRedes()
               {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = 'select tr.id, tr.nome, count(*) as total from Discipulo AS d -- , r.tipoRedeId as tipoRede
-inner join
-Redes AS r on d.id = r.discipuloId
-inner join
-TipoRede AS tr on r.tipoRedeId = tr.id
-and d.ativo = 1
-group by r.tipoRedeId
-                            ';
+                  //abrir conexao com o banco
+                  $pdo = new \PDO(DSN, USER, PASSWD);
+                  //cria sql
+                  $sql = '
+                      SELECT tr.id, tr.nome, count( * ) AS total
+                        FROM Discipulo AS d
+                        INNER JOIN Redes AS r ON d.id = r.discipuloId
+                        INNER JOIN TipoRede AS tr ON r.tipoRedeId = tr.id
+                        AND d.ativo =1
+                        GROUP BY r.tipoRedeId
+                                ';
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
+                  //prepara sql
+                  $stm = $pdo->prepare($sql);
+                  //trocar valores
 
-              $stm->execute();
+                  $stm->execute();
 
-              //fechar conexÃ£o
-              $pdo = null ;
+                  $pdo = null ;
 
-              return $stm->fetchAll();
+                  return $stm->fetchAll();
                 }
 
     public static function pegarTodasRedesPorLider($id)

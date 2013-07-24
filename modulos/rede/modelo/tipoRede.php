@@ -79,7 +79,7 @@ class  tipoRede extends modeloFramework
 
     public function listarTodos()
     {
-        $pdo = new \PDO (DSN,USER,PASSWD);
+        $pdo = self::pegarConexao() ;
 
         $sql = 'SELECT * FROM TipoRede';
 
@@ -157,6 +157,23 @@ WHERE r.tipoRedeId = ?
         }
 
         return $resposta ;
+    }
+
+    public function listarCelulasTotal()
+    {
+        $pdo = self::pegarConexao() ;
+
+        $sql = 'SELECT COUNT(*) AS total FROM Celula WHERE tipoRedeId = ?';
+
+        $stm = $pdo->prepare($sql);
+
+        $stm->bindParam(1, $this->id);
+
+        $stm->execute();
+
+        $resposta = $stm->fetch();
+
+        return $resposta[0] ;
     }
 
     public function atualizar()
