@@ -26,7 +26,7 @@
                         <input name = "discipuloId" type = "hidden" value = "<?php echo $discipulo->id ; ?>" >
 
                             <div class = "control-group">
-                                <label class = "control-label" >Tipo Equipe: </label>
+                                <label class = "control-label" >Meta: </label>
                                 <div class = "controls">
                             <select name = "metaId" >
                             <?php foreach ( $metas as $t ) :?>

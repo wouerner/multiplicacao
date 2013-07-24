@@ -51,6 +51,8 @@ namespace painel\controlador;
                         $somaRede += $t['total'];
                     }
 
+                    ////var_dump($totalRedes);
+
                     $somaRedeDiscipulos=NULL;
                     foreach ($totalRedesLideres as $t) {
                         $somaRedeDiscipulos += $t['total'];

@@ -41,7 +41,6 @@ $(document).ready(function() {
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Lider</th>
                     <th>Nome</th>
                     <th>Sexo</th>
                     <th>Endereço</th>
@@ -51,13 +50,13 @@ $(document).ready(function() {
                 </thead>
 
                 <tbody>
+                <?php $cont=0;?>
                 <?php foreach($relatorio as $r ) : ?>
 
                               <?php  $status =  $r->getStatusCelular() ; ?>
                               <?php  $lider =  is_object($r->getLider()) ? $r->getLider():'' ; ?>
                           <tr>
                                 <td> <?php echo ++$cont ; ?></td>
-                              <td><a href="/discipulo/discipulo/atualizar/id/<?php echo is_object($lider) ? $lider->id : '' ; ?>"><?php echo  is_object($lider) ? $lider->getAlcunha() : ''; ?></a></td>
                               <td><a target = "blank" href="/discipulo/discipulo/atualizar/id/<?php echo $r->id ; ?>"><strong><?php echo  $r->getAlcunha() ; ?></strong></a></td>
                               <td><?php echo  ($r->sexo == 'm')? 'M' : 'F' ; ?></td>
                               <td><?php echo  $r->endereco ; ?></td>

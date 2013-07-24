@@ -21,8 +21,8 @@
                                             <?php else : ?>
                                                 <?php echo $a['alcunha'] ; ?>
                                             <?php endif ;  ?>
-
-                                        </strong>fez:
+                                        :
+                                        </strong>
                         <i class = "<?php echo isset($a['icone']) ? $a['icone']:'' ; ?>"></i>
                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                                 <a href= "/<?php echo $a['modulo'] ; ?>/<?php echo isset($a['controlador']) ? $a['controlador']: '' ; ?>/<?php echo isset($a['link']) ? $a['link' ]: '' ?>/id/<?php echo isset($a['identificacao']) ? $a['identificacao'] : ''  ; ?>">

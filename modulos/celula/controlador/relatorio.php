@@ -49,12 +49,12 @@ class relatorio
                 $relatorioCelula->salvar();
                 $relatorioCelula->salvarParticipacao($discipulos);
 
-                $aviso = new aviso();
+                //$aviso = new aviso();
 
-                $aviso->tipoAviso = tipoAviso::relatorioNovo ;
-                $aviso->identificacao = $relatorioCelula->id ;
-                $aviso->emissor = $_SESSION['usuario_id'];
-                $aviso->salvar();
+                //$aviso->tipoAviso = tipoAviso::relatorioNovo ;
+                //$aviso->identificacao = $relatorioCelula->id ;
+                //$aviso->emissor = $_SESSION['usuario_id'];
+                //$aviso->salvar();
 
                 header ('location:/celula/relatorio/index/celulaId/'.$relatorioCelula->celulaId) ;
 

@@ -28,8 +28,7 @@ $('.table').tab('show');
                 <h3><i class="icon-screenshot"></i> Metas para: <?php echo $discipulo->nome ; ?></h3>
                 <tr>
                     <th>Meta</th>
-                    <th>Quantidade</th>
-                    <th>Atual</th>
+                    <th>quantidade</th>
                     <th>Inicio</th>
                     <th>Fim</th>
                     <th>Ações</th>
@@ -37,17 +36,19 @@ $('.table').tab('show');
                 <?php foreach ($metas as $m ) : ?>
                 <tr>
                     <td><?php echo $m->nome ; ?></td>
-                    <td><?php echo $m->quantidade ; ?></td>
-                    <td><?php echo $m->participantesTotal() ; ?></td>
+                    <td><?php echo $m->quantidade ; ?> Discipulos</td>
+                       <!-- <td><?php //echo $m->participantesTotal() ; ?></td>-->
                     <td><?php echo $m->dataInicio ; ?></td>
                     <td><?php echo $m->dataFim ; ?></td>
 <td>
-<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                    <a class="btn btn-danger" href = "/metas/metas/excluir/id/<?php echo $m->id ?>" >excluir</a>
-<?php endif ; ?>
                     <a href = "/metas/participantesMetas/listar/id/<?php echo $m->id ?>" >
                     <i class="icon-group"></i> participantes
-                    </a></td>
+                    </a>
+
+<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                    <td><a class="btn btn-danger" href = "/metas/metas/excluir/id/<?php echo $m->id ?>" >excluir</a></td>
+<?php endif ; ?>
+</td>
                 </tr>
                 <?php endforeach ; ?>
                 </table>

@@ -2,8 +2,9 @@
 namespace celula\modelo;
 
 use discipulo\Modelo\Discipulo;
+use \framework\modelo\modeloFramework;
 
-class celula
+class celula extends modeloFramework
 {
     private $id;
     private $nome;
@@ -135,6 +136,26 @@ class celula
 
         return $resposta ;
 
+    }
+
+    public function listarCelulasPorRede()
+    {
+        $pdo = new \PDO (DSN,USER,PASSWD);
+
+        $sql = 'SELECT c.* FROM Celula as c left join TipoRede  as t on c.tipoRedeId = t.id order by t.nome';
+
+        $stm = $pdo->prepare($sql);
+
+        //$stm->bindParam(1, $this->id);
+
+        $stm->execute();
+        $resposta = array();
+
+        while ( $obj = $stm->fetchObject('\celula\modelo\celula') ) {
+            $resposta[$obj->id] = $obj ;
+        }
+
+        return $resposta ;
     }
 
     /*Listar todos os lideres do sistema
@@ -393,7 +414,7 @@ order by dnome
 
     public function listarLideresCelula()
     {
-        $pdo = new \PDO(DSN , USER , PASSWD) ;
+        $pdo = self::pegarConexao();
 
         $sql = 'SELECT Discipulo.id , Discipulo.nome, COUNT( Discipulo.id ) AS totalCelulas
                      FROM Celula , Discipulo
@@ -404,7 +425,16 @@ order by dnome
 
         $stm->execute();
 
-        return $stm->fetchAll();
+        //return $stm->fetchAll();
+
+        //$stm->execute();
+        $resposta = array();
+
+        while ( $obj = $stm->fetchObject ('\discipulo\Modelo\Discipulo') ) {
+            $resposta[$obj->id] = $obj ;
+        }
+
+        return $resposta;
 
     }
 
@@ -460,7 +490,7 @@ order by dnome
     {
         $pdo = new \PDO (DSN, USER,PASSWD) ;
 
-        $sql = 'SELECT * FROM Discipulo WHERE celula = ? ORDER BY nome' ;
+        $sql = 'SELECT * FROM Discipulo WHERE celula = ? and Discipulo.ativo =1 ORDER BY nome' ;
 
         $stm = $pdo->prepare($sql);
 
@@ -468,7 +498,13 @@ order by dnome
 
         $stm->execute();
 
-        return $stm->fetchAll() ;
+        $resposta = array();
+
+        while ( $obj = $stm->fetchObject('\discipulo\Modelo\Discipulo') ) {
+            $resposta[$obj->id] = $obj ;
+        }
+
+        return $resposta ;
 
     }
 

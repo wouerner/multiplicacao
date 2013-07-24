@@ -26,7 +26,7 @@
 <div class = "well" >
         <form method="post">
                 <fieldset>
-                        <legend>Relátorio Resumido</legend>
+                        <legend>Relátorio Dinamico</legend>
                             <div class = "control-group " >
 
                             <div class = "control-group span2" >

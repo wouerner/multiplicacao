@@ -46,7 +46,7 @@ $('.table').tab('show');
                         <?php foreach ( $discipulos as $d) : ?>
                         <tr class = "<?php echo $d->desistiu==1 ? 'error' : ''; ?>" >
                             <td><?php echo !isset($c) ? $c=1 : ++$c ; ?></td>
-                            <td><?php echo $d->nome ; ?></td>
+                            <td><a target="blank" href="/discipulo/discipulo/atualizar/id/<?php echo $d->dId?>"><?php echo $d->nome ; ?></a></td>
                         <td>
                             <?php if ($d->preEncontro == 0 ) : ?>
                             <a class = "btn btn-mini " href = "/encontroComDeus/participantesEncontro/preEncontroAtivar/id/<?php echo $d->id ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>">

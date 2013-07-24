@@ -94,7 +94,7 @@ class participantesEncontro extends modeloFramework
               {
               $pdo = self::pegarConexao() ;
 
-              $sql = 'SELECT *
+              $sql = 'SELECT *,d.id as dId
                          FROM Discipulo AS d inner join ParticipantesEncontro AS pe ON pe.discipuloId = d.id
                          WHERE pe.encontroComDeusId = ?
                          ORDER BY d.nome ' ;

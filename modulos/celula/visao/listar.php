@@ -36,27 +36,50 @@ unset($_SESSION['mensagem']) ;
                    </div>
                 <?php endif ; ?>
                         <table class = "table well table-striped ">
-
-                            <caption><h3>Lista de Células: <?php echo $totalCelulas ; ?></h3></caption>
-
+                            <caption><h3>Lista de Células: <?php echo  $totalCelulas ; ?></h3></caption>
+                        </table>
+                            <?php foreach ( $redes as $r) : ?>
+                        <table class="table well">
                             <thead>
-                                <th>Rede</th>
+                            <tr>
+                                <caption><h3><?php echo $r->nome ?></h3></caption>
+                            </tr>
+                            <tr>
+                                <th>#</th>
                                 <th>Nome</th>
                                 <th>Endereço</th>
                                 <th>Horário</th>
                                 <th>Ações</th>
+                            </tr>
                             </thead>
+                                <?php foreach ( $r->listarCelulas() as $celula) : ?>
+                                    <?php  $rede =$celula->pegaRede() ?>
+                                    <tr>
+                                        <td><?php echo !isset($cont) ? $cont=1 : ++$cont ; ?></td>
+                                        <td>
+                                            <a href ="/celula/celula/detalhar/id/<?php echo $celula->id ; ?>" ><?php echo $celula->nome ; ?></td>
+                                        <td><?php echo $celula->endereco ; ?>	</td>
+                                        <td><?php echo $celula->horarioFuncionamento ; ?></td>
+                                        <?php require 'celula/visao/menuCelula.inc.php' ; ?>
+                                    </tr>
+                                <?php endforeach; ?>
+                                <?php $cont=0;?>
+                            </table>
+                            <?php endforeach; ?>
 
+                            <?php $celulas =null?>
                             <?php foreach ( $celulas as $celula) : ?>
-
+                            <?php  $rede =$celula->pegaRede() ?>
                             <tr>
-                                <td><a href ="#" ><?php  $rede =$celula->pegaRede() ; echo is_object($rede) ? $rede->nome : '' ; ?>  </td>
+                                <td><?php echo !isset($cont) ? $cont=1 : ++$cont ; ?></td>
+                                <td>
+                                    <a href ="#" >
+                                        <?php   echo is_object($rede) ? $rede->nome : '' ; ?>  </td>
                                 <td><a href ="/celula/celula/detalhar/id/<?php echo $celula->id ; ?>" ><?php echo $celula->nome ; ?></td>
                                 <td><?php echo $celula->endereco ; ?>	</td>
                                 <td><?php echo $celula->horarioFuncionamento ; ?></td>
                                 <?php require 'celula/visao/menuCelula.inc.php' ; ?>
                             </tr>
-
                         <?php endforeach ; ?>
                         </table>
 

@@ -67,7 +67,7 @@
                         <table class = "table" >
                             <caption>Paticipação Discipulos</caption>
                             <?php foreach ( $discipulos as $d ) : ?>
-                            <tr> <td><input name = "discipulos[]" type = "checkbox" value = "<?php echo $d['id'] ; ?>" > <?php echo $d['nome'] ; ?> </td> </tr>
+                            <tr> <td><input name = "discipulos[]" type = "checkbox" value = "<?php echo $d->id ; ?>" > <a href="/discipulo/discipulo/detalhar/id/<?php echo $d->id?>"><?php echo $d->nome; ?> </td> </tr>
                             <?php endforeach ; ?>
                         </table>
                         </div>

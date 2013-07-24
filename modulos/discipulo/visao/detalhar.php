@@ -164,6 +164,7 @@ $(document).ready(function () {
                     </table>
                 </td>
                 </tr>
+                 <tr><td><strong>Ações</strong></td></tr>
 
                     <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
                 </table>

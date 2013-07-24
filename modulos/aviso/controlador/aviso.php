@@ -13,6 +13,14 @@ class aviso
 
     }
 
+    public function json()
+    {
+        $avisos =	new \aviso\modelo\aviso();
+        $avisos = $avisos->listarTimeline();
+        var_dump(json_encode($avisos));
+
+    }
+
         public function excluir($url)
         {
                 $aviso =	new \aviso\modelo\aviso();
@@ -25,18 +33,18 @@ class aviso
 
     public function email($url)
     {
-// O remetente deve ser um e-mail do seu domínio conforme determina a RFC 822.
-// O return-path deve ser ser o mesmo e-mail do remetente.
-$headers = "MIME-Version: 1.1\n";
-$headers .= "Content-type: text/plain; charset=utf-8\n";
-$headers .= "From: Multiplicação12 <multiplicaca12@mga12.org>"."\n"; // remetente
-$headers .= "Return-Path: Meu Nome <multiplicacao@mga12.org>"."\n"; // return-path
-$envio = mail("wouerner@gmail.com", "Aviso", "Texto", $headers,"-r multiplicacao12@mga12.org");
+        // O remetente deve ser um e-mail do seu domínio conforme determina a RFC 822.
+        // O return-path deve ser ser o mesmo e-mail do remetente.
+        $headers = "MIME-Version: 1.1\n";
+        $headers .= "Content-type: text/plain; charset=utf-8\n";
+        $headers .= "From: Multiplicação12 <multiplicaca12@mga12.org>"."\n"; // remetente
+        $headers .= "Return-Path: Meu Nome <multiplicacao@mga12.org>"."\n"; // return-path
+        $envio = mail("wouerner@gmail.com", "Aviso", "Texto", $headers,"-r multiplicacao12@mga12.org");
 
-if($envio)
- echo "Mensagem enviada com sucesso";
-else
- echo "A mensagem não pode ser enviada";
+        if($envio)
+         echo "Mensagem enviada com sucesso";
+        else
+         echo "A mensagem não pode ser enviada";
 
     }
 

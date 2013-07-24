@@ -69,7 +69,6 @@ $(".btn-warning").click( function(){
                 <caption><h3>Lista de Discipulos</h3></caption>
                     <thead>
 <?php if ($acl->hasPermission('admin_acesso') == true) :  ?>
-                        <th>Líder</th>
 <?php endif; ?>
                         <th>Nome</th>
                         <th>Telefone</th>
@@ -80,10 +79,6 @@ $(".btn-warning").click( function(){
 
                 <tr>
 
-<?php if ($acl->hasPermission('admin_acesso') == true) :  ?>
-                    <td><a href="/discipulo/discipulo/detalhar/id/<?php echo is_object ($discipulo->getLider()) ? $discipulo->getLider()->id : '' ?>" >
-                            <?php echo is_object ($discipulo->getLider()) ? $discipulo->getLider()->nome : ''; ?></a></td>
-<?php endif; ?>
 
                     <td>
                  <?php if ( $discipulo->eLider()): ?>
@@ -100,11 +95,11 @@ $(".btn-warning").click( function(){
                     <?php endif ; ?>
 
                     <?php if ($discipulo->ativo == 1 ) : ?>
-                        <span class="label label-success"><i class ="icon-arrow-up"></i></span>
+                        <span class="label label-success"><i class ="icon-arrow-up"></i> Ativo</span>
                     <?php elseif ($discipulo->arquivo == 1 ) : ?>
-                        <span class="label label-inverse">A</span>
+                        <span class="label label-inverse">Aarquivo</span>
                     <?php else : ?>
-                        <span class="label label-warning">I</span>
+                        <span class="label label-warning">Inativo</span>
                     <?php endif ; ?>
                     </a>
                 </h5>

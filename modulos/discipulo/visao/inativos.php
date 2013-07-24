@@ -73,9 +73,6 @@ $(".btn-danger").click( function(){
                 <table class = "table bordered-table well table-condensed table-hover ">
                 <caption><h3>Lista de Discipulos: Inativos <?php echo $total?> </h3></caption>
                     <thead>
-                        <?php if ($acesso->hasPermission('admin_acesso') == true) : ?>
-                        <th class = "info" >Líder</th>
-                        <?php endif ; ?>
                         <th>Nome</th>
                         <th>Telefone</th>
                         <?php if ($acesso->hasPermission('admin_acesso') == true) : ?>
@@ -86,9 +83,6 @@ $(".btn-danger").click( function(){
                 <?php foreach ( $discipulos as $discipulo) : ?>
 
                 <tr>
-                        <?php if ($acesso->hasPermission('admin_acesso') == true) : ?>
-                    <td><a href="/discipulo/discipulo/detalhar/id/<?php $lider = $discipulo->getLider() ; echo  is_object($lider)?$lider->id: '' ?>" ><?php echo is_object ($lider) ? $lider->nome : '' ; ?></a></td>
-                        <?php endif ; ?>
                     <td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><strong><?php echo $discipulo->nome ; ?></strong></a></td>
                 <td><?php echo $discipulo->telefone ; ?></td>
 

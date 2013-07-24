@@ -143,7 +143,7 @@ WHERE r.tipoRedeId = ?
     {
         $pdo = new \PDO (DSN,USER,PASSWD);
 
-        $sql = 'SELECT * FROM Celula WHERE tipoRedeId = ?';
+        $sql = 'SELECT * FROM Celula WHERE tipoRedeId = ? order by Celula.nome';
 
         $stm = $pdo->prepare($sql);
 

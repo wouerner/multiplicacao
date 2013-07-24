@@ -16,7 +16,11 @@ class celula
         $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
 
         if ($acl->hasPermission('admin_acesso') == true) {
+            $redes =	new \rede\modelo\tipoRede();
+            $redes =	$redes->listarTodos();
+
             $celulas = $celulas->listarTodos();
+            //$celulas = $celulas->listarCelulasPorRede();
             //$totalCelulas = \celula\modelo\celula::totalCelulas();
             $totalCelulas = count($celulas);
         } else {
