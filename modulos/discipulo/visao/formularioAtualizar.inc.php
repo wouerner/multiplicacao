@@ -225,7 +225,7 @@
                 <div class = "form-actions " >
                             <input type = "hidden" name = "discipuloId" value = "<?php echo $discipulo->id ; ?>" >
                           <button type = "submit" class = "btn btn-success" ><i class = "icon-pencil icon-white" ></i> Salvar</button>
-                            <a class = "btn" href = "/discipulo/discipulo/encontroComDeus/id/<?php echo $discipulo->id ; ?>" target = "blank" >Ficha encontro</a>
+                            <a class = "btn" href = "/encontroComDeus/participantesEncontro/fichaIndividual/id/<?php echo $discipulo->id ; ?>" target = "blank" >Ficha encontro</a>
                             <a class = "btn" href = "/discipulo/discipulo/crachaIndividual/id/<?php echo $discipulo->id ; ?>" target = "blank" >cracha</a>
               </div>
 </form>

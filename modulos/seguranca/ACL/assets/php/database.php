@@ -4,7 +4,7 @@ ob_start();
 $hasDB = false;
 $server = 'localhost';
 $user = 'root';
-$pass = '';
+$pass = 'root';
 $db = 'multiplicacao';
 $link = mysql_connect($server,$user,$pass);
 if (!is_resource($link)) {

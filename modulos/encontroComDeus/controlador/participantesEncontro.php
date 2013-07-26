@@ -490,7 +490,6 @@ class participantesEncontro
             $encontro = new \encontroComDeus\modelo\participantesEncontro() ;
             $encontro->encontroComDeusId =  $url[4];
             $discipulos = $encontro->cracha() ;
-        //	var_dump($discipulos);
 
             require 'ext/fpdf17/fpdf.php';
             $pdf = new \FPDF('P','mm','A4');
@@ -516,7 +515,7 @@ class participantesEncontro
             $pdf->Image('modulos/encontroComDeus/visao/participantesEncontro/mga.jpg',$x,$y,30,$t);
             $pdf->SetY($y+10);
             $pdf->SetX($x+30);
-            $pdf->Cell(70,10,' Reencontro com Deus dias 12, 13 e 14/07/2013');
+            $pdf->Cell(70,10,' Encontro com Deus dias 9, 10 e 11/08/2013');
 
             $pdf->SetFont('Arial','B',14);
             $pdf->SetY($y+20);
@@ -543,8 +542,8 @@ class participantesEncontro
 a) Valor do encontro para encontrista: R$ 100,00 - à vista; R$ 120,00 - a prazo;
 b) O pagamento a prazo e/ou parcelamento somente será aceito em CHEQUE OU CARTÃO.
 OBS: Não haverá ressarcimento ou alteração dos valores acordados, bem como das formas de pagamento.
-Estou CIENTE da minha participação no REENCONTRO COM DEUS e concordo em realizar o pagamento
-até o dia 12/07/2013.
+Estou CIENTE da minha participação no ENCONTRO COM DEUS e concordo em realizar o pagamento
+até o dia 09/08/2013.
 Assinatura do Encontrista:_______________________________________________________________
 Menor de Idade (Ass. do Responsável):_____________________________________________________
 Membro de outra Igreja (Ass. do Pastor):____________________________________________________');
@@ -553,9 +552,6 @@ Membro de outra Igreja (Ass. do Pastor):________________________________________
             $pdf->SetY($y+60);
             $pdf->SetX($x);
             $pdf->MultiCell(0,5,$txt );
-
-            //$pdf->WriteHTML( 'encontroComDeus/visao/participantesEncontro/ficha.php' );
-            //include 'encontroComDeus/visao/participantesEncontro/ficha.php' ;
 
             $x += 120 ;
 
@@ -573,6 +569,66 @@ Membro de outra Igreja (Ass. do Pastor):________________________________________
             }
 
             }
+
+            $pdf->Output();
+    }
+
+    public function fichaIndividual($url)
+    {
+            $discipulo = new Discipulo() ;
+            $discipulo->id =  $url[4];
+            $d =$discipulo->listarUm();
+            //var_dump($d);exit;
+
+            require 'ext/fpdf17/fpdf.php';
+            $pdf = new \FPDF('P','mm','A4');
+            $x = 10 ;
+            $y = 6 ;
+            $t = 20 ;
+
+            $pdf->AddPage();
+            $pdf->SetFont('Arial','B',20);
+            $pdf->Image('modulos/encontroComDeus/visao/participantesEncontro/mga.jpg',$x,$y,30,$t);
+            $pdf->SetY($y+10);
+            $pdf->SetX($x+30);
+            $pdf->Cell(70,10,' Encontro com Deus dias 9, 10 e 11/08/2013');
+
+            $pdf->SetFont('Arial','B',14);
+            $pdf->SetY($y+20);
+            $pdf->SetX($x);
+            $pdf->Cell(70,10,'Nome: '.$d->getNomeAbreviado());
+
+            $pdf->SetY($y+20);
+            $pdf->SetX($x+80);
+            $pdf->Cell(70,10,'Data Nasc.: '.$d->getDataNascimento()->format('d/m/Y'));
+
+            $pdf->SetY($y+30);
+            $pdf->SetX($x);
+            $pdf->Cell(70,10,'Endereco: '.$d->endereco);
+
+            $pdf->SetY($y+40);
+            $pdf->SetX($x);
+            $pdf->Cell(70,10,'Telefone: '.$d->telefone);
+
+            $pdf->SetY($y+40);
+            $pdf->SetX($x+70);
+            $pdf->Cell(70,10,'Lider: '.utf8_decode($d->getLider()->nome) );
+
+            $txt = utf8_decode('Condições de Pagamento:
+a) Valor do encontro para encontrista: R$ 100,00 - à vista; R$ 120,00 - a prazo;
+b) O pagamento a prazo e/ou parcelamento somente será aceito em CHEQUE OU CARTÃO.
+OBS: Não haverá ressarcimento ou alteração dos valores acordados, bem como das formas de pagamento.
+Estou CIENTE da minha participação no ENCONTRO COM DEUS e concordo em realizar o pagamento
+até o dia 09/08/2013.
+Assinatura do Encontrista:_______________________________________________________________
+Menor de Idade (Ass. do Responsável):_____________________________________________________
+Membro de outra Igreja (Ass. do Pastor):____________________________________________________');
+
+            $pdf->SetFont('Arial','B',10);
+            $pdf->SetY($y+60);
+            $pdf->SetX($x);
+            $pdf->MultiCell(0,5,$txt );
+
 
             $pdf->Output();
     }

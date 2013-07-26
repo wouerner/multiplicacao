@@ -9,7 +9,6 @@ $usuario = $usuario[0] ;
 ?>
 
 <div class="navbar ">
-<<<<<<< HEAD
   <div class="navbar-inner ">
 
 <a class="btn btn-navbar " data-toggle="collapse" data-target=".nav-collapse">
@@ -20,17 +19,6 @@ $usuario = $usuario[0] ;
 
                             <a class="brand" href="/painel/painel"> MGA</a>
 <div class="nav-collapse collapse">
-=======
-    <div class="navbar-inner ">
-        <a class="btn btn-navbar " data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </a>
-
-        <a class="brand" href="/painel/painel">MGA</a>
-    <div class="nav-collapse collapse">
->>>>>>> a91d75d21800040bb3a064bffad7d64e7951a1d1
         <ul class="nav" role="navigation">
             <li class="divider-vertical"></li>
 
