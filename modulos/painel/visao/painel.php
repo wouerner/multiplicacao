@@ -39,6 +39,13 @@
                 </div>
 
                 <?php require_once 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+<div class="row-fluid">
+    <div class="span12">
+    <div class="alert">
+        <a id = "<?php //echo $discipulo->id ?>" href="/encontroComDeus/preEquipe/novoMembro/id/<?php echo $_SESSION['usuario_id'] ?>" class = "" alt = "" > <i class="icon-wrench"></i>Me cadidatar a Trabalhar no Encontro</a>
+    </div>
+    </div>
+</div>
 
 <div class = "row-fluid" >
     <div class = "span6" >
@@ -127,6 +134,9 @@
                         <th>Metas</th>
                     </thead>
                     <tbody>
+                        <?php $total['discipulos']=0?>
+                        <?php $total['celulas']= 0?>
+                        <?php $total['metas']= 0?>
                         <?php foreach( $tiposRedes as $s) :?>
                         <tr>
                             <td>
@@ -141,10 +151,18 @@
                             <td>
                                 <a href = "#"><?php echo $s->getMeta() ?></a>
                             </td>
-                            <td></td>
                         </tr>
+                        <?php $total['discipulos'] += $s->totalDiscipulosPorRede()?>
+                        <?php $total['celulas']+= $s->listarCelulasTotal()?>
+                        <?php $total['metas']+= $s->getMeta()?>
                         <?php endforeach ; ?>
-                        <tr class = "info" ><td>Total</td><td><?php echo $somaRede ; ?></td></tr>
+
+                        <tr class = "info" >
+                            <td></td>
+                            <td><?php echo $total['discipulos'] ; ?></td>
+                            <td><?php echo $total['celulas'] ; ?></td>
+                            <td><?php echo $total['metas'] ; ?></td>
+                        </tr>
                     </tbody>
                 </table>
 
@@ -192,7 +210,7 @@
 
                 <ul class="thumbnails">
                 <?php foreach( $discipulos as $d ) : ?>
-          <li class="span4">
+          <li class="span3">
            <div class="thumbnail">
                      <a class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
                       <img  src="<?php echo is_object($d->getFoto()) ? $d->getFoto()->url : '' ; ?>" alt="">

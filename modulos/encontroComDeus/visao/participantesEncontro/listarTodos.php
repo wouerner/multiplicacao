@@ -26,7 +26,7 @@ $('.table').tab('show');
 
                 <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
-                <h3>Encontro: <?php echo $total?></h3>
+                <h3>Quantidade de Encontrista: <?php echo $total?></h3>
                 <?php require 'modulos/encontroComDeus/visao/participantesEncontro/menuParticipante.php' ; ?>
 
                 <div class = "row-fluid" >
@@ -36,6 +36,7 @@ $('.table').tab('show');
                         <thead>
                                 <th>#</th>
                                 <th>Nome</th>
+                                <th>Líder</th>
                                 <th>Pré?</th>
                                 <th>Encontro?</th>
                                 <th>Pos?</th>
@@ -47,6 +48,7 @@ $('.table').tab('show');
                         <tr class = "<?php echo $d->desistiu==1 ? 'error' : ''; ?>" >
                             <td><?php echo !isset($c) ? $c=1 : ++$c ; ?></td>
                             <td><a target="blank" href="/discipulo/discipulo/atualizar/id/<?php echo $d->dId?>"><?php echo $d->nome ; ?></a></td>
+                            <td><a target="blank" href="/discipulo/discipulo/atualizar/id/<?php echo $d->getLider()->id ?>"><?php echo $d->getLider()->getAlcunha() ; ?></a></td>
                         <td>
                             <?php if ($d->preEncontro == 0 ) : ?>
                             <a class = "btn btn-mini " href = "/encontroComDeus/participantesEncontro/preEncontroAtivar/id/<?php echo $d->id ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>">

@@ -24,7 +24,12 @@
         <li>
         <a id = "<?php echo $discipulo->id ?>" href="/encontroComDeus/participantesEncontro/novoParticipante/id/<?php echo $discipulo->id ?>" class = "" alt = "" ><i class="icon-plus"></i>Cadastrar no Encontro</a></li>
         <li>
+    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
         <a id = "<?php echo $discipulo->id ?>" href="/encontroComDeus/equipe/novoMembro/id/<?php echo $discipulo->id ?>" class = "" alt = "" > <i class="icon-wrench"></i>Trabalhar no Encontro</a>
+</li>
+<?php endif; ?>
+        <li>
+        <a id = "<?php echo $discipulo->id ?>" href="/encontroComDeus/preEquipe/novoMembro/id/<?php echo $discipulo->id ?>" class = "" alt = "" > <i class="icon-wrench"></i>Pre Equipe</a>
 </li>
 
     </ul>

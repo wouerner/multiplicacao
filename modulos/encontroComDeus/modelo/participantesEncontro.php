@@ -88,7 +88,28 @@ class participantesEncontro extends modeloFramework
 
       return $resposta;
 
-  }
+    }
+
+      public function eParticipante()
+      {
+          $pdo = self::pegarConexao() ;
+
+          $sql = 'SELECT *
+                    FROM ParticipantesEncontro AS p
+                    WHERE p.encontroComDeusId = ?
+                    AND p.discipuloId = ?
+                    LIMIT 1';
+
+          $stm = $pdo->prepare($sql);
+          $stm->bindParam(1, $this->encontroComDeusId ) ;
+          $stm->bindParam(2, $this->discipuloId ) ;
+
+          $stm->execute();
+          //var_dump($this);
+          //var_dump($stm->fetch());die;
+
+          return $stm->fetch() ? TRUE : FALSE;
+      }
 
               public function listarTodos()
               {

@@ -1,4 +1,5 @@
-    <ul class="nav nav-pills">
+<ul class="nav nav-pills">
+            <li><a class="" href="#"><strong>Listar:</strong></a></li>
         <li class="<?php echo isset($ativo) ? $ativo : '' ; ?>">
             <a href = "/encontroComDeus/participantesEncontro/index/id/<?php echo $participante->encontroComDeusId ; ?>" >Participantes</a>
     </li>

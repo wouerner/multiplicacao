@@ -1,7 +1,3 @@
-<?php
-$mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL;
-$_SESSION['mensagem'] = isset($_SESSION['mensagem']) ? NULL : NULL;
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,21 +19,9 @@ $_SESSION['mensagem'] = isset($_SESSION['mensagem']) ? NULL : NULL;
 
                 <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
-      <div class = "row-fluid" >
-            <?php if ($mensagem) : ?>
-            <div class = "<?php echo $mensagem['class']?>" >
-                        <?php echo $mensagem['mensagem'] ; ?>
-                </div>
-            <?php endif ; ?>
-     </div>
-
                 <div class = "row-fluid" >
                         <table class = "table bordered-table">
-                        <caption>
-                        <h3>Equipe: <?php echo $equip->nome?> (<?php echo $total?>)</h3>
-<h4><?php echo $equip->nomeEncontro ?></h4>
-</caption>
-<a class="btn" href="/encontroComDeus/preEquipe/index/id/<?php echo $equip->encontroId ?>" >Lista Pre Equipe</a>
+                        <caption><h3>Membros</h3></caption>
 
                         <?php foreach ( $membros as $e) : ?>
                         <tr>

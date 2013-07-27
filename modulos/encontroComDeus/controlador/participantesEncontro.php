@@ -44,30 +44,35 @@ class participantesEncontro
 
     public function novoParticipante($url)
     {
-        $id = $url[4] ;
+        $id = isset($url[4])?$url[4] :NULL  ;
 
-      if ( empty ( $url['post'] ) ) {
-        $discipulo = new discipulo();
-        $discipulo->id = $id ;
-        $discipulo = $discipulo->listarUm();
+        if ( empty ( $url['post'] ) ) {
+            $discipulo = new discipulo();
+            $discipulo->id = $id ;
+            $discipulo = $discipulo->listarUm();
 
-        $encontro = new \encontroComDeus\modelo\encontroComDeus();
-        //$encontro = $encontro->listarTodos();
-        $encontro = $encontro->listarTodosAtivos();
+            $encontro = new \encontroComDeus\modelo\encontroComDeus();
+            $encontro = $encontro->listarTodosAtivos();
 
         } else {
-        $post = $url['post'] ;
-        $participantes = new \encontroComDeus\modelo\participantesEncontro() ;
+            $post = $url['post'] ;
+            $participantes = new \encontroComDeus\modelo\participantesEncontro() ;
 
-        $participantes->encontroComDeusId = $post['encontroId'] ;
-        $participantes->discipuloId = $post['id'] ;
-        $participantes->salvar() ;
+            $participantes->encontroComDeusId = $post['encontroId'] ;
+            $participantes->discipuloId = $post['id'] ;
 
-        $_SESSION['mensagem'] = array('mensagem'	=> 'Cadastro Realizado com Sucesso!',
+            if(!$participantes->eParticipante()){
+                $participantes->salvar() ;
+                $_SESSION['mensagem'] = array('mensagem'	=> 'Cadastro Realizado com Sucesso!',
                                                                   'class' => 'alert alert-success');
-
-        header ('location:/discipulo/discipulo' );
-        exit();
+            }
+            else
+            {
+                $_SESSION['mensagem'] = array('mensagem'	=> 'Já está cadastrado!',
+                                                                  'class' => 'alert alert-info');
+            }
+            header ('location:/discipulo/discipulo' );
+            exit();
         }
         require_once 'modulos/encontroComDeus/visao/participantesEncontro/novoParticipante.php';
 

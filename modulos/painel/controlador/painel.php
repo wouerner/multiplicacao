@@ -50,10 +50,9 @@ use \rede\modelo\tipoRede as TipoRede;
                     $tiposRedes = new TipoRede();
                     $tiposRedes = $tiposRedes->listarTodos();
 
-                    $somaRede=NULL;
-                    foreach ($totalRedes as $t) {
-                        $somaRede += $t['total'];
-                    }
+                    //foreach ($totalRedes as $t) {
+                        //$somaRede += $t['total'];
+                    //}
 
                     ////var_dump($totalRedes);
 

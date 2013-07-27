@@ -3,17 +3,18 @@ namespace encontroComDeus\controlador;
 
 use \discipulo\Modelo\Discipulo as discipulo;
 
-class equipe
+class preEquipe
 {
     public function index($url)
     {
         $encontroId = $url['4'] ;
-        $encontro = new \encontroComDeus\modelo\equipe() ;
-        $encontro->encontroComDeusId = $encontroId ;
+        $preEquipe = new \encontroComDeus\modelo\preEquipe() ;
+        $preEquipe->encontroComDeusId = $encontroId ;
 
-        $equipes = $encontro->listarEquipeEncontro();
+        $discipulos = $preEquipe->listar();
+        $total = count($discipulos);
 
-        require_once 'modulos/encontroComDeus/visao/equipe/listar.php';
+        require_once 'modulos/encontroComDeus/visao/preEquipe/listar.php';
 
     }
 
@@ -37,20 +38,21 @@ class equipe
         foreach ($equipes as $e) {
          $eq[$e['eNome']][] = $e ;
         }
+//var_dump($eq);
 
         require_once 'modulos/encontroComDeus/visao/equipe/listarTodos.php';
+
     }
 
     public function membros($url)
     {
         $equipe = new \encontroComDeus\modelo\equipe() ;
         $equipe->id = $url[4] ;
-        $equip = $equipe->listarUm();
-
         $membros = $equipe->membros();
-        $total = count($membros);
+        //var_dump($membros);
 
         require_once 'modulos/encontroComDeus/visao/equipe/membros.php';
+
     }
 
     public function novoEquipe($url)
@@ -90,42 +92,21 @@ class equipe
             $equipe = new \encontroComDeus\modelo\equipe();
             $equipes = $equipe->listarEquipes() ;
 
-            //var_dump($equipes);
+            $encontro = $encontro->listarTodosAtivos();
 
-            require_once 'modulos/encontroComDeus/visao/equipe/novoMembro.php';
+            require_once 'modulos/encontroComDeus/visao/preEquipe/novoMembro.php';
         } else {
 
             $post = $url['post'] ;
-            $equipe = new \encontroComDeus\modelo\equipe() ;
-            $equipe->id = $post['equipeId'] ;
 
-            $equipe->equipeId = $post['equipeId'] ;
+            $equipe = new \encontroComDeus\modelo\preEquipe() ;
+            $equipe->encontroComDeusId = $post['encontroId'] ;
             $equipe->discipuloId = $post['discipuloId'] ;
+            $equipe->salvar() ;
 
-            if (!$equipe->eMembro()){
-
-                $equipe->salvarMembro($post['discipuloId']) ;
-
-                $preEquipe = new \encontroComDeus\modelo\preEquipe() ;
-                $preEquipe->discipuloId = $post['discipuloId'] ;
-                $preEquipe->excluir() ;
-
-                $_SESSION['mensagem'] = array('mensagem'	=> 'Cadastro Realizado com Sucesso!',
-                                                                  'class' => 'alert alert-success');
-            }
-            else{
-                $preEquipe = new \encontroComDeus\modelo\preEquipe() ;
-                $preEquipe->discipuloId = $post['discipuloId'] ;
-                $preEquipe->excluir() ;
-
-                $_SESSION['mensagem'] = array('mensagem'	=> 'Já esta Cadastrado!',
-                                                                  'class' => 'alert ');
-            }
-
-
-            $redirecionar = '/encontroComDeus/equipe/membros/id/'.$post['equipeId'];
-            header ('location:'.$redirecionar );
-            //header ('location:/discipulo/discipulo' );
+            //$redirecionar = $_SERVER['HTTP_REFERER'];
+            //header ('location:'.$redirecionar );
+            header ('location:/discipulo/discipulo' );
             exit();
         }
 
@@ -316,13 +297,14 @@ class equipe
 
         public function excluirMembro($url)
         {
-                $equipe =	new \encontroComDeus\modelo\equipe();
-                $equipe->equipeId = $url[4];
-                $equipe->discipuloId = $url[6];
+                $equipe =	new \encontroComDeus\modelo\preEquipe();
+                $equipe->discipuloId = $url[4];
                 $equipe->excluir();
+            $redirecionar = $_SERVER['HTTP_REFERER'];
+            header ('location:'.$redirecionar );
 
-                header ('location:/encontroComDeus/equipe/membros/id/'.$equipe->equipeId );
-                exit();
+                //header ('location:/encontroComDeus/preEquipe/index/id/'.$equipe->equipeId );
+                //exit();
         }
 
         public function excluirEquipe($url)

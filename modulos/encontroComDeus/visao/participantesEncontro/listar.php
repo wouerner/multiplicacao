@@ -26,7 +26,7 @@ $('.table').tab('show');
 
                 <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 
-                <h3>Encontro: <?php echo $total?></h3>
+                <h3>Quantidade de Encontrista: <?php echo $total?></h3>
                 <?php require 'modulos/encontroComDeus/visao/participantesEncontro/menuParticipante.php' ; ?>
                 <?php require 'modulos/encontroComDeus/visao/participantesEncontro/tab.php' ; ?>
 
@@ -39,6 +39,7 @@ $('.table').tab('show');
                         <thead>
                                 <th>#</th>
                                 <th>Nome</th>
+                                <th>Lider</th>
                                 <th>Pré</th>
                                 <th>Encontro</th>
                                 <th>Pos</th>
@@ -49,6 +50,7 @@ $('.table').tab('show');
                         <tr class = "<?php echo $d->desistiu==1 ? 'error' : ''; ?>" >
                             <td><?php echo !isset($c) ? $c=1 : ++$c ; ?></td>
                             <td><?php echo $d->nome ; ?></td>
+                            <td><a target="blank" href="/discipulo/discipulo/atualizar/id/<?php echo $d->getLider()->id ?>"><?php echo $d->getLider()->getAlcunha() ; ?></a></td>
                             <td><i class = "<?php echo $d->preEncontro ? 'icon-ok': 'icon-remove' ; ?>" ></i></td>
                             <td><i class = "<?php echo $d->encontro ? 'icon-ok': 'icon-remove' ; ?>" ></i></td>
                             <td><i class = "<?php echo $d->posEncontro ? 'icon-ok': 'icon-remove' ; ?>" ></i></td>

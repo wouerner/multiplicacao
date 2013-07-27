@@ -34,6 +34,7 @@
                                 <a class = "btn btn-mini" href="/encontroComDeus/participantesEncontro/index/id/<?php echo $e->id?>">
                                     <i class = "icon-user "></i>Participantes
                                 </a>
+                            <a class = "btn btn-mini"  href="/encontroComDeus/preEquipe/index/id/<?php echo $e->id?>"><i class = "icon-wrench" ></i>Pre-Equipes</a>
                             <a class = "btn btn-mini"  href="/encontroComDeus/equipe/index/id/<?php echo $e->id?>"><i class = "icon-wrench" ></i>Equipes</a>
                             <a class = "btn btn-mini"  href="/encontroComDeus/participantesEncontro/cracha/id/<?php echo $e->id?>"><i class = "icon-barcode" ></i> Cracha</a>
                             <a class = "btn btn-mini"  href="/encontroComDeus/participantesEncontro/ficha/id/<?php echo $e->id?>"><i class = "icon-file" ></i> Ficha</a>
