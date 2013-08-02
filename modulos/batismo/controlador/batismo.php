@@ -9,11 +9,12 @@ class batismo
 {
     public function index()
     {
-        $metas =  metasModelo::listarPorTodos() ;
+        $discipulos = new batismoModelo() ;
+        $discipulos = $discipulos->listar() ;
 
-        $total = count ($metas) ;
+        $total = count ($discipulos) ;
 
-        require_once 'modulos/metas/visao/metas/listar.php';
+        require_once 'modulos/batismo/visao/listar.php';
 
     }
 

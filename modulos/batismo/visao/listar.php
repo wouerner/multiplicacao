@@ -27,18 +27,16 @@ $('.table').tab('show');
 
                 <div class = "row-fluid" >
                     <table class = "table" >
-          <caption><h3>Discipulos com Meta</h3></caption>
+          <caption><h3>Discipulos Batizados</h3></caption>
                     <thead>
+             <th>#</th>
              <th>Nome</th>
-             <th>Quantidade</th>
-             <th>Ações</th>
           </thead>
 
-                    <?php foreach ($metas as $m ) : ?>
+                    <?php foreach ($discipulos as $m ) : ?>
                             <tr>
+                <td><?php echo $m->id ; ?></td>
                 <td><?php echo $m->nome ; ?></td>
-                <td><?php echo $m->quantidade ; ?></td>
-                <td><a class = "btn btn-danger btn-mini" href = "/metas/metas/excluir/id/<?php echo $m->metaId?>" >Excluir</a></td>
               </tr>
                     <?php endforeach ; ?>
           </table>

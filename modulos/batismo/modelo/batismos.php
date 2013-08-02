@@ -137,14 +137,11 @@ WHERE 1 order by nome
               $pdo = self::pegarConexao() ;
 
               $sql = '
-                  SELECT  m.id , im.nome, m.intervaloMetasId, im.id as intervaloId, im.dataInicio, im.dataFim, m.quantidade
-FROM Metas as m
-inner join IntervaloMetas as im on im.id = m.intervaloMetasId
-WHERE discipuloId = ?
+                  SELECT *
+                    FROM Batismos 
                           ' ;
 
               $stm = $pdo->prepare($sql);
-              $stm->bindParam(1, $this->discipuloId ) ;
 
               $stm->execute();
 
@@ -152,8 +149,9 @@ WHERE discipuloId = ?
                 //var_dump($stm->errorInfo());
               $resposta = array();
 
-            while ( $obj = $stm->fetchObject ('\metas\modelo\metas')  ) {
-                    $resposta[$obj->id] = $obj ;
+            while ( $obj = $stm->fetchObject ('discipulo\Modelo\Discipulo')  ) {
+                    $obj->id = $obj->discipuloId ;
+                    $resposta[$obj->id] = $obj->listarUm();
                 }
 
               return $resposta ;
