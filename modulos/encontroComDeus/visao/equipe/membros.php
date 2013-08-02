@@ -39,12 +39,29 @@ $_SESSION['mensagem'] = isset($_SESSION['mensagem']) ? NULL : NULL;
 </caption>
 <a class="btn" href="/encontroComDeus/preEquipe/index/id/<?php echo $equip->encontroId ?>" >Lista Pre Equipe</a>
 
+<a class="btn btn-primary" href="/encontroComDeus/equipe/index/id/<?php echo $equip->encontroId ?>" >Listar Equipe</a>
                         <?php foreach ( $membros as $e) : ?>
                         <tr>
                             <td><?php echo  !isset($c) ? $c=1 : ++$c ; ?></td>
                             <td><a href="/discipulo/discipulo/detalhar/id/<?php echo $e->id ; ?>"><?php echo  $e->nome ?></a></td>
-                            <td><a class = "btn btn-mini btn-danger"  href="/encontroComDeus/equipe/excluirMembro/equipeId/<?php echo $equipe->id?>/discipuloId/<?php echo $e->id?>">
-                                        <i class = "icon-remove - icon-white" ></i>Excluir</a></td>
+                            <td>
+
+                <form method="post" action="/encontroComDeus/equipe/novoMembro" class="form-inline span5">
+                    <input type="hidden" value="<?php echo $e->id?>" name="discipuloId">
+                    <div class="control-group">
+                        <div class="controls">
+                        <select class="" name="equipeId">
+                            <?php foreach($equipes as $eq ):?>
+                                <option value="<?php echo $eq->id?>"><?php echo $eq->nome ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <button type="submit" class="btn">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+                                <a class = "btn  btn-danger"  href="/encontroComDeus/equipe/excluirMembro/equipeId/<?php echo $equipe->id?>/discipuloId/<?php echo $e->id?>">
+                                        <i class = "icon-remove - icon-white" ></i>Excluir</a>
+                    </td>
                         </tr>
 
                         <?php endforeach ; ?>

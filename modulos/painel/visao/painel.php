@@ -207,15 +207,17 @@
                 <div class = "span12 well well-small">
                 <div class = "row-fluid" >
                 <h5><strong> <?php echo $totalDiscipulos ; ?>  Discipulos: </strong></h5>
-
+                <?php $discipulos = array_chunk($discipulos,4) ?>
+                <?php //var_dump($discipulos)?>
+                <?php foreach( $discipulos as $disc ) : ?>
                 <ul class="thumbnails">
-                <?php foreach( $discipulos as $d ) : ?>
+                <?php foreach( $disc as $d ) : ?>
           <li class="span3">
-           <div class="thumbnail">
-                     <a class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
-                      <img  src="<?php echo is_object($d->getFoto()) ? $d->getFoto()->url : '' ; ?>" alt="">
-           </a>
-           <div class = "caption" >
+               <div class="thumbnail">
+                   <a class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
+                       <img  src="<?php echo is_object($d->getFoto()) ? $d->getFoto()->url : '' ; ?>" alt="">
+                   </a>
+               <div class = "caption" >
                      <a class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
               <i class = "<?php echo $d->eLider() ? 'icon-certificate': '' ?>"></i>
               <i class = "<?php echo $d->eLiderCelula() ? 'icon-home': '' ?>"></i>
@@ -228,6 +230,7 @@
        </li>
                 <?php endforeach ; ?>
      </ul>
+                <?php endforeach ; ?>
 
                 <?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
                             <div class = "span3 " >

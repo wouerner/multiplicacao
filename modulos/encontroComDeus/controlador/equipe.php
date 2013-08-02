@@ -13,6 +13,8 @@ class equipe
 
         $equipes = $encontro->listarEquipeEncontro();
 
+        //var_dump($equipes);
+
         require_once 'modulos/encontroComDeus/visao/equipe/listar.php';
 
     }
@@ -47,6 +49,7 @@ class equipe
         $equipe->id = $url[4] ;
         $equip = $equipe->listarUm();
 
+        $equipes = $equipe->listarEquipes();
         $membros = $equipe->membros();
         $total = count($membros);
 
@@ -124,6 +127,7 @@ class equipe
 
 
             $redirecionar = '/encontroComDeus/equipe/membros/id/'.$post['equipeId'];
+            //$redirecionar = $_SERVER['HTTP_REFFER'];
             header ('location:'.$redirecionar );
             //header ('location:/discipulo/discipulo' );
             exit();

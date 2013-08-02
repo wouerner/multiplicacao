@@ -146,7 +146,6 @@ class equipe extends modeloFramework
                     $resposta[$obj->id] = $obj ;
                 }
 
-                //var_dump($stm->errorInfo());
               return $resposta ;
                 }
 
