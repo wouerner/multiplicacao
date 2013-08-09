@@ -18,6 +18,77 @@ class batismo
 
     }
 
+    public function diploma($url){
+        $discipulos = $url['post']['ids'];
+
+
+        require 'ext/fpdf17/fpdf.php';
+        $pdf = new \FPDF('L','mm','A4');
+
+        $novaPagina = true ;
+        $x = 10 ;
+        $y = 20 ;
+        $t = 20 ;
+        $colunas = 0 ;
+        $linhas = 0 ;
+        $qtdColunas = 1 ;
+        $qtdLinhas = 2 ;
+
+        foreach ($discipulos as $disc) {
+
+            $d = new discipulo() ;
+            $d->id =  $disc;
+            $d = $d->listarUm() ;
+
+            $pdf->AddPage();
+
+            $pdf->SetFont('Arial','B',55);
+            $pdf->Image('modulos/batismo/visao/batismo.jpg',0,0,50,210);
+            $pdf->Image('modulos/encontroComDeus/visao/participantesEncontro/mga.jpg',250,185,40,$t);
+            $pdf->SetY(20);
+            $pdf->SetX($x+50);
+            $pdf->Cell(70,10,' Certificado de Batismo');
+
+            $pdf->SetFont('Arial','B',40);
+            $pdf->SetY(60);
+            $pdf->SetX(60);
+            $pdf->Cell(220,20,'Certificamos que',0,0,'C');
+
+            $pdf->SetFont('Arial','B',30);
+            $pdf->SetY($y+80);
+            $pdf->SetX($x+50);
+            $pdf->Cell(220 ,10,utf8_decode($d->nome),0,0,'C');
+
+            $pdf->SetFont('Arial','B',25);
+            $pdf->SetY($y+110);
+            $pdf->SetX($x+50);
+            $pdf->Cell(220,10,'foi batizado em 11 de Agosto de 2013',0,0,'C');
+
+            $pdf->SetY($y+140);
+            $pdf->SetX($x+50);
+            $pdf->Cell(220,10,utf8_decode('____________________________________________'),0,0,'C');
+
+            $pdf->SetY($y+150);
+            $pdf->SetX($x+50);
+            $pdf->Cell(220,10,utf8_decode(' Aps. Sebastião e Marlene Veloso '),0,0,'C');
+
+
+            $txt = utf8_decode('
+            "...Arrependei-vos, e cada um de vós seja batizado em nome de Jesus Cristo..." Atos 2:38
+            ');
+
+            $pdf->SetFont('Arial','B',15);
+            $pdf->SetY($y+20);
+            $pdf->SetX($x+30);
+            $pdf->MultiCell(0,5,$txt );
+
+
+            }
+
+        $pdf->Output();
+    }
+
+
     public function novo($url)
     {
         $discipuloId = isset($url[4])? $url[4]: '' ;
@@ -47,7 +118,7 @@ class batismo
 
     }
 
-    public function novoParticipante($url)
+    public function novoparticipante($url)
     {
         $id = $url[4] ;
 

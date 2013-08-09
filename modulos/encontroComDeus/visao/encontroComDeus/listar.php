@@ -32,7 +32,7 @@
                             <td><?php echo $e->nome ; ?></td>
                             <td>
                                 <a class = "btn btn-mini" href="/encontroComDeus/participantesEncontro/index/id/<?php echo $e->id?>">
-                                    <i class = "icon-user "></i>Participantes
+                                    <i class = "icon-user "></i> Encontristas
                                 </a>
                             <a class = "btn btn-mini"  href="/encontroComDeus/preEquipe/index/id/<?php echo $e->id?>"><i class = "icon-wrench" ></i>Pre-Equipes</a>
                             <a class = "btn btn-mini"  href="/encontroComDeus/equipe/index/id/<?php echo $e->id?>"><i class = "icon-wrench" ></i>Equipes</a>

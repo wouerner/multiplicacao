@@ -27,18 +27,20 @@ $('.table').tab('show');
 
                 <div class = "row-fluid" >
                     <table class = "table" >
-          <caption><h3>Discipulos Batizados</h3></caption>
-                    <thead>
-             <th>#</th>
-             <th>Nome</th>
-          </thead>
-
+                      <caption><h3>Discipulos Batizados</h3></caption>
+                                <thead>
+                         <th>#</th>
+                         <th>Nome</th>
+                      </thead>
+                    <form action="/batismo/batismo/diploma" method="post">
                     <?php foreach ($discipulos as $m ) : ?>
                             <tr>
-                <td><?php echo $m->id ; ?></td>
+                <td><input type="checkbox" name="ids[]" value="<?php echo $m->id ; ?>"></td>
                 <td><?php echo $m->nome ; ?></td>
               </tr>
                     <?php endforeach ; ?>
+                    <button class="btn" type="submit">Gerar Diploma</button>
+                    </form>
           </table>
                 <div>
             </article>

@@ -72,6 +72,7 @@ $(".btn-warning").click( function(){
 <?php endif; ?>
                         <th>Nome</th>
                         <th>Telefone</th>
+                        <th>Lider</th>
                         <th>Ações</th>
                     </thead>
 
@@ -107,6 +108,8 @@ $(".btn-warning").click( function(){
 
                 <td>
                     <?php echo $discipulo->telefone ; ?></td>
+                    <td>
+<a target="blank" href="/discipulo/discipulo/atualizar/id/<?php echo $discipulo->getLider()->id ?>"><?php echo $discipulo->getLider()->getAlcunha() ; ?></a></td>
                  <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
                 </tr>
 

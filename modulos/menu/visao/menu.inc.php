@@ -88,6 +88,9 @@ $usuario = $usuario[0] ;
                         </ul>
                     </li>
             <?php endif ; ?>
+            <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                <li><a href = "/batismo/batismo" ><i class = "icon- " ></i> Batismo</a></li>
+            <?php endif; ?>
 
                     <li class = "dropdown" >
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role = "button" >
