@@ -209,6 +209,19 @@ class Discipulo extends modeloFramework
         }
 
     }
+ 
+    /*Pega a Batismo.
+     *
+     *
+     * */
+    public function getBatismo()
+    {
+        $batismo = new \batismo\modelo\batismos();
+        $batismo->discipuloId = $this->id;
+
+        return $batismo->listarUm();
+
+    }
 
     public function eLider()
     {

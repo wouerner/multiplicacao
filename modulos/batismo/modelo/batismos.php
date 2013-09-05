@@ -9,6 +9,7 @@ class batismos extends modeloFramework
   private $id ;
   private $discipuloId ;
   private $criadoEm ;
+  private $diploma ;
 
   public function __get($prop)
   {
@@ -61,107 +62,94 @@ class batismos extends modeloFramework
         self::insert($this) ;
     }
 
-              public function atualizar()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = "UPDATE MinisterioTemDiscipulo SET 	 ministerioId= ?  , funcaoId = ?
+    public function excluir()
+    {
+        $pdo = self::pegarConexao() ;
+
+        $sql ='
+              DELETE FROM Batismos WHERE discipuloId = ?
+              ';
+
+        $stm = $pdo->prepare($sql);
+        $id = $this->id ;
+
+        $stm->bindParam(1, $this->discipuloId);
+
+        $stm->execute();
+        $resposta = $stm->fetch();
+
+        $pdo = null ;
+
+        return $resposta;
+    }
+
+    public function atualizarDiploma()
+    {
+        //abrir conexao com o banco
+        $pdo = new \PDO(DSN, USER, PASSWD);
+        //cria sql
+        $sql = "UPDATE Batismos SET diploma	= ?
                   WHERE discipuloId = ?
-                              ";
+              ";
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->ministerioId );
-              $stm->bindParam(2, $this->funcaoId );
-              $stm->bindParam(3, $this->discipuloId );
+        //prepara sql
+        $stm = $pdo->prepare($sql);
+        //trocar valores
+        $stm->bindParam(1, $this->diploma );
+        $stm->bindParam(2, $this->discipuloId );
 
-              $resposta = $stm->execute();
+        $resposta = $stm->execute();
 
-              $erro = $stm->errorInfo();
-              //var_dump($erro);
-              //exit();
+        $erro = $stm->errorInfo();
 
-              //fechar conexÃ£o
-              $pdo = null ;
+        $pdo = null ;
 
-              return $resposta;
+        return $resposta;
+    }
 
-              }
 
-              public static function listarPorTodos()
-              {
-              $pdo = self::pegarConexao() ;
+    public function listarUm()
+    {
+        $pdo = self::pegarConexao() ;
 
-                $sql = '
-                                SELECT d.id as id , d.nome AS nome, m.quantidade AS quantidade, m.id AS metaId FROM Discipulo as d inner join Metas as m on d.id = m.discipuloId
-WHERE 1 order by nome
-                         ' ;
+        $sql = 'SELECT *
+                FROM Batismos
+                WHERE discipuloId = ?
+                LIMIT 1
+        ';
 
-              $stm = $pdo->prepare($sql);
+        $stm = $pdo->prepare($sql);
+        $stm->bindParam(1, $this->discipuloId ) ;
 
-              $resposta = $stm->execute();
+        $stm->execute();
 
-              $pdo = null ;
-                $resposta = array();
+        $pdo = null ;
+        return $stm->fetchObject('batismo\modelo\batismos') ;
+    }
 
-                while ( $obj = $stm->fetchObject ('\discipulo\Modelo\Discipulo')  ) {
-                    $resposta[$obj->id] = $obj ;
-                }
+    public function listar()
+    {
+        $pdo = self::pegarConexao() ;
+        $sql = '
+            SELECT *
+            FROM Batismos 
+        ';
 
-              return $resposta ;
-                }
+        $stm = $pdo->prepare($sql);
 
-              public function listarUm()
-              {
-              $pdo = self::pegarConexao() ;
+        $stm->execute();
 
-              $sql = 'SELECT *
-                                FROM Metas
-                                WHERE discipuloId = ?
-                          ' ;
+        $pdo = null ;
+        $resposta = array();
 
-              $stm = $pdo->prepare($sql);
-              $stm->bindParam(1, $this->discipuloId ) ;
+        while ( $obj = $stm->fetchObject ('discipulo\Modelo\Discipulo')  ) {
+            $obj->id = $obj->discipuloId ;
+            $resposta[$obj->id] = $obj->listarUm();
+        }
 
-              $stm->execute();
+        return $resposta ;
+    }
 
-              $pdo = null ;
-                //var_dump($stm->errorInfo());
-              return $stm->fetchObject() ;
-                }
-
-              public function listar()
-              {
-              $pdo = self::pegarConexao() ;
-
-              $sql = '
-                  SELECT *
-                    FROM Batismos 
-                          ' ;
-
-              $stm = $pdo->prepare($sql);
-
-              $stm->execute();
-
-              $pdo = null ;
-                //var_dump($stm->errorInfo());
-              $resposta = array();
-
-            while ( $obj = $stm->fetchObject ('discipulo\Modelo\Discipulo')  ) {
-                    $obj->id = $obj->discipuloId ;
-                    $resposta[$obj->id] = $obj->listarUm();
-                }
-
-              return $resposta ;
-                }
-
-              public function excluir()
-              {
-                 return self::delete($this) ;
-
-              }
 
               public function listarStatusCelularTodos()
               {

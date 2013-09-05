@@ -15,12 +15,19 @@ class batismo
         $total = count ($discipulos) ;
 
         require_once 'modulos/batismo/visao/listar.php';
-
     }
 
     public function diploma($url){
         $discipulos = $url['post']['ids'];
 
+        $diploma = new \batismo\modelo\batismos();
+
+        foreach($discipulos as $id)
+        {
+            $diploma->discipuloId = $id;
+            $diploma->diploma = 1;
+            $diploma->atualizarDiploma();
+        }
 
         require 'ext/fpdf17/fpdf.php';
         $pdf = new \FPDF('P','mm','A4');
@@ -35,70 +42,68 @@ class batismo
         $linhas = 0 ;
         $qtdColunas = 1 ;
         $qtdLinhas = 2 ;
-        
+
         $discipulos = array_chunk($discipulos,2);
-        //var_dump($teste);
-        //var_dump($discipulos);exit;
 
         foreach ($discipulos as $disc1) {
 
             $pdf->AddPage();
-            
+
             foreach($disc1 as $disc){
 
-            $d = new discipulo() ;
-            $d->id =  $disc;
-            $d = $d->listarUm() ;
+                $d = new discipulo() ;
+                $d->id =  $disc;
+                $d = $d->listarUm() ;
 
 
-            $pdf->SetFont('Times','',30);
-            $pdf->Image('modulos/batismo/visao/batismo.jpg',0,0+$yi,50,147);
-            $pdf->Image('modulos/encontroComDeus/visao/participantesEncontro/mga.jpg',160,120+$yi,40,$t);
-            $pdf->Image('modulos/batismo/visao/assinatura.jpg',80,97+$yi,100,18);
-            $pdf->SetY($y);
-            $pdf->SetX($x+50);
-            $pdf->Cell(150,30,' Certificado de Batismo',0,0,'C');
+                $pdf->SetFont('Times','',30);
+                $pdf->Image('modulos/batismo/visao/batismo.jpg',0,0+$yi,50,147);
+                $pdf->Image('modulos/encontroComDeus/visao/participantesEncontro/mga.jpg',160,120+$yi,40,$t);
+                $pdf->Image('modulos/batismo/visao/assinatura.jpg',80,97+$yi,100,18);
+                $pdf->SetY($y);
+                $pdf->SetX($x+50);
+                $pdf->Cell(150,30,' Certificado de Batismo',0,0,'C');
 
 
-            $pdf->SetFont('Arial','B',40);
-            $pdf->SetY(30+$y);
-            $pdf->SetX(50);
-            $pdf->Cell(150,30,'Certificamos que',0,0,'C');
+                $pdf->SetFont('Arial','B',40);
+                $pdf->SetY(30+$y);
+                $pdf->SetX(50);
+                $pdf->Cell(150,30,'Certificamos que',0,0,'C');
 
-            $pdf->SetFont('Times','BI',25);
-            $pdf->SetY($y+70);
-            $pdf->SetX($x+50);
-            $pdf->Cell(150 ,10,utf8_decode($d->nome),0,0,'C');
+                $pdf->SetFont('Times','BI',25);
+                $pdf->SetY($y+70);
+                $pdf->SetX($x+50);
+                $pdf->Cell(150 ,10,utf8_decode($d->nome),0,0,'C');
 
-            $pdf->SetFont('Arial','B',22);
-            $pdf->SetY($y+90);
-            $pdf->SetX($x+50);
-            $pdf->Cell(150,10,'foi batizado em 11 de Agosto de 2013',0,0,'C');
+                $pdf->SetFont('Arial','B',22);
+                $pdf->SetY($y+90);
+                $pdf->SetX($x+50);
+                $pdf->Cell(150,10,'foi batizado em 11 de Agosto de 2013',0,0,'C');
 
-            $pdf->SetY($y+105);
-            $pdf->SetX($x+50);
-            $pdf->Cell(150,10,utf8_decode('__________________________________'),0,0,'C');
+                $pdf->SetY($y+105);
+                $pdf->SetX($x+50);
+                $pdf->Cell(150,10,utf8_decode('__________________________________'),0,0,'C');
 
-            $pdf->SetFont('Arial','B',20);
-            $pdf->SetY($y+113);
-            $pdf->SetX($x+50);
-            $pdf->Cell(150,10,utf8_decode(' Aps. Sebastião e Marlene Veloso '),0,0,'C');
-
-
-            $txt = utf8_decode('
-            "...Arrependei-vos, e cada um de vós seja batizado em nome de Jesus Cristo..." Atos 2:38
-            ');
-
-            $pdf->SetFont('Arial','',10);
-            $pdf->SetY($y+20);
-            $pdf->SetX($x+40);
-            $pdf->MultiCell(0,5,$txt );
+                $pdf->SetFont('Arial','B',20);
+                $pdf->SetY($y+113);
+                $pdf->SetX($x+50);
+                $pdf->Cell(150,10,utf8_decode(' Aps. Sebastião e Marlene Veloso '),0,0,'C');
 
 
-            //$x +=50;
-            $y +=150;
-            $xi +=100;
-            $yi +=150;
+                $txt = utf8_decode('
+                "...Arrependei-vos, e cada um de vós seja batizado em nome de Jesus Cristo..." Atos 2:38
+                ');
+
+                $pdf->SetFont('Arial','',10);
+                $pdf->SetY($y+20);
+                $pdf->SetX($x+40);
+                $pdf->MultiCell(0,5,$txt );
+
+
+                //$x +=50;
+                $y +=150;
+                $xi +=100;
+                $yi +=150;
 
             }
             $y =0;
@@ -132,6 +137,11 @@ class batismo
             {
                 $batismo->discipuloId = $post['discipuloId'] ;
                 $batismo->salvar();
+            }
+            else
+            {
+                $batismo->discipuloId = $post['discipuloId'] ;
+                $batismo->excluir();
             }
 
             header ('location:/discipulo/discipulo' );

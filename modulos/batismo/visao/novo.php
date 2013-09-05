@@ -5,15 +5,11 @@
         <?php include 'incluidos/css.inc.php' ; ?>
         <?php include 'incluidos/js.inc.php' ; ?>
     </head>
-
     <body>
         <section class = "container-fluid">
-
-        <nav>
-
-            <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
-        </nav>
-
+            <nav>
+                <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
+            </nav>
         <section>
             <article>
 
