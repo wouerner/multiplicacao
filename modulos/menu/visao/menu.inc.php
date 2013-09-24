@@ -106,9 +106,7 @@ $usuario = $usuario[0] ;
                                     <ul class="dropdown-menu">
                                         <li><a href = "/discipulo/discipulo" ><i class = "icon-arrow-up" ></i>Ativos</a></li>
                                         <li><a href = "/discipulo/discipulo/inativos" ><i class = "icon-arrow-down" ></i>Inativos</a></li>
-                                <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                                         <li><a href = "/discipulo/discipulo/arquivo" ><i class = "icon-inbox" ></i> Arquivo</a></li>
-                                <?php endif ; ?>
                                     </ul>
 
                                 </li>

@@ -110,6 +110,17 @@ class discipulo
             $aviso->salvar();
 
           $discipulo->desativar() ;
+            $discipulo= $discipulo->listarUm();
+            
+            $headers = "MIME-Version: 1.1\n";
+            $headers .= "Content-type: text/plain; charset=utf-8\n";
+            $headers .= "From: Multiplicação12 <multiplicaca12@mga12.org>"."\n"; // remetente
+            $headers .= "Return-Path: Meu Nome <multiplicacao@mga12.org>"."\n"; // return-path
+            $envio = mail("tiaoveloso12@gmail.com", "Desativação Discipulo", "nome: ".$discipulo->nome,
+                            $headers,"-r multiplicacao12@mga12.org");
+
+
+
             header ('location:/discipulo/discipulo');
             exit();
         }
@@ -136,19 +147,24 @@ class discipulo
 
         public function arquivo()
         {
-          $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
+            $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+              $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
-          $discipulos =	new \discipulo\Modelo\Discipulo();
-          $quantidadePorPagina = 12;
+              $discipulos =	new \discipulo\Modelo\Discipulo();
+              $quantidadePorPagina = 12;
 
-          $discipulos = $discipulos->arquivados() ;
+            //teste
+            if ($acl->hasPermission('admin_acesso') == true) {
+              $discipulos = $discipulos->arquivados() ;
+              $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
+              $totalDiscipulos = (int) $totalDiscipulos['total'] ;
+            } else {
+              $discipulos->lider = $_SESSION['usuario_id'];
+              $discipulos = $discipulos->listarDiscipulosArquivo();
+            }
             $total = count($discipulos);
 
-          $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
-          $totalDiscipulos = (int) $totalDiscipulos['total'] ;
-
-          require_once 'modulos/discipulo/visao/arquivo/listar.php';
-
+            require_once 'modulos/discipulo/visao/arquivo/listar.php';
         }
 
         public function semCelula()
@@ -290,6 +306,15 @@ class discipulo
 
                             $_SESSION['mensagem'] = array('mensagem'	=> 'Cadastro Realizado com Sucesso!',
                                                                   'class' => 'alert alert-success');
+
+
+            $headers = "MIME-Version: 1.1\n";
+            $headers .= "Content-type: text/plain; charset=utf-8\n";
+            $headers .= "From: Multiplicação12 <multiplicaca12@mga12.org>"."\n"; // remetente
+            $headers .= "Return-Path: Meu Nome <multiplicacao@mga12.org>"."\n"; // return-path
+            $envio = mail("tiaoveloso12@gmail.com", "Novo Discipulo", "nome: ".$discipulo->nome,
+                            $headers,"-r multiplicacao12@mga12.org");
+
                 } else {
 
                 $_SESSION['dados']['nome'] = $post['nome'] ;
@@ -582,6 +607,13 @@ class discipulo
             $totalInativosLider = \discipulo\Modelo\Discipulo::totalInativosLider($url['4']) ;
 
             $totalRedesLideres =  \rede\modelo\rede::pegarTodasRedesPorLider($url['4']);
+
+
+            //meta dos discipulos:
+
+            $meta = new \metas\modelo\metas() ;
+            $meta->discipuloId = $discipulo->id;
+            $metas = $meta->listar() ;
 
             require 'discipulo/visao/detalhar.php';
 

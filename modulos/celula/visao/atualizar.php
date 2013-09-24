@@ -6,9 +6,7 @@
         <?php include 'incluidos/js.inc.php' ?>
         <script src="/modulos/discipulo/visao/js/combobox.js"></script>
         <script src="/modulos/discipulo/visao/js/comboboxCelula.js"></script>
-
     </head>
-
     <body>
         <section class = "container-fluid">
         <header>
@@ -65,11 +63,12 @@
                             </div>
                          </div>
 
-                         <div class = "control-group " >
-                            <div class = "ui-widget" >
-                                 <label class = "control-label" for = "lider" >Líder</label>
-                        <div class = "controls" >
-                                 <select id = "combobox" class = "combobox lider span3" name = "lider"  >
+                        <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                             <div class = "control-group " >
+                                <div class = "ui-widget" >
+                                     <label class = "control-label" for = "lider" >Líder</label>
+                                     <div class = "controls" >
+                                         <select id = "combobox" class = "combobox lider span3" name = "lider"  >
                                         <option value = "<?php echo $lider->id?>"><?php echo $lider->nome ?></option>
                                       <?php foreach($lideres as $lider) : ?><option value = "<?php echo $lider['id']?>"><?php echo $lider['nome']?></option>
                                       <?php endforeach ; ?>
@@ -78,6 +77,9 @@
                             </div>
                          </div>
                          </div>
+                        <?php else: ?>
+                            <input name="lider" type="hidden" value = "<?php echo $lider->id?>">
+                        <?php endif; ?>
 
                         </select>
                         </div>

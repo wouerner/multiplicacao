@@ -1185,4 +1185,24 @@ class Discipulo extends modeloFramework
         return $resposta;
 
     }
+
+    public function listarDiscipulosArquivo()
+    {
+        $pdo = self::pegarConexao();
+
+        $sql = 'SELECT * FROM Discipulo WHERE ativo = 0 AND arquivo = 1  AND lider = ? order by nome';
+
+        $stm = $pdo->prepare($sql);
+        $stm->bindParam(1, $this->lider);
+
+        $stm->execute();
+
+        $resposta = array();
+
+        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+            $resposta[$ob->id] = $ob;
+        }
+
+        return $resposta;
+    }
 }

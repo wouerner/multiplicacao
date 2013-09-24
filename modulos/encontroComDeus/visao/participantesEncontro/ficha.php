@@ -51,7 +51,7 @@
             <table class = " table " >
                 <tr>
                     <td><img src="/modulos/discipulo/visao/img/mga.jpg"> </img></td>
-                    <td><h2>Reencontro com Deus dias 12, 13 e 14/07/2013</h2></td>
+                    <td><h2>Reencontro com Deus dias 20, 21 e 22/09/2013</h2></td>
                 </tr>
             <tr>
 

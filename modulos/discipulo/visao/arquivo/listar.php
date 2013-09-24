@@ -55,23 +55,30 @@ $(".btn-warning").click( function(){
                 <table class = "table table-condensed well ">
                 <caption><h3>Lista de Discipulos</h3></caption>
                     <thead>
-                        <th>Líder</th>
                         <th>Nome</th>
+                    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                        <th>Líder</th>
+                    <?php endif; ?>
                         <th>Telefone</th>
                         <th>E-mail</th>
-                        <th>Ações</th>
+                        <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                            <th>Ações</th>
+                        <?php endif; ?>
                     </thead>
 
                 <?php foreach ( $discipulos as $discipulo) : ?>
-
                 <tr>
 
-                    <td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->getLider()->id?>" ><?php echo $discipulo->getLider()->nome ; ?></a></td>
-
                     <td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><strong><?php echo $discipulo->nome ; ?></strong></a></td>
+                    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                    <td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->getLider()->id?>" ><?php echo $discipulo->getLider()->nome ; ?></a></td>
+                    <?php endif; ?>
                 <td><?php echo $discipulo->telefone ; ?></td> <td><?php echo $discipulo->email ; ?></td>
+                        <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                 <td><a class = "btn btn-mini" href = "/discipulo/discipulo/desarquivar/id/<?php echo $discipulo->id ; ?>"><i class = "icon-arrow-up" ></i>Desarquivar</a></td>
+                        <?php endif; ?>            
                 </tr>
+            
 
                 <?php endforeach ; ?>
                 </table>

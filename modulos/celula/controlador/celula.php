@@ -14,10 +14,10 @@ class celula
 
         //include("seguranca/ACL/assets/php/database.php");
         $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $redes =	new \rede\modelo\tipoRede();
+        $redes =	$redes->listarTodos();
 
         if ($acl->hasPermission('admin_acesso') == true) {
-            $redes =	new \rede\modelo\tipoRede();
-            $redes =	$redes->listarTodos();
 
             $celulas = $celulas->listarTodos();
             //$celulas = $celulas->listarCelulasPorRede();

@@ -1,11 +1,13 @@
 <?php
 //session_start();
 ob_start();
+//include('modulos/../config/banco.php');
+
 $hasDB = false;
-$server = 'localhost';
-$user = 'root';
-$pass = 'root';
-$db = 'multiplicacao';
+$server = HOST;
+$user = USER;
+$pass = PASSWD;
+$db = DB;
 $link = mysql_connect($server,$user,$pass);
 if (!is_resource($link)) {
     $hasDB = false;

@@ -22,7 +22,7 @@ $(".btn-warning").click( function(){
                 $( this ).dialog( "close" );
             },
       Desativar: function() {
-                                        $(location).attr('href', '/discipulo/discipulo/desativar/id/'+id);
+                            $(location).attr('href', '/discipulo/discipulo/desativar/id/'+id);
        },
 }
 
@@ -30,8 +30,30 @@ $(".btn-warning").click( function(){
 
 }
 
-); });
+); 
+
+
+    $(".btn-success").click( function(){
+                var id = this.id ;
+
+                $( "#dialog-success" ).dialog({
+                resizable: false,
+                height:240,
+                modal: true,
+                buttons: {
+                    Cancelar: function() {
+                        $( this ).dialog( "close" );
+                    },
+              Ativar: function() {
+                        $(location).attr('href', '/discipulo/discipulo/ativar/id/'+id);
+               },
+                }
+
+        });
+    });
+});
 </script>
+
     </head>
 
     <body>
@@ -41,6 +63,10 @@ $(".btn-warning").click( function(){
     <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;">
     </span>Se desativar o discipulo, só terá acesso após comunicar ao seu líder.
     </p>
+</div>
+
+<div id="dialog-success" title="Deseja ativar?" style = "display:none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente ativar?</p>
 </div>
 
         <section class = "container-fluid">
@@ -70,6 +96,7 @@ $(".btn-warning").click( function(){
                     <thead>
 <?php if ($acl->hasPermission('admin_acesso') == true) :  ?>
 <?php endif; ?>
+                        <th></th>
                         <th>Nome</th>
                         <th>Telefone</th>
                         <th>Lider</th>
@@ -79,6 +106,13 @@ $(".btn-warning").click( function(){
                 <?php foreach ( $discipulos as $discipulo) : ?>
 
                 <tr>
+
+                <td>
+                <a title=""
+                    data-content=" <?php echo '<b>Email:</b> '.$discipulo->email.'<br><b>Endereço:</b> '.$discipulo->endereco ?>"
+                    data-placement="right" data-toggle="popover" class="btn btn-mini btnPopover"
+                    href="#aqui" data-original-title="<?php echo $discipulo->nome?>"><i class="icon-eye-close"></i></a>
+                </td>
 
 
                     <td>
@@ -98,7 +132,7 @@ $(".btn-warning").click( function(){
                     <?php if ($discipulo->ativo == 1 ) : ?>
                         <span class="label label-success"><i class ="icon-arrow-up"></i> Ativo</span>
                     <?php elseif ($discipulo->arquivo == 1 ) : ?>
-                        <span class="label label-inverse">Aarquivo</span>
+                        <span class="label label-inverse">Arquivo</span>
                     <?php else : ?>
                         <span class="label label-warning">Inativo</span>
                     <?php endif ; ?>
@@ -141,5 +175,8 @@ $(".btn-warning").click( function(){
         </section>
 
         </section>
+<script>
+    $('.btnPopover').popover({ html:true});
+</script>
     </body>
 </html>

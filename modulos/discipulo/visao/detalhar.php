@@ -78,6 +78,18 @@ $(document).ready(function () {
 
             <table class = "table" >
                 <caption><h3><?php echo $discipulo->nome ; ?> <a href="/metas/metas/detalhar/id/<?php echo $discipulo->id ?>">metas</a></h3></caption>
+            <tr>
+                <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                <td>
+                        <a id = "<?php echo $discipulo->id ?>" 
+                            href="/metas/metas/novo/id/<?php echo $discipulo->id ?>" class = "btn btn-mini " alt = "excluir" >
+                        <i class="icon-screenshot "></i> Cadastrar Meta</a>
+                </td>
+                <?php endif ; ?>
+                <td>
+                <a id = "<?php echo $discipulo->id ?>" href="/metas/participantesMetas/novo/id/<?php echo $discipulo->id ?>" class = "btn btn-mini " alt = "" ><i class="icon-group icon-white"></i>Participantes da Meta</a>
+                </td>
+            </tr>
 
                 <tr>
                     <td class = "span2" rowspan = "4">
@@ -170,16 +182,58 @@ $(document).ready(function () {
                     </table>
                 </td>
                 </tr>
-                 <tr><td><strong>Ações</strong></td></tr>
 
+                <!-- Metas dos discipulos-->
+                <?php if($metas):?>
+                <tr>
+                <td colspan="5">
+                <table class = "table" >
+                    <caption>
+                        <h3>
+                            <a href="/metas/metas/detalhar/id/<?php echo $discipulo->id ?>">
+                                <i class="icon-screenshot"></i> Metas
+                            </a>
+                        </h3>
+                    </caption>
+                    <tr>
+                        <th>Meta</th>
+                        <th>quantidade</th>
+                        <th>Inicio</th>
+                        <th>Fim</th>
+                        <th>Ações</th>
+                    </tr>
+                    <?php foreach ($metas as $m ): ?>
+                        <tr>
+                            <td><?php echo $m->nome ; ?></td>
+                            <td><?php echo $m->quantidade ; ?> Discipulos</td>
+                            <td><?php echo $m->dataInicio ; ?></td>
+                            <td><?php echo $m->dataFim ; ?></td>
+                            <td>
+                                <a href = "/metas/participantesMetas/listar/id/<?php echo $m->id ?>" >
+                                    <i class="icon-group"></i> Participantes
+                                </a>
+                                <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                                    <td>
+                                        <a class="btn btn-danger" href = "/metas/metas/excluir/id/<?php echo $m->id ?>" >
+                                            excluir
+                                        </a>
+                                    </td>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+                </td>
+                </tr>
+                <!-- Metas dos discipulos-->
+                <?php endif; ?>
+
+                 <tr><td><strong>Ações</strong></td></tr>
                     <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
                 </table>
-</div>
-
+            </div>
             </article>
-
         </section>
-
         </section>
     </body>
 </html>
