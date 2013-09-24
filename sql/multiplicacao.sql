@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 22, 2013 at 11:48 PM
--- Server version: 5.5.31-MariaDB
--- PHP Version: 5.4.17
+-- Generation Time: Sep 24, 2013 at 08:31 PM
+-- Server version: 5.5.32-MariaDB
+-- PHP Version: 5.4.19
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `multiplicacao`
 --
-CREATE DATABASE IF NOT EXISTS `multiplicacao` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `multiplicacao`;
 
 -- --------------------------------------------------------
 
@@ -52,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `Avisos` (
   PRIMARY KEY (`id`),
   KEY `emissor` (`emissor`),
   KEY `tipoAvisoId` (`tipoAvisoId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=633 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=308 ;
 
 -- --------------------------------------------------------
 
@@ -64,9 +62,10 @@ CREATE TABLE IF NOT EXISTS `Batismos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `discipuloId` int(11) NOT NULL,
   `criadoEm` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `diploma` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `discipuloId` (`discipuloId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -86,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `Celula` (
   PRIMARY KEY (`id`),
   KEY `fk_Celula_Discipulo2` (`lider`),
   KEY `tipoRedeId` (`tipoRedeId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=96 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=97 ;
 
 -- --------------------------------------------------------
 
@@ -116,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `Discipulo` (
   KEY `fk_Discipulo_Discipulo` (`lider`),
   KEY `fk_Discipulo_Celula1` (`celula`),
   KEY `fk_Discipulo_EstadoCivil1` (`estadoCivilId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=555 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=539 ;
 
 -- --------------------------------------------------------
 
@@ -144,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `EncontroComDeus` (
   `endereco` varchar(45) CHARACTER SET utf8 NOT NULL,
   `ativo` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -211,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `Foto` (
   `discipuloId` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `discipuloId_2` (`discipuloId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=60 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=50 ;
 
 -- --------------------------------------------------------
 
@@ -250,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `IntervaloMetas` (
   `dataFim` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `dataInicio` (`dataInicio`,`dataFim`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -269,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `Metas` (
   KEY `intervaloMetasId` (`intervaloMetasId`),
   KEY `discipuloId_2` (`discipuloId`),
   KEY `tipoRedeId` (`tipoRedeId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -346,7 +345,7 @@ CREATE TABLE IF NOT EXISTS `ParticipantesEncontro` (
   PRIMARY KEY (`id`),
   KEY `discipuloId` (`discipuloId`),
   KEY `encontroComDeusId` (`encontroComDeusId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=158 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=16 ;
 
 -- --------------------------------------------------------
 
@@ -374,6 +373,21 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `permName` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `PreEquipe`
+--
+
+CREATE TABLE IF NOT EXISTS `PreEquipe` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `discipuloId` int(11) NOT NULL,
+  `encontroComDeusId` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `discipuloId` (`discipuloId`,`encontroComDeusId`),
+  KEY `encontroComDeusId` (`encontroComDeusId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -410,7 +424,7 @@ CREATE TABLE IF NOT EXISTS `RelatorioCelula` (
   KEY `lider` (`lider`),
   KEY `celulaId` (`celulaId`),
   KEY `temaRelatorioCelulaId` (`temaRelatorioCelulaId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=900 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=528 ;
 
 -- --------------------------------------------------------
 
@@ -439,7 +453,7 @@ CREATE TABLE IF NOT EXISTS `role_perms` (
   PRIMARY KEY (`ID`),
   KEY `fk_permissions_has_roles_roles1` (`roleID`),
   KEY `fk_permissions_has_roles_permissions1` (`permID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 -- --------------------------------------------------------
 
@@ -456,7 +470,7 @@ CREATE TABLE IF NOT EXISTS `StatusCelular` (
   PRIMARY KEY (`id`),
   KEY `fk_StatusCelular_TipoStatusCelular1` (`tipoStatusCelular`),
   KEY `fk_StatusCelular_Discipulo1` (`discipuloId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1357 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1331 ;
 
 -- --------------------------------------------------------
 
@@ -471,7 +485,7 @@ CREATE TABLE IF NOT EXISTS `TemaRelatorioCelula` (
   `dataFim` datetime NOT NULL,
   `ativo` tinyint(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 -- --------------------------------------------------------
 
@@ -568,7 +582,7 @@ CREATE TABLE IF NOT EXISTS `user_perms` (
   PRIMARY KEY (`ID`),
   KEY `fk_Discipulo_has_permissions_permissions1` (`permID`),
   KEY `fk_Discipulo_has_permissions_Discipulo1` (`userID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=57 ;
 
 -- --------------------------------------------------------
 
@@ -599,8 +613,8 @@ ALTER TABLE `Admissao`
 -- Constraints for table `Avisos`
 --
 ALTER TABLE `Avisos`
-  ADD CONSTRAINT `Avisos_ibfk_2` FOREIGN KEY (`tipoAvisoId`) REFERENCES `TipoAviso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Avisos_ibfk_1` FOREIGN KEY (`emissor`) REFERENCES `Discipulo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `Avisos_ibfk_1` FOREIGN KEY (`emissor`) REFERENCES `Discipulo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `Avisos_ibfk_2` FOREIGN KEY (`tipoAvisoId`) REFERENCES `TipoAviso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `Batismos`
@@ -634,15 +648,15 @@ ALTER TABLE `DiscipuloTemEvento`
 -- Constraints for table `Equipe`
 --
 ALTER TABLE `Equipe`
-  ADD CONSTRAINT `Equipe_ibfk_2` FOREIGN KEY (`tipoEquipeId`) REFERENCES `TipoEquipe` (`id`),
-  ADD CONSTRAINT `Equipe_ibfk_1` FOREIGN KEY (`encontroComDeusId`) REFERENCES `EncontroComDeus` (`id`);
+  ADD CONSTRAINT `Equipe_ibfk_1` FOREIGN KEY (`encontroComDeusId`) REFERENCES `EncontroComDeus` (`id`),
+  ADD CONSTRAINT `Equipe_ibfk_2` FOREIGN KEY (`tipoEquipeId`) REFERENCES `TipoEquipe` (`id`);
 
 --
 -- Constraints for table `EquipeDiscipulos`
 --
 ALTER TABLE `EquipeDiscipulos`
-  ADD CONSTRAINT `EquipeDiscipulos_ibfk_2` FOREIGN KEY (`discipuloId`) REFERENCES `Discipulo` (`id`),
-  ADD CONSTRAINT `EquipeDiscipulos_ibfk_1` FOREIGN KEY (`equipeId`) REFERENCES `Equipe` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `EquipeDiscipulos_ibfk_1` FOREIGN KEY (`equipeId`) REFERENCES `Equipe` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `EquipeDiscipulos_ibfk_2` FOREIGN KEY (`discipuloId`) REFERENCES `Discipulo` (`id`);
 
 --
 -- Constraints for table `Foto`
@@ -654,9 +668,9 @@ ALTER TABLE `Foto`
 -- Constraints for table `Metas`
 --
 ALTER TABLE `Metas`
-  ADD CONSTRAINT `Metas_ibfk_3` FOREIGN KEY (`tipoRedeId`) REFERENCES `TipoRede` (`id`),
   ADD CONSTRAINT `Metas_ibfk_1` FOREIGN KEY (`discipuloId`) REFERENCES `Discipulo` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `Metas_ibfk_2` FOREIGN KEY (`intervaloMetasId`) REFERENCES `IntervaloMetas` (`id`);
+  ADD CONSTRAINT `Metas_ibfk_2` FOREIGN KEY (`intervaloMetasId`) REFERENCES `IntervaloMetas` (`id`),
+  ADD CONSTRAINT `Metas_ibfk_3` FOREIGN KEY (`tipoRedeId`) REFERENCES `TipoRede` (`id`);
 
 --
 -- Constraints for table `MinisterioTemDiscipulo`
@@ -677,8 +691,8 @@ ALTER TABLE `Oferta`
 -- Constraints for table `ParticipacaoCelula`
 --
 ALTER TABLE `ParticipacaoCelula`
-  ADD CONSTRAINT `ParticipacaoCelula_ibfk_3` FOREIGN KEY (`relatorioCelulaId`) REFERENCES `RelatorioCelula` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `ParticipacaoCelula_ibfk_2` FOREIGN KEY (`discipuloId`) REFERENCES `Discipulo` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  ADD CONSTRAINT `ParticipacaoCelula_ibfk_2` FOREIGN KEY (`discipuloId`) REFERENCES `Discipulo` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ParticipacaoCelula_ibfk_3` FOREIGN KEY (`relatorioCelulaId`) REFERENCES `RelatorioCelula` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `ParticipantesEncontro`
@@ -692,7 +706,14 @@ ALTER TABLE `ParticipantesEncontro`
 --
 ALTER TABLE `ParticipantesMetas`
   ADD CONSTRAINT `ParticipantesMetas_ibfk_2` FOREIGN KEY (`discipuloId`) REFERENCES `Discipulo` (`id`),
-  ADD CONSTRAINT `ParticipantesMetas_ibfk_1` FOREIGN KEY (`metasId`) REFERENCES `Metas` (`id`);
+  ADD CONSTRAINT `ParticipantesMetas_ibfk_3` FOREIGN KEY (`metasId`) REFERENCES `Metas` (`id`);
+
+--
+-- Constraints for table `PreEquipe`
+--
+ALTER TABLE `PreEquipe`
+  ADD CONSTRAINT `PreEquipe_ibfk_1` FOREIGN KEY (`discipuloId`) REFERENCES `Discipulo` (`id`),
+  ADD CONSTRAINT `PreEquipe_ibfk_2` FOREIGN KEY (`encontroComDeusId`) REFERENCES `EncontroComDeus` (`id`);
 
 --
 -- Constraints for table `Redes`
@@ -706,9 +727,9 @@ ALTER TABLE `Redes`
 -- Constraints for table `RelatorioCelula`
 --
 ALTER TABLE `RelatorioCelula`
-  ADD CONSTRAINT `RelatorioCelula_ibfk_4` FOREIGN KEY (`celulaId`) REFERENCES `Celula` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `RelatorioCelula_ibfk_1` FOREIGN KEY (`lider`) REFERENCES `Discipulo` (`id`),
-  ADD CONSTRAINT `RelatorioCelula_ibfk_3` FOREIGN KEY (`temaRelatorioCelulaId`) REFERENCES `TemaRelatorioCelula` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `RelatorioCelula_ibfk_3` FOREIGN KEY (`temaRelatorioCelulaId`) REFERENCES `TemaRelatorioCelula` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `RelatorioCelula_ibfk_4` FOREIGN KEY (`celulaId`) REFERENCES `Celula` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `role_perms`
