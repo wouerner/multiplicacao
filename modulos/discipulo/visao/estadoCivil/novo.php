@@ -2,11 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <style type="text/css">
-           @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-           @import url("../../../incluidos/css/estilo.css");
-        </style>
-        <script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
+        <?php include 'incluidos/css.inc.php' ; ?>
+        <?php include 'incluidos/js.inc.php' ; ?>
     </head>
 
     <body>
@@ -21,7 +18,7 @@
         <section>
             <article>
                     <legend>Criar Estado Civil</legend>
-                    <form action = "/discipulo/novoEstadoCivil" method = "post"  class = "form-horizontal">
+                    <form action = "/discipulo/discipulo/novoEstadoCivil" method = "post"  class = "form-horizontal">
                 <fieldset>
                         <div class = "control-group" >
 

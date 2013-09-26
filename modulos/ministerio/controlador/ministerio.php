@@ -39,11 +39,11 @@ namespace ministerio\controlador;
 
         if ($ministerio->salvar()) {
 
-                header ('location:/ministerio/novo/id/'.$ministerio->discipuloId);
+                header ('location:/ministerio/ministerio/novo/id/'.$ministerio->discipuloId);
                 exit();
         } else {
                   $ministerio->atualizar();
-                header ('location:/discipulo/detalhar/id/'.$ministerio->discipuloId);
+                header ('location:/discipulo/discipulo/detalhar/id/'.$ministerio->discipuloId);
                 exit();
 
         }
@@ -65,7 +65,7 @@ namespace ministerio\controlador;
             $ministerio->nome = $post['nome'] ;
 
             $ministerio->salvar();
-            header ('location:/ministerio/listarMinisterio') ;
+            header ('location:/ministerio/ministerio/listarMinisterio') ;
             exit();
             }
 
@@ -85,10 +85,9 @@ namespace ministerio\controlador;
             $funcao->nome = $post['nome'] ;
 
             $funcao->salvar();
-            header ('location:/ministerio/listarFuncao') ;
+            header ('location:/ministerio/ministerio/listarFuncao') ;
             exit();
             }
-
         }
 
         public function listarMinisterio()
@@ -148,7 +147,7 @@ namespace ministerio\controlador;
 
                 $discipulo->atualizar();
 
-                header ('location:/discipulo/atualizar/id/'.$discipulo->id);
+                header ('location:/discipulo/discipulo/atualizar/id/'.$discipulo->id);
                 exit();
             }
 
@@ -174,7 +173,7 @@ namespace ministerio\controlador;
 
                 $ministerio->atualizarMinisterio();
 
-                header ('location:/ministerio/atualizarMinisterio/id/'.$ministerio->id);
+                header ('location:/ministerio/ministerio/atualizarMinisterio/id/'.$ministerio->id);
                 exit();
             }
 
@@ -200,7 +199,7 @@ namespace ministerio\controlador;
 
                 $funcao->atualizarFuncao();
 
-                header ('location:/ministerio/atualizarFuncao/id/'.$funcao->id);
+                header ('location:/ministerio/ministerio/atualizarFuncao/id/'.$funcao->id);
                 exit();
             }
 
@@ -213,7 +212,7 @@ namespace ministerio\controlador;
                 $ministerio->excluir();
 
                 $_SESSION['mensagem'] = !is_null($ministerio->erro) ? $ministerio->erro : null ;
-                header ('location:/ministerio/listarMinisterio');
+                header ('location:/ministerio/ministerio/listarMinisterio');
                 exit();
         }
 
@@ -224,7 +223,7 @@ namespace ministerio\controlador;
                 $funcao->excluir();
 
                 $_SESSION['mensagem'] = !is_null($funcao->erro) ? $funcao->erro : null ;
-                header ('location:/ministerio/listarFuncao');
+                header ('location:/ministerio/ministerio/listarFuncao');
                 exit();
         }
 
@@ -234,7 +233,7 @@ namespace ministerio\controlador;
                 $ministerio->discipuloId = $url[3];
                 $ministerio->ministerioId = $url[4];
                 $ministerio->excluir();
-                header ('location:/ministerio/novo/id/'.$ministerio->discipuloId);
+                header ('location:/ministerio/ministerio/novo/id/'.$ministerio->discipuloId);
                 exit();
         }
 
@@ -304,7 +303,7 @@ namespace ministerio\controlador;
                      var_dump($url);
                      $id = $post['discipuloId'];
 
-                     header ('location:/discipulo/evento/id/'.$id);
+                     header ('location:/discipulo/discipulo/evento/id/'.$id);
                      exit();
 
             }

@@ -121,31 +121,31 @@ $usuario = $usuario[0] ;
                                 <li class = "dropdown-submenu">
                                     <a href = "/discipulo/discipulo/listarEstadoCivil" >Estado Civil</a>
                                     <ul class="dropdown-menu">
-                                      <li><a href = "/discipulo/novoEstadoCivil" >Novo Estado Civil</a></li>
-                                      <li><a href = "/discipulo/listarEstadoCivil" >Lista</a></li>
+                                      <li><a href = "/discipulo/discipulo/novoEstadoCivil" >Novo Estado Civil</a></li>
+                                      <li><a href = "/discipulo/discipulo/listarEstadoCivil" >Lista</a></li>
                                     </ul>
                                 </li>
 
                                 <li class = "dropdown-submenu"><a href = "/ministerio/listarMinisterio" >Ministério</a>
                                     <ul class="dropdown-menu">
-                                        <li><a href = "/ministerio/novoMinisterio">Novo Ministério</a></li>
-                                        <li><a href = "/ministerio/listarMinisterio">Listar Ministério</a></li>
-                                        <li><a href = "/ministerio/novaFuncao" >Nova Função</a></li>
-                                        <li><a href = "/ministerio/listarFuncao" >Listar Função</a></li>
+                                        <li><a href = "/ministerio/ministerio/novoMinisterio">Novo Ministério</a></li>
+                                        <li><a href = "/ministerio/ministerio/listarMinisterio">Listar Ministério</a></li>
+                                        <li><a href = "/ministerio/ministerio/novaFuncao" >Nova Função</a></li>
+                                        <li><a href = "/ministerio/ministerio/listarFuncao" >Listar Função</a></li>
                                     </ul>
                                 </li>
 
                         <li class = "dropdown-submenu"><a href = "/admissao/listarTipoAdmissao" >Admissão</a>
                             <ul class="dropdown-menu">
-                            <li><a href = "/admissao/novoTipoAdmissao">Novo</a></li>
-                            <li><a href = "/admissao/listarTipoAdmissao" >Lista</a></li>
+                            <li><a href = "/admissao/admissao/novoTipoAdmissao">Novo</a></li>
+                            <li><a href = "/admissao/admissao/listarTipoAdmissao" >Lista</a></li>
                             </ul>
                         </li>
 
                                 <li class = "dropdown-submenu"><a href = "/evento" >Escala de Êxito</a>
                                     <ul class="dropdown-menu">
-                                        <li><a href = "/evento/novo">Novo</a></li>
-                                        <li><a href = "/evento" >Lista</a></li>
+                                        <li><a href = "/evento/evento/novo">Novo</a></li>
+                                        <li><a href = "/evento/evento" >Lista</a></li>
                                     </ul>
                                 </li>
                                 <?php endif ; ?>

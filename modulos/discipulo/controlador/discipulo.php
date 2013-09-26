@@ -843,7 +843,7 @@ class discipulo
 
                       if ($estadoCivil->salvar() ) {
 
-                         header ('location:/discipulo/listarEstadoCivil');
+                         header ('location:/discipulo/discipulo/listarEstadoCivil');
                          exit();
 
                       } else {

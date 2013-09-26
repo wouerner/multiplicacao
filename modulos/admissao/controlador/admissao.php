@@ -43,7 +43,7 @@ class admissao
                      $admissao->atualizar();
 
                  }
-                 header ('location:/discipulo/detalhar/id/'.$post['discipuloId']);
+                 header ('location:/discipulo/discipulo/detalhar/id/'.$post['discipuloId']);
                  exit();
             }
     }
@@ -60,7 +60,7 @@ class admissao
                  $admissao->nome = $post['nome'] ;
 
                  $admissao->salvar();
-                 header ('location:/admissao/listarTipoAdmissao');
+                 header ('location:/admissao/admissao/listarTipoAdmissao');
                  exit();
             }
     }
@@ -86,7 +86,7 @@ class admissao
 
                 $tipoAdmissao->atualizar();
 
-                header ('location:/admissao/atualizarTipoAdmissao/id/'.$tipoAdmissao->id);
+                header ('location:/admissao/admissao/atualizarTipoAdmissao/id/'.$tipoAdmissao->id);
                 exit();
             }
 
@@ -99,7 +99,7 @@ class admissao
                 $tipoAdmissao->excluir();
 
                 $_SESSION['mensagem'] = !is_null($tipoAdmissao->erro) ? $tipoAdmissao->erro : null ;
-                header ('location:/admissao/listarTipoAdmissao');
+                header ('location:/admissao/admissao/listarTipoAdmissao');
                 exit();
         }
 
@@ -110,7 +110,7 @@ class admissao
                 $admissao->discipuloId = $url[4];
 
                 $admissao->excluir();
-                header ('location:/discipulo/admissao/id/'.$admissao->discipuloId);
+                header ('location:/discipulo/discipulo/admissao/id/'.$admissao->discipuloId);
                 exit();
 
         }
