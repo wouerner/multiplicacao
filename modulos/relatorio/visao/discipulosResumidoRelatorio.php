@@ -42,8 +42,10 @@ $(document).ready(function() {
                 <tr>
                     <th>#</th>
                     <th>Nome</th>
+                    <th>Líder</th>
                     <th>Sexo</th>
                     <th>Endereço</th>
+                    <th>Telefone</th>
                     <th>Data Nasc. </th>
                     <th>Status</th>
                 </tr>
@@ -57,9 +59,21 @@ $(document).ready(function() {
                               <?php  $lider =  is_object($r->getLider()) ? $r->getLider():'' ; ?>
                           <tr>
                                 <td> <?php echo ++$cont ; ?></td>
-                              <td><a target = "blank" href="/discipulo/discipulo/atualizar/id/<?php echo $r->id ; ?>"><strong><?php echo  $r->getAlcunha() ; ?></strong></a></td>
+                                <td>
+                                <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                                    <a target = "blank" href="/discipulo/discipulo/atualizar/id/<?php echo $r->id ; ?>">
+                                <?php endif; ?>
+                                        <strong><?php echo  $r->getAlcunha() ; ?>
+                                        </strong>
+                                <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                                    </a> 
+                                <?php endif; ?>
+                                    <?php echo $r->ativo ? '-ativo':'inativo'?>
+</td>
+                               <td><?php echo $lider->nome?></td>
                               <td><?php echo  ($r->sexo == 'm')? 'M' : 'F' ; ?></td>
                               <td><?php echo  $r->endereco ; ?></td>
+                              <td><?php echo  $r->telefone; ?></td>
                               <td><?php echo  $r->getDataNascimento()->format('d/m/Y') ; ?></td>
                               <td><?php echo $status['nome'] ; ?></td>
                           </tr>

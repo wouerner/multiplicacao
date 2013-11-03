@@ -60,7 +60,11 @@ unset($_SESSION['mensagem']) ;
                                 </td>
                             </tr>
                             <?php foreach($lider->listarDiscipulos() as $d ):?>
-                                <tr class=""><td></td><td><?php echo !isset($c) ? $c=1 : ++$c ; ?> -- <a href ="/discipulo/discipulo/detalhar/id/<?php echo $d->id ?>" ><?php echo $d->nome;?></a></td></tr>
+                                <tr class=""><td></td><td><?php echo !isset($c) ? $c=1 : ++$c ; ?> -- <a href ="/discipulo/discipulo/detalhar/id/<?php echo $d->id ?>" >
+                                <?php echo $d->nome;?> <?php  $status = $d->getStatusCelular();  ?>
+                                    <span class="badge"><?php echo $status['nome']?>
+                                    </span>
+                                </a></td></tr>
                             <?php endforeach;?>
                             <?php $total += $c?>
                             <?php $c=0 ?>

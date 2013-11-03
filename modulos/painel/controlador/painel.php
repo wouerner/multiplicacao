@@ -74,7 +74,8 @@ use \rede\modelo\tipoRede as TipoRede;
                     $discipulos->id = $usuarioId ;
                     $discipulos = $discipulos->listarDiscipulos();
 
-                    $totalDiscipulos = count($discipulos) ;
+                    //$totalDiscipulos = count($discipulos) ;
+                    //var_dump($totalDiscipulos);
 
                     //aniversarios
 
@@ -82,6 +83,9 @@ use \rede\modelo\tipoRede as TipoRede;
                     $discipulosAniver = $discipulosAniver->aniversarioHoje();
                     $totalAniver = count($discipulosAniver);
                     $contator = 0 ;
+
+                    $geracoes = new \geracoes\modelo\tipoGeracao();
+                    $geracoes = $geracoes->listarTodos();
 
                   require_once 'modulos/painel/visao/painel.php';
         }

@@ -14,17 +14,19 @@ class celula
 
         //include("seguranca/ACL/assets/php/database.php");
         $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
-        $redes =	new \rede\modelo\tipoRede();
-        $redes =	$redes->listarTodos();
+        //$redes =	new \rede\modelo\tipoRede();
+        //$redes =	$redes->listarTodos();
 
         if ($acl->hasPermission('admin_acesso') == true) {
 
-            $celulas = $celulas->listarTodos();
+            $celulasInativas = $celulas->listarTodosInativos();
+            $celulas = $celulas->listarTodosAtivos();
             //$celulas = $celulas->listarCelulasPorRede();
             //$totalCelulas = \celula\modelo\celula::totalCelulas();
             $totalCelulas = count($celulas);
         } else {
             $celulas->lider = $_SESSION['usuario_id'];
+            $celulasInativas = $celulas->listarCelulasLiderInativos();
             $celulas = $celulas->listarCelulasLider();
             $totalCelulas = count($celulas);
         }
@@ -90,9 +92,10 @@ class celula
                 $celula->horarioFuncionamento = $post['horarioFuncionamento'];
                 $celula->endereco = $post['endereco'];
                 $celula->lider = $post['lider'];
-                $celula->ativa = $post['ativa']== 1 ? 1 : 0 ;
+                $celula->ativa = (isset($post['ativa']))? 1 : 0;
                 $celula->tipoRedeId = $post['tipoRedeId'];
                 $celula->id = $post['id'];
+                //var_dump(isset($post['ativa']));exit;
 
                 $celula->atualizar();
 

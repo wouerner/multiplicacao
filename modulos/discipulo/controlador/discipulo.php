@@ -1,5 +1,5 @@
 <?php
-use discipulo\Modelo\Discipulo;
+use discipulo\Modelo\Discipulo as DiscipuloModelo;
 use discipulo\Modelo\estadoCivil;
 use celula\modelo\celula;
 use evento\modelo\evento;
@@ -242,11 +242,11 @@ class discipulo
                 $celulas = new \celula\modelo\celula();
                 $celulas = $celulas->listarTodos();
 
-              //status celular da pessoa
-              $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
-              $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
+            //status celular da pessoa
+            $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
+            $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
 
-        $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
+            $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
 
              //$statusCelularDiscipulo->discipuloId= $url[3];
              $statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
@@ -308,13 +308,17 @@ class discipulo
                                                                   'class' => 'alert alert-success');
 
 
+                    $lider = new DiscipuloModelo();
+                    $lider->id = $_SESSION['usuario_id'];
+                    $lider = $lider->listarUm();
+
             $headers = "MIME-Version: 1.1\n";
             $headers .= "Content-type: text/plain; charset=utf-8\n";
             $headers .= "From: Multiplicação12 <multiplicaca12@mga12.org>"."\n"; // remetente
-            $headers .= "Return-Path: Meu Nome <multiplicacao@mga12.org>"."\n"; // return-path
-            $envio = mail("tiaoveloso12@gmail.com", "Novo Discipulo", "nome: ".$discipulo->nome,
-                            $headers,"-r multiplicacao12@mga12.org");
-
+            $headers .= "Return-Path: M12 <multiplicacao@mga12.org>"."\n"; // return-path
+            $envio = mail("tiaoveloso12@gmail.com,".$lider->email,
+                          "Novo Discipulo", "Nome: ".$discipulo->nome." Líder: ".$lider->nome,
+                          $headers, "-r multiplicacao12@mga12.org");
                 } else {
 
                 $_SESSION['dados']['nome'] = $post['nome'] ;

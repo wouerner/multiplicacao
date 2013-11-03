@@ -2,56 +2,40 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <style type="text/css">
-           @import url("../../../ext/twitter-bootstrap/bootstrap.css");
-           @import url("../../../incluidos/css/estilo.css");
-        </style>
-        <script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
+        <?php include 'incluidos/css.inc.php' ; ?>
+        <?php include 'incluidos/js.inc.php' ; ?>
     </head>
-
     <body>
-        <section class = "container">
+        <section class="container-fluid">
         <header>
             <nav>
                 <?php require 'modulos/menu/visao/menu.inc.php' ; ?>
             </nav>
         </header>
-
         <section>
             <article>
-                    <form action = "/rede/atualizarTipoRede" method = "post"  class = "form-horizontal">
-
-                    <div class = "row" >
-                              <fieldset class = "span6" >
-                                  <legend>Atualizar Tipo de Rede </legend>
-
-                              <div class="control-group ">
-                                  <label class = "control-label" >Nome:</label>
-                                  <div class = "controls" >
-                                      <input name = "nome"  value = "<?php echo $rede['nome'] ; ?>" required >
-                                  </div>
-                                  </div>
-
-                                  <input type = "hidden" name = "id" value = "<?php echo $rede['id']?>">
-
-                              </fieldset>
-
-                              <fieldset class = "span12" >
-                                      <div class = "form-actions" >
-                                            <a class = "btn" href = "/rede/listarTipoRede" ><i class = " icon-chevron-left" ></i></a>
-                                          <button type = "submit" class = "btn btn-primary" >Atualizar</button>
-                                  </div>
-                              </fieldset>
-
+                <form action="/rede/rede/atualizarTipoRede" method="post"  class="form-horizontal">
+                    <div class="row" >
+                        <fieldset class="span6" >
+                            <legend>Atualizar Tipo de Rede</legend>
+                            <div class="control-group">
+                                <label class="control-label">Nome:</label>
+                                <div class="controls" >
+                                    <input name="nome" value="<?php echo $rede->nome; ?>" required >
+                                </div>
+                            </div>
+                            <input type="hidden" name="id" value="<?php echo $rede->id;?>">
+                        </fieldset>
+                        <fieldset class="span12" >
+                            <div class="form-actions" >
+                                <a class="btn" href="/rede/rede/listarTipoRede" ><i class=" icon-chevron-left" ></i></a>
+                                <button type="submit" class="btn btn-primary" >Atualizar</button>
+                            </div>
+                        </fieldset>
                     </div>
-
-                    </form>
-
+                </form>
             </article>
-
         </section>
-
         </section>
     </body>
-
 </html>

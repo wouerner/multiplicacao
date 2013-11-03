@@ -77,15 +77,27 @@ $(document).ready(function () {
 <div class = "well" >
 
             <table class = "table" >
-                <caption><h3><?php echo $discipulo->nome ; ?> <a href="/metas/metas/detalhar/id/<?php echo $discipulo->id ?>">metas</a></h3></caption>
+            <caption>
+                <h3>
+                    <span class="label">
+                        <?php echo $discipulo->getGeracao()->nome?>
+                    </span>
+                    <?php echo $discipulo->nome ; ?> 
+                        <a href="/metas/metas/detalhar/id/<?php echo $discipulo->id ?>">metas</a></h3> 
+            </caption>
             <tr>
                 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                <td>
+                    <td>
                         <a id = "<?php echo $discipulo->id ?>" 
                             href="/metas/metas/novo/id/<?php echo $discipulo->id ?>" class = "btn btn-mini " alt = "excluir" >
-                        <i class="icon-screenshot "></i> Cadastrar Meta</a>
-                </td>
+                            <i class="icon-screenshot "></i> Cadastrar Meta
+                        </a>
+                     </td>
                 <?php endif ; ?>
+                     <td>
+                        <a href="/geracoes/geracao/novo/id/<?php echo $discipulo->id ?>" class = "btn btn-mini">
+                        Cadastrar Geração</a>
+                    </td>
                 <td>
                 <a id = "<?php echo $discipulo->id ?>" href="/metas/participantesMetas/novo/id/<?php echo $discipulo->id ?>" class = "btn btn-mini " alt = "" ><i class="icon-group icon-white"></i>Participantes da Meta</a>
                 </td>
@@ -231,6 +243,7 @@ $(document).ready(function () {
                  <tr><td><strong>Ações</strong></td></tr>
                     <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
                 </table>
+                    
             </div>
             </article>
         </section>

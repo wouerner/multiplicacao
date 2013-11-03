@@ -62,7 +62,7 @@ class discipulos
               }
 
                     $sql='SELECT DISTINCT
-                                d.id, d.nome , d.alcunha , d.dataNascimento, d.sexo, d.estadoCivilId, d.telefone, d.email, d.endereco, d.lider, d.celula
+                                d.id, d.nome , d.alcunha , d.dataNascimento, d.sexo, d.estadoCivilId, d.telefone, d.email, d.endereco, d.lider, d.celula, d.ativo
                                 FROM
                                     Discipulo AS d
                                 left join

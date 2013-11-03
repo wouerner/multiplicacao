@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php include 'incluidos/css.inc.php' ; ?>
         <?php include 'incluidos/js.inc.php' ; ?>
 
@@ -19,8 +19,24 @@
                 );
         </script>
 
+        <style type="text/css">
+           @import url("../../../ext/jQuery-Visualize/css/visualize.css");
+        </style>
+        <script src="../../../ext/jQuery-Visualize/js/visualize.jQuery.js"></script>
+        <script>
+$(function(){
+            $('#tabelaStatus').visualize({type: 'pie',pieMargin: 60,
+                                          pieLabelPos:'outside',
+                                          height: '300px', width: '500px'});
+            $('#discipulosEstado').visualize({type: 'pie',pieMargin: 60,
+                                          pieLabelPos:'outside',
+                                          height: '300px', width: '500px'});
+            $('#discipulosRede').visualize({type: 'pie',pieMargin: 60,
+                                          pieLabelPos:'outside',
+                                          height: '400px', width: '500px'});
+});
+        </script>
     </head>
-
     <body>
         <section class = "container-fluid">
         <nav>
@@ -28,7 +44,6 @@
         </nav>
         <section>
             <article>
-
               <div class = "row-fluid" >
                 <?php if ( $mensagem ) : ?>
                     <div class = "alert alert-success span10" >
@@ -91,27 +106,30 @@
         </div>
         <div id="collapseOne" class="accordion-body collapse">
         <div class="accordion-inner">
-                    <table id = "tabelaStatus" class = "table table-striped  tablesorter " >
+                    <table id="tabelaStatus" class = "table table-striped  tablesorter " >
                     <thead>
                         <tr>
-                            <th>Nome</th>
-                            <th>Quantidade</th>
+                            <th></th>
+                            <th scope="col">Quantidade</th>
                             <th>%</th>
                         </tr>
-                        </thead>
+                    </thead>
                         <tbody>
                         <?php foreach($status as $s) : ?>
                             <tr>
                                 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                                    <td><a href="/statusCelular/statusCelular/listarDiscipulosPorStatus/id/<?php echo $s['tipoStatusCelular'] ; ?>" ><?php echo $s['tipoNome'] ; ?></a></td>
+                                    <th scope="row"><a href="/statusCelular/statusCelular/listarDiscipulosPorStatus/id/<?php echo $s['tipoStatusCelular'] ; ?>" ><?php echo $s['tipoNome'] ; ?></a></th>
                                 <?php else :?>
                                     <td><?php echo $s['tipoNome'] ; ?></td>
                                 <?php endif ; ?>
                                     <td><?php echo $s['total'] ; ?></td>
-                                    <td><?php echo round($s['porcentagem'],1).'%' ; ?></td>
+                                 <!--   <td><?php echo round($s['porcentagem'],1).'%' ; ?></td>-->
                             </tr>
                         <?php endforeach ; ?>
-                            <tr  class = "info" ><td>Total</td><td colspan = "2"><?php echo $totalDiscipulos ; ?></td></tr>
+                            <!-- <tr  class = "info" ><td>Total</td><td colspan = "2">
+                                <?php echo $totalDiscipulos ; ?>
+                                </td> -->
+                            </tr>
                         </tbody>
                     </table>
         </div>
@@ -165,7 +183,32 @@
                         </tr>
                     </tbody>
                 </table>
-
+                <table style="display:none" id="discipulosRede" class = "table " >
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <th socpe="col">quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $total['discipulos']=0?>
+                        <?php $total['celulas']= 0?>
+                        <?php $total['metas']= 0?>
+                        <?php foreach( $tiposRedes as $s) :?>
+                        <tr>
+                            <th scope="row">
+                                 <?php echo $s->nome ?>
+                            </th>
+                            <td>
+                                <?php echo $s->totalDiscipulosPorRede() ?></a>
+                            </td>
+                        </tr>
+                        <?php $total['discipulos'] += $s->totalDiscipulosPorRede()?>
+                        <?php $total['celulas']+= $s->listarCelulasTotal()?>
+                        <?php $total['metas']+= $s->getMeta()?>
+                        <?php endforeach ; ?>
+                    </tbody>
+                </table>
         </div>
         </div>
     </div>
@@ -176,30 +219,78 @@
                 Discipulos Ativos/Inativos/Arquivados<b class="caret pull-right"></b>
             </a>
         </div>
-
         <div id="collapseTree" class="accordion-body collapse">
-        <div class="accordion-inner">
+            <div class="accordion-inner">
                 <table class = "table " >
                     <thead>
-                        <th>Ativos</th>
-                        <th>Inativos</th>
-                        <th>Arquivados</th>
+                        <th scope="col">Ativos</th>
+                        <th scope="col">Inativos</th>
+                        <th scope="col">Arquivados</th>
                     </thead>
                     <tbody>
                         <tr>
+                            <td scope="row"><?php echo $totalAtivos['total'] ; ?></td>
+                            <td scope="row"><?php echo $totalInativos['total'] ; ?></td>
+                            <td scope="row"><?php echo $totalArquivados['total'] ; ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table style="display:none" id="discipulosEstado" class = "table " >
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <th socpe="col">quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Ativos</th>
                             <td><?php echo $totalAtivos['total'] ; ?></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Inativos</th>
                             <td><?php echo $totalInativos['total'] ; ?></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Arquivados</th>
                             <td><?php echo $totalArquivados['total'] ; ?></td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
         </div>
+    </div>
+
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse4">
+                Gerações<b class="caret pull-right"></b>
+            </a>
         </div>
+        <div id="collapse4" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <table class = "table " >
+                    <thead>
+                        <th>Nome</th>
+                        <th>Quantidade</th>
+                    </thead>
+                    <tbody>
+                            <?php foreach($geracoes as $g):?>
+                        <tr>
+                            <td><?php echo $g->nome ; ?></td>
+                            <td><?php echo $g->quantidade() ; ?></td>
+                        </tr>
+                            <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div>
-</div>
 
-</div>
 </div>
 
 <div class = "span6 " >

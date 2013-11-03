@@ -135,7 +135,44 @@ class celula extends modeloFramework
         }
 
         return $resposta ;
+    }
 
+    public function listarTodosAtivos()
+    {
+        $pdo = new \PDO (DSN,USER,PASSWD);
+
+        $sql = 'SELECT * FROM Celula WHERE ativa=1 ORDER BY nome ';
+
+        $stm = $pdo->prepare($sql);
+
+        $stm->execute();
+
+        $resposta = array();
+
+        while ( $obj = $stm->fetchObject('\celula\modelo\celula') ) {
+            $resposta[$obj->id] = $obj ;
+        }
+
+        return $resposta ;
+    }
+
+    public function listarTodosInativos()
+    {
+        $pdo = new \PDO (DSN,USER,PASSWD);
+
+        $sql = 'SELECT * FROM Celula WHERE ativa=0 ORDER BY nome ';
+
+        $stm = $pdo->prepare($sql);
+
+        $stm->execute();
+
+        $resposta = array();
+
+        while ( $obj = $stm->fetchObject('\celula\modelo\celula') ) {
+            $resposta[$obj->id] = $obj ;
+        }
+
+        return $resposta ;
     }
 
     public function listarCelulasPorRede()
@@ -456,6 +493,25 @@ order by dnome
 
         return $resposta;
 
+    }
+
+    public function listarCelulasLiderInativos()
+    {
+        $pdo = new \PDO(DSN, USER, PASSWD) ;
+
+        $sql = 'SELECT * FROM Celula WHERE lider = ?  AND ativa = 0 ';
+
+        $stm = $pdo->prepare($sql);
+        $stm->bindParam( 1 , $this->lider );
+
+        $stm->execute();
+        $resposta = array();
+
+        while ( $obj = $stm->fetchObject ('\celula\modelo\celula') ) {
+            $resposta[$obj->id] = $obj;
+        }
+
+        return $resposta;
     }
 
     /* listar todos menos os usuario logado atualmente, e com paginação

@@ -2,6 +2,7 @@
 namespace discipulo\Modelo;
 
 use \framework\modelo\modeloFramework;
+use \geracoes\modelo\geracoes as geracaoModelo;
 
 class Discipulo extends modeloFramework
 {
@@ -10,7 +11,11 @@ class Discipulo extends modeloFramework
     private $nome;
     private $alcunha;
     private $dataNascimento;
-    private $sexo = 'm'; // padrão da classe é sexo masculino
+
+    /* Sexo da pessoa: m = Maculino, f = Feminino.
+     * */
+    private $sexo = 'm';
+
     private $estadoCivilId;
     private $ativo;
     private $telefone;
@@ -26,6 +31,7 @@ class Discipulo extends modeloFramework
     private $erro;
     private $rede;
     private $foto;
+    private $geracao;
 
     public function __construct ()
     {
@@ -221,6 +227,17 @@ class Discipulo extends modeloFramework
 
         return $batismo->listarUm();
 
+    }
+
+    /*.
+     * */
+    public function getGeracao()
+    {
+        $geracao = new geracaoModelo();
+        $geracao->discipuloId = $this->id;
+        $this->geracao = $geracao->listarUm();
+
+        return $this->geracao;
     }
 
     public function eLider()
@@ -565,7 +582,7 @@ class Discipulo extends modeloFramework
     {
         $pdo = self::pegarConexao();
 
-        $sql = 'SELECT count(*) AS total FROM Discipulo WHERE ativo = 0 ';
+        $sql = 'SELECT count(*) AS total FROM Discipulo WHERE ativo = 0 AND arquivo =0';
 
         $stm = $pdo->prepare($sql);
 

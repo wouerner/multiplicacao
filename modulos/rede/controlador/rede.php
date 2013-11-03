@@ -182,7 +182,6 @@ namespace rede\controlador;
                 header ('location:/discipulo/atualizar/id/'.$discipulo->id);
                 exit();
             }
-
         }
 
         public function atualizarTipoRede($url)
@@ -190,7 +189,7 @@ namespace rede\controlador;
             if ( empty ( $url['post'] ) ) {
 
                 $rede =	new \rede\modelo\tipoRede();
-                $rede->id = $url[3] ;
+                $rede->id = $url[4] ;
                 $rede = $rede->listarUm();
 
                 require_once 'modulos/rede/visao/tipoRede/atualizar.php';
@@ -205,7 +204,7 @@ namespace rede\controlador;
 
                 $rede->atualizar();
 
-                header ('location:/rede/atualizarTipoRede/id/'.$rede->id);
+                header ('location:/rede/rede/atualizarTipoRede/id/'.$rede->id);
                 exit();
             }
 

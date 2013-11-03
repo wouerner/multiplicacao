@@ -4,7 +4,6 @@ $dados = isset($_SESSION['dados']) ? $_SESSION['dados'] : NULL;
 $_SESSION['mensagem'] = isset($_SESSION['mensagem']) ? NULL : NULL;
 $_SESSION['dados'] = isset($_SESSION['dados']) ? NULL : NULL;
 
-//var_dump($mensagem);
 ?>
 <!DOCTYPE html>
 <html>
@@ -78,31 +77,23 @@ $_SESSION['dados'] = isset($_SESSION['dados']) ? NULL : NULL;
         </script>
 
     </head>
-
     <body>
         <section class = "container-fluid">
-        <header>
-            <nav>
-                <?php require 'modulos/menu/visao/menu.inc.php' ; ?>
-            </nav>
-        </header>
-
-        <section>
-
-            <article>
-
-            <?php if ($mensagem) : ?>
-            <div class = "<?php echo $mensagem['class']?>" >
-                        <?php echo $mensagem['mensagem'] ; ?>
-                </div>
-            <?php endif ; ?>
-
-                <?php include 'discipulo/visao/formularioNovoCompleto.inc.php' ; ?>
-            </article>
-        </section>
-
-    </div>
+            <header>
+                <nav>
+                    <?php require 'modulos/menu/visao/menu.inc.php' ; ?>
+                </nav>
+            </header>
+            <section>
+                <article>
+                    <?php if ($mensagem) : ?>
+                        <div class = "<?php echo $mensagem['class']?>" >
+                            <?php echo $mensagem['mensagem'] ; ?>
+                        </div>
+                    <?php endif ; ?>
+                    <?php include 'discipulo/visao/formularioNovoCompleto.inc.php' ; ?>
+                </article>
+            </section>
         </section>
     </body>
-
 </html>

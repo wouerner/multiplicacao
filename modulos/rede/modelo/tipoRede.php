@@ -1,85 +1,81 @@
 <?php
 
-namespace rede\modelo ;
+namespace rede\modelo;
 
-use \framework\modelo\modeloFramework ;
+use \framework\modelo\modeloFramework;
 use \metas\modelo\metas as Metas;
 
-class  tipoRede extends modeloFramework
+class tipoRede extends modeloFramework
 {
-    private $id ;
-    private $nome ;
-    private $erro ;
+    private $id;
+    private $nome;
+    private $erro;
 
-          public function __get($prop)
-          {
-                     return $this->$prop ;
-
-          }
-
-          public function __set($prop, $valor)
-          {
-                     $this->$prop = $valor ;
-
-          }
-
-            public function getMeta()
-            {
-                $meta = new Metas();
-                $meta->tipoRedeId = $this->id;
-                $meta = $meta::metaPorRede();
-                //var_dump($meta);
-                return $meta[0] ;
-
-            }
-
-              public function salvar()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = "INSERT INTO TipoRede ( nome )
-                  VALUES (?)";
-
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->nome);
-
-              $resposta = $stm->execute();
-
-              //fechar conexÃ£o
-              $pdo = null ;
-
-              return $resposta;
+    public function __get($prop)
+    {
+        return $this->$prop;
     }
 
-              public function salvarTipoRedeDiscipulo()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = "INSERT INTO TipoRedeTemDiscipulo ( ministerioId, discipuloId, funcaoId )
-                  VALUES (?,?,?)";
+    public function __set($prop, $valor)
+    {
+        $this->$prop = $valor;
+    }
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->nome);
-              $stm->bindParam(2, $this->nome);
-              $stm->bindParam(3, $this->nome);
+    public function getMeta()
+    {
+        $meta = new Metas();
+        $meta->tipoRedeId = $this->id;
+        $meta = $meta::metaPorRede();
 
-              $resposta = $stm->execute();
+        return $meta[0];
+    }
 
-              //fechar conexÃ£o
-              $pdo = null ;
+    public function salvar()
+    {
+        //abrir conexao com o banco
+        $pdo = new \PDO(DSN, USER, PASSWD);
+        //cria sql
+        $sql = "INSERT INTO TipoRede ( nome )
+            VALUES (?)";
 
-              return $resposta;
+        //prepara sql
+        $stm = $pdo->prepare($sql);
+        //trocar valores
+        $stm->bindParam(1, $this->nome);
+
+        $resposta = $stm->execute();
+
+        //fechar conexÃ£o
+        $pdo = null;
+
+        return $resposta;
+    }
+
+    public function salvarTipoRedeDiscipulo()
+    {
+        //abrir conexao com o banco
+        $pdo = new \PDO(DSN, USER, PASSWD);
+        //cria sql
+        $sql = "INSERT INTO TipoRedeTemDiscipulo ( ministerioId, discipuloId, funcaoId )
+            VALUES (?,?,?)";
+
+        //prepara sql
+        $stm = $pdo->prepare($sql);
+        //trocar valores
+        $stm->bindParam(1, $this->nome);
+        $stm->bindParam(2, $this->nome);
+        $stm->bindParam(3, $this->nome);
+
+        $resposta = $stm->execute();
+
+        $pdo = null;
+
+        return $resposta;
     }
 
     public function listarTodos()
     {
-        $pdo = self::pegarConexao() ;
+        $pdo = self::pegarConexao();
 
         $sql = 'SELECT * FROM TipoRede';
 
@@ -89,8 +85,8 @@ class  tipoRede extends modeloFramework
 
         $resposta = array();
 
-        while ($obj = $stm->fetchObject('\rede\modelo\tipoRede') ) {
-            $resposta[$obj->id] = $obj ;
+        while ($obj = $stm->fetchObject('\rede\modelo\tipoRede')) {
+            $resposta[$obj->id] = $obj;
         }
 
         return $resposta;
@@ -99,33 +95,30 @@ class  tipoRede extends modeloFramework
 
     public function totalDiscipulosPorRede()
     {
-              $pdo = self::pegarConexao() ;
+        $pdo = self::pegarConexao();
 
-                $sql ='
-                                SELECT count(*) FROM Discipulo as d
-inner join Redes as r on d.id = r.discipuloId and d.ativo = 1
-WHERE r.tipoRedeId = ?
-                                ';
+        $sql ='
+                SELECT count(*) FROM Discipulo as d
+                inner join Redes as r on d.id = r.discipuloId and d.ativo = 1
+                WHERE r.tipoRedeId = ?
+                ';
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-                //var_dump($this);
-                $id = $this->id ;
+        $stm = $pdo->prepare($sql);
+        $id = $this->id;
 
-              $stm->bindParam(1, $id);
+        $stm->bindParam(1, $id);
 
-              $stm->execute();
-              $resposta = $stm->fetch();
+        $stm->execute();
+        $resposta = $stm->fetch();
 
-              $pdo = null ;
+        $pdo = null;
 
-              return $resposta[0];
-
-        }
+        return $resposta[0];
+    }
 
     public function listarUm()
     {
-        $pdo = new \PDO (DSN,USER,PASSWD);
+        $pdo = self::pegarConexao();
 
         $sql = 'SELECT * FROM TipoRede WHERE id = ?';
 
@@ -136,12 +129,11 @@ WHERE r.tipoRedeId = ?
         $stm->execute();
 
         return $stm->fetchObject();
-
     }
 
     public function listarCelulas()
     {
-        $pdo = new \PDO (DSN,USER,PASSWD);
+        $pdo = self::pegarConexao();
 
         $sql = 'SELECT * FROM Celula WHERE tipoRedeId = ? order by Celula.nome';
 
@@ -152,16 +144,16 @@ WHERE r.tipoRedeId = ?
         $stm->execute();
         $resposta = array();
 
-        while ( $obj = $stm->fetchObject('\celula\modelo\celula') ) {
-            $resposta[$obj->id] = $obj ;
+        while ($obj = $stm->fetchObject('\celula\modelo\celula')) {
+            $resposta[$obj->id] = $obj;
         }
 
-        return $resposta ;
+        return $resposta;
     }
 
     public function listarCelulasTotal()
     {
-        $pdo = self::pegarConexao() ;
+        $pdo = self::pegarConexao();
 
         $sql = 'SELECT COUNT(*) AS total FROM Celula WHERE tipoRedeId = ?';
 
@@ -173,54 +165,45 @@ WHERE r.tipoRedeId = ?
 
         $resposta = $stm->fetch();
 
-        return $resposta[0] ;
+        return $resposta[0];
     }
 
     public function atualizar()
     {
-    //abrir conexao com o banco
-    $pdo = new \PDO(DSN, USER, PASSWD);
-    //cria sql
-    $sql = " UPDATE TipoRede SET 	nome = ?
-        WHERE id = ? ";
-    //prepara sql
-    $stm = $pdo->prepare($sql);
-    //trocar valores
-    $stm->bindParam(1, $this->nome);
-    $stm->bindParam(2, $this->id);
+        $pdo = self::pegarConexao();
+        $sql = " UPDATE TipoRede SET 	nome = ?
+            WHERE id = ? ";
+        $stm = $pdo->prepare($sql);
+        $stm->bindParam(1, $this->nome);
+        $stm->bindParam(2, $this->id);
 
-    $resposta = $stm->execute();
+        $resposta = $stm->execute();
 
-    //fechar conexÃ£o
-    $pdo = null ;
+        $pdo = null;
 
-    return $resposta;
+        return $resposta;
 
     }
 
     public function excluir()
     {
-    try {
-        $pdo = new \PDO (DSN,USER,PASSWD);
+        try {
+            $pdo = self::pegarConexao();
 
-        $sql = 'DELETE FROM TipoRede WHERE id = ?';
+            $sql = 'DELETE FROM TipoRede WHERE id = ?';
 
-        $stm = $pdo->prepare($sql);
+            $stm = $pdo->prepare($sql);
 
-        $stm->bindParam(1, $this->id);
+            $stm->bindParam(1, $this->id);
 
-        $resposta = $stm->execute();
-        $erro = $stm->errorCode();
+            $resposta = $stm->execute();
+            $erro = $stm->errorCode();
 
-        if ($erro != '0000') {
-
-             throw new \Exception ('Existe discípulos cadastrados') ;
-        }
+            if ($erro != '0000') {
+                 throw new \Exception('Existe discípulos cadastrados');
+            }
         } catch ( \Exception $e ) {
-
-                  $this->erro= $e->getMessage();
+            $this->erro= $e->getMessage();
+        }
     }
-
-    }
-
 }
