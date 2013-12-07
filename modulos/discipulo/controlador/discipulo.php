@@ -304,11 +304,11 @@ class discipulo
                             $aviso->emissor = $_SESSION['usuario_id'];
                             $aviso->salvar();
 
-                            $_SESSION['mensagem'] = array('mensagem'	=> 'Cadastro Realizado com Sucesso!',
-                                                                  'class' => 'alert alert-success');
+                            $_SESSION['mensagem'] = array('mensagem'=> 'Cadastro Realizado com Sucesso!',
+                                                          'class' => 'alert alert-success');
 
 
-                    $lider = new DiscipuloModelo();
+                    $lider =	new \discipulo\Modelo\Discipulo();
                     $lider->id = $_SESSION['usuario_id'];
                     $lider = $lider->listarUm();
 
@@ -327,7 +327,10 @@ class discipulo
                 $_SESSION['dados']['endereco'] = $post['endereco'] ;
                 $_SESSION['dados']['email'] = $post['email'] ;
 
-                $_SESSION['mensagem'] ="E-mail já cadastrado" ;
+                $_SESSION['mensagem'] = array('mensagem'=> 'E-mail já cadastrado!',
+                                              'class' => 'alert alert-danger');
+
+                var_dump($_SESSION);
                 header ('location:/discipulo/discipulo/novoCompleto');
                 exit();
 

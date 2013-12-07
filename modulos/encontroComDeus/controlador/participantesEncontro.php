@@ -15,7 +15,18 @@ class participantesEncontro
         $ativo = 'active' ;
 
         require_once 'modulos/encontroComDeus/visao/participantesEncontro/listarTodos.php';
+    }
 
+    public function lista($url)
+    {
+        $participante = new \encontroComDeus\modelo\participantesEncontro() ;
+        $participante->encontroComDeusId =$url[4] ;
+        $discipulos = $participante->listarTodos();
+
+        $total = count ($discipulos) ;
+        $ativo = 'active' ;
+
+        require_once 'modulos/encontroComDeus/visao/participantesEncontro/lista.php';
     }
 
     public function novo($url)
@@ -525,7 +536,7 @@ class participantesEncontro
             $pdf->SetFont('Arial','B',14);
             $pdf->SetY($y+20);
             $pdf->SetX($x);
-            $pdf->Cell(70,10,'Nome: '.$d->getNomeAbreviado());
+            $pdf->Cell(70,10,'Nome: '.utf8_decode($d->getNomeAbreviado()));
 
             $pdf->SetY($y+20);
             $pdf->SetX($x+80);
@@ -544,7 +555,7 @@ class participantesEncontro
             $pdf->Cell(70,10,'Lider: '.utf8_decode($d->getLider()->nome) );
 
             $txt = utf8_decode('Condições de Pagamento:
-a) Valor do encontro para encontrista: R$ 85,00 - à vista; R$ 100,00 - a prazo;
+a) Valor do encontro para encontrista: R$ 100,00 - à vista; R$ 120,00 - a prazo;
 b) O pagamento a prazo e/ou parcelamento somente será aceito em CHEQUE OU CARTÃO.
 OBS: Não haverá ressarcimento ou alteração dos valores acordados, bem como das formas de pagamento.
 Estou CIENTE da minha participação no ENCONTRO COM DEUS e concordo em realizar o pagamento
@@ -601,7 +612,7 @@ Membro de outra Igreja (Ass. do Pastor):________________________________________
             $pdf->SetFont('Arial','B',14);
             $pdf->SetY($y+20);
             $pdf->SetX($x);
-            $pdf->Cell(70,10,'Nome: '.$d->getNomeAbreviado());
+            $pdf->Cell(70,10,'Nome: '.utf8_decode($d->getNomeAbreviado()));
 
             $pdf->SetY($y+20);
             $pdf->SetX($x+80);
@@ -620,7 +631,7 @@ Membro de outra Igreja (Ass. do Pastor):________________________________________
             $pdf->Cell(70,10,'Lider: '.utf8_decode($d->getLider()->nome) );
 
             $txt = utf8_decode('Condições de Pagamento:
-a) Valor do encontro para encontrista: R$ 85,00 - à vista; R$ 100,00 - a prazo;
+a) Valor do encontro para encontrista: R$ 100,00 - à vista; R$ 120,00 - a prazo;
 b) O pagamento a prazo e/ou parcelamento somente será aceito em CHEQUE OU CARTÃO.
 OBS: Não haverá ressarcimento ou alteração dos valores acordados, bem como das formas de pagamento.
 Estou CIENTE da minha participação no ENCONTRO COM DEUS e concordo em realizar o pagamento

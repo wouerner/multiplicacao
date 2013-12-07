@@ -57,7 +57,8 @@ $(function(){
 <div class="row-fluid">
     <div class="span12">
     <div class="alert">
-        <a id = "<?php //echo $discipulo->id ?>" href="/encontroComDeus/preEquipe/novoMembro/id/<?php echo $_SESSION['usuario_id'] ?>" class = "" alt = "" > <i class="icon-wrench"></i>Me cadidatar a Trabalhar no Encontro</a>
+        <a id = "<?php //echo $discipulo->id ?>" href="/encontroComDeus/preEquipe/novoMembro/id/<?php echo $_SESSION['usuario_id'] ?>" class = "" alt = "" > <i class="icon-wrench"></i>Me candidatar a Trabalhar no Encontro</a>
+        <a href="http://m.localhost/encontroComDeus/participantesEncontro/lista/id/9">Lista do Encontro</a>
     </div>
     </div>
 </div>
