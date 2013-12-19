@@ -2,169 +2,175 @@
 
 namespace aviso\modelo;
 
-class aviso
-{
-          private $id;
-          private $emissor;
-          private $tipoAviso;
-          private $dataAviso;
-          private $identificacao;
+class aviso{
 
-          public function __get($prop)
-          {
-                  return $this->$prop ;
-          }
+		  private $id;
+		  private $emissor;
+		  private $tipoAviso;
+		  private $dataAviso;
+		  private $identificacao;
 
-          public function __set($prop, $valor)
-          {
-                  $this->$prop = $valor ;
-          }
 
-          public function salvar()
-          {
-              $pdo = new \PDO(DSN, USER, PASSWD);
+		  public function __get($prop){
+		  		return $this->$prop ; 
+		  }
 
-              $sql = "INSERT INTO Avisos (emissor , tipoAvisoId, dataAviso ,  identificacao )
-                              VALUES (?, ?, NOW(),?)";
+		  public function __set($prop, $valor){
+		  		$this->$prop = $valor ; 
+		  }
 
-              $stm = $pdo->prepare($sql);
+		  public function salvar(){
 
-              $stm->bindParam( 1 , $this->emissor );
-              $stm->bindParam( 2 , $this->tipoAviso );
-              $stm->bindParam( 3 , $this->identificacao );
+			  $pdo = new \PDO(DSN, USER, PASSWD);
 
-              $resposta = $stm->execute();
+			  $sql = "INSERT INTO Avisos (emissor , tipoAvisoId, dataAviso ,  identificacao )
+				  			VALUES (?, ?, NOW(),?)";
 
-              $pdo = null ;
+			  $stm = $pdo->prepare($sql);
+				
+			  $stm->bindParam( 1 , $this->emissor );
+			  $stm->bindParam( 2 , $this->tipoAviso );
+			  $stm->bindParam( 3 , $this->identificacao );
 
-              return $resposta;
-          }
+			  $resposta = $stm->execute();
 
-          public function listarTodos()
-          {
-        $pdo = new \PDO (DSN,USER,PASSWD);
+			  $pdo = null ;
 
-        $sql = 'SELECT d.nome, a.identificacao, a.dataAviso, ta.modulo, ta.acao FROM
-Discipulo AS d
-inner join
+			  return $resposta;
+		  }
+
+
+		  public function listarTodos(){
+
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT d.nome, a.identificacao, a.dataAviso, ta.modulo, ta.acao FROM 
+Discipulo AS d 
+inner join 
 Avisos AS a on d.id = a.emissor
-inner join
-TipoAviso AS ta
-on a.tipoAvisoId = ta.id
+inner join 
+TipoAviso AS ta 
+on a.tipoAvisoId = ta.id 
 order by a.dataAviso DESC
 ';
 
-        $stm = $pdo->prepare($sql);
+		$stm = $pdo->prepare($sql);
 
-        $stm->execute();
+		$stm->execute();
 
-        return $stm->fetchAll();
+		return $stm->fetchAll();
 
-    }
-        public function listarUltimos()
-        {
-        $pdo = new \PDO (DSN,USER,PASSWD);
+	}
+		public function listarUltimos(){
 
-        $sql = 'SELECT d.nome, a.identificacao, a.dataAviso, ta.modulo, ta.acao FROM
-Discipulo AS d
-inner join
+		$pdo = new \PDO (DSN,USER,PASSWD);	
+
+		$sql = 'SELECT d.nome, a.identificacao, a.dataAviso, ta.modulo, ta.acao FROM 
+Discipulo AS d 
+inner join 
 Avisos AS a on d.id = a.emissor
-inner join
-TipoAviso AS ta
-on a.tipoAvisoId = ta.id
+inner join 
+TipoAviso AS ta 
+on a.tipoAvisoId = ta.id 
 order by a.dataAviso DESC
-limit 5
+limit 5 
 ';
 
-        $stm = $pdo->prepare($sql);
+		$stm = $pdo->prepare($sql);
 
-        $stm->execute();
+		$stm->execute();
 
-        return $stm->fetchAll();
+		return $stm->fetchAll();
 
-    }
+	}
 
-    /* Exclui um evento associado a um discipulo.
-     *
-     *
-     *
-     */
-    public function excluir()
-    {
-        $pdo = new \PDO (DSN,USER,PASSWD);
+	/* Exclui um evento associado a um discipulo.
+	 *
+	 *
+	 *
+	 */
+	public function excluir(){
 
-        $sql = 'DELETE FROM DiscipuloTemEvento WHERE discipuloId = ? AND eventoId = ?';
+		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-        $stm = $pdo->prepare($sql);
+		$sql = 'DELETE FROM DiscipuloTemEvento WHERE discipuloId = ? AND eventoId = ?';
 
-        $stm->bindParam(1, $this->discipuloId);
-        $stm->bindParam(2, $this->eventoId);
+		$stm = $pdo->prepare($sql);
 
-        $stm->execute();
+		$stm->bindParam(1, $this->discipuloId);
+		$stm->bindParam(2, $this->eventoId);
 
-    }
+		$stm->execute();
 
-    /*Lista apenas um Disicpulo
-    */
+	}
+	
+	/*Lista apenas um Disicpulo
+	*/
 
-    public function listarUm()
-    {
-        $pdo = new \PDO (DSN,USER,PASSWD);
+	public function listarUm(){
 
-        $sql = 'SELECT * FROM Admissao, TipoAdmissao WHERE discipuloId = ? AND Admissao.tipoAdmissao = TipoAdmissao.id Limit 1';
+		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-        $stm = $pdo->prepare($sql);
+		$sql = 'SELECT * FROM Admissao, TipoAdmissao WHERE discipuloId = ? AND Admissao.tipoAdmissao = TipoAdmissao.id Limit 1';
 
-        $stm->bindParam(1, $this->discipuloId);
+		$stm = $pdo->prepare($sql);
 
-        $stm->execute();
+		$stm->bindParam(1, $this->discipuloId);
 
-        return $stm->fetch();
+		$stm->execute();
 
-    }
+		return $stm->fetch();
 
-    public function atualizar()
-    {
-    //abrir conexao com o banco
-    $pdo = new \PDO(DSN, USER, PASSWD);
-    //cria sql
-    $sql = "UPDATE Admissao SET 	tipoAdmissao = ?	WHERE discipuloId = ?
-                    ";
-    //prepara sql
-    $stm = $pdo->prepare($sql);
-    //trocar valores
-    $stm->bindParam(1, $this->tipoAdmissao);
-    $stm->bindParam(2, $this->discipuloId);
+	}
 
-    $resposta = $stm->execute();
+	public function atualizar(){
 
-    var_dump($stm->errorInfo());
+	//abrir conexao com o banco
+	$pdo = new \PDO(DSN, USER, PASSWD);
+	//cria sql
+	$sql = "UPDATE Admissao SET 	tipoAdmissao = ?	WHERE discipuloId = ?
+					";
+	//prepara sql
+	$stm = $pdo->prepare($sql);
+	//trocar valores
+	$stm->bindParam(1, $this->tipoAdmissao);
+	$stm->bindParam(2, $this->discipuloId);
 
-    //fechar conexÃ£o
-    $pdo = null ;
 
-    return $resposta;
+	$resposta = $stm->execute();
 
-    }
+	var_dump($stm->errorInfo());
 
-    public function listarTodosDiscipulo($url)
-    {
-        $pdo = new \PDO(DSN, USER, PASSWD);
+	//fechar conexÃ£o
+	$pdo = null ;
 
-        $sql = '
-        SELECT DISTINCT id , nome
-        FROM DiscipuloTemEvento , Evento
-        WHERE DiscipuloTemEvento.discipuloId = ? AND Evento.id = DiscipuloTemEvento.eventoId
-        ' ;
+	return $resposta;
+	
+	}
+		
 
-        $stm = $pdo->prepare($sql);
+	public function listarTodosDiscipulo($url){
 
-        $stm->bindParam(1, $url);
+		$pdo = new \PDO(DSN, USER, PASSWD);	  
+		
+		$sql = '
+		SELECT DISTINCT id , nome
+		FROM DiscipuloTemEvento , Evento
+		WHERE DiscipuloTemEvento.discipuloId = ? AND Evento.id = DiscipuloTemEvento.eventoId
+		' ;
 
-        $stm->execute() ;
+		$stm = $pdo->prepare($sql);
 
-        return $stm->fetchAll();
+		
+		$stm->bindParam(1, $url);
 
-    }
+		$stm->execute() ; 
+
+		return $stm->fetchAll();
+	
+	}
+
 
 }
+
+

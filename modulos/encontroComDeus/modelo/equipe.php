@@ -149,6 +149,31 @@ class equipe extends modeloFramework
               return $resposta ;
                 }
 
+              public function listarEquipesAtivas()
+              {
+              $pdo = self::pegarConexao() ;
+
+              $sql = 'SELECT e.id AS id, e.encontroComDeusId as encontroComDeusId , te.id as tipoId , te.nome AS nome, ecd.nome AS encontroNome
+                                FROM
+                                Equipe AS e
+                                inner join TipoEquipe AS te on te.id = e.tipoEquipeId
+                                inner join EncontroComDeus as ecd ON ecd.id = e.encontroComDeusId
+                                where ecd.ativo =1
+                         ORDER BY nome ' ;
+
+              $stm = $pdo->prepare($sql);
+              $resposta = $stm->execute();
+
+              $pdo = null ;
+                $resposta = array();
+
+                while ( $obj = $stm->fetchObject ('\encontroComDeus\modelo\equipe')  ) {
+                    $resposta[$obj->id] = $obj ;
+                }
+
+              return $resposta ;
+                }
+
     public function listarUm()
     {
         $pdo = self::pegarConexao() ;

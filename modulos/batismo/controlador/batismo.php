@@ -56,7 +56,7 @@ class batismo
                 $d = $d->listarUm() ;
 
 
-                $pdf->SetFont('Times','',30);
+                $pdf->SetFont('Times','',40);
                 $pdf->Image('modulos/batismo/visao/batismo.jpg',0,0+$yi,50,147);
                 $pdf->Image('modulos/encontroComDeus/visao/participantesEncontro/mga.jpg',160,120+$yi,40,$t);
                 $pdf->Image('modulos/batismo/visao/assinatura.jpg',80,97+$yi,100,18);
@@ -65,7 +65,7 @@ class batismo
                 $pdf->Cell(150,30,' Certificado de Batismo',0,0,'C');
 
 
-                $pdf->SetFont('Arial','B',40);
+                $pdf->SetFont('Arial','B',30);
                 $pdf->SetY(30+$y);
                 $pdf->SetX(50);
                 $pdf->Cell(150,30,'Certificamos que',0,0,'C');
@@ -78,7 +78,7 @@ class batismo
                 $pdf->SetFont('Arial','B',22);
                 $pdf->SetY($y+90);
                 $pdf->SetX($x+50);
-                $pdf->Cell(150,10,'foi batizado em 11 de Agosto de 2013',0,0,'C');
+                $pdf->Cell(150,10,'foi batizado em 24 de Novembro de 2013',0,0,'C');
 
                 $pdf->SetY($y+105);
                 $pdf->SetX($x+50);

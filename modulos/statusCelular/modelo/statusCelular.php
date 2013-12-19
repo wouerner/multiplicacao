@@ -1,338 +1,349 @@
-<?php
+<?php 
 
 namespace statusCelular\modelo ;
 
-class statusCelular
-{
-          private $id ;
-          private $discipuloId;
-          private $tipoStatusCelular;
-          private $dataInicio;
-          private $ativo;
+class statusCelular{
 
-          public function __get($prop)
-          {
-                     return $this->$prop ;
+		  private $id ;
+		  private $discipuloId;
+		  private $tipoStatusCelular;
+		  private $dataInicio;
+		  private $ativo;
 
-          }
+		  public function __get($prop){
 
-          public function __set($prop, $valor)
-          {
-                     $this->$prop = $valor ;
+					 return $this->$prop ;
+		  
+		  }
 
-          }
-              public function salvar()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = "INSERT INTO StatusCelular ( discipuloId, tipoStatusCelular,dataInicio, ativo )
-                  VALUES ( ? , ? , NOW(), 1 )";
+		  public function __set($prop, $valor){
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->discipuloId);
-              $stm->bindParam(2, $this->tipoStatusCelular);
+					 $this->$prop = $valor ;
+		  
+		  }
+			  public function salvar(){
 
-              $resposta = $stm->execute();
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "INSERT INTO StatusCelular ( discipuloId, tipoStatusCelular,dataInicio, ativo )
+				  VALUES ( ? , ? , NOW(), 1 )";
 
-            //atualiza para esse o status atual
-              $this->id = $pdo->lastInsertId();
-              $this->atualizarAtivo();
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->discipuloId);
+			  $stm->bindParam(2, $this->tipoStatusCelular);
 
-              //fechar conexÃ£o
-              $pdo = null ;
+			  $resposta = $stm->execute();
 
-              return $resposta;
-        }
 
-        public function atualizarAtivo()
-        {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = 'UPDATE StatusCelular SET ativo =  0  WHERE id <> ? AND discipuloId = ? '
-                 ;
+			//atualiza para esse o status atual
+			  $this->id = $pdo->lastInsertId();
+			  $this->atualizarAtivo();
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->id);
-              $stm->bindParam(2, $this->discipuloId);
+			  //fechar conexÃ£o
+			  $pdo = null ;
 
-              $resposta = $stm->execute();
-            //  var_dump($stm->errorInfo());
+			  return $resposta;
+		}
 
-              //fechar conexÃ£o
-              $pdo = null ;
+		public function atualizarAtivo(){
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = 'UPDATE StatusCelular SET ativo =  0  WHERE id <> ? AND discipuloId = ? '
+				 ;
 
-              return $resposta;
-        }
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->id);
+			  $stm->bindParam(2, $this->discipuloId);
 
-              public function atualizar()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = "UPDATE StatusCelular SET 	tipoStatusCelular = ?
-                  WHERE discipuloId = ?
-                              ";
+			  $resposta = $stm->execute();
+			//  var_dump($stm->errorInfo());
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->tipoStatusCelular );
-              $stm->bindParam(2, $this->discipuloId );
+			  //fechar conexÃ£o
+			  $pdo = null ;
 
-              $resposta = $stm->execute();
+			  return $resposta;
+		}
 
-              $erro = $stm->errorInfo();
-              //var_dump($erro);
-              //exit();
 
-              //fechar conexÃ£o
-              $pdo = null ;
 
-              return $resposta;
 
-              }
 
-              public function listarUm()
-              {
-                  $pdo = new \PDO (DSN,USER,PASSWD);
+			  public function atualizar(){
 
-                  $sql = 'SELECT * FROM StatusCelular WHERE id = ?';
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "UPDATE StatusCelular SET 	tipoStatusCelular = ?  
+				  WHERE discipuloId = ?
+							  ";
 
-                  $stm = $pdo->prepare($sql);
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->tipoStatusCelular );
+			  $stm->bindParam(2, $this->discipuloId );
 
-                  $stm->bindParam(1, $this->id);
+			  $resposta = $stm->execute();
 
-                  $stm->execute();
+			  $erro = $stm->errorInfo();
+			  //var_dump($erro);
+			  //exit();
 
-                  return $stm->fetch();
+			  //fechar conexÃ£o
+			  $pdo = null ;
 
-              }
-              /*
-                *Este metodo retorna todos os Status do discipulo ordenado por data.
-                *
-                * */
+			  return $resposta;
+			  
+			  }
 
-              public function listarTodosStatus()
-              {
-                  $pdo = new \PDO (DSN,USER,PASSWD);
+			  public function listarUm(){
 
-                  $sql = 'SELECT  discipuloId, dataInicio , nome , s.id AS statusId , ts.id AS tipoId
-                            FROM StatusCelular AS s , TipoStatusCelular AS ts
-                            WHERE
-                            s.discipuloId = ? AND ts.id = s.tipoStatusCelular ORDER BY s.dataInicio DESC';
+				  $pdo = new \PDO (DSN,USER,PASSWD);	
 
-                  $stm = $pdo->prepare($sql);
+				  $sql = 'SELECT * FROM StatusCelular WHERE id = ?';
 
-                  $stm->bindParam(1, $this->discipuloId);
+				  $stm = $pdo->prepare($sql);
 
-                  $stm->execute();
+				  $stm->bindParam(1, $this->id);
 
-                  $resposta = array();
+				  $stm->execute();
 
-                    while ($ob = $stm->fetchObject('\statusCelular\modelo\statusCelular')) {
-                        $resposta[$ob->statusId] = $ob ;
-                    }
+				  return $stm->fetch();
 
-                  return $resposta;
+			  }
+			  /*
+				*Este metodo retorna todos os Status do discipulo ordenado por data.
+				*
+				* */
 
-              }
+			  public function listarTodosStatus(){
 
-              public function getTipoStatusCelular()
-              {
-                         $tipoStatus = new \statusCelular\modelo\tipoStatusCelular();
-                         $tipoStatus->id = $this->tipoStatusCelular ;
+				  $pdo = new \PDO (DSN,USER,PASSWD);	
 
-                         return $tipoStatus->listarUm();
+				  $sql = 'SELECT  discipuloId, dataInicio , nome , s.id AS statusId , ts.id AS tipoId 
+							FROM StatusCelular AS s , TipoStatusCelular AS ts 
+							WHERE 
+							s.discipuloId = ? AND ts.id = s.tipoStatusCelular ORDER BY s.dataInicio DESC';
 
-              }
+				  $stm = $pdo->prepare($sql);
 
-              public function getDataInicio()
-              {
-              try {
-                  return  new \DateTime($this->dataInicio, new \DateTimeZone('America/Sao_Paulo'));
-              } catch ( \Exception $e ) {
-                  echo 'Erro ao instanciar objeto.';
-                    echo $e->getMessage();
-                  exit();
-                  }
+				  $stm->bindParam(1, $this->discipuloId);
 
-              }
+				  $stm->execute();
 
-              public function pegarStatusCelular()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = "SELECT * FROM StatusCelular AS s, TipoStatusCelular
-                                WHERE  s.discipuloId = ? AND tipoStatusCelular = TipoStatusCelular.id and s.ativo=1
-                                ORDER BY s.dataInicio DESC";
+				  $resposta = array();
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->discipuloId);
+					while($ob = $stm->fetchObject('\statusCelular\modelo\statusCelular')){
+						$resposta[$ob->statusId] = $ob ;
+					}
+				  return $resposta;
 
-              $resposta = $stm->execute();
 
-              //fechar conexÃ£o
-              $pdo = null ;
-              //var_dump($this->discipuloId);
-                //var_dump($stm->errorInfo());
-              return $stm->fetch();
-    }
+			  }
 
-              public function listarStatusCelularTodos()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-                $sql = "SELECT Discipulo.nome AS discipulo , TipoStatusCelular.nome AS status
-                                FROM Discipulo,StatusCelular, TipoStatusCelular
-                                 WHERE Discipulo.id = StatusCelular.discipuloId And
-                                StatusCelular.tipoStatusCelular = TipoStatusCelular.id ORDER BY discipulo";
+			  public function getTipoStatusCelular(){
+						 $tipoStatus = new \statusCelular\modelo\tipoStatusCelular();
+						 $tipoStatus->id = $this->tipoStatusCelular ;
+						 return $tipoStatus->listarUm();
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
+			  
+			  }
 
-              $resposta = $stm->execute();
+			  public function getDataInicio(){
+			  try
+			  {
+				  return  new \DateTime($this->dataInicio, new \DateTimeZone('America/Sao_Paulo'));
+			  }
+			  catch( \Exception $e )
+				  {
+				  echo 'Erro ao instanciar objeto.';
+					echo $e->getMessage();
+				  exit();
+				  }	
+			  
+			  }
 
-              //fechar conexÃ£o
-              $pdo = null ;
+			  
 
-              return $stm->fetchAll();
-    }
+			  public function pegarStatusCelular(){
 
-                /**
-                    * Retorna os objetos de discipulos ultimo status dos discipulos
-                    */
-              public function listarStatusCelularPorTipo()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "SELECT * FROM StatusCelular AS s, TipoStatusCelular 
+								WHERE  s.discipuloId = ? AND tipoStatusCelular = TipoStatusCelular.id and s.ativo=1 
+								ORDER BY s.dataInicio DESC";
 
-              $sql = 'SELECT d.*  ,sc.id AS idStatus, tpsc.nome AS tipoNome
-                  FROM Discipulo AS d inner join StatusCelular AS sc
-                  ON d.id = sc.discipuloId and d.ativo = 1 AND d.arquivo = 0
-                INNER JOIN TipoStatusCelular AS tpsc ON sc.tipoStatusCelular = tpsc.id
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->discipuloId);
+
+			  $resposta = $stm->execute();
+
+
+			  //fechar conexÃ£o
+			  $pdo = null ;
+			  //var_dump($this->discipuloId);
+				//var_dump($stm->errorInfo());
+
+			  return $stm->fetch();
+	}
+
+			  public function listarStatusCelularTodos(){
+
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+				$sql = "SELECT Discipulo.nome AS discipulo , TipoStatusCelular.nome AS status 
+								FROM Discipulo,StatusCelular, TipoStatusCelular  
+						 		WHERE Discipulo.id = StatusCelular.discipuloId And 
+								StatusCelular.tipoStatusCelular = TipoStatusCelular.id ORDER BY discipulo";
+
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+
+			  $resposta = $stm->execute();
+
+			  //fechar conexÃ£o
+			  $pdo = null ;
+
+			  return $stm->fetchAll();
+	}
+				
+				
+
+				/**
+					* Retorna os objetos de discipulos ultimo status dos discipulos
+					*/
+			  public function listarStatusCelularPorTipo(){
+
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+
+			  $sql = 'SELECT d.*  ,sc.id AS idStatus, tpsc.nome AS tipoNome
+				  FROM Discipulo AS d inner join StatusCelular AS sc 
+				  ON d.id = sc.discipuloId and d.ativo = 1 AND d.arquivo = 0
+				INNER JOIN TipoStatusCelular AS tpsc ON sc.tipoStatusCelular = tpsc.id
 WHERE 1
 AND sc.ativo =1 AND sc.tipoStatusCelular = ?
 ';
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->tipoStatusCelular);
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->tipoStatusCelular);
+				
+				$stm->execute();
 
-                $stm->execute();
+				$resposta = array();
 
-                $resposta = array();
+				while($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')){
+					$resposta[$ob->id] = $ob ;
+				}
 
-                while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
-                    $resposta[$ob->id] = $ob ;
-                }
+			  $pdo = null ;
 
-              $pdo = null ;
+				return $resposta ;
+	}
 
-                return $resposta ;
-    }
+			  public function discipulosInativos(){
 
-              public function discipulosInativos()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
 
-              $sql = 'SELECT d.*  ,sc.id AS idStatus, tpsc.nome AS tipoNome
-                  FROM Discipulo AS d inner join StatusCelular AS sc
-                  ON d.id = sc.discipuloId and d.ativo = 0 AND d.arquivo = 0
-                INNER JOIN TipoStatusCelular AS tpsc ON sc.tipoStatusCelular = tpsc.id
+			  $sql = 'SELECT d.*  ,sc.id AS idStatus, tpsc.nome AS tipoNome
+				  FROM Discipulo AS d inner join StatusCelular AS sc 
+				  ON d.id = sc.discipuloId and d.ativo = 0 AND d.arquivo = 0
+				INNER JOIN TipoStatusCelular AS tpsc ON sc.tipoStatusCelular = tpsc.id
 WHERE 1
 AND sc.ativo =1 AND sc.tipoStatusCelular = ?
 ';
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->tipoStatusCelular);
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->tipoStatusCelular);
+				
+				$stm->execute();
 
-                $stm->execute();
+				$resposta = array();
 
-                $resposta = array();
+				while($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')){
+					$resposta[$ob->id] = $ob ;
+				}
 
-                while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
-                    $resposta[$ob->id] = $ob ;
-                }
+			  $pdo = null ;
 
-              $pdo = null ;
+				return $resposta ;
+	}
 
-                return $resposta ;
-    }
+			  public function discipulosArquivo(){
 
-              public function discipulosArquivo()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
 
-              $sql = 'SELECT d.*  ,sc.id AS idStatus, tpsc.nome AS tipoNome
-                  FROM Discipulo AS d inner join StatusCelular AS sc
-                  ON d.id = sc.discipuloId and d.arquivo = 1
-                INNER JOIN TipoStatusCelular AS tpsc ON sc.tipoStatusCelular = tpsc.id
+			  $sql = 'SELECT d.*  ,sc.id AS idStatus, tpsc.nome AS tipoNome
+				  FROM Discipulo AS d inner join StatusCelular AS sc 
+				  ON d.id = sc.discipuloId and d.arquivo = 1
+				INNER JOIN TipoStatusCelular AS tpsc ON sc.tipoStatusCelular = tpsc.id
 WHERE 1
 AND sc.ativo =1 AND sc.tipoStatusCelular = ?
 ';
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->tipoStatusCelular);
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->tipoStatusCelular);
+				
+				$stm->execute();
 
-                $stm->execute();
+				$resposta = array();
 
-                $resposta = array();
+				while($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')){
+					$resposta[$ob->id] = $ob ;
+				}
 
-                while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
-                    $resposta[$ob->id] = $ob ;
-                }
+			  $pdo = null ;
 
-              $pdo = null ;
+				return $resposta ;
+	}
 
-                return $resposta ;
-    }
+	public function  quantidadePorStatusCelular() {
 
-    public function  quantidadePorStatusCelular()
-    {
-              $pdo = new \PDO(DSN, USER, PASSWD);
+			  $pdo = new \PDO(DSN, USER, PASSWD);
 
-            /*	$sql = '
+			/*	$sql = '
 SELECT s2.id AS idStatus, ultimo, nomeDiscipulo, s3.id, s2.tipoStatusCelular, count( s2.tipoStatusCelular ) AS total , ts.nome AS tipoNome
-                FROM StatusCelular s2
-                INNER JOIN (
+				FROM StatusCelular s2
+				INNER JOIN (
 
-                SELECT d.id AS id, d.nome AS nomeDiscipulo, (
+				SELECT d.id AS id, d.nome AS nomeDiscipulo, (
 
-                SELECT id
-                FROM StatusCelular AS s1
-                WHERE s1.discipuloId = d.id
-                ORDER BY dataInicio DESC
-                LIMIT 1
-                ) AS ultimo
-                FROM Discipulo AS d
-                WHERE 1
-                GROUP BY d.id
-                ) AS s3 ON ultimo = s2.id
+				SELECT id
+				FROM StatusCelular AS s1
+				WHERE s1.discipuloId = d.id
+				ORDER BY dataInicio DESC
+				LIMIT 1
+				) AS ultimo
+				FROM Discipulo AS d
+				WHERE 1
+				GROUP BY d.id
+				) AS s3 ON ultimo = s2.id
 inner join TipoStatusCelular AS ts on s2.tipoStatusCelular = ts.id
 
 
-                WHERE 1
-            GROUP BY s2.tipoStatusCelular
-                ORDER BY nome
-                ';*/
+				WHERE 1
+			GROUP BY s2.tipoStatusCelular
+				ORDER BY nome
+				';*/
 
 /*			  $sql = 'SELECT sc.id AS idStatus, tpsc.nome AS tipoNome, count( * ) AS total, sc.tipoStatusCelular
 FROM `StatusCelular` AS sc
@@ -342,75 +353,80 @@ AND sc.ativo =1
 GROUP BY sc.tipoStatusCelular';*/
 
 $sql = 'SELECT sc.id AS idStatus, tpsc.nome AS tipoNome, count( * ) AS total, sc.tipoStatusCelular
-FROM
-Discipulo 		AS d
+FROM 
+Discipulo 		AS d 
 INNER JOIN
 StatusCelular	AS sc
-ON d.id = sc.discipuloId AND d.ativo = 1
-INNER JOIN
+ON d.id = sc.discipuloId AND d.ativo = 1 
+INNER JOIN 
 TipoStatusCelular tpsc ON sc.tipoStatusCelular = tpsc.id
 WHERE 1
 AND sc.ativo = 1
 GROUP BY sc.tipoStatusCelular';
 
-              $stm = $pdo->prepare($sql);
+			  $stm = $pdo->prepare($sql);
 
-              $resposta = $stm->execute();
+			  $resposta = $stm->execute();
 
-              $resposta = $stm->fetchAll();
+			  $resposta = $stm->fetchAll();
 
-              $pdo = null ;
+			  $pdo = null ;
 
-              return $resposta;
+			  return $resposta;
+				
 
-        }
+		}
 
-    public function pegarStatusCelularPorLider($lider)
-    {
-              $pdo = new \PDO(DSN, USER, PASSWD);
+	public function pegarStatusCelularPorLider($lider){
+	
+			  $pdo = new \PDO(DSN, USER, PASSWD);
 $sql = 'SELECT sc.id AS idStatus, tpsc.nome AS tipoNome, count( * ) AS total, sc.tipoStatusCelular
-FROM
-Discipulo 		AS d
+FROM 
+Discipulo 		AS d 
 INNER JOIN
 StatusCelular	AS sc
-ON d.id = sc.discipuloId
-INNER JOIN
+ON d.id = sc.discipuloId 
+INNER JOIN 
 TipoStatusCelular tpsc ON sc.tipoStatusCelular = tpsc.id
 WHERE 1
 AND sc.ativo = 1
 AND d.lider = ?
 GROUP BY sc.tipoStatusCelular';
 
-              $stm = $pdo->prepare($sql);
-                $stm->bindParam(1 , $lider);
+			  $stm = $pdo->prepare($sql);
+				$stm->bindParam(1 , $lider);
 
-              $resposta = $stm->execute();
+			  $resposta = $stm->execute();
 
-              $resposta = $stm->fetchAll();
+			  $resposta = $stm->fetchAll();
 
-              $pdo = null ;
+			  $pdo = null ;
 
-              return $resposta;
+			  return $resposta;
+	
+	
+	}
 
-    }
+		  
+			  public function excluir(){
 
-              public function excluir()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = "DELETE FROM StatusCelular WHERE Id = ?";
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "DELETE FROM StatusCelular WHERE Id = ?";
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->id);
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->id);
 
-              $resposta = $stm->execute();
+			  $resposta = $stm->execute();
 
-              $pdo = null ;
+			  $pdo = null ;
 
-              return $resposta;
-    }
+			  return $resposta;
+	}
+
+
 
 }

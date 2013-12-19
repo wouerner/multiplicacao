@@ -11,6 +11,10 @@ class metas
     {
         $metas =  metasModelo::listarPorTodos() ;
 
+        foreach ($metas as $m) {
+            $resultado[$m->redeNome][] = $m;
+        }
+        
         $total = count ($metas) ;
 
         require_once 'modulos/metas/visao/metas/listar.php';

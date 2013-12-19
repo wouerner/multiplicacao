@@ -91,28 +91,29 @@ class metas extends modeloFramework
 
               }
 
-              public static function listarPorTodos()
-              {
-              $pdo = self::pegarConexao() ;
+    public static function listarPorTodos()
+    {
+        $pdo = self::pegarConexao() ;
 
-                $sql = '
-                                SELECT d.id as id , d.nome AS nome, m.quantidade AS quantidade, m.id AS metaId FROM Discipulo as d inner join Metas as m on d.id = m.discipuloId
-WHERE 1 order by nome
-                         ' ;
+        $sql = 'SELECT d.id AS id, d.nome AS nome, m.quantidade AS quantidade, m.id AS metaId, tr.nome AS redeNome
+FROM Discipulo AS d
+INNER JOIN Metas AS m ON d.id = m.discipuloId
+JOIN TipoRede AS tr ON tr.id = m.tipoRedeId
+WHERE 1' ;
 
-              $stm = $pdo->prepare($sql);
+        $stm = $pdo->prepare($sql);
 
-              $resposta = $stm->execute();
+        $resposta = $stm->execute();
 
-              $pdo = null ;
-                $resposta = array();
+        $pdo = null ;
+        $resposta = array();
 
-                while ( $obj = $stm->fetchObject ('\discipulo\Modelo\Discipulo')  ) {
-                    $resposta[$obj->id] = $obj ;
-                }
+        while ( $obj = $stm->fetchObject ('\discipulo\Modelo\Discipulo')  ) {
+              $resposta[$obj->id] = $obj ;
+        }
 
-              return $resposta ;
-                }
+        return $resposta ;
+    }
 
               public function listarUm()
               {

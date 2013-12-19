@@ -4,9 +4,9 @@ session_start();
 
 require '../../../config/autoload.php';
 //verificar se tem post
-/*if (! $_POST) {
-    ///header('Location:cadastro.php');
-    exit();
+/*if( ! $_POST){
+	///header('Location:cadastro.php');
+	exit();
 }*/
 //criar o objeto ususario
 
@@ -25,18 +25,18 @@ $discipulo->senha = $_POST['senha'];
 
 $discipuloLogado = $discipulo->entrar();
 
-if ($discipuloLogado) {
-    $_SESSION['usuario_nome'] = $discipuloLogado['nome'];
-    $_SESSION['usuario_id'] = $discipuloLogado['id'];
-    $_SESSION['logado'] = TRUE;
+if($discipuloLogado){
+	$_SESSION['usuario_nome'] = $discipuloLogado['nome'];
+	$_SESSION['usuario_id'] = $discipuloLogado['id'];
+	$_SESSION['logado'] = TRUE;
 
-    header('Location:../../discipulo/acao/listar.php');
-    exit();
+	header('Location:../../discipulo/acao/listar.php');
+	exit();
 
-} else {
+}else{
 
-    $_SESSION['mensagem'] = 'Discipulo não encontrado';
-    header('Location:../formularios/index.php');
-    exit();
+	$_SESSION['mensagem'] = 'Discipulo não encontrado';
+	header('Location:../formularios/index.php');
+	exit();
 
 }

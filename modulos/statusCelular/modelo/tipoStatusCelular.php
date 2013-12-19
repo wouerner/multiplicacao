@@ -2,135 +2,136 @@
 
 namespace statusCelular\modelo ;
 
-class  tipoStatusCelular
-{
-    private $id ;
-    private $nome ;
-    private $descricao ;
-    private $ordem ;
-    private $cor ;
-    private $erro ;
+class  tipoStatusCelular{
 
-          public function __get($prop)
-          {
-                     return $this->$prop ;
+	private $id ;
+	private $nome ;
+	private $descricao ;
+	private $ordem ;
+	private $cor ;
+	private $erro ;
 
-          }
 
-          public function __set($prop, $valor)
-          {
-                     $this->$prop = $valor ;
+		  public function __get($prop){
 
-          }
+					 return $this->$prop ;
+		  
+		  }
 
-              public function salvar()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = "INSERT INTO TipoStatusCelular ( nome, descricao, ordem, cor  )
-                  VALUES ( ? , ? , ? , ? )";
+		  public function __set($prop, $valor){
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->nome );
-              $stm->bindParam(2, $this->descricao );
-              $stm->bindParam(3, $this->ordem );
-              $stm->bindParam(4, $this->cor );
+					 $this->$prop = $valor ;
+		  
+		  }
 
-              $resposta = $stm->execute();
+			  public function salvar(){
 
-              //fechar conexÃ£o
-              $pdo = null ;
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "INSERT INTO TipoStatusCelular ( nome, descricao, ordem, cor  )
+				  VALUES ( ? , ? , ? , ? )";
 
-              return $resposta;
-    }
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->nome );
+			  $stm->bindParam(2, $this->descricao );
+			  $stm->bindParam(3, $this->ordem );
+			  $stm->bindParam(4, $this->cor );
 
-    public function listarTodos()
-    {
-        $pdo = new \PDO (DSN,USER,PASSWD);
+			  $resposta = $stm->execute();
 
-        $sql = 'SELECT * FROM TipoStatusCelular ORDER BY ordem ';
+			  //fechar conexÃ£o
+			  $pdo = null ;
 
-        $stm = $pdo->prepare($sql);
+			  return $resposta;
+	}
 
-        $stm->execute();
+	public function listarTodos(){
 
-        $resposta = array();
+		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-        while ( $obj = $stm->fetchObject('\statusCelular\modelo\tipoStatusCelular') ) {
-            $resposta[$obj->id] = $obj ;
-        }
+		$sql = 'SELECT * FROM TipoStatusCelular ORDER BY ordem ';
 
-        return $resposta;
+		$stm = $pdo->prepare($sql);
 
-    }
+		$stm->execute();
+		
+		$resposta = array();
 
-    public function listarUm()
-    {
-        $pdo = new \PDO (DSN,USER,PASSWD);
+		while ( $obj = $stm->fetchObject('\statusCelular\modelo\tipoStatusCelular') ) {
+			$resposta[$obj->id] = $obj ; 
+		}
+		return $resposta;
 
-        $sql = 'SELECT * FROM TipoStatusCelular WHERE id = ?';
+	}
 
-        $stm = $pdo->prepare($sql);
+	public function listarUm(){
 
-        $stm->bindParam(1, $this->id);
+		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-        $stm->execute();
+		$sql = 'SELECT * FROM TipoStatusCelular WHERE id = ?';
 
-        return $stm->fetchObject();
+		$stm = $pdo->prepare($sql);
 
-    }
+		$stm->bindParam(1, $this->id);
 
-    public function atualizar()
-    {
-    //abrir conexao com o banco
-    $pdo = new \PDO(DSN, USER, PASSWD);
-    //cria sql
-    $sql = " UPDATE TipoStatusCelular SET 	nome = ? , descricao = ? ,  ordem = ? , cor = ?
-        WHERE id = ? ";
-    //prepara sql
-    $stm = $pdo->prepare($sql);
-    //trocar valores
-    $stm->bindParam(1, $this->nome);
-    $stm->bindParam(2, $this->descricao);
-    $stm->bindParam(3, $this->ordem);
-    $stm->bindParam(4, $this->cor);
-    $stm->bindParam(5, $this->id);
+		$stm->execute();
 
-    $resposta = $stm->execute();
+		return $stm->fetchObject();
 
-    //fechar conexÃ£o
-    $pdo = null ;
+	}
 
-    return $resposta;
+	public function atualizar(){
 
-    }
+	//abrir conexao com o banco
+	$pdo = new \PDO(DSN, USER, PASSWD);
+	//cria sql
+	$sql = " UPDATE TipoStatusCelular SET 	nome = ? , descricao = ? ,  ordem = ? , cor = ?
+		WHERE id = ? ";
+	//prepara sql
+	$stm = $pdo->prepare($sql);
+	//trocar valores
+	$stm->bindParam(1, $this->nome);
+	$stm->bindParam(2, $this->descricao);
+	$stm->bindParam(3, $this->ordem);
+	$stm->bindParam(4, $this->cor);
+	$stm->bindParam(5, $this->id);
 
-    public function excluir()
-    {
-    try {
-        $pdo = new \PDO (DSN,USER,PASSWD);
+	$resposta = $stm->execute();
 
-        $sql = 'DELETE FROM TipoStatusCelular WHERE id = ?';
+	//fechar conexÃ£o
+	$pdo = null ;
 
-        $stm = $pdo->prepare($sql);
+	return $resposta;
+	
+	}
 
-        $stm->bindParam(1, $this->id);
+	public function excluir(){
+	try {
+		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-        $resposta = $stm->execute();
-        $erro = $stm->errorCode();
+		$sql = 'DELETE FROM TipoStatusCelular WHERE id = ?';
 
-        if ($erro != '0000') {
+		$stm = $pdo->prepare($sql);
 
-             throw new \Exception ('Existe discípulos cadastrados') ;
-        }
-        } catch ( \Exception $e ) {
+		$stm->bindParam(1, $this->id);
 
-                  $this->erro= $e->getMessage();
-    }
 
-    }
+		$resposta = $stm->execute();
+		$erro = $stm->errorCode();
+		 
+		if ($erro != '0000'){
+
+			 throw new \Exception ('Existe discípulos cadastrados') ;
+		}
+		}catch ( \Exception $e ) {
+		
+				  $this->erro= $e->getMessage();
+	}
+
+	}
+
 
 }

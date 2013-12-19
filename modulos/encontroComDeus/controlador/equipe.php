@@ -91,7 +91,7 @@ class equipe
 
             $encontro = new \encontroComDeus\modelo\encontroComDeus();
             $equipe = new \encontroComDeus\modelo\equipe();
-            $equipes = $equipe->listarEquipes() ;
+            $equipes = $equipe->listarEquipesAtivas() ;
 
             //var_dump($equipes);
 

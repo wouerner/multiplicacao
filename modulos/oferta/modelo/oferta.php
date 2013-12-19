@@ -1,114 +1,121 @@
-<?php
+<?php 
 
 namespace oferta\modelo ;
 
-class oferta
-{
-          private $id ;
-          private $discipuloId ;
-          private $tipoOfertaId ;
-          private $dataOferta ;
+class oferta{
 
-          public function __get($prop)
-          {
-                     return $this->$prop ;
+		  private $id ;
+		  private $discipuloId ;
+		  private $tipoOfertaId ;
+		  private $dataOferta ;
 
-          }
+		  public function __get($prop){
 
-          public function __set($prop, $valor)
-          {
-                     $this->$prop = $valor ;
+					 return $this->$prop ;
+		  
+		  }
 
-          }
-              public function salvar()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = "INSERT INTO  Oferta ( discipuloId, tipoOfertaId , data)
+		  public function __set($prop, $valor){
 
-                  VALUES (?,?,?)";
+					 $this->$prop = $valor ;
+		  
+		  }
+			  public function salvar(){
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->discipuloId);
-              $stm->bindParam(2, $this->tipoOfertaId);
-              $stm->bindParam(3, $this->dataOferta);
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "INSERT INTO  Oferta ( discipuloId, tipoOfertaId , data)
 
-              $resposta = $stm->execute();
+				  VALUES (?,?,?)";
 
-              //fechar conexÃ£o
-              $pdo = null ;
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->discipuloId);
+			  $stm->bindParam(2, $this->tipoOfertaId);
+			  $stm->bindParam(3, $this->dataOferta);
+			
 
-              return $resposta;
-    }
 
-              public function atualizar()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = "UPDATE StatusCelular SET 	tipoOferta = ?
-                  WHERE discipuloId = ?
-                              ";
+			  $resposta = $stm->execute();
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->tipoOferta );
-              $stm->bindParam(2, $this->discipuloId );
+				
+			  //fechar conexÃ£o
+			  $pdo = null ;
 
-              $resposta = $stm->execute();
+			  return $resposta;
+	}
 
-              $erro = $stm->errorInfo();
-              //var_dump($erro);
-              //exit();
+			  public function atualizar(){
 
-              //fechar conexÃ£o
-              $pdo = null ;
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "UPDATE StatusCelular SET 	tipoOferta = ?  
+				  WHERE discipuloId = ?
+							  ";
 
-              return $resposta;
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->tipoOferta );
+			  $stm->bindParam(2, $this->discipuloId );
 
-              }
+			  $resposta = $stm->execute();
 
-              public function pegarOfertasDiscipulo()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = "SELECT * FROM Oferta, TipoOferta WHERE  discipuloId = ? AND Oferta.tipoOfertaId = TipoOferta.id ORDER BY data";
+			  $erro = $stm->errorInfo();
+			  //var_dump($erro);
+			  //exit();
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->discipuloId);
+			  //fechar conexÃ£o
+			  $pdo = null ;
 
-              $stm->execute();
+			  return $resposta;
+			  
+			  }
 
-              //fechar conexÃ£o
-              $pdo = null ;
+			  public function pegarOfertasDiscipulo(){
 
-              return $stm->fetchAll();
-    }
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "SELECT * FROM Oferta, TipoOferta WHERE  discipuloId = ? AND Oferta.tipoOfertaId = TipoOferta.id ORDER BY data";
 
-            public function excluir()
-            {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = "DELETE FROM Oferta WHERE  id = ?";
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->discipuloId);
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->id);
+			  $stm->execute();
 
-              $stm->execute();
+			  //fechar conexÃ£o
+			  $pdo = null ;
 
-              //fechar conexÃ£o
-              $pdo = null ;
+			  return $stm->fetchAll();
+	}
 
-            }
+			public function excluir(){
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "DELETE FROM Oferta WHERE  id = ?";
+
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->id);
+
+			  $stm->execute();
+
+			  //fechar conexÃ£o
+			  $pdo = null ;
+
+			}
+
+
+		  
+
+
 
 }

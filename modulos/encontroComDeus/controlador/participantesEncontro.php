@@ -531,7 +531,7 @@ class participantesEncontro
             $pdf->Image('modulos/encontroComDeus/visao/participantesEncontro/mga.jpg',$x,$y,30,$t);
             $pdf->SetY($y+10);
             $pdf->SetX($x+30);
-            $pdf->Cell(70,10,' Encontro com Deus dias 20, 21 e 22/08/2013');
+            $pdf->Cell(70,10,' Encontro com Deus dias 22, 23 e 24/11/2013');
 
             $pdf->SetFont('Arial','B',14);
             $pdf->SetY($y+20);
@@ -559,7 +559,7 @@ a) Valor do encontro para encontrista: R$ 100,00 - à vista; R$ 120,00 - a prazo
 b) O pagamento a prazo e/ou parcelamento somente será aceito em CHEQUE OU CARTÃO.
 OBS: Não haverá ressarcimento ou alteração dos valores acordados, bem como das formas de pagamento.
 Estou CIENTE da minha participação no ENCONTRO COM DEUS e concordo em realizar o pagamento
-até o dia 20/09/2013.
+até o dia 22/11/2013.
 Assinatura do Encontrista:_______________________________________________________________
 Menor de Idade (Ass. do Responsável):_____________________________________________________
 Membro de outra Igreja (Ass. do Pastor):____________________________________________________');

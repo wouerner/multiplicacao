@@ -2,142 +2,144 @@
 
 namespace ministerio\modelo ;
 
-class  ministerio
-{
-    private $id ;
-    private $nome ;
-    private $erro ;
+class  ministerio{
 
-          public function __get($prop)
-          {
-                     return $this->$prop ;
+	private $id ;
+	private $nome ;
+	private $erro ;
 
-          }
 
-          public function __set($prop, $valor)
-          {
-                     $this->$prop = $valor ;
+		  public function __get($prop){
 
-          }
+					 return $this->$prop ;
+		  
+		  }
 
-              public function salvar()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = "INSERT INTO Ministerio ( nome )
-                  VALUES (?)";
+		  public function __set($prop, $valor){
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->nome);
+					 $this->$prop = $valor ;
+		  
+		  }
 
-              $resposta = $stm->execute();
+			  public function salvar(){
 
-              //fechar conexÃ£o
-              $pdo = null ;
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "INSERT INTO Ministerio ( nome )
+				  VALUES (?)";
 
-              return $resposta;
-    }
-              public function salvarMinisterioDiscipulo()
-              {
-              //abrir conexao com o banco
-              $pdo = new \PDO(DSN, USER, PASSWD);
-              //cria sql
-              $sql = "INSERT INTO MinisterioTemDiscipulo ( ministerioId, discipuloId, funcaoId )
-                  VALUES (?,?,?)";
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->nome);
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-              //trocar valores
-              $stm->bindParam(1, $this->nome);
-              $stm->bindParam(2, $this->nome);
-              $stm->bindParam(3, $this->nome);
+			  $resposta = $stm->execute();
 
-              $resposta = $stm->execute();
+			  //fechar conexÃ£o
+			  $pdo = null ;
 
-              //fechar conexÃ£o
-              $pdo = null ;
+			  return $resposta;
+	}
+			  public function salvarMinisterioDiscipulo(){
 
-              return $resposta;
-    }
+			  //abrir conexao com o banco
+			  $pdo = new \PDO(DSN, USER, PASSWD);
+			  //cria sql
+			  $sql = "INSERT INTO MinisterioTemDiscipulo ( ministerioId, discipuloId, funcaoId )
+				  VALUES (?,?,?)";
 
-    public function listarTodos()
-    {
-        $pdo = new \PDO (DSN,USER,PASSWD);
+			  //prepara sql
+			  $stm = $pdo->prepare($sql);
+			  //trocar valores
+			  $stm->bindParam(1, $this->nome);
+			  $stm->bindParam(2, $this->nome);
+			  $stm->bindParam(3, $this->nome);
 
-        $sql = 'SELECT * FROM Ministerio';
+			  $resposta = $stm->execute();
 
-        $stm = $pdo->prepare($sql);
+			  //fechar conexÃ£o
+			  $pdo = null ;
 
-        $stm->execute();
+			  return $resposta;
+	}
 
-        return $stm->fetchAll();
+	public function listarTodos(){
 
-    }
+		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-    public function listarUm()
-    {
-        $pdo = new \PDO (DSN,USER,PASSWD);
+		$sql = 'SELECT * FROM Ministerio';
 
-        $sql = 'SELECT * FROM Ministerio WHERE id = ?';
+		$stm = $pdo->prepare($sql);
 
-        $stm = $pdo->prepare($sql);
+		$stm->execute();
 
-        $stm->bindParam(1, $this->id);
+		return $stm->fetchAll();
 
-        $stm->execute();
+	}
 
-        return $stm->fetch();
+	public function listarUm(){
 
-    }
+		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-    public function atualizarMinisterio()
-    {
-    //abrir conexao com o banco
-    $pdo = new \PDO(DSN, USER, PASSWD);
-    //cria sql
-    $sql = " UPDATE Ministerio SET 	nome = ?
-        WHERE id = ? ";
-    //prepara sql
-    $stm = $pdo->prepare($sql);
-    //trocar valores
-    $stm->bindParam(1, $this->nome);
-    $stm->bindParam(2, $this->id);
+		$sql = 'SELECT * FROM Ministerio WHERE id = ?';
 
-    $resposta = $stm->execute();
+		$stm = $pdo->prepare($sql);
 
-    //fechar conexÃ£o
-    $pdo = null ;
+		$stm->bindParam(1, $this->id);
 
-    return $resposta;
+		$stm->execute();
 
-    }
+		return $stm->fetch();
 
-    public function excluir()
-    {
-    try {
-        $pdo = new \PDO (DSN,USER,PASSWD);
+	}
 
-        $sql = 'DELETE FROM Ministerio WHERE id = ?';
+	public function atualizarMinisterio(){
 
-        $stm = $pdo->prepare($sql);
+	//abrir conexao com o banco
+	$pdo = new \PDO(DSN, USER, PASSWD);
+	//cria sql
+	$sql = " UPDATE Ministerio SET 	nome = ? 
+		WHERE id = ? ";
+	//prepara sql
+	$stm = $pdo->prepare($sql);
+	//trocar valores
+	$stm->bindParam(1, $this->nome);
+	$stm->bindParam(2, $this->id);
 
-        $stm->bindParam(1, $this->id);
+	$resposta = $stm->execute();
 
-        $resposta = $stm->execute();
-        $erro = $stm->errorCode();
 
-        if ($erro != '0000') {
+	//fechar conexÃ£o
+	$pdo = null ;
 
-             throw new \Exception ('Existe discípulos cadastrados') ;
-        }
-        } catch ( \Exception $e ) {
+	return $resposta;
+	
+	}
 
-                  $this->erro= $e->getMessage();
-    }
+	public function excluir(){
+	try {
+		$pdo = new \PDO (DSN,USER,PASSWD);	
 
-    }
+		$sql = 'DELETE FROM Ministerio WHERE id = ?';
+
+		$stm = $pdo->prepare($sql);
+
+		$stm->bindParam(1, $this->id);
+
+		$resposta = $stm->execute();
+		$erro = $stm->errorCode();
+		 
+		if ($erro != '0000'){
+
+			 throw new \Exception ('Existe discípulos cadastrados') ;
+		}
+		}catch ( \Exception $e ) {
+		
+				  $this->erro= $e->getMessage();
+	}
+
+	}
+
 
 }
