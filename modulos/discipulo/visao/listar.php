@@ -125,7 +125,7 @@ $(".btn-warning").click( function(){
 
                         <i class = "<?php echo $discipulo->eLiderCelula() ? 'icon-home': '' ?>"></i>
              <a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id?>" >
-                            <?php echo $discipulo->nome ; ?>
+                            <?php echo $discipulo->getAlcunha() ; ?>
                  <?php if ( $discipulo->eLider()): ?>
                     <?php endif ; ?>
 

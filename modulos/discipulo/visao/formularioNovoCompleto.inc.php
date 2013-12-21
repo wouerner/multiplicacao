@@ -81,7 +81,7 @@
                     <select id="combobox" class="combobox lider " name="lider" required >
                         <option value="" selected> </option>
                             <?php foreach($lideres as $lider) : ?>
-                                <option value="<?php echo $lider->id ; ?>"><?php echo $lider->nome ; ?> </option>
+                                <option value="<?php echo $lider->id ; ?>"><?php echo $lider->getAlcunha(); ?> </option>
                             <?php endforeach ; ?>
                     </select>
                 </div>

@@ -73,7 +73,7 @@ $(function(){
                             <?php if ( isset($da->alcunha) || $da->alcunha!=''): ?>
                             <?php echo $da->alcunha ; ?>
                             <?php else : ?>
-                            <?php echo $da->nome ; ?>
+                            <?php echo $da->getNome() ; ?>
 
                             <?php endif ; ?>
                             </a>

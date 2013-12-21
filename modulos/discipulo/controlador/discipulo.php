@@ -116,7 +116,9 @@ class discipulo
             $headers .= "Content-type: text/plain; charset=utf-8\n";
             $headers .= "From: Multiplicação12 <multiplicaca12@mga12.org>"."\n"; // remetente
             $headers .= "Return-Path: Meu Nome <multiplicacao@mga12.org>"."\n"; // return-path
-            $envio = mail("tiaoveloso12@gmail.com", "Desativação Discipulo", "nome: ".$discipulo->nome,
+            $envio = mail("tiaoveloso12@gmail.com,wouerner@gmail.com", 
+                            "Desativação Discipulo", 
+                            "nome: ".$discipulo->nome,
                             $headers,"-r multiplicacao12@mga12.org");
 
 
@@ -487,7 +489,7 @@ class discipulo
 
                 $discipulo->id = $post['discipuloId'] ;
                 $discipulo->nome = $post['nome'] ;
-                $discipulo->alcunha = $post['alcunha'] ;
+                $discipulo->alcunha = isset($post['alcunha']) ?$post['alcunha'] : null;
                 $discipulo->setDataNascimento($post['dataNascimento']) ;
                 $discipulo->telefone = $post['telefone'];
                 $discipulo->sexo = $post['sexo'] ;

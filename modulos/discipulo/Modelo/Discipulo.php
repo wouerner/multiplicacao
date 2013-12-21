@@ -372,25 +372,26 @@ class Discipulo extends modeloFramework
             //abrir conexao com o banco
             $pdo = self::pegarConexao();
             //cria sql
-            $sql = "UPDATE Discipulo SET 	nome = ?, telefone = ?, email = ?,endereco = ?, nivel = ?,
-            lider = ?, celula = ?, dataNascimento = ?, estadoCivilId = ?,sexo = ?, alcunha = ?
-            WHERE id = ?
-            ";
+            $sql = "UPDATE Discipulo SET 	nome = :nome, telefone = :telefone, email = :email, endereco = :endereco, nivel = :nivel,
+            lider = :lider, celula = :celula, dataNascimento = :dataNascimento , estadoCivilId = :estadoCivilId ,sexo = :sexo";
+	    $sql .= isset($this->alcunha) ?	 ',alcunha = :alcunha ' : '';
+            $sql.=" WHERE id = :id ";
 
             $stm = $pdo->prepare($sql);
 
-            $stm->bindParam(1, $this->nome);
-            $stm->bindParam(2, $this->telefone);
-            $stm->bindParam(3, $this->email);
-            $stm->bindParam(4, $this->endereco);
-            $stm->bindParam(5, $this->nivel);
-            $stm->bindParam(6, $this->lider);
-            $stm->bindParam(7, $this->celula);
-            $stm->bindParam(8, $this->dataNascimento->format('Y-m-d'));
-            $stm->bindParam(9, $this->estadoCivilId);
-            $stm->bindParam(10, $this->sexo);
-            $stm->bindParam(11, $this->alcunha);
-            $stm->bindParam(12, $this->id);
+            $stm->bindParam(':nome', $this->nome, \PDO::PARAM_STR);
+            $stm->bindParam(':telefone', $this->telefone, \PDO::PARAM_STR);
+            $stm->bindParam(':email', $this->email, \PDO::PARAM_STR);
+            $stm->bindParam(':endereco', $this->endereco, \PDO::PARAM_STR);
+            $stm->bindParam(':nivel', $this->nivel,  \PDO::PARAM_STR);
+            $stm->bindParam(':lider', $this->lider,  \PDO::PARAM_STR);
+            $stm->bindParam(':celula', $this->celula,  \PDO::PARAM_INT);
+            $stm->bindParam(':dataNascimento', $this->dataNascimento->format('Y-m-d'), \PDO::PARAM_STR);
+            $stm->bindParam(':estadoCivilId', $this->estadoCivilId, \PDO::PARAM_INT);
+            $stm->bindParam(':sexo', $this->sexo, \PDO::PARAM_STR);
+            $stm->bindParam(':id', $this->id, \PDO::PARAM_INT);
+	    
+            isset($this->alcunha) ? $stm->bindParam(':alcunha', $this->alcunha, \PDO::PARAM_STR): null;
 
             $resposta = $stm->execute();
             $erro = $stm->errorCode();
@@ -501,8 +502,12 @@ class Discipulo extends modeloFramework
 
         $stm->execute();
 
-        return $stm->fetchAll();
+        $resposta = array();
 
+        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+            $resposta[$ob->id] = $ob;
+        }
+        return $resposta;
     }
 
     public function inativos()
@@ -725,7 +730,7 @@ class Discipulo extends modeloFramework
     {
         $pdo = self::pegarConexao();
 
-        $sql = 'SELECT id, nome FROM Discipulo';
+        $sql = 'SELECT id, nome,alcunha FROM Discipulo';
 
         $stm = $pdo->prepare($sql);
         $stm->bindParam(1, $id);

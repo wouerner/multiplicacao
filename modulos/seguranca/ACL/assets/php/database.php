@@ -2,10 +2,10 @@
 //session_start();
 ob_start();
 $hasDB = false;
-$server = 'mysql08.wouerner.eti.br';
-$user = 'wouerner17';
-$pass = 'bdmultimga';
-$db = 'wouerner17';
+$server = DB_SERVER;
+$user = USER;
+$pass = PASSWD;
+$db = DB;
 $link = mysql_connect($server,$user,$pass);
 if (!is_resource($link)) {   
 	$hasDB = false;

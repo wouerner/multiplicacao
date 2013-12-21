@@ -14,12 +14,14 @@
                                     </div>
                                 </div>
 
+			    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                               <div class="control-group span3">
                                       <label class = "control-label" for = "alcunha" >Alcunha:</label>
                                         <div class = "controls" >
                                             <input id = "nome" type = "text" class = "input-block-level" name = "alcunha"  value = "<?php echo $discipulo->alcunha ; ?>">
                                     </div>
                                 </div>
+			    <?php endif ; ?>
 
                               <div class="control-group span1">
                                       <label class = "control-label" for = "dataNascimento" >Data Nasc.:</label>
@@ -94,11 +96,11 @@
                                               <label class = "control-label" for = "lider" >Nome do Líder:</label>
                                               <select id = "combobox" class = "input-block-level combobox lider " name = "lider"  >
 
-                                                <option value = "<?php echo is_object($lider) ? $lider->id  : '' ; ?>" selected><?php echo is_object($lider) ? $lider->getNomeAbreviado() : ''; ?></option>
+                                                <option value = "<?php echo is_object($lider) ? $lider->id  : '' ; ?>" selected><?php echo is_object($lider) ? $lider->getAlcunha() : ''; ?></option>
                                                   <option>--------- </option>
 
                                                  <?php foreach($lideres as $lider) : ?>
-                                                 <option value = "<?php echo $lider->id ?>"><?php echo $lider->getNomeAbreviado() ?> </option>
+                                                 <option value = "<?php echo $lider->id ?>"><?php echo $lider->getAlcunha() ?> </option>
                                                  <?php endforeach ; ?>
 
                                              </select>

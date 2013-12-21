@@ -39,15 +39,6 @@
                             </select>
                             </div>
 
-                            <!--<div class = "control-group span2" >
-                            <label>líder:</label>
-                            <select class = "span2" name = "lider" >
-                                <option value = "todos" >todos</option>
-                                <?php foreach($lideres as $l) : ?>
-                                <option value = "<?php echo $l['id'] ; ?>" ><?php echo $l['nome'] ?></option>
-                                <?php endforeach ; ?>
-                            </select>
-                            </div>-->
 
                             <div class = "control-group span3" >
                               <div class = "ui-widget" >
@@ -55,7 +46,7 @@
                                               <select id = "combobox" class = "input-block-level combobox lider " name = "lider"  >
                                                 <option value = "todos" selected >todos</option>
                                                  <?php foreach($lideres as $lider) : ?>
-                                                         <option value = "<?php echo $lider['id'] ?>"><?php echo $lider['nome'] ?> </option>
+                                                         <option value = "<?php echo $lider->id ?>"><?php echo $lider->getAlcunha() ?> </option>
                                                  <?php endforeach ; ?>
                                              </select>
                             </div>
