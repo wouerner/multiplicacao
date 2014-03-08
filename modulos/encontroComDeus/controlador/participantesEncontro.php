@@ -531,7 +531,7 @@ class participantesEncontro
             $pdf->Image('modulos/encontroComDeus/visao/participantesEncontro/mga.jpg',$x,$y,30,$t);
             $pdf->SetY($y+10);
             $pdf->SetX($x+30);
-            $pdf->Cell(70,10,' Encontro com Deus dias 22, 23 e 24/11/2013');
+            $pdf->Cell(70,10,' Encontro com Deus dias 04, 05 e 06/04/2014');
 
             $pdf->SetFont('Arial','B',14);
             $pdf->SetY($y+20);
@@ -554,15 +554,17 @@ class participantesEncontro
             $pdf->SetX($x+70);
             $pdf->Cell(70,10,'Lider: '.utf8_decode($d->getLider()->nome) );
 
-            $txt = utf8_decode('Condições de Pagamento:
-a) Valor do encontro para encontrista: R$ 100,00 - à vista; R$ 120,00 - a prazo;
+            $txt = utf8_decode('
+Condições de Pagamento:
+a) Valor do encontro para encontrista: até  16/03 R$ 85,00 à vista e R$ 95,00 à prazo; de 17/03 à 04/04 - R$100,00 à vista e  R$ 115,00 - a prazo;
 b) O pagamento a prazo e/ou parcelamento somente será aceito em CHEQUE OU CARTÃO.
-OBS: Não haverá ressarcimento ou alteração dos valores acordados, bem como das formas de pagamento.
-Estou CIENTE da minha participação no ENCONTRO COM DEUS e concordo em realizar o pagamento
-até o dia 22/11/2013.
+OBS I: Crianças de 0 até 12 anos, passando pela avaliação dos Apostólos, pagará 50% do valor do adulto. 
+OBS II: Não haverá ressarcimento ou alteração dos valores acordados, bem como das formas de pagamento.
+até o dia 04/04/2014.
 Assinatura do Encontrista:_______________________________________________________________
 Menor de Idade (Ass. do Responsável):_____________________________________________________
-Membro de outra Igreja (Ass. do Pastor):____________________________________________________');
+Membro de outra Igreja (Ass. do Pastor):____________________________________________________
+');
 
             $pdf->SetFont('Arial','B',10);
             $pdf->SetY($y+60);
@@ -607,7 +609,7 @@ Membro de outra Igreja (Ass. do Pastor):________________________________________
             $pdf->Image('modulos/encontroComDeus/visao/participantesEncontro/mga.jpg',$x,$y,30,$t);
             $pdf->SetY($y+10);
             $pdf->SetX($x+30);
-            $pdf->Cell(70,10,' Encontro com Deus dias 20, 21 e 22/09/2013');
+            $pdf->Cell(70,10,' Encontro com Deus dias 04, 05 e 06/04/2014');
 
             $pdf->SetFont('Arial','B',14);
             $pdf->SetY($y+20);
@@ -630,15 +632,17 @@ Membro de outra Igreja (Ass. do Pastor):________________________________________
             $pdf->SetX($x+70);
             $pdf->Cell(70,10,'Lider: '.utf8_decode($d->getLider()->nome) );
 
-            $txt = utf8_decode('Condições de Pagamento:
-a) Valor do encontro para encontrista: R$ 100,00 - à vista; R$ 120,00 - a prazo;
+            $txt = utf8_decode('
+Condições de Pagamento:
+a) Valor do encontro para encontrista: até  16/03 R$ 85,00 à vista e R$ 95,00 à prazo; de 17/03 à 04/04 - R$100,00 à vista e  R$ 115,00 - a prazo;
 b) O pagamento a prazo e/ou parcelamento somente será aceito em CHEQUE OU CARTÃO.
-OBS: Não haverá ressarcimento ou alteração dos valores acordados, bem como das formas de pagamento.
-Estou CIENTE da minha participação no ENCONTRO COM DEUS e concordo em realizar o pagamento
-até o dia 20/09/2013.
+OBS I: Crianças de 0 até 12 anos, passando pela avaliação dos Apostólos, pagará 50% do valor do adulto. 
+OBS II: Não haverá ressarcimento ou alteração dos valores acordados, bem como das formas de pagamento.
+até o dia 04/04/2014.
 Assinatura do Encontrista:_______________________________________________________________
 Menor de Idade (Ass. do Responsável):_____________________________________________________
-Membro de outra Igreja (Ass. do Pastor):____________________________________________________');
+Membro de outra Igreja (Ass. do Pastor):____________________________________________________
+');
 
             $pdf->SetFont('Arial','B',10);
             $pdf->SetY($y+60);
