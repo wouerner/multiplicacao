@@ -58,7 +58,7 @@ $(function(){
     <div class="span12">
     <div class="alert">
         <a id = "<?php //echo $discipulo->id ?>" href="/encontroComDeus/preEquipe/novoMembro/id/<?php echo $_SESSION['usuario_id'] ?>" class = "" alt = "" > <i class="icon-wrench"></i>Me candidatar a Trabalhar no Encontro</a>
-        <a href="http://m.mga12.org/encontroComDeus/participantesEncontro/lista/id/9">  <i class="icon-list-alt"></i> Lista do Encontro</a>
+        <a href="http://m.mga12.org/encontroComDeus/participantesEncontro/lista/id/10">  <i class="icon-list-alt"></i> Lista do Encontro</a>
     </div>
     </div>
 </div>
