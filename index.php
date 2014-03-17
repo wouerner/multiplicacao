@@ -2,13 +2,9 @@
 //inicia a sessão
 session_start();
 
-
 $sessao = isset ($_SESSION) ? $_SESSION : NULL ; 
 
-
 $_GET['url'] = array_key_exists('url',$_GET) ? $_GET['url'] : NULL;
-
-//var_dump($_GET['url']);
 
 //se estiver a sessão tiver indice 'logado' e o indice logado for igual a TRUE
 if (array_key_exists('logado', $sessao) && $sessao['logado']==TRUE){
@@ -42,8 +38,8 @@ if(isset($perfil[2]) && $perfil[2] == 'perfil' ){
 
 $url = explode('/' ,$url) ;
 
-$modulo = $url[0] ;
-$controlador = $url[1] ;
+$modulo = $url[0] ? $url[0] : 'painel' ;
+$controlador = $url[1] ? $url[1]:'painel' ;
 $acao = ( array_key_exists(2, $url) ) ? $url[2] : 'index' ;
 
 $url['post'] = isset($_POST) ? $_POST : NULL;

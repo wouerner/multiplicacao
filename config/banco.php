@@ -5,9 +5,9 @@ define('PASSWD', 'bdmultimga');
 define('DB', 'wouerner17');
 define('DB_SERVER', 'mysql08.wouerner.eti.br');*/
 
-define('DSN', 'mysql:host=162.243.216.63;dbname=multiplicacao');
+define('DSN', 'mysql:host=162.243.216.63;dbname=multiplicacao_dev');
 define('USER', 'multiplicacao');
 define('PASSWD', 'bdmultimga');
-define('DB', 'multiplicacao');
+define('DB', 'multiplicacao_dev');
 define('DB_SERVER', '162.243.216.63');
 ?>
