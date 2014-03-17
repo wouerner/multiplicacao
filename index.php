@@ -40,6 +40,7 @@ $url = explode('/' ,$url) ;
 
 $modulo = $url[0] ? $url[0] : 'painel' ;
 $controlador = $url[1] ? $url[1]:'painel' ;
+
 $acao = ( array_key_exists(2, $url) ) ? $url[2] : 'index' ;
 
 $url['post'] = isset($_POST) ? $_POST : NULL;
