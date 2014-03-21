@@ -391,7 +391,9 @@ order by nome
 
         //var_dump($select);
         //var_dump($select2);
-        $sql = 'select '.$select.' from ( select  '.$select2.' from  QtdDiscipulosStatus where tipoStatusId = '.$status.' ) as q';
+        $sql = 'select '.$select.' from ( select  '.$select2.' from  QtdDiscipuloStatus where tipoStatusId = '.$status.' ) as q';
+        //echo $sql;
+        //exit;
 
             $pdo = new \PDO(DSN,USER,PASSWD);
 
