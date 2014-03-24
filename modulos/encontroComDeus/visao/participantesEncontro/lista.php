@@ -20,12 +20,11 @@
                 <h3>Quantidade de Encontrista: <?php echo $total?></h3>
                 <div class="row-fluid">
                         <table class="table bordered-table">
-                                        <h2></h2>
-                        </caption>
                         <thead>
                             <th>#</th>
                             <th>Nome</th>
                             <th>Líder</th>
+                            <th>Rede</th>
                             <th>Pré?</th>
                             <th>Encontro?</th>
                             <th>Pos?</th>
@@ -36,6 +35,7 @@
                             <td><?php echo !isset($c) ? $c=1 : ++$c ; ?></td>
                             <td><?php echo $d->nome ; ?></td>
                             <td><?php echo $d->getLider()->getAlcunha() ; ?></td>
+                            <td><?php echo utf8_encode($d->getRede()[0]['tipoRede']); ?></td>
                         <td>
                             <?php if ($d->preEncontro == 0 ) : ?>
                             <i class = "icon-remove" ></i>
