@@ -10,12 +10,16 @@
                     <input id="nome" type="text" class="input-block-level" maxlength="45" name="nome" placeholder="Nome Completo" value="<?php echo $dados['nome']?>" required autofocus>
                     </div>
                 </div>
-                <div class="control-group span2">
-                    <label class="control-label" for="nome">Alcunha:</label>
-                    <div class="controls" >
-                        <input id="alcunha" type="text" class="input-block-level" name="alcunha" placeholder="Ou apelido"  value="<?php echo $dados['alcunha']?>">
+			    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                    <div class="control-group span2">
+                        <label class="control-label" for="nome">Alcunha:</label>
+                        <div class="controls" >
+                            <input id="alcunha" type="text" class="input-block-level" name="alcunha" placeholder="Ou apelido"  value="<?php echo $dados['alcunha']?>">
+                        </div>
                     </div>
-                </div>
+			    <?php else: ?>
+                    <input id="alcunha" type="hidden" class="input-block-level" name="alcunha" placeholder="Ou apelido"  value="<?php echo $dados['alcunha']?>">
+			    <?php endif ; ?>
                 <div class="control-group span1">
                     <label class="control-label" for="dataNascimento" >
                         <i class="icon-calendar" ></i> Nasc.:
