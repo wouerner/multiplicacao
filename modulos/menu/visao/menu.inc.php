@@ -213,6 +213,7 @@ $usuario = $usuario[0] ;
 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                                 <li><a href = "/celula/celula/lideresCelula" >Líderes e Discipulos</a></li>
                                 <li><a href = "/relatorio/relatorio/aniversariantes" ><i class = "icon-gift " ></i> Aniversariantes</a></li>
+                                <li><a href = "/relatorio/grafico" >Gráfico</a></li>
                                 <!--<li><a href = "/celula/celula/listarPorStatus" ><i class = " " ></i> Lider por Status</a></li>
                                 <li><a href = "/celula/celula/listarPorStatusTodos" ><i class = " " ></i> Lider por Status Geral</a></li>
                                 <li><a href = "/relatorio/relatorio/statusPorLider" ><i class = " " ></i> Status Por Lider</a></li>-->

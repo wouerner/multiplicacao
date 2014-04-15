@@ -337,7 +337,7 @@ order by nome
         $end = new \DateTime( $fim );
        // $end = $end->modify( '+1 day' );
 
-        $interval = new \DateInterval('P1D');
+        $interval = new \DateInterval('P2D');
         $daterange = new \DatePeriod($begin, $interval ,$end);
         //var_dump($daterange);
         $select='';
@@ -365,6 +365,42 @@ order by nome
             $stm->execute();
 
             return $stm->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function crescimentoRede($inicio,$fim)
+    {
+        $begin = new \DateTime( $inicio );
+        $end = new \DateTime( $fim );
+        $end = $end->modify( '+1 day' );
+
+        $interval = new \DateInterval('P1D');
+        $daterange = new \DatePeriod($begin, $interval ,$end);
+        //var_dump($daterange);
+        $select='';
+        $select2='';
+
+        foreach ($daterange as $date) {
+            $select .= "nomeRede, q.`{$date->format('d-m-Y')}`,";
+        }
+        $select = substr($select,0,strlen($select)-1);
+
+        foreach ($daterange as $date) {
+            $select2 .= "SUM(IF(DATE_FORMAT(data,'%Y-%m-%d') = '{$date->format('Y-m-d')}',total,0)) AS '{$date->format('d-m-Y')}',";
+        }
+        $select2 = substr($select2,0,strlen($select2)-1);
+
+        //var_dump($select);
+        //var_dump($select2);
+        $sql = 'select '.$select.' from ( select  nomeRede,'.$select2.' from  QtdDiscipulosRede group by data,redeId) as q';
+
+            $pdo = new \PDO(DSN,USER,PASSWD);
+
+            $stm = $pdo->prepare($sql);
+            //$stm->bindParam(1,$);
+
+            $stm->execute();
+
+            return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function crescimentoStatus($inicio,$fim,$status)
