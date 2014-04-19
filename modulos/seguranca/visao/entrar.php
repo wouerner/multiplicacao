@@ -8,8 +8,8 @@ unset($_SESSION['mensagem']);
 	<head>
         <meta charset="utf-8">
         <title>Autenticação</title>
-        <link href="../../../ext/twitter-bootstrap/3/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />	
-        <link href="../../../ext/custom/css/login.css" rel="stylesheet" type="text/css" />	
+        <link href="../../../ext/twitter-bootstrap/3/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="../../../ext/custom/css/login.css" rel="stylesheet" type="text/css" />
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     </head>
     <body>
@@ -27,9 +27,12 @@ unset($_SESSION['mensagem']);
                     <input name="email" type="text" class="form-control" placeholder="Email address" required="" autofocus="">
                     <input name="senha" type="password" class="form-control" placeholder="Password" required="">
                     <button class="btn btn-lg btn-primary btn-block" type="submit">
-                       Entrar 
+                       Entrar
                     </button>
                 </form>
+            </div>
+            <div class="container form-signin">
+                <iframe width="560" height="315" src="//www.youtube.com/embed/pLNZYip9CIE?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
     </body>
