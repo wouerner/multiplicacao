@@ -87,6 +87,10 @@ use \rede\modelo\tipoRede as TipoRede;
                     $geracoes = new \geracoes\modelo\tipoGeracao();
                     $geracoes = $geracoes->listarTodos();
 
+
+                    $encontro = new \encontroComDeus\modelo\encontroComDeus() ;
+                    $encontros = $encontro->listarTodosAtivos();
+
                   require_once 'modulos/painel/visao/painel.php';
         }
 

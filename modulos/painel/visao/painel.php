@@ -56,10 +56,17 @@ $(function(){
                 <?php require_once 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 <div class="row-fluid">
     <div class="span12">
-    <div class="alert">
-        <a id = "<?php //echo $discipulo->id ?>" href="/encontroComDeus/preEquipe/novoMembro/id/<?php echo $_SESSION['usuario_id'] ?>" class = "" alt = "" > <i class="icon-wrench"></i>Me candidatar a Trabalhar no Encontro</a>
-        <a href="/encontroComDeus/participantesEncontro/lista/id/10">  <i class="icon-list-alt"></i> Lista do Encontro</a>
-    </div>
+        <div class="well">
+            <ul class="unstyled">
+            <?php foreach($encontros as $encontro):?>
+                <li>  <?php echo $encontro->nome?>
+                    <a class="btn btn-primary" href="/encontroComDeus/participantesEncontro/novoParticipante/id/<?php echo $_SESSION['usuario_id'] ?>">Participar</a>
+                    <a class="btn btn-primary" href="/encontroComDeus/preEquipe/novoMembro/id/<?php echo $_SESSION['usuario_id'] ?>">Trabalhar</a>
+                    <a class="btn" href="/encontroComDeus/participantesEncontro/lista/id/<?php echo $encontro->id?>"><i class="icon-list-alt"></i> Lista do Encontro</a>
+                </li>
+            <?php endforeach;?>
+            </ul>
+        </div>
     </div>
 </div>
 
