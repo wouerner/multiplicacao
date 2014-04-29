@@ -194,7 +194,7 @@ var defaults = {
 	scaleGridLineWidth : 1,
 
 	//Boolean - Whether the line is curved between points
-	bezierCurve : true,
+	bezierCurve : false,
 
 	//Boolean - Whether to show a dot for each point
 	pointDot : true,
