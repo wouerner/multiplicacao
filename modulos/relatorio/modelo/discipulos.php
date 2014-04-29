@@ -376,11 +376,11 @@ order by nome
         $interval = new \DateInterval('P1D');
         $daterange = new \DatePeriod($begin, $interval ,$end);
         //var_dump($daterange);
-        $select='';
+        $select='nomeRede,';
         $select2='';
 
         foreach ($daterange as $date) {
-            $select .= "nomeRede, q.`{$date->format('d-m-Y')}`,";
+            $select .= " q.`{$date->format('d-m-Y')}`,";
         }
         $select = substr($select,0,strlen($select)-1);
 
@@ -391,7 +391,7 @@ order by nome
 
         //var_dump($select);
         //var_dump($select2);
-        $sql = 'select '.$select.' from ( select  nomeRede,'.$select2.' from  QtdDiscipulosRede group by data,redeId) as q';
+        $sql = 'select '.$select.' from ( select  nomeRede,'.$select2.' from  QtdDiscipulosRede group by redeId) as q';
 
             $pdo = new \PDO(DSN,USER,PASSWD);
 
