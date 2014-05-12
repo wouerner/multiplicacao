@@ -84,15 +84,32 @@ class discipulo
 
         }
 
-        public function ativar($url)
-        {
-          $discipulo =	new \discipulo\Modelo\Discipulo();
+    public function ativar($url)
+    {
+        $discipulo =	new \discipulo\Modelo\Discipulo();
 
-          $discipulo->id = $url[4] ;
-          $discipulo->ativar() ;
-            header ('location:/discipulo/discipulo/inativos');
-            exit();
+        $discipulo->id = $url[4] ;
+        $discipulo->ativar();
 
+        $aviso = new \aviso\modelo\aviso();
+        $aviso->identificacao = $discipulo->id;
+        $aviso->tipoAviso = 7;
+        $aviso->emissor = $_SESSION['usuario_id'];
+        $aviso->salvar();
+
+        $discipulo = $discipulo->listarUm();
+
+        $headers = "MIME-Version: 1.1\n";
+        $headers .= "Content-type: text/plain; charset=utf-8\n";
+        $headers .= "From: Multiplicação12 <multiplicaca12@multiplicacao.org>"."\n"; // remetente
+        $headers .= "Return-Path: Meu Nome <multiplicacao@multiplicacao.org>"."\n"; // return-path
+        $envio = mail("tiaoveloso12@gmail.com,wouerner@gmail.com,".$discipulo->getLider()->email,
+                        "Ativou Discipulo",
+                        "Lider: ".$discipulo->getLider()->nome.", nome: ".$discipulo->nome,
+                        $headers,"-r multiplicacao@multiplicacao.org");
+
+        header ('location:/discipulo/discipulo/inativos');
+        exit();
         }
 
         /* Desativar os discipulos
@@ -111,6 +128,7 @@ class discipulo
         $aviso->salvar();
 
         $discipulo->desativar();
+
         $discipulo = $discipulo->listarUm();
 
         $headers = "MIME-Version: 1.1\n";
@@ -137,7 +155,7 @@ class discipulo
 
         $aviso = new \aviso\modelo\aviso();
         $aviso->identificacao = $discipulo->id;
-        $aviso->tipoAviso = 5 ;
+        $aviso->tipoAviso = 5;
         $aviso->emissor = $_SESSION['usuario_id'];
         $aviso->salvar();
 
@@ -148,7 +166,7 @@ class discipulo
         $headers .= "From: Multiplicação12 <multiplicaca12@multiplicacao.org>"."\n"; // remetente
         $headers .= "Return-Path: Meu Nome <multiplicacao@multiplicacao.org>"."\n"; // return-path
         $envio = mail("tiaoveloso12@gmail.com,wouerner@gmail.com,".$discipulo->getLider()->email,
-                        "A Discipulo",
+                        "Arquivou Discipulo",
                         "Lider: ".$discipulo->getLider()->nome.", nome: ".$discipulo->nome,
                         $headers,"-r multiplicacao@multiplicacao.org");
 
@@ -158,14 +176,14 @@ class discipulo
 
     public function desarquivar($url)
     {
-        $discipulo =	new \discipulo\Modelo\Discipulo();
+        $discipulo = new \discipulo\Modelo\Discipulo();
 
         $discipulo->id = $url[4] ;
         $discipulo->desarquivar() ;
 
         $aviso = new \aviso\modelo\aviso();
         $aviso->identificacao = $discipulo->id;
-        $aviso->tipoAviso = 6 ;
+        $aviso->tipoAviso = 6;
         $aviso->emissor = $_SESSION['usuario_id'];
         $aviso->salvar();
 
@@ -176,7 +194,7 @@ class discipulo
         $headers .= "From: Multiplicação12 <multiplicaca12@multiplicacao.org>"."\n"; // remetente
         $headers .= "Return-Path: Meu Nome <multiplicacao@multiplicacao.org>"."\n"; // return-path
         $envio = mail("tiaoveloso12@gmail.com,wouerner@gmail.com,".$discipulo->getLider()->email,
-                        "A Discipulo",
+                        "Desarquivou Discipulo",
                         "Lider: ".$discipulo->getLider()->nome.", nome: ".$discipulo->nome,
                         $headers,"-r multiplicacao@multiplicacao.org");
 
