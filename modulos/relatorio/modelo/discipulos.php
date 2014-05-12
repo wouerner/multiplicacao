@@ -4,7 +4,7 @@ namespace relatorio\modelo;
 
 class discipulos
 {
-              function ordenar($a, $b) { return strnatcmp($a['lastname'], $b['lastname']); }
+    function ordenar($a, $b) { return strnatcmp($a['lastname'], $b['lastname']); }
 
     public function discipulosResumido($idadeMaxima,$idadeMinima,$sexo, $estadoCivil,$status , $celula , $rede=NULL , $ativo,$lider )
     {
@@ -356,6 +356,7 @@ order by nome
         //var_dump($select);
         //var_dump($select2);
         $sql = 'select '.$select.' from ( select  '.$select2.' from  QtdDiscipulosLider) as q';
+    //    echo $sql;
 
             $pdo = new \PDO(DSN,USER,PASSWD);
 
@@ -392,6 +393,7 @@ order by nome
         //var_dump($select);
         //var_dump($select2);
         $sql = 'select '.$select.' from ( select  nomeRede,'.$select2.' from  QtdDiscipulosRede group by redeId) as q';
+//        echo $sql;
 
             $pdo = new \PDO(DSN,USER,PASSWD);
 

@@ -10,25 +10,23 @@ namespace discipulo\controlador;
 
 class discipulo
 {
-          /* Mostra a lista de todos os discipulos cadastrados no sistema
-            *
-            * */
+    /* Mostra a lista de todos os discipulos cadastrados no sistema
+    *
+    * */
+    public function index()
+    {
+        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
 
-        public function index()
-        {
-            //include("seguranca/ACL/assets/php/database.php");
-            $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
-          $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
-
-          $quantidadePorPagina = 50;
+        $quantidadePorPagina = 50;
 
           //$discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
 
-          $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
-          $totalDiscipulos = (int) $totalDiscipulos['total'] ;
+        $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
+        $totalDiscipulos = (int) $totalDiscipulos['total'] ;
 
-          $discipulos =	new \discipulo\Modelo\Discipulo();
+        $discipulos =	new \discipulo\Modelo\Discipulo();
             if ($acl->hasPermission('admin_acesso') == true) {
               $discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
             } else {
@@ -39,7 +37,7 @@ class discipulo
 
           require_once 'modulos/discipulo/visao/listar.php';
 
-        }
+    }
 
         public function listarPorLider($url)
         {
@@ -97,55 +95,94 @@ class discipulo
 
         }
 
-        public function desativar($url)
-        {
-          $discipulo =	new \discipulo\Modelo\Discipulo();
+        /* Desativar os discipulos
+         * @author Wouerner
+         * */
+    public function desativar($url)
+    {
+        $discipulo =	new \discipulo\Modelo\Discipulo();
 
-          $discipulo->id = $url[4] ;
+        $discipulo->id = $url[4];
 
-            $aviso = new \aviso\modelo\aviso();
-            $aviso->identificacao = $discipulo->id ;
-            $aviso->tipoAviso = 2 ;
-            $aviso->emissor = $_SESSION['usuario_id'];
-            $aviso->salvar();
+        $aviso = new \aviso\modelo\aviso();
+        $aviso->identificacao = $discipulo->id;
+        $aviso->tipoAviso = 2 ;
+        $aviso->emissor = $_SESSION['usuario_id'];
+        $aviso->salvar();
 
-          $discipulo->desativar() ;
-            $discipulo= $discipulo->listarUm();
-            
-            $headers = "MIME-Version: 1.1\n";
-            $headers .= "Content-type: text/plain; charset=utf-8\n";
-            $headers .= "From: Multiplicação12 <multiplicaca12@mga12.org>"."\n"; // remetente
-            $headers .= "Return-Path: Meu Nome <multiplicacao@mga12.org>"."\n"; // return-path
-            $envio = mail("tiaoveloso12@gmail.com,wouerner@gmail.com", 
-                            "Desativação Discipulo", 
-                            "nome: ".$discipulo->nome,
-                            $headers,"-r multiplicacao12@mga12.org");
+        $discipulo->desativar();
+        $discipulo = $discipulo->listarUm();
+
+        $headers = "MIME-Version: 1.1\n";
+        $headers .= "Content-type: text/plain; charset=utf-8\n";
+        $headers .= "From: Multiplicação12 <multiplicaca12@multiplicacao.org>"."\n"; // remetente
+        $headers .= "Return-Path: Meu Nome <multiplicacao@multiplicacao.org>"."\n"; // return-path
+        $envio = mail("tiaoveloso12@gmail.com,wouerner@gmail.com,".$discipulo->getLider()->email,
+                        "Desativação Discipulo",
+                        "Lider: ".$discipulo->getLider()->nome.", nome: ".$discipulo->nome,
+                        $headers,"-r multiplicacao@multiplicacao.org");
 
 
 
-            header ('location:/discipulo/discipulo');
-            exit();
+        header ('location:/discipulo/discipulo');
+        exit();
         }
 
-        public function arquivar($url)
-        {
-          $discipulo =	new \discipulo\Modelo\Discipulo();
+    public function arquivar($url)
+    {
+        $discipulo = new \discipulo\Modelo\Discipulo();
 
-          $discipulo->id = $url[4] ;
-          $discipulo->arquivar() ;
-            header ('location:/discipulo/discipulo/inativos');
-            exit();
-        }
+        $discipulo->id = $url[4];
+        $discipulo->arquivar();
 
-        public function desarquivar($url)
-        {
-          $discipulo =	new \discipulo\Modelo\Discipulo();
+        $aviso = new \aviso\modelo\aviso();
+        $aviso->identificacao = $discipulo->id;
+        $aviso->tipoAviso = 5 ;
+        $aviso->emissor = $_SESSION['usuario_id'];
+        $aviso->salvar();
 
-          $discipulo->id = $url[4] ;
-          $discipulo->desarquivar() ;
-            header ('location:/discipulo/discipulo/arquivo');
-            exit();
-        }
+        $discipulo = $discipulo->listarUm();
+
+        $headers = "MIME-Version: 1.1\n";
+        $headers .= "Content-type: text/plain; charset=utf-8\n";
+        $headers .= "From: Multiplicação12 <multiplicaca12@multiplicacao.org>"."\n"; // remetente
+        $headers .= "Return-Path: Meu Nome <multiplicacao@multiplicacao.org>"."\n"; // return-path
+        $envio = mail("tiaoveloso12@gmail.com,wouerner@gmail.com,".$discipulo->getLider()->email,
+                        "A Discipulo",
+                        "Lider: ".$discipulo->getLider()->nome.", nome: ".$discipulo->nome,
+                        $headers,"-r multiplicacao@multiplicacao.org");
+
+        header ('location:/discipulo/discipulo/inativos');
+        exit();
+    }
+
+    public function desarquivar($url)
+    {
+        $discipulo =	new \discipulo\Modelo\Discipulo();
+
+        $discipulo->id = $url[4] ;
+        $discipulo->desarquivar() ;
+
+        $aviso = new \aviso\modelo\aviso();
+        $aviso->identificacao = $discipulo->id;
+        $aviso->tipoAviso = 6 ;
+        $aviso->emissor = $_SESSION['usuario_id'];
+        $aviso->salvar();
+
+        $discipulo = $discipulo->listarUm();
+
+        $headers = "MIME-Version: 1.1\n";
+        $headers .= "Content-type: text/plain; charset=utf-8\n";
+        $headers .= "From: Multiplicação12 <multiplicaca12@multiplicacao.org>"."\n"; // remetente
+        $headers .= "Return-Path: Meu Nome <multiplicacao@multiplicacao.org>"."\n"; // return-path
+        $envio = mail("tiaoveloso12@gmail.com,wouerner@gmail.com,".$discipulo->getLider()->email,
+                        "A Discipulo",
+                        "Lider: ".$discipulo->getLider()->nome.", nome: ".$discipulo->nome,
+                        $headers,"-r multiplicacao@multiplicacao.org");
+
+        header ('location:/discipulo/discipulo/arquivo');
+        exit();
+    }
 
         public function arquivo()
         {
@@ -233,16 +270,17 @@ class discipulo
 
         }
 
-        public function novoCompleto($url)
-        {
-         if ( empty ( $url['post'] ) ) {
-              $estadosCivies = new \discipulo\Modelo\estadoCivil();
-                $estadosCivies = $estadosCivies->listarTodos();
-                $lideres =	new \discipulo\Modelo\Discipulo();
-                $lideres =	$lideres->listarlideres();
-                $celula = new \celula\modelo\celula();
-                $celulas = new \celula\modelo\celula();
-                $celulas = $celulas->listarTodos();
+
+    public function novoCompleto($url)
+    {
+        if ( empty ( $url['post'] ) ) {
+            $estadosCivies = new \discipulo\Modelo\estadoCivil();
+            $estadosCivies = $estadosCivies->listarTodos();
+            $lideres =	new \discipulo\Modelo\Discipulo();
+            $lideres =	$lideres->listarlideres();
+            $celula = new \celula\modelo\celula();
+            $celulas = new \celula\modelo\celula();
+            $celulas = $celulas->listarTodos();
 
             //status celular da pessoa
             $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
@@ -250,78 +288,78 @@ class discipulo
 
             $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
 
-             //$statusCelularDiscipulo->discipuloId= $url[3];
-             $statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
+            //$statusCelularDiscipulo->discipuloId= $url[3];
+            $statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
 
-             //Tipos de admissão e admissão atual
-             $tipoAdmissao = new \admissao\modelo\tipoAdmissao();
-             $tiposAdmissoes = $tipoAdmissao->listarTodos();
+            //Tipos de admissão e admissão atual
+            $tipoAdmissao = new \admissao\modelo\tipoAdmissao();
+            $tiposAdmissoes = $tipoAdmissao->listarTodos();
 
-             $tipoAdmissaoAtual = new \admissao\modelo\admissao();
-             //$tipoAdmissaoAtual->discipuloId = $url[3] ;
-             $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
+            $tipoAdmissaoAtual = new \admissao\modelo\admissao();
+            //$tipoAdmissaoAtual->discipuloId = $url[3] ;
+            $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
 
-             //tipos de rede e rede atual da pessoa
-             $rede = new \rede\modelo\rede();
-             $tipoRede = new \rede\modelo\tipoRede();
-             $funcaoRede = new \rede\modelo\funcaoRede();
+            //tipos de rede e rede atual da pessoa
+            $rede = new \rede\modelo\rede();
+            $tipoRede = new \rede\modelo\tipoRede();
+            $funcaoRede = new \rede\modelo\funcaoRede();
 
-             $tiposRedes = $tipoRede->listarTodos();
-             $funcoesRedes = $funcaoRede->listarTodos();
-             $redeAtual = $rede->listarUm();
+            $tiposRedes = $tipoRede->listarTodos();
+            $funcoesRedes = $funcaoRede->listarTodos();
+            $redeAtual = $rede->listarUm();
 
-             //escala de exito
-           $eventos = new \evento\modelo\evento();
+            //escala de exito
+            $eventos = new \evento\modelo\evento();
 
-           //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
-             $eventos = $eventos->listarTodos();
+            //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
+            $eventos = $eventos->listarTodos();
 
-             require_once 'modulos/discipulo/visao/novoCompleto.php';
+            require_once 'modulos/discipulo/visao/novoCompleto.php';
         } else {
-                $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo =	new \discipulo\Modelo\Discipulo();
 
-                $post = $url['post'] ;
+            $post = $url['post'] ;
 
-                $discipulo->nome = $post['nome'] ;
-                $discipulo->alcunha = $post['alcunha'] ;
-                $discipulo->setDataNascimento($post['dataNascimento']) ;
-                $discipulo->telefone = $post['telefone'];
-                $discipulo->sexo = $post['sexo'] ;
-                $discipulo->estadoCivilId = $post['estadoCivilId'] ;
-                $discipulo->endereco = $post['endereco'] ;
-                $discipulo->email = $post['email'] ;
-                $discipulo->celula = $post['celula'] ;
+            $discipulo->nome = $post['nome'] ;
+            $discipulo->alcunha = $post['alcunha'] ;
+            $discipulo->setDataNascimento($post['dataNascimento']) ;
+            $discipulo->telefone = $post['telefone'];
+            $discipulo->sexo = $post['sexo'] ;
+            $discipulo->estadoCivilId = $post['estadoCivilId'] ;
+            $discipulo->endereco = $post['endereco'] ;
+            $discipulo->email = $post['email'] ;
+            $discipulo->celula = $post['celula'] ;
 
-                $discipulo->ativo = 0 ;
+            $discipulo->ativo = 0 ;
 
-                $discipulo->lider = $post['lider'] ;
+            $discipulo->lider = $post['lider'] ;
 
-                if ( $discipulo->emailUnico() ) {
+            if ($discipulo->emailUnico()) {
 
-                          $discipulo->salvarCompleto() ;
+                $discipulo->salvarCompleto() ;
 
-                            $aviso = new \aviso\modelo\aviso();
-                            $aviso->identificacao = $discipulo->id ;
-                            $aviso->tipoAviso = 1 ;
-                            $aviso->emissor = $_SESSION['usuario_id'];
-                            $aviso->salvar();
+                $aviso = new \aviso\modelo\aviso();
+                $aviso->identificacao = $discipulo->id ;
+                $aviso->tipoAviso = 1 ;
+                $aviso->emissor = $_SESSION['usuario_id'];
+                $aviso->salvar();
 
-                            $_SESSION['mensagem'] = array('mensagem'=> 'Cadastro Realizado com Sucesso!',
+                $_SESSION['mensagem'] = array('mensagem'=> 'Cadastro Realizado com Sucesso!',
                                                           'class' => 'alert alert-success');
 
 
-                    $lider =	new \discipulo\Modelo\Discipulo();
-                    $lider->id = $_SESSION['usuario_id'];
-                    $lider = $lider->listarUm();
+                $lider =	new \discipulo\Modelo\Discipulo();
+                $lider->id = $_SESSION['usuario_id'];
+                $lider = $lider->listarUm();
 
-            $headers = "MIME-Version: 1.1\n";
-            $headers .= "Content-type: text/plain; charset=utf-8\n";
-            $headers .= "From: Multiplicação12 <multiplicaca12@mga12.org>"."\n"; // remetente
-            $headers .= "Return-Path: M12 <multiplicacao@mga12.org>"."\n"; // return-path
-            $envio = mail("tiaoveloso12@gmail.com,".$lider->email,
-                          "Novo Discipulo", "Nome: ".$discipulo->nome." Líder: ".$lider->nome,
-                          $headers, "-r multiplicacao12@mga12.org");
-                } else {
+                $headers = "MIME-Version: 1.1\n";
+                $headers .= "Content-type: text/plain; charset=utf-8\n";
+                $headers .= "From: Multiplicação12 <multiplicaca12@multiplicacao.org>"."\n"; // remetente
+                $headers .= "Return-Path: M12 <multiplicacao@multiplicacao.org>"."\n"; // return-path
+                $envio = mail("tiaoveloso12@gmail.com,wouerner@gmail.com,".$lider->email,
+                              "Novo Discipulo", "Nome: ".$discipulo->nome." Líder: ".$lider->nome,
+                              $headers, "-r multiplicacao12@multiplicacao.org");
+            } else {
 
                 $_SESSION['dados']['nome'] = $post['nome'] ;
                 $_SESSION['dados']['dataNascimento'] = $post['dataNascimento'] ;
@@ -332,44 +370,42 @@ class discipulo
                 $_SESSION['mensagem'] = array('mensagem'=> 'E-mail já cadastrado!',
                                               'class' => 'alert alert-danger');
 
-                var_dump($_SESSION);
                 header ('location:/discipulo/discipulo/novoCompleto');
                 exit();
 
-                }
+            }
 
-                //status celular
-                 $tipoStatusCelular =	$post['tipoStatusCelular'] ;
-                 $statusCelular =	new \statusCelular\modelo\statusCelular() ;
-                $statusCelular->tipoStatusCelular = $tipoStatusCelular;
-                $statusCelular->discipuloId = $discipulo->id;
-                if (!$statusCelular->salvar()) $statusCelular->atualizar();
+            //status celular
+            $tipoStatusCelular =	$post['tipoStatusCelular'] ;
+            $statusCelular =	new \statusCelular\modelo\statusCelular() ;
+            $statusCelular->tipoStatusCelular = $tipoStatusCelular;
+            $statusCelular->discipuloId = $discipulo->id;
+            if (!$statusCelular->salvar()) $statusCelular->atualizar();
 
-                //admissão
-                 $admissao = new \admissao\modelo\admissao();
-                 $admissao->tipoAdmissao = $post['tipoAdmissao'] ;
-                 $admissao->discipuloId = $discipulo->id ;
-                 if (!$admissao->salvar()) $admissao->atualizar() ;
+            //admissão
+            $admissao = new \admissao\modelo\admissao();
+            $admissao->tipoAdmissao = $post['tipoAdmissao'] ;
+            $admissao->discipuloId = $discipulo->id ;
+            if (!$admissao->salvar()) $admissao->atualizar() ;
 
-                //tipos de rede e rede atual da pessoa
-                $rede = new \rede\modelo\rede();
+            //tipos de rede e rede atual da pessoa
+            $rede = new \rede\modelo\rede();
 
-                 $rede->discipuloId = $discipulo->id;
-                 $rede->tipoRedeId = $post['tipoRedeId'];
-                 $rede->funcaoRedeId = $post['funcaoRedeId'];
-                if (!$rede->salvar()) $rede->atualizar();
+            $rede->discipuloId = $discipulo->id;
+            $rede->tipoRedeId = $post['tipoRedeId'];
+            $rede->funcaoRedeId = $post['funcaoRedeId'];
+
+            if (!$rede->salvar()) $rede->atualizar();
 
                 $discipuloEventos = new \evento\modelo\evento();
-                  $eventos = isset($post['eventos']) ? $post['eventos'] : NULL ;
+                $eventos = isset($post['eventos']) ? $post['eventos'] : NULL ;
                 if ($eventos) {
-                          $discipuloEventos->salvarEventos($eventos,$discipulo->id);
+                    $discipuloEventos->salvarEventos($eventos,$discipulo->id);
                 }
 
                 header('location:/discipulo/discipulo/novoCompleto');
                 exit();
-
-        }
-
+            }
         }
 
           public function novoAnonimo($url)
