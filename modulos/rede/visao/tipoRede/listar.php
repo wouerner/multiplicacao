@@ -52,7 +52,7 @@ unset($_SESSION['mensagem']) ;
                             //Number - The number of steps in a hard coded scale
                             scaleSteps : 40,
                             //Number - The value jump in the hard coded scale
-                            scaleStepWidth : 2,
+                            scaleStepWidth : 1,
                             //Number - The scale starting value
                             scaleStartValue : <?php echo $rede->totalDiscipulosPorRede()/2?>,
                             //String - Colour of the scale line
