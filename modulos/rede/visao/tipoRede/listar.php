@@ -14,6 +14,7 @@ unset($_SESSION['mensagem']) ;
         <nav>
             <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
         </nav>
+                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
         <section>
             <style>
                 #chart {
@@ -29,18 +30,17 @@ unset($_SESSION['mensagem']) ;
                 <?php //var_dump($rede->crescimento('2014-04-15',date('2014-04-16')))?>
                 <div class = "span5 well" >
                         <h2>
-                            <a href="/rede/rede/detalharTipoRede/id/<?php echo $rede->id?>" >
-                                <?php echo $rede->nome ; ?>
-                            </a>
+                            <?php echo $rede->nome ; ?>
                         </h2>
-                        <canvas id="chart<?php echo $rede->id?>" width="500"  height="300"></canvas>
-                        <span class="label label-info"><?php echo $rede->totalDiscipulosPorRede() ; ?></span>
-                        <a href="/rede/rede/listarMembrosRede/id/<?php echo $rede->id ; ?>" class = "btn btn-mini " ><i class = "icon-list" ></i> listar Discipulos </a>
-                        <a href="/rede/rede/listarCelulas/id/<?php echo $rede->id ; ?>" class = "btn btn-mini " ><i class = "icon-list" ></i> listar Células</a>
-                        <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                            <a href="/rede/rede/atualizarTipoRede/id/<?php echo $rede->id ; ?>" class = "btn btn-mini btn-primary" ><i class="icon-edit icon-white"></i> Atualizar</a>
-                            <a href="/rede/rede/excluirTipoRede/id/<?php echo $rede->id ; ?>" class = "btn btn-mini btn-danger" ><i class = "icon-remove icon-white" ></i> excluir</a>
-                        <?php endif ; ?>
+                        <canvas id="chart<?php echo $rede->id?>" width="450"  height="300"></canvas>
+                        <div class = "span12" >
+                            <a href="/rede/rede/listarMembrosRede/id/<?php echo $rede->id ; ?>" class = "btn btn-mini " ><i class = "icon-list" ></i> listar Discipulos </a>
+                            <a href="/rede/rede/listarCelulas/id/<?php echo $rede->id ; ?>" class = "btn btn-mini " ><i class = "icon-list" ></i> listar Células</a>
+                            <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                                <a href="/rede/rede/atualizarTipoRede/id/<?php echo $rede->id ; ?>" class = "btn btn-mini btn-primary" ><i class="icon-edit icon-white"></i> Atualizar</a>
+                                <a href="/rede/rede/excluirTipoRede/id/<?php echo $rede->id ; ?>" class = "btn btn-mini btn-danger" ><i class = "icon-remove icon-white" ></i> excluir</a>
+                            <?php endif ; ?>
+                        </div>
                         <script>
 
                             var defaults = {
@@ -129,7 +129,6 @@ unset($_SESSION['mensagem']) ;
         </section>
         <section>
             <article>
-                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
                 <div class = "row-fluid" >
                 <div class = "span12" >
                         <table class = "well table table-condensed">
