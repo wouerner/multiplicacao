@@ -54,7 +54,7 @@ unset($_SESSION['mensagem']) ;
                             //Number - The value jump in the hard coded scale
                             scaleStepWidth : 2,
                             //Number - The scale starting value
-                            scaleStartValue : <?php echo $rede->totalDiscipulosPorRede()?>,
+                            scaleStartValue : <?php echo $rede->totalDiscipulosPorRede()/2?>,
                             //String - Colour of the scale line
                             scaleLineColor : "rgba(0,0,0,.1)",
                             //Number - Pixel width of the scale line
