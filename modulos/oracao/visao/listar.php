@@ -12,9 +12,12 @@
             </nav>
             <?php if ($acl->hasPermission('intercessao')==true): ?>
                 <table class="table">
-                <caption>Orações Privadas</caption>
+                <caption><h3>Orações Privadas</h3></caption>
                 <?php foreach ($oracoesPrivadas as $oracao): ?>
                     <tr>
+                    <td>
+                        <?php echo $oracao->getDiscipulo()->nome?>
+                    </td>
                         <td>
                             <?php echo $oracao->texto?>
                         </td>
@@ -24,9 +27,12 @@
             <?php endif ?>
 
             <table class="table">
-            <caption>Orações Publicas</caption>
+            <caption><h3>Orações Publicas</h3></caption>
             <?php foreach ($oracoesPublicas as $oracao):?>
                 <tr>
+                    <td>
+                        <?php echo $oracao->getDiscipulo()->nome?>
+                    </td>
                     <td>
                         <?php echo $oracao->texto?>
                     </td>

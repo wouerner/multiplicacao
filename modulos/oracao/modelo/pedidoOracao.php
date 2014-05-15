@@ -37,6 +37,21 @@ class pedidoOracao extends modeloFramework
         return $resposta;
     }
 
+    public function getDiscipulo()
+    {
+        $pdo = self::pegarConexao();
+
+        $sql = 'select * from Discipulo where id = ?';
+
+        $stm = $pdo->prepare($sql);
+        $stm->bindParam(1, $this->discipuloId);
+
+        $stm->execute();
+
+        $resposta = $stm->fetchObject('\discipulo\Modelo\Discipulo');
+
+        return $resposta;
+    }
     public function listar($publico)
     {
         $pdo = self::pegarConexao();
