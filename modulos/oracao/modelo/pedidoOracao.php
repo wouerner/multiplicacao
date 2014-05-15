@@ -125,16 +125,14 @@ class pedidoOracao extends modeloFramework
 
     }
 
-    /* Exclui um evento associado a um discipulo.
-     *
-     *
+    /*
      *
      */
     public function excluir()
     {
         $pdo = new \PDO (DSN,USER,PASSWD);
 
-        $sql = 'DELETE FROM Avisos WHERE id = ?';
+        $sql = 'DELETE FROM PedidoOracao WHERE id = ?';
 
         $stm = $pdo->prepare($sql);
 

@@ -21,6 +21,9 @@
                         <td>
                             <?php echo $oracao->texto?>
                         </td>
+                        <td>
+                            <a class="btn btn-danger" href="/oracao/oracao/excluir/id/<?php echo $oracao->id?>">excluir</a>
+                        </td>
                     </tr>
                 <?php endforeach?>
                 </table>
@@ -36,6 +39,11 @@
                     <td>
                         <?php echo $oracao->texto?>
                     </td>
+                <?php if ($acl->hasPermission('intercessao')==true): ?>
+                        <td>
+                            <a  class="btn btn-danger" href="/oracao/oracao/excluir/id/<?php echo $oracao->id?>">excluir</a>
+                        </td>
+                <?php endif ?>
                 </tr>
             <?php endforeach?>
             </table>

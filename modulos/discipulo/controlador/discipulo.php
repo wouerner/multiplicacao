@@ -631,17 +631,18 @@ class discipulo
 
         public function excluir($url)
         {
-            include 'seguranca/ACL/assets/php/database.php';
             $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
 
+                var_dump($url);
             if ($acl->hasPermission('admin_acesso') == true) {
 
                 $discipulo =	new \discipulo\Modelo\Discipulo();
                 $discipulo->id = $url[4];
+                var_dump($url);
                 $discipulo->excluir();
             }
 
-                header ('location:/discipulo/discipulo');
+                //header ('location:/discipulo/discipulo');
                 exit();
 
         }
