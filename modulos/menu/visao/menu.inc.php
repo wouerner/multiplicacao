@@ -26,6 +26,8 @@ $usuario = $usuario[0] ;
                 <li><a href = "/aviso/aviso" ><i class = " icon-bullhorn " ></i></a></li>
             <?php endif ; ?>
 
+            <li><a href = "/oracao/oracao" >Orações</a></li>
+
             <?php if ($acesso->hasPermission('rede_acesso') == true): ?>
                 <li class = "dropdown">
                     <a href = "#" class="dropdown-toggle" data-toggle="dropdown" role = "button">

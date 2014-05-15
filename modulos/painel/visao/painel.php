@@ -57,6 +57,37 @@ $(function(){
 <div class="row-fluid">
     <div class="span12">
         <div class="well">
+            <div id="msgOracao" class="alert" style="display:none">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Sucesso!</strong> Vamos orar por você.
+            </div>
+            <form id="oracao" class="form-inline" action="/oracao/oracao/pedido" method="post">
+            <fieldset>
+            <legend>Pedido de Oração</legend>
+            <input type="hidden" name="discipuloId" value="<?php echo $_SESSION['usuario_id']?>">
+                <label>Texto</label>
+                <textarea class="span6" name="texto" placeholder="Seu pedido"></textarea>
+                <label>
+                    <input type="checkbox" name="publico"> Publico
+                </label>
+                <button class="btn" type="submit">Enviar</button>
+                </fieldset>
+            </form>
+            <script>
+                 jQuery("#oracao").submit( function(event) {
+                    event.preventDefault();
+                    jQuery.post( "/oracao/oracao/pedido",$("#oracao").serializeArray(), function( data ) {
+                        console.log(data);
+                        jQuery( "#msgOracao" ).show();
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="well">
             <ul class="unstyled">
             <?php foreach($encontros as $encontro):?>
                 <li>  <?php echo $encontro->nome?>
