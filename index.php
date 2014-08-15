@@ -36,6 +36,7 @@ if(isset($perfil[2]) && $perfil[2] == 'perfil' ){
 
 }
 
+$subdomain = array();
 if (isset($_GET['d'])){
     $url =  'celula/relatorio/blog';
     $subdomain = $_GET['d'];

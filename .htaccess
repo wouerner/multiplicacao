@@ -3,8 +3,14 @@
 RewriteEngine on
 RewriteBase / 
 #RewriteCond %{SCRIPT_FILENAME} !-d
-RewriteCond %{SCRIPT_FILENAME} !-f
+#RewriteCond %{SCRIPT_FILENAME} !-f
 
+RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{HTTP_HOST} ^(www\.)?([^\.]+)\.m\.local$ [NC]
-RewriteRule ^(.*)$ /index.php?d=%2&url=$1 [L]
+RewriteRule ^(.*)$ index.php?d=%2&url=$1 [L,QSA]
+
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
 

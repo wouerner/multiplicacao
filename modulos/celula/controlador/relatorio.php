@@ -19,13 +19,18 @@ class relatorio
 
     }
 
-    public function blog($subdomain)
+    public function blog()
     {
+        $celula = new \celula\modelo\celula();
+        $celula->alias =$_GET['d'];
+        $celula = $celula->porAlias();
+
         $relatorioCelula = new \celula\modelo\relatorioCelula();
-        $relatorioCelula->celulaId  = 12;
+        $relatorioCelula->celulaId  = $celula['id'];
+
         $relatorios = $relatorioCelula->listarTodos();
 
-        require_once 'modulos/celula/visao/relatorioCelula/listar.php';
+        require_once 'modulos/celula/visao/relatorioCelula/blog.php';
     }
 
         public function novo($url)

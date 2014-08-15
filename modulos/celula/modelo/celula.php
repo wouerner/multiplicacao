@@ -775,4 +775,20 @@ group by d.id
 
     }
 
+
+    public function porAlias() {
+
+        $pdo = new \PDO (DSN,USER,PASSWD);
+
+        $sql = 'SELECT * FROM Celula WHERE alias = ?';
+
+        $stm = $pdo->prepare($sql);
+
+        $stm->bindParam(1, $this->alias);
+
+        $stm->execute();
+
+        $result = $stm->fetchAll();
+        return $result[0];
+    }
 }
