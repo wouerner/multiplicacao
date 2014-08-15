@@ -1,8 +1,9 @@
 <?php
+//var_dump($_GET);exit;
 //inicia a sessão
 session_start();
 
-$sessao = isset ($_SESSION) ? $_SESSION : NULL ; 
+$sessao = isset ($_SESSION) ? $_SESSION : NULL ;
 
 $_GET['url'] = array_key_exists('url',$_GET) ? $_GET['url'] : NULL;
 
@@ -10,11 +11,11 @@ $_GET['url'] = array_key_exists('url',$_GET) ? $_GET['url'] : NULL;
 if (array_key_exists('logado', $sessao) && $sessao['logado']==TRUE){
 
 	$url = $_GET['url'];
-	
+
 	//se for uma tentativa de login deixar prosseguir com a url
 }else if( $_GET['url']=='seguranca/seguranca/entrar' ){
 	$url = $_GET['url'];
-//caso não seja nenhuma das duas opções acima redireciona para a pagina de segurança para logar no sistema.	
+//caso não seja nenhuma das duas opções acima redireciona para a pagina de segurança para logar no sistema.
 }else{
 
 	$url = 'seguranca/seguranca/index' ;
@@ -35,6 +36,10 @@ if(isset($perfil[2]) && $perfil[2] == 'perfil' ){
 
 }
 
+if (isset($_GET['d'])){
+    $url =  'celula/relatorio/blog';
+    $subdomain = $_GET['d'];
+}
 
 $url = explode('/' ,$url) ;
 
@@ -57,5 +62,3 @@ $controlador = $modulo.'\controlador\\'.$controlador ;
 $app = new $controlador();
 
 $app->$acao($url);
-
-?>

@@ -19,6 +19,15 @@ class relatorio
 
     }
 
+    public function blog($subdomain)
+    {
+        $relatorioCelula = new \celula\modelo\relatorioCelula();
+        $relatorioCelula->celulaId  = 12;
+        $relatorios = $relatorioCelula->listarTodos();
+
+        require_once 'modulos/celula/visao/relatorioCelula/listar.php';
+    }
+
         public function novo($url)
         {
             $dataEnvio = date('d/m/Y');
