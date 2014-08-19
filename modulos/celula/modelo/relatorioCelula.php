@@ -131,7 +131,7 @@ class relatorioCelula extends modeloFramework
     {
         $pdo = new \PDO (DSN,USER,PASSWD);
 
-        $sql = 'SELECT * FROM RelatorioCelula WHERE celulaId = ? ORDER BY year(dataEnvio) DESC, month(dataEnvio) DESC, day(dataEnvio) DESC ';
+        $sql = 'SELECT * FROM RelatorioCelula WHERE celulaId = ? ORDER BY year(dataEnvio) DESC, month(dataEnvio) DESC, day(dataEnvio) DESC';
 
         $stm = $pdo->prepare($sql);
 
@@ -166,11 +166,11 @@ class relatorioCelula extends modeloFramework
 
         while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
             $ob->id = $ob->discipuloId   ;
-            $resposta[$ob->discipuloId] = $ob->listarUm()  ;
+            $resposta[$ob->discipuloId] = $ob->listarUm();
 
         }
 
-        return $resposta ;
+        return $resposta;
 
     }
 

@@ -17,15 +17,35 @@ unset($_SESSION['mensagem']) ;
             <section>
                 <article>
                     <?php foreach ( $relatorios as $r ) : ?>
-                        <table class = "table well">
-                            <tr>
-                                <td class = "span3" ><h4><?php echo date_format(date_create($r->dataEnvio),'d/m/Y  H:i')  ; ?></h4></td>
-                                <td><h4><?php echo $r->titulo ; ?></h4></td>
-                            </tr>
-                            <tr>
-                                <td colspan = "2" ><?php echo $r->texto ; ?></td>
-                            </tr>
-                        </table>
+                        <div class="row-fluid">
+                            <div  class="span1" >
+                                <div  class="span12" >
+                                    <label class="label label-success">
+                                        <h3>
+                                            <?php echo date_format(date_create($r->dataEnvio),'d')  ; ?>
+                                        </h3>
+                                    </label>
+                                </div>
+                                <div  class="span12" >
+                                    <label class="label label-info">
+                                        <?php echo date_format(date_create($r->dataEnvio),'m/Y H:i')  ; ?>
+                                    </label>
+                                </div>
+                            </div>
+                            <div  class="span9" >
+                                <h1><?php echo $r->titulo ; ?></h1>
+                                <h2>Tema: <?php echo $r->pegarTemaRelatorio()->nome ; ?></h1>
+                                <p><?php echo $r->texto ; ?></p>
+                                <p> Participantes:
+                                    <?php foreach ($r->listarParticipacao() as $discipulo) : ?>
+                                        <label class="label label-success">
+                                            <?php echo $discipulo->getNome() ?>
+                                        </label>
+                                    <?php endforeach?>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
                     <?php endforeach ; ?>
                 </article>
             </section>
