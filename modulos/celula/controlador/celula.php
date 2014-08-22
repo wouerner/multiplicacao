@@ -5,9 +5,9 @@ namespace celula\controlador;
 
 class celula
 {
-    /*Metodo padrão para o controler
+    /* Metodo padrão para o controler
      *
-     * */
+     **/
     public function index()
     {
         $celulas =	new \celula\modelo\celula();

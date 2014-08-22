@@ -22,11 +22,16 @@ class relatorio
     public function blog()
     {
         $celula = new \celula\modelo\celula();
+
+
         $celula->alias =$_GET['d'];
+
         $celula = $celula->porAlias();
+        $lider = $celula->pegaLider();
+        $discipulos = $lider->listarDiscipulos();
 
         $relatorioCelula = new \celula\modelo\relatorioCelula();
-        $relatorioCelula->celulaId  = $celula['id'];
+        $relatorioCelula->celulaId  = $celula->id;
 
         $relatorios = $relatorioCelula->listarTodos();
 

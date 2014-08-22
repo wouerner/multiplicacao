@@ -776,7 +776,8 @@ group by d.id
     }
 
 
-    public function porAlias() {
+    public function porAlias()
+    {
 
         $pdo = new \PDO (DSN,USER,PASSWD);
 
@@ -788,7 +789,7 @@ group by d.id
 
         $stm->execute();
 
-        $result = $stm->fetchAll();
-        return $result[0];
+        $result = $stm->fetchObject('\celula\modelo\celula');
+        return $result;
     }
 }
