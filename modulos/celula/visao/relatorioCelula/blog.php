@@ -13,11 +13,14 @@ unset($_SESSION['mensagem']) ;
                 background:url('ext/img/night_sky.jpg');
             }
         </style>
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-522f29a96c8d3945"></script>
     </head>
     <body id="blog-back">
         <section class="container-fluid">
             <header>
                 <h1 class="text-center"><?php echo $celula->nome?></h1>
+                <div class="span10 offset3 addthis_native_toolbox"></div>
             </header>
             <section>
                 <article>
