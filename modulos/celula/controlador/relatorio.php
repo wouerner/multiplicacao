@@ -81,40 +81,33 @@ class relatorio
 
         }
 
-        public function atualizar($url)
-        {
-            if ( empty ( $url['post'] ) ) {
+    public function atualizar($url)
+    {
+        if (empty($url['post'])) {
 
-                $celula =	new \celula\modelo\celula();
-                $lideres = $celula->listarLideres();
+            $relatorio =	new \celula\modelo\relatorioCelula();
 
-                $celula->id =  $url[3] ;
-                $celula = $celula->listarUm() ;
+            $relatorio->id =  $url[4] ;
+            $relatorio = $relatorio->listarUm() ;
+            //var_dump($relatorio);exit;
 
-                $lider =	new \discipulo\Modelo\Discipulo() ;
-                $lider->id = $celula->lider ;
-                $lider = $lider->listarUm($celula->lider) ;
+            require_once 'modulos/celula/visao/relatorioCelula/atualizar.php';
 
-                require_once 'modulos/celula/visao/atualizar.php';
+        } else {
 
-            } else {
+            $relatorio = new \celula\modelo\relatorioCelula();
 
-                $celula =	new \celula\modelo\celula();
+            $post = $url['post'] ;
+            $relatorio->titulo = $post['titulo'];
+            $relatorio->texto = $post['texto'];
+            $relatorio->id = $post['id'];
 
-                $post = $url['post'] ;
-                $celula->nome = $post['nome'];
-                $celula->horarioFuncionamento = $post['horarioFuncionamento'];
-                $celula->endereco = $post['endereco'];
-                $celula->lider = $post['lider'];
-                $celula->id = $post['id'];
+            $relatorio->atualizar();
 
-                $celula->atualizar();
-
-                header ('location:/celula/atualizar/id/'.$celula->id);
-                exit();
-            }
-
+            header('location:/celula/relatorio/detalhar/id/'.$relatorio->id);
+            exit();
         }
+    }
 
         public function excluir($url)
         {

@@ -100,30 +100,27 @@ class relatorioCelula extends modeloFramework
 
     public function atualizar()
     {
-    //abrir conexao com o banco
-    $pdo = new \PDO(DSN, USER, PASSWD);
-    //cria sql
-    $sql = "UPDATE Celula SET 	nome = ? , horarioFuncionamento = ? , endereco = ?,
-        lider = ?
-        WHERE id = ?
-                    ";
-    //prepara sql
-    $stm = $pdo->prepare($sql);
-    //trocar valores
-    $stm->bindParam(1, $this->nome);
-    $stm->bindParam(2, $this->horarioFuncionamento);
-    $stm->bindParam(3, $this->endereco);
-    $stm->bindParam(4, $this->lider);
-    $stm->bindParam(5, $this->id);
+        //abrir conexao com o banco
+        $pdo = new \PDO(DSN, USER, PASSWD);
 
-    $resposta = $stm->execute();
+        $sql = "UPDATE RelatorioCelula SET 	titulo = ? , texto= ?
+            WHERE id = ?
+                        ";
+        //prepara sql
+        $stm = $pdo->prepare($sql);
+        //trocar valores
+        $stm->bindParam(1, $this->titulo);
+        $stm->bindParam(2, $this->texto);
+        $stm->bindParam(3, $this->id);
 
-    //fechar conexÃ£o
-    $pdo = null ;
+        $resposta = $stm->execute();
 
-    return $resposta;
+        //fechar conexÃ£o
+        $pdo = null ;
 
+        return $resposta;
     }
+
     /*Recebe o id para nÃ£o listar este cadastro.
      *
      * */
@@ -483,8 +480,10 @@ where c.tipoRedeId in ('.$rede.' )
 
     }
 
-    /*Lista apenas um Disicpulo
-    */
+    /**
+     * Lista apenas um Disicpulo
+     *
+     */
 
     public function listarUm()
     {
