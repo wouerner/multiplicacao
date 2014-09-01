@@ -176,15 +176,15 @@ class relatorioCelula extends modeloFramework
         $pdo = new \PDO (DSN,USER,PASSWD);
 
         $sql = '
-                        SELECT d.nome AS lider, c.nome AS celulaNome, c.id AS celulaId, r.dataEnvio AS dataEnvioRelatorio,
-tr.nome AS nomeTema, tr.dataInicio AS inicio , tr.dataFim AS fim
-FROM
-Discipulo AS d right join
-Celula AS c on d.id = c.lider
-LEFT JOIN
-RelatorioCelula AS r ON c.id = r.celulaId AND  r.temaRelatorioCelulaId = ?
-left join
-TemaRelatorioCelula AS tr
+                SELECT d.nome AS lider, c.nome AS celulaNome, c.id AS celulaId, r.dataEnvio AS dataEnvioRelatorio,
+    tr.nome AS nomeTema, tr.dataInicio AS inicio , tr.dataFim AS fim
+    FROM
+    Discipulo AS d right join
+    Celula AS c on d.id = c.lider
+    LEFT JOIN
+    RelatorioCelula AS r ON c.id = r.celulaId AND  r.temaRelatorioCelulaId = ?
+    left join
+    TemaRelatorioCelula AS tr
     ON tr.id = r.temaRelatorioCelulaId AND
     r.dataEnvio between tr.dataInicio and  tr.dataFim
     AND temaRelatorioCelulaId = ?
@@ -233,7 +233,7 @@ TemaRelatorioCelula AS tr
     ON tr.id = r.temaRelatorioCelulaId AND
     r.dataEnvio between tr.dataInicio and  tr.dataFim
     AND temaRelatorioCelulaId = ?
-where c.tipoRedeId in ('.$rede.' )
+where c.tipoRedeId in ('.$rede.' ) and c.ativa= 1
 
     group by c.id
     order by c.nome
