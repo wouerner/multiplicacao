@@ -81,7 +81,8 @@ unset($_SESSION['mensagem']) ;
                             <tr class = "<?php echo ($r->titulo) ? '' : 'warning' ; ?>" >
                                 <td class = "" >	<?php echo date_format(date_create($r->dataEnvio),'d/m/Y  H:i:s')  ; ?></td>
                                 <td><?php echo $r->celulaNome ; ?></td>
-                                <td><a href = "/celula/relatorio/detalhar/id/<?php echo $r->relatorioId ; ?>" >
+                                <td>
+                                    <!--<a href = "/celula/relatorio/detalhar/id/<?php echo $r->relatorioId ; ?>" >
                                         <?php echo is_object($r) ? $r->titulo : 'não enviou' ; ?>
                                 </td>
                             </tr>

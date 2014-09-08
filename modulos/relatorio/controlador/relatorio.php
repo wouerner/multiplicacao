@@ -259,7 +259,6 @@ class relatorio
             $relatorio->temaRelatorioCelulaId = $url['post']['temaId'] ;
             $relatorios = $relatorio->listarTodosPorTemaRede($tipoRedeId) ;
             $cont=0;
-//			var_dump($relatorios);
         }
 
         require 'modulos/relatorio/visao/relatorioCelulaPorTema.php';

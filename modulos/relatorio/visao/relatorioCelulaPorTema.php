@@ -3,15 +3,12 @@ $mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL ;
 unset($_SESSION['mensagem']) ;
 
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-
         <?php include 'incluidos/css.inc.php' ?>
         <?php include 'incluidos/js.inc.php' ?>
-
         <script>
         $(function() {
 
@@ -27,23 +24,16 @@ unset($_SESSION['mensagem']) ;
         });
 
         </script>
-
     </head>
-
     <body>
         <section class = "container-fluid">
-
         <nav>
             <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
         </nav>
-
         <header>
-
         </header>
-
         <section>
             <article>
-
             <?php if (isset($mensagem)) : ?>
                     <div class="alert <?php echo ($mensagem=='ok') ? 'alert-success' : 'alert-error' ; ?>">
                       <h4 class="alert-heading">
@@ -105,11 +95,16 @@ unset($_SESSION['mensagem']) ;
                                 <td><?php echo ++$cont  ; ?></td>
                                 <td><?php echo $r['nomeTema'] ? 'sim' : 'não'  ; ?></td>
                                 <td><?php echo $r['lider'] ; ?></td>
-                                <td><a href = "/celula/relatorio/index/id/<?php echo $r['celulaId']?>" ><?php echo $r['celulaNome'] ; ?></a></td>
+                                <td>
+                                    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                                        <a href = "/celula/relatorio/index/id/<?php echo $r['celulaId']?>" ><?php echo $r['celulaNome'] ; ?></a>
+                                    <?php else: ?>
+                                        <?php echo $r['celulaNome'] ; ?>
+                                    <?php endif ?>
+                                </td>
                                 <td class = "" >	<?php echo $r['dataEnvioRelatorio'] ? date_format(date_create($r['dataEnvioRelatorio']),'d/m/Y  H:i:s')  : '' ; ?></td>
                                 </td>
                             </tr>
-
                         <?php endforeach ; ?>
                         </table>
                         </div>
