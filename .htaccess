@@ -6,7 +6,7 @@ RewriteBase /
 #RewriteCond %{SCRIPT_FILENAME} !-f
 
 RewriteCond %{SCRIPT_FILENAME} !-f
-RewriteCond %{HTTP_HOST} ^(www\.)?([^\.]+)\.m\.local$ [NC]
+RewriteCond %{HTTP_HOST} ^(www\.)?([^\.]+)\.multiplicacao\.org$ [NC]
 RewriteRule ^(.*)$ index.php?d=%2&url=$1 [L,QSA]
 
 

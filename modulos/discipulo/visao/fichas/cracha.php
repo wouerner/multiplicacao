@@ -9,9 +9,8 @@
 
         <style>
                 body{
-
                     font-size: 14pt;
-
+		color: white;
                     }
 
                     p{
@@ -42,7 +41,7 @@
 
                     .nome{
                         position: relative;
-                        top: 150px;
+                        top: 129px;
                         left: 10px;
                         }
                     .foto{
