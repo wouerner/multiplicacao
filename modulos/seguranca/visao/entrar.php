@@ -32,7 +32,6 @@ unset($_SESSION['mensagem']);
                 </form>
             </div>
             <div class="container form-signin">
-                <iframe width="560" height="315" src="//www.youtube.com/embed/pLNZYip9CIE?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
     </body>
