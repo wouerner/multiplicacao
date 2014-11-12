@@ -10,4 +10,6 @@
             <a href = "/encontroComDeus/participantesEncontro/encontro/id/<?php echo $participante->encontroComDeusId ; ?>" >Encontro</a>
         <li class="<?php echo isset($posEncontro) ? $posEncontro : ''; ?>">
             <a href = "/encontroComDeus/participantesEncontro/posEncontro/id/<?php echo $participante->encontroComDeusId ; ?>" >Pos Encontro</a>
+        <li class="<?php echo isset($posEncontro) ? $posEncontro : ''; ?>">
+            <a href = "/encontroComDeus/participantesEncontro/imprimir/id/<?php echo $participante->encontroComDeusId ; ?>" >Imprimir</a>
     </ul>
