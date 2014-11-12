@@ -17,6 +17,18 @@ class participantesEncontro
         require_once 'modulos/encontroComDeus/visao/participantesEncontro/listarTodos.php';
     }
 
+    public function imprimir($url)
+    {
+        $participante = new \encontroComDeus\modelo\participantesEncontro() ;
+        $participante->encontroComDeusId =$url[4] ;
+        $discipulos = $participante->listarTodos();
+
+        $total = count ($discipulos) ;
+        $ativo = 'active' ;
+
+        require_once 'modulos/encontroComDeus/visao/participantesEncontro/imprimir.php';
+    }
+
     public function lista($url)
     {
         $participante = new \encontroComDeus\modelo\participantesEncontro() ;
