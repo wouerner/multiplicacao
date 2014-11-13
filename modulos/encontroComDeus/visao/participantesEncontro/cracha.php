@@ -44,6 +44,7 @@
                         position: relative;
                         top: 150px;
                         left: 10px;
+                        color: white;
                         }
                     .foto{
                         height:2cm;

@@ -470,7 +470,7 @@ class participantesEncontro
 
             require 'ext/fpdf17/fpdf.php';
             $pdf = new \FPDF('L','mm','A4');
-
+            $pdf->SetTextColor(255,255,255);
             $novaPagina = true ;
             $x = 10 ;
             $y = 6 ;
