@@ -491,7 +491,7 @@ class participantesEncontro
             $pdf->Image('modulos/encontroComDeus/visao/participantesEncontro/cracha.png',$x,$y,114,$t);
             $pdf->SetY($y+20);
             $pdf->SetX($x);
-            $pdf->Cell(70,10,utf8_decode($d->getNomeAbreviado()));
+            $pdf->Cell(70,10,utf8_decode($d->getAlcunha()));
 
             $x += 120 ;
 
@@ -548,7 +548,7 @@ class participantesEncontro
             $pdf->SetFont('Arial','B',14);
             $pdf->SetY($y+20);
             $pdf->SetX($x);
-            $pdf->Cell(70,10,'Nome: '.utf8_decode($d->getNomeAbreviado()));
+            $pdf->Cell(70,10,'Nome: '.utf8_decode($d->alcunha()));
 
             $pdf->SetY($y+20);
             $pdf->SetX($x+80);

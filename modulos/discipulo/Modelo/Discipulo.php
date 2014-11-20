@@ -69,7 +69,15 @@ class Discipulo extends modeloFramework
 
     public function getAlcunha()
     {
-              return  $this->alcunha ? $this->alcunha : $this->nome;
+        if ($this->alcunha) {
+            $nome = $this->alcunha;
+        } else if($this->getNomeAbreviado()) {
+            $nome = $this->getNomeAbreviado();
+        } else {
+           $nome = $this->nome;
+        }
+
+        return  $nome;
     }
 
     public function setDataNascimento($valor)
@@ -215,7 +223,7 @@ class Discipulo extends modeloFramework
         }
 
     }
- 
+
     /*Pega a Batismo.
      *
      *
@@ -390,7 +398,7 @@ class Discipulo extends modeloFramework
             $stm->bindParam(':estadoCivilId', $this->estadoCivilId, \PDO::PARAM_INT);
             $stm->bindParam(':sexo', $this->sexo, \PDO::PARAM_STR);
             $stm->bindParam(':id', $this->id, \PDO::PARAM_INT);
-	    
+
             isset($this->alcunha) ? $stm->bindParam(':alcunha', $this->alcunha, \PDO::PARAM_STR): null;
 
             $resposta = $stm->execute();
@@ -453,7 +461,7 @@ class Discipulo extends modeloFramework
 
         $sql = '
                 select *
-                From Discipulo as d 
+                From Discipulo as d
                 where day(d.dataNascimento) = day(curdate()) and month(d.dataNascimento) = month(curdate())
                 ';
 
@@ -767,7 +775,7 @@ class Discipulo extends modeloFramework
     {
         $pdo = self::pegarConexao();
 
-        $sql = 'SELECT l.id AS liderId, l.nome AS Lider, d.id AS discipuloId, 
+        $sql = 'SELECT l.id AS liderId, l.nome AS Lider, d.id AS discipuloId,
                 d.nome AS nomeDiscipulo, d.lider AS discipuloLiderId
                 FROM Discipulo AS d
                 INNER JOIN Discipulo AS l ON d.lider = l.id
