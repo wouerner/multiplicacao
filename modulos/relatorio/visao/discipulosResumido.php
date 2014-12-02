@@ -10,17 +10,13 @@
 
     <body>
         <section class = "container-fluid">
-
-        <nav>
-            <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
-        </nav>
-
+            <nav>
+                <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
+            </nav>
         <header>
         </header>
-
         <section>
             <article>
-
 <div class = "row" >
     <div class = "span12" >
 <div class = "well" >
@@ -30,15 +26,13 @@
                             <div class = "control-group " >
 
                             <div class = "control-group span2" >
-                            <label>Ativo:</label>
-
-                            <select class = "span2" name = "ativo" >
-                                    <option value = "todos"  >Todos</option>
+                                <label>Ativo:</label>
+                                <select class = "span2" name = "ativo" >
                                     <option value = "1" >Ativo</option>
+                                    <option value = "todos"  >Todos</option>
                                     <option value = "0" >Inativo</option>
-                            </select>
+                                </select>
                             </div>
-
 
                             <div class = "control-group span3" >
                               <div class = "ui-widget" >
@@ -118,6 +112,7 @@
 
                             <div class = "form-actions span11" >
                         <button class = "btn" type="submit">Gerar</button>
+                        <a href="/relatorio/relatorio/relatorioResumidoImprimir" class = "btn" ">imprimir</a>
                             </div>
                     </div>
                 </fieldset>

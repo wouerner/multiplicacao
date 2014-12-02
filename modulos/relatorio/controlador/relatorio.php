@@ -50,7 +50,94 @@ class relatorio
 
     }
 
+
     public function relatorioResumido($url)
+    {
+        $post = $url['post'];
+    if (empty($post)) {
+        $tipoStatusCelulares = new \statusCelular\modelo\tipoStatusCelular();
+        $tipoStatusCelulares= $tipoStatusCelulares->listarTodos();
+
+        $estadoCivies = new \discipulo\Modelo\estadoCivil();
+        $estadoCivies = $estadoCivies->listarTodos();
+
+        $celulas = new \celula\modelo\celula();
+        $celulas = $celulas->listarTodos();
+
+        $tipoRedes = new \rede\modelo\tipoRede();
+        $tipoRedes = $tipoRedes->listarTodos();
+
+        $lideres = new \discipulo\Modelo\Discipulo();
+        $lideres = $lideres->listarTodosDiscipulos();
+
+        require 'relatorio/visao/discipulosResumido.php';
+    } else {
+
+        $idadeMinima = new \DateTime( "now" ,new \DateTimeZone('America/Sao_Paulo')) ;
+        $idadeMaxima = new \DateTime( "now" ,new \DateTimeZone('America/Sao_Paulo')) ;
+
+        $idadeMinima->sub(new \DateInterval('P'.$post['idadeMinima'].'Y') );
+        $idadeMaxima->sub(new \DateInterval('P'.$post['idadeMaxima'].'Y') );
+
+        $sexo = $post['sexo'];
+        $estadoCivil = $post['estadoCivil'];
+        $status = $post['tipoStatusCelular'];
+        $celula = $post['celula'];
+        $rede = $post['rede'];
+        $ativo = $post['ativo'];
+        $lider = $post['lider'];
+
+        $relatorio = new \relatorio\modelo\discipulos();
+
+        $relatorio = $relatorio->discipulosResumido($idadeMaxima->format('Y-m-d'), $idadeMinima->format('Y-m-d') ,$sexo,$estadoCivil,$status , $celula , $rede,$ativo , $lider);
+
+        if ($sexo != 'todos') {
+            $sexo = ($post['sexo']=='m') ? "Masculino" : "Feminino";
+        }
+
+        if ($estadoCivil != 'todos') {
+        $estadoCivil = new \discipulo\Modelo\estadoCivil();
+        $estadoCivil->id = $post['estadoCivil'];
+        $estadoCivil = $estadoCivil->listarUm();
+        }
+
+        if ($status != 'todos') {
+        $status = new \statusCelular\modelo\tipoStatusCelular();
+        $status->id = $post['tipoStatusCelular'];
+        $status = $status->listarUm();
+        }
+
+        if ($celula != 'todos') {
+        $celula = new \celula\modelo\celula();
+        $celula->id = $post['celula'];
+        $celula = $celula->listarUm();
+        }
+
+        if ($estadoCivil != 'todos') {
+        $estadoCivil = new \discipulo\Modelo\estadoCivil();
+        $estadoCivil->id = $post['estadoCivil'];
+        $estadoCivil = $estadoCivil->listarUm();
+        }
+
+        if ($rede != 'todos') {
+        $rede = new \rede\modelo\tipoRede();
+        $rede->id = $post['rede'];
+        $rede = $rede->listarUm();
+        }
+
+    //	$status = $post['tipoStatusCelular'];
+    //	$celula = $post['celula'];
+    //	$rede = $post['rede'];
+    //var_dump($relatorio);
+        //
+        $total = count($relatorio);
+        $count = 0 ;
+        require 'relatorio/visao/discipulosResumidoRelatorio.php';
+    }
+
+    }
+
+    public function relatorioResumidoImprimir($url)
     {
         $post = $url['post'];
     if (empty($post)) {
