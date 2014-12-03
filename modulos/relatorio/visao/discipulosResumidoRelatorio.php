@@ -54,7 +54,7 @@ $(document).ready(function() {
                                 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                                     <a target = "blank" href="/discipulo/discipulo/atualizar/id/<?php echo $r->id ; ?>">
                                 <?php endif; ?>
-                                        <strong><?php echo  $r->nome ; ?>
+                                        <strong><?php echo  $r->alcunha() ; ?>
                                         </strong>
                                 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                                     </a>
