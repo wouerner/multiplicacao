@@ -1,6 +1,6 @@
 <?php
-                $mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL ;
-                $_SESSION['mensagem']=  isset($_SESSION['mensagem']) ? NULL : NULL;
+    $mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL ;
+    $_SESSION['mensagem']=  isset($_SESSION['mensagem']) ? NULL : NULL;
 ?>
 <!DOCTYPE html>
 <html>
@@ -56,21 +56,19 @@ $(function(){
                 <?php require_once 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 <div class="row-fluid">
     <div class="span12">
-        <div class="well">
             <div id="msgOracao" class="alert" style="display:none">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <strong>Sucesso!</strong> Vamos orar por você.
             </div>
             <form id="oracao" class="form-inline" action="/oracao/oracao/pedido" method="post">
             <fieldset>
-            <legend>Pedido de Oração</legend>
-            <input type="hidden" name="discipuloId" value="<?php echo $_SESSION['usuario_id']?>">
-                <label>Texto</label>
-                <textarea class="span6" name="texto" placeholder="Seu pedido"></textarea>
-                <label>
-                    <input type="checkbox" name="publico"> Publico
-                </label>
-                <button class="btn" type="submit">Enviar</button>
+                <legend>Pedido de Oração</legend>
+                <input type="hidden" name="discipuloId" value="<?php echo $_SESSION['usuario_id']?>">
+                    <textarea class="span6" name="texto" placeholder="Seu pedido"></textarea>
+                    <label>
+                        <input type="checkbox" name="publico"> Publico
+                    </label>
+                    <button class="btn" type="submit">Enviar</button>
                 </fieldset>
             </form>
             <script>
@@ -82,20 +80,19 @@ $(function(){
                     });
                 });
             </script>
-        </div>
     </div>
 </div>
 <div class="row-fluid">
     <div class="span12">
-        <div class="well">
+        <div class="well well-small">
             <ul class="unstyled">
             <?php foreach($encontros as $encontro):?>
                 <li>  <?php echo $encontro->nome?>
-                    <a class="btn btn-primary" href="/encontroComDeus/participantesEncontro/novoParticipante/id/<?php echo $_SESSION['usuario_id'] ?>">Participar</a>
-                    <a class="btn btn-primary" href="/encontroComDeus/preEquipe/novoMembro/id/<?php echo $_SESSION['usuario_id'] ?>">Trabalhar</a>
-                    <a class="btn" href="/encontroComDeus/participantesEncontro/lista/id/<?php echo $encontro->id?>"><i class="icon-list-alt"></i> Lista do Encontro</a>
-<a class="btn btn-primary" href="/encontroComDeus/equipe/listarTodasEquipes/id/<?php echo $encontro->id?>">Lista Encontreiros</a>
-                    <a class="btn btn-link" href="https://www.dropbox.com/s/4hxw9eocf3yhd8z/AUTORIZA%C3%87%C3%83O%20DOS%20PAIS%20OU%20PASTORES.docx"><i class="icon-list-alt"></i> Autorização para Pessoas de outras Igrejas</a>
+                    <a class="btn btn-mini btn-primary" href="/encontroComDeus/participantesEncontro/novoParticipante/id/<?php echo $_SESSION['usuario_id'] ?>">Participar</a>
+                    <a class="btn btn-mini btn-primary" href="/encontroComDeus/preEquipe/novoMembro/id/<?php echo $_SESSION['usuario_id'] ?>">Trabalhar</a>
+                    <a class="btn btn-mini" href="/encontroComDeus/participantesEncontro/lista/id/<?php echo $encontro->id?>"><i class="icon-list-alt"></i> Lista do Encontro</a>
+<a class="btn btn-mini btn-primary" href="/encontroComDeus/equipe/listarTodasEquipes/id/<?php echo $encontro->id?>">Lista Encontreiros</a>
+                    <a class="btn btn-mini btn-link" href="https://www.dropbox.com/s/4hxw9eocf3yhd8z/AUTORIZA%C3%87%C3%83O%20DOS%20PAIS%20OU%20PASTORES.docx"><i class="icon-list-alt"></i> Autorização para Pessoas de outras Igrejas</a>
 
                 </li>
             <?php endforeach;?>
@@ -106,8 +103,8 @@ $(function(){
 
 <div class = "row-fluid" >
     <div class = "span6" >
-        <div class = "well" >
-        <h4><i class="icon-gift "></i> <?php echo $totalAniver ; ?> Aniversariantes hoje:</h4>
+        <div class = "well well-small" >
+        <b><i class="icon-gift "></i> <?php echo $totalAniver ; ?> Aniversariantes hoje:</b>
                         <?php foreach($discipulosAniver as $da) : ?>
                             <?php ++$contator ?>
                             <a href = "/discipulo/discipulo/perfil/id/<?php echo $da->id ; ?>" >
@@ -139,7 +136,6 @@ $(function(){
 </div>
 </div>
 
-<div class = "well" >
 
 <div class="accordion" id="accordion2">
     <div class="accordion-group">
@@ -176,7 +172,6 @@ $(function(){
                     </table>
         </div>
     </div>
-</div>
 
     <div class="accordion-group">
         <div class="accordion-heading">
@@ -378,7 +373,7 @@ $(function(){
 
 <div class = "row-fluid" >
                     <div class = "span12" >
-                    <div class = "well" >
+                    <div class = "well well-small" >
                     <strong>Relatório de Célula:</strong>
                 <?php foreach ( $celulas as $c ) : ?>
                         <a class = "btn" href="/celula/relatorio/novo/id/<?php echo $c->id ; ?>" > <?php echo $c->nome ; ?></a>
@@ -394,7 +389,7 @@ $(function(){
 
 <div class = "row-fluid" >
 <div class = "span12 " >
-<div class = "well" >
+<div class = "well well-small" >
 <div class="accordion" id="accordion3">
 
     <div class="accordion-group">

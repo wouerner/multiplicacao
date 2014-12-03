@@ -41,11 +41,13 @@ $(document).ready(function() {
                     <th>Endereço</th>
                     <th>Telefone</th>
                     <th>Data Nasc. </th>
+                    <th>Ações </th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php $cont=0;?>
                 <?php foreach($relatorio as $r ) : ?>
+                              <?php  $discipulo =  $r; ?>
                               <?php  $status =  $r->getStatusCelular() ; ?>
                               <?php  $lider =  is_object($r->getLider()) ? $r->getLider():'' ; ?>
                           <tr>
@@ -67,6 +69,7 @@ $(document).ready(function() {
                               <td><?php echo  $r->telefone; ?></td>
                               <td><?php echo  $r->getDataNascimento()->format('d/m/Y') ; ?></td>
                               <!-- td><?php //echo $status['nome'] ; ?></td -->
+                                <td><a target="blank" class="btn btn-mini btn-warning" href="/discipulo/discipulo/desativar/id/<?php echo $r->id?>"> desativar</a></td>
                           </tr>
                     <?php endforeach ; ?>
                 </tbody>
