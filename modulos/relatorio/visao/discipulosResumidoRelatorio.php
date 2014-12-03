@@ -40,7 +40,6 @@ $(document).ready(function() {
                     <th>Endereço</th>
                     <th>Telefone</th>
                     <th>Data Nasc. </th>
-                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
