@@ -374,7 +374,7 @@ order by nome
         $end = new \DateTime( $fim );
         $end = $end->modify( '+1 day' );
 
-        $interval = new \DateInterval('P1D');
+        $interval = new \DateInterval('P4D');
         $daterange = new \DatePeriod($begin, $interval ,$end);
         //var_dump($daterange);
         $select='nomeRede,';
@@ -411,7 +411,7 @@ order by nome
         $end = new \DateTime( $fim );
        // $end = $end->modify( '+1 day' );
 
-        $interval = new \DateInterval('P1D');
+        $interval = new \DateInterval('P4D');
         $daterange = new \DatePeriod($begin, $interval ,$end);
         //var_dump($daterange);
         $select='';

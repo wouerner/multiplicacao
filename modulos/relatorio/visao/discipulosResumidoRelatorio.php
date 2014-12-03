@@ -66,7 +66,7 @@ $(document).ready(function() {
                               <td><?php echo  $r->endereco ; ?></td>
                               <td><?php echo  $r->telefone; ?></td>
                               <td><?php echo  $r->getDataNascimento()->format('d/m/Y') ; ?></td>
-                              <td><?php echo $status['nome'] ; ?></td>
+                              <!-- td><?php //echo $status['nome'] ; ?></td -->
                           </tr>
                     <?php endforeach ; ?>
                 </tbody>
