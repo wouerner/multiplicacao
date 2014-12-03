@@ -21,13 +21,14 @@ $(document).ready(function() {
         <section>
             <article>
             <table class = "table table-bordered table-condensed" >
-                    <caption><h3>Relatório: <?php echo $total?></h3></caption>
+                    <caption><h3>Relatório Dinamico</h3></caption>
                 <tr>
                     <th>Status :<?php echo is_object($status) ? $status->nome : 'todos' ?> </th>
                     <th>Sexo :  <?php  echo $sexo ?></th>
                     <th>Estado Civil : <?php echo is_object($estadoCivil) ? $estadoCivil->nome : 'todos' ?></th>
                     <th>Rede : <?php echo is_object($rede) ? $rede->nome : 'todos' ?></th>
                     <th>célula :<?php echo is_object($celula)? $celula->nome : 'todos' ?> </th>
+                    <th>total : <?php echo $total?></th>
                 </tr>
             </table>
             <table class = "table table-condensed tablesorter well" >
@@ -36,7 +37,7 @@ $(document).ready(function() {
                     <th>#</th>
                     <th>Nome</th>
                     <th>Líder</th>
-                    <th>Sexo</th>
+                    <!--th>Sexo</th-->
                     <th>Endereço</th>
                     <th>Telefone</th>
                     <th>Data Nasc. </th>
@@ -61,7 +62,7 @@ $(document).ready(function() {
                                     <?php echo $r->ativo ? '-ativo':'inativo'?>
 </td>
                                <td><?php echo $lider->getAlcunha()?></td>
-                              <td><?php echo  ($r->sexo == 'm')? 'M' : 'F' ; ?></td>
+                              <!--td><?php //echo  ($r->sexo == 'm')? 'M' : 'F' ; ?></td-->
                               <td><?php echo  $r->endereco ; ?></td>
                               <td><?php echo  $r->telefone; ?></td>
                               <td><?php echo  $r->getDataNascimento()->format('d/m/Y') ; ?></td>
