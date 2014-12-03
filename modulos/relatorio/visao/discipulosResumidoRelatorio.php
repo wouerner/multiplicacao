@@ -23,10 +23,10 @@ $(document).ready(function() {
             <table class = "table table-bordered table-condensed" >
                     <caption><h3>Relatório: <?php echo $total?></h3></caption>
                 <tr>
+                    <th>Status :<?php echo is_object($status) ? $status->nome : 'todos' ?> </th>
                     <th>Sexo :  <?php  echo $sexo ?></th>
                     <th>Estado Civil : <?php echo is_object($estadoCivil) ? $estadoCivil->nome : 'todos' ?></th>
                     <th>Rede : <?php echo is_object($rede) ? $rede->nome : 'todos' ?></th>
-                    <th>Status :<?php echo is_object($status) ? $status->nome : 'todos' ?> </th>
                     <th>célula :<?php echo is_object($celula)? $celula->nome : 'todos' ?> </th>
                 </tr>
             </table>
