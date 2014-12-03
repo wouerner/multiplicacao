@@ -59,7 +59,7 @@ $(document).ready(function() {
                                 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                                     </a>
                                 <?php endif; ?>
-                                    <?php echo $r->ativo ? '-ativo':'inativo'?>
+                                    <?php //echo $r->ativo ? '-ativo':'inativo'?>
 </td>
                                <td><?php echo $lider->getAlcunha()?></td>
                               <!--td><?php //echo  ($r->sexo == 'm')? 'M' : 'F' ; ?></td-->
