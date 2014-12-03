@@ -56,7 +56,7 @@ class Discipulo extends modeloFramework
 
     public function getNomeAbreviado()
     {
-              $nome = explode(' ', $this->nome);
+              $nome = explode(' ', trim($this->nome));
               $nome = $nome[0].' '.$nome[count($nome)-1];
 
               return $nome;
