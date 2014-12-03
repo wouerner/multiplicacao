@@ -26,7 +26,7 @@
                             <div class = "control-group " >
 
                             <div class = "control-group span2" >
-                                <label>Ativo:</label>
+                                <label>Discipulo:</label>
                                 <select class = "span2" name = "ativo" >
                                     <option value = "1" >Ativo</option>
                                     <option value = "todos"  >Todos</option>
@@ -78,7 +78,7 @@
                             </div>
 
                             <div class = "control-group span2" >
-                            <label>Status:</label>
+                            <label>Consolidação:</label>
                                 <select class = "span2" name = "tipoStatusCelular" >
                                     <option value = "todos" >Todos</option>
                                 <?php foreach ( $tipoStatusCelulares as $status) : ?>
@@ -112,7 +112,6 @@
 
                             <div class = "form-actions span11" >
                         <button class = "btn" type="submit">Gerar</button>
-                        <a href="/relatorio/relatorio/relatorioResumidoImprimir" class = "btn" ">imprimir</a>
                             </div>
                     </div>
                 </fieldset>

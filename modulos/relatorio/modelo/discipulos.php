@@ -337,7 +337,7 @@ order by nome
         $end = new \DateTime( $fim );
        // $end = $end->modify( '+1 day' );
 
-        $interval = new \DateInterval('P2D');
+        $interval = new \DateInterval('P4D');
         $daterange = new \DatePeriod($begin, $interval ,$end);
         //var_dump($daterange);
         $select='';
