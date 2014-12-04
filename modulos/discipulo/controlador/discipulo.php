@@ -653,6 +653,10 @@ class discipulo
             $eventoDiscipulo = new \evento\modelo\eventoDiscipulo();
             $ministerios = new \ministerio\modelo\ministerioTemDiscipulo();
             $statusCelular = new \statusCelular\modelo\statusCelular();
+            $tipoStatus= new \statusCelular\modelo\tipoStatusCelular();
+
+            $statusCelulares = $tipoStatus->listarTodos() ;
+//var_dump($statusCelulares);
 
             $discipulo->id = $url[4] ;
 
@@ -678,6 +682,8 @@ class discipulo
             $meta = new \metas\modelo\metas() ;
             $meta->discipuloId = $discipulo->id;
             $metas = $meta->listar() ;
+
+            $discipulos = $discipulo->listarDiscipulos();
 
             require 'discipulo/visao/detalhar.php';
 

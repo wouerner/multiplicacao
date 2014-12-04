@@ -7,7 +7,6 @@
 
 <script>
 $(document).ready(function () {
-
     $(".btn-warning").click( function(){
                 var id = this.id ;
 
@@ -23,7 +22,6 @@ $(document).ready(function () {
                         $(location).attr('href', '/discipulo/discipulo/desativar/id/'+id);
                },
                 }
-
         });
     });
 
@@ -49,46 +47,37 @@ $(document).ready(function () {
 });
 </script>
     </head>
-
 <body>
-
 <div id="dialog-confirm" title="Deseja desativar?" style = "display:none">
     <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente excluir?</p>
 </div>
-
 <div id="dialog-success" title="Deseja ativar?" style = "display:none">
     <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente ativar?</p>
 </div>
 
         <section class = "container-fluid">
-
         <nav>
             <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
         </nav>
-
         <header>
-
         </header>
-
         <section>
             <article>
-
             <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
 <div class = "well" >
-
             <table class = "table" >
             <caption>
                 <h3>
                     <span class="label">
                         <?php echo $discipulo->getGeracao()->nome?>
                     </span>
-                    <?php echo $discipulo->nome ; ?> 
-                        <a href="/metas/metas/detalhar/id/<?php echo $discipulo->id ?>">metas</a></h3> 
+                    <?php echo $discipulo->nome ; ?>
+                        <a href="/metas/metas/detalhar/id/<?php echo $discipulo->id ?>">metas</a></h3>
             </caption>
             <tr>
                 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                     <td>
-                        <a id = "<?php echo $discipulo->id ?>" 
+                        <a id = "<?php echo $discipulo->id ?>"
                             href="/metas/metas/novo/id/<?php echo $discipulo->id ?>" class = "btn btn-mini " alt = "excluir" >
                             <i class="icon-screenshot "></i> Cadastrar Meta
                         </a>
@@ -240,13 +229,34 @@ $(document).ready(function () {
                 <!-- Metas dos discipulos-->
                 <?php endif; ?>
 
+
                  <tr><td><strong>Ações</strong></td></tr>
                     <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
                 </table>
-                    
+
+
             </div>
             </article>
         </section>
+        </section>
+        <section>
+            <?php foreach ($statusCelulares as $status ): ?>
+                <div class="span3">
+                    <table class="table table-condensed">
+                    <legend><?php echo $status->nome?></legend>
+                    <tbody>
+                    <?php foreach ($discipulos as $discipulo ): ?>
+                        <?php if($status->id == $discipulo->getStatusCelular()['id'] && $discipulo->ativo):?>
+                            <tr>
+                                <td><?php echo !isset($cont) ? $cont=1 : ++$cont?></td>
+                                <td><?php echo $discipulo->getAlcunha() ; ?></td>
+                            </tr>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                    </tbody>
+                    </table>
+                </div>
+            <?php endforeach ?>
         </section>
     </body>
 </html>
