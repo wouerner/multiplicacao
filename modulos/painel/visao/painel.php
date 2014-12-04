@@ -94,6 +94,7 @@ $(function(){
                     <a class="btn btn-mini" href="/encontroComDeus/participantesEncontro/lista/id/<?php echo $encontro->id?>"><i class="icon-list-alt"></i> Lista do Encontro</a>
 <a class="btn btn-mini btn-primary" href="/encontroComDeus/equipe/listarTodasEquipes/id/<?php echo $encontro->id?>">Lista Encontreiros</a>
                     <a class="btn btn-mini btn-link" href="https://www.dropbox.com/s/4hxw9eocf3yhd8z/AUTORIZA%C3%87%C3%83O%20DOS%20PAIS%20OU%20PASTORES.docx"><i class="icon-list-alt"></i> Autorização para Pessoas de outras Igrejas</a>
+                    <a class="btn btn-mini btn-link" href="https://www.dropbox.com/s/timfql416k0wuv3/AUTORIZA%C3%87%C3%83O%20ENCONTRO%202014.doc?dl=0"><i class="icon-list-alt"></i> Autorização para Encotro de Crianças</a>
                 </li>
             <?php endforeach;?>
             </ul>
