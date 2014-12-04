@@ -87,13 +87,13 @@ $(function(){
         <div class="well well-small">
             <ul class="unstyled">
             <?php foreach($encontros as $encontro):?>
-                <li>  <?php echo $encontro->nome?>
+                <li>
+                    <?php echo $encontro->nome?>
                     <a class="btn btn-mini btn-primary" href="/encontroComDeus/participantesEncontro/novoParticipante/id/<?php echo $_SESSION['usuario_id'] ?>">Participar</a>
                     <a class="btn btn-mini btn-primary" href="/encontroComDeus/preEquipe/novoMembro/id/<?php echo $_SESSION['usuario_id'] ?>">Trabalhar</a>
                     <a class="btn btn-mini" href="/encontroComDeus/participantesEncontro/lista/id/<?php echo $encontro->id?>"><i class="icon-list-alt"></i> Lista do Encontro</a>
 <a class="btn btn-mini btn-primary" href="/encontroComDeus/equipe/listarTodasEquipes/id/<?php echo $encontro->id?>">Lista Encontreiros</a>
                     <a class="btn btn-mini btn-link" href="https://www.dropbox.com/s/4hxw9eocf3yhd8z/AUTORIZA%C3%87%C3%83O%20DOS%20PAIS%20OU%20PASTORES.docx"><i class="icon-list-alt"></i> Autorização para Pessoas de outras Igrejas</a>
-
                 </li>
             <?php endforeach;?>
             </ul>
@@ -103,123 +103,96 @@ $(function(){
 
 <div class = "row-fluid" >
     <div class = "span6" >
-        <div class = "well well-small" >
+        <div class = "" >
         <b><i class="icon-gift "></i> <?php echo $totalAniver ; ?> Aniversariantes hoje:</b>
-                        <?php foreach($discipulosAniver as $da) : ?>
-                            <?php ++$contator ?>
-                            <a href = "/discipulo/discipulo/perfil/id/<?php echo $da->id ; ?>" >
-                            <?php if ( isset($da->alcunha) || $da->alcunha!=''): ?>
-                            <?php echo $da->alcunha ; ?>
-                            <?php else : ?>
-                            <?php echo $da->nome ; ?>
+            <?php foreach($discipulosAniver as $da) : ?>
+                <?php ++$contator ?>
+                <a href = "/discipulo/discipulo/perfil/id/<?php echo $da->id ; ?>" >
+                <?php if ( isset($da->alcunha) || $da->alcunha!=''): ?>
+                <?php echo $da->alcunha ; ?>
+                <?php else : ?>
+                <?php echo $da->nome ; ?>
 
-                            <?php endif ; ?>
-                            </a>
+                <?php endif ; ?>
+                </a>
 
-                            <?php if ($totalAniver > $contator ) : ?>
-                                -
-                            <?php endif ; ?>
-                        <?php endforeach ; ?>
-
+                <?php if ($totalAniver > $contator ) : ?>
+                    -
+                <?php endif ; ?>
+            <?php endforeach ; ?>
         </div>
-<div class="accordion" id="avisosCollapse">
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#avisos" href="#avisos"><i class="icon-bullhorn"></i> Avisos <b class="caret pull-right"></b></a>
-        </div>
-        <div id="avisos" class="accordion-body collapse">
-        <div class="accordion-inner">
-
-                <?php require 'modulos/aviso/visao/tabAviso.inc.php' ; ?>
-</div>
-</div>
-</div>
-</div>
-
-
-<div class="accordion" id="accordion2">
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Status da Igreja <b class="caret pull-right"></b></a>
-        </div>
-        <div id="collapseOne" class="accordion-body collapse">
-        <div class="accordion-inner">
-                    <table id="tabelaStatus" class = "table table-striped  tablesorter " >
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th scope="col">Quantidade</th>
-                            <th>%</th>
-                        </tr>
-                    </thead>
-                        <tbody>
-                        <?php foreach($status as $s) : ?>
-                            <tr>
-                                <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                                    <th scope="row"><a href="/statusCelular/statusCelular/listarDiscipulosPorStatus/id/<?php echo $s['tipoStatusCelular'] ; ?>" ><?php echo $s['tipoNome'] ; ?></a></th>
-                                <?php else :?>
-                                    <td><?php echo $s['tipoNome'] ; ?></td>
-                                <?php endif ; ?>
-                                    <td><?php echo $s['total'] ; ?></td>
-                                 <!--   <td><?php echo round($s['porcentagem'],1).'%' ; ?></td>-->
-                            </tr>
-                        <?php endforeach ; ?>
-                            <!-- <tr  class = "info" ><td>Total</td><td colspan = "2">
-                                <?php echo $totalDiscipulos ; ?>
-                                </td> -->
-                            </tr>
-                        </tbody>
-                    </table>
-        </div>
+        <table id="tabelaStatus" class = "table table-striped  tablesorter " >
+            <thead>
+                <tr>
+                    <th></th>
+                    <th scope="col">Quantidade</th>
+                    <th>%</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach($status as $s) : ?>
+                <tr>
+                    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                        <th scope="row"><a href="/statusCelular/statusCelular/listarDiscipulosPorStatus/id/<?php echo $s['tipoStatusCelular'] ; ?>" ><?php echo $s['tipoNome'] ; ?></a></th>
+                    <?php else :?>
+                        <td><?php echo $s['tipoNome'] ; ?></td>
+                    <?php endif ; ?>
+                        <td><?php echo $s['total'] ; ?></td>
+                     <!--   <td><?php echo round($s['porcentagem'],1).'%' ; ?></td>-->
+                </tr>
+            <?php endforeach ; ?>
+                <!-- <tr  class = "info" ><td>Total</td><td colspan = "2">
+                    <?php echo $totalDiscipulos ; ?>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>
 
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">Discipulos por Rede<b class="caret pull-right"></b></a>
-        </div>
+<div class = "span6 " >
+    <div class = "row-fluid" >
+        <table class = "table " >
+            <caption><h5>Total Redes</h5></caption>
+            <thead>
+                <th>Nome</th>
+                <th>Discipulos</th>
+                <th>Celulas</th>
+                <th>Metas</th>
+            </thead>
+            <tbody>
+                <?php $total['discipulos']=0?>
+                <?php $total['celulas']= 0?>
+                <?php $total['metas']= 0?>
+                <?php foreach( $tiposRedes as $s) :?>
+                <tr>
+                    <td>
+                        <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->nome ?></a>
+                    </td>
+                    <td>
+                    <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->totalDiscipulosPorRede() ?></a>
+                    </td>
+                    <td>
+                        <a href = "/rede/rede/listarCelulas/id/<?php echo $s->id ; ?>"><?php echo $s->listarCelulasTotal() ?></a>
+                    </td>
+                    <td>
+                        <a href = "#"><?php echo $s->getMeta() ?></a>
+                    </td>
+                </tr>
+                <?php $total['discipulos'] += $s->totalDiscipulosPorRede()?>
+                <?php $total['celulas']+= $s->listarCelulasTotal()?>
+                <?php $total['metas']+= $s->getMeta()?>
+                <?php endforeach ; ?>
 
-        <div id="collapseTwo" class="accordion-body collapse">
-        <div class="accordion-inner">
-                <table class = "table " >
-                    <caption><h5>Total Redes</h5></caption>
-                    <thead>
-                        <th>Nome</th>
-                        <th>Discipulos</th>
-                        <th>Celulas</th>
-                        <th>Metas</th>
-                    </thead>
-                    <tbody>
-                        <?php $total['discipulos']=0?>
-                        <?php $total['celulas']= 0?>
-                        <?php $total['metas']= 0?>
-                        <?php foreach( $tiposRedes as $s) :?>
-                        <tr>
-                            <td>
-                                <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->nome ?></a>
-                            </td>
-                            <td>
-                            <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->totalDiscipulosPorRede() ?></a>
-                            </td>
-                            <td>
-                                <a href = "/rede/rede/listarCelulas/id/<?php echo $s->id ; ?>"><?php echo $s->listarCelulasTotal() ?></a>
-                            </td>
-                            <td>
-                                <a href = "#"><?php echo $s->getMeta() ?></a>
-                            </td>
-                        </tr>
-                        <?php $total['discipulos'] += $s->totalDiscipulosPorRede()?>
-                        <?php $total['celulas']+= $s->listarCelulasTotal()?>
-                        <?php $total['metas']+= $s->getMeta()?>
-                        <?php endforeach ; ?>
+                <tr class = "info" >
+                    <td></td>
+                    <td><?php echo $total['discipulos'] ; ?></td>
+                    <td><?php echo $total['celulas'] ; ?></td>
+                    <td><?php echo $total['metas'] ; ?></td>
+                </tr>
+            </tbody>
+        </table>
 
-                        <tr class = "info" >
-                            <td></td>
-                            <td><?php echo $total['discipulos'] ; ?></td>
-                            <td><?php echo $total['celulas'] ; ?></td>
-                            <td><?php echo $total['metas'] ; ?></td>
-                        </tr>
-                    </tbody>
-                </table>
                 <table style="display:none" id="discipulosRede" class = "table " >
                     <thead>
                         <tr>
@@ -246,18 +219,7 @@ $(function(){
                         <?php endforeach ; ?>
                     </tbody>
                 </table>
-        </div>
-        </div>
-    </div>
 
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTree">
-                Discipulos Ativos/Inativos/Arquivados<b class="caret pull-right"></b>
-            </a>
-        </div>
-        <div id="collapseTree" class="accordion-body collapse">
-            <div class="accordion-inner">
                 <table class = "table " >
                     <thead>
                         <th scope="col">Ativos</th>
@@ -296,15 +258,7 @@ $(function(){
                     </tbody>
                 </table>
             </div>
-        </div>
-    </div>
 
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse4">
-                Gerações<b class="caret pull-right"></b>
-            </a>
-        </div>
         <div id="collapse4" class="accordion-body collapse">
             <div class="accordion-inner">
                 <table class = "table " >
@@ -371,11 +325,11 @@ $(function(){
                 </div>
 </div>
 
-<div class = "row-fluid" >
+                <div class = "row-fluid" >
                     <div class = "span12" >
                     <div class = "well well-small" >
                     <strong>Relatório de Célula:</strong>
-                <?php foreach ( $celulas as $c ) : ?>
+                    <?php foreach ( $celulas as $c ) : ?>
                         <a class = "btn" href="/celula/relatorio/novo/id/<?php echo $c->id ; ?>" > <?php echo $c->nome ; ?></a>
                     <?php endforeach ; ?>
                 </div>
@@ -383,44 +337,37 @@ $(function(){
     </div>
 
 <div class = "row-fluid" >
-<div class = "span12" >
+    <div class = "span12 " >
+        <div class = "well well-small" >
+            <div class="accordion" id="accordion3">
 
-</div>
-
-<div class = "row-fluid" >
-<div class = "span12 " >
-<div class = "well well-small" >
-<div class="accordion" id="accordion3">
-
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapse4">Meus Discipulos por Status<b class="caret pull-right"></b></a>
-        </div>
-
-        <div id="collapse4" class="accordion-body collapse ">
-            <div class="accordion-inner">
-
-            <table class = "table " >
-                <thead>
-                    <th>Status</th>
-                    <th>Quantidade</th>
-            </thead>
-            <tbody>
-                <?php foreach( $statusDiscipulos as $s) :?>
-                    <tr>
-                        <td><?php echo $s['tipoNome']?></td>
-                        <td><?php echo $s['total']?></td>
-                    </tr>
-                <?php endforeach ; ?>
-                    <tr class = "info" >
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapse4">Meus Discipulos por Status<b class="caret pull-right"></b></a>
+                </div>
+                <div id="collapse4" class="accordion-body collapse ">
+                    <div class="accordion-inner">
+                    <table class = "table " >
+                        <thead>
+                            <th>Status</th>
+                            <th>Quantidade</th>
+                        </thead>
+                        <tbody>
+                            <?php foreach( $statusDiscipulos as $s) :?>
+                                <tr>
+                                    <td><?php echo $s['tipoNome']?></td>
+                                    <td><?php echo $s['total']?></td>
+                                </tr>
+                            <?php endforeach ; ?>
+                            <tr class = "info" >
                                 <td>Total</td>
                                 <td><?php echo $statusDiscipulosTotal ; ?></td>
                             </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
     <div class="accordion-group">
         <div class="accordion-heading">
@@ -478,11 +425,18 @@ $(function(){
 </div>
 </div>
 
-</div>
-</div>
-</div>
-</div>
-</div>
+        <div class="accordion" id="avisosCollapse">
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#avisos" href="#avisos"><i class="icon-bullhorn"></i> Avisos <b class="caret pull-right"></b></a>
+                </div>
+                <div id="avisos" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                            <?php require 'modulos/aviso/visao/tabAviso.inc.php' ; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
 
             </article>
 

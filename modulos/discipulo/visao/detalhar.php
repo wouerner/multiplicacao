@@ -240,7 +240,7 @@ $(document).ready(function () {
         </section>
         </section>
         <section>
-                    <?php $cont=0 ?>
+            <?php $cont=0 ?>
             <?php foreach ($statusCelulares as $status ): ?>
                 <div class="span3">
                     <table class="table table-condensed">
@@ -251,6 +251,25 @@ $(document).ready(function () {
                         <?php if($status->id == $discipulo->getStatusCelular()['id'] && $discipulo->ativo):?>
                             <tr>
                                 <td><?php echo ++$cont ?></td>
+                                <td><?php echo $discipulo->getAlcunha() ; ?></td>
+                            </tr>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                    </tbody>
+                    </table>
+                </div>
+            <?php endforeach ?>
+            <?php $cont=0 ?>
+            <?php foreach ($statusCelulares as $status ): ?>
+                <div class="span3">
+                    <table class="table table-condensed">
+                    <legend><?php echo $status->nome?></legend>
+                    <tbody>
+                    <?php $cont=0 ?>
+                    <?php foreach ($discipulos as $discipulo ): ?>
+                        <?php if($status->id == $discipulo->getStatusCelular()['id'] && $discipulo->ativo):?>
+                            <tr>
+                                <td><?php ++$cont ?></td>
                                 <td><?php echo $discipulo->getAlcunha() ; ?></td>
                             </tr>
                         <?php endif ?>
