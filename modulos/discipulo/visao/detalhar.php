@@ -246,6 +246,7 @@ $(document).ready(function () {
                     <table class="table table-condensed">
                     <legend><?php echo $status->nome?></legend>
                     <tbody>
+                    <?php $cont=0 ?>
                     <?php foreach ($discipulos as $discipulo ): ?>
                         <?php if($status->id == $discipulo->getStatusCelular()['id'] && $discipulo->ativo):?>
                             <tr>
