@@ -1,5 +1,5 @@
 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-    <div class = "row-fluid" >
+    <!--div class = "row-fluid" >
         <div class = "span6" >
             <form action = "/discipulo/discipulo/chamar" method = "GET" class="form-search" accept-charset ="UTF-8"  >
                 <fieldset>
@@ -22,5 +22,5 @@
                 </fieldset>
             </form>
         </div>
-    </div>
-<?php endif ;
+    </div-->
+<?php endif ;?>

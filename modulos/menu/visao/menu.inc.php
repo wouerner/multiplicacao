@@ -26,7 +26,7 @@ $usuario = $usuario[0] ;
                 <li><a href = "/aviso/aviso" ><i class = " icon-bullhorn " ></i></a></li>
             <?php endif ; ?>
 
-            <li><a href = "/oracao/oracao" >Orações</a></li>
+            <!--li><a href = "/oracao/oracao" >Orações</a></li-->
 
             <?php if ($acesso->hasPermission('rede_acesso') == true): ?>
                 <li class = "dropdown">
@@ -78,7 +78,7 @@ $usuario = $usuario[0] ;
             <?php endif ; ?>
 
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                <li class="dropdown">
+                <!--li class="dropdown">
                     <a href = "#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class = "" ></i>Gerações<b class="caret"></b>
                     </a>
@@ -86,7 +86,7 @@ $usuario = $usuario[0] ;
                         <li><a href = "/geracoes/tipoGeracao/novo">Novo Tipo</a></li>
                         <li><a href = "/geracoes/tipoGeracao" >Lista</a></li>
                     </ul>
-                </li>
+                </li-->
             <?php endif ; ?>
 
             <?php if ($acesso->hasPermission('encontro') == true): ?>
@@ -104,7 +104,7 @@ $usuario = $usuario[0] ;
                     </li>
             <?php endif ; ?>
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                <li><a href = "/batismo/batismo" ><i class = "icon- " ></i> Batismo</a></li>
+                <!--li><a href = "/batismo/batismo" ><i class = "icon- " ></i> Batismo</a></li-->
             <?php endif; ?>
 
                     <li class = "dropdown" >
@@ -226,9 +226,12 @@ $usuario = $usuario[0] ;
                         </ul>
                     </li>
 <?php endif ; ?>
-
-        </ul>
-
+<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+            <form action = "/discipulo/discipulo/chamar" method="GET" class="navbar-search pull-left" accept-charset ="UTF-8"  >
+                <input class="navbar-search pull-left"  type="search" name="nome" size="45" placeholder="Pesquisar...">
+            </form>
+<?php endif ;?>
+            </ul>
                 <div class = "nav pull-right" >
                     <li class="divider-vertical"></li>
                     <li class = "dropdown" >

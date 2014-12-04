@@ -54,7 +54,7 @@ $(function(){
                 </div>
 
                 <?php require_once 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
-<div class="row-fluid">
+<!--div class="row-fluid">
     <div class="span12">
             <div id="msgOracao" class="alert" style="display:none">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -81,7 +81,7 @@ $(function(){
                 });
             </script>
     </div>
-</div>
+</div-->
 <div class="row-fluid">
     <div class="span12">
         <div class="well well-small">
@@ -107,7 +107,7 @@ $(function(){
 <div class = "row-fluid" >
                 <div class = "span12 well well-small">
                 <div class = "row-fluid" >
-                <h5><strong> <?php echo $totalDiscipulos ; ?>  Discipulos: </strong></h5>
+                <h5><strong> <?php// echo $totalDiscipulos ; ?>  Discipulos: </strong></h5>
                 <?php $discipulos = array_chunk($discipulos,4) ?>
                 <?php //var_dump($discipulos)?>
                 <?php foreach( $discipulos as $disc ) : ?>
