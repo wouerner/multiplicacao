@@ -15,10 +15,10 @@
     <div class="row-fluid">
     <div class = "well well-small span4" >
         <table id="tabelaStatus" class = "table table-striped  tablesorter table-condensed"  >
-            <caption><h5>Discipulos</h5></caption>
+            <caption><h5>Status</h5></caption>
             <thead>
                 <tr>
-                    <th></th>
+                    <th>Disciulos</th>
                     <th scope="col">Quantidade</th>
                 </tr>
             </thead>
