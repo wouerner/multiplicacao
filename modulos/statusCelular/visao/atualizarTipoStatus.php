@@ -14,14 +14,14 @@
 			</nav>
 		</header>
 
-		<section>		
+		<section>
 			<article>
-					<form action = "/statusCelular/atualizarTipoStatusCelular" method = "post"  class = "form-horizontal">
+					<form action = "/statusCelular/statusCelular/atualizarTipoStatusCelular" method = "post"  class = "form-horizontal">
 
 					<div class = "row" >
 							  <fieldset class = "span6" >
 								  <legend>Atualizar Tipo de Status</legend>
-							  
+
 							  <div class="control-group ">
 								  <label class = "control-label" >Nome:</label>
 								  <div class = "controls" >
@@ -63,10 +63,10 @@
 					</div>
 
 					</form>
-				
-			
+
+
 			</article>
-		
+
 		</section>
 
 		</section>
