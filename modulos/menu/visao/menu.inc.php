@@ -20,10 +20,15 @@ $usuario = $usuario[0] ;
                             <a class="brand" href="/painel/painel"> MGA</a>
 <div class="nav-collapse collapse">
         <ul class="nav" role="navigation">
-            <li class="divider-vertical"></li>
+
+<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+            <form action = "/discipulo/discipulo/chamar" method="GET" class="navbar-search pull-left" accept-charset ="UTF-8"  >
+                <input class="navbar-search pull-left"  type="search" name="nome" size="45" placeholder="Pesquisar...">
+            </form>
+<?php endif ;?>
 
             <?php if ($acesso->hasPermission('aviso_acesso') == true): ?>
-                <li><a href = "/aviso/aviso" ><i class = " icon-bullhorn " ></i></a></li>
+                <li><a href = "/aviso/aviso" ><i class = " icon-bullhorn " ></i> Aviso</a></li>
             <?php endif ; ?>
 
             <!--li><a href = "/oracao/oracao" >Orações</a></li-->
@@ -226,11 +231,6 @@ $usuario = $usuario[0] ;
                         </ul>
                     </li>
 <?php endif ; ?>
-<?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-            <form action = "/discipulo/discipulo/chamar" method="GET" class="navbar-search pull-left" accept-charset ="UTF-8"  >
-                <input class="navbar-search pull-left"  type="search" name="nome" size="45" placeholder="Pesquisar...">
-            </form>
-<?php endif ;?>
             </ul>
                 <div class = "nav pull-right" >
                     <li class="divider-vertical"></li>
