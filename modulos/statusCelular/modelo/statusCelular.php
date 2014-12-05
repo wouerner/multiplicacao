@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace statusCelular\modelo ;
 
@@ -13,13 +13,13 @@ class statusCelular{
 		  public function __get($prop){
 
 					 return $this->$prop ;
-		  
+
 		  }
 
 		  public function __set($prop, $valor){
 
 					 $this->$prop = $valor ;
-		  
+
 		  }
 			  public function salvar(){
 
@@ -79,7 +79,7 @@ class statusCelular{
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
-			  $sql = "UPDATE StatusCelular SET 	tipoStatusCelular = ?  
+			  $sql = "UPDATE StatusCelular SET 	tipoStatusCelular = ?
 				  WHERE discipuloId = ?
 							  ";
 
@@ -99,12 +99,12 @@ class statusCelular{
 			  $pdo = null ;
 
 			  return $resposta;
-			  
+
 			  }
 
 			  public function listarUm(){
 
-				  $pdo = new \PDO (DSN,USER,PASSWD);	
+				  $pdo = new \PDO (DSN,USER,PASSWD);
 
 				  $sql = 'SELECT * FROM StatusCelular WHERE id = ?';
 
@@ -124,11 +124,11 @@ class statusCelular{
 
 			  public function listarTodosStatus(){
 
-				  $pdo = new \PDO (DSN,USER,PASSWD);	
+				  $pdo = new \PDO (DSN,USER,PASSWD);
 
-				  $sql = 'SELECT  discipuloId, dataInicio , nome , s.id AS statusId , ts.id AS tipoId 
-							FROM StatusCelular AS s , TipoStatusCelular AS ts 
-							WHERE 
+				  $sql = 'SELECT  discipuloId, dataInicio , nome , s.id AS statusId , ts.id AS tipoId
+							FROM StatusCelular AS s , TipoStatusCelular AS ts
+							WHERE
 							s.discipuloId = ? AND ts.id = s.tipoStatusCelular ORDER BY s.dataInicio DESC';
 
 				  $stm = $pdo->prepare($sql);
@@ -152,7 +152,7 @@ class statusCelular{
 						 $tipoStatus->id = $this->tipoStatusCelular ;
 						 return $tipoStatus->listarUm();
 
-			  
+
 			  }
 
 			  public function getDataInicio(){
@@ -165,19 +165,19 @@ class statusCelular{
 				  echo 'Erro ao instanciar objeto.';
 					echo $e->getMessage();
 				  exit();
-				  }	
-			  
+				  }
+
 			  }
 
-			  
+
 
 			  public function pegarStatusCelular(){
 
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
-			  $sql = "SELECT * FROM StatusCelular AS s, TipoStatusCelular 
-								WHERE  s.discipuloId = ? AND tipoStatusCelular = TipoStatusCelular.id and s.ativo=1 
+			  $sql = "SELECT * FROM StatusCelular AS s, TipoStatusCelular
+								WHERE  s.discipuloId = ? AND tipoStatusCelular = TipoStatusCelular.id and s.ativo=1
 								ORDER BY s.dataInicio DESC";
 
 			  //prepara sql
@@ -201,9 +201,9 @@ class statusCelular{
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 			  //cria sql
-				$sql = "SELECT Discipulo.nome AS discipulo , TipoStatusCelular.nome AS status 
-								FROM Discipulo,StatusCelular, TipoStatusCelular  
-						 		WHERE Discipulo.id = StatusCelular.discipuloId And 
+				$sql = "SELECT Discipulo.nome AS discipulo , TipoStatusCelular.nome AS status
+								FROM Discipulo,StatusCelular, TipoStatusCelular
+						 		WHERE Discipulo.id = StatusCelular.discipuloId And
 								StatusCelular.tipoStatusCelular = TipoStatusCelular.id ORDER BY discipulo";
 
 			  //prepara sql
@@ -217,8 +217,8 @@ class statusCelular{
 
 			  return $stm->fetchAll();
 	}
-				
-				
+
+
 
 				/**
 					* Retorna os objetos de discipulos ultimo status dos discipulos
@@ -229,7 +229,7 @@ class statusCelular{
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 
 			  $sql = 'SELECT d.*  ,sc.id AS idStatus, tpsc.nome AS tipoNome
-				  FROM Discipulo AS d inner join StatusCelular AS sc 
+				  FROM Discipulo AS d inner join StatusCelular AS sc
 				  ON d.id = sc.discipuloId and d.ativo = 1 AND d.arquivo = 0
 				INNER JOIN TipoStatusCelular AS tpsc ON sc.tipoStatusCelular = tpsc.id
 WHERE 1
@@ -240,7 +240,7 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
 			  $stm->bindParam(1, $this->tipoStatusCelular);
-				
+
 				$stm->execute();
 
 				$resposta = array();
@@ -260,7 +260,7 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 
 			  $sql = 'SELECT d.*  ,sc.id AS idStatus, tpsc.nome AS tipoNome
-				  FROM Discipulo AS d inner join StatusCelular AS sc 
+				  FROM Discipulo AS d inner join StatusCelular AS sc
 				  ON d.id = sc.discipuloId and d.ativo = 0 AND d.arquivo = 0
 				INNER JOIN TipoStatusCelular AS tpsc ON sc.tipoStatusCelular = tpsc.id
 WHERE 1
@@ -271,7 +271,7 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
 			  $stm->bindParam(1, $this->tipoStatusCelular);
-				
+
 				$stm->execute();
 
 				$resposta = array();
@@ -291,7 +291,7 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 
 			  $sql = 'SELECT d.*  ,sc.id AS idStatus, tpsc.nome AS tipoNome
-				  FROM Discipulo AS d inner join StatusCelular AS sc 
+				  FROM Discipulo AS d inner join StatusCelular AS sc
 				  ON d.id = sc.discipuloId and d.arquivo = 1
 				INNER JOIN TipoStatusCelular AS tpsc ON sc.tipoStatusCelular = tpsc.id
 WHERE 1
@@ -302,7 +302,7 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
 			  $stm = $pdo->prepare($sql);
 			  //trocar valores
 			  $stm->bindParam(1, $this->tipoStatusCelular);
-				
+
 				$stm->execute();
 
 				$resposta = array();
@@ -321,16 +321,17 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
         $pdo = new \PDO(DSN, USER, PASSWD);
 
         $sql = 'SELECT sc.id AS idStatus, tpsc.nome AS tipoNome, count( * ) AS total, sc.tipoStatusCelular
-            FROM 
-            Discipulo 		AS d 
+            FROM
+            Discipulo 		AS d
             INNER JOIN
             StatusCelular	AS sc
             ON d.id = sc.discipuloId AND d.ativo = 1 and d.arquivo = 0  and sc.ativo = 1
-            INNER JOIN 
+            INNER JOIN
             TipoStatusCelular tpsc ON sc.tipoStatusCelular = tpsc.id
             WHERE 1
             AND sc.ativo = 1
-            GROUP BY sc.tipoStatusCelular';
+            GROUP BY sc.tipoStatusCelular
+            order by tpsc.ordem';
 
         $stm = $pdo->prepare($sql);
 
@@ -344,15 +345,15 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
     }
 
 	public function pegarStatusCelularPorLider($lider){
-	
+
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 $sql = 'SELECT sc.id AS idStatus, tpsc.nome AS tipoNome, count( * ) AS total, sc.tipoStatusCelular
-FROM 
-Discipulo 		AS d 
+FROM
+Discipulo 		AS d
 INNER JOIN
 StatusCelular	AS sc
-ON d.id = sc.discipuloId 
-INNER JOIN 
+ON d.id = sc.discipuloId
+INNER JOIN
 TipoStatusCelular tpsc ON sc.tipoStatusCelular = tpsc.id
 WHERE 1
 AND sc.ativo = 1
@@ -369,11 +370,11 @@ GROUP BY sc.tipoStatusCelular';
 			  $pdo = null ;
 
 			  return $resposta;
-	
-	
+
+
 	}
 
-		  
+
 			  public function excluir(){
 
 			  //abrir conexao com o banco
