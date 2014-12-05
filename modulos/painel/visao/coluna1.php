@@ -27,7 +27,7 @@
                     <tr>
                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                             <th scope="row">
-                                <a href="/statusCelular/statusCelular/listarDiscipulosPorStatus/id/<?php echo $s['tipoStatusCelular'] ; ?>" ><?php echo $s['tipoNome'] ; ?>(<?php echo $s['total'] ; ?>)
+                                <a href="/statusCelular/statusCelular/listarDiscipulosPorStatus/id/<?php echo $s['tipoStatusCelular'] ; ?>" ><?php echo $s['tipoNome'] ; ?>
                                 </a></th>
                         <?php else :?>
                             <td><?php echo $s['tipoNome'] ; ?>(<?php echo $s['total'] ; ?>)</td>
