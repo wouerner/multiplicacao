@@ -27,15 +27,20 @@
 $(function(){
             $('#tabelaStatus').visualize({type: 'pie',pieMargin: 20,
                                           pieLabelPos:'inside',
-                                          height: '200px', width: '500px'});
+                                          height: '200px', width: '200px'});
             $('#discipulosEstado').visualize({type: 'pie',pieMargin: 20,
                                           pieLabelPos:'inside',
-                                          height: '200px', width: '500px'});
+                                          height: '200px', width: '200px'});
             $('#discipulosRede').visualize({type: 'pie',pieMargin: 20,
                                           pieLabelPos:'inside',
-                                          height: '200px', width: '500px'});
+                                          height: '200px', width: '200px'});
 });
         </script>
+    <style>
+        .Visualize {
+            float:left
+        }
+    </style>
     </head>
     <body>
         <section class = "container-fluid">

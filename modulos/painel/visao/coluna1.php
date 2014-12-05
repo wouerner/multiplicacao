@@ -1,4 +1,4 @@
-    <div class = "span6" >
+    <!-- div class = "span6" >
         <div>
             <b><i class="icon-gift "></i> <?php echo $totalAniver ; ?> Aniversariantes hoje:</b>
             <?php foreach($discipulosAniver as $da) : ?>
@@ -11,8 +11,11 @@
                 <?php endif ; ?>
             <?php endforeach ; ?>
         </div>
+    </div-->
+    <div class="row-fluid">
+    <div class = "span4" >
         <h3>Status</h3>
-        <table id="tabelaStatus" class = "table table-striped  tablesorter " style="display:none" >
+        <table id="tabelaStatus" class = "table table-striped  tablesorter "  >
             <thead>
                 <tr>
                     <th></th>
@@ -39,8 +42,10 @@
                 </tr>
             </tbody>
         </table>
-        <h3>Redes</h3>
-        <table class = "table " style="display:none">
+    </div>
+
+    <div class = "span4" >
+        <table class = "table " style="">
             <caption><h5>Total Redes</h5></caption>
             <thead>
                 <th>Nome</th>
@@ -106,8 +111,11 @@
                 <?php endforeach ; ?>
             </tbody>
         </table>
+    </div>
+
+    <div class = "span4" >
         <h3>Discipulos Ativos/Inativos/Arquivo</h3>
-        <table class = "table "  style="display:none" >
+        <table class = "table "   >
             <thead>
                 <th scope="col">Ativos</th>
                 <th scope="col">Inativos</th>
