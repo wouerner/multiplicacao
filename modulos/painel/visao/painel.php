@@ -25,7 +25,7 @@
         <script src="../../../ext/jQuery-Visualize/js/visualize.jQuery.js"></script>
         <script>
 $(function(){
-            $('#tabelaStatus').visualize({type: 'pie',pieMargin: 30,
+            $('#tabelaStatus').visualize({type: 'pie',pieMargin: 75,
                                           pieLabelPos:'inside',
                                           height: '363px', width: '400px'});
             $('#discipulosEstado').visualize({type: 'pie',pieMargin: 30,
@@ -156,7 +156,7 @@ $(function(){
 </div>
 <?php include 'modulos/painel/visao/coluna1.php'?>
 
-<div class = "row-fluid" >
+<!-- div class = "row-fluid" >
     <div class = "span12 " >
         <div class = "well well-small" >
             <div class="accordion" id="accordion3">
@@ -256,7 +256,7 @@ $(function(){
                     </div>
                 </div>
             </div>
-        </div>
+        </div-->
 
             </article>
 
