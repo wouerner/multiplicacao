@@ -31,44 +31,6 @@ $usuario = $usuario[0] ;
                 <li><a href = "/aviso/aviso" ><i class = " icon-bullhorn " ></i> Aviso</a></li>
             <?php endif ; ?>
 
-            <!--li><a href = "/oracao/oracao" >Orações</a></li-->
-
-            <?php if ($acesso->hasPermission('rede_acesso') == true): ?>
-                <li class = "dropdown">
-                    <a href = "#" class="dropdown-toggle" data-toggle="dropdown" role = "button">
-                        <i class = "icon-flag" ></i> Rede <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <?php if ($acesso->hasPermission('rede_criar') == true): ?>
-                                <li><a href = "/rede/rede/novoTipoRede"><i class = "icon-plus " ></i > Nova</a></li>
-                        <?php endif ; ?>
-                                <li><a href = "/rede/rede/listarTipoRede"><i class = "icon-list-alt " ></i> Listar</a></li>
-                        <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                                <li class="divider"></li>
-                                <li><a href = "/rede/rede/novaFuncaoRede" >Nova Função</a></li>
-                                <li><a href = "/rede/rede/listarFuncaoRede" >Listar Função</a></li>
-                        <?php endif ; ?>
-                    </ul>
-                </li>
-            <?php endif ; ?>
-
-            <li class = "dropdown">
-                <a href = "#" class="dropdown-toggle" data-toggle="dropdown" role = "button">
-                    <i class = "icon-screenshot" ></i> Metas<b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href = "/metas/metas/detalhar/id/<?php echo $_SESSION['usuario_id']?>">
-                            <i class = "icon-list-alt " ></i>Minhas metas
-                        </a>
-                    </li>
-                    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                        <li><a href = "/metas/metas"><i class = "icon-plus " ></i > Discipulos Com Metas</a></li>
-                        <li><a href = "/metas/intervaloMetas/novo"><i class = "icon-plus " ></i > novo intervalo</a></li>
-                        <li><a href = "/rede/rede/listarTipoRede"><i class = "icon-list-alt " ></i> Listar intervalo</a></li>
-                    <?php endif ; ?>
-                </ul>
-            </li>
-
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                 <li class="dropdown">
                     <a href = "#" class="dropdown-toggle" data-toggle="dropdown">
@@ -81,36 +43,6 @@ $usuario = $usuario[0] ;
                     </ul>
                 </li>
             <?php endif ; ?>
-
-            <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                <!--li class="dropdown">
-                    <a href = "#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class = "" ></i>Gerações<b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href = "/geracoes/tipoGeracao/novo">Novo Tipo</a></li>
-                        <li><a href = "/geracoes/tipoGeracao" >Lista</a></li>
-                    </ul>
-                </li-->
-            <?php endif ; ?>
-
-            <?php if ($acesso->hasPermission('encontro') == true): ?>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role = "button" >
-                            <i class = "icon-fire " ></i>Encontro <b class="caret"></b>
-                        </a>
-                        <ul class="  dropdown-menu" role="menu" aria-labelledby="dLabel" >
-                            <li><a href = "/encontroComDeus/encontroComDeus/novo" ><i class = "icon-plus " ></i> Novo</a></li>
-                            <li><a href = "/encontroComDeus/encontroComDeus" ><i class = "icon-list-alt " ></i> Listar</a></li>
-                            <li class="divider"></li>
-                            <li><a href = "/encontroComDeus/tipoEquipe/novo" ><i class = "icon-plus " ></i> Novo Tipo de Equipe</a></li>
-                            <li><a href = "/encontroComDeus/tipoEquipe" ><i class = "icon-list-alt " ></i> Lista Tipo de Equipe</a></li>
-                        </ul>
-                    </li>
-            <?php endif ; ?>
-            <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                <!--li><a href = "/batismo/batismo" ><i class = "icon- " ></i> Batismo</a></li-->
-            <?php endif; ?>
 
                     <li class = "dropdown" >
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role = "button" >
@@ -174,6 +106,26 @@ $usuario = $usuario[0] ;
             </ul>
           </li>
 
+            <!--li><a href = "/oracao/oracao" >Orações</a></li-->
+
+            <?php if ($acesso->hasPermission('rede_acesso') == true): ?>
+                <li class = "dropdown">
+                    <a href = "#" class="dropdown-toggle" data-toggle="dropdown" role = "button">
+                        <i class = "icon-flag" ></i> Rede <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <?php if ($acesso->hasPermission('rede_criar') == true): ?>
+                                <li><a href = "/rede/rede/novoTipoRede"><i class = "icon-plus " ></i > Nova</a></li>
+                        <?php endif ; ?>
+                                <li><a href = "/rede/rede/listarTipoRede"><i class = "icon-list-alt " ></i> Listar</a></li>
+                        <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                                <li class="divider"></li>
+                                <li><a href = "/rede/rede/novaFuncaoRede" >Nova Função</a></li>
+                                <li><a href = "/rede/rede/listarFuncaoRede" >Listar Função</a></li>
+                        <?php endif ; ?>
+                    </ul>
+                </li>
+            <?php endif ; ?>
 <?php if ($acesso->hasPermission('celula_acesso') == true): ?>
                     <li class = "dropdown"><a href = "#" class="dropdown-toggle" data-toggle="dropdown"><i class = "icon-home" ></i>Célula<b class="caret"></b></a>
                         <ul  class="dropdown-menu">
@@ -211,6 +163,55 @@ $usuario = $usuario[0] ;
                             </ul>
                     </li>
 <?php endif ; ?>
+
+
+            <li class = "dropdown">
+                <a href = "#" class="dropdown-toggle" data-toggle="dropdown" role = "button">
+                    <i class = "icon-screenshot" ></i> Metas<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href = "/metas/metas/detalhar/id/<?php echo $_SESSION['usuario_id']?>">
+                            <i class = "icon-list-alt " ></i>Minhas metas
+                        </a>
+                    </li>
+                    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                        <li><a href = "/metas/metas"><i class = "icon-plus " ></i > Discipulos Com Metas</a></li>
+                        <li><a href = "/metas/intervaloMetas/novo"><i class = "icon-plus " ></i > novo intervalo</a></li>
+                        <li><a href = "/rede/rede/listarTipoRede"><i class = "icon-list-alt " ></i> Listar intervalo</a></li>
+                    <?php endif ; ?>
+                </ul>
+            </li>
+
+            <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                <!--li class="dropdown">
+                    <a href = "#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class = "" ></i>Gerações<b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href = "/geracoes/tipoGeracao/novo">Novo Tipo</a></li>
+                        <li><a href = "/geracoes/tipoGeracao" >Lista</a></li>
+                    </ul>
+                </li-->
+            <?php endif ; ?>
+
+            <?php if ($acesso->hasPermission('encontro') == true): ?>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role = "button" >
+                            <i class = "icon-fire " ></i>Encontro <b class="caret"></b>
+                        </a>
+                        <ul class="  dropdown-menu" role="menu" aria-labelledby="dLabel" >
+                            <li><a href = "/encontroComDeus/encontroComDeus/novo" ><i class = "icon-plus " ></i> Novo</a></li>
+                            <li><a href = "/encontroComDeus/encontroComDeus" ><i class = "icon-list-alt " ></i> Listar</a></li>
+                            <li class="divider"></li>
+                            <li><a href = "/encontroComDeus/tipoEquipe/novo" ><i class = "icon-plus " ></i> Novo Tipo de Equipe</a></li>
+                            <li><a href = "/encontroComDeus/tipoEquipe" ><i class = "icon-list-alt " ></i> Lista Tipo de Equipe</a></li>
+                        </ul>
+                    </li>
+            <?php endif ; ?>
+            <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                <!--li><a href = "/batismo/batismo" ><i class = "icon- " ></i> Batismo</a></li-->
+            <?php endif; ?>
+
 
 <?php if ($acesso->hasPermission('relatorio') == true): ?>
                     <li class = "dropdown" >
