@@ -13,9 +13,9 @@
         </div>
     </div-->
     <div class="row-fluid">
-    <div class = "span4" >
-        <h3>Status</h3>
-        <table id="tabelaStatus" class = "table table-striped  tablesorter "  >
+    <div class = "well well-small span4" >
+        <table id="tabelaStatus" class = "table table-striped  tablesorter table-condensed"  >
+            <caption><h5>Status MGA</h5></caption>
             <thead>
                 <tr>
                     <th></th>
@@ -44,9 +44,9 @@
         </table>
     </div>
 
-    <div class = "span4" >
-        <table class = "table " style="">
-            <caption><h5>Total Redes</h5></caption>
+    <div class = "well well-small span4" >
+        <table class = "table table-condensed" style="">
+            <caption><h4>Redes</h4></caption>
             <thead>
                 <th>Nome</th>
                 <th>Discipulos</th>
@@ -113,9 +113,8 @@
         </table>
     </div>
 
-    <div class = "span4" >
-        <h3>Discipulos Ativos/Inativos/Arquivo</h3>
-        <table class = "table "   >
+    <div class = "well well-small span4" >
+        <table class="table table-condensed" >
             <thead>
                 <th scope="col">Ativos</th>
                 <th scope="col">Inativos</th>
