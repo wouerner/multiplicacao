@@ -25,15 +25,15 @@
         <script src="../../../ext/jQuery-Visualize/js/visualize.jQuery.js"></script>
         <script>
 $(function(){
-            $('#tabelaStatus').visualize({type: 'pie',pieMargin: 40,
+            $('#tabelaStatus').visualize({type: 'pie',pieMargin: 30,
                                           pieLabelPos:'inside',
-                                          height: '400px', width: '400px'});
-            $('#discipulosEstado').visualize({type: 'pie',pieMargin: 40,
+                                          height: '363px', width: '400px'});
+            $('#discipulosEstado').visualize({type: 'pie',pieMargin: 30,
                                           pieLabelPos:'inside',
-                                          height: '400px', width: '400px'});
+                                          height: '455px', width: '400px'});
             $('#discipulosRede').visualize({type: 'pie',pieMargin: 40,
                                           pieLabelPos:'inside',
-                                          height: '400px', width: '400px'});
+                                          height: '300px', width: '400px'});
 });
         </script>
     <style>
