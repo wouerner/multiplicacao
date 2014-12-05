@@ -106,48 +106,49 @@ $(function(){
         </div>
     </div>
 </div>
-<?php include 'modulos/painel/visao/coluna1.php'?>
-
-<div class = "span6 " >
-<div class = "row-fluid" >
-                <div class = "span12 well well-small">
-                <div class = "row-fluid" >
-                <h5><strong> <?php// echo $totalDiscipulos ; ?>  Discipulos: </strong></h5>
+<div class="row-fluid">
+    <div class = "span12 well well-small">
+        <div class = "row-fluid" >
+            <!-- h5><strong> <?php// echo $totalDiscipulos ; ?>  Discipulos: </strong></h5 -->
                 <?php $discipulos = array_chunk($discipulos,4) ?>
                 <?php //var_dump($discipulos)?>
                 <?php foreach( $discipulos as $disc ) : ?>
                 <ul class="thumbnails">
-                <?php foreach( $disc as $d ) : ?>
-          <li class="span3">
-               <div class="thumbnail">
-                   <a class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
-                       <img  src="<?php echo is_object($d->getFoto()) ? $d->getFoto()->url : '' ; ?>" alt="">
-                   </a>
-               <div class = "caption" >
-                     <a class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
-              <i class = "<?php echo $d->eLider() ? 'icon-certificate': '' ?>"></i>
-              <i class = "<?php echo $d->eLiderCelula() ? 'icon-home': '' ?>"></i>
-                          <small class = "" ><?php echo !isset($c) ? $c=1 : ++$c ; ?>-
-                 <?php echo $d->getAlcunha() ; ?>
-              </small>
-            </a>
-           </div>
-        </div>
-       </li>
-                <?php endforeach ; ?>
-     </ul>
-                <?php endforeach ; ?>
-
-                <?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
-                            <div class = "span3 " >
-                          <a class = "span12 btn bnt-mini btn-success" href = "/discipulo/discipulo/novoCompleto" >
-                                    <i class = "icon-plus icon-white" ></i>Novo Discípulo
-                            </a>
+                    <?php foreach( $disc as $d ) : ?>
+                        <li class="span1">
+                           <div class="thumbnail" style="height:55px;overflow:hidden;margin:0">
+                               <a  class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
+                                   <img  class="span12" src="<?php echo is_object($d->getFoto()) ? $d->getFoto()->url : '' ; ?>" alt="">
+                               </a>
+                               <div class = "caption" >
+                                   <a class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
+                                      <i class = "<?php echo $d->eLider() ? 'icon-certificate': '' ?>"></i>
+                                      <i class = "<?php echo $d->eLiderCelula() ? 'icon-home': '' ?>"></i>
+                                      <small class = "" ><?php echo !isset($c) ? $c=1 : ++$c ; ?>-
+                                          <?php echo $d->getAlcunha() ; ?>
+                                      </small>
+                                   </a>
+                               </div>
                             </div>
-                    <?php endif ; ?>
-                </div>
-                </div>
+                        </li>
+                    <?php endforeach ; ?>
+                </ul>
+                <?php endforeach ; ?>
+                <?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
+                    <!-- div class = "span3 " >
+                    <a class = "btn bnt-mini btn-success" href = "/discipulo/discipulo/novoCompleto" >
+                            <i class = "icon-plus icon-white" ></i>Novo Discípulo
+                    </a>
+                    </div-->
+                <?php endif ; ?>
+            </div>
+        </div>
+    </div>
 </div>
+<?php include 'modulos/painel/visao/coluna1.php'?>
+
+<div class = "span6 " >
+<div class = "row-fluid" >
 
                 <div class = "row-fluid" >
                     <div class = "span12" >
