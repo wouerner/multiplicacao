@@ -18,7 +18,7 @@
             <caption><h5>Status</h5></caption>
             <thead>
                 <tr>
-                    <th>Disciulos</th>
+                    <th>Discipulos</th>
                     <th scope="col">Quantidade</th>
                 </tr>
             </thead>
