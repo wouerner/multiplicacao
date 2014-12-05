@@ -115,6 +115,7 @@
 
     <div class = "well well-small span4" >
         <table class="table table-condensed" >
+            <caption><h5>Situação</h5></caption>
             <thead>
                 <th scope="col">Ativos</th>
                 <th scope="col">Inativos</th>
