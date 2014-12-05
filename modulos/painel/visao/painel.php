@@ -106,17 +106,18 @@ $(function(){
         </div>
     </div>
 </div>
+
 <div class="row-fluid">
-    <div class = "span12 well well-small">
-        <div class = "row-fluid" >
+    <div class = "span6">
+    <div class = "well well-small">
             <!-- h5><strong> <?php// echo $totalDiscipulos ; ?>  Discipulos: </strong></h5 -->
                 <?php $discipulos = array_chunk($discipulos,4) ?>
                 <?php //var_dump($discipulos)?>
                 <?php foreach( $discipulos as $disc ) : ?>
-                <ul class="thumbnails">
+                <ul class="thumbnails" style="margin:0">
                     <?php foreach( $disc as $d ) : ?>
-                        <li class="span1">
-                           <div class="thumbnail" style="height:55px;overflow:hidden;margin:0">
+                        <li class="span1" style="margin:2px">
+                           <div class="thumbnail" style="height:30px;overflow:hidden;margin:0">
                                <a  class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
                                    <img  class="span12" src="<?php echo is_object($d->getFoto()) ? $d->getFoto()->url : '' ; ?>" alt="">
                                </a>
@@ -134,32 +135,26 @@ $(function(){
                     <?php endforeach ; ?>
                 </ul>
                 <?php endforeach ; ?>
-                <?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
-                    <!-- div class = "span3 " >
-                    <a class = "btn bnt-mini btn-success" href = "/discipulo/discipulo/novoCompleto" >
+        </div>
+    </div>
+
+    <div class = "well well-small span6">
+        <div class = "row-fluid" >
+                <div class = "span12" >
+                    <?php foreach ( $celulas as $c ) : ?>
+                        <a class = "btn" href="/celula/relatorio/novo/id/<?php echo $c->id ; ?>" ><?php echo $c->nome ; ?></a>
+                    <?php endforeach ; ?>
+                    <?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
+                        <a class = "btn bnt-mini btn-success" href = "/discipulo/discipulo/novoCompleto" >
                             <i class = "icon-plus icon-white" ></i>Novo Discípulo
-                    </a>
-                    </div-->
-                <?php endif ; ?>
+                        </a>
+                    <?php endif ; ?>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <?php include 'modulos/painel/visao/coluna1.php'?>
-
-<div class = "span6 " >
-<div class = "row-fluid" >
-
-                <div class = "row-fluid" >
-                    <div class = "span12" >
-                    <div class = "well well-small" >
-                    <strong>Relatório de Célula:</strong>
-                    <?php foreach ( $celulas as $c ) : ?>
-                        <a class = "btn" href="/celula/relatorio/novo/id/<?php echo $c->id ; ?>" > <?php echo $c->nome ; ?></a>
-                    <?php endforeach ; ?>
-                </div>
-                </div>
-    </div>
 
 <div class = "row-fluid" >
     <div class = "span12 " >
