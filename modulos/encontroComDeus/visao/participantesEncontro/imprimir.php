@@ -6,9 +6,51 @@
         <?php include 'incluidos/js.inc.php' ; ?>
 
 <script>
-$(function () {
-$('.table').tab('show');
-})
+
+jQuery(document).ready(function(){
+    jQuery('#bu').on("click",function(e){
+        //console('teste');
+        e.preventDefault();
+        pdf.save('Test.pdf');
+        });
+
+
+var pdf = new jsPDF('p', 'pt', 'letter')
+
+, source = jQuery('#div')[0]
+
+, specialElementHandlers = {
+	// element with id of "bypass" - jQuery style selector
+	'#bypassme': function(element, renderer){
+		// true = "handled elsewhere, bypass text extraction"
+		return true
+	}
+}
+
+margins = {
+    top: 80,
+    bottom: 60,
+    left: 40,
+    width: 522
+  };
+
+pdf.fromHTML(
+  	source // HTML string or DOM elem ref.
+  	, margins.left // x coord
+  	, margins.top // y coord
+  	, {
+  		'width': margins.width // max width of content on PDF
+  		, 'elementHandlers': specialElementHandlers
+  	},
+  	function (dispose) {
+  	  // dispose: object with X, Y of the last line add to the PDF
+  	  //          this allow the insertion of new lines after html
+        //pdf.save('Test.pdf');
+      },
+  	margins
+  )
+
+});
 </script>
 
     </head>
@@ -17,13 +59,14 @@ $('.table').tab('show');
         <section class = "container-fluid">
         <section>
             <article>
+                <button id="bu" >imprimir</button>
+                <div id="div" class = "row-fluid" >
                 <h3>Quantidade de Encontrista: <?php echo $total?></h3>
-                <div class = "row-fluid" >
                         <table class = "table bordered-table">
                             <caption><h3>Homens</h3></caption>
                             <thead>
                                 <th>#</th>
-                                <th>Nome</th>
+                                <th style="color:red">Nome</th>
                                 <th>Líder</th>
                             </thead>
                     <?php foreach ( $discipulos as $d) : ?>
@@ -36,6 +79,7 @@ $('.table').tab('show');
                             <?php endif?>
                         <?php endforeach ; ?>
                         </table>
+                        <!-- ADD_PAGE -->
                         <table class = "table bordered-table">
                             <caption><h3>Mulheres</h3></caption>
                             <thead>
