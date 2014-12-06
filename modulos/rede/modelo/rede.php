@@ -75,13 +75,14 @@ class rede
               //abrir conexao com o banco
               $pdo = new \PDO(DSN, USER, PASSWD);
               //cria sql
-              $sql = 'SELECT
- tpRede.nome AS tipoRede,
-           tpRede.id AS tpRedeId, fRede.id AS funcaoId, fRede.nome AS funcaoRede
-
-                        FROM Redes AS r, TipoRede AS tpRede, FuncaoRede AS fRede
-
-                            WHERE r.discipuloId = ? and tpRede.id = r.tipoRedeId and r.funcaoRedeid = fRede.id
+              $sql = '
+             select tpRede.nome AS tipoRede,
+                    tpRede.id AS tpRedeId,
+                    fRede.id AS funcaoId,
+                    fRede.nome AS funcaoRede
+                    FROM Redes AS r inner join  TipoRede AS tpRede on r.tipoRedeId = tpRede.id
+					inner join FuncaoRede AS fRede on r.funcaoRedeId = fRede.id
+                    WHERE r.discipuloId = ?
                             ';
 
               //prepara sql
