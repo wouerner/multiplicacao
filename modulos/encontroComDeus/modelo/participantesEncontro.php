@@ -115,7 +115,7 @@ class participantesEncontro extends modeloFramework
               {
               $pdo = self::pegarConexao() ;
 
-              $sql = 'SELECT *,d.id as dId
+                  $sql = 'SELECT d.*, pe.preEncontro, pe.encontro, pe.posEncontro, pe.igrejaLocal, pe.desistiu
                          FROM Discipulo AS d inner join ParticipantesEncontro AS pe ON pe.discipuloId = d.id
                          WHERE pe.encontroComDeusId = ?
                          ORDER BY d.nome ' ;
@@ -132,7 +132,6 @@ class participantesEncontro extends modeloFramework
                 }
 
               $pdo = null ;
-
               return $resposta ;
                 }
 

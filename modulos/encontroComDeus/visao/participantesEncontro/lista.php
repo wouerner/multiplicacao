@@ -36,7 +36,7 @@
                             <td><?php echo $d->nome ; ?></td>
                             <td><?php echo $d->getLider()->getAlcunha() ; ?></td>
 
-                            <td><?php //var_dump($d->getRede())?><?php echo utf8_encode($d->getRede()['tipoRede']); ?></td>
+                            <td><?php echo utf8_encode($d->getRede()[0]['tipoRede']); ?></td>
                         <td>
                             <?php if ($d->preEncontro == 0 ) : ?>
                             <i class = "icon-remove" ></i>

@@ -187,7 +187,7 @@ class Discipulo extends modeloFramework
         $rede->discipuloId = $this->id;
         $rede =  $rede->pegarRedeDiscipulo();
 
-        return $rede[0];
+        return $rede;
 
     }
 
