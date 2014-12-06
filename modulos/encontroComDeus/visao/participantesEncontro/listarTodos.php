@@ -47,47 +47,47 @@ $('.table').tab('show');
                         <?php foreach ( $discipulos as $d) : ?>
                         <tr class = "<?php echo $d->desistiu==1 ? 'error' : ''; ?>" >
                             <td><?php echo !isset($c) ? $c=1 : ++$c ; ?></td>
-                            <td><a target="blank" href="/discipulo/discipulo/atualizar/id/<?php echo $d->dId?>"><?php echo $d->nome ; ?></a></td>
+                            <td><a target="blank" href="/discipulo/discipulo/atualizar/id/<?php echo $d->participanteId?>"><?php echo $d->nome ; ?></a></td>
                             <td><a target="blank" href="/discipulo/discipulo/atualizar/id/<?php echo $d->getLider()->id ?>"><?php echo $d->getLider()->getAlcunha() ; ?></a></td>
                         <td>
                             <?php if ($d->preEncontro == 0 ) : ?>
-                            <a class = "btn btn-mini " href = "/encontroComDeus/participantesEncontro/preEncontroAtivar/id/<?php echo $d->id ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>">
+                            <a class = "btn btn-mini " href = "/encontroComDeus/participantesEncontro/preEncontroAtivar/id/<?php echo $d->participanteId ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>">
                             <i class = "icon-remove" ></i>
                             </a>
                             <?php else : ?>
-                            <a class = "text-error" href = "/encontroComDeus/participantesEncontro/preEncontroDesativar/id/<?php echo $d->id ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>">
+                            <a class = "text-error" href = "/encontroComDeus/participantesEncontro/preEncontroDesativar/id/<?php echo $d->participanteId ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>">
                                 <i class = "icon-ok" ></i></a>
                             <?php endif ; ?>
 </td><td>
                             <?php if ($d->encontro == 0 ) : ?>
-                            <a class = "btn btn-mini " href = "/encontroComDeus/participantesEncontro/encontroAtivar/id/<?php echo $d->id ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>"><i class = "icon-remove" ></i></a>
+                            <a class = "btn btn-mini " href = "/encontroComDeus/participantesEncontro/encontroAtivar/id/<?php echo $d->participanteId ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>"><i class = "icon-remove" ></i></a>
                             <?php else : ?>
-                            <a class = "text-error"href = "/encontroComDeus/participantesEncontro/encontroDesativar/id/<?php echo $d->id ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>"><i class = "icon-ok" ></i></a>
+                            <a class = "text-error"href = "/encontroComDeus/participantesEncontro/encontroDesativar/id/<?php echo $d->participanteId; ?>/encontroId/<?php echo $participante->encontroComDeusId?>"><i class = "icon-ok" ></i></a>
                             <?php endif ; ?>
 
 </td><td>
                             <?php if ($d->posEncontro == 0 ) : ?>
-                            <a class = "btn btn-mini " href = "/encontroComDeus/participantesEncontro/posEncontroAtivar/id/<?php echo $d->id ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>"><i class = "icon-remove" ></i></a>
+                            <a class = "btn btn-mini " href = "/encontroComDeus/participantesEncontro/posEncontroAtivar/id/<?php echo $d->participanteId ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>"><i class = "icon-remove" ></i></a>
                             <?php else : ?>
-                            <a class = "text-error"href = "/encontroComDeus/participantesEncontro/posEncontroDesativar/id/<?php echo $d->id ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>"><i class = "icon-ok" ></i></a>
+                            <a class = "text-error"href = "/encontroComDeus/participantesEncontro/posEncontroDesativar/id/<?php echo $d->participanteId ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>"><i class = "icon-ok" ></i></a>
                             <?php endif ; ?>
 
 </td><td>
                             <?php if ($d->igrejaLocal == 0 ) : ?>
-                            <a class = "btn btn-mini btn-inverse" href = "/encontroComDeus/participantesEncontro/igrejaAtivar/id/<?php echo $d->id ; ?>"><i class = "icon-remove icon-white" ></i></a>
+                            <a class = "btn btn-mini btn-inverse" href = "/encontroComDeus/participantesEncontro/igrejaAtivar/id/<?php echo $d->participanteId ; ?>"><i class = "icon-remove icon-white" ></i></a>
                             <?php else : ?>
-                            <a href = "/encontroComDeus/participantesEncontro/igrejaDesativar/id/<?php echo $d->id ; ?>"><i class = "icon-ok" ></i></a>
+                            <a href = "/encontroComDeus/participantesEncontro/igrejaDesativar/id/<?php echo $d->participanteId ; ?>"><i class = "icon-ok" ></i></a>
                             <?php endif ; ?>
 
 </td><td>
                             <?php if ($d->desistiu == 0 ) : ?>
-                            <a class = "btn btn-mini btn-inverse" href = "/encontroComDeus/participantesEncontro/desistiuAtivar/id/<?php echo $d->id ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>"><i class = "icon-remove" ></i>Desistiu</a>
+                            <a class = "btn btn-mini btn-inverse" href = "/encontroComDeus/participantesEncontro/desistiuAtivar/id/<?php echo $d->participanteId ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>"><i class = "icon-remove" ></i>Desistiu</a>
                             <?php else : ?>
-                            <a href = "/encontroComDeus/participantesEncontro/desistiuDesativar/id/<?php echo $d->id ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>"><i class = "icon-ok" ></i></a>
+                            <a href = "/encontroComDeus/participantesEncontro/desistiuDesativar/id/<?php echo $d->participanteId ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>"><i class = "icon-ok" ></i></a>
                             <?php endif ; ?>
 </td>
 <td>
-                            <a class = "btn btn-mini btn-danger" href = "/encontroComDeus/participantesEncontro/excluir/id/<?php echo $d->id ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>"><i class = "icon-remove icon-white" ></i>Excluir</a>
+                            <a class = "btn btn-mini btn-danger" href = "/encontroComDeus/participantesEncontro/excluir/id/<?php echo $d->participanteId ; ?>/encontroId/<?php echo $participante->encontroComDeusId?>"><i class = "icon-remove icon-white" ></i>Excluir</a>
 
 </td>
 

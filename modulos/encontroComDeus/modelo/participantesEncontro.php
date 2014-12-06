@@ -115,7 +115,7 @@ class participantesEncontro extends modeloFramework
               {
               $pdo = self::pegarConexao() ;
 
-                  $sql = 'SELECT d.*, pe.preEncontro, pe.encontro, pe.posEncontro, pe.igrejaLocal, pe.desistiu
+                  $sql = 'SELECT d.*, pe.id as participanteId, pe.preEncontro, pe.encontro, pe.posEncontro, pe.igrejaLocal, pe.desistiu
                          FROM Discipulo AS d inner join ParticipantesEncontro AS pe ON pe.discipuloId = d.id
                          WHERE pe.encontroComDeusId = ?
                          ORDER BY d.nome ' ;
@@ -449,6 +449,7 @@ class participantesEncontro extends modeloFramework
               //prepara sql
       $stm = $pdo->prepare($sql);
               //trocar valores
+        //var_dump($this->id );
         $stm->bindParam(1, $this->id );
 
         $resposta = $stm->execute();
