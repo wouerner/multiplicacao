@@ -14,16 +14,16 @@
     </div-->
     <div class="row-fluid">
     <div class = "well well-small span4" >
-        <table id="tabelaStatus" class = "table table-striped  tablesorter table-condensed"  >
-            <caption><h5>Status</h5></caption>
+        <table  class = "table table-striped  tablesorter table-condensed"  >
+            <caption><h5>Discipulos</h5></caption>
             <thead>
                 <tr>
-                    <th>Discipulos</th>
+                    <th></th>
                     <th scope="col">Quantidade</th>
                 </tr>
             </thead>
             <tbody>
-                <?php  $totalStatus =0; ?>
+                <?php $totalStatus=0 ; ?>
                 <?php foreach($status as $s) : ?>
                     <tr>
                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
@@ -36,13 +36,40 @@
                             <td><?php echo $s['total'] ; ?></td>
                          <!--   <td><?php echo round($s['porcentagem'],1).'%' ; ?></td>-->
                     </tr>
-                    <?php  $totalStatus +=$s['total']; ?>
+                    <?php $totalStatus += $s['total']?>
                 <?php endforeach ; ?>
                 <tr  class = "info" >
-                    <td>Total</td>
-                    <td colspan = "2">
-                        <?php echo $totalStatus; ?>
+                    <td>Total</td><td colspan = "2">
+                        <?php echo $totalStatus ; ?>
                     </td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="display:none" id="tabelaStatus" class = "table table-striped  tablesorter table-condensed"  >
+            <caption><h5>Discipulos</h5></caption>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th scope="col">Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($status as $s) : ?>
+                    <tr>
+                        <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                            <th scope="row">
+                                <a href="/statusCelular/statusCelular/listarDiscipulosPorStatus/id/<?php echo $s['tipoStatusCelular'] ; ?>" ><?php echo $s['tipoNome'] ; ?>
+                                </a></th>
+                        <?php else :?>
+                            <td><?php echo $s['tipoNome'] ; ?>(<?php echo $s['total'] ; ?>)</td>
+                        <?php endif ; ?>
+                            <td><?php echo $s['total'] ; ?></td>
+                         <!--   <td><?php echo round($s['porcentagem'],1).'%' ; ?></td>-->
+                    </tr>
+                <?php endforeach ; ?>
+                <!-- <tr  class = "info" ><td>Total</td><td colspan = "2">
+                <?php echo $totalDiscipulos ; ?>
+                    </td> -->
                 </tr>
             </tbody>
         </table>
