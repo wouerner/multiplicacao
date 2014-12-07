@@ -320,7 +320,8 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
 
         $pdo = new \PDO(DSN, USER, PASSWD);
 
-        $sql = 'SELECT sc.id AS idStatus, tpsc.nome AS tipoNome, count( * ) AS total, sc.tipoStatusCelular
+        $sql = '
+            SELECT sc.id AS idStatus, tpsc.nome AS tipoNome, count( * ) AS total, sc.tipoStatusCelular
             FROM
             Discipulo 		AS d
             INNER JOIN
@@ -331,7 +332,8 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
             WHERE 1
             AND sc.ativo = 1 and d.ativo =1
             GROUP BY sc.tipoStatusCelular
-            order by tpsc.ordem';
+            order by tpsc.ordem
+';
 
         $stm = $pdo->prepare($sql);
 
