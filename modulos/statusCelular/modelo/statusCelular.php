@@ -329,7 +329,7 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
             INNER JOIN
             TipoStatusCelular tpsc ON sc.tipoStatusCelular = tpsc.id
             WHERE 1
-            AND sc.ativo = 1
+            AND sc.ativo = 1 and d.ativo =1
             GROUP BY sc.tipoStatusCelular
             order by tpsc.ordem';
 

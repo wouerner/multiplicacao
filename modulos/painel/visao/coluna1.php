@@ -151,12 +151,14 @@
                 <th scope="col">Ativos</th>
                 <th scope="col">Inativos</th>
                 <th scope="col">Arquivados</th>
+                <th scope="col">Total</th>
             </thead>
             <tbody>
                 <tr>
                     <td scope="row"><?php echo $totalAtivos['total'] ; ?></td>
                     <td scope="row"><?php echo $totalInativos['total'] ; ?></td>
                     <td scope="row"><?php echo $totalArquivados['total'] ; ?></td>
+                    <td><?php echo $totalAtivos['total']+$totalInativos['total']+$totalArquivados['total'] ?></td>
                 </tr>
             </tbody>
         </table>
