@@ -69,7 +69,7 @@ $(document).ready(function() {
                               <td><?php echo  $r->telefone; ?></td>
                               <td><?php echo  $r->getDataNascimento()->format('d/m/Y') ; ?></td>
                               <!-- td><?php //echo $status['nome'] ; ?></td -->
-                                <td><a target="blank" class="btn btn-mini btn-warning" href="/discipulo/discipulo/desativar/id/<?php echo $r->id?>"> desativar</a></td>
+                                <td><a target="blank" class="btn btn-mini btn-inverse" href="/discipulo/discipulo/arquivar/id/<?php echo $r->id?>"> Arquivar</a></td>
                           </tr>
                     <?php endforeach ; ?>
                 </tbody>
