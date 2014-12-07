@@ -68,7 +68,7 @@ $(".btn-warning").click( function(){
 
                 <?php foreach ( $discipulos as $discipulo) : ?>
                 <tr>
-
+                    <td><?php echo !isset($count)  ?$count=1 : ++$count ; ?></td>
                     <td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><strong><?php echo $discipulo->nome ; ?></strong></a></td>
                     <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                     <td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->getLider()->id?>" ><?php echo $discipulo->getLider()->nome ; ?></a></td>
@@ -76,9 +76,9 @@ $(".btn-warning").click( function(){
                 <td><?php echo $discipulo->telefone ; ?></td> <td><?php echo $discipulo->email ; ?></td>
                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                 <td><a class = "btn btn-mini" href = "/discipulo/discipulo/desarquivar/id/<?php echo $discipulo->id ; ?>"><i class = "icon-arrow-up" ></i>Desarquivar</a></td>
-                        <?php endif; ?>            
+                        <?php endif; ?>
                 </tr>
-            
+
 
                 <?php endforeach ; ?>
                 </table>

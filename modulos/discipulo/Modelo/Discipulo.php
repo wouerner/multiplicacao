@@ -677,7 +677,7 @@ class Discipulo extends modeloFramework
     {
         $pdo = new \PDO(DSN, USER, PASSWD);
 
-        $sql = 'UPDATE Discipulo SET  arquivo = 1 WHERE id = ?';
+        $sql = 'UPDATE Discipulo SET  arquivo = 1, ativo = 0 WHERE id = ?';
 
         $stm = $pdo->prepare($sql);
         $stm->bindParam(1, $this->id);
@@ -689,7 +689,7 @@ class Discipulo extends modeloFramework
     {
         $pdo = new \PDO(DSN, USER, PASSWD);
 
-        $sql = 'UPDATE Discipulo SET  arquivo = 0 WHERE id = ?';
+        $sql = 'UPDATE Discipulo SET  arquivo = 0, ativo = 1 WHERE id = ?';
 
         $stm = $pdo->prepare($sql);
         $stm->bindParam(1, $this->id);
