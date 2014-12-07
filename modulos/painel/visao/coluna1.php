@@ -23,6 +23,7 @@
                 </tr>
             </thead>
             <tbody>
+                <?php  $totalStatus =0; ?>
                 <?php foreach($status as $s) : ?>
                     <tr>
                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
@@ -35,10 +36,13 @@
                             <td><?php echo $s['total'] ; ?></td>
                          <!--   <td><?php echo round($s['porcentagem'],1).'%' ; ?></td>-->
                     </tr>
+                    <?php  $totalStatus +=$s['total']; ?>
                 <?php endforeach ; ?>
-                <!-- <tr  class = "info" ><td>Total</td><td colspan = "2">
-                <?php echo $totalDiscipulos ; ?>
-                    </td> -->
+                <tr  class = "info" >
+                    <td>Total</td>
+                    <td colspan = "2">
+                        <?php echo $totalStatus; ?>
+                    </td>
                 </tr>
             </tbody>
         </table>
