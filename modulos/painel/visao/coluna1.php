@@ -27,9 +27,9 @@
                 <?php foreach($status as $s) : ?>
                     <tr>
                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                            <th scope="row">
+                            <td>
                                 <a href="/statusCelular/statusCelular/listarDiscipulosPorStatus/id/<?php echo $s['tipoStatusCelular'] ; ?>" ><?php echo $s['tipoNome'] ; ?>
-                                </a></th>
+                                </a></td>
                         <?php else :?>
                             <td><?php echo $s['tipoNome'] ; ?>(<?php echo $s['total'] ; ?>)</td>
                         <?php endif ; ?>

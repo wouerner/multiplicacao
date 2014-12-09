@@ -87,9 +87,9 @@ $(function(){
             </script>
     </div>
 </div-->
-<div class="row-fluid">
+<div  class="row-fluid">
     <div class="span12">
-        <div class="well well-small">
+        <div style="margin-bottom:3px" class="well well-small">
             <ul class="unstyled">
             <?php foreach($encontros as $encontro):?>
                 <li>
@@ -109,15 +109,14 @@ $(function(){
 
 <div class="row-fluid">
     <div class = "span4">
-    <div class = "well well-small">
+    <div  style="margin-bottom:3px" class = "well well-small">
             <!-- h5><strong> <?php// echo $totalDiscipulos ; ?>  Discipulos: </strong></h5 -->
                 <?php $discipulos = array_chunk($discipulos,4) ?>
-                <?php //var_dump($discipulos)?>
                 <?php foreach( $discipulos as $disc ) : ?>
                 <ul class="thumbnails" style="margin:0">
                     <?php foreach( $disc as $d ) : ?>
-                        <li class="span1" style="margin:2px">
-                           <div class="thumbnail" style="height:30px;overflow:hidden;margin:0">
+                        <li class="span2" style="margin:2px">
+                           <div class="thumbnail" style="height:50px;overflow:hidden;margin:0">
                                <a  class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
                                    <img  class="span12" src="<?php echo is_object($d->getFoto()) ? $d->getFoto()->url : '' ; ?>" alt="">
                                </a>

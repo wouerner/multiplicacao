@@ -8,7 +8,7 @@ $usuario = $usuario[0] ;
 
 ?>
 
-<div class="navbar ">
+<div style="margin-bottom:3px" class="navbar ">
   <div class="navbar-inner ">
 
 <a class="btn btn-navbar " data-toggle="collapse" data-target=".nav-collapse">
