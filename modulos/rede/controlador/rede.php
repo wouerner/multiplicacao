@@ -119,6 +119,9 @@ namespace rede\controlador;
                     $rede->tipoRedeId = $redeId;
 
                   $redeMembros = $rede->pegarMembrosAtivos();
+
+                  $redeInativos = $rede->pegarMembrosInativos();
+                  $redeArquivados = $rede->pegarMembrosArquivados();
                     $cont = 1 ;
                     $metaTotal=0;
                     $metaTotalLider=0;

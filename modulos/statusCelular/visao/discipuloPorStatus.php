@@ -14,15 +14,15 @@ $('#myTab a:last').tab('show');
 	<body>
 		<section class = "container-fluid">
 
-		<nav> 
-			
-			<?php include 'menu/visao/menu.inc.php' ; ?>	
+		<nav>
+
+			<?php include 'menu/visao/menu.inc.php' ; ?>
 		</nav>
-		<section>		
+		<section>
 			<article>
 
 				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
-				<div class = "row-fluid" >	
+				<div class = "row-fluid" >
 
 				<div class = "span12" >
 <h3>Discipulos em: <?php echo $tipoStatus->nome ?></h3>
@@ -42,6 +42,7 @@ $('#myTab a:last').tab('show');
 						<th>Líder</th>
 						<th>Nome</th>
 						<th>Sexo</th>
+						<th>Ações</th>
 				</thead>
 				<?php foreach ( $discipulos as $discipulo) : ?>
 				<tr>
@@ -49,6 +50,9 @@ $('#myTab a:last').tab('show');
 						<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->getLider()->id ; ?>" ><?php echo $discipulo->getLider()->nome ; ?></a></td>
 						<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ; ?>" ><strong><?php echo $discipulo->nome ; ?></strong></a></td>
 						<td><?php echo $discipulo->sexo == 'm' ? 'M' : 'F' ; ?></td>
+                        <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                            <td><a target="blank" class="btn btn-mini btn-inverse" href="/discipulo/discipulo/arquivar/id/<?php echo $discipulo->id?>"> Arquivar</a></td>
+                        <?php endif?>
 				</tr>
 				</tr>
 				<?php endforeach ; ?>
@@ -108,7 +112,7 @@ $('#myTab a:last').tab('show');
 				</div>
 			</div>
 			</article>
-		
+
 		</section>
 
 		</section>

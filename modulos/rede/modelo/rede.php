@@ -264,4 +264,66 @@ group by r.tipoRedeId
               return $resposta ;
     }
 
+    public function pegarMembrosInativos()
+    {
+        //abrir conexao com o banco
+        $pdo = new \PDO(DSN, USER, PASSWD);
+        //cria sql
+        $sql = "
+            SELECT
+                        d.id AS id , d.nome AS nome, d.telefone , d.endereco , d.email , d.lider AS lider
+            FROM Discipulo AS d inner join Redes AS r ON d.id = r.discipuloId AND d.ativo = 0 and d.arquivo= 0
+                          inner join TipoRede AS tp ON r.tipoRedeId = tp.id
+            WHERE r.tipoRedeId = ?
+            ORDER BY nome
+                ";
+
+        //prepara sql
+        $stm = $pdo->prepare($sql);
+        //trocar valores
+        $stm->bindParam(1, $this->tipoRedeId );
+
+        $resposta = $stm->execute();
+
+        //fechar conexÃ£o
+        $pdo = null ;
+        $resposta = array();
+        while ( $obj = $stm->fetchObject('\discipulo\Modelo\Discipulo') ) {
+                $resposta[ $obj->id ] = $obj ;
+        }
+
+        return $resposta ;
+    }
+
+    public function pegarMembrosArquivados()
+    {
+        //abrir conexao com o banco
+        $pdo = new \PDO(DSN, USER, PASSWD);
+        //cria sql
+        $sql = "
+            SELECT
+                        d.id AS id , d.nome AS nome, d.telefone , d.endereco , d.email , d.lider AS lider
+            FROM Discipulo AS d inner join Redes AS r ON d.id = r.discipuloId AND d.arquivo = 1
+                          inner join TipoRede AS tp ON r.tipoRedeId = tp.id
+            WHERE r.tipoRedeId = ?
+            ORDER BY nome
+                ";
+
+        //prepara sql
+        $stm = $pdo->prepare($sql);
+        //trocar valores
+        $stm->bindParam(1, $this->tipoRedeId );
+
+        $resposta = $stm->execute();
+
+        //fechar conexÃ£o
+        $pdo = null ;
+        $resposta = array();
+        while ( $obj = $stm->fetchObject('\discipulo\Modelo\Discipulo') ) {
+                $resposta[ $obj->id ] = $obj ;
+        }
+
+        return $resposta ;
+    }
+
 }
