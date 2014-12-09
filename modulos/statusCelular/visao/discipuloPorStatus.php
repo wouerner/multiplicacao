@@ -39,16 +39,16 @@ $('#myTab a:last').tab('show');
 				<table class = "table bordered-table">
 				<thead>
 						<th>#</th>
-						<th>Líder</th>
 						<th>Nome</th>
+						<th>Líder</th>
 						<th>Sexo</th>
 						<th>Ações</th>
 				</thead>
-				<?php foreach ( $discipulos as $discipulo) : ?>
+				<?php foreach ($discipulos as $discipulo) : ?>
 				<tr>
 						<td><?php echo !isset($c) ? $c=1 : ++$c  ; ?></td>
-						<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->getLider()->id ; ?>" ><?php echo $discipulo->getLider()->nome ; ?></a></td>
 						<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ; ?>" ><strong><?php echo $discipulo->nome ; ?></strong></a></td>
+						<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->getLider()->id ; ?>" ><?php echo $discipulo->getLider()->nome ; ?></a></td>
 						<td><?php echo $discipulo->sexo == 'm' ? 'M' : 'F' ; ?></td>
                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                             <td><a target="blank" class="btn btn-mini btn-inverse" href="/discipulo/discipulo/arquivar/id/<?php echo $discipulo->id?>"> Arquivar</a></td>
@@ -66,16 +66,16 @@ $('#myTab a:last').tab('show');
 				<table class = "table bordered-table">
 				<thead>
 						<th>#</th>
-						<th>Líder</th>
 						<th>Nome</th>
+						<th>Líder</th>
 						<th>Sexo</th>
 				</thead>
 				<?php foreach ( $discipulosInativos as $discipulo) : ?>
 				<tr>
-						<td><?php echo !isset($c) ? $c=1 : ++$c  ; ?></td>
-						<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->getLider()->id ; ?>" ><?php echo $discipulo->getLider()->nome ; ?></a></td>
-						<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ; ?>" ><strong><?php echo $discipulo->nome ; ?></strong></a></td>
-						<td><?php echo $discipulo->sexo == 'm' ? 'M' : 'F' ; ?></td>
+                    <td><?php echo !isset($c) ? $c=1 : ++$c  ; ?></td>
+                    <td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ; ?>" ><strong><?php echo $discipulo->nome ; ?></strong></a></td>
+                    <td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->getLider()->id ; ?>" ><?php echo $discipulo->getLider()->nome ; ?></a></td>
+                    <td><?php echo $discipulo->sexo == 'm' ? 'M' : 'F' ; ?></td>
 				</tr>
 				</tr>
 				<?php endforeach ; ?>
@@ -89,15 +89,15 @@ $('#myTab a:last').tab('show');
 				<table class = "table bordered-table">
 				<thead>
 						<th>#</th>
-						<th>Líder</th>
 						<th>Nome</th>
+						<th>Líder</th>
 						<th>Sexo</th>
 				</thead>
 				<?php foreach ( $discipulosArquivo as $discipulo) : ?>
 				<tr>
 						<td><?php echo !isset($c) ? $c=1 : ++$c  ; ?></td>
-						<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->getLider()->id ; ?>" ><?php echo $discipulo->getLider()->nome ; ?></a></td>
 						<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ; ?>" ><strong><?php echo $discipulo->nome ; ?></strong></a></td>
+						<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->getLider()->id ; ?>" ><?php echo $discipulo->getLider()->nome ; ?></a></td>
 						<td><?php echo $discipulo->sexo == 'm' ? 'M' : 'F' ; ?></td>
 				</tr>
 				</tr>
