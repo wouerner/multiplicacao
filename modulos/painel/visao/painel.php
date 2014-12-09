@@ -108,7 +108,7 @@ $(function(){
 </div>
 
 <div class="row-fluid">
-    <div class = "span6">
+    <div class = "span4">
     <div class = "well well-small">
             <!-- h5><strong> <?php// echo $totalDiscipulos ; ?>  Discipulos: </strong></h5 -->
                 <?php $discipulos = array_chunk($discipulos,4) ?>
@@ -138,7 +138,26 @@ $(function(){
         </div>
     </div>
 
-    <div class = "well well-small span6">
+    <div class = "span4">
+        <div class = "well well-small">
+            <div class = "" >
+                <div>
+                    <b><i class="icon-gift "></i> <?php echo $totalAniver ; ?> Aniversariantes hoje:</b>
+                    <?php foreach($discipulosAniver as $da) : ?>
+                        <?php ++$contator ?>
+                        <a href = "/discipulo/discipulo/perfil/id/<?php echo $da->id ; ?>" >
+                            <?php echo $da->getAlcunha() ; ?>
+                        </a>
+                        <?php if ($totalAniver > $contator ) : ?>
+                            -
+                        <?php endif ; ?>
+                    <?php endforeach ; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class = "well well-small span4">
         <div class = "row-fluid" >
                 <div class = "span12" >
                     <?php foreach ( $celulas as $c ) : ?>
