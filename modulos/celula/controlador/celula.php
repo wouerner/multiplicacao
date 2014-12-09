@@ -149,6 +149,10 @@ class celula
             $lideres = new \celula\modelo\celula();
             $lideres = $lideres->listarLideresCelula() ;
 
+            $tipoStatus= new \statusCelular\modelo\tipoStatusCelular();
+
+            $statusCelulares = $tipoStatus->listarTodos() ;
+
             require_once 'celula/visao/listarLideresCelula.php';
 
         }
