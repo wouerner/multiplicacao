@@ -63,31 +63,31 @@ unset($_SESSION['mensagem']) ;
                                 <?php $cont=0 ?>
                                 <?php foreach ($statusCelulares as $status ): ?>
                                     <td>
-                                    <table class="span3 table table-condensed">
-                                        <legend><?php echo $status->nome?></legend>
-                                        <tbody>
-                                        <?php $cont=0 ?>
-                                        <?php foreach ($lider->listarDiscipulos() as $discipulo ): ?>
-                                            <?php if($status->id == $discipulo->getStatusCelular()['id'] && $discipulo->ativo):?>
-                                                <tr>
-                                                    <td><?php ++$cont ?></td>
-                                                    <td><?php echo $discipulo->getAlcunha() ; ?></td>
-                                                    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                                                        <td><a target="blank" class="btn btn-mini btn-inverse" href="/discipulo/discipulo/arquivar/id/<?php echo $discipulo->id?>"> Arquivar</a></td>
-                                                    <?php endif?>
-                                                </tr>
-                                            <?php endif ?>
-                                        <?php endforeach ?>
-                                        </tbody>
-                                    </table>
+                                        <table class="span3 table table-condensed">
+                                            <caption><?php echo $status->nome?></caption>
+                                            <tbody>
+                                                <?php $cont=0 ?>
+                                                <?php foreach ($lider->listarDiscipulos() as $discipulo ): ?>
+                                                    <?php if($status->id == $discipulo->getStatusCelular()['id'] && $discipulo->ativo):?>
+                                                        <tr>
+                                                            <!--td><?php ++$cont ?></td-->
+                                                            <td><?php echo $discipulo->getAlcunha() ; ?></td>
+                                                            <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                                                                <td><a target="blank" class="btn btn-mini btn-inverse" href="/discipulo/discipulo/arquivar/id/<?php echo $discipulo->id?>"> Arquivar</a></td>
+                                                            <?php endif?>
+                                                        </tr>
+                                                    <?php endif ?>
+                                                <?php endforeach ?>
+                                            </tbody>
+                                        </table>
                                     </td>
                                 <?php endforeach ?>
                                 </tr>
                             <?php// $total += $c?>
                             <?php// $c=0 ?>
                         <?php endforeach ; ?>
-                            <h3>Lideres: <?php //echo count($lideres)?>-
-                            Discipulos: <?php //echo $total - (2*count($lideres))?></h3>
+                            <!--h3>Lideres: <?php //echo count($lideres)?>-
+                            Discipulos: <?php //echo $total - (2*count($lideres))?></h3-->
                         </table>
                         <?php // discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos['total'] ,3 ,$pagina ) ; ?>
             </article>
