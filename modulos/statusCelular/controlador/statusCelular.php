@@ -3,27 +3,27 @@ use \statusCelular\modelo\tipoStatusCelular ;
 use \statusCelular\modelo\statusCelular ;
 use \discipulo\Modelo\Discipulo ;
 
-namespace statusCelular\controlador; 
+namespace statusCelular\controlador;
 
 
 	class statusCelular{
-	
+
 		public function index(){
 
 
 //			require_once  'modulos/discipulo/visao/listar.php';
 
-		
+
 		}
 		public function novo($url){
 			if ( empty ( $url['post'] ) ) {
-				$tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ; 
+				$tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
 			 	$statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
 
-			 	$tiposStatusCelulares = $tiposStatusCelulares->listarTodos();	
-			
+			 	$tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
+
 				$statusCelularDiscipulo->discipuloId= $url[4];
-				
+
 				$historico = $statusCelularDiscipulo->listarTodosStatus();
 
 				$statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
@@ -33,7 +33,7 @@ namespace statusCelular\controlador;
 				$discipulo = $discipulo->listarUm();
 
 				require_once  'modulos/statusCelular/visao/novo.php';
-			
+
 			}else {
 				$statusCelular =	new \statusCelular\modelo\statusCelular();
 
@@ -48,22 +48,22 @@ namespace statusCelular\controlador;
 						$statusCelular->atualizar();
 						header ('location:/discipulo/discipulo/detalhar/id/'.$statusCelular->discipuloId);
 						exit();
-		
+
 					}
 			}
-			
+
 
 		}
 
 		public function novoTipoStatusCelular($url){
 			if ( empty ( $url['post'] ) ) {
-		
+
 				require_once  'modulos/statusCelular/visao/novoTipoStatus.php' ;
-			
+
 			}else{
 
-			$tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular() ; 
-	
+			$tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular() ;
+
 			$post = $url['post'] ;
 			$tipoStatusCelular->nome = $post['nome'] ;
 			$tipoStatusCelular->descricao = $post['descricao'] ;
@@ -74,7 +74,7 @@ namespace statusCelular\controlador;
 				header ('location:/statusCelular/listarTipoStatusCelular') ;
 				exit();
 			}
-			
+
 
 		}
 
@@ -83,8 +83,8 @@ namespace statusCelular\controlador;
 				  $tipoStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular();
 				  $tipoStatusCelulares = $tipoStatusCelulares->listarTodos();
 
-				  require 'modulos/statusCelular/visao/listarTipoStatusCelular.php' ; 
-		
+				  require 'modulos/statusCelular/visao/listarTipoStatusCelular.php' ;
+
 		}
 
 		public function atualizar($url){
@@ -112,13 +112,13 @@ namespace statusCelular\controlador;
 
 
 				require_once  'modulos/discipulo/visao/atualizar.php';
-			
+
 			}else {
 				$discipulo =	new \discipulo\Modelo\Discipulo();
 
 				$post = $url['post'] ;
 
-				$discipulo->id = $post['id'];	
+				$discipulo->id = $post['id'];
 				$discipulo->nome = $post['nome'];
 				$discipulo->telefone = $post['telefone'];
 				$discipulo->endereco = $post['endereco'];
@@ -132,45 +132,43 @@ namespace statusCelular\controlador;
 				header ('location:/discipulo/atualizar/id/'.$discipulo->id);
 				exit();
 			}
-		
+
 		}
 
 		public function atualizarTipoStatusCelular($url){
 
 			if ( empty ( $url['post'] ) ) {
 
-
 				$tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular();
 				$tipoStatusCelular->id = $url[4] ;
 				$tipoStatusCelular = $tipoStatusCelular->listarUm();
 
 				require_once  'modulos/statusCelular/visao/atualizarTipoStatus.php';
-			
 			}else {
 				$tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular();
 
 				$post = $url['post'] ;
 
-				$tipoStatusCelular->id = $post['id'];	
+				$tipoStatusCelular->id = $post['id'];
 				$tipoStatusCelular->nome = $post['nome'];
 				$tipoStatusCelular->descricao = $post['descricao'];
 				$tipoStatusCelular->ordem = $post['ordem'];
 				$tipoStatusCelular->cor = $post['cor'];
-				
+
 				$tipoStatusCelular->atualizar();
-				header ('location:/statusCelular/atualizarTipoStatusCelular/id/'.$tipoStatusCelular->id);
+				header ('location:/statusCelular/statusCelular/atualizarTipoStatusCelular/id/'.$tipoStatusCelular->id);
 				exit();
 			}
-		
+
 		}
 
 		public function excluirTipoStatusCelular($url){
 				$tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular();
-				$tipoStatusCelular->id = $url[4]; 
+				$tipoStatusCelular->id = $url[4];
 				$tipoStatusCelular->excluir();
 
 				$_SESSION['mensagem'] = !is_null($tipoStatusCelular->erro) ? $tipoStatusCelular->erro : null ;
-				
+
 				header ('location:/statusCelular/statusCelular/listarTipoStatusCelular');
 				exit();
 		}
@@ -180,11 +178,11 @@ namespace statusCelular\controlador;
 
 			$status = new \statusCelular\modelo\tipoStatusCelular() ;
 
-			$status->id = $url[4] ; 
+			$status->id = $url[4] ;
 			$status = $status->listarUm() ;
-		
-			require 'statusCelular/visao/detalhar.php' ;	
-		
+
+			require 'statusCelular/visao/detalhar.php' ;
+
 		}
 
 
@@ -192,20 +190,20 @@ namespace statusCelular\controlador;
 
 			$nome = (!empty($_GET['nome'])) ? $_GET['nome'] : NULL;
 			$discipulo =	new \discipulo\Modelo\Discipulo();
-			$discipulo->nome = $nome; 
-			$discipulos = $discipulo->chamar($nome);	
+			$discipulo->nome = $nome;
+			$discipulos = $discipulo->chamar($nome);
 			require_once 'discipulo/visao/chamar.php' ;
 
-		
+
 		}
-	
+
 		public function evento($url){
-			
+
 
 			if ( empty ( $url['post'] ) ) {
 
 				  $eventos = new \evento\modelo\evento();
-				
+
 				  $id = $url[3];
 				  $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
 				$eventos = $eventos->listarTodos();
@@ -218,7 +216,7 @@ namespace statusCelular\controlador;
 					  $eventoId = $post['eventoId'];
 						$discipuloId = $post['discipuloId'];
 
-					 $discipuloEvento->salvarDiscipuloEvento($discipuloId, $eventoId );	
+					 $discipuloEvento->salvarDiscipuloEvento($discipuloId, $eventoId );
 
 					  echo "url" ;
 					 var_dump($url);
@@ -226,18 +224,18 @@ namespace statusCelular\controlador;
 
 					 header ('location:/discipulo/evento/id/'.$id);
 					 exit();
-			
-				
-			
-			
+
+
+
+
 			}
-				
-		
-		}	
+
+
+		}
 
 		public function excluir($url){
 
-				
+
 			$id = $url[4] ;
 			$discipulo = $url[6] ;
 
@@ -246,8 +244,8 @@ namespace statusCelular\controlador;
 			$status->excluir();
 			header ('location:/statusCelular/statusCelular/novo/id/'.$discipulo);
 			exit();
-		
-		
+
+
 		}
 
 		public function listarDiscipulosPorStatus($url){
@@ -268,13 +266,13 @@ namespace statusCelular\controlador;
 			$cont = 0 ;
 
 			$tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
-			$tipoStatus->id = (int)$id ; 
+			$tipoStatus->id = (int)$id ;
 			$tipoStatus = $tipoStatus->listarUm() ;
 
-			require 'statusCelular/visao/discipuloPorStatus.php' ;	
+			require 'statusCelular/visao/discipuloPorStatus.php' ;
 
-		}	
-	
-	}	
+		}
+
+	}
 
 ?>

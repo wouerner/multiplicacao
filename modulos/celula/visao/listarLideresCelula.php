@@ -8,6 +8,9 @@ unset($_SESSION['mensagem']) ;
         <meta charset="UTF-8">
             <?php include 'incluidos/css.inc.php' ?>
             <?php include 'incluidos/js.inc.php' ?>
+<style type="text/css">
+</style>
+
     </head>
     <body>
         <section class = "container">
@@ -18,78 +21,75 @@ unset($_SESSION['mensagem']) ;
         </header>
         <section>
             <article>
-                    <?php require 'modulos/celula/visao/chamarCelula.php' ; ?>
+            <?php require 'modulos/celula/visao/chamarCelula.php' ; ?>
             <?php if (isset($mensagem)) : ?>
-                    <div class="alert <?php echo ($mensagem=='ok') ? 'alert-success' : 'alert-error' ; ?>">
-                      <h4 class="alert-heading">
+                <div class="alert <?php echo ($mensagem=='ok') ? 'alert-success' : 'alert-error' ; ?>">
+                    <h4 class="alert-heading">
                         <?php echo $mensagem ?>!
                     </h4>
-                   </div>
-                <?php endif ; ?>
-                        <table class = "table">
-                            <caption><h3>Lista de Líderes de Células</h3></caption>
-                            <thead>
-                                <tr>
-                                </tr>
-                                <tr>
-                                    <th>Nº</th>
-                                    <th>Nome</th>
-                                </tr>
-                            </thead>
-                            <?php $total=0?>
-                            <?php foreach ( $lideres as $lider) : ?>
-                                <tr class="success">
-                                    <td><?php //echo !isset($cont) ? $cont=1 : ++$cont ; ?></td>
-                                    <td colspan="2">
-                                        <a href ="/discipulo/discipulo/detalhar/id/<?php echo $lider->id ?>" ><?php echo $lider->nome ; ?></a>
-                                    </td>
-                                    <td>
-                                        <?php //echo $lider['totalCelulas'] ; ?>
-                                    </td>
-                                </tr>
-                            <?php //foreach($lider->listarDiscipulos() as $d ):?>
-                                <!--tr class="">
-                                    <td></td>
-                                    <td><?php //echo !isset($c) ? $c=1 : ++$c ; ?>
-                                    -- <a href ="/discipulo/discipulo/detalhar/id/<?php //echo $d->id ?>" >
-                                    <?php// echo $d->nome;?> <?php  //$status = $d->getStatusCelular();  ?>
-                                        <span class="badge"><?php //echo $status['nome']?>
-                                        </span>
-                                    </a>
-                                    </td>
-                                </tr-->
-                            <?php// endforeach;?>
-                                <tr>
+                </div>
+            <?php endif ; ?>
+            <table class = "table table-condensed">
+                <caption><h3>Lista de Líderes de Células</h3></caption>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php $total=0?>
+                <?php foreach ( $lideres as $lider) : ?>
+                    <tr class="">
+                        <td colspan=2"">
+                            <h4 class="text-center">
+                            <strong >
+                            <a href ="/discipulo/discipulo/detalhar/id/<?php echo $lider->id ?>" ><?php echo $lider->nome ; ?></a>
+                            </strong>
+                            </h4>
+                        </td>
+                        <!--td>
+                            <?php //echo $lider['totalCelulas'] ; ?>
+                        </td-->
+                    </tr>
+                <?php //foreach($lider->listarDiscipulos() as $d ):?>
+                    <!--tr class="">
+                        <td></td>
+                        <td><?php //echo !isset($c) ? $c=1 : ++$c ; ?>
+                        -- <a href ="/discipulo/discipulo/detalhar/id/<?php //echo $d->id ?>" >
+                        <?php// echo $d->nome;?> <?php  //$status = $d->getStatusCelular();  ?>
+                            <span class="badge"><?php //echo $status['nome']?>
+                            </span>
+                        </a>
+                        </td>
+                    </tr-->
+                <?php// endforeach;?>
+                    <?php $cont=0 ?>
+                    <?php foreach ($statusCelulares as $status ): ?>
                                 <?php $cont=0 ?>
-                                <?php foreach ($statusCelulares as $status ): ?>
-                                    <td>
-                                        <table class="span3 table table-condensed">
-                                            <caption><?php echo $status->nome?></caption>
-                                            <tbody>
-                                                <?php $cont=0 ?>
-                                                <?php foreach ($lider->listarDiscipulos() as $discipulo ): ?>
-                                                    <?php if($status->id == $discipulo->getStatusCelular()['id'] && $discipulo->ativo):?>
-                                                        <tr>
-                                                            <!--td><?php ++$cont ?></td-->
-                                                            <td><?php echo $discipulo->getAlcunha() ; ?></td>
-                                                            <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                                                                <td><a target="blank" class="btn btn-mini btn-inverse" href="/discipulo/discipulo/arquivar/id/<?php echo $discipulo->id?>"> Arquivar</a></td>
-                                                            <?php endif?>
-                                                        </tr>
-                                                    <?php endif ?>
-                                                <?php endforeach ?>
-                                            </tbody>
-                                        </table>
+                                <?php foreach ($lider->listarDiscipulos() as $discipulo ): ?>
+                                    <?php if($discipulo->getStatusCelular() && $status->id == $discipulo->getStatusCelular()['id'] && $discipulo->ativo):?>
+                                    <tr class="<?php echo $status->cor?>">
+                                        <td>
+                                            <?php echo $status->nome?>
+                                        </td>
+                                        <!--td><?php ++$cont ?></td-->
+                                        <td><?php echo $discipulo->getAlcunha() ; ?>
+                                        <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                                            <a target="blank" class="btn btn-mini btn-inverse" href="/discipulo/discipulo/arquivar/id/<?php echo $discipulo->id?>"> Arquivar</a>
+                                        <?php endif?>
                                     </td>
-                                <?php endforeach ?>
+                                    <?php endif ?>
                                 </tr>
-                            <?php// $total += $c?>
-                            <?php// $c=0 ?>
-                        <?php endforeach ; ?>
-                            <!--h3>Lideres: <?php //echo count($lideres)?>-
-                            Discipulos: <?php //echo $total - (2*count($lideres))?></h3-->
-                        </table>
-                        <?php // discipulo\Modelo\Discipulo::mostrarPaginacao( $totalDiscipulos['total'] ,3 ,$pagina ) ; ?>
+                                <?php endforeach ?>
+                            </td>
+                    <?php endforeach ?>
+                <?php// $total += $c?>
+                <?php// $c=0 ?>
+            <?php endforeach ; ?>
+                <!--h3>Lideres: <?php //echo count($lideres)?>-
+                Discipulos: <?php //echo $total - (2*count($lideres))?></h3-->
+            <tbody>
+            </table>
             </article>
         </section>
         </section>
