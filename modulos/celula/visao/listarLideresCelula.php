@@ -40,7 +40,7 @@ unset($_SESSION['mensagem']) ;
                 <?php $total=0?>
                 <?php foreach ( $lideres as $lider) : ?>
                     <tr class="">
-                        <td colspan=2"">
+                        <td colspan="3">
                             <h4 class="text-center">
                             <strong >
                             <a href ="/discipulo/discipulo/detalhar/id/<?php echo $lider->id ?>" ><?php echo $lider->nome ; ?></a>
@@ -69,10 +69,10 @@ unset($_SESSION['mensagem']) ;
                                 <?php foreach ($lider->listarDiscipulos() as $discipulo ): ?>
                                     <?php if($discipulo->getStatusCelular() && $status->id == $discipulo->getStatusCelular()['id'] && $discipulo->ativo):?>
                                     <tr class="<?php echo $status->cor?>">
+                                        <td><?php echo ++$cont ?></td>
                                         <td>
                                             <?php echo $status->nome?>
                                         </td>
-                                        <!--td><?php ++$cont ?></td-->
                                         <td><?php echo $discipulo->getAlcunha() ; ?>
                                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                                             <a target="blank" class="btn btn-mini btn-inverse" href="/discipulo/discipulo/arquivar/id/<?php echo $discipulo->id?>"> Arquivar</a>
