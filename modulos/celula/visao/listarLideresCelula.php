@@ -71,9 +71,13 @@ unset($_SESSION['mensagem']) ;
                                     <tr class="<?php echo $status->cor?>">
                                         <td><?php echo ++$cont ?></td>
                                         <td>
-                                            <?php echo $status->nome?>
+                                                <?php echo $status->nome?>
+                                            </a>
                                         </td>
-                                        <td><?php echo $discipulo->getAlcunha() ; ?>
+                                        <td>
+                                            <a href ="/discipulo/discipulo/atualizar/id/<?php echo $discipulo->id ?>" >
+                                                <?php echo $discipulo->getAlcunha(); ?>
+                                            </a>
                                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                                             <a target="blank" class="btn btn-mini btn-inverse" href="/discipulo/discipulo/arquivar/id/<?php echo $discipulo->id?>"> Arquivar</a>
                                         <?php endif?>
