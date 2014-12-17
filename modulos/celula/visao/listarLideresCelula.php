@@ -32,9 +32,6 @@ unset($_SESSION['mensagem']) ;
             <table class = "table table-condensed">
                 <caption><h3>Lista de Líderes de Células</h3></caption>
                 <thead>
-                    <tr>
-                        <th>Nome</th>
-                    </tr>
                 </thead>
                 <tbody>
                 <?php $total=0?>
@@ -46,6 +43,13 @@ unset($_SESSION['mensagem']) ;
                             <a href ="/discipulo/discipulo/detalhar/id/<?php echo $lider->id ?>" ><?php echo $lider->nome ; ?></a>
                             </strong>
                             </h4>
+                            <h5 class="text-center">Células:
+                            <?php foreach ( $lider->getCelulaLider() as $celula) : ?>
+                                <a href ="/celula/celula/detalhar/id/<?php echo $celula->id ?>" >
+                                    <?php echo $celula->nome?>
+                                </a>
+                            <?php endforeach;?>
+                            </h5>
                         </td>
                         <!--td>
                             <?php //echo $lider['totalCelulas'] ; ?>

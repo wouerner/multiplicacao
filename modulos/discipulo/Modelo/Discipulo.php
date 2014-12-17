@@ -128,6 +128,16 @@ class Discipulo extends modeloFramework
 
     }
 
+    public function getCelulaLider()
+    {
+        $celula = new \celula\modelo\celula();
+        $celula->lider = $this->id;
+        $this->celulaLidera = $celula->listarCelulasLider();
+
+        return $this->celulaLidera;
+
+    }
+
     /*
      *Listar todos os eventos do discipulo
      *

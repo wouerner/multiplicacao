@@ -117,22 +117,22 @@ class celula
 
         }
 
-        public function detalhar($url)
-        {
-            $celula =	new \celula\modelo\celula() ;
-            $celula->id = $url[4] ;
-            $discipulos= $celula->listarDiscipulos() ;
-            $celula = $celula->listarUm() ;
+    public function detalhar($url)
+    {
+        $celula =	new \celula\modelo\celula() ;
+        $celula->id = $url[4] ;
+        $discipulos= $celula->listarDiscipulos() ;
+        $celula = $celula->listarUm() ;
 
-                $lider =	new \discipulo\Modelo\Discipulo() ;
-                $lider->id = $celula->lider ;
-                $lider = $lider->listarUm($celula->lider) ;
+        $lider =	new \discipulo\Modelo\Discipulo() ;
+        $lider->id = $celula->lider ;
+        $lider = $lider->listarUm($celula->lider) ;
 
-//				var_dump($discipulos);
+                    //var_dump($discipulos);
 
-            require 'celula/visao/detalhar.php';
+        require 'celula/visao/detalhar.php';
 
-        }
+    }
 
         public function chamar ()
         {
