@@ -46,8 +46,8 @@ unset($_SESSION['mensagem']) ;
                             <h5 class="text-center">Células:
                             <?php foreach ( $lider->getCelulaLider() as $celula) : ?>
                                 <a href ="/celula/celula/detalhar/id/<?php echo $celula->id ?>" >
-                                    <?php echo $celula->nome?>
-                                </a>
+                                <?php echo $celula->nome?> (<?php echo count($celula->listarDiscipulos())?>)
+                                </a>|
                             <?php endforeach;?>
                             </h5>
                         </td>
