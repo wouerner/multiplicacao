@@ -73,4 +73,15 @@ class grafico
         header('Content-type: application/json; charset=utf-8');
 
     }
+
+    public function crescimento()
+    {
+        $begin = new \relatorio\modelo\discipulos();
+        $crescimento = $begin->crescimento('2014-02-10',date('Y-m-d'));
+        //var_dump($crescimento);
+        echo json_encode($crescimento);
+
+        header('Content-type: application/json; charset=utf-8');
+
+    }
 }
