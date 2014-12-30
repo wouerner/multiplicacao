@@ -25,9 +25,9 @@
         <script src="../../../ext/jQuery-Visualize/js/visualize.jQuery.js"></script>
         <script>
 $(function(){
-            $('#tabelaStatus').visualize({type: 'pie',pieMargin: 75,
-                                          pieLabelPos:'inside',
-                                          height: '363px', width: '400px'});
+            //$('#tabelaStatus').visualize({type: 'pie',pieMargin: 75,
+                                          //pieLabelPos:'inside',
+                                          //height: '363px', width: '400px'});
             $('#discipulosEstado').visualize({type: 'pie',pieMargin: 30,
                                           pieLabelPos:'inside',
                                           height: '455px', width: '400px'});
@@ -281,5 +281,23 @@ $(function(){
         </section>
 
         </section>
+
+        <section>
+            <div id="ativosChart"></div>
+            <script>
+                var ativos = jQuery.get('/relatorio/grafico/ativos')
+                        .done(function( data ) {
+                            var chart = c3.generate({
+                            bindto: '#ativosChart',
+                            data: {
+                              json: data,
+                              type: 'pie',
+                            },
+                              legend: {position: 'right'}
+                            });
+                        });
+            </script>
+        </section>
+
     </body>
 </html>

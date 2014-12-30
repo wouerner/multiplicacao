@@ -9,6 +9,8 @@
 <script src="/modulos/framework/visao/js/tabela.js"></script>
 <script src="/ext/chart.js/Chart.js"></script>
 <script src="/ext/jsPDF/dist/jspdf.min.js"></script>
+<script src="/ext/d3/d3.js" charset="utf-8"></script>
+<script src="/ext/c3/c3.js"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

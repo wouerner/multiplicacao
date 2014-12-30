@@ -14,6 +14,26 @@
     </div-->
     <div class="row-fluid">
     <div class = "well well-small span4" >
+
+        <section>
+            <div id="chart"></div>
+            <script>
+                var t = jQuery.get('/relatorio/grafico/status')
+                        .done(function( data ) {
+                            var chart = c3.generate({
+                            bindto: '#chart',
+                            data: {
+                              json: data,
+                              type: 'pie',
+                            },
+                              legend: {position: 'right'}
+                            });
+                        });
+
+                console.log(teste);
+            </script>
+        </section>
+
         <table  class = "table table-striped  tablesorter table-condensed"  >
             <caption><h5>Discipulos</h5></caption>
             <thead>
@@ -50,7 +70,7 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th scope="col">Quantidade</th>
+                    <th scope="col1">Quantidade</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,6 +96,22 @@
     </div>
 
     <div class = "well well-small span4" >
+        <section>
+            <div id="redesChart"></div>
+            <script>
+                var redes = jQuery.get('/relatorio/grafico/redes')
+                        .done(function( data ) {
+                            var chart = c3.generate({
+                            bindto: '#redesChart',
+                            data: {
+                              json: data,
+                              type: 'pie',
+                            },
+                              legend: {position: 'right'}
+                            });
+                        });
+            </script>
+        </section>
         <table class = "table table-condensed" style="">
             <caption><h5>Redes</h5></caption>
             <thead>
@@ -116,35 +152,23 @@
                 </tr>
             </tbody>
         </table>
-        <table style="display:none" id="discipulosRede" class = "table " >
-            <thead>
-                <tr>
-                    <td></td>
-                    <th socpe="col">quantidade</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $total['discipulos']=0?>
-                <?php $total['celulas']= 0?>
-                <?php $total['metas']= 0?>
-                <?php foreach( $tiposRedes as $s) :?>
-                <tr>
-                    <th scope="row">
-                         <?php echo $s->nome ?>
-                    </th>
-                    <td>
-                        <?php echo $s->totalDiscipulosPorRede() ?></a>
-                    </td>
-                </tr>
-                <?php $total['discipulos'] += $s->totalDiscipulosPorRede()?>
-                <?php $total['celulas']+= $s->listarCelulasTotal()?>
-                <?php $total['metas']+= $s->getMeta()?>
-                <?php endforeach ; ?>
-            </tbody>
-        </table>
     </div>
 
     <div class = "well well-small span4" >
+            <div id="ativosChart"></div>
+            <script>
+                var ativos = jQuery.get('/relatorio/grafico/ativos')
+                        .done(function( data ) {
+                            var chart = c3.generate({
+                            bindto: '#ativosChart',
+                            data: {
+                              json: data,
+                              type: 'pie',
+                            },
+                              legend: {position: 'right'}
+                            });
+                        });
+            </script>
         <table class="table table-condensed" >
             <caption><h5>Situação</h5></caption>
             <thead>
@@ -160,42 +184,6 @@
                     <td scope="row"><?php echo $totalArquivados['total'] ; ?></td>
                     <td><?php echo $totalAtivos['total']+$totalInativos['total']+$totalArquivados['total'] ?></td>
                 </tr>
-            </tbody>
-        </table>
-        <table style="display:none" id="discipulosEstado" class = "table " >
-            <thead>
-                <tr>
-                    <td></td>
-                    <th socpe="col">quantidade</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">Ativos</th>
-                    <td><?php echo $totalAtivos['total'] ; ?></td>
-                </tr>
-                <tr>
-                    <th scope="row">Inativos</th>
-                    <td><?php echo $totalInativos['total'] ; ?></td>
-                </tr>
-                <tr>
-                    <th scope="row">Arquivados</th>
-                    <td><?php echo $totalArquivados['total'] ; ?></td>
-                </tr>
-            </tbody>
-        </table>
-        <table class = "table " style="display:none">
-            <thead>
-                <th>Nome</th>
-                <th>Quantidade</th>
-            </thead>
-            <tbody>
-                    <?php foreach($geracoes as $g):?>
-                <tr>
-                    <td><?php echo $g->nome ; ?></td>
-                    <td><?php echo $g->quantidade() ; ?></td>
-                </tr>
-                    <?php endforeach; ?>
             </tbody>
         </table>
     </div>

@@ -34,4 +34,43 @@ class grafico
 
         require 'relatorio/visao/grafico/index.php';
     }
+
+    public function status()
+    {
+        $status = new \statusCelular\modelo\statusCelular() ;
+        $status = $status->quantidadePorStatusCelular();
+
+        $aux = array();
+        foreach ($status as $st) {
+            $aux[$st['tipoNome']] = $st['total'];
+        }
+        echo json_encode($aux);
+
+        header('Content-type: application/json; charset=utf-8');
+    }
+
+    public function redes()
+    {
+        $tiposRedes = new \rede\modelo\tipoRede();
+        $tiposRedes = $tiposRedes->listarTodos();
+
+        $aux = array();
+        foreach ($tiposRedes as $rede) {
+            $aux[$rede->nome] = $rede->totalDiscipulosPorRede();
+        }
+        echo json_encode($aux);
+
+        header('Content-type: application/json; charset=utf-8');
+    }
+    public function ativos()
+    {
+        $totalAtivos =  \discipulo\Modelo\Discipulo::totalAtivos() ;
+        $totalInativos = \discipulo\Modelo\Discipulo::totalInativos() ;
+        $totalArquivados =  \discipulo\Modelo\Discipulo::totalArquivados() ;
+
+        echo json_encode(array('ativo'=> $totalAtivos['total'], 'inativos'=> $totalInativos['total'], 'arquivado' => $totalArquivados['total']));
+
+        header('Content-type: application/json; charset=utf-8');
+
+    }
 }
