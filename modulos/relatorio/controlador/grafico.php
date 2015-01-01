@@ -113,4 +113,31 @@ class grafico
 
         header('Content-type: application/json; charset=utf-8');
     }
+
+    public function crescimentoStatus()
+    {
+        $begin = new \relatorio\modelo\discipulos();
+        $tipoStatus =	new \statusCelular\modelo\tipoStatusCelular() ;
+        $tipoStatus = $tipoStatus->listarTodos();
+
+        $aux = array();
+        $chaves = array();
+        foreach($tipoStatus as $tipo){
+            $status = array_values($begin->crescimentoStatus('2014-02-16', date('Y-m-d'), $tipo->id));
+            $chaves = array_keys($begin->crescimentoStatus('2014-02-16', date('Y-m-d'), $tipo->id));
+            //var_dump($status);
+            array_unshift($status, $tipo->nome);
+            $aux[] = $status;
+            //$aux[$tipo->nome] = $begin->crescimentoStatus('2014-02-16', date('Y-m-d'), $tipo->id);
+            //$aux[$tipo->nome] = $begin->crescimentoStatus('2014-02-16', date('Y-m-d'), $tipo->id);
+
+        }
+        array_unshift($chaves, 'x');
+        $aux[] = $chaves;
+        //var_dump($aux);
+
+        echo json_encode($aux);
+
+        header('Content-type: application/json; charset=utf-8');
+    }
 }

@@ -17,6 +17,7 @@
                         <div class = "span12" >
                             <div id="crescimentoChart"></div>
                             <div id="redesChart"></div>
+                            <div id="statusChart"></div>
                             <script>
                                 var keys;
 
@@ -63,6 +64,32 @@
 
                                     var chart2 = c3.generate({
                                         bindto: '#redesChart',
+                                        data: {
+                                            x: 'x',
+                                            xFormat: '%d-%m-%Y', // 'xFormat' can be used as custom format of 'x'
+                                            columns:// [
+                                             //  ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],
+                                    //            ['x', '20130101', '20130102', '20130103', '20130104', '20130105', '20130106'],
+                                                data, //['data1', 30, 200, 100, 400, 150, 250],
+                                            //]
+                                        },
+                                        axis: {
+                                            x: {
+                                                type: 'timeseries',
+                                                tick: {
+                                                    format: '%Y-%m-%d'
+                                                }
+                                            }
+                                        }
+                                    });
+                                });
+
+                                jQuery.get('/relatorio/grafico/crescimentoStatus')
+                                                .done(function( data ) {
+                                    console.log(data);
+
+                                    var chart3 = c3.generate({
+                                        bindto: '#statusChart',
                                         data: {
                                             x: 'x',
                                             xFormat: '%d-%m-%Y', // 'xFormat' can be used as custom format of 'x'
