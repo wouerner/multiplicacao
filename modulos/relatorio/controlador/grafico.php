@@ -84,4 +84,33 @@ class grafico
         header('Content-type: application/json; charset=utf-8');
 
     }
+    public function crescimentoRedes()
+    {
+        $redes = new	\relatorio\modelo\discipulos();
+        $redes = $redes->crescimentoRede('2014-04-14',date('Y-m-d'));
+
+        $chaves = array_keys($redes[0]);
+        unset($chaves[0]);
+        array_unshift($chaves, 'x');
+        //var_dump($chaves);exit;
+
+        $valor = array();
+        foreach( $redes as $rede){
+            $valor[] = array_values($rede);
+        }
+
+        $aux = array();
+        foreach( $valor as $rede){
+            $rede[0] = utf8_encode($rede[0]);
+            $aux[] = $rede;
+        }
+
+        $aux[] = $chaves;
+        //$redes = array_merge($chaves, $aux);
+        //var_dump($aux);
+
+        echo json_encode($aux);
+
+        header('Content-type: application/json; charset=utf-8');
+    }
 }
