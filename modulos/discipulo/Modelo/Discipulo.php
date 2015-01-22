@@ -32,6 +32,7 @@ class Discipulo extends modeloFramework
     private $rede;
     private $foto;
     private $geracao;
+    private $observacao;
 
     public function __construct ()
     {
@@ -675,10 +676,11 @@ class Discipulo extends modeloFramework
     {
         $pdo = self::pegarConexao();
 
-        $sql = 'UPDATE Discipulo SET  ativo = 0 WHERE id = ?';
+        $sql = 'UPDATE Discipulo SET  ativo = 0, observacao = ?  WHERE id = ?';
 
         $stm = $pdo->prepare($sql);
-        $stm->bindParam(1, $this->id);
+        $stm->bindParam(1, $this->observacao);
+        $stm->bindParam(2, $this->id);
 
         return $stm->execute();
     }

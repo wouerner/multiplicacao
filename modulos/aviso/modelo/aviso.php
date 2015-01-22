@@ -47,9 +47,10 @@ class aviso extends modeloFramework
         $pdo = self::pegarConexao();
 
         $sql = '
-                        SELECT d.nome, a.id, a.identificacao, a.dataAviso, ta.modulo, ta.controlador, ta.acao, ta.link,ta.mensagem, ta.icone
+                        SELECT d.nome, a.id, f.url, a.identificacao, a.dataAviso, ta.modulo, ta.controlador, ta.acao, ta.link,ta.mensagem, ta.icone, ta.cor
                          FROM
-                        Discipulo AS d
+                         Discipulo AS d
+                         inner join Foto as f on f.discipuloId = d.id
                         inner join
                         Avisos AS a on d.id = a.emissor
                         inner join
@@ -94,7 +95,7 @@ class aviso extends modeloFramework
     {
         $pdo = self::pegarConexao();
 
-        $sql = 'SELECT d.nome , d.alcunha , a.id, a.identificacao, a.dataAviso, ta.modulo, 
+        $sql = 'SELECT d.nome , d.alcunha , a.id, a.identificacao, a.dataAviso, ta.modulo,
             ta.controlador, ta.acao, ta.link,ta.mensagem, ta.icone, f.url FROM
         Discipulo AS d
         inner join

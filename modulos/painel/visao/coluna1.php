@@ -12,8 +12,8 @@
             <?php endforeach ; ?>
         </div>
     </div-->
-    <div class="row-fluid">
-    <div class = "well well-small span4" >
+    <div class="row">
+    <div class = "well well-small col-md-4" >
 
         <section>
             <div id="chart"></div>
@@ -95,7 +95,7 @@
         </table>
     </div>
 
-    <div class = "well well-small span4" >
+    <div class = "well well-small col-md-4" >
         <section>
             <div id="redesChart"></div>
             <script>
@@ -154,7 +154,7 @@
         </table>
     </div>
 
-    <div class = "well well-small span4" >
+    <div class = "well well-small col-md-4" >
             <div id="ativosChart"></div>
             <script>
                 var ativos = jQuery.get('/relatorio/grafico/ativos')

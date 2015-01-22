@@ -28,7 +28,6 @@ $('.table').tab('show');
 
                 <h3>Quantidade de Encontrista: <?php echo $total?></h3>
                 <?php require 'modulos/encontroComDeus/visao/participantesEncontro/menuParticipante.php' ; ?>
-
                 <div class = "row-fluid" >
                         <table class = "table bordered-table">
                                         <h2></h2>
@@ -47,7 +46,7 @@ $('.table').tab('show');
                         <?php foreach ( $discipulos as $d) : ?>
                         <tr class = "<?php echo $d->desistiu==1 ? 'error' : ''; ?>" >
                             <td><?php echo !isset($c) ? $c=1 : ++$c ; ?></td>
-                            <td><a target="blank" href="/discipulo/discipulo/atualizar/id/<?php echo $d->participanteId?>"><?php echo $d->nome ; ?></a></td>
+                            <td><a target="blank" href="/discipulo/discipulo/atualizar/id/<?php echo $d->id?>"><?php echo $d->nome ; ?></a></td>
                             <td><a target="blank" href="/discipulo/discipulo/atualizar/id/<?php echo $d->getLider()->id ?>"><?php echo $d->getLider()->getAlcunha() ; ?></a></td>
                         <td>
                             <?php if ($d->preEncontro == 0 ) : ?>

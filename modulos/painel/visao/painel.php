@@ -49,9 +49,9 @@ $(function(){
         </nav>
         <section>
             <article>
-              <div class = "row-fluid" >
+              <div class = "row" >
                 <?php if ( $mensagem ) : ?>
-                    <div class = "alert alert-success span10" >
+                    <div class = "alert alert-success col-md-10" >
                         <strong>Mensagem:</strong> Atualizado com Sucesso
                         <a href="/discipulo/atualizar/id/<?php echo $mensagem['id']; ?>" > <?php echo $mensagem['nome'] ; ?></a>
                     </div>
@@ -59,8 +59,8 @@ $(function(){
                 </div>
 
                 <?php require_once 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
-<!--div class="row-fluid">
-    <div class="span12">
+<!--div class="row">
+    <div class="col-md-12">
             <div id="msgOracao" class="alert" style="display:none">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <strong>Sucesso!</strong> Vamos orar por você.
@@ -69,7 +69,7 @@ $(function(){
             <fieldset>
                 <legend>Pedido de Oração</legend>
                 <input type="hidden" name="discipuloId" value="<?php echo $_SESSION['usuario_id']?>">
-                    <textarea class="span6" name="texto" placeholder="Seu pedido"></textarea>
+                    <textarea class="col-md-6" name="texto" placeholder="Seu pedido"></textarea>
                     <label>
                         <input type="checkbox" name="publico"> Publico
                     </label>
@@ -87,8 +87,8 @@ $(function(){
             </script>
     </div>
 </div-->
-<div  class="row-fluid">
-    <div class="span12">
+<div  class="row">
+    <div class="col-md-12">
         <div style="margin-bottom:3px" class="well well-small">
             <ul class="unstyled">
             <?php foreach($encontros as $encontro):?>
@@ -107,18 +107,18 @@ $(function(){
     </div>
 </div>
 
-<div class="row-fluid">
-    <div class = "span4">
+<div class="row">
+    <div class = "col-md-4">
     <div  style="margin-bottom:3px" class = "well well-small">
             <!-- h5><strong> <?php// echo $totalDiscipulos ; ?>  Discipulos: </strong></h5 -->
                 <?php $discipulos = array_chunk($discipulos,4) ?>
                 <?php foreach( $discipulos as $disc ) : ?>
                 <ul class="thumbnails" style="margin:0">
                     <?php foreach( $disc as $d ) : ?>
-                        <li class="span2" style="margin:2px">
+                        <li class="col-md-2" style="margin:2px">
                            <div class="thumbnail" style="height:50px;overflow:hidden;margin:0">
                                <a  class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
-                                   <img  class="span12" src="<?php echo is_object($d->getFoto()) ? $d->getFoto()->url : '' ; ?>" alt="">
+                                   <img  class="col-md-12" src="<?php echo is_object($d->getFoto()) ? $d->getFoto()->url : '' ; ?>" alt="">
                                </a>
                                <div class = "caption" >
                                    <a class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
@@ -137,7 +137,7 @@ $(function(){
         </div>
     </div>
 
-    <div class = "span4">
+    <div class = "col-md-4">
         <div class = "well well-small">
             <div class = "" >
                 <div>
@@ -156,9 +156,9 @@ $(function(){
         </div>
     </div>
 
-    <div class = "well well-small span4">
-        <div class = "row-fluid" >
-                <div class = "span12" >
+    <div class = "well well-small col-md-4">
+        <div class = "row" >
+                <div class = "col-md-12" >
                     <?php foreach ( $celulas as $c ) : ?>
                         <a class = "btn" href="/celula/relatorio/novo/id/<?php echo $c->id ; ?>" ><?php echo $c->nome ; ?></a>
                     <?php endforeach ; ?>
@@ -174,8 +174,8 @@ $(function(){
 </div>
 <?php include 'modulos/painel/visao/coluna1.php'?>
 
-<!-- div class = "row-fluid" >
-    <div class = "span12 " >
+<!-- div class = "row" >
+    <div class = "col-md-12 " >
         <div class = "well well-small" >
             <div class="accordion" id="accordion3">
 

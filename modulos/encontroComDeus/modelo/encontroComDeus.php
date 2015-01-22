@@ -23,6 +23,7 @@ class encontroComDeus extends modeloFramework
   }
   public function salvar()
   {
+      //var_dump($this->dataEncontroComDeus);exit;
               $pdo = self::pegarConexao() ;
               $sql = "INSERT INTO  EncontroComDeus ( nome, dataEncontroComDeus, endereco )
                               VALUES (?,?,?)";
@@ -121,27 +122,27 @@ class encontroComDeus extends modeloFramework
               return $resposta;
               }
 
-              public function listarTodos()
-              {
-              $pdo = self::pegarConexao() ;
+    public function listarTodos()
+    {
+        $pdo = self::pegarConexao() ;
 
-              $sql = 'SELECT *
-                         FROM EncontroComDeus
-                         ORDER BY nome ' ;
+        $sql = 'SELECT *
+                 FROM EncontroComDeus
+                 ORDER BY dataEncontroComDeus DESC ' ;
 
-              $stm = $pdo->prepare($sql);
+        $stm = $pdo->prepare($sql);
 
-              $resposta = $stm->execute();
+        $resposta = $stm->execute();
 
-              $pdo = null ;
-                $resposta = array();
+        $pdo = null ;
+        $resposta = array();
 
-                while ( $obj = $stm->fetchObject (get_class($this))  ) {
-                    $resposta[$obj->id] = $obj ;
-                }
+        while ( $obj = $stm->fetchObject (get_class($this))  ) {
+            $resposta[$obj->id] = $obj ;
+        }
 
-              return $resposta ;
-                }
+        return $resposta ;
+    }
 
               public function listarTodosAtivos()
               {

@@ -117,9 +117,10 @@ class discipulo
          * */
     public function desativar($url)
     {
-        $discipulo =	new \discipulo\Modelo\Discipulo();
+        $discipulo = new \discipulo\Modelo\Discipulo();
 
         $discipulo->id = $url[4];
+        $discipulo->observacao = $url['post']['observacao'];
 
         $aviso = new \aviso\modelo\aviso();
         $aviso->identificacao = $discipulo->id;
@@ -139,8 +140,6 @@ class discipulo
                         "Desativação Discipulo",
                         "Lider: ".$discipulo->getLider()->nome.", nome: ".$discipulo->nome,
                         $headers,"-r multiplicacao@multiplicacao.org");
-
-
 
         header ('location:/discipulo/discipulo');
         exit();

@@ -26,7 +26,6 @@ class encontroComDeus
         $encontro = new \encontroComDeus\modelo\encontroComDeus() ;
         $encontro->nome = $post['nome'];
         $encontro->dataEncontroComDeus = implode ('-',array_reverse(explode('/',$post['dataEncontroComDeus'])));
-        $encontro->dataEncontroComDeus = $post['dataEncontroComDeus'];
         $encontro->endereco = $post['endereco'];
 
         $encontro->salvar() ;

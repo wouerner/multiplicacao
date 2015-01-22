@@ -8,20 +8,27 @@
 <script>
 $(document).ready(function () {
     $(".btn-warning").click( function(){
-                var id = this.id ;
+        var id = this.id ;
 
-                $( "#dialog-confirm" ).dialog({
-                resizable: false,
-                height:240,
-                modal: true,
-                buttons: {
-                    Cancelar: function() {
-                        $( this ).dialog( "close" );
-                    },
-              Desativar: function() {
-                        $(location).attr('href', '/discipulo/discipulo/desativar/id/'+id);
-               },
-                }
+    $( "#dialog-confirm" ).dialog({
+        resizable: true,
+        height:340,
+        width: 'auto',
+        modal: true,
+        buttons: {
+            Cancelar: function() {
+                $( this ).dialog( "close" );
+            },
+            Desativar: function() {
+
+                jQuery.ajax({
+                    type: "POST",
+                    url: '/discipulo/discipulo/desativar/id/'+id,
+                    data: {observacao: jQuery("#observacao").val()},
+                    success: function (){$(location).attr('href', '/discipulo/discipulo/detalhar/id/'+id); },
+                });
+            },
+        }
         });
     });
 
@@ -48,9 +55,22 @@ $(document).ready(function () {
 </script>
     </head>
 <body>
+
 <div id="dialog-confirm" title="Deseja desativar?" style = "display:none">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente excluir?</p>
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente desativar?</p>
+    <form id="desativarForm">
+        <fieldset>
+            <label for="name">Motivo:</label>
+            <textarea  id="observacao" type="text" name="motivo" class="text ui-widget-content ui-corner-all form-control"></textarea>
+            <!-- Allow form submission with keyboard without duplicating the dialog button -->
+            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </fieldset>
+    </form>
+    <script>
+    </script>
 </div>
+</div>
+
 <div id="dialog-success" title="Deseja ativar?" style = "display:none">
     <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente ativar?</p>
 </div>
@@ -64,7 +84,7 @@ $(document).ready(function () {
         <section>
             <article>
             <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
-<div class = "well" >
+        <div class = "well" >
             <table class = "table" >
             <caption>
                 <h3>
