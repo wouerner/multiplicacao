@@ -50,6 +50,9 @@ $usuario = $usuario[0] ;
                     <?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
                         <li><a href = "/discipulo/discipulo/novoCompleto" ><i class = "icon-plus " ></i> Novo</a></li>
                     <?php endif ; ?>
+                    <li><a href = "/discipulo/discipulo" ><i class = "icon-arrow-up" ></i>Ativos</a></li>
+                    <li><a href = "/discipulo/discipulo/inativos" ><i class = "icon-arrow-down" ></i>Inativos</a></li>
+                    <li><a href = "/discipulo/discipulo/arquivo" ><i class = "icon-inbox" ></i> Arquivo</a></li>
                     <li class = "dropdown-submenu" role = "presentation">
                         <a href = "#" role="menuitem" ><i class = "icon-list-alt " ></i> Listar</a>
                         <ul class="dropdown-menu">
