@@ -38,13 +38,15 @@ unset($_SESSION['mensagem']) ;
             </table>
 
                     <table class="well table" >
-                    <tr>
+                    <thead>
                         <th>#</th>
+                        <th>Rede</th>
                         <th>Nome</th>
                         <th>Endereço</th>
                         <th>Horário</th>
                         <th>Ações</th>
-                    </tr>
+                    </thead>
+                    <tbody>
                     <?php //$celulas =null?>
                     <?php foreach ( $celulas as $celula) : ?>
                     <?php  $rede =$celula->pegaRede() ?>
@@ -59,6 +61,7 @@ unset($_SESSION['mensagem']) ;
                         <?php require 'celula/visao/menuCelula.inc.php' ; ?>
                     </tr>
                 <?php endforeach ; ?>
+                    </tbody>
             </table>
 
             <table class = "table well table-striped ">
