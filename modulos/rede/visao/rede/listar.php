@@ -74,13 +74,13 @@
                                             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                                             <td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ?>" ><?php echo $discipulo->nome ; ?></a></td>
                                             <td><a href="/discipulo/discipulo/detalhar/id/<?php echo is_object($lider=$discipulo->getLider()) ? $lider->id : '' ; ?>"><?php echo $lider->nome ; ?></a></td>
-                                            <td><?php echo $lider->observacao; ?></td>
+                                            <td><?php echo $discipulo->observacao; ?></td>
                                             <td><?php echo is_object($meta = $discipulo->getMeta()) ? $meta->quantidade : 0 ?></td>
                                             <?php $metaTotal+= is_object($meta) ? $meta->quantidade : 0?>
                                         <?php else : ?>
                                             <td><?php echo $discipulo->nome ; ?></td>
                                             <td><?php echo is_object($lider=$discipulo->getLider()) ? $lider->nome : '' ; ?></td>
-                                            <td><?php echo $lider->observacao; ?></td>
+                                            <td><?php echo $discipulo->observacao; ?></td>
                                             <td><?php echo is_object($meta = $discipulo->getMeta()) ? $meta->quantidade : 0 ?></td> <?php $metaTotal+= is_object($meta)? $meta->quantidade : 0 ?>
                                         <?php endif ; ?>
                                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
