@@ -240,7 +240,7 @@ group by r.tipoRedeId
               //cria sql
               $sql = "
                     SELECT
-                                d.id AS id , d.nome AS nome, d.telefone , d.endereco , d.email , d.lider AS lider
+                                d.id AS id , d.nome AS nome, d.telefone , d.endereco , d.email , d.lider AS lider, d.observacao
                     FROM Discipulo AS d inner join Redes AS r ON d.id = r.discipuloId AND d.ativo = 1
                                   inner join TipoRede AS tp ON r.tipoRedeId = tp.id
                     WHERE r.tipoRedeId = ?
@@ -271,7 +271,7 @@ group by r.tipoRedeId
         //cria sql
         $sql = "
             SELECT
-                        d.id AS id , d.nome AS nome, d.telefone , d.endereco , d.email , d.lider AS lider
+                        d.id AS id , d.nome AS nome, d.telefone , d.endereco , d.email , d.lider AS lider, d.observacao
             FROM Discipulo AS d inner join Redes AS r ON d.id = r.discipuloId AND d.ativo = 0 and d.arquivo= 0
                           inner join TipoRede AS tp ON r.tipoRedeId = tp.id
             WHERE r.tipoRedeId = ?
@@ -302,7 +302,7 @@ group by r.tipoRedeId
         //cria sql
         $sql = "
             SELECT
-                        d.id AS id , d.nome AS nome, d.telefone , d.endereco , d.email , d.lider AS lider
+                        d.id AS id , d.nome AS nome, d.telefone , d.endereco , d.email , d.lider AS lider, d.observacao
             FROM Discipulo AS d inner join Redes AS r ON d.id = r.discipuloId AND d.arquivo = 1
                           inner join TipoRede AS tp ON r.tipoRedeId = tp.id
             WHERE r.tipoRedeId = ?
