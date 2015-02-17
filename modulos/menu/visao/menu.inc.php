@@ -21,8 +21,8 @@ $usuario = $usuario[0] ;
         <div class="collapse navbar-collapse" >
             <ul class="nav navbar-nav" role="navigation">
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                <form action = "/discipulo/discipulo/chamar" method="GET" class="navbar-form navbar-left" accept-charset ="UTF-8" role="search" >
-                    <div class="form-group">
+                <form action = "/discipulo/discipulo/chamar" method="GET" class="col-sm-2  navbar-left" accept-charset ="UTF-8" role="search" >
+                    <div class="">
                         <input class="form-control"  type="search" name="nome" size="45" placeholder="Pesquisar...">
                     </div>
                 </form>
