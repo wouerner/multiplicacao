@@ -140,7 +140,7 @@
                     </td>
                 </tr>
                 <?php $total['discipulos'] += $s->totalDiscipulosPorRede()?>
-                <?php $total['celulas']+= $s->listarCelulasTotal()?>
+                <?php $total['celulas']+= $s->totalCelulasMultiplicacao()?>
                 <?php $total['metas']+= $s->getMeta()?>
                 <?php endforeach ; ?>
 
