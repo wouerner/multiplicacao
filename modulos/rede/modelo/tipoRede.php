@@ -168,6 +168,23 @@ class tipoRede extends modeloFramework
         return $resposta[0];
     }
 
+    public function totalCelulasMultiplicacao()
+    {
+        $pdo = self::pegarConexao();
+
+        $sql = 'SELECT COUNT(*) AS total FROM Celula WHERE tipoRedeId = ? and multiplicacao = 1 and ativa =1';
+
+        $stm = $pdo->prepare($sql);
+
+        $stm->bindParam(1, $this->id);
+
+        $stm->execute();
+
+        $resposta = $stm->fetch();
+
+        return $resposta[0];
+    }
+
     public function atualizar()
     {
         $pdo = self::pegarConexao();

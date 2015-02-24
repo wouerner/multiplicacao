@@ -133,7 +133,7 @@
                     <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->totalDiscipulosPorRede() ?></a>
                     </td>
                     <td>
-                        <a href = "/rede/rede/listarCelulas/id/<?php echo $s->id ; ?>"><?php echo $s->listarCelulasTotal() ?></a>
+                        <a href = "/rede/rede/listarCelulas/id/<?php echo $s->id ; ?>"><?php echo $s->totalCelulasMultiplicacao() ?></a>
                     </td>
                     <td>
                         <a href = "#"><?php echo $s->getMeta() ?></a>
