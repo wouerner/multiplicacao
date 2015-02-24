@@ -137,7 +137,7 @@ namespace rede\controlador;
                     $tipoRede = new \rede\modelo\tipoRede();
                     $tipoRede->id = $redeId;
                     $celulas = $tipoRede->listarCelulas();
-                    $cont = 0 ;
+                    $cont = 0;
 
                   require 'modulos/rede/visao/tipoRede/celulas.php';
 
