@@ -23,11 +23,17 @@
                     <legend>Atualizar Célula</legend>
                     <form action = "/celula/celula/atualizar" method = "post"  class = "form-horizontal">
 
-                    <div class = "control-group" >
-                        <label class = "control-label" >Ativa:</label>
-                        <div class = "controls" >
-                        <input type = "checkbox" name = "ativa" value = "1" autofocus alt = "" placeholder= "" <?php echo $celula->ativa == 1 ? 'checked' : '' ; ?>>
-                        </div>
+                    <div class="checkbox" >
+                        <label class="" >
+                            <input type = "checkbox" name = "ativa" value = "1" autofocus alt = "" placeholder= "" <?php echo $celula->ativa == 1 ? 'checked' : '' ; ?>>
+                            Ativa
+                        </label>
+                    </div>
+
+                    <div class = "checkbox" >
+                        <label class="">
+                            <input class="" type="checkbox" name="multiplicao" value="1" autofocus alt="" <?php echo $celula->multiplicacao == 1 ? 'checked' : '' ; ?>>Multipiplição:
+                        </label>
                     </div>
 
                         <div class = "control-group" >

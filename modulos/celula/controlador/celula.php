@@ -93,6 +93,7 @@ class celula
                 $celula->endereco = $post['endereco'];
                 $celula->lider = $post['lider'];
                 $celula->ativa = (isset($post['ativa']))? 1 : 0;
+                $celula->multiplicacao = (isset($post['multiplicao']))? 1 : 0;
                 $celula->tipoRedeId = $post['tipoRedeId'];
                 $celula->id = $post['id'];
                 //var_dump(isset($post['ativa']));exit;

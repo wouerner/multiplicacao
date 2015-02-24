@@ -89,31 +89,31 @@ class celula extends modeloFramework
 
     public function atualizar()
     {
-    //abrir conexao com o banco
-    $pdo = new \PDO(DSN, USER, PASSWD);
-    //cria sql
-    $sql = "UPDATE Celula SET 	nome = ? , horarioFuncionamento = ? , endereco = ?,
-        lider = ? , tipoRedeId = ? , ativa = ?
-        WHERE id = ?
-                    ";
-    //prepara sql
-    $stm = $pdo->prepare($sql);
-    //trocar valores
-    $stm->bindParam(1, $this->nome);
-    $stm->bindParam(2, $this->horarioFuncionamento);
-    $stm->bindParam(3, $this->endereco);
-    $stm->bindParam(4, $this->lider);
-    $stm->bindParam(5, $this->tipoRedeId );
-    $stm->bindParam(6, $this->ativa );
-    $stm->bindParam(7, $this->id);
+        //abrir conexao com o banco
+        $pdo = new \PDO(DSN, USER, PASSWD);
+        //cria sql
+        $sql = "UPDATE Celula SET 	nome = ? , horarioFuncionamento = ? , endereco = ?,
+            lider = ? , tipoRedeId = ? , ativa = ?, multiplicacao = ?
+            WHERE id = ?
+               ";
+        //prepara sql
+        $stm = $pdo->prepare($sql);
+        //trocar valores
+        $stm->bindParam(1, $this->nome);
+        $stm->bindParam(2, $this->horarioFuncionamento);
+        $stm->bindParam(3, $this->endereco);
+        $stm->bindParam(4, $this->lider);
+        $stm->bindParam(5, $this->tipoRedeId );
+        $stm->bindParam(6, $this->ativa );
+        $stm->bindParam(7, $this->multiplicacao );
+        $stm->bindParam(8, $this->id);
 
-    $resposta = $stm->execute();
+        $resposta = $stm->execute();
 
-    //fechar conexÃ£o
-    $pdo = null ;
+        //fechar conexÃ£o
+        $pdo = null ;
 
-    return $resposta;
-
+        return $resposta;
     }
     /*Recebe o id para nÃ£o listar este cadastro.
      *

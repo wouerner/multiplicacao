@@ -76,7 +76,6 @@ unset($_SESSION['mensagem']) ;
         <script src="/modulos/discipulo/visao/js/comboboxCelula.js"></script>
 
     </head>
-
     <body>
         <section class = "container-fluid">
         <header>
