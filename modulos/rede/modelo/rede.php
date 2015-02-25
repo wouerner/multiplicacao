@@ -98,6 +98,32 @@ class rede
               return $stm->fetchAll();
                 }
 
+    public function pegarFuncaoRede()
+    {
+        //abrir conexao com o banco
+        $pdo = new \PDO(DSN, USER, PASSWD);
+
+        $sql = '
+        select *
+            FROM Redes AS r inner join  TipoRede AS tpRede on r.tipoRedeId = tpRede.id
+            inner join FuncaoRede AS fRede on r.funcaoRedeId = fRede.id
+            WHERE r.discipuloId = ?
+                ';
+
+        //prepara sql
+        $stm = $pdo->prepare($sql);
+        //trocar valores
+        $stm->bindParam(1, $this->discipuloId);
+
+        $stm->execute();
+
+        //fechar conexÃ£o
+        $pdo = null ;
+
+        $result = $stm->fetchObject('\rede\modelo\funcaoRede');
+        return $result;
+    }
+
               public static function pegarTodasRedes()
               {
                   //abrir conexao com o banco

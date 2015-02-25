@@ -26,21 +26,28 @@
                         <tr>
                             <th>Nº</th>
                             <th>Nome</th>
+                            <th>Função</th>
                             <th>Líder</th>
                             <th>Meta </th>
                             <th>Ações </th>
                         </tr>
+
+                            <?php foreach ( $funcoes as $funcao) : ?>
                             <?php foreach ( $redeMembros as $discipulo) : ?>
+                            <?php //var_dump( $discipulo->getFuncaoRede()) ?>
+                            <?php if ( $funcao['id'] == $discipulo->getFuncaoRede()->id) : ?>
                                 <tr>
                                     <td><?php echo  $cont++  ?></td>
                                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                                     <td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ?>" ><?php echo $discipulo->nome ; ?></a></td>
+                                        <td><?php echo $discipulo->getFuncaoRede()->nome; ?></td>
                                     <td><a href="/discipulo/discipulo/detalhar/id/<?php echo is_object($lider=$discipulo->getLider()) ? $lider->id : '' ; ?>"><?php echo $lider->nome ; ?></a></td>
                                     <td><?php echo is_object($meta = $discipulo->getMeta()) ? $meta->quantidade : 0 ?></td>
                                     <?php $metaTotal+= is_object($meta) ? $meta->quantidade : 0?>
 
                                     <?php else : ?>
                                         <td><?php echo $discipulo->nome ; ?></td>
+                                        <td><?php echo $discipulo->getFuncaoRede()->nome; ?></td>
                                         <td><?php echo is_object($lider=$discipulo->getLider()) ? $lider->nome : '' ; ?></td>
                                         <td><?php echo is_object($meta = $discipulo->getMeta()) ? $meta->quantidade : 0 ?></td> <?php $metaTotal+= is_object($meta)? $meta->quantidade : 0 ?>
                                     <?php endif ; ?>
@@ -48,6 +55,8 @@
                                         <td><a target="blank" class="btn btn-mini btn-inverse" href="/discipulo/discipulo/arquivar/id/<?php echo $discipulo->id?>"> Arquivar</a></td>
                                     <?php endif?>
                                 </tr>
+                            <?php endif?>
+                            <?php endforeach ; ?>
                             <?php endforeach ; ?>
                         <tr>
                <td colspan = "" ></td>
@@ -62,6 +71,7 @@
                         <tr>
                             <th>Nº</th>
                             <th>Nome</th>
+                            <th>Função</th>
                             <th>Líder</th>
                             <th>OBS</th>
                             <th>Meta </th>
@@ -73,12 +83,14 @@
                                         <td><?php echo  $cont++  ?></td>
                                             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                                             <td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ?>" ><?php echo $discipulo->nome ; ?></a></td>
+                                        <td><?php echo $discipulo->getFuncaoRede()->nome; ?></td>
                                             <td><a href="/discipulo/discipulo/detalhar/id/<?php echo is_object($lider=$discipulo->getLider()) ? $lider->id : '' ; ?>"><?php echo $lider->nome ; ?></a></td>
                                             <td><?php echo $discipulo->observacao; ?></td>
                                             <td><?php echo is_object($meta = $discipulo->getMeta()) ? $meta->quantidade : 0 ?></td>
                                             <?php $metaTotal+= is_object($meta) ? $meta->quantidade : 0?>
                                         <?php else : ?>
                                             <td><?php echo $discipulo->nome ; ?></td>
+                                        <td><?php echo $discipulo->getFuncaoRede()->nome; ?></td>
                                             <td><?php echo is_object($lider=$discipulo->getLider()) ? $lider->nome : '' ; ?></td>
                                             <td><?php echo $discipulo->observacao; ?></td>
                                             <td><?php echo is_object($meta = $discipulo->getMeta()) ? $meta->quantidade : 0 ?></td> <?php $metaTotal+= is_object($meta)? $meta->quantidade : 0 ?>
@@ -102,6 +114,7 @@
                         <tr>
                             <th>Nº</th>
                             <th>Nome</th>
+                            <th>Função</th>
                             <th>Líder</th>
                             <th>OBS</th>
                             <th>Meta </th>
@@ -113,12 +126,14 @@
                                         <td><?php echo  $cont++  ?></td>
                                             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                                             <td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ?>" ><?php echo $discipulo->nome ; ?></a></td>
+                                        <td><?php echo $discipulo->getFuncaoRede()->nome; ?></td>
                                             <td><a href="/discipulo/discipulo/detalhar/id/<?php echo is_object($lider=$discipulo->getLider()) ? $lider->id : '' ; ?>"><?php echo $lider->nome ; ?></a></td>
                                             <td><?php echo $discipulo->observacao; ?></td>
                                             <td><?php echo is_object($meta = $discipulo->getMeta()) ? $meta->quantidade : 0 ?></td>
                                             <?php $metaTotal+= is_object($meta) ? $meta->quantidade : 0?>
                                         <?php else : ?>
                                             <td><?php echo is_object($lider=$discipulo->getLider()) ? $lider->nome : '' ; ?></td>
+                                        <td><?php echo $discipulo->getFuncaoRede()->nome; ?></td>
                                             <td><?php echo $discipulo->observacao; ?></td>
                                             <td><?php echo $discipulo->nome ; ?></td>
                                             <td><?php echo is_object($meta = $discipulo->getMeta()) ? $meta->quantidade : 0 ?></td> <?php $metaTotal+= is_object($meta)? $meta->quantidade : 0 ?>

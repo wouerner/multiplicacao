@@ -108,27 +108,30 @@ namespace rede\controlador;
 
         }
 
-        public function listarMembrosRede($url)
-        {
-                    $redeId = $url[4];
+    public function listarMembrosRede($url)
+    {
+        $redeId = $url[4];
 
-                  $rede =	new \rede\modelo\rede();
-                    $tipoRede = new \rede\modelo\tipoRede();
-                    $tipoRede->id = $redeId;
-                    $tipoRede = $tipoRede->listarUm();
-                    $rede->tipoRedeId = $redeId;
+        $rede =	new \rede\modelo\rede();
+        $funcao =	new \rede\modelo\funcaoRede();
+        $tipoRede = new \rede\modelo\tipoRede();
+        $tipoRede->id = $redeId;
+        $tipoRede = $tipoRede->listarUm();
+        $rede->tipoRedeId = $redeId;
 
-                  $redeMembros = $rede->pegarMembrosAtivos();
+        $funcoes = $funcao->listarTodos();
 
-                  $redeInativos = $rede->pegarMembrosInativos();
-                  $redeArquivados = $rede->pegarMembrosArquivados();
-                    $cont = 1 ;
-                    $metaTotal=0;
-                    $metaTotalLider=0;
+        $redeMembros = $rede->pegarMembrosAtivos();
 
-                  require 'modulos/rede/visao/rede/listar.php';
+        $redeInativos = $rede->pegarMembrosInativos();
+        $redeArquivados = $rede->pegarMembrosArquivados();
+        $cont = 1 ;
+        $metaTotal=0;
+        $metaTotalLider=0;
 
-        }
+        require 'modulos/rede/visao/rede/listar.php';
+
+    }
 
         public function listarCelulas($url)
         {

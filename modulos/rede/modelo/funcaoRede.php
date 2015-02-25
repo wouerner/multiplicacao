@@ -45,7 +45,7 @@ class  funcaoRede
     {
         $pdo = new \PDO (DSN,USER,PASSWD);
 
-        $sql = 'SELECT * FROM FuncaoRede';
+        $sql = 'SELECT * FROM FuncaoRede order by ordem';
 
         $stm = $pdo->prepare($sql);
 

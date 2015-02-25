@@ -202,6 +202,15 @@ class Discipulo extends modeloFramework
 
     }
 
+    public function getFuncaoRede()
+    {
+        $rede = new \rede\modelo\rede();
+        $rede->discipuloId = $this->id;
+        $rede =  $rede->pegarFuncaoRede();
+
+        return $rede;
+    }
+
     public function getMinisterio()
     {
         $ministerio = new \ministerio\modelo\ministerioTemDiscipulo();
