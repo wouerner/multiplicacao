@@ -144,6 +144,28 @@ class encontroComDeus extends modeloFramework
         return $resposta ;
     }
 
+    public function listarUm()
+    {
+        $pdo = self::pegarConexao() ;
+
+        $sql = 'SELECT *
+                FROM EncontroComDeus
+                WHERE id = ?
+                ' ;
+
+        $stm = $pdo->prepare($sql);
+        $stm->bindParam(1, $this->id);
+
+        $resposta = $stm->execute();
+
+        $pdo = null ;
+        $resposta = array();
+
+        $resposta = $stm->fetchObject (get_class($this));
+
+        return $resposta ;
+    }
+
               public function listarTodosAtivos()
               {
               $pdo = self::pegarConexao() ;
@@ -234,4 +256,40 @@ Discipulo.id = StatusCelular.discipuloId AND TipoStatusCelular.id = ?  AND TipoS
               return $stm->fetchAll();
     }
 
+
+    public function grafico()
+    {
+        $pdo = self::pegarConexao() ;
+
+        $sql = "
+            SELECT
+             CASE d.ativo
+               WHEN 1 THEN 'ativo'
+              WHEN 0 THEN 'inativo'
+             END AS 'tipo',
+            CASE d.ativo
+               WHEN 1 THEN count(d.id)
+              WHEN 0 THEN count(d.id)
+             END AS 'total'
+            FROM
+                ParticipantesEncontro AS pe
+                JOIN Discipulo AS d ON pe.discipuloId = d.id
+                JOIN EncontroComDeus AS e ON pe.encontroComDeusId = e.id
+             WHERE
+                e.id IN (?)
+              group by  d.ativo
+            "
+                  ;
+
+        $stm = $pdo->prepare($sql);
+
+        $stm->bindParam(1, $this->id);
+
+        $resposta = $stm->execute();
+
+        $pdo = null ;
+        $resposta = $stm->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $resposta ;
+    }
 }

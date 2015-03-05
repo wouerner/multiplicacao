@@ -140,4 +140,19 @@ class grafico
 
         header('Content-type: application/json; charset=utf-8');
     }
+
+    public function encontro($url)
+    {
+        $encontro = new \encontroComDeus\modelo\encontroComDeus() ;
+        $encontro->id = $url[4] ;
+        $encontro = $encontro->grafico();
+
+        $aux = array();
+        foreach ($encontro as $st) {
+            $aux[$st['tipo']] = $st['total'];
+        }
+        echo json_encode($aux);
+
+        header('Content-type: application/json; charset=utf-8');
+    }
 }

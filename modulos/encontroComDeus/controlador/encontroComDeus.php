@@ -38,15 +38,25 @@ class encontroComDeus
 
     public function ativar($url)
     {
-      if ( isset ( $url['post'] ) ) {
-                        $encontro = new \encontroComDeus\modelo\encontroComDeus() ;
-                        $encontro->id = $url[4];
-                        $encontro->ativar() ;
-                        header ('location:/encontroComDeus/encontroComDeus' );
-                        exit();
+        if (isset($url['post'])) {
+            $encontro = new \encontroComDeus\modelo\encontroComDeus() ;
+            $encontro->id = $url[4];
+            $encontro->ativar() ;
+            header ('location:/encontroComDeus/encontroComDeus' );
+            exit();
         }
 
-        }
+    }
+
+    public function grafico($url)
+    {
+        $encontro = new \encontroComDeus\modelo\encontroComDeus() ;
+        $encontro->id = $url[4];
+        $encontro = $encontro->listarUm();
+
+        require_once 'modulos/encontroComDeus/visao/encontroComDeus/grafico.php';
+    }
+
 
     public function desativar($url)
     {

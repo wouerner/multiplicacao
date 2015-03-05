@@ -26,7 +26,6 @@
                             <th>Nome</th>
                             <th>Ações</th>
                         </thead>
-
                         <?php foreach ( $encontros as $e) : ?>
                         <tr>
                             <td><?php echo $e->nome ; ?></td>
@@ -38,6 +37,9 @@
                             <a class = "btn btn-mini"  href="/encontroComDeus/equipe/index/id/<?php echo $e->id?>"><i class = "icon-wrench" ></i>Equipes</a>
                             <a class = "btn btn-mini"  href="/encontroComDeus/participantesEncontro/cracha/id/<?php echo $e->id?>"><i class = "icon-barcode" ></i> Cracha</a>
                             <a class = "btn btn-mini"  href="/encontroComDeus/participantesEncontro/ficha/id/<?php echo $e->id?>"><i class = "icon-file" ></i> Ficha</a>
+                            <a class = "btn btn-mini btn-primary" href="/encontroComDeus/encontroComDeus/grafico/id/<?php echo $e->id?>">
+                                <i class="icon-file"></i> Gráfico
+                            </a>
                                 <a class = "btn btn-mini btn-danger" href="/encontroComDeus/encontroComDeus/excluir/id/<?php echo $e->id?>">
                                     <i class = "icon-remove icon-white" ></i> Excluir
                                 </a>
