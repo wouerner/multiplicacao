@@ -1,6 +1,4 @@
-<?php
-
-namespace aviso\controlador;
+<?php namespace aviso\controlador;
 
 class aviso
 {
@@ -8,6 +6,7 @@ class aviso
     {
         $avisos =	new \aviso\modelo\aviso();
         $avisos = $avisos->listarTodos();
+        //var_dump($avisos);
 
         require_once 'modulos/aviso/visao/listar.php';
 
@@ -26,6 +25,16 @@ class aviso
                 $aviso =	new \aviso\modelo\aviso();
                 $aviso->id = $url[4];
                 $aviso->excluir();
+
+                header ('location:/aviso/aviso');
+                exit();
+        }
+
+        public function visto($url)
+        {
+                $aviso =	new \aviso\modelo\aviso();
+                $aviso->id = $url[4];
+                $aviso->visto();
 
                 header ('location:/aviso/aviso');
                 exit();

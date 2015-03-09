@@ -202,47 +202,6 @@
         <section>
             <article>
 
-<div class="container">
-    <div class="page-header">
-        <h1 id="timeline">Avisos</h1>
-    </div>
-    <ul class="timeline">
-    <?php $cont =  1?>
-    <?php foreach ($avisos as $aviso) :?>
-    <?php //var_dump($aviso);?>
-        <li class="<?php echo $cont%2 == 0 ? 'timeline-inverted' : ''?>">
-        <div class="timeline-badge <?php echo $aviso['cor'] ?>"><i class="<?php echo $aviso['icone']?>"></i></div>
-          <div class="timeline-panel">
-            <div class="timeline-body">
-                <?php if ( isset($aviso['url']) ) : ?>
-                    <div class="col-md-2">
-                        <img src="<?php echo $aviso['url'] ; ?>" class = "img-polaroid img-responsive" width = ""  >
-                    </div>
-                <?php endif ; ?>
-                <p class="col-md-10">
-                    <strong><?php echo $aviso['nome'] ; ?></strong>
-                    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                        <a href= "/<?php echo $aviso['modulo'] ; ?>/<?php echo isset($aviso['controlador']) ? $aviso['controlador']: '' ; ?>/<?php echo isset($aviso['link']) ? $aviso['link' ]: '' ?>/id/<?php echo isset($aviso['identificacao']) ? $aviso['identificacao'] : ''  ; ?>">
-                            <?php echo isset($aviso['mensagem']) ? $aviso['mensagem']: ''   ; ?>
-                        </a>
-                    <?php else: ?>
-                        <?php echo isset($aviso['mensagem']) ? $aviso['mensagem']: ''; ?>
-                    <?php endif ; ?>
-
-                </p>
-                    <p class="col-md-10"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> <?php echo date('d/m/Y',strtotime($aviso['dataAviso']))?></small></p>
-            </div>
-            <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                <div class="col-md-12">
-                    <a class = "btn btn-sm btn-danger" href= "/aviso/aviso/excluir/id/<?php echo isset($a['id'] ) ?$a['id'] : '' ; ?>"><i class = "icon-remove icon-white" > </i></a>
-                </div>
-            <?php endif ; ?>
-          </div>
-        </li>
-        <?php $cont++ ?>
-    <?php endforeach ?>
-    </ul>
-</div>
                 <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
                 <?php require 'modulos/aviso/visao/tabAviso.inc.php' ; ?>
 

@@ -47,7 +47,7 @@ class aviso extends modeloFramework
         $pdo = self::pegarConexao();
 
         $sql = '
-                        SELECT d.nome, a.id, f.url, a.identificacao, a.dataAviso, ta.modulo, ta.controlador, ta.acao, ta.link,ta.mensagem, ta.icone, ta.cor
+                        SELECT d.nome, d.alcunha, a.id, f.url, a.visto, a.identificacao, a.dataAviso, ta.modulo, ta.controlador, ta.acao, ta.link,ta.mensagem, ta.icone, ta.cor
                          FROM
                          Discipulo AS d
                          inner join Foto as f on f.discipuloId = d.id
@@ -156,28 +156,25 @@ class aviso extends modeloFramework
 
     }
 
-    public function atualizar()
+    public function visto()
     {
-    //abrir conexao com o banco
-    $pdo = new \PDO(DSN, USER, PASSWD);
-    //cria sql
-    $sql = "UPDATE Admissao SET 	tipoAdmissao = ?	WHERE discipuloId = ?
-                    ";
-    //prepara sql
-    $stm = $pdo->prepare($sql);
-    //trocar valores
-    $stm->bindParam(1, $this->tipoAdmissao);
-    $stm->bindParam(2, $this->discipuloId);
+        $pdo = self::pegarConexao();
+        //cria sql
+        $sql = "UPDATE Avisos SET visto = 1 WHERE id = ?";
+        //prepara sql
+        $stm = $pdo->prepare($sql);
+        //trocar valores
+        $stm->bindParam(1, $this->id);
 
-    $resposta = $stm->execute();
+        $resposta = $stm->execute();
 
-    var_dump($stm->errorInfo());
+        //var_dump($stm->errorInfo());
+        //exit;
 
-    //fechar conexÃ£o
-    $pdo = null ;
+        //fechar conexÃ£o
+        $pdo = null ;
 
-    return $resposta;
-
+        return $resposta;
     }
 
     public function listarTodosDiscipulo($url)
