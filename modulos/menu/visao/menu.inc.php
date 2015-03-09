@@ -19,7 +19,6 @@ $usuario = $usuario[0] ;
             <a class="navbar-brand" href="/">MGA</a>
         </div>
         <div class="collapse navbar-collapse" >
-            <ul class="nav navbar-nav" role="navigation">
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                 <form action = "/discipulo/discipulo/chamar" method="GET" class="col-sm-2  navbar-left" accept-charset ="UTF-8" role="search" >
                     <div class="">
@@ -27,8 +26,9 @@ $usuario = $usuario[0] ;
                     </div>
                 </form>
             <?php endif ;?>
+            <ul class="nav navbar-nav" role="navigation">
             <?php if ($acesso->hasPermission('aviso_acesso') == true): ?>
-                <li><a href = "/aviso/aviso" ><i class = " icon-bullhorn " ></i> Aviso</a></li>
+                <li><a href = "/aviso/aviso" ><i class = " icon-bullhorn " ></i></a></li>
             <?php endif ; ?>
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                 <li class="dropdown">
@@ -44,7 +44,7 @@ $usuario = $usuario[0] ;
             <?php endif ; ?>
             <li class = "dropdown" >
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role = "button" >
-                    <i class = "icon-user" ></i>Discipulo<b class="caret"></b>
+                    <i class = "icon-user" ></i>Discip.<b class="caret"></b>
                 </a>
                 <ul class="  dropdown-menu" role="menu" aria-labelledby="dLabel" >
                     <?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
