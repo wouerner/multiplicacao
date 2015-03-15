@@ -12,6 +12,9 @@ unset($_SESSION['mensagem']) ;
         <?php include 'incluidos/css.inc.php' ?>
         <?php include 'incluidos/js.inc.php' ?>
 
+<link href="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-rc.1/css/select2.min.css" rel="stylesheet" />
+<script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-rc.1/js/select2.min.js"></script>
+
         <script>
 
         jQuery(function($){

@@ -543,12 +543,13 @@ class participantesEncontro
             $pdf->Image('modulos/encontroComDeus/visao/participantesEncontro/mga.jpg',$x,$y,30,$t);
             $pdf->SetY($y+10);
             $pdf->SetX($x+30);
-            $pdf->Cell(70,10,' Encontro com Deus dias 21, 22 e 23/11/2014');
+            $pdf->Cell(70,10,' Encontro com Deus dias 20, 21 e 22/03/2015');
 
             $pdf->SetFont('Arial','B',14);
             $pdf->SetY($y+20);
             $pdf->SetX($x);
-            $pdf->Cell(70,10,'Nome: '.utf8_decode($d->alcunha()));
+            $nome = empty($d->alcunha)?  $d->getNomeAbreviado() : $d->alcunha;
+            $pdf->Cell(70,10,'Nome: '.utf8_decode($nome));
 
             $pdf->SetY($y+20);
             $pdf->SetX($x+80);
@@ -572,7 +573,7 @@ a) Valor do encontro para encontrista: R$100,00 à vista e  R$ 110,00 - a prazo;
 b) O pagamento a prazo e/ou parcelamento somente será aceito em CHEQUE OU CARTÃO.
 OBS I: Crianças de 0 até 12 anos, passando pela avaliação dos Apostólos, pagará 50% do valor do adulto.
 OBS II: Não haverá ressarcimento ou alteração dos valores acordados, bem como das formas de pagamento.
-até o dia 21/11/2014.
+até o dia 20/03/2015.
 Assinatura do Encontrista:_______________________________________________________________
 Menor de Idade (Ass. do Responsável):_____________________________________________________
 Membro de outra Igreja (Ass. do Pastor):____________________________________________________
@@ -621,7 +622,7 @@ Membro de outra Igreja (Ass. do Pastor):________________________________________
             $pdf->Image('modulos/encontroComDeus/visao/participantesEncontro/mga.jpg',$x,$y,30,$t);
             $pdf->SetY($y+10);
             $pdf->SetX($x+30);
-            $pdf->Cell(70,10,' Encontro com Deus dias 21, 22 e 23/11/2014');
+            $pdf->Cell(70,10,' Encontro com Deus dias 20, 21 e 22/03/2015');
 
             $pdf->SetFont('Arial','B',14);
             $pdf->SetY($y+20);
@@ -650,7 +651,7 @@ a) Valor do encontro para encontrista: R$100,00 à vista e  R$ 110,00 - a prazo;
 b) O pagamento a prazo e/ou parcelamento somente será aceito em CHEQUE OU CARTÃO.
 OBS I: Crianças de 0 até 12 anos, passando pela avaliação dos Apostólos, pagará 50% do valor do adulto.
 OBS II: Não haverá ressarcimento ou alteração dos valores acordados, bem como das formas de pagamento.
-até o dia 21/11/2014.
+até o dia 20/03/2015.
 Assinatura do Encontrista:_______________________________________________________________
 Menor de Idade (Ass. do Responsável):_____________________________________________________
 Membro de outra Igreja (Ass. do Pastor):____________________________________________________

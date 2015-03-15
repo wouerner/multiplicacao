@@ -437,7 +437,38 @@ class Discipulo extends modeloFramework
         $pdo = null;
 
         return $resposta;
+    }
 
+    public function atualizarConjuge()
+    {
+        try {
+
+            //abrir conexao com o banco
+            $pdo = self::pegarConexao();
+            //cria sql
+            $sql = "UPDATE Discipulo SET conjuge = :conjuge ";
+            $sql.=" WHERE id = :id ";
+
+            $stm = $pdo->prepare($sql);
+
+            $stm->bindParam(':conjuge', $this->conjuge, \PDO::PARAM_INT);
+            $stm->bindParam(':id', $this->id, \PDO::PARAM_INT);
+
+            $resposta = $stm->execute();
+            $erro = $stm->errorCode();
+
+            if ($erro != '0000') {
+                throw new \Exception('N„o foi possivel atualizar');
+            }
+
+        } catch (\Exception $e) {
+
+            $this->erro= $e->getMessage();
+        }
+        //fechar conex√£o
+        $pdo = null;
+
+        return $resposta;
     }
 
     public function trocarSenha()
