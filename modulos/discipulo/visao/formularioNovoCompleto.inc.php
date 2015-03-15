@@ -1,11 +1,10 @@
 <form action="/discipulo/discipulo/novoCompleto" method="post"  class="form-inline well">
     <fieldset>
         <legend>Dados Pessoais</legend>
-        <div class="row-fluid" >
-            <div class="col-md-12" >
+        <div class="row" >
                 <div class="form-group col-md-3">
                     <i class="icon-user" ></i>
-                    <label class="control-label" for="nome" >Nome:</label>
+                    <label class="" for="nome" >Nome:</label>
                     <input id="nome" type="text" class="form-control" maxlength="45" name="nome" placeholder="Nome Completo" value="<?php echo $dados['nome']?>" required autofocus>
                 </div>
 			    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
@@ -41,14 +40,13 @@
                         <?php endforeach ; ?>
                     </select>
                 </div>
-            </div>
         </div>
         <div class="row" >
             <div class="col-md-12" >
                 <div class="control-group col-md-4">
                     <label class="control-label" for="telefone" >Telefone:</label>
                     <div class="controls" >
-                        <input id="telefone" class="" type="tel" value="<?php echo $dados['telefone']?>"  maxlength="14"
+                        <input id="telefone" class="form-control" type="tel" value="<?php echo $dados['telefone']?>"  maxlength="14"
                             pattern="\([0-9]{2}\) [0-9]{4}\-[0-9]{4}" placeholder="(00) 9999-9999" value="" name="telefone" id="telefone">
                     </div>
                 </div>
@@ -69,8 +67,7 @@
     </fieldset>
     <fieldset>
         <legend>Dados Ministériais</legend>
-        <div class="row-fluid " >
-            <div class="col-md-12 " >
+        <div class="row" >
                 <div class="control-group col-md-2" >
                     <label class="control-label " for="lider" >
                         <i class="icon-user" ></i>
@@ -97,18 +94,18 @@
                     </div>
                 </div>
                 <div class="control-group col-md-2" >
-                    <label class="control-label" ></strong>Status Celular:</label>
-                    <div class="controls" >
-                        <select class="form-control" name="tipoStatusCelular" required >
-                         <option value=""></option>
-                            <?php foreach ($tiposStatusCelulares as $tipoStatusCelular) : ?>
-                                <option value="<?php echo $tipoStatusCelular->id ; ?>" >
-                                    <?php echo $tipoStatusCelular->nome ; ?>
-                                </option>
-                            <?php endforeach ; ?>
-                        </select>
-                    </div>
+                    <label class="" ></strong>Status Celular:</label>
+                    <select class="form-control" name="tipoStatusCelular" required >
+                     <option value=""></option>
+                        <?php foreach ($tiposStatusCelulares as $tipoStatusCelular) : ?>
+                            <option value="<?php echo $tipoStatusCelular->id ; ?>" >
+                                <?php echo $tipoStatusCelular->nome ; ?>
+                            </option>
+                        <?php endforeach ; ?>
+                    </select>
                 </div>
+            </div>
+            <div class="row" >
                 <div class="form-group col-md-2" >
                     <label class="control-label" >Admissão:</label>
                     <div class="controls" >
@@ -124,7 +121,7 @@
                 <div class="control-group col-md-2" >
                     <label class="control-label" ></strong>Função</label>
                     <div class="controls" >
-                        <select class="input-block-level" name="funcaoRedeId" >
+                        <select class="form-control" name="funcaoRedeId" >
                             <option value=""></option>
                             <?php foreach ($funcoesRedes as $funcaoRede) : ?>
                                 <option value="<?php echo $funcaoRede['id'] ; ?>" ><?php echo $funcaoRede['nome'] ; ?></option>
@@ -132,10 +129,10 @@
                         </select>
                     </div>
                 </div>
-                <div class="control-group col-md-2" >
+                <div class="control-group col-md-1" >
                     <label class="control-label" >Rede:</label>
                     <div class="controls" >
-                        <select class="input-block-level" name="tipoRedeId" >
+                        <select class="form-control" name="tipoRedeId" >
                             <option value=""></option>
                             <?php foreach ($tiposRedes as $tipoRede) : ?>
                                 <option value="<?php echo $tipoRede->id ; ?>" ><?php echo $tipoRede->nome ; ?></option>
@@ -143,7 +140,6 @@
                         </select>
                     </div>
                 </div>
-            </div>
         </div>
     </fieldset>
 
