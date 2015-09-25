@@ -59,7 +59,7 @@
                 <div class="control-group col-md-4" >
                     <label class="control-label" for="email" >E-mail:</label>
                     <div class="controls" >
-                        <input id="email" class="form-control" maxlength="60" name="email" type="email" placeholder="exemplo@exemplo.com"  value="<?php echo $dados['email']?>" required >
+                        <input id="email" class="form-control" maxlength="60" name="email" type="email" placeholder="exemplo@exemplo.com"  value="<?php echo $dados['email']?>" >
                     </div>
                 </div>
             </div>

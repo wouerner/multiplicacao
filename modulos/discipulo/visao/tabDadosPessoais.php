@@ -55,7 +55,7 @@
             </div>
             <div class = "form-group col-md-3" >
                   <label class = "control-label" for = "email" >E-mail:</label>
-                  <input id = "email" class = "form-control" name = "email" type = "email" value = "<?php echo $discipulo->email ; ?>" required >
+                  <input id = "email" class = "form-control" name = "email" type = "email" value = "<?php echo $discipulo->email ; ?>"  >
             </div>
         </div>
     </fieldset>

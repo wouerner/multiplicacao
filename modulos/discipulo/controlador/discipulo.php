@@ -351,7 +351,7 @@ class discipulo
 
             $discipulo->lider = $post['lider'] ;
 
-            if ($discipulo->emailUnico()) {
+            if (empty($post['email']) || $discipulo->emailUnico()) {
 
                 $discipulo->salvarCompleto() ;
 
@@ -548,7 +548,7 @@ class discipulo
                 $discipulo->sexo = $post['sexo'] ;
                 $discipulo->estadoCivilId = $post['estadoCivilId'] ;
                 $discipulo->endereco = $post['endereco'] ;
-                $discipulo->email = $post['email'] ;
+                $discipulo->email = isset($post['email']) ? $post['email']: null ;
                 $discipulo->celula = $post['celula'] ;
 
                 //if ($acl->hasPermission('admin_acesso') == true) {
@@ -559,8 +559,8 @@ class discipulo
                 //}
                 $discipulo->lider = $post['lider'] ;
 
-            //	var_dump($discipulo);
-            //	exit();
+                //var_dump($discipulo);
+                //exit();
 
                 //status celular
              /*	$tipoStatusCelular =	$post['tipoStatusCelular'] ;

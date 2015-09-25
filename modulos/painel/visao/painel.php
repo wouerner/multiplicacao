@@ -90,16 +90,25 @@ $(function(){
 <div  class="row">
     <div class="col-md-12">
         <div style="margin-bottom:3px" class="well well-small">
-            <ul class="unstyled">
+            <ul class="list-group">
             <?php foreach($encontros as $encontro):?>
-                <li>
-                    <?php echo $encontro->nome?>
-                    <a class="btn btn-mini btn-primary" href="/encontroComDeus/participantesEncontro/novoParticipante/id/<?php echo $_SESSION['usuario_id'] ?>">Participar</a>
-                    <a class="btn btn-mini btn-primary" href="/encontroComDeus/preEquipe/novoMembro/id/<?php echo $_SESSION['usuario_id'] ?>">Trabalhar</a>
-                    <a class="btn btn-mini" href="/encontroComDeus/participantesEncontro/lista/id/<?php echo $encontro->id?>"><i class="icon-list-alt"></i> Lista do Encontro</a>
-<a class="btn btn-mini btn-primary" href="/encontroComDeus/equipe/listarTodasEquipes/id/<?php echo $encontro->id?>">Lista Encontreiros</a>
-                    <a class="btn btn-link" href="https://www.dropbox.com/s/4hxw9eocf3yhd8z/AUTORIZA%C3%87%C3%83O%20DOS%20PAIS%20OU%20PASTORES.docx"><i class="icon-list-alt"></i> Autorização para Pessoas de outras Igrejas</a>
-                    <a class="btn btn-link" href="https://www.dropbox.com/s/timfql416k0wuv3/AUTORIZA%C3%87%C3%83O%20ENCONTRO%202014.doc?dl=0"><i class="icon-list-alt"></i> Autorização para Encotro de Crianças</a>
+
+                <li class="list-group-item">
+                    <div class="btn-toolbar" role="toolbar" aria-label="...">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <a href="#" class="btn btn-default"><?php echo $encontro->nome?></a>
+                            <a class="btn btn-mini btn-primary" href="/encontroComDeus/participantesEncontro/novoParticipante/id/<?php echo $_SESSION['usuario_id'] ?>">Participar</a>
+                            <a class="btn btn-mini btn-primary" href="/encontroComDeus/preEquipe/novoMembro/id/<?php echo $_SESSION['usuario_id'] ?>">Trabalhar</a>
+
+                        </div>
+                        <div class="btn-group" role="group" aria-label="...">
+                            <a class="btn btn-mini btn-default" href="/encontroComDeus/participantesEncontro/lista/id/<?php echo $encontro->id?>"><i class="icon-list-alt"></i> Lista do Encontro</a>
+                            <a class="btn btn-mini btn-primary" href="/encontroComDeus/equipe/listarTodasEquipes/id/<?php echo $encontro->id?>">Lista Encontreiros</a>
+                            <a class="btn btn-mini btn-primary" href="/encontroComDeus/preEquipe/index/id/<?php echo $encontro->id?>">Pre-Equipe</a>
+                        </div>
+                    </div>
+                    <!--a class="btn btn-link" href="https://www.dropbox.com/s/4hxw9eocf3yhd8z/AUTORIZA%C3%87%C3%83O%20DOS%20PAIS%20OU%20PASTORES.docx"><i class="icon-list-alt"></i> Autorização para Pessoas de outras Igrejas</a>
+                    <a class="btn btn-link" href="https://www.dropbox.com/s/timfql416k0wuv3/AUTORIZA%C3%87%C3%83O%20ENCONTRO%202014.doc?dl=0"><i class="icon-list-alt"></i> Autorização para Encotro de Crianças</a-->
                 </li>
             <?php endforeach;?>
             </ul>
