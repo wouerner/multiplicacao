@@ -30,7 +30,7 @@ $(".btn-warning").click( function(){
 
 }
 
-); 
+);
 
 
     $(".btn-success").click( function(){
@@ -142,9 +142,9 @@ $(".btn-warning").click( function(){
 
                 <td>
                     <?php echo $discipulo->telefone ; ?></td>
-                    <td>
-<a target="blank" href="/discipulo/discipulo/atualizar/id/<?php echo $discipulo->getLider()->id ?>"><?php echo $discipulo->getLider()->getAlcunha() ; ?></a></td>
-                 <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
+                <td>
+                    <a target="blank" href="/discipulo/discipulo/atualizar/id/<?php echo $discipulo->getLider()->id ?>"><?php echo $discipulo->getLider()->getAlcunha() ; ?></a></td>
+                     <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
                 </tr>
 
                  <?php if ( $discipulo->eLider()): ?>
@@ -167,13 +167,10 @@ $(".btn-warning").click( function(){
 
                 <?php endforeach ; ?>
                 </table>
-
                 </div>
             </div>
             </article>
-
         </section>
-
         </section>
 <script>
     $('.btnPopover').popover({ html:true});

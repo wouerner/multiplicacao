@@ -30,7 +30,7 @@ class oferta{
         require_once  'modulos/oferta/visao/novo.php';
 
         }else {
-            $oferta =	new \oferta\modelo\oferta();
+            $oferta = new \oferta\modelo\oferta();
 
             $post = $url['post'] ;
             $oferta->discipuloId = $post['discipuloId'];

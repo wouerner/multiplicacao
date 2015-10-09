@@ -30,7 +30,7 @@ class oferta {
         $stm->bindParam(2, $this->tipoOfertaId);
         $stm->bindParam(3, $this->dataOferta);
         $stm->bindParam(4, $this->conta);
-        $stm->bindParam(4, $this->valor);
+        $stm->bindParam(5, $this->valor);
 
         $resposta = $stm->execute();
 

@@ -5,6 +5,7 @@
 		<meta charset="UTF-8">
         <?php include 'incluidos/css.inc.php' ?>
         <?php include 'incluidos/js.inc.php' ?>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 	</head>
 	<body>
 		<section class="container">
@@ -54,7 +55,7 @@
                         <div class="form-group">
                             <label class = "control-label col-md-2">Valor:</label>
                             <div class="col-md-4">
-                                <input placeholder="100"  class="form-control " type="" name="valor" required>
+                                <input id="valor" placeholder="100"  class="form-control " type="" name="valor" required>
                             </div>
                         </div>
                         <button type = "submit" class = "btn btn-primary" >Atualizar</button>
@@ -66,6 +67,7 @@
                 <thead>
                     <th>Conta</th>
                     <th>Tipo</th>
+                    <th>Valor</th>
                     <th>Ações</th>
                 </thead>
                     <?php foreach ($ofertasDiscipulo as $oferta) : ?>
@@ -80,6 +82,9 @@
                                 <?php echo $of = implode ('/',array_reverse(explode('-',$oferta['data']))) ; ?>
                             </td>
                             <td>
+                                <?php echo $oferta['valor'] ; ?>
+                            </td>
+                            <td>
                             <a class = "btn btn-danger" href="/oferta/oferta/excluir/id/<?php echo $oferta['0'] ; ?>/<?php echo $oferta['discipuloId']?>" >Excluir</a>
                             </td>
                         </tr>
@@ -90,7 +95,8 @@
         </section>
         <script>
         $(function() {
-                  $("#data" ).datepicker();
+           $('#valor').maskMoney();
+           $("#data" ).datepicker();
         });
         </script>
     </body>

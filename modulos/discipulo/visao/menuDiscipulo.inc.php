@@ -1,5 +1,10 @@
 <td colspan = "2" >
 
+                    <?php if ($acesso->hasPermission('financeiro') == true): ?>
+                        <a class="btn btn=success" href="/oferta/oferta/novo/<?php echo $discipulo->id ?>" >
+                                <i class="icon-money"></i>
+                        </a>
+                    <?php endif ; ?>
     <a href="/discipulo/discipulo/atualizar/id/<?php echo $discipulo->id ?>" class = "btn btn-mini btn-primary " >
         <i class="icon-edit icon-white"></i> Atualizar
     </a>
@@ -12,7 +17,7 @@
 
     <div class="btn-group ">
     <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
-        Encontro 
+        Encontro
     <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
@@ -36,14 +41,14 @@
     <a id = "<?php echo $discipulo->id ?>" href="#desativar" class = "btn btn-mini btn-warning " alt = "Desativar" ><i class="icon-arrow-down icon-white"></i>Desativar</a>
         <?php else : ?>
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                <a id = "<?php echo $discipulo->id ; ?>" 
+                <a id = "<?php echo $discipulo->id ; ?>"
                    href="#ativar" class = "btn btn-mini btn-success " alt = "ativar" >
                 <i class="icon-arrow-up icon-white"></i>Ativar</a>
             <?php endif ; ?>
         <?php endif ; ?>
 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
     <?php if ($discipulo->arquivo == 0):?>
-    <a id = "<?php echo $discipulo->id ; ?>" href="/discipulo/discipulo/arquivar/id/<?php echo $discipulo->id?>" 
+    <a id = "<?php echo $discipulo->id ; ?>" href="/discipulo/discipulo/arquivar/id/<?php echo $discipulo->id?>"
        class = "btn btn-mini btn-inverse " >
         <i class=""></i>Arquivar
     </a>
