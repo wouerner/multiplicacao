@@ -63,6 +63,7 @@
                     </div>
 				</fieldset>
             </form>
+            <?php if($ofertasDiscipulo) : ?>
             <table class = "table" >
                 <thead>
                     <th>Conta</th>
@@ -90,13 +91,14 @@
                         </tr>
                     <?php endforeach ; ?>
             </table>
+            <?php endif ?>
             </article>
         </section>
         </section>
         <script>
         $(function() {
            $('#valor').maskMoney();
-           $("#data" ).datepicker();
+           $("#data").datepicker();
         });
         </script>
     </body>
