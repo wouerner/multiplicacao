@@ -1,24 +1,70 @@
 <?php
 use \discipulo\Modelo\Discipulo ;
+use \oferta\Modelo\conta as ContaModel;
 
 namespace oferta\controlador;
 
-class oferta{
+class conta {
 
-    public function index(){
-
-//			require_once  'modulos/discipulo/visao/listar.php';
-
+    public function index() {
+        require_once  'modulos/oferta/visao/conta/index.php';
     }
+
+    public function all ($url) {
+        $contas = new \oferta\modelo\conta();
+
+        header('Content-Type: application/json');
+        echo json_encode($contas->listarTodos());
+    }
+
+    public function update ($url) {
+        $conta = new \oferta\modelo\conta();
+
+        $post = $url['post'];
+
+        $conta->id = $post['id'];
+        $conta->nome = $post['nome'];
+
+        $conta->atualizar();
+
+        header('Content-Type: application/json');
+        echo json_encode(true);
+    }
+
+    public function store ($url) {
+        $conta = new \oferta\modelo\conta();
+
+        $post = $url['post'];
+
+        $conta->nome = $post['nome'];
+
+        $conta->salvar();
+
+        header('Content-Type: application/json');
+        echo json_encode(true);
+    }
+
+    public function destroy ($url) {
+        $conta = new \oferta\modelo\conta();
+
+
+        $conta->id = $url[3];
+
+        $conta->excluir();
+
+        header('Content-Type: application/json');
+        echo json_encode(true);
+    }
+
+
+
     public function novo($url){
       if ( empty ( $url['post'] ) ) {
 
         $tiposOfertas =	new \oferta\modelo\tipoOferta() ;
         $ofertasDiscipulo =	new \oferta\modelo\oferta() ;
-        $conta =	new \oferta\modelo\conta() ;
 
         $tiposOfertas = $tiposOfertas->listarTodos();
-        $contas = $conta->listarTodos();
 
         $ofertasDiscipulo->discipuloId= $url[3];
         $ofertasDiscipulo= $ofertasDiscipulo->pegarOfertasDiscipulo();
@@ -35,11 +81,9 @@ class oferta{
             $post = $url['post'] ;
             $oferta->discipuloId = $post['discipuloId'];
             $oferta->tipoOfertaId = $post['tipoOfertaId'];
-            $oferta->conta = $post['conta'];
-            $oferta->valor = $post['valor'];
-            $data = implode('-',array_reverse(explode('/',$post['data'])));
+            $dataOferta = $post['ano'].'-'.$post['mes'].'-'.$post['dia'] ;
 
-            $oferta->dataOferta = $data;
+            $oferta->dataOferta = $dataOferta;
 
         if ($oferta->salvar()){
 
@@ -170,9 +214,9 @@ class oferta{
 
     public function excluir($url){
             $oferta =	new \oferta\modelo\oferta();
-            $oferta->id = $url[4];
+            $oferta->id = $url[3];
             $oferta->excluir();
-            header ('location:/oferta/oferta/novo/'.$url[4]);
+            header ('location:/oferta/novo/id/'.$url[4]);
             exit();
     }
 
