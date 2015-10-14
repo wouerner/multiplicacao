@@ -8,5 +8,5 @@
  *
  * Main module of the application.
  */
-var app = angular.module('contaApp',[]);
+var app = angular.module('contaApp',['ngSanitize', 'ui.select']);
 

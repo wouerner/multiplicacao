@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <label class = "control-label col-md-2">Valor:</label>
                             <div class="col-md-4">
-                                <input id="valor" placeholder="100"  class="form-control " type="" name="valor" required>
+                                <input id="valor" data-thousands="" placeholder="100"  class="form-control " type="" name="valor" required>
                             </div>
                         </div>
                         <button type = "submit" class = "btn btn-primary" >Atualizar</button>

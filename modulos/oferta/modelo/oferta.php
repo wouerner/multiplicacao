@@ -108,4 +108,23 @@ class oferta {
       $pdo = null ;
 
     }
+
+    public static function valorTotal () {
+
+        $pdo = new \PDO (DSN,USER,PASSWD);
+
+        $sql = 'SELECT sum(valor) as total FROM Oferta';
+
+        $stm = $pdo->prepare($sql);
+
+        $stm->execute();
+
+        $resposta = array();
+
+        while ( $obj = $stm->fetchObject('\oferta\modelo\oferta') ) {
+            $resposta = $obj;
+        }
+
+        return $resposta ;
+    }
 }
