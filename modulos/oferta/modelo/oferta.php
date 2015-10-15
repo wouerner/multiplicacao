@@ -91,6 +91,32 @@ class oferta {
     return $stm->fetchAll();
     }
 
+    public function discipuloMesAno($mes, $ano){
+
+        //abrir conexao com o banco
+        $pdo = new \PDO(DSN, USER, PASSWD);
+        //cria sql
+        $sql = "
+            select * from Oferta o inner join TipoOferta tp ON tp.id = o.tipoOfertaId
+                where discipuloId = ? and
+            month(data) = ?  and year(data) = ?
+        ";
+
+        //prepara sql
+        $stm = $pdo->prepare($sql);
+        //trocar valores
+        $stm->bindParam(1, $this->discipuloId);
+        $stm->bindParam(2, $mes);
+        $stm->bindParam(3, $ano);
+
+        $stm->execute();
+
+        //fechar conexÃ£o
+        $pdo = null ;
+
+        return $stm->fetchAll();
+    }
+
     public function excluir(){
       //abrir conexao com o banco
       $pdo = new \PDO(DSN, USER, PASSWD);

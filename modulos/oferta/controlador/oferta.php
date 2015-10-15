@@ -13,15 +13,22 @@ class oferta{
     public function novo($url){
       if ( empty ( $url['post'] ) ) {
 
-        $tiposOfertas =	new \oferta\modelo\tipoOferta() ;
-        $ofertasDiscipulo =	new \oferta\modelo\oferta() ;
-        $conta =	new \oferta\modelo\conta() ;
+        $tiposOfertas = new \oferta\modelo\tipoOferta() ;
+        $ofertasDiscipulo = new \oferta\modelo\oferta() ;
+        $conta = new \oferta\modelo\conta() ;
 
         $tiposOfertas = $tiposOfertas->listarTodos();
         $contas = $conta->listarTodos();
 
         $ofertasDiscipulo->discipuloId= $url[3];
+
+        $ofertasMesAno = array();
+        for($i = 1; $i <= 12 ; $i++ ){
+            $ofertasMesAno[$i] = $ofertasDiscipulo->discipuloMesAno($i, 2015);
+        }
+
         $ofertasDiscipulo= $ofertasDiscipulo->pegarOfertasDiscipulo();
+
 
         $discipulo = new \discipulo\Modelo\Discipulo() ;
         $discipulo->id = $url[3] ;

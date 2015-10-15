@@ -16,6 +16,7 @@
             </header>
 		<section>
 			<article>
+                <?php if ($acesso->hasPermission('financeiro_editar') == true): ?>
                 <form action="/oferta/oferta/novo" method="post"  class="form-horizontal">
                     <fieldset>
                         <legend>Ofertas</legend>
@@ -63,13 +64,27 @@
                     </div>
 				</fieldset>
             </form>
+            <?php endif ; ?>
+            <hr>
             <?php if($ofertasDiscipulo) : ?>
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Todas</a></li>
+        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Por Mês</a></li>
+    </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
             <table class = "table" >
                 <thead>
                     <th>Conta</th>
                     <th>Tipo</th>
                     <th>Valor</th>
-                    <th>Ações</th>
+                    <th>Data</th>
+                    <?php if ($acesso->hasPermission('financeiro_editar') == true): ?>
+                        <th>Ações</th>
+                    <?php endif; ?>
                 </thead>
                     <?php foreach ($ofertasDiscipulo as $oferta) : ?>
                         <tr>
@@ -85,12 +100,43 @@
                             <td>
                                 <?php echo $oferta['valor'] ; ?>
                             </td>
-                            <td>
-                            <a class = "btn btn-danger" href="/oferta/oferta/excluir/id/<?php echo $oferta['0'] ; ?>/<?php echo $oferta['discipuloId']?>" >Excluir</a>
-                            </td>
+                            <?php if ($acesso->hasPermission('financeiro_editar') == true): ?>
+                                <td>
+                                <a class = "btn btn-danger" href="/oferta/oferta/excluir/id/<?php echo $oferta['0'] ; ?>/<?php echo $oferta['discipuloId']?>" >Excluir</a>
+                                </td>
+                            <?php endif; ?>
                         </tr>
                     <?php endforeach ; ?>
             </table>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+        <?php foreach ($ofertasMesAno as $key => $oferta) : ?>
+            <div class="col-md-6">
+                <table class = "table table-condensed well" >
+                    <caption>Mês : <?php echo $key?></caption>
+                    <thead>
+                        <th>Tipo</th>
+                        <th>Data</th>
+                        <th>Valor</th>
+                    </thead>
+                            <?php foreach ($oferta as $mes) : ?>
+                                <tr>
+                                    <td>
+                                        <?php echo $mes['nome'] ; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $of = implode ('/',array_reverse(explode('-',$mes['data']))) ; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $mes['valor'] ; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach ; ?>
+                </table>
+            </div>
+        <?php endforeach ; ?>
+    </div>
+</div>
             <?php endif ?>
             </article>
         </section>
