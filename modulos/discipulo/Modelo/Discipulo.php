@@ -300,6 +300,22 @@ class Discipulo extends modeloFramework
         }
     }
 
+    public function ofertasMesAno($ano)
+    {
+        $oferta = new \oferta\modelo\oferta();
+        $oferta->discipuloId = $this->id;
+
+        $ofertasMesAno = array();
+        for($i = 1; $i <= 12 ; $i++ ){
+            $ofertasMesAno[$i] = $oferta->discipuloMesAno($i, 2015);
+        }
+
+        $resultado = $ofertasMesAno;
+
+        return $resultado	;
+
+    }
+
     public function salvar()
     {
         $pdo = self::pegarConexao();
@@ -1272,6 +1288,26 @@ class Discipulo extends modeloFramework
         $pdo = self::pegarConexao();
 
         $sql = 'SELECT * FROM Discipulo WHERE ativo = 0 AND arquivo = 1  AND lider = ? order by nome';
+
+        $stm = $pdo->prepare($sql);
+        $stm->bindParam(1, $this->lider);
+
+        $stm->execute();
+
+        $resposta = array();
+
+        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+            $resposta[$ob->id] = $ob;
+        }
+
+        return $resposta;
+    }
+
+    public function listarAtivos()
+    {
+        $pdo = self::pegarConexao();
+
+        $sql = 'SELECT * FROM Discipulo WHERE ativo = 1 AND arquivo = 0  order by nome';
 
         $stm = $pdo->prepare($sql);
         $stm->bindParam(1, $this->lider);

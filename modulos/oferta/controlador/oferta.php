@@ -1,7 +1,8 @@
 <?php
-use \discipulo\Modelo\Discipulo ;
 
 namespace oferta\controlador;
+
+use \discipulo\Modelo\Discipulo ;
 
 class oferta{
 
@@ -50,7 +51,7 @@ class oferta{
 
         if ($oferta->salvar()){
 
-                header ('location:/oferta/oferta/novo/'.$post['discipuloId']);
+                header ('location:/oferta/oferta/novo/'.$oferta->discipuloId);
                 exit();
         } else {
             $oferta->atualizar();
@@ -59,7 +60,17 @@ class oferta{
         }
     }
 
+    }
 
+    public function geral($url) {
+        $discipulos = new Discipulo();
+        $discipulos = $discipulos->listarAtivos();
+
+        $relatorios = array();
+        foreach( $discipulos as $discipulo ) {
+             $relatorios[] = array('ofertas'=>$discipulo->ofertasMesAno(2015), 'nome'=>$discipulo->nome, 'id'=>$discipulo->id);
+        }
+        require_once  'modulos/oferta/visao/oferta/geral.php' ;
     }
 
     public function novoTipoOferta($url){
@@ -179,7 +190,7 @@ class oferta{
             $oferta =	new \oferta\modelo\oferta();
             $oferta->id = $url[4];
             $oferta->excluir();
-            header ('location:/oferta/oferta/novo/'.$url[4]);
+            header ('location:/oferta/oferta/novo/'.$url[5]);
             exit();
     }
 
