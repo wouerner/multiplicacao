@@ -63,13 +63,25 @@ class oferta{
     }
 
     public function geral($url) {
+        $tipo = array_key_exists('id', $_GET) ? $_GET['id'] : null ;
+
+        $mes['inicio'] = array_key_exists('inicio', $_GET) ? $_GET['inicio'] : null;
+        $mes['fim'] = array_key_exists('fim', $_GET) ?$_GET['fim'] : null;
+
         $discipulos = new Discipulo();
         $discipulos = $discipulos->listarAtivos();
 
         $relatorios = array();
         foreach( $discipulos as $discipulo ) {
-             $relatorios[] = array('ofertas'=>$discipulo->ofertasMesAno(2015), 'nome'=>$discipulo->nome, 'id'=>$discipulo->id);
+             $relatorios[] = array(
+                                'ofertas'=>$discipulo->ofertasMesAno(2015, $tipo ? $tipo : null,
+                                                                    !empty($mes['inicio']) ? $mes : null),
+                                'nome'=>$discipulo->nome,
+                                'id'=>$discipulo->id);
         }
+
+        $tipoOferta =	new \oferta\modelo\tipoOferta() ;
+        $tipoOferta = $tipoOferta->listarTodos();
         require_once  'modulos/oferta/visao/oferta/geral.php' ;
     }
 

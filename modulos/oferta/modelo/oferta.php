@@ -91,7 +91,7 @@ class oferta {
     return $stm->fetchAll();
     }
 
-    public function discipuloMesAno($mes, $ano){
+    public function discipuloMesAno($mes, $ano, $tipo = null){
 
         //abrir conexao com o banco
         $pdo = new \PDO(DSN, USER, PASSWD);
@@ -102,12 +102,20 @@ class oferta {
             month(data) = ?  and year(data) = ?
         ";
 
+        if ($tipo){
+            $sql .= '  and tp.id in (?)';
+        }
+
         //prepara sql
         $stm = $pdo->prepare($sql);
         //trocar valores
         $stm->bindParam(1, $this->discipuloId);
         $stm->bindParam(2, $mes);
         $stm->bindParam(3, $ano);
+
+        if ($tipo){
+            $stm->bindParam(4, implode(',',$tipo));
+        }
 
         $stm->execute();
 

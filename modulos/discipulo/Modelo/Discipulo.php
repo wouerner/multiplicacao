@@ -300,14 +300,15 @@ class Discipulo extends modeloFramework
         }
     }
 
-    public function ofertasMesAno($ano)
+    public function ofertasMesAno($ano, $tipo = null, $mes = ['inicio' => 1, 'fim'=> 12])
     {
         $oferta = new \oferta\modelo\oferta();
         $oferta->discipuloId = $this->id;
 
+        $mes = empty($mes) ? ['inicio'=> 1, 'fim'=> 12] : $mes;
         $ofertasMesAno = array();
-        for($i = 1; $i <= 12 ; $i++ ){
-            $ofertasMesAno[$i] = $oferta->discipuloMesAno($i, 2015);
+        for($i = $mes['inicio']; $i <= $mes['fim'] ; $i++ ){
+            $ofertasMesAno[$i] = $oferta->discipuloMesAno($i, $ano, $tipo);
         }
 
         $resultado = $ofertasMesAno;
