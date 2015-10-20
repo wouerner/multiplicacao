@@ -19,6 +19,9 @@
                         <input class="form-control" value="<?php echo $tipo['id']?>" type="checkbox" name="id[]"> <?php echo $tipo['nome']?>
                     </label>
                 <?php endforeach ?>
+                <label>
+                    <input class="form-control" value="1" type="checkbox" name="inativos"> mostrar inativos?
+                </label>
             </fieldset>
             <fieldset>
                 <legend>Meses</legend>
@@ -30,6 +33,7 @@
         </form>
         <table class="table table-bordered table-condensed">
         <?php foreach ($relatorios as $relatorio): ?>
+            <?php if ($relatorio['mostrar'] || $inativos): ?>
             <tr>
                 <td>
                 <table class="table table-bordered table-condensed">
@@ -62,6 +66,7 @@
                 </table>
                 </td>
             </tr>
+        <?php endif;?>
         <?php endforeach;?>
         </table>
         <script>

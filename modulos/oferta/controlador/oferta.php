@@ -64,6 +64,7 @@ class oferta{
 
     public function geral($url) {
         $tipo = array_key_exists('id', $_GET) ? $_GET['id'] : null ;
+        $inativos = array_key_exists('inativos', $_GET) ? $_GET['inativos'] : null ;
 
         $mes['inicio'] = array_key_exists('inicio', $_GET) ? $_GET['inicio'] : null;
         $mes['fim'] = array_key_exists('fim', $_GET) ?$_GET['fim'] : null;
@@ -73,12 +74,23 @@ class oferta{
 
         $relatorios = array();
         foreach( $discipulos as $discipulo ) {
+             $ofertas = $discipulo->ofertasMesAno(2015, $tipo ? $tipo : null,
+                                                                    !empty($mes['inicio']) ? $mes : null);
+            $mostrar = false;
+             foreach($ofertas as $oferta){
+                //var_dump($oferta);
+                 if( !empty($oferta) ){
+                    $mostrar = true;
+                 }
+             }
              $relatorios[] = array(
-                                'ofertas'=>$discipulo->ofertasMesAno(2015, $tipo ? $tipo : null,
-                                                                    !empty($mes['inicio']) ? $mes : null),
+                                'ofertas'=> $ofertas,
                                 'nome'=>$discipulo->nome,
-                                'id'=>$discipulo->id);
+                                'id'=>$discipulo->id,
+                                'mostrar'=> $mostrar);
         }
+        //var_dump($relatorios);
+        //die;
 
         $tipoOferta =	new \oferta\modelo\tipoOferta() ;
         $tipoOferta = $tipoOferta->listarTodos();
