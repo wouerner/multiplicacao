@@ -13,36 +13,42 @@
 		</header>
         <form id="form" class="form-inline">
             <fieldset>
-                <legend>Filtros</legend>
+                <legend>Tipos de oferta</legend>
                 <?php foreach($tipoOferta as $tipo) : ?>
                     <label>
                         <input class="form-control" value="<?php echo $tipo['id']?>" type="checkbox" name="id[]"> <?php echo $tipo['nome']?>
                     </label>
                 <?php endforeach ?>
+            </fieldset>
+            <fieldset>
                 <label>
                     <input class="form-control" value="1" type="checkbox" name="inativos"> mostrar inativos?
                 </label>
             </fieldset>
             <fieldset>
                 <legend>Meses</legend>
-                <input id="inicio" class="form-control" value="1" name="inicio">
+                <label>
+                    Inicio
+                </label>
+                    <input id="inicio" class="form-control" value="1" name="inicio">
+                <label>
+                    Fim
+                </label>
                 <input  id="fim" class="form-control" value="12" name="fim">
-                <button id="btnOk" class="btn btn-default">OK</button>
-                <a class="btn btn-primary" href="/oferta/oferta/geral">RESET</a>
+                <button id="btnOk" class="btn btn-default">Filtrar</button>
+                <a class="btn btn-primary" href="/oferta/oferta/geral">Reiniciar</a>
             </fieldset>
         </form>
-        <table class="table table-bordered table-condensed">
+        <hr>
         <?php foreach ($relatorios as $relatorio): ?>
             <?php if ($relatorio['mostrar'] || $inativos): ?>
-            <tr>
-                <td>
                 <table class="table table-bordered table-condensed">
                     <tr >
-                        <td>
+                        <td rowspan="2">
                             <a href="/oferta/oferta/novo/<?php echo $relatorio['id']?>">
                                 <?php echo $relatorio['nome']?>
                             </a>
-                            </td>
+                        </td>
                         <?php foreach ($relatorio['ofertas'] as $key =>$oferta): ?>
                             <td><?php echo($key)?></td>
                         <?php endforeach;?>
@@ -64,11 +70,8 @@
                     <?php endforeach;?>
                     </tr>
                 </table>
-                </td>
-            </tr>
         <?php endif;?>
         <?php endforeach;?>
-        </table>
         <script>
             jQuery("#btnOk").on('click', function(){
                 //window.location = '/oferta/oferta/geral?inicio='+jQuery("#inicio")+'fim'+jQuery("#fim");
