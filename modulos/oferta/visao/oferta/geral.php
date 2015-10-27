@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
         <?php include 'incluidos/css.inc.php' ?>
         <?php include 'incluidos/js.inc.php' ?>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     </head>
     <body class="container">
 		<header>
@@ -11,38 +12,51 @@
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>
 			</nav>
 		</header>
-        <form id="form" class="form-inline">
+        <h1 class="text-center">Relatorio geral de ofertas</h1>
+        <form id="form" class="form-inline well well-small">
             <fieldset>
                 <legend>Tipos de oferta</legend>
                 <?php foreach($tipoOferta as $tipo) : ?>
-                    <label>
-                        <input class="form-control" value="<?php echo $tipo['id']?>" type="checkbox" name="id[]"> <?php echo $tipo['nome']?>
-                    </label>
+                    <div class="checkbox">
+                        <label>
+                            <input class="form-control" value="<?php echo $tipo['id']?>" type="checkbox" name="id[]"> <?php echo $tipo['nome']?>
+                        </label>
+                    </div>
                 <?php endforeach ?>
             </fieldset>
             <fieldset>
+                <legend>Inativos:</legend>
+                <div class="checkbox">
                 <label>
                     <input class="form-control" value="1" type="checkbox" name="inativos"> mostrar inativos?
                 </label>
+                </div>
             </fieldset>
             <fieldset>
                 <legend>Meses</legend>
-                <label>
-                    Inicio
-                </label>
-                    <input id="inicio" class="form-control" value="1" name="inicio">
-                <label>
-                    Fim
-                </label>
-                <input  id="fim" class="form-control" value="12" name="fim">
-                <button id="btnOk" class="btn btn-default">Filtrar</button>
-                <a class="btn btn-primary" href="/oferta/oferta/geral">Reiniciar</a>
+                    <div class="form-group">
+                        <label>
+                            Inicio
+                        </label>
+                            <input id="inicio" class="form-control" value="1" name="inicio">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Fim
+                        </label>
+                        <input  id="fim" class="form-control" value="12" name="fim">
+                    </div>
+            </fieldset>
+            <fieldset>
+                <legend>Ações</legend>
+                <button id="btnOk" class="btn  btn-primary"><i class="fa fa-filter"></i> Filtrar</button>
+                <a class="btn btn-default" href="/oferta/oferta/geral"><i class="fa fa-refresh"></i> Reiniciar</a>
             </fieldset>
         </form>
         <hr>
         <?php foreach ($relatorios as $relatorio): ?>
             <?php if ($relatorio['mostrar'] || $inativos): ?>
-                <table class="table table-bordered table-condensed">
+                <table class="table table-bordered table-condensed well well-small">
                     <tr >
                         <td rowspan="2">
                             <a href="/oferta/oferta/novo/<?php echo $relatorio['id']?>">
@@ -57,12 +71,14 @@
                     <?php foreach ($relatorio['ofertas'] as $key =>$oferta): ?>
                             <?php if($oferta):?>
                                 <td class="<?php echo !$oferta ? 'warning' : 'info' ?>">
-                                <?php foreach ($oferta as $o): ?>
-                                    <?php //var_dump($oferta)?>
-                                        <?php echo $o['nome']?>:
-                                        <?php echo $o['valor']?>,
-                                <?php endforeach;?>
-                                    </td>
+                                    <?php foreach ($oferta as $o): ?>
+                                         <span class="label label-default">
+                                            <?php //var_dump($oferta)?>
+                                            <?php echo $o['nome']?>:
+                                            <?php echo $o['valor']?>
+                                          </span><br/>
+                                    <?php endforeach;?>
+                                </td>
                             <?php else:?>
                                     <td class="warning">
                                     </td>

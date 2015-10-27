@@ -30,7 +30,6 @@ class oferta{
 
         $ofertasDiscipulo= $ofertasDiscipulo->pegarOfertasDiscipulo();
 
-
         $discipulo = new \discipulo\Modelo\Discipulo() ;
         $discipulo->id = $url[3] ;
         $discipulo = $discipulo->listarUm();
@@ -38,6 +37,10 @@ class oferta{
         require_once  'modulos/oferta/visao/novo.php';
 
         }else {
+            $discipulo = new \discipulo\Modelo\Discipulo() ;
+            $discipulo->id = $url[3] ;
+            $discipulo = $discipulo->listarUm();
+
             $oferta = new \oferta\modelo\oferta();
 
             $post = $url['post'] ;
@@ -50,6 +53,14 @@ class oferta{
             $oferta->dataOferta = $data;
 
         if ($oferta->salvar()){
+            $headers = "MIME-Version: 1.1\n";
+            $headers .= "Content-type: text/plain; charset=utf-8\n";
+            $headers .= "From: Multiplicação12 <multiplicaca12@multiplicacao.org>"."\n"; // remetente
+            $headers .= "Return-Path: Meu Nome <multiplicacao@multiplicacao.org>"."\n"; // return-path
+            $envio = mail("wouerner@gmail.com,".$discipulo->email,
+                            "Oferta Recebida",
+                            "Data: ".$post['data']." Valor: ".$oferta->valor,
+                            $headers,"-r multiplicacao@multiplicacao.org");
 
                 header ('location:/oferta/oferta/novo/'.$oferta->discipuloId);
                 exit();
@@ -74,16 +85,15 @@ class oferta{
 
         $relatorios = array();
         foreach( $discipulos as $discipulo ) {
-             $ofertas = $discipulo->ofertasMesAno(2015, $tipo ? $tipo : null,
+            $ofertas = $discipulo->ofertasMesAno(2015, $tipo ? $tipo : null,
                                                                     !empty($mes['inicio']) ? $mes : null);
             $mostrar = false;
-             foreach($ofertas as $oferta){
-                //var_dump($oferta);
+            foreach($ofertas as $oferta){
                  if( !empty($oferta) ){
                     $mostrar = true;
                  }
-             }
-             $relatorios[] = array(
+            }
+            $relatorios[] = array(
                                 'ofertas'=> $ofertas,
                                 'nome'=>$discipulo->nome,
                                 'id'=>$discipulo->id,

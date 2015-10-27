@@ -6,29 +6,34 @@ $acesso = new acl($_SESSION['usuario_id']);
 $usuario = explode (' ',$_SESSION['usuario_nome']) ;
 $usuario = $usuario[0] ;
 ?>
-
-<div class="navbar navbar-default">
+<style>
+    body{
+        margin-top : 60px;
+    }
+    .navbar-default{
+        background-color:#3FC0E8;
+    }
+    .navbar-default .navbar-nav > li > a {
+        color: #E4E4E4;
+    }
+</style>
+<div class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid ">
-
         <div class="navbar-header">
              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" >
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">MGA<small>v1</small></a>
+            <a class="navbar-brand" href="/">MGA</a>
         </div>
         <div class="collapse navbar-collapse" >
-            <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                <form action = "/discipulo/discipulo/chamar" method="GET" class="col-sm-2  navbar-left" accept-charset ="UTF-8" role="search" >
-                    <div class="">
-                        <input class="form-control"  type="search" name="nome" size="45" placeholder="Pesquisar...">
-                    </div>
-                </form>
-            <?php endif ;?>
             <ul class="nav navbar-nav" role="navigation">
             <?php if ($acesso->hasPermission('aviso_acesso') == true): ?>
                 <li><a href = "/aviso/aviso" ><i class = " icon-bullhorn " ></i></a></li>
+            <?php endif ; ?>
+            <?php if ($acesso->hasPermission('financeiro_editar') == true): ?>
+                <li><a href = "/oferta/oferta/geral" ><i class = " icon-money " ></i></a></li>
             <?php endif ; ?>
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                 <li class="dropdown">
@@ -87,14 +92,13 @@ $usuario = $usuario[0] ;
                                 <li><a href = "/admissao/admissao/listarTipoAdmissao" >Lista</a></li>
                             </ul>
                         </li>
-                        <li class = "dropdown-submenu"><a href = "/evento" >Escala de Êxito</a>
+                        <li class = "dropdown-submenu"><a href = "/evento">Escala de Êxito</a>
                             <ul class="dropdown-menu">
                                 <li><a href = "/evento/evento/novo">Novo</a></li>
                                 <li><a href = "/evento/evento" >Lista</a></li>
                             </ul>
                         </li>
                     <?php endif ; ?>
-                    </li>
                 </ul>
             </li>
             <!--li><a href = "/oracao/oracao" >Orações</a></li-->
@@ -217,6 +221,13 @@ $usuario = $usuario[0] ;
                 </li>
             <?php endif ; ?>
             </ul>
+            <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                <form action="/discipulo/discipulo/chamar" method="GET" class="navbar-form col-sm-2 navbar-left" accept-charset ="UTF-8" role="search" >
+                    <div class="form-group">
+                        <input class="form-control"  type="search" name="nome" placeholder="Pesquisar...">
+                    </div>
+                </form>
+            <?php endif ;?>
             <ul class="nav navbar-nav navbar-right">
                 <li class="divider-vertical"></li>
                 <li class = "dropdown" >
@@ -227,10 +238,10 @@ $usuario = $usuario[0] ;
                         <li><a href="/discipulo/foto/novo/id/<?php echo $_SESSION['usuario_id']?>" class = "" ><i class = "icon-picture" ></i> Foto</a></li>
                         <li><a href="/seguranca/seguranca/trocarSenha/id/<?php echo $_SESSION['usuario_id']?>" class = "" ><i class = "icon-lock" ></i> trocar senha</a></li>
                         <li><a href="/seguranca/seguranca/sair" class = "" ><i class = "icon-off" ></i> Sair</a></li>
+                        <li><a href="#" class = "" >Versão 1.0</a></li>
                     </ul>
                 </li>
             </ul>
         </div><!-- /.nav-collapse -->
         </div>
   </div><!-- /navbar-inner -->
-</div>

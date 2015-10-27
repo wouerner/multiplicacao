@@ -5,3 +5,9 @@
     @import url("/incluidos/css/estilo.css");
     @import url("http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css");
 </style>
+<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+<style>
+    body{
+        font-family: 'Roboto Condensed', sans-serif;
+    }
+</style>
