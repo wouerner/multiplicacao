@@ -1,5 +1,4 @@
 <?php
-//var_dump($_GET);exit;
 //inicia a sessão
 session_start();
 
