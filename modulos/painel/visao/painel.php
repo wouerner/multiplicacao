@@ -117,35 +117,32 @@ $(function(){
 </div>
 
 <div class="row">
-    <div class = "col-md-4">
-    <div  style="margin-bottom:3px" class = "well well-small">
-            <!-- h5><strong> <?php// echo $totalDiscipulos ; ?>  Discipulos: </strong></h5 -->
-                <?php $discipulos = array_chunk($discipulos,4) ?>
-                <?php foreach( $discipulos as $disc ) : ?>
-                <ul class="thumbnails" style="margin:0">
-                    <?php foreach( $disc as $d ) : ?>
-                        <li class="col-md-2" style="margin:2px">
-                           <div class="thumbnail" style="height:50px;overflow:hidden;margin:0">
-                               <a  class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
-                                   <img  class="col-md-12" src="<?php echo is_object($d->getFoto()) ? $d->getFoto()->url : '' ; ?>" alt="">
-                               </a>
-                               <div class = "caption" >
-                                   <a class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
-                                      <i class = "<?php echo $d->eLider() ? 'icon-certificate': '' ?>"></i>
-                                      <i class = "<?php echo $d->eLiderCelula() ? 'icon-home': '' ?>"></i>
-                                      <small class = "" ><?php echo !isset($c) ? $c=1 : ++$c ; ?>-
-                                          <?php echo $d->getAlcunha() ; ?>
-                                      </small>
-                                   </a>
-                               </div>
-                            </div>
-                        </li>
-                    <?php endforeach ; ?>
-                </ul>
+    <div class="col-md-12 well">
+        <?php $discipulos = array_chunk($discipulos, 12) ?>
+        <?php foreach( $discipulos as $disc ) : ?>
+            <div class="row">
+                <?php foreach( $disc as $d ) : ?>
+                    <div class="col-md-1">
+                        <a  class="thumbnail" href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
+                           <img class="img-responsive"  src="<?php echo is_object($d->getFoto()) ? $d->getFoto()->url : '' ; ?>" alt="">
+                        </a>
+                        <!--div class="caption">
+                           <a class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
+                              <i class = "<?php echo $d->eLider() ? 'icon-certificate': '' ?>"></i>
+                              <i class = "<?php echo $d->eLiderCelula() ? 'icon-home': '' ?>"></i>
+                              <small class = "" ><?php echo !isset($c) ? $c=1 : ++$c ; ?>-
+                                  <?php echo $d->getAlcunha() ; ?>
+                              </small>
+                           </a>
+                        </div-->
+                    </div>
                 <?php endforeach ; ?>
-        </div>
+            </div>
+        <?php endforeach ; ?>
     </div>
+</div>
 
+<div class="row">
     <div class = "col-md-4">
         <div class = "well well-small">
             <div class = "" >
