@@ -68,9 +68,11 @@ class discipulo
         $limit = $_REQUEST['count'];
         $page = $_REQUEST['page'];
         $filter = array_key_exists('filter', $_REQUEST) ? $_REQUEST['filter'] : null;
+
         $discipulos = $discipulos->listarTodosLista($limit, $page, $filter);
 
-        $total = \discipulo\Modelo\Discipulo::totalDiscipulos();
+        $total = $filter ? count($discipulos) : \discipulo\Modelo\Discipulo::totalDiscipulos();
+        //var_dump($total);
 
         header('Content-Type: application/json');
         echo json_encode(["dados"=>$discipulos, "total"=>$total]);

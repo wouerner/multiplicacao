@@ -1364,4 +1364,35 @@ class Discipulo extends modeloFramework implements \JsonSerializable
         }
         return $resposta;
     }
+
+    public function totalParam($filter)
+    {
+        $limit = (int)$limit;
+
+        $init = $page == 1 ? 0 : $limit*($page-1);
+
+        $pdo = self::pegarConexao();
+
+        $sql = ' SELECT count(*) FROM Discipulo ';
+
+        if ($filter){
+            $sql.= ' where nome like :nome ';
+        }
+
+        $stm = $pdo->prepare($sql);
+
+        if ($filter){
+            $nome = '%'.$filter['nome'].'%';
+            $stm->bindParam(':nome', $nome, \PDO::PARAM_STR);
+        }
+
+        $stm->execute();
+
+        $resposta = array();
+
+        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+            $resposta[] = $ob;
+        }
+        return $resposta;
+    }
 }

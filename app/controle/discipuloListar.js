@@ -19,8 +19,8 @@ app.controller('DiscipuloListarController', ['$scope', '$http',"NgTableParams", 
                               headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
                         }).
                         then(function(data) {
-                                //params.total(data.data.total);
-                                params.total(200);
+                                params.total(data.data.total);
+                                console.log(data.data.total);
                                 return data.data.dados;
                         });
             }
