@@ -1,4 +1,6 @@
 <?php
+namespace discipulo\controlador;
+
 use discipulo\Modelo\Discipulo as DiscipuloModelo;
 use discipulo\Modelo\estadoCivil;
 use celula\modelo\celula;
@@ -6,7 +8,6 @@ use evento\modelo\evento;
 use evento\modelo\eventoDiscipulo;
 use seguranca\modelo\acl;
 
-namespace discipulo\controlador;
 
 class discipulo
 {
@@ -37,6 +38,43 @@ class discipulo
 
           require_once 'modulos/discipulo/visao/listar.php';
 
+    }
+
+    public function lista(){
+          require_once 'modulos/discipulo/visao/lista.php';
+    }
+
+    public function index2()
+    {
+        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+
+        $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
+
+        $quantidadePorPagina = 50;
+
+          //$discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
+
+        //$totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
+        //$totalDiscipulos = (int) $totalDiscipulos['total'] ;
+
+        $discipulos =	new \discipulo\Modelo\Discipulo();
+            //if ($acl->hasPermission('admin_acesso') == true) {
+              ////$discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
+            //} else {
+                //$discipulos->id = $_SESSION['usuario_id'];
+              ////$discipulos = $discipulos->listarDiscipulos();
+
+            //}
+        $limit = $_REQUEST['count'];
+        $page = $_REQUEST['page'];
+        $filter = array_key_exists('filter', $_REQUEST) ? $_REQUEST['filter'] : null;
+        $discipulos = $discipulos->listarTodosLista($limit, $page, $filter);
+
+        $total = \discipulo\Modelo\Discipulo::totalDiscipulos();
+
+        header('Content-Type: application/json');
+        echo json_encode(["dados"=>$discipulos, "total"=>$total]);
+        die;
     }
 
         public function listarPorLider($url)

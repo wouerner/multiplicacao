@@ -4,9 +4,8 @@ namespace discipulo\Modelo;
 use \framework\modelo\modeloFramework;
 use \geracoes\modelo\geracoes as geracaoModelo;
 
-class Discipulo extends modeloFramework
+class Discipulo extends modeloFramework implements \JsonSerializable
 {
-
     private $id;
     private $nome;
     private $alcunha;
@@ -1321,6 +1320,48 @@ class Discipulo extends modeloFramework
             $resposta[$ob->id] = $ob;
         }
 
+        return $resposta;
+    }
+
+    public function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'nome' => $this->nome,
+        ];
+    }
+
+    public function listarTodosLista($limit = 100, $page = null, $filter)
+    {
+        $limit = (int)$limit;
+
+        $init = $page == 1 ? 0 : $limit*($page-1);
+
+        $pdo = self::pegarConexao();
+
+        $sql = ' SELECT * FROM Discipulo ';
+
+        if ($filter){
+            $sql.= ' where nome like :nome ';
+        }
+
+        $sql .= ' order by nome limit :init,:limit';
+
+        $stm = $pdo->prepare($sql);
+        $stm->bindParam(':init', $init, \PDO::PARAM_INT);
+        $stm->bindParam(':limit', $limit, \PDO::PARAM_INT);
+
+        if ($filter){
+            $nome = '%'.$filter['nome'].'%';
+            $stm->bindParam(':nome', $nome, \PDO::PARAM_STR);
+        }
+
+        $stm->execute();
+
+        $resposta = array();
+
+        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+            $resposta[] = $ob;
+        }
         return $resposta;
     }
 }
