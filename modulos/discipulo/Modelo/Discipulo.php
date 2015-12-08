@@ -1367,13 +1367,9 @@ class Discipulo extends modeloFramework implements \JsonSerializable
 
     public function totalParam($filter)
     {
-        $limit = (int)$limit;
-
-        $init = $page == 1 ? 0 : $limit*($page-1);
-
         $pdo = self::pegarConexao();
 
-        $sql = ' SELECT count(*) FROM Discipulo ';
+        $sql = ' SELECT count(*) total FROM Discipulo ';
 
         if ($filter){
             $sql.= ' where nome like :nome ';
@@ -1390,9 +1386,8 @@ class Discipulo extends modeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
-            $resposta[] = $ob;
-        }
-        return $resposta;
+        $resposta = $stm->fetch() ;
+
+        return $resposta['total'];
     }
 }

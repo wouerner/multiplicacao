@@ -1,12 +1,12 @@
-<?php 
-namespace seguranca\controlador ; 
+<?php
+namespace seguranca\controlador ;
 use discipulo\Modelo\Discipulo;
 use discipulo\modelo\role;
 
 	class seguranca{
-	
+
 		public function index(){
-			
+
 
 			require 'modulos/seguranca/visao/entrar.php' ;
 		}
@@ -36,20 +36,20 @@ use discipulo\modelo\role;
 			header('Location:/seguranca/seguranca');
 			exit();
 
-			
+
 			}
-	
-		}	
-		
+
+		}
+
 		public function novoPapel($url){
 
 			if ( empty ( $url['post'] ) ) {
-		
+
 				require_once  'seguranca/visao/novoPapel.php' ;
-			
+
 			}else{
 
-			$role =	new \seguranca\modelo\role() ; 
+			$role =	new \seguranca\modelo\role() ;
 
 			$post = $url['post'] ;
 
@@ -59,19 +59,19 @@ use discipulo\modelo\role;
 			header ('location:/seguranca/novoPapel') ;
 			exit();
 			}
-		
-		
+
+
 		}
 
 
 
 		public function sair(){
-		
+
 			session_destroy();
 			header('location:/seguranca');
 			exit();
-		
-		
+
+
 		}
 
 		public function trocarSenha($url){
@@ -83,14 +83,39 @@ use discipulo\modelo\role;
 				require 'modulos/seguranca/visao/trocarSenha.php' ;
 				exit();
 			}
-			
-		$discipulo->senha = $url['post']['senha'];	
-		$discipulo->email = $url['post']['email'];	
-		$discipulo->trocarSenha();	
+
+		$discipulo->senha = $url['post']['senha'];
+		$discipulo->email = $url['post']['email'];
+		$discipulo->trocarSenha();
 		$mens = "Senha trocada." ;
 		require 'modulos/seguranca/visao/trocarSenha.php' ;
 			exit();
-		
-		
 		}
+
+    public function recuperar($url){
+        $discipulo = new \discipulo\Modelo\Discipulo() ;
+
+        if ($url['post']){
+            $discipulo->senha = $this->random_password();
+            $discipulo->email = $url['post']['email'];
+            $discipulo->trocarSenha();
+
+            $headers = "MIME-Version: 1.1\n";
+            $headers .= "Content-type: text/plain; charset=utf-8\n";
+            $headers .= "From: Multiplicação12 <multiplicaca12@multiplicacao.org>"."\n"; // remetente
+            $headers .= "Return-Path: Meu Nome <multiplicacao@multiplicacao.org>"."\n"; // return-path
+            $envio = mail($discipulo->email,
+                        "Recuperar Senha SIM12",
+                        "senha: $discipulo->senha",
+                        $headers,"-r multiplicacao@multiplicacao.org");
+
+            echo json_encode(['success' => true]);
+        }
+    }
+
+    private function random_password( $length = 8 ) {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
+        $password = substr( str_shuffle( $chars ), 0, $length );
+        return $password;
+    }
 }

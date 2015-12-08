@@ -41,6 +41,11 @@ $_SESSION['mensagem'] = isset($_SESSION['mensagem']) ? NULL : NULL;
                             <td title="'Nome'" filter="{ nome: 'text'}" sortable="'nome'">
                                 {{user.nome}}
                             </td>
+                            <td title="'Ações'">
+                                <a href="/discipulo/discipulo/atualizar/id/{{user.id}}" class = "btn btn-mini btn-primary " >
+                                    <i class="icon-edit icon-white"></i> Atualizar
+                                </a>
+                            </td>
                         </tr>
                     </table>
                 </article>

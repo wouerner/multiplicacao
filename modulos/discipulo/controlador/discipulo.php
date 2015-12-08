@@ -65,15 +65,15 @@ class discipulo
               ////$discipulos = $discipulos->listarDiscipulos();
 
             //}
-        $limit = $_REQUEST['count'];
-        $page = $_REQUEST['page'];
+        $limit = array_key_exists('count', $_REQUEST) ? $_REQUEST['count']: null;
+        $page = array_key_exists('page', $_REQUEST) ? $_REQUEST['page'] : null;
         $filter = array_key_exists('filter', $_REQUEST) ? $_REQUEST['filter'] : null;
 
         $discipulos = $discipulos->listarTodosLista($limit, $page, $filter);
 
-        $total = $filter ? count($discipulos) : \discipulo\Modelo\Discipulo::totalDiscipulos();
-        //var_dump($total);
+        $total =  \discipulo\Modelo\Discipulo::totalParam($filter) ;
 
+        //var_dump($total);die;
         header('Content-Type: application/json');
         echo json_encode(["dados"=>$discipulos, "total"=>$total]);
         die;
@@ -581,7 +581,7 @@ class discipulo
                 $post = $url['post'] ;
 
                 $discipulo->id = $post['discipuloId'] ;
-                $discipulo->nome = $post['nome'] ;
+                $discipulo->nome = $post['nome'];
                 $discipulo->alcunha = isset($post['alcunha']) ?$post['alcunha'] : null;
                 $discipulo->setDataNascimento($post['dataNascimento']) ;
                 $discipulo->telefone = $post['telefone'];

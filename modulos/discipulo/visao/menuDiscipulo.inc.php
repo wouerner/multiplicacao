@@ -1,14 +1,12 @@
 <td colspan = "2" >
-
-                    <?php if ($acesso->hasPermission('financeiro') == true): ?>
-                        <a class="btn btn=success" href="/oferta/oferta/novo/<?php echo $discipulo->id ?>" >
-                                <i class="icon-money"></i>
-                        </a>
-                    <?php endif ; ?>
+    <?php if ($acesso->hasPermission('financeiro') == true): ?>
+        <a class="btn btn=success" href="/oferta/oferta/novo/<?php echo $discipulo->id ?>" >
+            <i class="icon-money"></i>
+        </a>
+    <?php endif ; ?>
     <a href="/discipulo/discipulo/atualizar/id/<?php echo $discipulo->id ?>" class = "btn btn-mini btn-primary " >
         <i class="icon-edit icon-white"></i> Atualizar
     </a>
-
     <?php if ($discipulo->eLider() ) : ?>
     <a target="blank" id = "" href="/discipulo/discipulo/listarPorLider/id/<?php echo $discipulo->id ?>" class = "btn btn-mini btn-info " alt = "Discipulos por líder" ><i class="icon-user icon-white"></i> Discs</a>
     <?php endif ; ?>
