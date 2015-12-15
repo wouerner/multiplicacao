@@ -3,7 +3,6 @@ $mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL;
 $dados = isset($_SESSION['dados']) ? $_SESSION['dados'] : NULL;
 $_SESSION['mensagem'] = isset($_SESSION['mensagem']) ? NULL : NULL;
 $_SESSION['dados'] = isset($_SESSION['dados']) ? NULL : NULL;
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -91,7 +90,10 @@ $_SESSION['dados'] = isset($_SESSION['dados']) ? NULL : NULL;
                             <?php echo $mensagem['mensagem'] ; ?>
                         </div>
                     <?php endif ; ?>
-                    <?php include 'discipulo/visao/formularioNovoCompleto.inc.php' ; ?>
+                    <div class="row"><div class="col-md-12"><h3>Novo Cadastro</h3></div></div>
+                    <div class="row"><div class="col-md-12">
+                        <?php include 'discipulo/visao/formularioNovoCompleto.inc.php' ; ?>
+                    </div></div>
                 </article>
             </section>
         </section>

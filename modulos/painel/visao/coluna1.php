@@ -16,7 +16,7 @@
 <div class="col-md-4">
     <div class=" panel panel-default">
       <!-- Default panel contents -->
-      <div class="panel-heading"><h5>Discipulos</h5></div>
+      <div class="panel-heading"><h5 class="panel-title">Discipulos</h5></div>
       <div class="panel-body">
             <div id="chart"></div>
             <script>
@@ -101,7 +101,7 @@
 
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading"><h5>Redes</h5></div>
+  <div class="panel-heading"><h5 class="panel-title">Redes</h5></div>
   <div class="panel-body">
     <div id="redesChart"></div>
     <script>
@@ -165,7 +165,7 @@
 
 <div class="col-md-4">
     <div class="panel panel-default">
-        <div class="panel-heading"><h5>Situação</h5></div>
+        <div class="panel-heading"><h5 class="panel-title">Situação</h5></div>
         <div class="panel-body">
             <div id="ativosChart"></div>
             <script>

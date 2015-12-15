@@ -95,7 +95,7 @@ $(function(){
 
         <div class="panel panel-default">
           <!-- Default panel contents -->
-          <div class="panel-heading"><h5>Encontros</h5></div>
+          <div class="panel-heading"><h5 class="panel-title">Encontros</h5></div>
             <ul class="list-group">
             <?php foreach($encontros as $encontro):?>
                 <li class="list-group-item">
@@ -122,7 +122,11 @@ $(function(){
 
 <div class="row">
     <div class="col-md-12">
-        <h4>Discipulos</h4>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">Discipulos</h4>
+  </div>
+  <div class="panel-body">
         <?php $discipulos = array_chunk($discipulos, 12) ?>
         <?php foreach( $discipulos as $disc ) : ?>
             <div class="row">
@@ -145,9 +149,34 @@ $(function(){
             </div>
         <?php endforeach ; ?>
     </div>
+    <table class="table">
+
+    <?php foreach ( $celulas as $c ) : ?>
+        <tr>
+            <td>
+                <?php echo $c->nome ; ?>
+            </td>
+            <td>
+                <a class = "btn btn-default" href="/celula/relatorio/novo/id/<?php echo $c->id ; ?>" >Novo Relatório</a>
+            </td>
+        </tr>
+
+    <?php endforeach ; ?>
+    </table>
+    <div class="panel-footer">
+                        <?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
+                            <a class = "btn bnt-mini btn-success" href = "/discipulo/discipulo/novoCompleto" >
+                                <i class = "icon-plus icon-white" ></i>Novo Discípulo
+                            </a>
+                        <?php endif ; ?>
+        </div>
+    </div>
 </div>
 
-<div class="row">
+    </div>
+</div>
+
+<!-- div class="row">
     <div class = "col-md-4">
         <div class = "well well-small">
             <div class = "" >
@@ -167,22 +196,7 @@ $(function(){
         </div>
     </div>
 
-    <div class = "well well-small col-md-4">
-        <div class = "row" >
-                <div class = "col-md-12" >
-                    <?php foreach ( $celulas as $c ) : ?>
-                        <a class = "btn" href="/celula/relatorio/novo/id/<?php echo $c->id ; ?>" ><?php echo $c->nome ; ?></a>
-                    <?php endforeach ; ?>
-                    <?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
-                        <a class = "btn bnt-mini btn-success" href = "/discipulo/discipulo/novoCompleto" >
-                            <i class = "icon-plus icon-white" ></i>Novo Discípulo
-                        </a>
-                    <?php endif ; ?>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+</div-->
 <?php include 'modulos/painel/visao/coluna1.php'?>
 
 <!-- div class = "row" >
