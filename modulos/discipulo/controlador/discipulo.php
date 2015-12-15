@@ -1156,4 +1156,17 @@ class discipulo
 
         }
 
+        /**
+         * lideres
+         *
+         * @access public
+         * @return void
+         */
+        public function lideres()
+        {
+            $lideres = new DiscipuloModelo();
+            $lideres = $lideres->lideres() ;
+
+            require_once 'celula/visao/listarLideresCelula.php';
+        }
 }

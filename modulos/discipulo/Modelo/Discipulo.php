@@ -1390,4 +1390,32 @@ class Discipulo extends modeloFramework implements \JsonSerializable
 
         return $resposta['total'];
     }
+
+    public function lideres()
+    {
+        $pdo = self::pegarConexao();
+
+        $sql =
+            '
+                SELECT l.id as id, d.nome AS Discipulo, l.nome AS Lider
+                FROM Discipulo AS d
+                INNER JOIN Discipulo AS l ON l.id = d.lider
+                WHERE d.ativo =1
+                AND d.arquivo =0
+                ORDER BY l.nome
+            '
+        ;
+
+        $stm = $pdo->prepare($sql);
+
+        $stm->execute();
+
+        $resposta = array();
+
+        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+            $resposta[$ob->id] = $ob;
+        }
+
+        return $resposta;
+    }
 }

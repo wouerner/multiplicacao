@@ -70,6 +70,7 @@ $usuario = $usuario[0] ;
                         <!--<li><a href = "/discipulo/discipulo/rank" role="menuitem" ><i class = "icon-list-alt " ></i> Rank Ativos</a>
                         <li><a href = "/discipulo/discipulo/rankInativos" role="menuitem" ><i class = "icon-list-alt " ></i> Rank Inativos</a>-->
                         <li><a href = "/discipulo/discipulo/chamar" ><i class = "icon-search " ></i> Pesquisar</a></li>
+                        <li><a href = "/discipulo/discipulo/lideres"><i class = " " ></i>Lideres</a></li>
                         <li class="divider"></li>
                         <li class = "dropdown-submenu">
                             <a href = "/discipulo/discipulo/listarEstadoCivil" >Estado Civil</a>

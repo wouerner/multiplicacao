@@ -87,12 +87,17 @@ $(function(){
             </script>
     </div>
 </div-->
-<div  class="row">
-    <div class="col-md-12">
-        <div style="margin-bottom:3px" class="well well-small">
+
+<?php if(!empty($encontros)):?>
+
+    <div  class="row">
+        <div class="col-md-12">
+
+        <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading"><h5>Encontros</h5></div>
             <ul class="list-group">
             <?php foreach($encontros as $encontro):?>
-
                 <li class="list-group-item">
                     <div class="btn-toolbar" role="toolbar" aria-label="...">
                         <div class="btn-group" role="group" aria-label="...">
@@ -107,17 +112,17 @@ $(function(){
                             <a class="btn btn-mini btn-primary" href="/encontroComDeus/preEquipe/index/id/<?php echo $encontro->id?>">Pre-Equipe</a>
                         </div>
                     </div>
-                    <!--a class="btn btn-link" href="https://www.dropbox.com/s/4hxw9eocf3yhd8z/AUTORIZA%C3%87%C3%83O%20DOS%20PAIS%20OU%20PASTORES.docx"><i class="icon-list-alt"></i> Autorização para Pessoas de outras Igrejas</a>
-                    <a class="btn btn-link" href="https://www.dropbox.com/s/timfql416k0wuv3/AUTORIZA%C3%87%C3%83O%20ENCONTRO%202014.doc?dl=0"><i class="icon-list-alt"></i> Autorização para Encotro de Crianças</a-->
                 </li>
             <?php endforeach;?>
             </ul>
         </div>
     </div>
-</div>
+        </div>
+<?php endif;?>
 
 <div class="row">
-    <div class="col-md-12 well">
+    <div class="col-md-12">
+        <h4>Discipulos</h4>
         <?php $discipulos = array_chunk($discipulos, 12) ?>
         <?php foreach( $discipulos as $disc ) : ?>
             <div class="row">
