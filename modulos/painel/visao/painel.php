@@ -87,12 +87,9 @@ $(function(){
             </script>
     </div>
 </div-->
-
 <?php if(!empty($encontros)):?>
-
     <div  class="row">
         <div class="col-md-12">
-
         <div class="panel panel-default">
           <!-- Default panel contents -->
           <div class="panel-heading"><h5 class="panel-title">Encontros</h5></div>
