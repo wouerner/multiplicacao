@@ -62,6 +62,25 @@ class  igreja implements \JsonSerializable {
         return $resposta ;
     }
 
+	public function mediaIdade(){
+		$pdo = new \PDO (DSN,USER,PASSWD);
+
+		$sql = 'select AVG(TIMESTAMPDIFF(YEAR, d.dataNascimento, NOW())) as media
+                from Discipulo as d
+                where d.ativo =1' ;
+
+		$stm = $pdo->prepare($sql);
+		$stm->execute();
+
+        $resposta = array();
+
+        while ($obj = $stm->fetchObject('\igreja\modelo\igreja')) {
+            $resposta[] = $obj ;
+        }
+
+        return $resposta[0] ;
+    }
+
     public function jsonSerialize() {
         return [
             'id' => $this->id,
