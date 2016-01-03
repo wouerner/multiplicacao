@@ -4,9 +4,8 @@ namespace discipulo\Modelo;
 use \framework\modelo\modeloFramework;
 use \geracoes\modelo\geracoes as geracaoModelo;
 
-class Discipulo extends modeloFramework
+class Discipulo extends modeloFramework implements \JsonSerializable
 {
-
     private $id;
     private $nome;
     private $alcunha;
@@ -300,6 +299,23 @@ class Discipulo extends modeloFramework
         }
     }
 
+    public function ofertasMesAno($ano, $tipo = null, $mes = ['inicio' => 1, 'fim'=> 12])
+    {
+        $oferta = new \oferta\modelo\oferta();
+        $oferta->discipuloId = $this->id;
+
+        $mes = empty($mes) ? ['inicio'=> 1, 'fim'=> 12] : $mes;
+        $ofertasMesAno = array();
+        for($i = $mes['inicio']; $i <= $mes['fim'] ; $i++ ){
+            $ofertasMesAno[$i] = $oferta->discipuloMesAno($i, $ano, $tipo);
+        }
+
+        $resultado = $ofertasMesAno;
+
+        return $resultado	;
+
+    }
+
     public function salvar()
     {
         $pdo = self::pegarConexao();
@@ -375,22 +391,17 @@ class Discipulo extends modeloFramework
     public function emailUnico()
     {
         $pdo = self::pegarConexao();
-              //cria sql
         $sql = "SELECT email FROM Discipulo WHERE email = ?";
-              //prepara sql
         $stm = $pdo->prepare($sql);
-              //trocar valores
         $stm->bindParam(1, $this->email);
 
         $stm->execute();
 
         if ($stm->fetch() == false) {
-                  return true;
-
+            return true;
         }
 
         return false;
-
     }
 
     public function atualizar()
@@ -1275,6 +1286,122 @@ class Discipulo extends modeloFramework
 
         $stm = $pdo->prepare($sql);
         $stm->bindParam(1, $this->lider);
+
+        $stm->execute();
+
+        $resposta = array();
+
+        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+            $resposta[$ob->id] = $ob;
+        }
+
+        return $resposta;
+    }
+
+    public function listarAtivos()
+    {
+        $pdo = self::pegarConexao();
+
+        $sql = 'SELECT * FROM Discipulo WHERE ativo = 1 AND arquivo = 0  order by nome';
+
+        $stm = $pdo->prepare($sql);
+        $stm->bindParam(1, $this->lider);
+
+        $stm->execute();
+
+        $resposta = array();
+
+        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+            $resposta[$ob->id] = $ob;
+        }
+
+        return $resposta;
+    }
+
+    public function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'nome' => $this->nome,
+        ];
+    }
+
+    public function listarTodosLista($limit = 100, $page = null, $filter)
+    {
+        $limit = (int)$limit;
+
+        $init = $page == 1 ? 0 : $limit*($page-1);
+
+        $pdo = self::pegarConexao();
+
+        $sql = ' SELECT * FROM Discipulo ';
+
+        if ($filter){
+            $sql.= ' where nome like :nome ';
+        }
+
+        $sql .= ' order by nome limit :init,:limit';
+
+        $stm = $pdo->prepare($sql);
+        $stm->bindParam(':init', $init, \PDO::PARAM_INT);
+        $stm->bindParam(':limit', $limit, \PDO::PARAM_INT);
+
+        if ($filter){
+            $nome = '%'.$filter['nome'].'%';
+            $stm->bindParam(':nome', $nome, \PDO::PARAM_STR);
+        }
+
+        $stm->execute();
+
+        $resposta = array();
+
+        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+            $resposta[] = $ob;
+        }
+        return $resposta;
+    }
+
+    public function totalParam($filter)
+    {
+        $pdo = self::pegarConexao();
+
+        $sql = ' SELECT count(*) total FROM Discipulo ';
+
+        if ($filter){
+            $sql.= ' where nome like :nome ';
+        }
+
+        $stm = $pdo->prepare($sql);
+
+        if ($filter){
+            $nome = '%'.$filter['nome'].'%';
+            $stm->bindParam(':nome', $nome, \PDO::PARAM_STR);
+        }
+
+        $stm->execute();
+
+        $resposta = array();
+
+        $resposta = $stm->fetch() ;
+
+        return $resposta['total'];
+    }
+
+    public function lideres()
+    {
+        $pdo = self::pegarConexao();
+
+        $sql =
+            '
+                SELECT l.id as id, d.nome AS Discipulo, l.nome AS Lider
+                FROM Discipulo AS d
+                INNER JOIN Discipulo AS l ON l.id = d.lider
+                WHERE d.ativo =1
+                AND d.arquivo =0
+                ORDER BY l.nome
+            '
+        ;
+
+        $stm = $pdo->prepare($sql);
 
         $stm->execute();
 

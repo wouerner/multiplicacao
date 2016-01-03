@@ -2,6 +2,7 @@
 namespace painel\controlador;
 
 use \rede\modelo\tipoRede as TipoRede;
+use \igreja\modelo\igreja as igrejaModelo;
 
     class painel
     {
@@ -91,7 +92,10 @@ use \rede\modelo\tipoRede as TipoRede;
                     $encontro = new \encontroComDeus\modelo\encontroComDeus() ;
                     $encontros = $encontro->listarTodosAtivos();
 
-                  require_once 'modulos/painel/visao/painel.php';
-        }
+        $igreja = new igrejaModelo() ;
+        $idade = $igreja->mediaIdade();
 
+        require_once 'modulos/painel/visao/painel.php';
     }
+
+}

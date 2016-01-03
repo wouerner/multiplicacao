@@ -1,19 +1,17 @@
 <?php
-//var_dump($_GET);exit;
 //inicia a sessão
 session_start();
 
 $sessao = isset ($_SESSION) ? $_SESSION : NULL ;
 
 $_GET['url'] = array_key_exists('url',$_GET) ? $_GET['url'] : NULL;
-
 //se estiver a sessão tiver indice 'logado' e o indice logado for igual a TRUE
 if (array_key_exists('logado', $sessao) && $sessao['logado']==TRUE){
 
 	$url = $_GET['url'];
 
 	//se for uma tentativa de login deixar prosseguir com a url
-}else if( $_GET['url']=='seguranca/seguranca/entrar' ){
+} else if( $_GET['url']=='seguranca/seguranca/entrar' || $_GET['url'] == 'seguranca/seguranca/recuperar'){
 	$url = $_GET['url'];
 //caso não seja nenhuma das duas opções acima redireciona para a pagina de segurança para logar no sistema.
 }else{
@@ -22,7 +20,7 @@ if (array_key_exists('logado', $sessao) && $sessao['logado']==TRUE){
 }
 
 //acesso anonimo ao cadastro
-if( $_GET['url'] == 'discipulo/novoAnonimo' ){
+if( $_GET['url'] == 'discipulo/novoAnonimo'){
 
 	$url = $_GET['url'];
 

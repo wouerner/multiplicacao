@@ -9,9 +9,11 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-size: cover;
-    background-position: 50% 50%;
-    background-image: url('../../img/background-2014.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 20% 50%;
+    background-image: url('../../img/background-2014.jpg') ;
+    background-color: #000 ;
   }
   .form-signin {
     max-width: 280px;

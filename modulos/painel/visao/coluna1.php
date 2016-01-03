@@ -13,9 +13,11 @@
         </div>
     </div-->
     <div class="row">
-    <div class = "well well-small col-md-4" >
-
-        <section>
+<div class="col-md-4">
+    <div class=" panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading"><h5 class="panel-title">Discipulos</h5></div>
+      <div class="panel-body">
             <div id="chart"></div>
             <script>
                 var t = jQuery.get('/relatorio/grafico/status')
@@ -29,13 +31,11 @@
                               legend: {position: 'right'}
                             });
                         });
-
-                console.log(teste);
             </script>
-        </section>
+      </div>
 
+      <!-- Table -->
         <table  class = "table table-striped  tablesorter table-condensed"  >
-            <caption><h5>Discipulos</h5></caption>
             <thead>
                 <tr>
                     <th></th>
@@ -94,26 +94,33 @@
             </tbody>
         </table>
     </div>
+    </div>
 
-    <div class = "well well-small col-md-4" >
-        <section>
-            <div id="redesChart"></div>
-            <script>
-                var redes = jQuery.get('/relatorio/grafico/redes')
-                        .done(function( data ) {
-                            var chart = c3.generate({
-                            bindto: '#redesChart',
-                            data: {
-                              json: data,
-                              type: 'pie',
-                            },
-                              legend: {position: 'right'}
-                            });
-                        });
-            </script>
-        </section>
+
+    <div class = "col-md-4" >
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h5 class="panel-title">Redes</h5></div>
+  <div class="panel-body">
+    <div id="redesChart"></div>
+    <script>
+        var redes = jQuery.get('/relatorio/grafico/redes')
+                .done(function( data ) {
+                    var chart = c3.generate({
+                    bindto: '#redesChart',
+                    data: {
+                      json: data,
+                      type: 'pie',
+                    },
+                      legend: {position: 'right'}
+                    });
+                });
+    </script>
+  </div>
+  <!-- Table -->
         <table class = "table table-condensed" style="">
-            <caption><h5>Redes</h5></caption>
+            <caption></caption>
             <thead>
                 <th>Nome</th>
                 <th>Discipulos</th>
@@ -152,9 +159,14 @@
                 </tr>
             </tbody>
         </table>
+</div>
+
     </div>
 
-    <div class = "well well-small col-md-4" >
+<div class="col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h5 class="panel-title">Situação</h5></div>
+        <div class="panel-body">
             <div id="ativosChart"></div>
             <script>
                 var ativos = jQuery.get('/relatorio/grafico/ativos')
@@ -169,22 +181,31 @@
                             });
                         });
             </script>
-        <table class="table table-condensed" >
-            <caption><h5>Situação</h5></caption>
-            <thead>
-                <th scope="col">Ativos</th>
-                <th scope="col">Inativos</th>
-                <th scope="col">Arquivados</th>
-                <th scope="col">Total</th>
-            </thead>
-            <tbody>
-                <tr>
-                    <td scope="row"><?php echo $totalAtivos['total'] ; ?></td>
-                    <td scope="row"><?php echo $totalInativos['total'] ; ?></td>
-                    <td scope="row"><?php echo $totalArquivados['total'] ; ?></td>
-                    <td><?php echo $totalAtivos['total']+$totalInativos['total']+$totalArquivados['total'] ?></td>
-                </tr>
-            </tbody>
-        </table>
+            </div>
+            <table class="table table-condensed" >
+                <thead>
+                    <th scope="col">Ativos</th>
+                    <th scope="col">Inativos</th>
+                    <th scope="col">Arquivados</th>
+                    <th scope="col">Total</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row"><?php echo $totalAtivos['total'] ; ?></td>
+                        <td scope="row"><?php echo $totalInativos['total'] ; ?></td>
+                        <td scope="row"><?php echo $totalArquivados['total'] ; ?></td>
+                        <td><?php echo $totalAtivos['total']+$totalInativos['total']+$totalArquivados['total'] ?></td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h5 class="panel-title">Média de Idade da Igreja</h5></div>
+        <div class="panel-body">
+            <h2 class="text-center"><?php echo round($idade->media, 1)?> anos</h2>
+        </div>
     </div>
 </div>

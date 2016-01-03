@@ -4,7 +4,6 @@ $mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : '';
 unset($_SESSION['mensagem']) ;
 
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -86,11 +85,8 @@ unset($_SESSION['mensagem']) ;
                 <?php require 'modulos/menu/visao/menu.inc.php' ; ?>
             </nav>
         </header>
-
         <section>
-
-            <article class = "well" >
-
+            <article class="" >
                 <?php if ($mensagem) : ?>
                     <div class="alert <?php echo ($mensagem=='ok') ? 'alert-success' : 'alert-error' ; ?>">
                       <h4 class="alert-heading">
@@ -98,13 +94,10 @@ unset($_SESSION['mensagem']) ;
                     </h4>
                    </div>
                 <?php endif ; ?>
-
                 <?php include 'discipulo/visao/formularioAtualizar.inc.php' ; ?>
             </article>
         </section>
-
-    </div>
+        </div>
         </section>
     </body>
-
 </html>

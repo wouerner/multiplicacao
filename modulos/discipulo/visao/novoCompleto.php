@@ -3,7 +3,6 @@ $mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : NULL;
 $dados = isset($_SESSION['dados']) ? $_SESSION['dados'] : NULL;
 $_SESSION['mensagem'] = isset($_SESSION['mensagem']) ? NULL : NULL;
 $_SESSION['dados'] = isset($_SESSION['dados']) ? NULL : NULL;
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -77,8 +76,8 @@ $_SESSION['dados'] = isset($_SESSION['dados']) ? NULL : NULL;
         </script>
 
     </head>
-    <body>
-        <section class = "container-fluid">
+<body>
+    <section class = "container-fluid">
             <header>
                 <nav>
                     <?php require 'modulos/menu/visao/menu.inc.php' ; ?>
@@ -91,7 +90,15 @@ $_SESSION['dados'] = isset($_SESSION['dados']) ? NULL : NULL;
                             <?php echo $mensagem['mensagem'] ; ?>
                         </div>
                     <?php endif ; ?>
-                    <?php include 'discipulo/visao/formularioNovoCompleto.inc.php' ; ?>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Novo Cadastro</h3>
+          </div>
+          <div class="panel-body">
+                        <?php include 'discipulo/visao/formularioNovoCompleto.inc.php' ; ?>
+          </div>
+        </div>
                 </article>
             </section>
         </section>

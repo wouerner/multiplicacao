@@ -1,4 +1,6 @@
 <?php
+namespace discipulo\controlador;
+
 use discipulo\Modelo\Discipulo as DiscipuloModelo;
 use discipulo\Modelo\estadoCivil;
 use celula\modelo\celula;
@@ -6,8 +8,12 @@ use evento\modelo\evento;
 use evento\modelo\eventoDiscipulo;
 use seguranca\modelo\acl;
 
-namespace discipulo\controlador;
-
+/**
+ * Discipulo
+ *
+ * @package Discipulo
+ * @author wouerner <wouerner@gmail.com>
+ */
 class discipulo
 {
     /* Mostra a lista de todos os discipulos cadastrados no sistema
@@ -37,6 +43,45 @@ class discipulo
 
           require_once 'modulos/discipulo/visao/listar.php';
 
+    }
+
+    public function lista(){
+          require_once 'modulos/discipulo/visao/lista.php';
+    }
+
+    public function index2()
+    {
+        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+
+        $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
+
+        $quantidadePorPagina = 50;
+
+          //$discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
+
+        //$totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
+        //$totalDiscipulos = (int) $totalDiscipulos['total'] ;
+
+        $discipulos =	new \discipulo\Modelo\Discipulo();
+            //if ($acl->hasPermission('admin_acesso') == true) {
+              ////$discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
+            //} else {
+                //$discipulos->id = $_SESSION['usuario_id'];
+              ////$discipulos = $discipulos->listarDiscipulos();
+
+            //}
+        $limit = array_key_exists('count', $_REQUEST) ? $_REQUEST['count']: null;
+        $page = array_key_exists('page', $_REQUEST) ? $_REQUEST['page'] : null;
+        $filter = array_key_exists('filter', $_REQUEST) ? $_REQUEST['filter'] : null;
+
+        $discipulos = $discipulos->listarTodosLista($limit, $page, $filter);
+
+        $total =  \discipulo\Modelo\Discipulo::totalParam($filter) ;
+
+        //var_dump($total);die;
+        header('Content-Type: application/json');
+        echo json_encode(["dados"=>$discipulos, "total"=>$total]);
+        die;
     }
 
         public function listarPorLider($url)
@@ -255,8 +300,8 @@ class discipulo
 
           /*Cria um NOVO discipulo
           * */
-          public function novo($url)
-          {
+    public function novo($url)
+    {
                      if ( empty ( $url['post'] ) ) {
 
                      require_once 'modulos/discipulo/visao/novo.php';
@@ -288,9 +333,16 @@ class discipulo
         }
 
 
+    /**
+     * novoCompleto
+     *
+     * @param mixed $url
+     * @access public
+     * @return void
+     */
     public function novoCompleto($url)
     {
-        if ( empty ( $url['post'] ) ) {
+        if (empty ($url['post'])) {
             $estadosCivies = new \discipulo\Modelo\estadoCivil();
             $estadosCivies = $estadosCivies->listarTodos();
             $lideres =	new \discipulo\Modelo\Discipulo();
@@ -333,11 +385,11 @@ class discipulo
 
             require_once 'modulos/discipulo/visao/novoCompleto.php';
         } else {
-            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo = new \discipulo\Modelo\Discipulo();
 
-            $post = $url['post'] ;
+            $post = $url['post'];
 
-            $discipulo->nome = $post['nome'] ;
+            $discipulo->nome = $post['nome'];
             $discipulo->alcunha = $post['alcunha'] ;
             $discipulo->setDataNascimento($post['dataNascimento']) ;
             $discipulo->telefone = $post['telefone'];
@@ -345,7 +397,7 @@ class discipulo
             $discipulo->estadoCivilId = $post['estadoCivilId'] ;
             $discipulo->endereco = $post['endereco'] ;
             $discipulo->email = $post['email'] ;
-            $discipulo->celula = $post['celula'] ;
+            $discipulo->celula = $post['celula'];
 
             $discipulo->ativo = 1 ;
 
@@ -353,7 +405,7 @@ class discipulo
 
             if (empty($post['email']) || $discipulo->emailUnico()) {
 
-                $discipulo->salvarCompleto() ;
+                $discipulo->salvarCompleto();
 
                 $aviso = new \aviso\modelo\aviso();
                 $aviso->identificacao = $discipulo->id ;
@@ -363,8 +415,6 @@ class discipulo
 
                 $_SESSION['mensagem'] = array('mensagem'=> 'Cadastro Realizado com Sucesso!',
                                                           'class' => 'alert alert-success');
-
-
                 $lider =	new \discipulo\Modelo\Discipulo();
                 $lider->id = $_SESSION['usuario_id'];
                 $lider = $lider->listarUm();
@@ -423,11 +473,11 @@ class discipulo
                 header('location:/discipulo/discipulo/novoCompleto');
                 exit();
             }
-        }
+    }
 
-          public function novoAnonimo($url)
-          {
-                     if ( empty ( $url['post'] ) ) {
+    public function novoAnonimo($url)
+    {
+     if ( empty ( $url['post'] ) ) {
 
                      require_once 'modulos/discipulo/visao/novoAnonimo.php';
 
@@ -457,36 +507,36 @@ class discipulo
 
         }
 
-        public function atualizar($url)
-        {
-            $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+    public function atualizar($url)
+    {
+        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
 
-            if ( empty ( $url['post'] ) ) {
+        if ( empty ( $url['post'] ) ) {
 
-                $discipulo =	new \discipulo\Modelo\Discipulo();
-                $lideres = $discipulo->listarLideres();
+            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $lideres = $discipulo->listarLideres();
 
-                $discipulo->id =  $url[4] ;
-                $discipulo = $discipulo->listarUm();
+            $discipulo->id =  $url[4] ;
+            $discipulo = $discipulo->listarUm();
 
-                //estado civil
-                $estadosCivies = new \discipulo\Modelo\estadoCivil();
-                $estadosCivies->id = $discipulo->estadoCivilId ;
+            //estado civil
+            $estadosCivies = new \discipulo\Modelo\estadoCivil();
+            $estadosCivies->id = $discipulo->estadoCivilId ;
 
-                $estadoCivil = $estadosCivies->listarUm();
+            $estadoCivil = $estadosCivies->listarUm();
 
-                $estadosCivies = $estadosCivies->listarTodos();
+            $estadosCivies = $estadosCivies->listarTodos();
 
-                $lider =	new \discipulo\Modelo\Discipulo();
-                $lider->id = $discipulo->lider ;
-                $lider = $lider->listarUm($discipulo->lider);
+            $lider =	new \discipulo\Modelo\Discipulo();
+            $lider->id = $discipulo->lider ;
+            $lider = $lider->listarUm($discipulo->lider);
 
-                $celula = new \celula\modelo\celula();
-                $celula->id = $discipulo->celula;
-                $celula = $celula->listarUm();
+            $celula = new \celula\modelo\celula();
+            $celula->id = $discipulo->celula;
+            $celula = $celula->listarUm();
 
-                $celulas = new \celula\modelo\celula();
-                $celulas = $celulas->listarTodos();
+            $celulas = new \celula\modelo\celula();
+            $celulas = $celulas->listarTodos();
 
             //status celular da pessoa
              $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
@@ -541,7 +591,7 @@ class discipulo
                 $post = $url['post'] ;
 
                 $discipulo->id = $post['discipuloId'] ;
-                $discipulo->nome = $post['nome'] ;
+                $discipulo->nome = $post['nome'];
                 $discipulo->alcunha = isset($post['alcunha']) ?$post['alcunha'] : null;
                 $discipulo->setDataNascimento($post['dataNascimento']) ;
                 $discipulo->telefone = $post['telefone'];
@@ -628,7 +678,7 @@ class discipulo
 
         }
 
-        public function excluir($url)
+    public function excluir($url)
         {
             $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
 
@@ -646,7 +696,7 @@ class discipulo
 
         }
 
-        public function detalhar ($url)
+    public function detalhar ($url)
         {
             $discipulo = new \discipulo\Modelo\Discipulo() ;
             $eventoDiscipulo = new \evento\modelo\eventoDiscipulo();
@@ -688,7 +738,7 @@ class discipulo
 
         }
 
-        public function perfil ($url)
+    public function perfil ($url)
         {
             //var_dump($_SESSION);
             $discipulo = new \discipulo\Modelo\Discipulo() ;
@@ -1116,4 +1166,29 @@ class discipulo
 
         }
 
+        /**
+         * lideres
+         *
+         * @access public
+         * @return void
+         */
+        public function lideres()
+        {
+            $lideres = new DiscipuloModelo();
+            $lideres = $lideres->lideres() ;
+
+            require_once 'celula/visao/listarLideresCelula.php';
+        }
+
+    public function emailUnico($url)
+    {
+
+        $discipulo = new DiscipuloModelo();
+
+        $post = $url['post'];
+
+        $discipulo->email = $post['email'] ;
+
+        echo json_encode(['success' => $discipulo->emailUnico()]) ;
+    }
 }
