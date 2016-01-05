@@ -385,11 +385,11 @@ class discipulo
             $discipulo->estadoCivilId = $post['estadoCivilId'] ;
             $discipulo->endereco = $post['endereco'] ;
             $discipulo->email = $post['email'] ;
-            $discipulo->celula = $post['celula'] ;
+            $discipulo->celula = $post['celula'] ?$post['celula'] : null ;
 
             $discipulo->ativo = 1 ;
 
-            $discipulo->lider = $post['lider'] ;
+            $discipulo->lider = $post['lider'] ? $post['lider'] : null;
 
             if (empty($post['email']) || $discipulo->emailUnico()) {
 
@@ -403,7 +403,6 @@ class discipulo
 
                 $_SESSION['mensagem'] = array('mensagem'=> 'Cadastro Realizado com Sucesso!',
                                                           'class' => 'alert alert-success');
-
 
                 $lider =	new \discipulo\Modelo\Discipulo();
                 $lider->id = $_SESSION['usuario_id'];
@@ -432,27 +431,36 @@ class discipulo
 
             }
 
-            //status celular
-            $tipoStatusCelular =	$post['tipoStatusCelular'] ;
-            $statusCelular =	new \statusCelular\modelo\statusCelular() ;
-            $statusCelular->tipoStatusCelular = $tipoStatusCelular;
-            $statusCelular->discipuloId = $discipulo->id;
-            if (!$statusCelular->salvar()) $statusCelular->atualizar();
+            if ($post['tipoStatusCelular']) {
+                //status celular
+                $tipoStatusCelular =	$post['tipoStatusCelular'] ;
+                $statusCelular =	new \statusCelular\modelo\statusCelular() ;
+                $statusCelular->tipoStatusCelular = $tipoStatusCelular;
+                $statusCelular->discipuloId = $discipulo->id;
+                if (!$statusCelular->salvar()) $statusCelular->atualizar();
+            }
 
-            //admissão
-            $admissao = new \admissao\modelo\admissao();
-            $admissao->tipoAdmissao = $post['tipoAdmissao'] ;
-            $admissao->discipuloId = $discipulo->id ;
-            if (!$admissao->salvar()) $admissao->atualizar() ;
+            if ($post['tipoAdmissao']){
+                //admissão
+                $admissao = new \admissao\modelo\admissao();
+                $admissao->tipoAdmissao = $post['tipoAdmissao'] ;
+                $admissao->discipuloId = $discipulo->id ;
+                if (!$admissao->salvar()) $admissao->atualizar() ;
+            }
 
-            //tipos de rede e rede atual da pessoa
-            $rede = new \rede\modelo\rede();
+            if (
+                 $post['tipoRedeId'] &&
+                 $post['funcaoRedeId']
+            ){
+                //tipos de rede e rede atual da pessoa
+                $rede = new \rede\modelo\rede();
 
-            $rede->discipuloId = $discipulo->id;
-            $rede->tipoRedeId = $post['tipoRedeId'];
-            $rede->funcaoRedeId = $post['funcaoRedeId'];
+                $rede->discipuloId = $discipulo->id;
+                $rede->tipoRedeId = $post['tipoRedeId'];
+                $rede->funcaoRedeId = $post['funcaoRedeId'];
 
-            if (!$rede->salvar()) $rede->atualizar();
+                if (!$rede->salvar()) $rede->atualizar();
+            }
 
                 $discipuloEventos = new \evento\modelo\evento();
                 $eventos = isset($post['eventos']) ? $post['eventos'] : NULL ;

@@ -239,7 +239,7 @@ $usuario = $usuario[0] ;
                         <li><a href="/discipulo/foto/novo/id/<?php echo $_SESSION['usuario_id']?>" class = "" ><i class = "icon-picture" ></i> Foto</a></li>
                         <li><a href="/seguranca/seguranca/trocarSenha/id/<?php echo $_SESSION['usuario_id']?>" class = "" ><i class = "icon-lock" ></i> trocar senha</a></li>
                         <li><a href="/seguranca/seguranca/sair" class = "" ><i class = "icon-off" ></i> Sair</a></li>
-                        <li><a href="#" class = "" >Versão 1.1</a></li>
+                        <li><a href="#" class = "" >Versão 1.2</a></li>
                     </ul>
                 </li>
             </ul>

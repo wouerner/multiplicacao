@@ -63,7 +63,7 @@
             <div class="control-group " >
                 <label class="control-label col-md-4" for="email" >E-mail:</label>
                 <div class="col-md-4" >
-                    <input id="email" class="form-control" maxlength="60" name="email" type="email" placeholder="exemplo@exemplo.com"  value="<?php echo $dados['email']?>" >
+                    <input id="email" class="form-control" maxlength="60" name="email" type="email" placeholder="exemplo@exemplo.com"  value="<?php echo $dados['email']?>" required>
                 </div>
             </div>
         </fieldset>
@@ -74,7 +74,7 @@
                         <i class="icon-user" ></i>
                         Nome do Líder:
                     </label>
-                    <select id="combobox" class="combobox lider " name="lider" required >
+                    <select id="combobox" class="combobox lider " name="lider" >
                         <option value="" selected> </option>
                             <?php foreach($lideres as $lider) : ?>
                                 <option value="<?php echo $lider->id ; ?>"><?php echo $lider->getAlcunha(); ?> </option>
@@ -86,7 +86,7 @@
                         <label class="control-label" for="celula">
                             <i class="icon-home"></i> Célula que Participa:
                         </label>
-                        <select id="comboboxCelula" class="comboboxCelula" name="celula" required>
+                        <select id="comboboxCelula" class="comboboxCelula" name="celula" >
                             <option value="" ></option>
                             <?php foreach($celulas as $celula) : ?>
                                 <option value="<?php echo $celula->id; ?>"><?php echo $celula->nome; ?> </option>
@@ -96,7 +96,7 @@
                 </div>
                 <div class="control-group col-md-2" >
                     <label class="" >Status Celular:</label>
-                    <select class="form-control" name="tipoStatusCelular" required >
+                    <select class="form-control" name="tipoStatusCelular"  >
                      <option value=""></option>
                         <?php foreach ($tiposStatusCelulares as $tipoStatusCelular) : ?>
                             <option value="<?php echo $tipoStatusCelular->id ; ?>" >
