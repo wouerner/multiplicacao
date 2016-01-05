@@ -391,22 +391,17 @@ class Discipulo extends modeloFramework implements \JsonSerializable
     public function emailUnico()
     {
         $pdo = self::pegarConexao();
-              //cria sql
         $sql = "SELECT email FROM Discipulo WHERE email = ?";
-              //prepara sql
         $stm = $pdo->prepare($sql);
-              //trocar valores
         $stm->bindParam(1, $this->email);
 
         $stm->execute();
 
         if ($stm->fetch() == false) {
-                  return true;
-
+            return true;
         }
 
         return false;
-
     }
 
     public function atualizar()
