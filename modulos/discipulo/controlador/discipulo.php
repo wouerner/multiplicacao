@@ -416,10 +416,6 @@ class discipulo
 
                 $_SESSION['mensagem'] = array('mensagem'=> 'Cadastro Realizado com Sucesso!',
                                                           'class' => 'alert alert-success');
-<<<<<<< HEAD
-
-=======
->>>>>>> 4d04ff17a9bd2c4ed5e374b02eb357c3476cc294
                 $lider =	new \discipulo\Modelo\Discipulo();
                 $lider->id = $_SESSION['usuario_id'];
                 $lider = $lider->listarUm();
