@@ -2,9 +2,10 @@
     <fieldset class="col-md-6">
         <legend>Dados Pessoais</legend>
             <div class="form-group ">
-                <label class="control-label col-md-3" for="nome" ><i class="icon-user" ></i> Nome:</label>
+                <label class="control-label col-md-3" for="nome" ><i class="icon-user" ></i> Nome*:</label>
                 <div class="col-md-8">
                     <input id="nome" type="text" class="form-control" maxlength="45" name="nome" placeholder="Nome Completo" value="<?php echo $dados['nome']?>" required autofocus>
+                    <p class="help-block">(obrigatório)</p>
                 </div>
             </div>
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
@@ -19,29 +20,32 @@
             <?php endif ; ?>
             <div class="form-group">
                 <label class="control-label col-md-3" for="dataNascimento" >
-                    <i class="icon-calendar" ></i> Nasc.:
+                    <i class="icon-calendar" ></i> Nasc*.:
                 </label>
                 <div class="col-md-3" >
                     <input id="dataNascimento" type="text" placeholder="dd/mm/aaaa" class="dataNascimento form-control" name="dataNascimento"  value="<?php echo $dados['dataNascimento']?>" required >
+                    <p class="help-block">(obrigatório)</p>
                 </div>
             </div>
             <div class="form-group ">
-                <label class="control-label col-md-3" for="sexo" >Sexo:</label>
+                <label class="control-label col-md-3" for="sexo" >Sexo*:</label>
                 <div class="col-md-3" >
                     <select id="sexo" class="form-control " name="sexo" required >
                         <option value="m" >Masculino</option>
                         <option value="f" >Femenino</option>
                     </select>
+                  <p class="help-block">(obrigatório)</p>
                 </div>
             </div>
             <div class="form-group ">
-                <label class="control-label col-md-3" for="estadoCivilId" >Estado Civil:</label>
+                <label class="control-label col-md-3" for="estadoCivilId" >Estado Civil*:</label>
                 <div class="col-md-3" >
                     <select id="estadoCivilId" class="form-control" name="estadoCivilId" required >
                         <?php foreach($estadosCivies as $estadoCivil) : ?>
                             <option value="<?php echo $estadoCivil['id']?>"><?php echo $estadoCivil['nome']?> </option>
                         <?php endforeach ; ?>
                     </select>
+                    <p class="help-block">(obrigatório)</p>
                 </div>
             </div>
         </fieldset>
@@ -55,15 +59,17 @@
                 </div>
             </div>
             <div class="form-group" >
-                <label class="control-label col-md-4" for="endereco" >Endereço:</label>
+                <label class="control-label col-md-4" for="endereco" >Endereço*:</label>
                 <div class="col-md-4" >
-                  <input id="endereco" type="text" maxlength="45" class="form-control" name="endereco" value="<?php echo $dados['endereco']?>" required >
+                  <input id="endereco" type="text" maxlength="45" class="form-control" name="endereco" value="<?php echo $dados['endereco']?>" placeholder="" required >
+                  <p class="help-block">(obrigatório)</p>
                 </div>
             </div>
             <div class="control-group " >
-                <label class="control-label col-md-4" for="email" >E-mail:</label>
+                <label class="control-label col-md-4" for="email" >E-mail*:</label>
                 <div class="col-md-4" >
                     <input id="email" class="form-control" maxlength="60" name="email" type="email" placeholder="exemplo@exemplo.com"  value="<?php echo $dados['email']?>" required>
+                  <p class="help-block">(obrigatório)</p>
                 </div>
             </div>
         </fieldset>
