@@ -21,7 +21,7 @@
                 </h4>
                </div>
             <?php endif ; ?>
-            <form action = "/discipulo/discipulo/foto/novo" method = "post"  class = "form-horizontal" enctype="multipart/form-data" >
+            <form action = "/discipulo/foto/novo" method = "post"  class = "form-horizontal" enctype="multipart/form-data" >
                 <input name = "discipuloId" type = "hidden" value = "<?php echo $discipuloId ; ?>" >
                 <fieldset>
                     <legend>Foto para o perfil</legend>
