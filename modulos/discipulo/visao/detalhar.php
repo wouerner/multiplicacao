@@ -56,35 +56,34 @@ $(document).ready(function () {
     </head>
 <body>
 
-<div id="dialog-confirm" title="Deseja desativar?" style = "display:none">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente desativar?</p>
-    <form id="desativarForm">
-        <fieldset>
-            <label for="name">Motivo:</label>
-            <textarea  id="observacao" type="text" name="motivo" class="text ui-widget-content ui-corner-all form-control"></textarea>
-            <!-- Allow form submission with keyboard without duplicating the dialog button -->
-            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-        </fieldset>
-    </form>
-    <script>
-    </script>
-</div>
-</div>
-
-<div id="dialog-success" title="Deseja ativar?" style = "display:none">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente ativar?</p>
-</div>
-
-        <section class = "container-fluid">
+    <div id="dialog-confirm" title="Deseja desativar?" style = "display:none">
+        <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente desativar?</p>
+        <form id="desativarForm">
+            <fieldset>
+                <label for="name">Motivo:</label>
+                <textarea  id="observacao" type="text" name="motivo" class="text ui-widget-content ui-corner-all form-control"></textarea>
+                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+            </fieldset>
+        </form>
+        <script>
+        </script>
+    </div>
+    <div id="dialog-success" title="Deseja ativar?" style = "display:none">
+        <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente ativar?</p>
+    </div>
+    <section class = "container-fluid">
         <nav>
             <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
         </nav>
-        <header>
-        </header>
         <section>
             <article>
             <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
-        <div class = "well" >
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                    Detalhar Discipulo
+                </div>
+              <div class="panel-body">
+
             <table class = "table" >
             <caption>
                 <h3>
@@ -288,8 +287,15 @@ $(document).ready(function () {
 
 
                  <tr><td><strong>Ações</strong></td></tr>
-                    <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
                 </table>
+
+
+              </div>
+                <div class="panel-footer">
+                    <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
+                </div>
+            </div>
+
 
 
             </div>
