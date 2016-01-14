@@ -125,6 +125,32 @@ class oferta {
         return $stm->fetchAll();
     }
 
+    public function porDiscipulo($id){
+
+        //abrir conexao com o banco
+        $pdo = new \PDO(DSN, USER, PASSWD);
+        //cria sql
+        $sql = "
+select DATE_FORMAT(o.data, '%d/%m/%y') data, Month(o.data) mes, tpoferta.nome from Oferta as o
+inner join TipoOferta as tpoferta ON tpoferta.id = o.tipoOfertaId
+
+where o.discipuloId = ?
+order by o.data
+        ";
+
+        //prepara sql
+        $stm = $pdo->prepare($sql);
+        //trocar valores
+        $stm->bindParam(1, $id);
+
+        $stm->execute();
+
+        //fechar conexÃ£o
+        $pdo = null ;
+
+        return $stm->fetchAll();
+    }
+
     public function excluir(){
       //abrir conexao com o banco
       $pdo = new \PDO(DSN, USER, PASSWD);
