@@ -24,6 +24,7 @@ unset($_SESSION['mensagem']);
         </div>
         <div class="container">
             <form class="form-signin" method="post" accept-charset="utf-8" action ="/seguranca/seguranca/entrar" >
+                <img src="/ext/img/logo.png" class="img-responsive">
                 <h1 class="form-signin-heading text-muted">Multiplicacao.org</h1>
                 <input id="email" name="email" type="text" class="form-control" placeholder="Email address" required="" autofocus="">
                 <input name="senha" type="password" class="form-control" placeholder="Password" required="">
