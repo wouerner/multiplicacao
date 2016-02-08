@@ -64,17 +64,22 @@ class celula
 
         public function atualizar($url)
         {
-            if ( empty ( $url['post'] ) ) {
+            if ( empty($url['post']) ) {
 
                 $celula =	new \celula\modelo\celula();
                 $lideres = $celula->listarLideres();
 
                 $celula->id =  $url[4] ;
-                $celula = $celula->listarUm() ;
+                $celula = $celula->listarUm();
 
-                $lider =	new \discipulo\Modelo\Discipulo() ;
-                $lider->id = $celula->lider ;
-                $lider = $lider->listarUm($celula->lider) ;
+                $discLider =	new \discipulo\Modelo\Discipulo();
+                $discLider->id = $celula->lider;
+
+
+                $lider = $discLider->listarUm($celula->lider);
+
+                $discLider->id = $celula->colider;
+                $colider = $discLider->listarUm();
 
                 $tipoRede = new \rede\modelo\tipoRede();
                 $tipoRede->id = $celula->tipoRedeId;
@@ -96,6 +101,7 @@ class celula
                 $celula->multiplicacao = (isset($post['multiplicao']))? 1 : 0;
                 $celula->tipoRedeId = $post['tipoRedeId'];
                 $celula->id = $post['id'];
+                $celula->colider = $post['colider'];
                 //var_dump(isset($post['ativa']));exit;
 
                 $celula->atualizar();

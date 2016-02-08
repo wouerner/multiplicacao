@@ -5,7 +5,11 @@
  * # AboutCtrl
  * Controller of the yoExemploApp
  */
-app.controller('IgrejaController', ['$scope', '$http', function ($scope, $http){
+
+angular.module('IgrejaApp',[]);
+//app
+angular.module('IgrejaApp')
+    .controller('IgrejaController', ['$scope', '$http', function ($scope, $http){
         $scope.igreja = {};
         $scope.igrejas = [];
         $scope.btnSalvar = 'save';

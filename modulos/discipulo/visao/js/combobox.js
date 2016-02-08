@@ -1,4 +1,4 @@
- 
+
 (function( $ ) {
 		$.widget( "ui.combobox", {
 			_create: function() {
@@ -106,16 +106,10 @@
 		});
 	})( jQuery );
 
-/*	$(function() {
-		$( "#combobox" ).combobox();
-		$( "#toggle" ).click(function() {
-			$( "#combobox" ).toggle();
-		});
-});*/
-
 	$(function() {
 		$( ".combobox" ).combobox();
 		$( "#toggle" ).click(function() {
 			$( ".combobox" ).toggle();
 		});
+
 });

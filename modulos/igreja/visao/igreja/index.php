@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
         <?php include 'incluidos/css.inc.php' ?>
-        <?php include 'incluidos/js.inc.php' ?>
+        <?php //include 'incluidos/js.inc.php' ?>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -17,10 +17,9 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.2/ui-bootstrap.min.js"></script>
 
-        <script src="/app/controle/app.js"></script>
         <script src="/app/controle/igreja.js"></script>
 	</head>
-	<body ng-app="contaApp">
+	<body ng-app="IgrejaApp">
 		<header>
 			<nav>
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>

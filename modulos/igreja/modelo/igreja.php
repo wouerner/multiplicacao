@@ -145,4 +145,19 @@ class  igreja implements \JsonSerializable {
 				  $this->erro= $e->getMessage();
         }
     }
+
+	public function sede(){
+		$pdo = new \PDO (DSN,USER,PASSWD);
+
+		$sql = 'SELECT * FROM Igreja WHERE sede = 1';
+
+		$stm = $pdo->prepare($sql);
+		$stm->execute();
+
+        $resposta = array();
+
+        $resposta = $stm->fetchObject('\igreja\modelo\igreja');
+
+        return $resposta ;
+    }
 }

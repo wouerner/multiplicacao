@@ -1,10 +1,14 @@
 <?php
 use \seguranca\modelo\acl;
+use \igreja\modelo\igreja;
 
 $acesso = new acl($_SESSION['usuario_id']);
 
 $usuario = explode (' ',$_SESSION['usuario_nome']) ;
 $usuario = $usuario[0] ;
+
+$igreja = new igreja();
+$igreja = $igreja->sede();
 ?>
 <style>
     body{
@@ -25,7 +29,7 @@ $usuario = $usuario[0] ;
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">MGA</a>
+            <a class="navbar-brand" href="/"><?php echo $igreja->nome?></a>
         </div>
         <div class="collapse navbar-collapse" >
             <ul class="nav navbar-nav" role="navigation">
@@ -239,7 +243,7 @@ $usuario = $usuario[0] ;
                         <li><a href="/discipulo/foto/novo/id/<?php echo $_SESSION['usuario_id']?>" class = "" ><i class = "icon-picture" ></i> Foto</a></li>
                         <li><a href="/seguranca/seguranca/trocarSenha/id/<?php echo $_SESSION['usuario_id']?>" class = "" ><i class = "icon-lock" ></i> trocar senha</a></li>
                         <li><a href="/seguranca/seguranca/sair" class = "" ><i class = "icon-off" ></i> Sair</a></li>
-                        <li><a href="#" class = "" >Versão 1.2</a></li>
+                        <li><a href="#" class = "" >Versão 1.2.2</a></li>
                     </ul>
                 </li>
             </ul>

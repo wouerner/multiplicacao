@@ -93,7 +93,7 @@ class celula extends modeloFramework
         $pdo = new \PDO(DSN, USER, PASSWD);
         //cria sql
         $sql = "UPDATE Celula SET 	nome = ? , horarioFuncionamento = ? , endereco = ?,
-            lider = ? , tipoRedeId = ? , ativa = ?, multiplicacao = ?
+            lider = ? , tipoRedeId = ? , ativa = ?, multiplicacao = ?,colider = ?
             WHERE id = ?
                ";
         //prepara sql
@@ -106,7 +106,8 @@ class celula extends modeloFramework
         $stm->bindParam(5, $this->tipoRedeId );
         $stm->bindParam(6, $this->ativa );
         $stm->bindParam(7, $this->multiplicacao );
-        $stm->bindParam(8, $this->id);
+        $stm->bindParam(8, $this->colider );
+        $stm->bindParam(9, $this->id);
 
         $resposta = $stm->execute();
 
