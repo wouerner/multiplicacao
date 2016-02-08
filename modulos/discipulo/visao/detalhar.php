@@ -56,35 +56,34 @@ $(document).ready(function () {
     </head>
 <body>
 
-<div id="dialog-confirm" title="Deseja desativar?" style = "display:none">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente desativar?</p>
-    <form id="desativarForm">
-        <fieldset>
-            <label for="name">Motivo:</label>
-            <textarea  id="observacao" type="text" name="motivo" class="text ui-widget-content ui-corner-all form-control"></textarea>
-            <!-- Allow form submission with keyboard without duplicating the dialog button -->
-            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-        </fieldset>
-    </form>
-    <script>
-    </script>
-</div>
-</div>
-
-<div id="dialog-success" title="Deseja ativar?" style = "display:none">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente ativar?</p>
-</div>
-
-        <section class = "container-fluid">
+    <div id="dialog-confirm" title="Deseja desativar?" style = "display:none">
+        <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente desativar?</p>
+        <form id="desativarForm">
+            <fieldset>
+                <label for="name">Motivo:</label>
+                <textarea  id="observacao" type="text" name="motivo" class="text ui-widget-content ui-corner-all form-control"></textarea>
+                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+            </fieldset>
+        </form>
+        <script>
+        </script>
+    </div>
+    <div id="dialog-success" title="Deseja ativar?" style = "display:none">
+        <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Quer realmente ativar?</p>
+    </div>
+    <section class = "container-fluid">
         <nav>
             <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
         </nav>
-        <header>
-        </header>
         <section>
             <article>
             <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
-        <div class = "well" >
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                    Detalhar Discipulo
+                </div>
+              <div class="panel-body">
+
             <table class = "table" >
             <caption>
                 <h3>
@@ -249,10 +248,54 @@ $(document).ready(function () {
                 <!-- Metas dos discipulos-->
                 <?php endif; ?>
 
+                <?php if($ofertas):?>
+                <tr>
+                <td colspan="5">
+                    <table class = "table" >
+                        <caption>Oferta</caption>
+                        <tr>
+                            <th>Jan</th>
+                            <th>Fev</th>
+                            <th>Mar</th>
+                            <th>Abr</th>
+                            <th>Maio</th>
+                            <th>Jun</th>
+                            <th>Jul</th>
+                            <th>Ago</th>
+                            <th>Set</th>
+                            <th>Out</th>
+                            <th>Nov</th>
+                            <th>Dez</th>
+                        </tr>
+                            <?php for ($i =1 ; $i <= 12 ; $i++ ): ?>
+                                <td>
+                                    <?php foreach ($ofertas as $oferta ): ?>
+                                        <?php if($i == $oferta['mes'] ): ?>
+                                            <?php foreach ($tipoOfertas as $tipo): ?>
+                                                <?php echo ($tipo['nome'] == $oferta['nome']) ?
+                                                            $oferta['nome'] : ''; ?>
+                                            <?php endforeach; ?>
+                                        <?php endif?>
+                                    <?php endforeach; ?>
+                                </td>
+                            <?php endfor; ?>
+                        </tr>
+                    </table>
+                </td>
+                </tr>
+                <?php endif; ?>
+
 
                  <tr><td><strong>Ações</strong></td></tr>
-                    <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
                 </table>
+
+
+              </div>
+                <div class="panel-footer">
+                    <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
+                </div>
+            </div>
+
 
 
             </div>

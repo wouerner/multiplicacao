@@ -7,6 +7,8 @@ use celula\modelo\celula;
 use evento\modelo\evento;
 use evento\modelo\eventoDiscipulo;
 use seguranca\modelo\acl;
+use oferta\modelo\oferta as OfertaModelo;
+use oferta\modelo\tipoOferta as TipoOfertaModelo;
 
 /**
  * Discipulo
@@ -715,9 +717,14 @@ class discipulo
             $tipoStatus= new \statusCelular\modelo\tipoStatusCelular();
 
             $statusCelulares = $tipoStatus->listarTodos() ;
-//var_dump($statusCelulares);
 
             $discipulo->id = $url[4] ;
+
+            $ofertas = new OfertaModelo();
+            $ofertas = $ofertas->porDiscipulo($discipulo->id);
+
+            $tipoOfertas = new TipoOfertaModelo();
+            $tipoOfertas = $tipoOfertas->listarTodos();
 
             $liderCelula = $discipulo->liderCelula();
             $participaCelula = $discipulo->participaCelula();
