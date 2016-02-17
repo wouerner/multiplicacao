@@ -1,4 +1,4 @@
- 
+
 (function( $ ) {
 		$.widget( "ui.combobox", {
 			_create: function() {
@@ -117,5 +117,5 @@
 		$( ".comboboxCelula" ).combobox();
 		$( "#toggle" ).click(function() {
 			$( ".comboboxCelula" ).toggle();
-		});
+    });
 });
