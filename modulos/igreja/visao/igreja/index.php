@@ -27,7 +27,6 @@
 		</header>
 		<section>
 			<article>
-
                 <div ng-controller="IgrejaController as ctrl" class="">
                     <div class="well well-sm">
                         <table class="table table-condensed">
