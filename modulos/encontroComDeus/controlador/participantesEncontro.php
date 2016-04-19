@@ -35,6 +35,9 @@ class participantesEncontro
         $participante->encontroComDeusId =$url[4] ;
         $discipulos = $participante->listarTodos();
 
+        $redes =	new \rede\modelo\tipoRede();
+        $redes = $redes->listarTodos();
+
         $total = count ($discipulos) ;
         $ativo = 'active' ;
 
