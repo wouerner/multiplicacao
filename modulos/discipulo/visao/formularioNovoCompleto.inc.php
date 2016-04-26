@@ -32,7 +32,7 @@
                 <div class="col-md-3" >
                     <select id="sexo" class="form-control " name="sexo" required >
                         <option value="m" >Masculino</option>
-                        <option value="f" >Femenino</option>
+                        <option value="f" >Feminino</option>
                     </select>
                   <p class="help-block">(obrigatório)</p>
                 </div>
