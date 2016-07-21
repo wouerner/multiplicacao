@@ -90,7 +90,6 @@ class tipoRede extends modeloFramework
         }
 
         return $resposta;
-
     }
 
     public function totalDiscipulosPorRede()
@@ -260,5 +259,31 @@ class tipoRede extends modeloFramework
 
             return $stm->fetch(\PDO::FETCH_ASSOC);
             //return $stm->fetchAll();
+    }
+
+    public function lideresRede()
+    {
+        $pdo = self::pegarConexao();
+
+        $sql = '
+            select * from FuncaoRede fr
+            join Redes as r ON r.funcaoRedeId = fr.id
+            where fr.liderRede = 1 and r.tipoRedeId = ?
+            ';
+
+        $stm = $pdo->prepare($sql);
+
+        $stm->bindParam(1, $this->id);
+
+        $stm->execute();
+
+        $resposta = array();
+        $resposta = $stm->fetchAll();
+
+        //while ($obj = $stm->fetchObject('\rede\modelo\tipoRede')) {
+            //$resposta[$obj->id] = $obj;
+        //}
+
+        return $resposta;
     }
 }

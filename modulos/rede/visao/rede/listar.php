@@ -51,7 +51,7 @@
                                         <td><?php echo is_object($lider=$discipulo->getLider()) ? $lider->nome : '' ; ?></td>
                                         <td><?php echo is_object($meta = $discipulo->getMeta()) ? $meta->quantidade : 0 ?></td> <?php $metaTotal+= is_object($meta)? $meta->quantidade : 0 ?>
                                     <?php endif ; ?>
-                                    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                                    <?php if ($acesso->hasPermission('admin_acesso') == true || $liderRede): ?>
                                         <td><a target="blank" class="btn btn-mini btn-inverse" href="/discipulo/discipulo/arquivar/id/<?php echo $discipulo->id?>"> Arquivar</a></td>
                                     <?php endif?>
                                 </tr>

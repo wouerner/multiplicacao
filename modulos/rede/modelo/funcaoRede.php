@@ -76,13 +76,15 @@ class  funcaoRede
     //abrir conexao com o banco
     $pdo = new \PDO(DSN, USER, PASSWD);
     //cria sql
-    $sql = " UPDATE FuncaoRede SET 	nome = ?
+    $sql = " UPDATE FuncaoRede
+        SET 	nome = ?, liderRede = ?
         WHERE id = ? ";
     //prepara sql
     $stm = $pdo->prepare($sql);
     //trocar valores
     $stm->bindParam(1, $this->nome);
-    $stm->bindParam(2, $this->id);
+    $stm->bindParam(2, $this->liderRede);
+    $stm->bindParam(3, $this->id);
 
     $resposta = $stm->execute();
 
