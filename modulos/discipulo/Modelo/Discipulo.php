@@ -715,7 +715,7 @@ class Discipulo extends modeloFramework implements \JsonSerializable
     {
         $pdo = self::pegarConexao();
 
-        $sql = 'UPDATE Discipulo SET  ativo = 1 WHERE id = ?';
+        $sql = 'UPDATE Discipulo SET  ativo = 1, arquivo = 0 WHERE id = ?';
 
         $stm = $pdo->prepare($sql);
         $stm->bindParam(1, $this->id);
