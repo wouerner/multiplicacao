@@ -4,3 +4,6 @@
 ./modulos/discipulo/foto/upload/*
 ./config/banco.php
 .swo
+config/banco.php
+modulos/discipulo/visao/foto/*
+
