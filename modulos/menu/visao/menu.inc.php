@@ -1,6 +1,6 @@
 <?php
-use \seguranca\modelo\acl;
-use \igreja\modelo\igreja;
+use \Seguranca\Modelo\Acl;
+use \Igreja\Modelo\Igreja;
 
 $acesso = new acl($_SESSION['usuario_id']);
 

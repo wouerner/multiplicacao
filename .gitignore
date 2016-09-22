@@ -6,4 +6,5 @@
 .swo
 config/banco.php
 modulos/discipulo/visao/foto/*
+vendor
 

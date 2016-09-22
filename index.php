@@ -1,4 +1,7 @@
 <?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
 //inicia a sessão
 session_start();
 
@@ -50,10 +53,10 @@ $acao = ( array_key_exists(2, $url) ) ? $url[2] : 'index' ;
 $url['post'] = isset($_POST) ? $_POST : NULL;
 require_once 'config/autoload.php' ;
 
-include 'modulos/seguranca/ACL/assets/php/database.php';
-include 'modulos/seguranca/ACL/assets/php/acl.php';
+include 'modulos/Seguranca/ACL/assets/php/database.php';
+include 'modulos/Seguranca/ACL/assets/php/acl.php';
 
-require_once $modulo.'/controlador/'.$controlador.'.php' ;
+require_once ucfirst($modulo).'/controlador/'.$controlador.'.php' ;
 
 
 $controlador = $modulo.'\controlador\\'.$controlador ;
