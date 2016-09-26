@@ -1,11 +1,16 @@
 <?php
+/**
+ * tipoRede
+ *
+ * @uses modeloFramework
+ * @author wouerner <wouerner@gmail.com>
+ */
 
-namespace rede\modelo;
+namespace Rede\Modelo;
 
-use \framework\modelo\modeloFramework;
-use \metas\modelo\metas as Metas;
-
-class tipoRede extends modeloFramework
+use \Framework\Modelo\ModeloFramework;
+use \Metas\Modelo\Metas as Metas;
+class TipoRede extends ModeloFramework
 {
     private $id;
     private $nome;

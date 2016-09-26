@@ -1,9 +1,9 @@
 <?php
-namespace metas\modelo ;
-use \framework\modelo\modeloFramework ;
-use \metas\modelo\participantesMetas 	as participantesMetasModelo;
+namespace Metas\Modelo ;
+use \Framework\Modelo\ModeloFramework ;
+use \Metas\Modelo\ParticipantesMetas 	as participantesMetasModelo;
 
-class metas extends modeloFramework
+class Metas extends ModeloFramework
 {
   private $id ;
   private $quantidade ;

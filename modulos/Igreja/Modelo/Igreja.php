@@ -1,13 +1,13 @@
 <?php
 
-namespace igreja\modelo;
+namespace Igreja\Modelo;
 
 /**
  * Igreja
  *
  * @author  wouerner wouerner@gmail.com
  */
-class  igreja implements \JsonSerializable {
+class  Igreja implements \JsonSerializable {
 
 	private $id ;
 	private $nome ;

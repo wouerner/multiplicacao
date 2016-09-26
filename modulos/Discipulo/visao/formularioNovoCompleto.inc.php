@@ -1,4 +1,4 @@
-<form action="/discipulo/discipulo/novoCompleto" method="post"  class="form-horizontal ">
+<form id="form" action="/discipulo/discipulo/novoCompleto" method="post"  class="form-horizontal ">
     <fieldset class="col-md-6">
         <legend>Dados Pessoais</legend>
         <div class="form-group ">
@@ -114,7 +114,7 @@
         <div class="form-group col-md-2" >
             <label class="control-label" >Admissão:</label>
             <div class="controls" >
-                <select class="form-control" name="tipoAdmissao" >
+                <select class="form-control" name="tipoAdmissao" id="tipoAdmissao">
                      <option value=""></option>
                       <?php foreach ($tiposAdmissoes as $tipoAdmissao) : ?>
                             <option value="<?php echo $tipoAdmissao['id'] ; ?>" >
@@ -148,8 +148,34 @@
     </fieldset>
     <fieldset class="col-md-12">
         <div class="form-actions " >
-            <button type="submit" class="btn btn-success" ><i class="icon-ok icon-white" ></i> Salvar</button>
+            <button id="salvar" type="submit" class="btn btn-success" ><i class="icon-ok icon-white" ></i> Salvar</button>
             <a href="/discipulo/discipulo" class="" ><i class="icon-ban-circle" ></i>Cancelar</a>
         </div>
     </fieldset>
 </form>
+<div id="dialog" title="Salvar">
+    Deseja Salvar?
+</div>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<script src="https://raw.githubusercontent.com/jzaefferer/jquery-validation/master/src/localization/messages_pt_BR.js"></script>
+<script>
+    jQuery("#tipoAdmissao").select2();
+
+    jQuery("#form").validate();
+
+    jQuery("#salvar").on('click', function(){
+      jQuery( "#dialog" ).dialog({
+              modal: true,
+              buttons: {
+                "Delete all items": function() {
+                  $( this ).dialog( "close" );
+                },
+                Cancel: function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+          } );
+    });
+</script>
