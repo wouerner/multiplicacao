@@ -46,7 +46,7 @@ unset($_SESSION['mensagem']) ;
                             <h5 class="text-center">Células:
                             <?php foreach ( $lider->getCelulaLider() as $celula) : ?>
                                 <a href ="/celula/celula/detalhar/id/<?php echo $celula->id ?>" >
-                                <?php echo $celula->nome?> (<?php echo count($celula->listarDiscipulos())?>)
+                                <?php echo $celula->nome?> - <?php echo $celula->pegaRede()->nome ?> (<?php echo count($celula->listarDiscipulos())?>)
                                 </a>|
                             <?php endforeach;?>
                             </h5>
@@ -66,7 +66,7 @@ unset($_SESSION['mensagem']) ;
                         </a>
                         </td>
                     </tr-->
-                <?php// endforeach;?>
+                <?php // endforeach;?>
                     <?php $cont=0 ?>
                     <?php foreach ($statusCelulares as $status ): ?>
                                 <?php $cont=0 ?>
@@ -91,8 +91,8 @@ unset($_SESSION['mensagem']) ;
                                 <?php endforeach ?>
                             </td>
                     <?php endforeach ?>
-                <?php// $total += $c?>
-                <?php// $c=0 ?>
+                <?php // $total += $c?>
+                <?php // $c=0 ?>
             <?php endforeach ; ?>
                 <!--h3>Lideres: <?php //echo count($lideres)?>-
                 Discipulos: <?php //echo $total - (2*count($lideres))?></h3-->
