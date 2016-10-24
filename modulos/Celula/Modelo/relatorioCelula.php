@@ -28,7 +28,7 @@ class relatorioCelula extends modeloFramework
 
     public function getLider()
     {
-        $discipulo = new \discipulo\Modelo\Discipulo() ;
+        $discipulo = new \Discipulo\Modelo\Discipulo() ;
         $discipulo->id = $this->lider ;
 
         return $discipulo->listarUm() ;
@@ -161,7 +161,7 @@ class relatorioCelula extends modeloFramework
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $ob->id = $ob->discipuloId   ;
             $resposta[$ob->discipuloId] = $ob->listarUm();
 

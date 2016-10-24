@@ -83,7 +83,7 @@ class temaRelatorioCelula
                 $celula->id =  $url[4] ;
                 $celula = $celula->listarUm() ;
 
-                $lider =	new \discipulo\Modelo\Discipulo() ;
+                $lider =	new \Discipulo\Modelo\Discipulo() ;
                 $lider->id = $celula->lider ;
                 $lider = $lider->listarUm($celula->lider) ;
 
@@ -127,7 +127,7 @@ class temaRelatorioCelula
             $discipulos= $celula->listarDiscipulos() ;
             $celula = $celula->listarUm() ;
 
-                $lider =	new \discipulo\Modelo\Discipulo() ;
+                $lider =	new \Discipulo\Modelo\Discipulo() ;
                 $lider->id = $celula->lider ;
                 $lider = $lider->listarUm($celula->lider) ;
 

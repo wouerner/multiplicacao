@@ -1,7 +1,8 @@
 <?php
 namespace Seguranca\Modelo;
+use \Framework\Modelo\ModeloFramework;
 
-class Acl
+class Acl extends ModeloFramework
 {
     public $perms = array();		//Array : Stores the permissions for the user
     public $userID = 0;			//Integer : Stores the ID of the current user
@@ -21,6 +22,7 @@ class Acl
 
     public function __construct($userID = '')
     {
+        $this->con = self::pegarConexao();
         if ($userID != '')
         {
             $this->userID = floatval($userID);
@@ -51,16 +53,22 @@ class Acl
     function getPermKeyFromID($permID)
     {
         $strSQL = "SELECT `permKey` FROM `permissions` WHERE `ID` = " . floatval($permID) . " LIMIT 1";
-        $data = mysql_query($strSQL);
-        $row = mysql_fetch_array($data);
+        //$data = mysql_query($strSQL);
+        $stm = $this->con->prepare($strSQL);
+        $stm->execute();
+        //$row = mysql_fetch_array($data);
+        $row = $stm->fetch();
         return $row[0];
     }
 
     function getPermNameFromID($permID)
     {
         $strSQL = "SELECT `permName` FROM `permissions` WHERE `ID` = " . floatval($permID) . " LIMIT 1";
-        $data = mysql_query($strSQL);
-        $row = mysql_fetch_array($data);
+        $stm = $this->con->prepare($strSQL);
+        $stm->execute();
+        //$data = mysql_query($strSQL);
+        //$row = mysql_fetch_array($data);
+        $row = $stm->fetch();
         return $row[0];
     }
 
@@ -75,12 +83,15 @@ class Acl
     function getUserRoles()
     {
         $strSQL = "SELECT * FROM `user_roles` WHERE `userID` = " . floatval($this->userID) . " ORDER BY `addDate` ASC";
-        $data = mysql_query($strSQL);
+        //$data = mysqli_query(LINK, $strSQL);
         $resp = array();
 
-        //echo mysql_error();
+        $stm = $this->con->prepare($strSQL);
+        $stm->execute();
 
-        while($row = mysql_fetch_array($data))
+        //echo mysql_error();
+        //while($row = mysql_fetch_array($data))
+        while($row = $stm->fetch(\PDO::FETCH_ASSOC))
         {
             $resp[] = $row['roleID'];
         }
@@ -131,9 +142,12 @@ class Acl
         } else {
             $roleSQL = "SELECT * FROM `role_perms` WHERE `roleID` = " . floatval($role) . " ORDER BY `ID` ASC";
         }
-        $data = mysql_query($roleSQL);
+
+        $stm = $this->con->prepare($roleSQL);
+        $stm->execute();
+        //$data = mysql_query($roleSQL);
         $perms = array();
-        while($row = mysql_fetch_assoc($data))
+        while($row = $stm->fetch(\PDO::FETCH_ASSOC))
         {
             $pK = strtolower($this->getPermKeyFromID($row['permID']));
             if ($pK == '') { continue; }
@@ -150,9 +164,12 @@ class Acl
     function getUserPerms($userID)
     {
         $strSQL = "SELECT * FROM `user_perms` WHERE `userID` = " . floatval($userID) . " ORDER BY `addDate` ASC";
-        $data = mysql_query($strSQL);
+        //$data = mysql_query($strSQL);
+        $stm = $this->con->prepare($strSQL);
+        $stm->execute();
         $perms = array();
-        while($row = mysql_fetch_assoc($data))
+        //while($row = mysql_fetch_assoc($data))
+        while($row = $stm->fetch(\PDO::FETCH_ASSOC))
         {
             $pK = strtolower($this->getPermKeyFromID($row['permID']));
             if ($pK == '') { continue; }

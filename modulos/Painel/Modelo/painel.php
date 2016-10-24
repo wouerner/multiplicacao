@@ -435,7 +435,7 @@ class Discipulo
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob ;
 
         }
@@ -463,7 +463,7 @@ class Discipulo
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob ;
 
         }
@@ -513,7 +513,7 @@ class Discipulo
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob ;
 
         }
@@ -645,7 +645,7 @@ class Discipulo
 
         $stm->execute();
 
-        return $stm->fetchObject('\discipulo\Modelo\Discipulo');
+        return $stm->fetchObject('\Discipulo\Modelo\Discipulo');
 
     }
 
@@ -720,7 +720,7 @@ class Discipulo
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob ;
 
         }
@@ -746,7 +746,7 @@ class Discipulo
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob ;
 
         }

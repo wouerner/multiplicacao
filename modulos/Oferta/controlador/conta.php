@@ -1,5 +1,5 @@
 <?php
-use \discipulo\Modelo\Discipulo ;
+use \Discipulo\Modelo\Discipulo ;
 use \oferta\Modelo\conta as ContaModel;
 
 namespace oferta\controlador;
@@ -69,7 +69,7 @@ class conta {
         $ofertasDiscipulo->discipuloId= $url[3];
         $ofertasDiscipulo= $ofertasDiscipulo->pegarOfertasDiscipulo();
 
-        $discipulo = new \discipulo\Modelo\Discipulo() ;
+        $discipulo = new \Discipulo\Modelo\Discipulo() ;
         $discipulo->id = $url[3] ;
         $discipulo = $discipulo->listarUm();
 
@@ -132,13 +132,13 @@ class conta {
 
         if ( empty ( $url['post'] ) ) {
 
-            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo =	new \Discipulo\Modelo\Discipulo();
             $lideres = $discipulo->listarLideres();
 
             $discipulo->id =  $url[3] ;
             $discipulo = $discipulo->listarUm();
 
-            $lider =	new \discipulo\Modelo\Discipulo();
+            $lider =	new \Discipulo\Modelo\Discipulo();
             $lider->id = $discipulo['lider'] ;
             $lider = $lider->listarUm($discipulo['lider']);
 
@@ -155,7 +155,7 @@ class conta {
             require_once  'modulos/discipulo/visao/atualizar.php';
 
         }else {
-            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo =	new \Discipulo\Modelo\Discipulo();
 
             $post = $url['post'] ;
 

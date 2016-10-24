@@ -75,7 +75,7 @@ use Discipulo\modelo\role;
 		}
 
 		public function trocarSenha($url){
-			$discipulo = new \discipulo\Modelo\Discipulo() ;
+			$discipulo = new \Discipulo\Modelo\Discipulo() ;
 
 			if (empty($url['post'])){
 				$discipulo->id = $url[4] ;
@@ -93,7 +93,7 @@ use Discipulo\modelo\role;
 		}
 
     public function recuperar($url){
-        $discipulo = new \discipulo\Modelo\Discipulo() ;
+        $discipulo = new \Discipulo\Modelo\Discipulo() ;
 
         if ($url['post']){
             $discipulo->senha = $this->random_password();

@@ -16,11 +16,10 @@ class Metas extends ModeloFramework
          return $this->$prop ;
   }
 
-  public function __set($prop, $valor)
-  {
-         $this->$prop = $valor ;
-
-  }
+    public function __set($prop, $valor)
+    {
+        $this->$prop = $valor ;
+    }
 
   public function participantesTotal()
   {
@@ -34,28 +33,25 @@ class Metas extends ModeloFramework
 
     public function metaPorRede()
     {
-              $pdo = self::pegarConexao() ;
+        $pdo = self::pegarConexao() ;
 
-                $sql ='
-                                SELECT sum(m.quantidade) FROM Metas as m inner join TipoRede as tr on tr.id = m.tipoRedeId WHERE tr.id = ?
-                                group by tr.id
-                                ';
+        $sql ='
+            SELECT sum(m.quantidade) FROM Metas as m inner join TipoRede as tr on tr.id = m.tipoRedeId WHERE tr.id = ?
+            group by tr.id
+            ';
 
-              //prepara sql
-              $stm = $pdo->prepare($sql);
-                //var_dump($this);
-                $id = $this->id ;
+        $stm = $pdo->prepare($sql);
+        $id = $this->id ;
 
-              $stm->bindParam(1, $id);
+        $stm->bindParam(1, $id);
 
-              $stm->execute();
-              $resposta = $stm->fetch();
+        $stm->execute();
+        $resposta = $stm->fetch();
 
-              $pdo = null ;
+        $pdo = null ;
 
-              return $resposta;
-
-        }
+        return $resposta;
+    }
 
   public function salvar()
   {
@@ -108,7 +104,7 @@ WHERE 1' ;
         $pdo = null ;
         $resposta = array();
 
-        while ( $obj = $stm->fetchObject ('\discipulo\Modelo\Discipulo')  ) {
+        while ( $obj = $stm->fetchObject ('\Discipulo\Modelo\Discipulo')  ) {
               $resposta[$obj->id] = $obj ;
         }
 

@@ -37,7 +37,7 @@ class grafico
 
     public function status()
     {
-        $status = new \statusCelular\modelo\statusCelular() ;
+        $status = new \StatusCelular\Modelo\StatusCelular() ;
         $status = $status->quantidadePorStatusCelular();
 
         $aux = array();
@@ -51,7 +51,7 @@ class grafico
 
     public function redes()
     {
-        $tiposRedes = new \rede\modelo\tipoRede();
+        $tiposRedes = new \Rede\Modelo\TipoRede();
         $tiposRedes = $tiposRedes->listarTodos();
 
         $aux = array();
@@ -64,9 +64,9 @@ class grafico
     }
     public function ativos()
     {
-        $totalAtivos =  \discipulo\Modelo\Discipulo::totalAtivos() ;
-        $totalInativos = \discipulo\Modelo\Discipulo::totalInativos() ;
-        $totalArquivados =  \discipulo\Modelo\Discipulo::totalArquivados() ;
+        $totalAtivos =  \Discipulo\Modelo\Discipulo::totalAtivos() ;
+        $totalInativos = \Discipulo\Modelo\Discipulo::totalInativos() ;
+        $totalArquivados =  \Discipulo\Modelo\Discipulo::totalArquivados() ;
 
         echo json_encode(array('ativo'=> $totalAtivos['total'], 'inativos'=> $totalInativos['total'], 'arquivado' => $totalArquivados['total']));
 

@@ -42,7 +42,7 @@ class Celula extends ModeloFramework
 
     public function pegaLider()
     {
-        $discipulo = new \discipulo\Modelo\Discipulo();
+        $discipulo = new \Discipulo\Modelo\Discipulo();
         $discipulo->id = $this->lider ;
         $discipulo = $discipulo->listarUm();
 
@@ -52,7 +52,7 @@ class Celula extends ModeloFramework
 
     public function pegaRede()
     {
-        $tipoRede = new \rede\modelo\tipoRede();
+        $tipoRede = new \Rede\Modelo\TipoRede();
         $tipoRede->id = $this->tipoRedeId ;
         $this->tipoRedeId = $tipoRede->listarUm();
 
@@ -468,7 +468,7 @@ order by dnome
         //$stm->execute();
         $resposta = array();
 
-        while ( $obj = $stm->fetchObject ('\discipulo\Modelo\Discipulo') ) {
+        while ( $obj = $stm->fetchObject ('\Discipulo\Modelo\Discipulo') ) {
             $resposta[$obj->id] = $obj ;
         }
 
@@ -557,7 +557,7 @@ order by dnome
 
         $resposta = array();
 
-        while ( $obj = $stm->fetchObject('\discipulo\Modelo\Discipulo') ) {
+        while ( $obj = $stm->fetchObject('\Discipulo\Modelo\Discipulo') ) {
             $resposta[$obj->id] = $obj ;
         }
 

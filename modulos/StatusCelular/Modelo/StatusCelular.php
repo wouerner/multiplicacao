@@ -245,7 +245,7 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
 
 				$resposta = array();
 
-				while($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')){
+				while($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')){
 					$resposta[$ob->id] = $ob ;
 				}
 
@@ -276,7 +276,7 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
 
 				$resposta = array();
 
-				while($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')){
+				while($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')){
 					$resposta[$ob->id] = $ob ;
 				}
 
@@ -307,7 +307,7 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
 
 				$resposta = array();
 
-				while($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')){
+				while($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')){
 					$resposta[$ob->id] = $ob ;
 				}
 
@@ -316,12 +316,12 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
 				return $resposta ;
 	}
 
-    public function  quantidadePorStatusCelular() {
-
+    public function  quantidadePorStatusCelular()
+    {
         $pdo = new \PDO(DSN, USER, PASSWD);
 
         $sql = '
-            SELECT sc.id AS idStatus, tpsc.nome AS tipoNome, count( * ) AS total, sc.tipoStatusCelular
+            SELECT  tpsc.nome AS tipoNome, count( * ) AS total, sc.tipoStatusCelular
             FROM
             Discipulo 		AS d
             INNER JOIN
@@ -331,17 +331,15 @@ AND sc.ativo =1 AND sc.tipoStatusCelular = ?
             TipoStatusCelular tpsc ON sc.tipoStatusCelular = tpsc.id
             WHERE 1
             AND sc.ativo = 1 and d.ativo =1
-            GROUP BY sc.tipoStatusCelular
+            GROUP BY sc.tipoStatusCelular,  tpsc.nome
             order by tpsc.ordem
-';
+        ';
 
         $stm = $pdo->prepare($sql);
 
         $resposta = $stm->execute();
 
         $resposta = $stm->fetchAll();
-
-        $pdo = null ;
 
         return $resposta;
     }

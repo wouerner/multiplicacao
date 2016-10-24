@@ -2,8 +2,8 @@
 namespace batismo\controlador;
 
 use \batismo\modelo\batismos as batismoModelo;
-use \discipulo\Modelo\Discipulo as discipulo;
-use \rede\modelo\tipoRede as TipoRede;
+use \Discipulo\Modelo\Discipulo as discipulo;
+use \Rede\Modelo\TipoRede as TipoRede;
 
 class batismo
 {
@@ -342,13 +342,13 @@ class batismo
         {
             if ( empty ( $url['post'] ) ) {
 
-                $discipulo =	new \discipulo\Modelo\Discipulo();
+                $discipulo =	new \Discipulo\Modelo\Discipulo();
                 $lideres = $discipulo->listarLideres();
 
                 $discipulo->id =  $url[3] ;
                 $discipulo = $discipulo->listarUm();
 
-                $lider =	new \discipulo\Modelo\Discipulo();
+                $lider =	new \Discipulo\Modelo\Discipulo();
                 $lider->id = $discipulo['lider'] ;
                 $lider = $lider->listarUm($discipulo['lider']);
 
@@ -362,7 +362,7 @@ class batismo
                 require_once 'modulos/discipulo/visao/atualizar.php';
 
             } else {
-                $discipulo =	new \discipulo\Modelo\Discipulo();
+                $discipulo =	new \Discipulo\Modelo\Discipulo();
 
                 $post = $url['post'] ;
 
@@ -459,7 +459,7 @@ class batismo
 
         public function detalhar ($url)
         {
-            $discipulo = new \discipulo\Modelo\Discipulo() ;
+            $discipulo = new \Discipulo\Modelo\Discipulo() ;
 
             $discipulo->id = $url[4] ;
             $discipulo = $discipulo->listarUm() ;
@@ -498,7 +498,7 @@ class batismo
         public function chamar ()
         {
             $nome = (!empty($_GET['nome'])) ? $_GET['nome'] : NULL;
-            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo =	new \Discipulo\Modelo\Discipulo();
             $discipulo->nome = $nome;
             $discipulos = $discipulo->chamar($nome);
             require_once 'discipulo/visao/chamar.php';

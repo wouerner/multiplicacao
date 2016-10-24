@@ -1,5 +1,5 @@
 <?php
-use \discipulo\Modelo\Discipulo ;
+use \Discipulo\Modelo\Discipulo ;
 
 namespace rede\controlador;
 
@@ -17,13 +17,13 @@ class rede
 
          $rede =	new \rede\modelo\rede() ;
          $funcaoRede =	new \rede\modelo\funcaoRede() ;
-         $tipoRede =	new \rede\modelo\tipoRede() ;
+         $tipoRede =	new \Rede\Modelo\TipoRede() ;
 
          $rede->discipuloId = $url[3];
          $rede->tipoRedeId = $url[3];
          $rede->funcaoRedeId = $url[3];
 
-        $discipulo = new \discipulo\Modelo\Discipulo() ;
+        $discipulo = new \Discipulo\Modelo\Discipulo() ;
         $discipulo->id = $url[3] ;
         $discipulo = $discipulo->listarUm();
 
@@ -56,7 +56,7 @@ class rede
 
         } else {
 
-        $tipoRede =	new \rede\modelo\tipoRede() ;
+        $tipoRede =	new \Rede\Modelo\TipoRede() ;
 
         $post = $url['post'] ;
         $tipoRede->nome = $post['nome'] ;
@@ -90,7 +90,7 @@ class rede
 
     public function listarTipoRede()
     {
-              $redes =	new \rede\modelo\tipoRede();
+              $redes =	new \Rede\Modelo\TipoRede();
               $redes = $redes->listarTodos();
                 $totalMeta= 0 ;
                 $totalDisc= 0 ;
@@ -114,7 +114,7 @@ public function listarMembrosRede($url)
 
     $rede =	new \rede\modelo\rede();
     $funcao =	new \rede\modelo\funcaoRede();
-    $tipoRede = new \rede\modelo\tipoRede();
+    $tipoRede = new \Rede\Modelo\TipoRede();
     $tipoRede->id = $redeId;
     $lideresRede = $tipoRede->lideresRede();
     $tipoRede = $tipoRede->listarUm();
@@ -145,7 +145,7 @@ public function listarMembrosRede($url)
     {
                 $redeId = $url[4];
 
-                $tipoRede = new \rede\modelo\tipoRede();
+                $tipoRede = new \Rede\Modelo\TipoRede();
                 $tipoRede->id = $redeId;
                 $celulas = $tipoRede->listarCelulas();
                 $cont = 0;
@@ -158,13 +158,13 @@ public function listarMembrosRede($url)
     {
         if ( empty ( $url['post'] ) ) {
 
-            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo =	new \Discipulo\Modelo\Discipulo();
             $lideres = $discipulo->listarLideres();
 
             $discipulo->id =  $url[3] ;
             $discipulo = $discipulo->listarUm();
 
-            $lider =	new \discipulo\Modelo\Discipulo();
+            $lider =	new \Discipulo\Modelo\Discipulo();
             $lider->id = $discipulo['lider'] ;
             $lider = $lider->listarUm($discipulo['lider']);
 
@@ -178,7 +178,7 @@ public function listarMembrosRede($url)
             require_once 'modulos/discipulo/visao/atualizar.php';
 
         } else {
-            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo =	new \Discipulo\Modelo\Discipulo();
 
             $post = $url['post'] ;
 
@@ -202,14 +202,14 @@ public function listarMembrosRede($url)
     {
         if ( empty ( $url['post'] ) ) {
 
-            $rede =	new \rede\modelo\tipoRede();
+            $rede =	new \Rede\Modelo\TipoRede();
             $rede->id = $url[4] ;
             $rede = $rede->listarUm();
 
             require_once 'modulos/rede/visao/tipoRede/atualizar.php';
 
         } else {
-            $rede =	new \rede\modelo\tipoRede();
+            $rede =	new \Rede\Modelo\TipoRede();
 
             $post = $url['post'] ;
 
@@ -235,7 +235,7 @@ public function listarMembrosRede($url)
 
     public function excluirTipoRede($url)
     {
-            $rede =	new \rede\modelo\tipoRede();
+            $rede =	new \Rede\Modelo\TipoRede();
             $rede->id = $url[4];
             $rede->excluir();
 
@@ -267,7 +267,7 @@ public function listarMembrosRede($url)
 
     public function detalhar ($url)
     {
-        $discipulo = new \discipulo\Modelo\Discipulo() ;
+        $discipulo = new \Discipulo\Modelo\Discipulo() ;
 
         $discipulo->id = $url[4] ;
         $discipulo = $discipulo->listarUm() ;
@@ -289,7 +289,7 @@ public function listarMembrosRede($url)
 
     public function detalharTipoRede ($url)
     {
-        $rede = new \rede\modelo\tipoRede() ;
+        $rede = new \Rede\Modelo\TipoRede() ;
 
         $rede->id = $url[4] ;
         $rede = $rede->listarUm() ;
@@ -301,7 +301,7 @@ public function listarMembrosRede($url)
     public function chamar ()
     {
         $nome = (!empty($_GET['nome'])) ? $_GET['nome'] : NULL;
-        $discipulo =	new \discipulo\Modelo\Discipulo();
+        $discipulo =	new \Discipulo\Modelo\Discipulo();
         $discipulo->nome = $nome;
         $discipulos = $discipulo->chamar($nome);
         require_once 'discipulo/visao/chamar.php';

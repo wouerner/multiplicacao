@@ -36,7 +36,7 @@ class temaRelatorioCelula
 
     public function pegaLider()
     {
-        $discipulo = new \discipulo\Modelo\Discipulo();
+        $discipulo = new \Discipulo\Modelo\Discipulo();
         $discipulo->id = $this->lider ;
         $discipulo = $discipulo->listarUm();
 

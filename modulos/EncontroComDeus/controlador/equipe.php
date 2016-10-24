@@ -1,7 +1,7 @@
 <?php
 namespace encontroComDeus\controlador;
 
-use \discipulo\Modelo\Discipulo as discipulo;
+use \Discipulo\Modelo\Discipulo as discipulo;
 
 class equipe
 {
@@ -225,13 +225,13 @@ class equipe
         {
             if ( empty ( $url['post'] ) ) {
 
-                $discipulo =	new \discipulo\Modelo\Discipulo();
+                $discipulo =	new \Discipulo\Modelo\Discipulo();
                 $lideres = $discipulo->listarLideres();
 
                 $discipulo->id =  $url[3] ;
                 $discipulo = $discipulo->listarUm();
 
-                $lider =	new \discipulo\Modelo\Discipulo();
+                $lider =	new \Discipulo\Modelo\Discipulo();
                 $lider->id = $discipulo['lider'] ;
                 $lider = $lider->listarUm($discipulo['lider']);
 
@@ -245,7 +245,7 @@ class equipe
                 require_once 'modulos/discipulo/visao/atualizar.php';
 
             } else {
-                $discipulo =	new \discipulo\Modelo\Discipulo();
+                $discipulo =	new \Discipulo\Modelo\Discipulo();
 
                 $post = $url['post'] ;
 
@@ -363,7 +363,7 @@ class equipe
 
         public function detalhar ($url)
         {
-            $discipulo = new \discipulo\Modelo\Discipulo() ;
+            $discipulo = new \Discipulo\Modelo\Discipulo() ;
 
             $discipulo->id = $url[3] ;
             $discipulo = $discipulo->listarUm() ;
@@ -397,7 +397,7 @@ class equipe
         public function chamar ()
         {
             $nome = (!empty($_GET['nome'])) ? $_GET['nome'] : NULL;
-            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo =	new \Discipulo\Modelo\Discipulo();
             $discipulo->nome = $nome;
             $discipulos = $discipulo->chamar($nome);
             require_once 'discipulo/visao/chamar.php';

@@ -6,7 +6,7 @@ class relatorio
 {
     public function discipulos()
     {
-        $discipulos = new \discipulo\Modelo\Discipulo();
+        $discipulos = new \Discipulo\Modelo\Discipulo();
         $discipulos= $discipulos->listarTodosDiscipulos();
 
         require 'relatorio/visao/discipulos.php';
@@ -64,10 +64,10 @@ class relatorio
         $celulas = new \celula\modelo\celula();
         $celulas = $celulas->listarTodos();
 
-        $tipoRedes = new \rede\modelo\tipoRede();
+        $tipoRedes = new \Rede\Modelo\TipoRede();
         $tipoRedes = $tipoRedes->listarTodos();
 
-        $lideres = new \discipulo\Modelo\Discipulo();
+        $lideres = new \Discipulo\Modelo\Discipulo();
         $lideres = $lideres->listarTodosDiscipulos();
 
         require 'relatorio/visao/discipulosResumido.php';
@@ -120,7 +120,7 @@ class relatorio
         }
 
         if ($rede != 'todos') {
-        $rede = new \rede\modelo\tipoRede();
+        $rede = new \Rede\Modelo\TipoRede();
         $rede->id = $post['rede'];
         $rede = $rede->listarUm();
         }
@@ -150,10 +150,10 @@ class relatorio
         $celulas = new \celula\modelo\celula();
         $celulas = $celulas->listarTodos();
 
-        $tipoRedes = new \rede\modelo\tipoRede();
+        $tipoRedes = new \Rede\Modelo\TipoRede();
         $tipoRedes = $tipoRedes->listarTodos();
 
-        $lideres = new \discipulo\Modelo\Discipulo();
+        $lideres = new \Discipulo\Modelo\Discipulo();
         $lideres = $lideres->listarTodosDiscipulos();
 
         require 'relatorio/visao/discipulosResumido.php';
@@ -206,7 +206,7 @@ class relatorio
         }
 
         if ($rede != 'todos') {
-        $rede = new \rede\modelo\tipoRede();
+        $rede = new \Rede\Modelo\TipoRede();
         $rede->id = $post['rede'];
         $rede = $rede->listarUm();
         }
@@ -333,7 +333,7 @@ class relatorio
         //$temas = $tema->listarTodosAtivos();
         $temas = $tema->listarTodos();
 
-        $tipoRede = new \rede\modelo\tipoRede();
+        $tipoRede = new \Rede\Modelo\TipoRede();
         $tipoRede = $tipoRede->listarTodos() ;
 
         if ($url['post']) {
@@ -356,7 +356,7 @@ class relatorio
   {
         $post=$url['post'];
 
-        $lideres = new \discipulo\Modelo\Discipulo();
+        $lideres = new \Discipulo\Modelo\Discipulo();
         $lideres = $lideres->listarTodosDiscipulos();
 
         $tiposStatus = new \statusCelular\modelo\tipoStatusCelular();

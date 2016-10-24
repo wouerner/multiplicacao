@@ -271,7 +271,7 @@ WHERE e.encontroComDeusId = ?
               $pdo = null ;
                 $resposta = array();
 
-                while ( $obj = $stm->fetchObject ('\discipulo\Modelo\Discipulo')  ) {
+                while ( $obj = $stm->fetchObject ('\Discipulo\Modelo\Discipulo')  ) {
                     $resposta[$obj->id] = $obj ;
                 }
 

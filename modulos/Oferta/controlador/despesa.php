@@ -1,5 +1,5 @@
 <?php
-use \discipulo\Modelo\Discipulo ;
+use \Discipulo\Modelo\Discipulo ;
 use \oferta\modelo\despesa;
 
 namespace oferta\controlador;

@@ -329,7 +329,7 @@ class foto extends modeloFramework
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob ;
         }
 
@@ -350,7 +350,7 @@ class foto extends modeloFramework
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob ;
         }
 
@@ -369,7 +369,7 @@ class foto extends modeloFramework
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob ;
         }
 
@@ -532,7 +532,7 @@ class foto extends modeloFramework
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob ;
         }
 
@@ -623,7 +623,7 @@ class foto extends modeloFramework
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob ;
 
         }
@@ -658,7 +658,7 @@ class foto extends modeloFramework
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob ;
 
         }
@@ -773,7 +773,7 @@ class foto extends modeloFramework
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob ;
 
         }
@@ -802,7 +802,7 @@ $options = array(
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob ;
 
         }
@@ -856,7 +856,7 @@ SELECT *
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob ;
 
         }
@@ -879,7 +879,7 @@ SELECT *
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob ;
 
         }

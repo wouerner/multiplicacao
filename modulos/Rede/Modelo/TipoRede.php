@@ -30,7 +30,7 @@ class TipoRede extends ModeloFramework
     {
         $meta = new Metas();
         $meta->tipoRedeId = $this->id;
-        $meta = $meta::metaPorRede();
+        $meta = $meta->metaPorRede();
 
         return $meta[0];
     }
@@ -90,7 +90,7 @@ class TipoRede extends ModeloFramework
 
         $resposta = array();
 
-        while ($obj = $stm->fetchObject('\rede\modelo\tipoRede')) {
+        while ($obj = $stm->fetchObject('\Rede\Modelo\TipoRede')) {
             $resposta[$obj->id] = $obj;
         }
 
@@ -285,7 +285,7 @@ class TipoRede extends ModeloFramework
         $resposta = array();
         $resposta = $stm->fetchAll();
 
-        //while ($obj = $stm->fetchObject('\rede\modelo\tipoRede')) {
+        //while ($obj = $stm->fetchObject('\Rede\Modelo\TipoRede')) {
             //$resposta[$obj->id] = $obj;
         //}
 

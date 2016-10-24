@@ -14,7 +14,7 @@ class celula
 
         //include("seguranca/ACL/assets/php/database.php");
         $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
-        //$redes =	new \rede\modelo\tipoRede();
+        //$redes =	new \Rede\Modelo\TipoRede();
         //$redes =	$redes->listarTodos();
 
         if ($acl->hasPermission('admin_acesso') == true) {
@@ -38,10 +38,10 @@ class celula
         {
             if ( empty ( $url['post'] ) ) {
 
-                $lideres = new \discipulo\Modelo\Discipulo();
+                $lideres = new \Discipulo\Modelo\Discipulo();
                 $lideres = $lideres->listarLideres();
 
-                $tiposRedes = new \rede\modelo\tipoRede() ;
+                $tiposRedes = new \Rede\Modelo\TipoRede() ;
                 $tiposRedes = $tiposRedes->listarTodos() ;
 
                 require_once 'modulos/celula/visao/novo.php';
@@ -72,7 +72,7 @@ class celula
                 $celula->id =  $url[4] ;
                 $celula = $celula->listarUm();
 
-                $discLider =	new \discipulo\Modelo\Discipulo();
+                $discLider =	new \Discipulo\Modelo\Discipulo();
                 $discLider->id = $celula->lider;
 
 
@@ -81,7 +81,7 @@ class celula
                 $discLider->id = $celula->colider;
                 $colider = $discLider->listarUm();
 
-                $tipoRede = new \rede\modelo\tipoRede();
+                $tipoRede = new \Rede\Modelo\TipoRede();
                 $tipoRede->id = $celula->tipoRedeId;
                 $tiposRedes = $tipoRede->listarTodos();
                 $tipoRede = $tipoRede->listarUm();
@@ -131,7 +131,7 @@ class celula
         $discipulos= $celula->listarDiscipulos() ;
         $celula = $celula->listarUm() ;
 
-        $lider =	new \discipulo\Modelo\Discipulo() ;
+        $lider =	new \Discipulo\Modelo\Discipulo() ;
         $lider->id = $celula->lider ;
         $lider = $lider->listarUm($celula->lider) ;
 

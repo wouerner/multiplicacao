@@ -27,6 +27,7 @@ class painel
                 $totalDiscipulos += (int) $s['total'] ;
         }
 
+        $porc = null;
         foreach ($status as $k => $v) {
                 $porc [$k]= $v ;
                 $porc [$k]['porcentagem']= (100 *  $porc[$k]['total'])/$totalDiscipulos ;
@@ -44,11 +45,11 @@ class painel
         }
 
         $totalAtivos =  DiscipuloModelo::totalAtivos() ;
-        $totalInativos = \discipulo\Modelo\Discipulo::totalInativos() ;
-        $totalArquivados =  \discipulo\Modelo\Discipulo::totalArquivados() ;
+        $totalInativos = \Discipulo\Modelo\Discipulo::totalInativos() ;
+        $totalArquivados =  \Discipulo\Modelo\Discipulo::totalArquivados() ;
 
-        $totalAtivosLider =  \discipulo\Modelo\Discipulo::totalAtivosLider($usuarioId) ;
-        $totalInativosLider = \discipulo\Modelo\Discipulo::totalInativosLider($usuarioId) ;
+        $totalAtivosLider =  \Discipulo\Modelo\Discipulo::totalAtivosLider($usuarioId) ;
+        $totalInativosLider = \Discipulo\Modelo\Discipulo::totalInativosLider($usuarioId) ;
 
         $totalRedes =  RedeModelo::pegarTodasRedes();
         $totalRedesLideres =  \rede\modelo\rede::pegarTodasRedesPorLider($usuarioId);
@@ -73,7 +74,7 @@ class painel
         $discipulos->id = $usuarioId ;
         $discipulos = $discipulos->listarDiscipulos();
 
-        $discipulosAniver = new \discipulo\Modelo\Discipulo();
+        $discipulosAniver = new \Discipulo\Modelo\Discipulo();
         $discipulosAniver = $discipulosAniver->aniversarioHoje();
         $totalAniver = count($discipulosAniver);
         $contator = 0 ;

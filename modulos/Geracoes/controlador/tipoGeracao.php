@@ -110,7 +110,7 @@ class tipoGeracao
         public function chamar ()
         {
             $nome = (!empty($_GET['nome'])) ? $_GET['nome'] : NULL;
-            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo =	new \Discipulo\Modelo\Discipulo();
             $discipulo->nome = $nome;
             $discipulos = $discipulo->chamar($nome);
             require_once 'discipulo/visao/chamar.php';

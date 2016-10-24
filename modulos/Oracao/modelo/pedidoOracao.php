@@ -48,7 +48,7 @@ class pedidoOracao extends modeloFramework
 
         $stm->execute();
 
-        $resposta = $stm->fetchObject('\discipulo\Modelo\Discipulo');
+        $resposta = $stm->fetchObject('\Discipulo\Modelo\Discipulo');
 
         return $resposta;
     }

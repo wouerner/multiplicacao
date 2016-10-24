@@ -23,10 +23,10 @@ class familia
 
           //$discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
 
-        $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
+        $totalDiscipulos = \Discipulo\Modelo\Discipulo::totalDiscipulos() ;
         $totalDiscipulos = (int) $totalDiscipulos['total'] ;
 
-        $discipulos =	new \discipulo\Modelo\Discipulo();
+        $discipulos =	new \Discipulo\Modelo\Discipulo();
             if ($acl->hasPermission('admin_acesso') == true) {
               $discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
             } else {
@@ -47,10 +47,10 @@ class familia
 
           $quantidadePorPagina = 50;
 
-          $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
+          $totalDiscipulos = \Discipulo\Modelo\Discipulo::totalDiscipulos() ;
           $totalDiscipulos = (int) $totalDiscipulos['total'] ;
 
-          $discipulos =	new \discipulo\Modelo\Discipulo();
+          $discipulos =	new \Discipulo\Modelo\Discipulo();
             $discipulos->id = $url[4];
              $discipulos = $discipulos->listarDiscipulos();
 
@@ -64,7 +64,7 @@ class familia
 
           $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
-          $discipulos =	new \discipulo\Modelo\Discipulo();
+          $discipulos =	new \Discipulo\Modelo\Discipulo();
           $quantidadePorPagina = 12;
 
             if ( $acl->hasPermission('admin_acesso') == true ) {
@@ -77,7 +77,7 @@ class familia
 
             $total = count($discipulos);
 
-          $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
+          $totalDiscipulos = \Discipulo\Modelo\Discipulo::totalDiscipulos() ;
           $totalDiscipulos = (int) $totalDiscipulos['total'] ;
 
           require_once 'modulos/discipulo/visao/inativos.php';
@@ -86,7 +86,7 @@ class familia
 
     public function ativar($url)
     {
-        $discipulo =	new \discipulo\Modelo\Discipulo();
+        $discipulo =	new \Discipulo\Modelo\Discipulo();
 
         $discipulo->id = $url[4] ;
         $discipulo->ativar();
@@ -117,7 +117,7 @@ class familia
          * */
     public function desativar($url)
     {
-        $discipulo = new \discipulo\Modelo\Discipulo();
+        $discipulo = new \Discipulo\Modelo\Discipulo();
 
         $discipulo->id = $url[4];
         $discipulo->observacao = $url['post']['observacao'];
@@ -147,7 +147,7 @@ class familia
 
     public function arquivar($url)
     {
-        $discipulo = new \discipulo\Modelo\Discipulo();
+        $discipulo = new \Discipulo\Modelo\Discipulo();
 
         $discipulo->id = $url[4];
         $discipulo->arquivar();
@@ -175,7 +175,7 @@ class familia
 
     public function desarquivar($url)
     {
-        $discipulo = new \discipulo\Modelo\Discipulo();
+        $discipulo = new \Discipulo\Modelo\Discipulo();
 
         $discipulo->id = $url[4] ;
         $discipulo->desarquivar() ;
@@ -206,13 +206,13 @@ class familia
             $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
               $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
-              $discipulos =	new \discipulo\Modelo\Discipulo();
+              $discipulos =	new \Discipulo\Modelo\Discipulo();
               $quantidadePorPagina = 12;
 
             //teste
             if ($acl->hasPermission('admin_acesso') == true) {
               $discipulos = $discipulos->arquivados() ;
-              $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
+              $totalDiscipulos = \Discipulo\Modelo\Discipulo::totalDiscipulos() ;
               $totalDiscipulos = (int) $totalDiscipulos['total'] ;
             } else {
               $discipulos->lider = $_SESSION['usuario_id'];
@@ -228,10 +228,10 @@ class familia
           $pagina = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1 ;
           $quantidadePorPagina = 12;
 
-          $discipulos =	new \discipulo\Modelo\Discipulo();
+          $discipulos =	new \Discipulo\Modelo\Discipulo();
           $discipulos = $discipulos->semCelula($quantidadePorPagina , $pagina);
 
-          $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulosSemCelula() ;
+          $totalDiscipulos = \Discipulo\Modelo\Discipulo::totalDiscipulosSemCelula() ;
           $totalDiscipulos = (int) $totalDiscipulos['total'] ;
 
           require_once 'modulos/discipulo/visao/listar.php';
@@ -243,10 +243,10 @@ class familia
           $pagina = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1 ;
           $quantidadePorPagina = 12;
 
-          $discipulos =	new \discipulo\Modelo\Discipulo();
+          $discipulos =	new \Discipulo\Modelo\Discipulo();
           $discipulos = $discipulos->semLider($quantidadePorPagina , $pagina);
 
-          $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulosSemLider() ;
+          $totalDiscipulos = \Discipulo\Modelo\Discipulo::totalDiscipulosSemLider() ;
           $totalDiscipulos = (int) $totalDiscipulos['total'] ;
 
           require_once 'modulos/discipulo/visao/listar.php';
@@ -262,7 +262,7 @@ class familia
                      require_once 'modulos/discipulo/visao/novo.php';
 
                  } else {
-                     $discipulo =	new \discipulo\Modelo\Discipulo();
+                     $discipulo =	new \Discipulo\Modelo\Discipulo();
 
                      $post = $url['post'] ;
 
@@ -293,7 +293,7 @@ class familia
         if ( empty ( $url['post'] ) ) {
             $estadosCivies = new \discipulo\Modelo\estadoCivil();
             $estadosCivies = $estadosCivies->listarTodos();
-            $lideres =	new \discipulo\Modelo\Discipulo();
+            $lideres =	new \Discipulo\Modelo\Discipulo();
             $lideres =	$lideres->listarlideres();
             $celula = new \celula\modelo\celula();
             $celulas = new \celula\modelo\celula();
@@ -318,7 +318,7 @@ class familia
 
             //tipos de rede e rede atual da pessoa
             $rede = new \rede\modelo\rede();
-            $tipoRede = new \rede\modelo\tipoRede();
+            $tipoRede = new \Rede\Modelo\TipoRede();
             $funcaoRede = new \rede\modelo\funcaoRede();
 
             $tiposRedes = $tipoRede->listarTodos();
@@ -333,7 +333,7 @@ class familia
 
             require_once 'modulos/discipulo/visao/novoCompleto.php';
         } else {
-            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo =	new \Discipulo\Modelo\Discipulo();
 
             $post = $url['post'] ;
 
@@ -365,7 +365,7 @@ class familia
                                                           'class' => 'alert alert-success');
 
 
-                $lider =	new \discipulo\Modelo\Discipulo();
+                $lider =	new \Discipulo\Modelo\Discipulo();
                 $lider->id = $_SESSION['usuario_id'];
                 $lider = $lider->listarUm();
 
@@ -432,7 +432,7 @@ class familia
                      require_once 'modulos/discipulo/visao/novoAnonimo.php';
 
             } else {
-                     $discipulo =	new \discipulo\Modelo\Discipulo();
+                     $discipulo =	new \Discipulo\Modelo\Discipulo();
 
                      $post = $url['post'] ;
 
@@ -461,7 +461,7 @@ class familia
         {
             if(empty( $url['post'])) {
 
-                $discipulo =	new \discipulo\Modelo\Discipulo();
+                $discipulo =	new \Discipulo\Modelo\Discipulo();
                 $lideres = $discipulo->listarLideres();
 
                 $discipulo->id =  $url[4] ;
@@ -470,7 +470,7 @@ class familia
                 require_once 'modulos/discipulo/visao/atualizar.php';
 
             } else {
-                $discipulo =	new \discipulo\Modelo\Discipulo();
+                $discipulo =	new \Discipulo\Modelo\Discipulo();
 
                 $post = $url['post'] ;
 
@@ -487,7 +487,7 @@ class familia
                 var_dump($url);
             if ($acl->hasPermission('admin_acesso') == true) {
 
-                $discipulo =	new \discipulo\Modelo\Discipulo();
+                $discipulo =	new \Discipulo\Modelo\Discipulo();
                 $discipulo->id = $url[4];
                 var_dump($url);
                 $discipulo->excluir();
@@ -500,7 +500,7 @@ class familia
 
         public function detalhar ($url)
         {
-            $discipulo = new \discipulo\Modelo\Discipulo() ;
+            $discipulo = new \Discipulo\Modelo\Discipulo() ;
             $eventoDiscipulo = new \evento\modelo\eventoDiscipulo();
             $ministerios = new \ministerio\modelo\ministerioTemDiscipulo();
             $statusCelular = new \statusCelular\modelo\statusCelular();
@@ -522,8 +522,8 @@ class familia
 
             $discipulo = $discipulo->listarUm() ;
 
-            $totalAtivosLider =  \discipulo\Modelo\Discipulo::totalAtivosLider($url['4']) ;
-            $totalInativosLider = \discipulo\Modelo\Discipulo::totalInativosLider($url['4']) ;
+            $totalAtivosLider =  \Discipulo\Modelo\Discipulo::totalAtivosLider($url['4']) ;
+            $totalInativosLider = \Discipulo\Modelo\Discipulo::totalInativosLider($url['4']) ;
 
             $totalRedesLideres =  \rede\modelo\rede::pegarTodasRedesPorLider($url['4']);
 
@@ -543,7 +543,7 @@ class familia
         public function perfil ($url)
         {
             //var_dump($_SESSION);
-            $discipulo = new \discipulo\Modelo\Discipulo() ;
+            $discipulo = new \Discipulo\Modelo\Discipulo() ;
             $eventoDiscipulo = new \evento\modelo\eventoDiscipulo();
             $ministerios = new \ministerio\modelo\ministerioTemDiscipulo();
             $statusCelular = new \statusCelular\modelo\statusCelular();
@@ -561,8 +561,8 @@ class familia
 
             $discipulo = $discipulo->listarUm() ;
 
-            $totalAtivosLider =  \discipulo\Modelo\Discipulo::totalAtivosLider($url['4']) ;
-            $totalInativosLider = \discipulo\Modelo\Discipulo::totalInativosLider($url['4']) ;
+            $totalAtivosLider =  \Discipulo\Modelo\Discipulo::totalAtivosLider($url['4']) ;
+            $totalInativosLider = \Discipulo\Modelo\Discipulo::totalInativosLider($url['4']) ;
 
             $totalRedesLideres =  \rede\modelo\rede::pegarTodasRedesPorLider($url['4']);
 
@@ -575,7 +575,7 @@ class familia
         $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
 
             $nome = (!empty($_GET['nome'])) ? $_GET['nome'] : NULL;
-            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo =	new \Discipulo\Modelo\Discipulo();
             $discipulo->nome = $nome;
             $discipulos = $discipulo->chamar($nome);
 
@@ -583,7 +583,7 @@ class familia
 
                 $estadosCivies = $estadosCivies->listarTodos();
 
-                $lideres =	new \discipulo\Modelo\Discipulo();
+                $lideres =	new \Discipulo\Modelo\Discipulo();
                 $lideres =	$lideres->listarlideres();
 
                 $celula = new \celula\modelo\celula();
@@ -610,7 +610,7 @@ class familia
 
              //tipos de rede e rede atual da pessoa
              $rede = new \rede\modelo\rede();
-             $tipoRede = new \rede\modelo\tipoRede();
+             $tipoRede = new \Rede\Modelo\TipoRede();
              $funcaoRede = new \rede\modelo\funcaoRede();
 
              $tiposRedes = $tipoRede->listarTodos();
@@ -637,7 +637,7 @@ class familia
         public function chamarPorId ()
         {
         $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
-            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo =	new \Discipulo\Modelo\Discipulo();
             $discipulo->id = isset( $_GET['id'] )? $_GET['id']: '' ;
             $discipulos = $discipulo->listarUm() ;
             $nome = is_object($discipulos) ? $discipulos : NULL ;
@@ -647,7 +647,7 @@ class familia
 
                 $estadosCivies = $estadosCivies->listarTodos();
 
-                $lideres =	new \discipulo\Modelo\Discipulo();
+                $lideres =	new \Discipulo\Modelo\Discipulo();
                 $lideres =	$lideres->listarlideres();
 
                 $celula = new \celula\modelo\celula();
@@ -674,7 +674,7 @@ class familia
 
              //tipos de rede e rede atual da pessoa
              $rede = new \rede\modelo\rede();
-             $tipoRede = new \rede\modelo\tipoRede();
+             $tipoRede = new \Rede\Modelo\TipoRede();
              $funcaoRede = new \rede\modelo\funcaoRede();
 
              $tiposRedes = $tipoRede->listarTodos();
@@ -700,7 +700,7 @@ class familia
 
         public function cartao ($url)
         {
-            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo =	new \Discipulo\Modelo\Discipulo();
             $discipulo->id = $url[4] ;
             $discipulo = $discipulo->listarUm() ;
              require_once 'discipulo/visao/cartao.php';
@@ -710,7 +710,7 @@ class familia
         public function pesquisaJson($url)
         {
             $termo = $_GET['term'];
-            $pesquisa = new \discipulo\Modelo\Discipulo() ;
+            $pesquisa = new \Discipulo\Modelo\Discipulo() ;
             $pesquisa = $pesquisa->pesquisaJson($termo);
             echo json_encode($pesquisa) ;
 
@@ -720,7 +720,7 @@ class familia
         {
             if ( empty ( $url['post'] ) ) {
 
-            $discipulo = new \discipulo\Modelo\Discipulo() ;
+            $discipulo = new \Discipulo\Modelo\Discipulo() ;
 
             $discipulo->id = $url[3] ;
             $discipulo = $discipulo->listarUm() ;
@@ -825,7 +825,7 @@ class familia
 
         public function discipulosPorLider()
         {
-                $discipulo = new \discipulo\Modelo\Discipulo();
+                $discipulo = new \Discipulo\Modelo\Discipulo();
 
                 $discipulo = $discipulo->discipulosPorLider();
 
@@ -837,7 +837,7 @@ class familia
         {
           $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
-          $discipulos =	new \discipulo\Modelo\Discipulo();
+          $discipulos =	new \Discipulo\Modelo\Discipulo();
           $quantidadePorPagina = 30;
 
             //include("seguranca/ACL/assets/php/database.php");
@@ -857,7 +857,7 @@ class familia
 
             $estadosCivies = $estadosCivies->listarTodos();
 
-                $lideres =	new \discipulo\Modelo\Discipulo();
+                $lideres =	new \Discipulo\Modelo\Discipulo();
                 $lideres =	$lideres->listarlideres();
 
                 $celula = new \celula\modelo\celula();
@@ -888,7 +888,7 @@ class familia
              //tipos de rede e rede atual da pessoa
              $rede = new \rede\modelo\rede();
 
-             $tipoRede = new \rede\modelo\tipoRede();
+             $tipoRede = new \Rede\Modelo\TipoRede();
              $funcaoRedes = new \rede\modelo\funcaoRede();
 
              $tiposRedes = $tipoRede->listarTodos();
@@ -913,7 +913,7 @@ class familia
 
         public function encontroComDeus($url)
         {
-            $discipulo = new \discipulo\Modelo\Discipulo() ;
+            $discipulo = new \Discipulo\Modelo\Discipulo() ;
 
             $discipulo->id = $url[4] ;
             $discipulo = $discipulo->listarum() ;
@@ -924,7 +924,7 @@ class familia
 
         public function fichaPorStatus($url)
         {
-            $discipulos = new \discipulo\Modelo\Discipulo() ;
+            $discipulos = new \Discipulo\Modelo\Discipulo() ;
 
             $discipulos = $discipulos->fichaPorStatus($url[4]) ;
 
@@ -934,7 +934,7 @@ class familia
 
         public function cracha($url)
         {
-            $discipulos = new \discipulo\Modelo\Discipulo() ;
+            $discipulos = new \Discipulo\Modelo\Discipulo() ;
 
             $discipulos = $discipulos->fichaPorStatus($url[4]) ;
 
@@ -944,7 +944,7 @@ class familia
 
         public function crachaIndividual($url)
         {
-            $discipulo = new \discipulo\Modelo\Discipulo() ;
+            $discipulo = new \Discipulo\Modelo\Discipulo() ;
             $discipulo->id = ($url[4]);
             $discipulos[0] = $discipulo->listarUm($url[4]) ;
 
@@ -954,7 +954,7 @@ class familia
 
         public function rank()
         {
-            $rank = \discipulo\Modelo\Discipulo::rank() ;
+            $rank = \Discipulo\Modelo\Discipulo::rank() ;
             $nomeRank = 'Ativos' ;
             require 'discipulo/visao/rank.php';
 
@@ -962,7 +962,7 @@ class familia
 
         public function rankInativos()
         {
-            $rank = \discipulo\Modelo\Discipulo::rankInativos() ;
+            $rank = \Discipulo\Modelo\Discipulo::rankInativos() ;
             $nomeRank = 'Inativos' ;
             require 'discipulo/visao/rank.php';
 

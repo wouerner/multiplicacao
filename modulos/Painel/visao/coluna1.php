@@ -22,6 +22,7 @@
             <script>
                 var t = jQuery.get('/relatorio/grafico/status')
                         .done(function( data ) {
+console.log(data);
                             var chart = c3.generate({
                             bindto: '#chart',
                             data: {
@@ -54,7 +55,6 @@
                             <td><?php echo $s['tipoNome'] ; ?>(<?php echo $s['total'] ; ?>)</td>
                         <?php endif ; ?>
                             <td><?php echo $s['total'] ; ?></td>
-                         <!--   <td><?php echo round($s['porcentagem'],1).'%' ; ?></td>-->
                     </tr>
                     <?php $totalStatus += $s['total']?>
                 <?php endforeach ; ?>

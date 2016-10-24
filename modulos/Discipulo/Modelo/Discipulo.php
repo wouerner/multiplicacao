@@ -573,7 +573,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob;
         }
         return $resposta;
@@ -591,7 +591,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob;
         }
 
@@ -612,7 +612,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob;
         }
 
@@ -631,7 +631,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob;
         }
 
@@ -809,7 +809,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob;
         }
 
@@ -899,7 +899,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob;
 
         }
@@ -927,7 +927,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob;
 
         }
@@ -977,7 +977,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob;
 
         }
@@ -1109,7 +1109,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $stm->execute();
 
-        return $stm->fetchObject('\discipulo\Modelo\Discipulo');
+        return $stm->fetchObject('\Discipulo\Modelo\Discipulo');
 
     }
 
@@ -1186,7 +1186,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob;
 
         }
@@ -1215,7 +1215,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob;
 
         }
@@ -1246,7 +1246,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob;
 
         }
@@ -1269,7 +1269,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob;
 
         }
@@ -1290,7 +1290,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob;
         }
 
@@ -1310,7 +1310,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob;
         }
 
@@ -1353,7 +1353,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[] = $ob;
         }
         return $resposta;
@@ -1406,7 +1406,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         $resposta = array();
 
-        while ($ob = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
             $resposta[$ob->id] = $ob;
         }
 

@@ -103,7 +103,7 @@ class discipulos
 
               $res = array();
 
-              while ($s =$stm->fetchObject('\discipulo\Modelo\Discipulo')  ) {
+              while ($s =$stm->fetchObject('\Discipulo\Modelo\Discipulo')  ) {
 
                       //$resposta[$s->id] =$s ;
 
@@ -137,7 +137,7 @@ class discipulos
                 $stm->execute();
 
                 $resposta	= array();
-                while ($lider = $stm->fetchObject('\discipulo\Modelo\Discipulo')) {
+                while ($lider = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
                     $resposta[$lider->liderId]['lider'] =   $lider->nomeLider;
                     $resposta[$lider->liderId][$lider->discipuloId] = $lider;
 
@@ -217,7 +217,7 @@ ORDER BY TipoStatusCelular.nome';
             $stm->execute() ;
 
             $resposta = array();
-            while ( $obj = $stm->fetchObject('\discipulo\Modelo\Discipulo') ) {
+            while ( $obj = $stm->fetchObject('\Discipulo\Modelo\Discipulo') ) {
                 $resposta[$obj->id] = $obj ;
 
             }

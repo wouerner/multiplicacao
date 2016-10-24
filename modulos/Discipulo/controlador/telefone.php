@@ -29,10 +29,10 @@ class telefone
           $pagina = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1 ;
           $quantidadePorPagina = 12;
 
-          $discipulos =	new \discipulo\Modelo\Discipulo();
+          $discipulos =	new \Discipulo\Modelo\Discipulo();
           $discipulos = $discipulos->semLider($quantidadePorPagina , $pagina);
 
-          $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulosSemLider() ;
+          $totalDiscipulos = \Discipulo\Modelo\Discipulo::totalDiscipulosSemLider() ;
           $totalDiscipulos = (int) $totalDiscipulos['total'] ;
 
           require_once 'modulos/discipulo/visao/listar.php';
@@ -48,7 +48,7 @@ class telefone
 
                 $estadosCivies = $estadosCivies->listarTodos();
 
-                $lideres =	new \discipulo\Modelo\Discipulo();
+                $lideres =	new \Discipulo\Modelo\Discipulo();
                 $lideres =	$lideres->listarlideres();
 
                 $celula = new \celula\modelo\celula();
@@ -76,7 +76,7 @@ class telefone
 
              //tipos de rede e rede atual da pessoa
              $rede = new \rede\modelo\rede();
-             $tipoRede = new \rede\modelo\tipoRede();
+             $tipoRede = new \Rede\Modelo\TipoRede();
              $funcaoRede = new \rede\modelo\funcaoRede();
 
              $tiposRedes = $tipoRede->listarTodos();
@@ -91,7 +91,7 @@ class telefone
 
             require_once 'modulos/discipulo/visao/novoCompleto.php';
         } else {
-                $discipulo =	new \discipulo\Modelo\Discipulo();
+                $discipulo =	new \Discipulo\Modelo\Discipulo();
 
                 $post = $url['post'] ;
 
@@ -169,7 +169,7 @@ class telefone
                      require_once 'modulos/discipulo/visao/novoAnonimo.php';
 
             } else {
-                     $discipulo =	new \discipulo\Modelo\Discipulo();
+                     $discipulo =	new \Discipulo\Modelo\Discipulo();
 
                      $post = $url['post'] ;
 
@@ -198,7 +198,7 @@ class telefone
         {
             if ( empty ( $url['post'] ) ) {
 
-                $discipulo =	new \discipulo\Modelo\Discipulo();
+                $discipulo =	new \Discipulo\Modelo\Discipulo();
                 $lideres = $discipulo->listarLideres();
 
                 $discipulo->id =  $url[3] ;
@@ -212,7 +212,7 @@ class telefone
 
                 $estadosCivies = $estadosCivies->listarTodos();
 
-                $lider =	new \discipulo\Modelo\Discipulo();
+                $lider =	new \Discipulo\Modelo\Discipulo();
                 $lider->id = $discipulo->lider ;
                 $lider = $lider->listarUm($discipulo->lider);
 
@@ -243,7 +243,7 @@ class telefone
 
              //tipos de rede e rede atual da pessoa
              $rede = new \rede\modelo\rede();
-             $tipoRede = new \rede\modelo\tipoRede();
+             $tipoRede = new \Rede\Modelo\TipoRede();
              $funcaoRedes = new \rede\modelo\funcaoRede();
 
              $tiposRedes = $tipoRede->listarTodos();
@@ -271,7 +271,7 @@ class telefone
              require_once 'modulos/discipulo/visao/atualizar.php';
 
             } else {
-                $discipulo =	new \discipulo\Modelo\Discipulo();
+                $discipulo =	new \Discipulo\Modelo\Discipulo();
 
                 $post = $url['post'] ;
 
@@ -356,7 +356,7 @@ class telefone
 
         public function excluir($url)
         {
-                $discipulo =	new \discipulo\Modelo\Discipulo();
+                $discipulo =	new \Discipulo\Modelo\Discipulo();
                 $discipulo->id = $url[3];
                 $discipulo->excluir();
                 header ('location:/discipulo/listarAtualizar');
@@ -366,7 +366,7 @@ class telefone
 
         public function detalhar ($url)
         {
-            $discipulo = new \discipulo\Modelo\Discipulo() ;
+            $discipulo = new \Discipulo\Modelo\Discipulo() ;
             $eventoDiscipulo = new \evento\modelo\eventoDiscipulo();
             $ministerios = new \ministerio\modelo\ministerioTemDiscipulo();
             $statusCelular = new \statusCelular\modelo\statusCelular();
@@ -391,7 +391,7 @@ class telefone
         public function chamar ()
         {
             $nome = (!empty($_GET['nome'])) ? $_GET['nome'] : NULL;
-            $discipulo =	new \discipulo\Modelo\Discipulo();
+            $discipulo =	new \Discipulo\Modelo\Discipulo();
             $discipulo->nome = $nome;
             $discipulos = $discipulo->chamar($nome);
 
@@ -399,7 +399,7 @@ class telefone
 
                 $estadosCivies = $estadosCivies->listarTodos();
 
-                $lideres =	new \discipulo\Modelo\Discipulo();
+                $lideres =	new \Discipulo\Modelo\Discipulo();
                 $lideres =	$lideres->listarlideres();
 
                 $celula = new \celula\modelo\celula();
@@ -426,7 +426,7 @@ class telefone
 
              //tipos de rede e rede atual da pessoa
              $rede = new \rede\modelo\rede();
-             $tipoRede = new \rede\modelo\tipoRede();
+             $tipoRede = new \Rede\Modelo\TipoRede();
              $funcaoRede = new \rede\modelo\funcaoRede();
 
              $tiposRedes = $tipoRede->listarTodos();
@@ -452,7 +452,7 @@ class telefone
         public function pesquisaJson($url)
         {
             $termo = $_GET['term'];
-            $pesquisa = new \discipulo\Modelo\Discipulo() ;
+            $pesquisa = new \Discipulo\Modelo\Discipulo() ;
             $pesquisa = $pesquisa->pesquisaJson($termo);
             echo json_encode($pesquisa) ;
 
@@ -462,7 +462,7 @@ class telefone
         {
             if ( empty ( $url['post'] ) ) {
 
-            $discipulo = new \discipulo\Modelo\Discipulo() ;
+            $discipulo = new \Discipulo\Modelo\Discipulo() ;
 
             $discipulo->id = $url[3] ;
             $discipulo = $discipulo->listarUm() ;
@@ -567,7 +567,7 @@ class telefone
 
         public function discipulosPorLider()
         {
-                $discipulo = new \discipulo\Modelo\Discipulo();
+                $discipulo = new \Discipulo\Modelo\Discipulo();
 
                 $discipulo = $discipulo->discipulosPorLider();
 
@@ -579,19 +579,19 @@ class telefone
         {
           $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
-          $discipulos =	new \discipulo\Modelo\Discipulo();
+          $discipulos =	new \Discipulo\Modelo\Discipulo();
           $quantidadePorPagina = 12;
 
           $discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
 
-          $totalDiscipulos = \discipulo\Modelo\Discipulo::totalDiscipulos() ;
+          $totalDiscipulos = \Discipulo\Modelo\Discipulo::totalDiscipulos() ;
           $totalDiscipulos = (int) $totalDiscipulos['total'] ;
 
                 $estadosCivies = new \discipulo\Modelo\estadoCivil();
 
                 $estadosCivies = $estadosCivies->listarTodos();
 
-                $lideres =	new \discipulo\Modelo\Discipulo();
+                $lideres =	new \Discipulo\Modelo\Discipulo();
                 $lideres =	$lideres->listarlideres();
 
                 $celula = new \celula\modelo\celula();
@@ -622,7 +622,7 @@ class telefone
              //tipos de rede e rede atual da pessoa
              $rede = new \rede\modelo\rede();
 
-             $tipoRede = new \rede\modelo\tipoRede();
+             $tipoRede = new \Rede\Modelo\TipoRede();
              $funcaoRedes = new \rede\modelo\funcaoRede();
 
              $tiposRedes = $tipoRede->listarTodos();
@@ -647,7 +647,7 @@ class telefone
 
         public function encontroComDeus($url)
         {
-            $discipulo = new \discipulo\Modelo\Discipulo() ;
+            $discipulo = new \Discipulo\Modelo\Discipulo() ;
 
             $discipulo->id = $url[3] ;
             $discipulo = $discipulo->listarum() ;
@@ -658,7 +658,7 @@ class telefone
 
         public function fichaPorStatus($url)
         {
-            $discipulos = new \discipulo\Modelo\Discipulo() ;
+            $discipulos = new \Discipulo\Modelo\Discipulo() ;
 
             $discipulos = $discipulos->fichaPorStatus($url[3]) ;
 
@@ -668,7 +668,7 @@ class telefone
 
         public function cracha($url)
         {
-            $discipulos = new \discipulo\Modelo\Discipulo() ;
+            $discipulos = new \Discipulo\Modelo\Discipulo() ;
 
             $discipulos = $discipulos->fichaPorStatus($url[3]) ;
 
@@ -678,7 +678,7 @@ class telefone
 
         public function crachaIndividual($url)
         {
-            $discipulo = new \discipulo\Modelo\Discipulo() ;
+            $discipulo = new \Discipulo\Modelo\Discipulo() ;
             $discipulo->id = ($url[3]);
             $discipulos[0] = $discipulo->listarUm($url[3]) ;
 
