@@ -4,7 +4,7 @@ class aviso
 {
     public function index()
     {
-        $avisos =	new \aviso\modelo\aviso();
+        $avisos =	new \Aviso\Modelo\Aviso();
         $avisos = $avisos->listarTodos();
         //var_dump($avisos);
 
@@ -14,7 +14,7 @@ class aviso
 
     public function json()
     {
-        $avisos =	new \aviso\modelo\aviso();
+        $avisos =	new \Aviso\Modelo\Aviso();
         $avisos = $avisos->listarTimeline();
         var_dump(json_encode($avisos));
 
@@ -22,7 +22,7 @@ class aviso
 
         public function excluir($url)
         {
-                $aviso =	new \aviso\modelo\aviso();
+                $aviso =	new \Aviso\Modelo\Aviso();
                 $aviso->id = $url[4];
                 $aviso->excluir();
 
@@ -32,7 +32,7 @@ class aviso
 
         public function visto($url)
         {
-                $aviso =	new \aviso\modelo\aviso();
+                $aviso =	new \Aviso\Modelo\Aviso();
                 $aviso->id = $url[4];
                 $aviso->visto();
 

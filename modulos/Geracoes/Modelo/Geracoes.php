@@ -123,7 +123,7 @@ class Geracoes
 
                   $resposta = array();
 
-                    while ($ob = $stm->fetchObject('\statusCelular\modelo\statusCelular')) {
+                    while ($ob = $stm->fetchObject('\StatusCelular\Modelo\StatusCelular')) {
                         $resposta[$ob->statusId] = $ob ;
                     }
 

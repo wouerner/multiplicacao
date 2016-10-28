@@ -182,7 +182,7 @@ class geracao
         {
             if ( empty ( $url['post'] ) ) {
 
-                  $eventos = new \evento\modelo\evento();
+                  $eventos = new \Evento\Modelo\Evento();
 
                   $id = $url[3];
                   $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
@@ -191,7 +191,7 @@ class geracao
             require_once 'modulos/discipulo/visao/evento.php';
             } else {
                       $post = $url['post'];
-                     $discipuloEvento = new \evento\modelo\evento();
+                     $discipuloEvento = new \Evento\Modelo\Evento();
                       $eventoId = $post['eventoId'];
                         $discipuloId = $post['discipuloId'];
 
@@ -213,7 +213,7 @@ class geracao
             $id = $url[4] ;
             $discipulo = $url[6] ;
 
-            $status = new \statusCelular\modelo\statusCelular() ;
+            $status = new \StatusCelular\Modelo\StatusCelular() ;
             $status->id = $id ;
             $status->excluir();
             header ('location:/statusCelular/statusCelular/novo/id/'.$discipulo);
@@ -225,7 +225,7 @@ class geracao
         {
             $id = $url[4] ;
 
-            $status = new \statusCelular\modelo\statusCelular() ;
+            $status = new \StatusCelular\Modelo\StatusCelular() ;
             $status->tipoStatusCelular = (int) $id ;
 
             $discipulos = $status->listarStatusCelularPorTipo();

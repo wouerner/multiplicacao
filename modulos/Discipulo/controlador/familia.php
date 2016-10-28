@@ -91,7 +91,7 @@ class familia
         $discipulo->id = $url[4] ;
         $discipulo->ativar();
 
-        $aviso = new \aviso\modelo\aviso();
+        $aviso = new \Aviso\Modelo\Aviso();
         $aviso->identificacao = $discipulo->id;
         $aviso->tipoAviso = 7;
         $aviso->emissor = $_SESSION['usuario_id'];
@@ -122,7 +122,7 @@ class familia
         $discipulo->id = $url[4];
         $discipulo->observacao = $url['post']['observacao'];
 
-        $aviso = new \aviso\modelo\aviso();
+        $aviso = new \Aviso\Modelo\Aviso();
         $aviso->identificacao = $discipulo->id;
         $aviso->tipoAviso = 2 ;
         $aviso->emissor = $_SESSION['usuario_id'];
@@ -152,7 +152,7 @@ class familia
         $discipulo->id = $url[4];
         $discipulo->arquivar();
 
-        $aviso = new \aviso\modelo\aviso();
+        $aviso = new \Aviso\Modelo\Aviso();
         $aviso->identificacao = $discipulo->id;
         $aviso->tipoAviso = 5;
         $aviso->emissor = $_SESSION['usuario_id'];
@@ -180,7 +180,7 @@ class familia
         $discipulo->id = $url[4] ;
         $discipulo->desarquivar() ;
 
-        $aviso = new \aviso\modelo\aviso();
+        $aviso = new \Aviso\Modelo\Aviso();
         $aviso->identificacao = $discipulo->id;
         $aviso->tipoAviso = 6;
         $aviso->emissor = $_SESSION['usuario_id'];
@@ -301,7 +301,7 @@ class familia
 
             //status celular da pessoa
             $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
-            $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
+            $statusCelularDiscipulo =	new \StatusCelular\Modelo\StatusCelular() ;
 
             $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
 
@@ -326,7 +326,7 @@ class familia
             $redeAtual = $rede->listarUm();
 
             //escala de exito
-            $eventos = new \evento\modelo\evento();
+            $eventos = new \Evento\Modelo\Evento();
 
             //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
             $eventos = $eventos->listarTodos();
@@ -355,7 +355,7 @@ class familia
 
                 $discipulo->salvarCompleto() ;
 
-                $aviso = new \aviso\modelo\aviso();
+                $aviso = new \Aviso\Modelo\Aviso();
                 $aviso->identificacao = $discipulo->id ;
                 $aviso->tipoAviso = 1 ;
                 $aviso->emissor = $_SESSION['usuario_id'];
@@ -394,7 +394,7 @@ class familia
 
             //status celular
             $tipoStatusCelular =	$post['tipoStatusCelular'] ;
-            $statusCelular =	new \statusCelular\modelo\statusCelular() ;
+            $statusCelular =	new \StatusCelular\Modelo\StatusCelular() ;
             $statusCelular->tipoStatusCelular = $tipoStatusCelular;
             $statusCelular->discipuloId = $discipulo->id;
             if (!$statusCelular->salvar()) $statusCelular->atualizar();
@@ -414,7 +414,7 @@ class familia
 
             if (!$rede->salvar()) $rede->atualizar();
 
-                $discipuloEventos = new \evento\modelo\evento();
+                $discipuloEventos = new \Evento\Modelo\Evento();
                 $eventos = isset($post['eventos']) ? $post['eventos'] : NULL ;
                 if ($eventos) {
                     $discipuloEventos->salvarEventos($eventos,$discipulo->id);
@@ -501,9 +501,9 @@ class familia
         public function detalhar ($url)
         {
             $discipulo = new \Discipulo\Modelo\Discipulo() ;
-            $eventoDiscipulo = new \evento\modelo\eventoDiscipulo();
+            $eventoDiscipulo = new \Evento\Modelo\EventoDiscipulo();
             $ministerios = new \ministerio\modelo\ministerioTemDiscipulo();
-            $statusCelular = new \statusCelular\modelo\statusCelular();
+            $statusCelular = new \StatusCelular\Modelo\StatusCelular();
             $tipoStatus= new \statusCelular\modelo\tipoStatusCelular();
 
             $statusCelulares = $tipoStatus->listarTodos() ;
@@ -544,9 +544,9 @@ class familia
         {
             //var_dump($_SESSION);
             $discipulo = new \Discipulo\Modelo\Discipulo() ;
-            $eventoDiscipulo = new \evento\modelo\eventoDiscipulo();
+            $eventoDiscipulo = new \Evento\Modelo\EventoDiscipulo();
             $ministerios = new \ministerio\modelo\ministerioTemDiscipulo();
-            $statusCelular = new \statusCelular\modelo\statusCelular();
+            $statusCelular = new \StatusCelular\Modelo\StatusCelular();
 
             $discipulo->id = $url[4] ;
 
@@ -593,7 +593,7 @@ class familia
 
             //status celular da pessoa
              $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
-             $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
+             $statusCelularDiscipulo =	new \StatusCelular\Modelo\StatusCelular() ;
 
              $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
 
@@ -625,7 +625,7 @@ class familia
              $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
 
              //escala de exito
-              $eventos = new \evento\modelo\evento();
+              $eventos = new \Evento\Modelo\Evento();
 
            //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
              $eventos = $eventos->listarTodos();
@@ -657,7 +657,7 @@ class familia
 
             //status celular da pessoa
              $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
-             $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
+             $statusCelularDiscipulo =	new \StatusCelular\Modelo\StatusCelular() ;
 
              $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
 
@@ -689,7 +689,7 @@ class familia
              $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
 
              //escala de exito
-              $eventos = new \evento\modelo\evento();
+              $eventos = new \Evento\Modelo\Evento();
 
            //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
              $eventos = $eventos->listarTodos();
@@ -725,7 +725,7 @@ class familia
             $discipulo->id = $url[3] ;
             $discipulo = $discipulo->listarUm() ;
 
-                  $eventos = new \evento\modelo\evento();
+                  $eventos = new \Evento\Modelo\Evento();
 
                   $id = $url[3];
                   $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
@@ -734,7 +734,7 @@ class familia
                 require_once 'modulos/discipulo/visao/evento.php';
             } else {
                       $post = $url['post'];
-                     $discipuloEvento = new \evento\modelo\evento();
+                     $discipuloEvento = new \Evento\Modelo\Evento();
                       $eventoId = $post['eventoId'];
                         $discipuloId = $post['discipuloId'];
 
@@ -867,7 +867,7 @@ class familia
 
             //status celular da pessoa
              $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
-             $statusCelularDiscipulo =	new \statusCelular\modelo\statusCelular() ;
+             $statusCelularDiscipulo =	new \StatusCelular\Modelo\StatusCelular() ;
 
              $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
              $cores = array('verde','amarelo','cinza','laranja','','');
@@ -902,7 +902,7 @@ class familia
              $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
 
              //escala de exito
-              $eventos = new \evento\modelo\evento();
+              $eventos = new \Evento\Modelo\Evento();
 
           //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
             $eventos = $eventos->listarTodos();

@@ -162,7 +162,7 @@ $(function(){
     </table>
     <div class="panel-footer">
                         <?php if ($acesso->hasPermission('discipulo_criar') == true): ?>
-                            <a class = "btn bnt-mini btn-success" href = "/discipulo/discipulo/novoCompleto" >
+                        <a class = "btn bnt-mini btn-success" href = "/discipulo/discipulo/novoCompleto/igreja/<?php echo explode('/', $_GET['url'])[4]?>" >
                                 <i class = "icon-plus icon-white" ></i>Novo Discípulo
                             </a>
                         <?php endif ; ?>

@@ -2,7 +2,7 @@
 namespace painel\controlador;
 
 use \Rede\Modelo\TipoRede as TipoRede;
-use \Igreja\Modelo\Igreja as igrejaModelo;
+use \Igreja\Modelo\Igreja as IgrejaModelo;
 use \Discipulo\Modelo\Discipulo as DiscipuloModelo;
 use \Rede\Modelo\Rede as RedeModelo;
 use \Aviso\Modelo\Aviso as AvisoModelo;
@@ -17,6 +17,14 @@ class painel
     * */
 
     public function index()
+    {
+        $igrejas = new IgrejaModelo();
+        $igrejas = $igrejas->listarTodos();
+
+        require_once 'modulos/Painel/visao/escolhaIgreja.php';
+    }
+
+    public function igreja()
     {
         $usuarioId= $_SESSION['usuario_id'];
         $status = new \StatusCelular\Modelo\StatusCelular() ;
@@ -35,7 +43,7 @@ class painel
 
         $status = $porc ;
 
-        $statusDiscipulos = new \statusCelular\modelo\statusCelular() ;
+        $statusDiscipulos = new \StatusCelular\Modelo\StatusCelular() ;
         $statusDiscipulos = $statusDiscipulos->pegarStatusCelularPorLider($_SESSION['usuario_id']);
         $statusDiscipulosTotal = null ;
 
@@ -85,10 +93,9 @@ class painel
         $encontro = new EncontroComDeusModelo() ;
         $encontros = $encontro->listarTodosAtivos();
 
-        $igreja = new igrejaModelo() ;
+        $igreja = new IgrejaModelo() ;
         $idade = $igreja->mediaIdade();
 
         require_once 'modulos/Painel/visao/painel.php';
     }
-
 }

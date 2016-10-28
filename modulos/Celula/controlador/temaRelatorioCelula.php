@@ -4,7 +4,7 @@ use discipulo\Modelo\Discipulo;
 namespace celula\controlador;
 
 use \aviso\modelo\tipoAviso;
-use \aviso\modelo\aviso;
+use \Aviso\Modelo\Aviso;
 
 class temaRelatorioCelula
 {

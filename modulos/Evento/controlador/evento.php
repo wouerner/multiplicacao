@@ -9,7 +9,7 @@ class evento{
 	public function index(){
 
 		//$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
-		$eventos =	new \evento\modelo\evento();
+		$eventos =	new \Evento\Modelo\Evento();
 		//$eventos =	$eventos->listarTodos(8);
 		$eventos = $eventos->listarTodos();
 		///$totalDiscipulos = \evento\Modelo\Discipulo::totalDiscipulos();
@@ -27,7 +27,7 @@ class evento{
 					  require_once  'modulos/evento/visao/novo.php';
 			
 			}else {
-				 $evento =	new \evento\modelo\evento();
+				 $evento =	new \Evento\Modelo\Evento();
 
 				  $post = $url['post'] ;
 				 $evento->nome = $post['nome'] ;
@@ -44,7 +44,7 @@ class evento{
 
 			if ( empty ( $url['post'] ) ) {
 
-				$evento =	new \evento\modelo\evento();
+				$evento =	new \Evento\Modelo\Evento();
 
 				$evento->id =  $url[3] ;
 				$evento = $evento->listarUm();
@@ -52,7 +52,7 @@ class evento{
 				require_once  'modulos/evento/visao/atualizar.php';
 			
 			}else {
-				$evento =	new \evento\modelo\evento();
+				$evento =	new \Evento\Modelo\Evento();
 
 				$post = $url['post'] ;
 
@@ -71,7 +71,7 @@ class evento{
 		}
 
 		public function excluir($url){
-				$evento =	new \evento\modelo\evento();
+				$evento =	new \Evento\Modelo\Evento();
 				$evento->id = $url[3]; 
 				$evento->excluir();
 
@@ -81,7 +81,7 @@ class evento{
 		}
 
 		public function excluirEventoDiscipulo($url){
-				$evento =	new \evento\modelo\eventoDiscipulo();
+				$evento =	new \Evento\Modelo\EventoDiscipulo();
 				$evento->eventoId = $url[3];
 				$evento->discipuloId = $url[4];
 
@@ -94,7 +94,7 @@ class evento{
 
 		public function detalhar ($url) {
 
-			$evento = new \evento\modelo\evento() ;
+			$evento = new \Evento\Modelo\Evento() ;
 
 			$evento->id = $url[3] ; 
 			$evento = $evento->listarUm() ;

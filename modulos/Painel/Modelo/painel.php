@@ -88,7 +88,7 @@ class Discipulo
      * */
     public function getEventos()
     {
-        $evento = new \evento\modelo\evento();
+        $evento = new \Evento\Modelo\Evento();
         $evento = $evento->listarTodosDiscipulo($this->id);
 
         return $evento	;
@@ -117,7 +117,7 @@ class Discipulo
 
     public function getStatusCelular()
     {
-        $status = new \statusCelular\modelo\statusCelular();
+        $status = new \StatusCelular\Modelo\StatusCelular();
         $status->discipuloId = $this->id;
         $status = $status->pegarStatusCelular();
 

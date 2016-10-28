@@ -6,7 +6,7 @@ class aviso{
 	
 	public function index(){
 
-		$avisos =	new \aviso\modelo\aviso();
+		$avisos =	new \Aviso\Modelo\Aviso();
 		$avisos = $avisos->listarTodos();
 
 		require_once  'modulos/aviso/visao/listar.php';

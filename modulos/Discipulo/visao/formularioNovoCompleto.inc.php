@@ -1,4 +1,4 @@
-<form id="form" action="/discipulo/discipulo/novoCompleto" method="post"  class="form-horizontal ">
+<form id="form" action="/discipulo/discipulo/novoCompleto/igreja/<?php echo $url['4']?>" method="post"  class="form-horizontal ">
     <fieldset class="col-md-6">
         <legend>Dados Pessoais</legend>
         <div class="form-group ">
@@ -165,17 +165,17 @@
 
     jQuery("#form").validate();
 
-    jQuery("#salvar").on('click', function(){
-      jQuery( "#dialog" ).dialog({
-              modal: true,
-              buttons: {
-                "Delete all items": function() {
-                  $( this ).dialog( "close" );
-                },
-                Cancel: function() {
-                  $( this ).dialog( "close" );
-                }
-              }
-          } );
-    });
+    //jQuery("#salvar").on('click', function(){
+      //jQuery( "#dialog" ).dialog({
+              //modal: true,
+              //buttons: {
+                //"Delete all items": function() {
+                  //$( this ).dialog( "close" );
+                //},
+                //Cancel: function() {
+                  //$( this ).dialog( "close" );
+                //}
+              //}
+          //} );
+    //});
 </script>

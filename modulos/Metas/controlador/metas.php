@@ -416,7 +416,7 @@ class metas
         {
             if ( empty ( $url['post'] ) ) {
 
-                  $eventos = new \evento\modelo\evento();
+                  $eventos = new \Evento\Modelo\Evento();
 
                   $id = $url[3];
                   $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
@@ -425,7 +425,7 @@ class metas
             require_once 'modulos/discipulo/visao/evento.php';
             } else {
                       $post = $url['post'];
-                     $discipuloEvento = new \evento\modelo\evento();
+                     $discipuloEvento = new \Evento\Modelo\Evento();
                       $eventoId = $post['eventoId'];
                         $discipuloId = $post['discipuloId'];
 

@@ -144,7 +144,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
      * */
     public function getEventos()
     {
-        $evento = new \evento\modelo\evento();
+        $evento = new \Evento\Modelo\Evento();
         $evento = $evento->listarTodosDiscipulo($this->id);
 
         return $evento	;
@@ -173,7 +173,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
     public function getStatusCelular()
     {
-        $status = new \statusCelular\modelo\statusCelular();
+        $status = new \StatusCelular\Modelo\StatusCelular();
         $status->discipuloId = $this->id;
         $status = $status->pegarStatusCelular();
 
@@ -355,9 +355,9 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
         $pdo = self::pegarConexao();
         $sql = "INSERT INTO Discipulo (
                               nome, ativo, datanascimento, sexo, estadoCivilId, telefone, email,endereco,
-                              lider, celula,  senha, alcunha
+                              lider, celula,  senha, alcunha, igreja
                              )
-                  VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
               //prepara sql
         $stm = $pdo->prepare($sql);
               //trocar valores
@@ -373,6 +373,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
         $stm->bindParam(10, $this->celula);
         $stm->bindParam(11, md5($this->senha));
         $stm->bindParam(12, $this->alcunha);
+        $stm->bindParam(13, $this->igreja);
 
         $resposta = $stm->execute();
 
@@ -381,6 +382,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
         $erro =  $stm->errorInfo();
 
         $this->erro = $erro[0];
+//var_dump($stm->errorInfo());die;
 
         $pdo = null;
 

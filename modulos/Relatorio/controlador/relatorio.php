@@ -24,7 +24,7 @@ class relatorio
 
     public function statusCelular()
     {
-        $statusCelulares = new \statusCelular\modelo\statusCelular();
+        $statusCelulares = new \StatusCelular\Modelo\StatusCelular();
         $statusCelulares= $statusCelulares->listarStatusCelularTodos();
 
         require 'relatorio/visao/statusCelular.php';
@@ -33,7 +33,7 @@ class relatorio
 
     public function statusCelularPorTipo($url)
     {
-        $statusCelulares = new \statusCelular\modelo\statusCelular();
+        $statusCelulares = new \StatusCelular\Modelo\StatusCelular();
         $statusCelulares->tipoStatusCelular = $url['2'] ;
         $statusCelulares= $statusCelulares->listarStatusCelularPorTipo();
         $status= $statusCelulares[0]['status'];
