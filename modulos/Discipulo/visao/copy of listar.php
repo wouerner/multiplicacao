@@ -49,7 +49,7 @@ $(".btn-warning").click( function(){
 		<section>		
 			<article>
 
-				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+				<?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
 				<div class = "row-fluid" >	
 				<div class = "span12" >
 
@@ -76,7 +76,7 @@ $(".btn-warning").click( function(){
 
 					<td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><strong><?php echo $discipulo->nome ; ?></strong></a></td>
 				<td><?php echo $discipulo->telefone ; ?></td> <td><?php echo $discipulo->email ; ?></td>
-				 <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
+				 <?php require 'Discipulo/visao/menuDiscipulo.inc.php' ; ?>
 				</tr>
 				 
 				

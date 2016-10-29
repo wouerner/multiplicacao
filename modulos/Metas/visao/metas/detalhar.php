@@ -23,7 +23,7 @@ $('.table').tab('show');
         <section>
             <article>
 
-                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+                <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
                 <table class = "table" >
                 <h3><i class="icon-screenshot"></i> Metas para: <?php echo $discipulo->nome ; ?></h3>
                 <tr>

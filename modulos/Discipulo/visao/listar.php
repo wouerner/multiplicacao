@@ -78,7 +78,7 @@ $(".btn-warning").click( function(){
         <section id = "discipulo" >
             <article>
 
-                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+                <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
 
       <div class = "row-fluid" >
             <?php if ($mensagem) : ?>
@@ -144,7 +144,7 @@ $(".btn-warning").click( function(){
                     <?php echo $discipulo->telefone ; ?></td>
                 <td>
                     <a target="blank" href="/discipulo/discipulo/atualizar/id/<?php echo $discipulo->getLider()->id ?>"><?php echo $discipulo->getLider()->getAlcunha() ; ?></a></td>
-                     <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
+                     <?php require 'Discipulo/visao/menuDiscipulo.inc.php' ; ?>
                 </tr>
 
                  <?php if ( $discipulo->eLider()): ?>

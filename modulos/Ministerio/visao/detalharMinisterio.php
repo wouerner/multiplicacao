@@ -23,7 +23,7 @@
 		<section>		
 			<article>
 
-			<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+			<?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
 
 			<table>
 				<caption><h3>Ministério</h3></caption>

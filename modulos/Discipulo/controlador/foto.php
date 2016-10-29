@@ -26,7 +26,7 @@ class foto
             if (!$_FILES) {
 
                 $discipuloId = $url[4] ;
-              require_once 'modulos/discipulo/visao/foto/novo.php';
+              require_once 'modulos/Discipulo/visao/foto/novo.php';
             } else {
 
                 $id = $url['post']['discipuloId'] ;
@@ -43,7 +43,7 @@ class foto
 
                     $foto = new \discipulo\Modelo\foto();
                     $foto->discipuloId = $id ;
-                    $foto->url = '/modulos/discipulo/visao/foto/upload/'.$nomeArquivo ;
+                    $foto->url = '/modulos/Discipulo/visao/foto/upload/'.$nomeArquivo ;
 
                     if ( !$foto->salvar()) {
 
@@ -54,7 +54,7 @@ class foto
                         //var_dump($arq);
                         //var_dump($nomeArquivo) ;
                         //unlink($arq ) ;
-                        $foto->url ='/modulos/discipulo/visao/foto/upload/'.$nomeArquivo ;
+                        $foto->url ='/modulos/Discipulo/visao/foto/upload/'.$nomeArquivo ;
 
                         $foto->atualizar();
                     }
@@ -77,7 +77,7 @@ class foto
           $totalDiscipulos = \Discipulo\Modelo\Discipulo::totalDiscipulosSemLider() ;
           $totalDiscipulos = (int) $totalDiscipulos['total'] ;
 
-          require_once 'modulos/discipulo/visao/listar.php';
+          require_once 'modulos/Discipulo/visao/listar.php';
 
         }
 
@@ -131,7 +131,7 @@ class foto
           //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
             $eventos = $eventos->listarTodos();
 
-            require_once 'modulos/discipulo/visao/novoCompleto.php';
+            require_once 'modulos/Discipulo/visao/novoCompleto.php';
         } else {
                 $discipulo =	new \Discipulo\Modelo\Discipulo();
 
@@ -208,7 +208,7 @@ class foto
           {
                      if ( empty ( $url['post'] ) ) {
 
-                     require_once 'modulos/discipulo/visao/novoAnonimo.php';
+                     require_once 'modulos/Discipulo/visao/novoAnonimo.php';
 
             } else {
                      $discipulo =	new \Discipulo\Modelo\Discipulo();
@@ -223,12 +223,12 @@ class foto
 
                      if ($discipulo->salvar() ) {
 
-                                header ('location:/modulos/discipulo/visao/agradecimento.php');
+                                header ('location:/modulos/Discipulo/visao/agradecimento.php');
                                 exit();
 
                      } else {
                                 $mensagem = ($discipulo->erro== '23000') ? 'E-mail já cadastrado' :  'ok' ;
-                                require_once 'modulos/discipulo/visao/novoAnonimo.php';
+                                require_once 'modulos/Discipulo/visao/novoAnonimo.php';
 
                      }
 
@@ -310,7 +310,7 @@ class foto
             $status = $discipulo->getStatusCelular();
             $rede = $discipulo->getRede();
 
-             require_once 'modulos/discipulo/visao/atualizar.php';
+             require_once 'modulos/Discipulo/visao/atualizar.php';
 
             } else {
                 $discipulo =	new \Discipulo\Modelo\Discipulo();
@@ -426,7 +426,7 @@ class foto
 
             $discipulo = $discipulo->listarUm() ;
 
-            require 'discipulo/visao/detalhar.php';
+            require 'Discipulo/visao/detalhar.php';
 
         }
 
@@ -487,7 +487,7 @@ class foto
 
            //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
              $eventos = $eventos->listarTodos();
-             require_once 'discipulo/visao/chamar.php';
+             require_once 'Discipulo/visao/chamar.php';
 
         }
 
@@ -515,7 +515,7 @@ class foto
                   $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
                 $eventos = $eventos->listarTodos();
 
-                require_once 'modulos/discipulo/visao/evento.php';
+                require_once 'modulos/Discipulo/visao/evento.php';
             } else {
                       $post = $url['post'];
                      $discipuloEvento = new \Evento\Modelo\Evento();
@@ -537,7 +537,7 @@ class foto
     {
           if ( empty ( $url['post'] ) ) {
 
-                     require_once 'modulos/discipulo/visao/estadoCivil/novo.php';
+                     require_once 'modulos/Discipulo/visao/estadoCivil/novo.php';
 
             } else {
                      $estadoCivil =	new \Discipulo\Modelo\EstadoCivil();
@@ -552,7 +552,7 @@ class foto
                          exit();
 
                       } else {
-                         require_once 'modulos/discipulo/visao/estadoCivil/novo.php';
+                         require_once 'modulos/Discipulo/visao/estadoCivil/novo.php';
 
                       }
 
@@ -565,7 +565,7 @@ class foto
             $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
             $estadosCivies = $estadosCivies->listarTodos();
 
-            require_once 'modulos/discipulo/visao/estadoCivil/listar.php';
+            require_once 'modulos/Discipulo/visao/estadoCivil/listar.php';
 
         }
 
@@ -577,7 +577,7 @@ class foto
                 $estadoCivil->id = $url[3] ;
                 $estadoCivil = $estadoCivil->listarUm();
 
-                require_once 'modulos/discipulo/visao/estadoCivil/atualizar.php';
+                require_once 'modulos/Discipulo/visao/estadoCivil/atualizar.php';
 
             } else {
                 $estadoCivil =	new \Discipulo\Modelo\EstadoCivil();
@@ -683,7 +683,7 @@ class foto
           //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
             $eventos = $eventos->listarTodos();
 
-            require 'discipulo/visao/listarAtualizar.php';
+            require 'Discipulo/visao/listarAtualizar.php';
 
         }
 
@@ -694,7 +694,7 @@ class foto
             $discipulo->id = $url[3] ;
             $discipulo = $discipulo->listarum() ;
 
-            require 'discipulo/visao/fichas/encontroComDeus.php';
+            require 'Discipulo/visao/fichas/encontroComDeus.php';
 
         }
 
@@ -704,7 +704,7 @@ class foto
 
             $discipulos = $discipulos->fichaPorStatus($url[3]) ;
 
-            require 'discipulo/visao/fichas/fichaPorStatus.php';
+            require 'Discipulo/visao/fichas/fichaPorStatus.php';
 
         }
 
@@ -714,7 +714,7 @@ class foto
 
             $discipulos = $discipulos->fichaPorStatus($url[3]) ;
 
-            require 'discipulo/visao/fichas/cracha.php';
+            require 'Discipulo/visao/fichas/cracha.php';
 
         }
 
@@ -724,7 +724,7 @@ class foto
             $discipulo->id = ($url[3]);
             $discipulos[0] = $discipulo->listarUm($url[3]) ;
 
-            require 'discipulo/visao/fichas/cracha.php';
+            require 'Discipulo/visao/fichas/cracha.php';
 
         }
 

@@ -26,7 +26,7 @@ unset($_SESSION['mensagem']) ;
 		<section>		
 			<article>
 
-				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+				<?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
 
 			<?php if (isset($mensagem)) : ?>
 					<div class="alert <?php echo ($mensagem=='ok') ? 'alert-success' : 'alert-error' ; ?>">

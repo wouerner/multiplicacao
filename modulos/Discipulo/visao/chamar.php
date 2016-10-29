@@ -4,9 +4,9 @@
         <meta charset="UTF-8">
         <?php include 'incluidos/css.inc.php' ?>
         <?php include 'incluidos/js.inc.php' ?>
-        <script src = "/modulos/discipulo/visao/js/pesquisa.js" ></script>
-        <script src="/modulos/discipulo/visao/js/combobox.js"></script>
-        <script src="/modulos/discipulo/visao/js/comboboxCelula.js"></script>
+        <script src = "/modulos/Discipulo/visao/js/pesquisa.js" ></script>
+        <script src="/modulos/Discipulo/visao/js/combobox.js"></script>
+        <script src="/modulos/Discipulo/visao/js/comboboxCelula.js"></script>
 <script type="text/javascript">
 
    $(document).ready(function() {
@@ -76,7 +76,7 @@ jQuery(function($) {
         <section>
             <article>
 
-                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+                <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
             <div class = "row" >
                         <?php if (is_null($nome) ) : ?>
                             <div class = "span12" >
@@ -104,7 +104,7 @@ jQuery(function($) {
                             <button class = "btn btn-mini span1 editar" ><i class = "icon-pencil" ></i></button></td>
 
                             <div class = "oculto ui-widget" >
-                              <?php include 'discipulo/visao/formularioAtualizar.inc.php' ; ?>
+                              <?php include 'Discipulo/visao/formularioAtualizar.inc.php' ; ?>
                             </div>
                         </div>
 

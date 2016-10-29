@@ -36,7 +36,7 @@
                         /*width:500px;*/
                         height:274px;
                         border-color: 1px solid black;
-                        background : url('/modulos/discipulo/visao/fichas/cracha.png') ;
+                        background : url('/modulos/Discipulo/visao/fichas/cracha.png') ;
                     }
 
                     .nome{
@@ -69,7 +69,7 @@
             <div class = "span6" style = "margin-bottom:40px ; width: 420px ;;  " >
             <table class = "  table table-bordered table-condensed cracha" style = " border:1px solid black; " >
                  <tr>
-                <!--	<td class = "foto" ><img src="/modulos/discipulo/visao/img/mga.jpg"> </img></td> -->
+                <!--	<td class = "foto" ><img src="/modulos/Discipulo/visao/img/mga.jpg"> </img></td> -->
                 </tr>
                 <tr>
                     <!-- <td class = "" >Encontro com Deus dias 13, 14 e 15/07/2012</td> -->

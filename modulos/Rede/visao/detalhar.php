@@ -20,7 +20,7 @@
         <section>
             <article>
 
-            <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+            <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
             <div class = "well" >
             <table>
                 <caption><h3>Detalhes do Discipulos</h3></caption>
@@ -31,7 +31,7 @@
                 </tr>
 
                 <tr><td colspan = "2" >Endereço: <?php  echo $discipulo['endereco'] ; ?></td></tr>
-                    <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
+                    <?php require 'Discipulo/visao/menuDiscipulo.inc.php' ; ?>
                 </table>
             </div>
 

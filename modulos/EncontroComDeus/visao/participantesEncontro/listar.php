@@ -19,7 +19,7 @@ $(function () {
         </nav>
         <section>
             <article>
-                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+                <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
                 <h3>Quantidade de Encontrista: <?php echo $total?></h3>
                 <?php require 'modulos/encontroComDeus/visao/participantesEncontro/menuParticipante.php' ; ?>
                 <?php require 'modulos/encontroComDeus/visao/participantesEncontro/tab.php' ; ?>

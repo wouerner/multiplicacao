@@ -113,7 +113,7 @@ class tipoGeracao
             $discipulo =	new \Discipulo\Modelo\Discipulo();
             $discipulo->nome = $nome;
             $discipulos = $discipulo->chamar($nome);
-            require_once 'discipulo/visao/chamar.php';
+            require_once 'Discipulo/visao/chamar.php';
 
         }
 
@@ -127,7 +127,7 @@ class tipoGeracao
                   $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
                 $eventos = $eventos->listarTodos();
 
-            require_once 'modulos/discipulo/visao/evento.php';
+            require_once 'modulos/Discipulo/visao/evento.php';
             } else {
                       $post = $url['post'];
                      $discipuloEvento = new \Evento\Modelo\Evento();

@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <?php include 'incluidos/css.inc.php' ?>
         <?php include 'incluidos/js.inc.php' ?>
-        <script src="/modulos/discipulo/visao/js/combobox.js"></script>
-        <script src="/modulos/discipulo/visao/js/comboboxCelula.js"></script>
+        <script src="/modulos/Discipulo/visao/js/combobox.js"></script>
+        <script src="/modulos/Discipulo/visao/js/comboboxCelula.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.full.min.js"></script>
         <link href='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.css' rel='stylesheet' type='text/css'>

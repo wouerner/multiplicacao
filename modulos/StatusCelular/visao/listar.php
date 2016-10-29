@@ -18,7 +18,7 @@
 		<section>		
 			<article>
 
-				<?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+				<?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
 
 				<div class = "row" >	
 				<div class = "span12" >	
@@ -28,7 +28,7 @@
 						<?php foreach ( $discipulos as $discipulo) : ?>
 
 						<tr><td><a href="/discipulo/detalhar/id/<?php echo $discipulo['id']?>" ><h2><?php echo $discipulo['nome'] ; ?> </h2></a></td>
-							<?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
+							<?php require 'Discipulo/visao/menuDiscipulo.inc.php' ; ?>
 						</tr>
 						<tr><td>Telefone:<?php echo $discipulo['telefone'] ; ?></td> <td>E-mail:<?php echo $discipulo['email'] ; ?></td></tr>
 						<tr><td colspan = "2" >Endereço: <?php  echo $discipulo['endereco'] ; ?></td></tr>

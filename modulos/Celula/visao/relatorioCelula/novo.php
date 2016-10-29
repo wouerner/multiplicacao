@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/ext/markitup/markitup/skins/markitup/style.css" />
 <link rel="stylesheet" type="text/css" href="/ext/markitup/markitup/sets/default/style.css" />
 
-        <script src="/modulos/discipulo/visao/js/combobox.js"></script>
+        <script src="/modulos/Discipulo/visao/js/combobox.js"></script>
 
 <script type="text/javascript" src="/ext/markitup/markitup/jquery.markitup.js"></script>
 <script type="text/javascript" src="/ext/markitup/markitup/sets/default/set.js"></script>

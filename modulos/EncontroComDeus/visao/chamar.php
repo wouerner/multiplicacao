@@ -19,7 +19,7 @@
         <section>
             <article>
 
-                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+                <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
             <div class = "row" >
 
                         <?php if (is_null($nome)) : ?>
@@ -33,7 +33,7 @@
 
                         <tr>
                             <td><h2><?php echo $discipulo['nome'] ; ?> </h2>
-                            <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
+                            <?php require 'Discipulo/visao/menuDiscipulo.inc.php' ; ?>
                             </td>
                         </tr>
                         <tr><td>Telefone:<?php echo $discipulo['telefone'] ; ?></td> <td>E-mail:<?php echo $discipulo['email'] ; ?></td></tr>

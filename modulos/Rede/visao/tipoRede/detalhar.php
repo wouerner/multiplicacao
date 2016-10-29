@@ -20,7 +20,7 @@
         <section>
             <article>
 
-            <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+            <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
             <table class = "table well" >
                 <caption><h3>Rede</h3></caption>
 

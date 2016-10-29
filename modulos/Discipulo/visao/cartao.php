@@ -88,7 +88,7 @@ border-radius: 3px;
         <section>
             <article>
 
-                    <img class = "cartao" src="/modulos/discipulo/visao/img/cartao.png" >
+                    <img class = "cartao" src="/modulos/Discipulo/visao/img/cartao.png" >
                     <p class = "id fundo" >Id: <?php echo $discipulo->id ; ?></p>
                     <p class = "nome fundo" ><strong>	<?php echo $discipulo->nome ; ?></strong></p>
                     <p class = "telefone fundo" ><strong><?php echo $discipulo->telefone ; ?></strong></p>

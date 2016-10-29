@@ -266,7 +266,7 @@ class metas
                 $celulas = new \Celula\Modelo\Celula();
                 $celulas = $celulas->listarTodos();
 
-                require_once 'modulos/discipulo/visao/atualizar.php';
+                require_once 'modulos/Discipulo/visao/atualizar.php';
 
             } else {
                 $discipulo =	new \Discipulo\Modelo\Discipulo();
@@ -408,7 +408,7 @@ class metas
             $discipulo =	new \Discipulo\Modelo\Discipulo();
             $discipulo->nome = $nome;
             $discipulos = $discipulo->chamar($nome);
-            require_once 'discipulo/visao/chamar.php';
+            require_once 'Discipulo/visao/chamar.php';
 
         }
 
@@ -422,7 +422,7 @@ class metas
                   $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
                 $eventos = $eventos->listarTodos();
 
-            require_once 'modulos/discipulo/visao/evento.php';
+            require_once 'modulos/Discipulo/visao/evento.php';
             } else {
                       $post = $url['post'];
                      $discipuloEvento = new \Evento\Modelo\Evento();

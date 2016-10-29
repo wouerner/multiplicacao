@@ -20,7 +20,7 @@ class telefone
 
         public function novo()
         {
-          //require_once  'modulos/discipulo/visao/telefone/novo.php';
+          //require_once  'modulos/Discipulo/visao/telefone/novo.php';
 
         }
 
@@ -35,7 +35,7 @@ class telefone
           $totalDiscipulos = \Discipulo\Modelo\Discipulo::totalDiscipulosSemLider() ;
           $totalDiscipulos = (int) $totalDiscipulos['total'] ;
 
-          require_once 'modulos/discipulo/visao/listar.php';
+          require_once 'modulos/Discipulo/visao/listar.php';
 
         }
 
@@ -89,7 +89,7 @@ class telefone
           //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
             $eventos = $eventos->listarTodos();
 
-            require_once 'modulos/discipulo/visao/novoCompleto.php';
+            require_once 'modulos/Discipulo/visao/novoCompleto.php';
         } else {
                 $discipulo =	new \Discipulo\Modelo\Discipulo();
 
@@ -166,7 +166,7 @@ class telefone
           {
                      if ( empty ( $url['post'] ) ) {
 
-                     require_once 'modulos/discipulo/visao/novoAnonimo.php';
+                     require_once 'modulos/Discipulo/visao/novoAnonimo.php';
 
             } else {
                      $discipulo =	new \Discipulo\Modelo\Discipulo();
@@ -181,12 +181,12 @@ class telefone
 
                      if ($discipulo->salvar() ) {
 
-                                header ('location:/modulos/discipulo/visao/agradecimento.php');
+                                header ('location:/modulos/Discipulo/visao/agradecimento.php');
                                 exit();
 
                      } else {
                                 $mensagem = ($discipulo->erro== '23000') ? 'E-mail já cadastrado' :  'ok' ;
-                                require_once 'modulos/discipulo/visao/novoAnonimo.php';
+                                require_once 'modulos/Discipulo/visao/novoAnonimo.php';
 
                      }
 
@@ -268,7 +268,7 @@ class telefone
             $status = $discipulo->getStatusCelular();
             $rede = $discipulo->getRede();
 
-             require_once 'modulos/discipulo/visao/atualizar.php';
+             require_once 'modulos/Discipulo/visao/atualizar.php';
 
             } else {
                 $discipulo =	new \Discipulo\Modelo\Discipulo();
@@ -384,7 +384,7 @@ class telefone
 
             $discipulo = $discipulo->listarUm() ;
 
-            require 'discipulo/visao/detalhar.php';
+            require 'Discipulo/visao/detalhar.php';
 
         }
 
@@ -445,7 +445,7 @@ class telefone
 
            //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
              $eventos = $eventos->listarTodos();
-             require_once 'discipulo/visao/chamar.php';
+             require_once 'Discipulo/visao/chamar.php';
 
         }
 
@@ -473,7 +473,7 @@ class telefone
                   $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
                 $eventos = $eventos->listarTodos();
 
-                require_once 'modulos/discipulo/visao/evento.php';
+                require_once 'modulos/Discipulo/visao/evento.php';
             } else {
                       $post = $url['post'];
                      $discipuloEvento = new \Evento\Modelo\Evento();
@@ -495,7 +495,7 @@ class telefone
     {
           if ( empty ( $url['post'] ) ) {
 
-                     require_once 'modulos/discipulo/visao/estadoCivil/novo.php';
+                     require_once 'modulos/Discipulo/visao/estadoCivil/novo.php';
 
             } else {
                      $estadoCivil =	new \Discipulo\Modelo\EstadoCivil();
@@ -510,7 +510,7 @@ class telefone
                          exit();
 
                       } else {
-                         require_once 'modulos/discipulo/visao/estadoCivil/novo.php';
+                         require_once 'modulos/Discipulo/visao/estadoCivil/novo.php';
 
                       }
 
@@ -523,7 +523,7 @@ class telefone
             $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
             $estadosCivies = $estadosCivies->listarTodos();
 
-            require_once 'modulos/discipulo/visao/estadoCivil/listar.php';
+            require_once 'modulos/Discipulo/visao/estadoCivil/listar.php';
 
         }
 
@@ -535,7 +535,7 @@ class telefone
                 $estadoCivil->id = $url[3] ;
                 $estadoCivil = $estadoCivil->listarUm();
 
-                require_once 'modulos/discipulo/visao/estadoCivil/atualizar.php';
+                require_once 'modulos/Discipulo/visao/estadoCivil/atualizar.php';
 
             } else {
                 $estadoCivil =	new \Discipulo\Modelo\EstadoCivil();
@@ -641,7 +641,7 @@ class telefone
           //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
             $eventos = $eventos->listarTodos();
 
-            require 'discipulo/visao/listarAtualizar.php';
+            require 'Discipulo/visao/listarAtualizar.php';
 
         }
 
@@ -652,7 +652,7 @@ class telefone
             $discipulo->id = $url[3] ;
             $discipulo = $discipulo->listarum() ;
 
-            require 'discipulo/visao/fichas/encontroComDeus.php';
+            require 'Discipulo/visao/fichas/encontroComDeus.php';
 
         }
 
@@ -662,7 +662,7 @@ class telefone
 
             $discipulos = $discipulos->fichaPorStatus($url[3]) ;
 
-            require 'discipulo/visao/fichas/fichaPorStatus.php';
+            require 'Discipulo/visao/fichas/fichaPorStatus.php';
 
         }
 
@@ -672,7 +672,7 @@ class telefone
 
             $discipulos = $discipulos->fichaPorStatus($url[3]) ;
 
-            require 'discipulo/visao/fichas/cracha.php';
+            require 'Discipulo/visao/fichas/cracha.php';
 
         }
 
@@ -682,7 +682,7 @@ class telefone
             $discipulo->id = ($url[3]);
             $discipulos[0] = $discipulo->listarUm($url[3]) ;
 
-            require 'discipulo/visao/fichas/cracha.php';
+            require 'Discipulo/visao/fichas/cracha.php';
 
         }
 

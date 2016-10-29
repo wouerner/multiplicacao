@@ -9,7 +9,7 @@
 
         <script src="../../../ext/jquery/jquery-1.7.1.min.js"></script>
         <script src="../../../ext/jquery/jquery.maskedinput.js"></script>
-        <script src="../modulos/discipulo/visao/js/novo.js"></script>
+        <script src="../modulos/Discipulo/visao/js/novo.js"></script>
     </head>
 
     <body>

@@ -35,7 +35,7 @@ class familia
 
             }
 
-          require_once 'modulos/discipulo/visao/listar.php';
+          require_once 'modulos/Discipulo/visao/listar.php';
 
     }
 
@@ -54,7 +54,7 @@ class familia
             $discipulos->id = $url[4];
              $discipulos = $discipulos->listarDiscipulos();
 
-          require_once 'modulos/discipulo/visao/listar.php';
+          require_once 'modulos/Discipulo/visao/listar.php';
 
         }
 
@@ -80,7 +80,7 @@ class familia
           $totalDiscipulos = \Discipulo\Modelo\Discipulo::totalDiscipulos() ;
           $totalDiscipulos = (int) $totalDiscipulos['total'] ;
 
-          require_once 'modulos/discipulo/visao/inativos.php';
+          require_once 'modulos/Discipulo/visao/inativos.php';
 
         }
 
@@ -220,7 +220,7 @@ class familia
             }
             $total = count($discipulos);
 
-            require_once 'modulos/discipulo/visao/arquivo/listar.php';
+            require_once 'modulos/Discipulo/visao/arquivo/listar.php';
         }
 
         public function semCelula()
@@ -234,7 +234,7 @@ class familia
           $totalDiscipulos = \Discipulo\Modelo\Discipulo::totalDiscipulosSemCelula() ;
           $totalDiscipulos = (int) $totalDiscipulos['total'] ;
 
-          require_once 'modulos/discipulo/visao/listar.php';
+          require_once 'modulos/Discipulo/visao/listar.php';
 
         }
 
@@ -249,7 +249,7 @@ class familia
           $totalDiscipulos = \Discipulo\Modelo\Discipulo::totalDiscipulosSemLider() ;
           $totalDiscipulos = (int) $totalDiscipulos['total'] ;
 
-          require_once 'modulos/discipulo/visao/listar.php';
+          require_once 'modulos/Discipulo/visao/listar.php';
 
         }
 
@@ -259,7 +259,7 @@ class familia
           {
                      if ( empty ( $url['post'] ) ) {
 
-                     require_once 'modulos/discipulo/visao/novo.php';
+                     require_once 'modulos/Discipulo/visao/novo.php';
 
                  } else {
                      $discipulo =	new \Discipulo\Modelo\Discipulo();
@@ -279,7 +279,7 @@ class familia
 
                      } else {
                                 $mensagem = ($discipulo->erro== '23000') ? 'E-mail já cadastrado' :  'ok' ;
-                                require_once 'modulos/discipulo/visao/novo.php';
+                                require_once 'modulos/Discipulo/visao/novo.php';
 
                      }
 
@@ -331,7 +331,7 @@ class familia
             //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
             $eventos = $eventos->listarTodos();
 
-            require_once 'modulos/discipulo/visao/novoCompleto.php';
+            require_once 'modulos/Discipulo/visao/novoCompleto.php';
         } else {
             $discipulo =	new \Discipulo\Modelo\Discipulo();
 
@@ -429,7 +429,7 @@ class familia
           {
                      if ( empty ( $url['post'] ) ) {
 
-                     require_once 'modulos/discipulo/visao/novoAnonimo.php';
+                     require_once 'modulos/Discipulo/visao/novoAnonimo.php';
 
             } else {
                      $discipulo =	new \Discipulo\Modelo\Discipulo();
@@ -444,12 +444,12 @@ class familia
 
                      if ($discipulo->salvar() ) {
 
-                                header ('location:/modulos/discipulo/visao/agradecimento.php');
+                                header ('location:/modulos/Discipulo/visao/agradecimento.php');
                                 exit();
 
                      } else {
                                 $mensagem = ($discipulo->erro== '23000') ? 'E-mail já cadastrado' :  'ok' ;
-                                require_once 'modulos/discipulo/visao/novoAnonimo.php';
+                                require_once 'modulos/Discipulo/visao/novoAnonimo.php';
 
                      }
 
@@ -467,7 +467,7 @@ class familia
                 $discipulo->id =  $url[4] ;
                 $discipulo = $discipulo->listarUm();
 
-                require_once 'modulos/discipulo/visao/atualizar.php';
+                require_once 'modulos/Discipulo/visao/atualizar.php';
 
             } else {
                 $discipulo =	new \Discipulo\Modelo\Discipulo();
@@ -536,7 +536,7 @@ class familia
 
             $discipulos = $discipulo->listarDiscipulos();
 
-            require 'discipulo/visao/detalhar.php';
+            require 'Discipulo/visao/detalhar.php';
 
         }
 
@@ -566,7 +566,7 @@ class familia
 
             $totalRedesLideres =  \Rede\Modelo\Rede::pegarTodasRedesPorLider($url['4']);
 
-            require 'discipulo/visao/perfil.php';
+            require 'Discipulo/visao/perfil.php';
 
         }
 
@@ -629,8 +629,8 @@ class familia
 
            //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
              $eventos = $eventos->listarTodos();
-             //require_once 'discipulo/visao/chamar.php' ;
-             require_once 'discipulo/visao/listar.php';
+             //require_once 'Discipulo/visao/chamar.php' ;
+             require_once 'Discipulo/visao/listar.php';
 
         }
 
@@ -693,8 +693,8 @@ class familia
 
            //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
              $eventos = $eventos->listarTodos();
-             //require_once 'discipulo/visao/chamar.php' ;
-             require_once 'discipulo/visao/listar.php';
+             //require_once 'Discipulo/visao/chamar.php' ;
+             require_once 'Discipulo/visao/listar.php';
 
         }
 
@@ -703,7 +703,7 @@ class familia
             $discipulo =	new \Discipulo\Modelo\Discipulo();
             $discipulo->id = $url[4] ;
             $discipulo = $discipulo->listarUm() ;
-             require_once 'discipulo/visao/cartao.php';
+             require_once 'Discipulo/visao/cartao.php';
 
         }
 
@@ -731,7 +731,7 @@ class familia
                   $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
                 $eventos = $eventos->listarTodos();
 
-                require_once 'modulos/discipulo/visao/evento.php';
+                require_once 'modulos/Discipulo/visao/evento.php';
             } else {
                       $post = $url['post'];
                      $discipuloEvento = new \Evento\Modelo\Evento();
@@ -753,7 +753,7 @@ class familia
     {
           if ( empty ( $url['post'] ) ) {
 
-                     require_once 'modulos/discipulo/visao/estadoCivil/novo.php';
+                     require_once 'modulos/Discipulo/visao/estadoCivil/novo.php';
 
             } else {
                      $estadoCivil =	new \Discipulo\Modelo\EstadoCivil();
@@ -768,7 +768,7 @@ class familia
                          exit();
 
                       } else {
-                         require_once 'modulos/discipulo/visao/estadoCivil/novo.php';
+                         require_once 'modulos/Discipulo/visao/estadoCivil/novo.php';
 
                       }
 
@@ -781,7 +781,7 @@ class familia
             $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
             $estadosCivies = $estadosCivies->listarTodos();
 
-            require_once 'modulos/discipulo/visao/estadoCivil/listar.php';
+            require_once 'modulos/Discipulo/visao/estadoCivil/listar.php';
 
         }
 
@@ -793,7 +793,7 @@ class familia
                 $estadoCivil->id = $url[3] ;
                 $estadoCivil = $estadoCivil->listarUm();
 
-                require_once 'modulos/discipulo/visao/estadoCivil/atualizar.php';
+                require_once 'modulos/Discipulo/visao/estadoCivil/atualizar.php';
 
             } else {
                 $estadoCivil =	new \Discipulo\Modelo\EstadoCivil();
@@ -907,7 +907,7 @@ class familia
           //$eventosDiscipulos = $eventos->listarTodosDiscipulo($$id);
             $eventos = $eventos->listarTodos();
 
-            require 'discipulo/visao/listarAtualizar.php';
+            require 'Discipulo/visao/listarAtualizar.php';
 
         }
 
@@ -918,7 +918,7 @@ class familia
             $discipulo->id = $url[4] ;
             $discipulo = $discipulo->listarum() ;
 
-            require 'discipulo/visao/fichas/encontroComDeus.php';
+            require 'Discipulo/visao/fichas/encontroComDeus.php';
 
         }
 
@@ -928,7 +928,7 @@ class familia
 
             $discipulos = $discipulos->fichaPorStatus($url[4]) ;
 
-            require 'discipulo/visao/fichas/fichaPorStatus.php';
+            require 'Discipulo/visao/fichas/fichaPorStatus.php';
 
         }
 
@@ -938,7 +938,7 @@ class familia
 
             $discipulos = $discipulos->fichaPorStatus($url[4]) ;
 
-            require 'discipulo/visao/fichas/cracha.php';
+            require 'Discipulo/visao/fichas/cracha.php';
 
         }
 
@@ -948,7 +948,7 @@ class familia
             $discipulo->id = ($url[4]);
             $discipulos[0] = $discipulo->listarUm($url[4]) ;
 
-            require 'discipulo/visao/fichas/cracha.php';
+            require 'Discipulo/visao/fichas/cracha.php';
 
         }
 
@@ -956,7 +956,7 @@ class familia
         {
             $rank = \Discipulo\Modelo\Discipulo::rank() ;
             $nomeRank = 'Ativos' ;
-            require 'discipulo/visao/rank.php';
+            require 'Discipulo/visao/rank.php';
 
         }
 
@@ -964,7 +964,7 @@ class familia
         {
             $rank = \Discipulo\Modelo\Discipulo::rankInativos() ;
             $nomeRank = 'Inativos' ;
-            require 'discipulo/visao/rank.php';
+            require 'Discipulo/visao/rank.php';
 
         }
 

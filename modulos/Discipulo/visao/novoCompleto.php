@@ -11,8 +11,8 @@ $_SESSION['dados'] = isset($_SESSION['dados']) ? NULL : NULL;
     <?php include 'incluidos/css.inc.php'?>
     <?php include 'incluidos/js.inc.php'?>
 
-    <script src="/modulos/discipulo/visao/js/combobox.js"></script>
-    <script src="/modulos/discipulo/visao/js/comboboxCelula.js"></script>
+    <script src="/modulos/Discipulo/visao/js/combobox.js"></script>
+    <script src="/modulos/Discipulo/visao/js/comboboxCelula.js"></script>
     <script>
 
         jQuery(function($){

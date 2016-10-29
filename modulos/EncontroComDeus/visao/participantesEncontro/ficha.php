@@ -50,7 +50,7 @@
             <?php foreach ( $discipulos as $discipulo ) : ?>
             <table class = " table " >
                 <tr>
-                    <td><img src="/modulos/discipulo/visao/img/mga.jpg"> </img></td>
+                    <td><img src="/modulos/Discipulo/visao/img/mga.jpg"> </img></td>
                     <td><h2>Reencontro com Deus dias 20, 21 e 22/09/2013</h2></td>
                 </tr>
             <tr>

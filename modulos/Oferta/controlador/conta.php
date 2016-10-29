@@ -152,7 +152,7 @@ class conta {
 
 
 
-            require_once  'modulos/discipulo/visao/atualizar.php';
+            require_once  'modulos/Discipulo/visao/atualizar.php';
 
         }else {
             $discipulo =	new \Discipulo\Modelo\Discipulo();

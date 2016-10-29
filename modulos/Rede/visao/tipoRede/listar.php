@@ -14,7 +14,7 @@ unset($_SESSION['mensagem']) ;
         <nav>
             <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
         </nav>
-                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+                <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
         <section>
             <style>
                 #chart {

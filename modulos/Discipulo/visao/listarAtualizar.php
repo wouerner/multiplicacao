@@ -10,8 +10,8 @@
         <?php include 'incluidos/css.inc.php' ; ?>
         <?php include 'incluidos/js.inc.php' ; ?>
 
-        <script src="../modulos/discipulo/visao/js/novo.js"></script>
-        <script src = "/modulos/discipulo/visao/js/pesquisa.js" ></script>
+        <script src="../modulos/Discipulo/visao/js/novo.js"></script>
+        <script src = "/modulos/Discipulo/visao/js/pesquisa.js" ></script>
 
 <script type="text/javascript">
    $(document).ready(function() {
@@ -112,8 +112,8 @@ jQuery(function($) {
         });*/
     </script>
 
-        <script src="/modulos/discipulo/visao/js/combobox.js"></script>
-        <script src="/modulos/discipulo/visao/js/comboboxCelula.js"></script>
+        <script src="/modulos/Discipulo/visao/js/combobox.js"></script>
+        <script src="/modulos/Discipulo/visao/js/comboboxCelula.js"></script>
     </head>
 
     <body>
@@ -131,7 +131,7 @@ jQuery(function($) {
         <section class = "" >
             <article>
 
-                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+                <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
 
                 <?php if ( $mensagem ) : ?>
               <div class = "row-fluid" >
@@ -169,7 +169,7 @@ jQuery(function($) {
 
                                     <button class = "btn btn-mini span1 editar" ><i class = "icon-pencil" ></i></button>
                                     <div class = "oculto ui-widget" >
-                                      <?php include 'discipulo/visao/formularioAtualizar.inc.php' ; ?>
+                                      <?php include 'Discipulo/visao/formularioAtualizar.inc.php' ; ?>
                             </div>
             </div>
             </div>

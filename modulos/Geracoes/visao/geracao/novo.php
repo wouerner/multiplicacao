@@ -12,7 +12,7 @@
             </nav>
         <section>
         <article>
-            <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+            <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
             <div class = "row-fluid" >
                 <form class = "well form-horizontal"  method="post">
                  <input name="discipuloId" type="hidden" value="<?php echo $discipulo->id?>">

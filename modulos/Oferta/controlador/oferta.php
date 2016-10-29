@@ -8,7 +8,7 @@ class oferta{
 
     public function index(){
 
-//			require_once  'modulos/discipulo/visao/listar.php';
+//			require_once  'modulos/Discipulo/visao/listar.php';
 
     }
     public function novo($url){
@@ -160,7 +160,7 @@ class oferta{
 
 
 
-            require_once  'modulos/discipulo/visao/atualizar.php';
+            require_once  'modulos/Discipulo/visao/atualizar.php';
 
         }else {
             $discipulo =	new \Discipulo\Modelo\Discipulo();

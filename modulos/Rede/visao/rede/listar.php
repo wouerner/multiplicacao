@@ -11,7 +11,7 @@
         <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
         <section>
             <article>
-                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+                <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
         <div class = "row-fluid" >
             <div class = "col-md-12">
                     <!-- Nav tabs -->

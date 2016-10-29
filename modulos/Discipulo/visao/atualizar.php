@@ -74,8 +74,8 @@ unset($_SESSION['mensagem']) ;
 
         });*/
         </script>
-        <script src="/modulos/discipulo/visao/js/combobox.js"></script>
-        <script src="/modulos/discipulo/visao/js/comboboxCelula.js"></script>
+        <script src="/modulos/Discipulo/visao/js/combobox.js"></script>
+        <script src="/modulos/Discipulo/visao/js/comboboxCelula.js"></script>
 
     </head>
     <body>
@@ -94,7 +94,7 @@ unset($_SESSION['mensagem']) ;
                     </h4>
                    </div>
                 <?php endif ; ?>
-                <?php include 'discipulo/visao/formularioAtualizar.inc.php' ; ?>
+                <?php include 'Discipulo/visao/formularioAtualizar.inc.php' ; ?>
             </article>
         </section>
         </div>

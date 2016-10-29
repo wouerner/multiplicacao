@@ -11,7 +11,7 @@ namespace statusCelular\controlador;
 		public function index(){
 
 
-//			require_once  'modulos/discipulo/visao/listar.php';
+//			require_once  'modulos/Discipulo/visao/listar.php';
 
 
 		}
@@ -111,7 +111,7 @@ namespace statusCelular\controlador;
 
 
 
-				require_once  'modulos/discipulo/visao/atualizar.php';
+				require_once  'modulos/Discipulo/visao/atualizar.php';
 
 			}else {
 				$discipulo =	new \Discipulo\Modelo\Discipulo();
@@ -192,7 +192,7 @@ namespace statusCelular\controlador;
 			$discipulo =	new \Discipulo\Modelo\Discipulo();
 			$discipulo->nome = $nome;
 			$discipulos = $discipulo->chamar($nome);
-			require_once 'discipulo/visao/chamar.php' ;
+			require_once 'Discipulo/visao/chamar.php' ;
 
 
 		}
@@ -209,7 +209,7 @@ namespace statusCelular\controlador;
 				$eventos = $eventos->listarTodos();
 
 
-			require_once 'modulos/discipulo/visao/evento.php' ;
+			require_once 'modulos/Discipulo/visao/evento.php' ;
 			}else {
 					  $post = $url['post'];
 					 $discipuloEvento = new \Evento\Modelo\Evento();

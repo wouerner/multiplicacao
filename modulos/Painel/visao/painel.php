@@ -10,8 +10,8 @@
         <?php include 'incluidos/css.inc.php' ; ?>
         <?php include 'incluidos/js.inc.php' ; ?>
 
-        <script src="../modulos/discipulo/visao/js/novo.js"></script>
-        <script src = "/modulos/discipulo/visao/js/pesquisa.js" ></script>
+        <script src="../modulos/Discipulo/visao/js/novo.js"></script>
+        <script src = "/modulos/Discipulo/visao/js/pesquisa.js" ></script>
         <script>
             $(document).ready(function() {
             $("table").tablesorter();

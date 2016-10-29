@@ -113,7 +113,7 @@ class intervaloMetas
                 $celulas = new \Celula\Modelo\Celula();
                 $celulas = $celulas->listarTodos();
 
-                require_once 'modulos/discipulo/visao/atualizar.php';
+                require_once 'modulos/Discipulo/visao/atualizar.php';
 
             } else {
                 $discipulo =	new \Discipulo\Modelo\Discipulo();
@@ -217,7 +217,7 @@ class intervaloMetas
             $discipulo->id = $url[3] ;
             $discipulo = $discipulo->listarUm() ;
 
-            require 'discipulo/visao/detalhar.php';
+            require 'Discipulo/visao/detalhar.php';
 
         }
 
@@ -249,7 +249,7 @@ class intervaloMetas
             $discipulo =	new \Discipulo\Modelo\Discipulo();
             $discipulo->nome = $nome;
             $discipulos = $discipulo->chamar($nome);
-            require_once 'discipulo/visao/chamar.php';
+            require_once 'Discipulo/visao/chamar.php';
 
         }
 
@@ -263,7 +263,7 @@ class intervaloMetas
                   $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
                 $eventos = $eventos->listarTodos();
 
-            require_once 'modulos/discipulo/visao/evento.php';
+            require_once 'modulos/Discipulo/visao/evento.php';
             } else {
                       $post = $url['post'];
                      $discipuloEvento = new \Evento\Modelo\Evento();

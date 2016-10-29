@@ -24,7 +24,7 @@ $('.table').tab('show');
         <section>
             <article>
 
-                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+                <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
 
                 <h3>Encontro com Deus: <?php echo $total?></h3>
                 <?php require 'modulos/encontroComDeus/visao/participantesEncontro/menuParticipante.php' ; ?>

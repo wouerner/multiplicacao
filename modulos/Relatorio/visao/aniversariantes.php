@@ -16,7 +16,7 @@
         <section>
             <article>
 
-                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+                <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
                 <div class = "row-fluid" >
 
                 <div class = "span12" >

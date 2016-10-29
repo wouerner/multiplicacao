@@ -45,7 +45,7 @@
 
                         <tr>
                             <td ><a href="/evento/detalhar/id/<?php echo $evento['id']?>" ><?php echo $evento['nome'] ; ?> </a></td>
-                            <td><?php require 'discipulo/visao/menuEvento.inc.php' ; ?>	</td></tr>
+                            <td><?php require 'Discipulo/visao/menuEvento.inc.php' ; ?>	</td></tr>
                         <?php endforeach ; ?>
                         </table>
 

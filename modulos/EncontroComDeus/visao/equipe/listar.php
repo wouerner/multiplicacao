@@ -17,7 +17,7 @@
         <section>
             <article>
 
-                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+                <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
                 <a class = "btn btn-success" href = "/encontroComDeus/equipe/novoEquipe/id/<?php echo $encontroId ; ?>" ><i class = "icon-plus icon-white" ></i>Nova Equipe</a>
                 <a class = "btn btn-primary" href = "/encontroComDeus/equipe/listarTodasEquipes/id/<?php echo $encontroId ; ?>" ><i class = "icon-plus icon-white" ></i>Todas Equipe</a>
                 <div class = "row-fluid" >

@@ -17,7 +17,7 @@
         <section>
             <article>
 
-                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+                <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
                 <div class = "row-fluid" >
                         <table class = "table bordered-table">
                         <caption><h3>Participantes da Meta(<?php echo $total ; ?>)</h3></caption>

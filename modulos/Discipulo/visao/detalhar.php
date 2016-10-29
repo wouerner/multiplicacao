@@ -77,7 +77,7 @@ $(document).ready(function () {
         </nav>
         <section>
             <article>
-            <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+            <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
             <div class="panel panel-default">
               <div class="panel-heading">
                     Detalhar Discipulo
@@ -292,7 +292,7 @@ $(document).ready(function () {
 
               </div>
                 <div class="panel-footer">
-                    <?php require 'discipulo/visao/menuDiscipulo.inc.php' ; ?>
+                    <?php require 'Discipulo/visao/menuDiscipulo.inc.php' ; ?>
                 </div>
             </div>
 

@@ -17,7 +17,7 @@
         <section>
             <article>
 
-                <?php require 'modulos/discipulo/visao/chamarDiscipulo.php' ; ?>
+                <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
 <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                 <a class = "btn btn-success" href = "/encontroComDeus/equipe/novoEquipe/id/<?php //echo $encontroId ; ?>" ><i class = "icon-plus icon-white" ></i>Nova Equipe</a>
 <?php endif?>

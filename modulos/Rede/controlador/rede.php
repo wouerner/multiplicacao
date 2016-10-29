@@ -7,7 +7,7 @@ class rede
 {
     public function index()
     {
-//			require_once  'modulos/discipulo/visao/listar.php';
+//			require_once  'modulos/Discipulo/visao/listar.php';
 
     }
     public function novo($url)
@@ -175,7 +175,7 @@ public function listarMembrosRede($url)
             $celulas = new \Celula\Modelo\Celula();
             $celulas = $celulas->listarTodos();
 
-            require_once 'modulos/discipulo/visao/atualizar.php';
+            require_once 'modulos/Discipulo/visao/atualizar.php';
 
         } else {
             $discipulo =	new \Discipulo\Modelo\Discipulo();
@@ -272,7 +272,7 @@ public function listarMembrosRede($url)
         $discipulo->id = $url[4] ;
         $discipulo = $discipulo->listarUm() ;
 
-        require 'discipulo/visao/detalhar.php';
+        require 'Discipulo/visao/detalhar.php';
 
     }
 
@@ -304,7 +304,7 @@ public function listarMembrosRede($url)
         $discipulo =	new \Discipulo\Modelo\Discipulo();
         $discipulo->nome = $nome;
         $discipulos = $discipulo->chamar($nome);
-        require_once 'discipulo/visao/chamar.php';
+        require_once 'Discipulo/visao/chamar.php';
 
     }
 
@@ -318,7 +318,7 @@ public function listarMembrosRede($url)
               $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
             $eventos = $eventos->listarTodos();
 
-        require_once 'modulos/discipulo/visao/evento.php';
+        require_once 'modulos/Discipulo/visao/evento.php';
         } else {
                   $post = $url['post'];
                  $discipuloEvento = new \Evento\Modelo\Evento();
