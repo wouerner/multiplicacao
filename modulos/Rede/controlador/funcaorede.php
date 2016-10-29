@@ -14,7 +14,7 @@ class funcaoRede
      */
     public function atualizar($url)
     {
-            $funcao = new \rede\modelo\funcaoRede();
+            $funcao = new \Rede\Modelo\FuncaoRede();
 
             $post = $url['post'] ;
 

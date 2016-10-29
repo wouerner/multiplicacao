@@ -119,7 +119,7 @@ class foto
              //tipos de rede e rede atual da pessoa
              $rede = new \Rede\Modelo\Rede();
              $tipoRede = new \Rede\Modelo\TipoRede();
-             $funcaoRede = new \rede\modelo\funcaoRede();
+             $funcaoRede = new \Rede\Modelo\FuncaoRede();
 
              $tiposRedes = $tipoRede->listarTodos();
              $funcoesRedes = $funcaoRede->listarTodos();
@@ -286,7 +286,7 @@ class foto
              //tipos de rede e rede atual da pessoa
              $rede = new \Rede\Modelo\Rede();
              $tipoRede = new \Rede\Modelo\TipoRede();
-             $funcaoRedes = new \rede\modelo\funcaoRede();
+             $funcaoRedes = new \Rede\Modelo\FuncaoRede();
 
              $tiposRedes = $tipoRede->listarTodos();
              $funcaoRedes = $funcaoRedes->listarTodos();
@@ -469,7 +469,7 @@ class foto
              //tipos de rede e rede atual da pessoa
              $rede = new \Rede\Modelo\Rede();
              $tipoRede = new \Rede\Modelo\TipoRede();
-             $funcaoRede = new \rede\modelo\funcaoRede();
+             $funcaoRede = new \Rede\Modelo\FuncaoRede();
 
              $tiposRedes = $tipoRede->listarTodos();
              $funcaoRedes = $funcaoRede->listarTodos();
@@ -665,7 +665,7 @@ class foto
              $rede = new \Rede\Modelo\Rede();
 
              $tipoRede = new \Rede\Modelo\TipoRede();
-             $funcaoRedes = new \rede\modelo\funcaoRede();
+             $funcaoRedes = new \Rede\Modelo\FuncaoRede();
 
              $tiposRedes = $tipoRede->listarTodos();
              $funcaoRedes = $funcaoRedes->listarTodos();

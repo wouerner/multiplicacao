@@ -16,7 +16,7 @@ class rede
                          $post = $url['post'] ;
 
          $rede =	new \Rede\Modelo\Rede() ;
-         $funcaoRede =	new \rede\modelo\funcaoRede() ;
+         $funcaoRede =	new \Rede\Modelo\FuncaoRede() ;
          $tipoRede =	new \Rede\Modelo\TipoRede() ;
 
          $rede->discipuloId = $url[3];
@@ -76,7 +76,7 @@ class rede
 
         } else {
 
-        $funcao =	new \rede\modelo\funcaoRede() ;
+        $funcao =	new \Rede\Modelo\FuncaoRede() ;
 
         $post = $url['post'] ;
         $funcao->nome = $post['nome'] ;
@@ -101,7 +101,7 @@ class rede
 
     public function listarFuncaoRede()
     {
-              $funcoes =	new \rede\modelo\funcaoRede();
+              $funcoes =	new \Rede\Modelo\FuncaoRede();
               $funcoes = $funcoes->listarTodos();
 
               require 'modulos/rede/visao/funcaoRede/listar.php';
@@ -113,7 +113,7 @@ public function listarMembrosRede($url)
     $redeId = $url[4];
 
     $rede =	new \Rede\Modelo\Rede();
-    $funcao =	new \rede\modelo\funcaoRede();
+    $funcao =	new \Rede\Modelo\FuncaoRede();
     $tipoRede = new \Rede\Modelo\TipoRede();
     $tipoRede->id = $redeId;
     $lideresRede = $tipoRede->lideresRede();
@@ -226,7 +226,7 @@ public function listarMembrosRede($url)
 
     public function atualizarFuncaoRede($url)
     {
-        $funcao = new \rede\modelo\funcaoRede();
+        $funcao = new \Rede\Modelo\FuncaoRede();
         $funcao->id = $url[4] ;
         $funcao = $funcao->listarUm();
 
@@ -246,7 +246,7 @@ public function listarMembrosRede($url)
 
     public function excluirFuncaoRede($url)
     {
-            $funcao =	new \rede\modelo\funcaoRede();
+            $funcao =	new \Rede\Modelo\FuncaoRede();
             $funcao->id = $url[4];
             $funcao->excluir();
 

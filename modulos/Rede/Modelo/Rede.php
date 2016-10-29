@@ -120,7 +120,7 @@ class Rede
         //fechar conexÃ£o
         $pdo = null ;
 
-        $result = $stm->fetchObject('\rede\modelo\funcaoRede');
+        $result = $stm->fetchObject('\Rede\Modelo\FuncaoRede');
         return $result;
     }
 
