@@ -58,7 +58,7 @@ class relatorio
         $tipoStatusCelulares = new \statusCelular\modelo\tipoStatusCelular();
         $tipoStatusCelulares= $tipoStatusCelulares->listarTodos();
 
-        $estadoCivies = new \discipulo\Modelo\estadoCivil();
+        $estadoCivies = new \Discipulo\Modelo\EstadoCivil();
         $estadoCivies = $estadoCivies->listarTodos();
 
         $celulas = new \celula\modelo\celula();
@@ -96,7 +96,7 @@ class relatorio
         }
 
         if ($estadoCivil != 'todos') {
-        $estadoCivil = new \discipulo\Modelo\estadoCivil();
+        $estadoCivil = new \Discipulo\Modelo\EstadoCivil();
         $estadoCivil->id = $post['estadoCivil'];
         $estadoCivil = $estadoCivil->listarUm();
         }
@@ -114,7 +114,7 @@ class relatorio
         }
 
         if ($estadoCivil != 'todos') {
-        $estadoCivil = new \discipulo\Modelo\estadoCivil();
+        $estadoCivil = new \Discipulo\Modelo\EstadoCivil();
         $estadoCivil->id = $post['estadoCivil'];
         $estadoCivil = $estadoCivil->listarUm();
         }
@@ -144,7 +144,7 @@ class relatorio
         $tipoStatusCelulares = new \statusCelular\modelo\tipoStatusCelular();
         $tipoStatusCelulares= $tipoStatusCelulares->listarTodos();
 
-        $estadoCivies = new \discipulo\Modelo\estadoCivil();
+        $estadoCivies = new \Discipulo\Modelo\EstadoCivil();
         $estadoCivies = $estadoCivies->listarTodos();
 
         $celulas = new \celula\modelo\celula();
@@ -182,7 +182,7 @@ class relatorio
         }
 
         if ($estadoCivil != 'todos') {
-        $estadoCivil = new \discipulo\Modelo\estadoCivil();
+        $estadoCivil = new \Discipulo\Modelo\EstadoCivil();
         $estadoCivil->id = $post['estadoCivil'];
         $estadoCivil = $estadoCivil->listarUm();
         }
@@ -200,7 +200,7 @@ class relatorio
         }
 
         if ($estadoCivil != 'todos') {
-        $estadoCivil = new \discipulo\Modelo\estadoCivil();
+        $estadoCivil = new \Discipulo\Modelo\EstadoCivil();
         $estadoCivil->id = $post['estadoCivil'];
         $estadoCivil = $estadoCivil->listarUm();
         }

@@ -1,5 +1,5 @@
 <?php		//include("seguranca/ACL/assets/php/database.php");
-        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
 
 ?>
             <td colspan = "2" >

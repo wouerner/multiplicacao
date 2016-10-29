@@ -12,8 +12,8 @@ namespace seguranca\controlador ;
 
 			$userID = ($_GET['userID']) ? $_GET['userID'] : 1 ;
 
-			$myACL = new \seguranca\modelo\acl();
-			$userACL = new \seguranca\modelo\acl($userID);
+			$myACL = new \Seguranca\Modelo\Acl();
+			$userACL = new \Seguranca\Modelo\Acl($userID);
 
 			
 			include 'modulos/seguranca/ACL/index.php' ;
@@ -27,8 +27,8 @@ namespace seguranca\controlador ;
 
 			//$userID = ($_GET['userID']) ? $_GET['userID'] : 1 ;
 
-			$myACL = new \seguranca\modelo\acl();
-			//$userACL = new \seguranca\modelo\acl($userID);
+			$myACL = new \Seguranca\Modelo\Acl();
+			//$userACL = new \Seguranca\Modelo\Acl($userID);
 
 			
 			include 'modulos/seguranca/ACL/admin/index.php' ;
@@ -42,8 +42,8 @@ namespace seguranca\controlador ;
 
 			//$userID = ($_GET['userID']) ? $_GET['userID'] : 1 ;
 
-			$myACL = new \seguranca\modelo\acl();
-			//$userACL = new \seguranca\modelo\acl($userID);
+			$myACL = new \Seguranca\Modelo\Acl();
+			//$userACL = new \Seguranca\Modelo\Acl($userID);
 
 			
 			include 'modulos/seguranca/ACL/admin/users.php' ;
@@ -57,8 +57,8 @@ namespace seguranca\controlador ;
 
 			//$userID = ($_GET['userID']) ? $_GET['userID'] : 1 ;
 
-			$myACL = new \seguranca\modelo\acl();
-			//$userACL = new \seguranca\modelo\acl($userID);
+			$myACL = new \Seguranca\Modelo\Acl();
+			//$userACL = new \Seguranca\Modelo\Acl($userID);
 
 			
 			include 'modulos/seguranca/ACL/admin/roles.php' ;
@@ -72,8 +72,8 @@ namespace seguranca\controlador ;
 
 			//$userID = ($_GET['userID']) ? $_GET['userID'] : 1 ;
 
-			$myACL = new \seguranca\modelo\acl();
-			//$userACL = new \seguranca\modelo\acl($userID);
+			$myACL = new \Seguranca\Modelo\Acl();
+			//$userACL = new \Seguranca\Modelo\Acl($userID);
 
 			
 			include 'modulos/seguranca/ACL/admin/perms.php' ;

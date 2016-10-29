@@ -382,12 +382,17 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
         $erro =  $stm->errorInfo();
 
         $this->erro = $erro[0];
-//var_dump($stm->errorInfo());die;
 
         $pdo = null;
 
         return $resposta;
     }
+
+    //public function insert()
+    //{
+        //return parent::insert($this);
+    //}
+
 
     public function emailUnico()
     {

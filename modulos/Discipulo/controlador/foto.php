@@ -86,7 +86,7 @@ class foto
         public function novoCompleto($url)
         {
          if ( empty ( $url['post'] ) ) {
-            $estadosCivies = new \discipulo\Modelo\estadoCivil();
+            $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
 
                 $estadosCivies = $estadosCivies->listarTodos();
 
@@ -247,7 +247,7 @@ class foto
                 $discipulo = $discipulo->listarUm();
 
                 //estado civil
-                $estadosCivies = new \discipulo\Modelo\estadoCivil();
+                $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
                 $estadosCivies->id = $discipulo->estadoCivilId ;
 
                 $estadoCivil = $estadosCivies->listarUm();
@@ -365,7 +365,7 @@ class foto
 
                 $discipulo->atualizar() ;
 
-                $estadosCivies = new \discipulo\Modelo\estadoCivil();
+                $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
                 $estadosCivies->id = $discipulo->estadoCivilId ;
 
                 $estadoCivil = $estadosCivies->listarUm();
@@ -437,7 +437,7 @@ class foto
             $discipulo->nome = $nome;
             $discipulos = $discipulo->chamar($nome);
 
-                $estadosCivies = new \discipulo\Modelo\estadoCivil();
+                $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
 
                 $estadosCivies = $estadosCivies->listarTodos();
 
@@ -540,7 +540,7 @@ class foto
                      require_once 'modulos/discipulo/visao/estadoCivil/novo.php';
 
             } else {
-                     $estadoCivil =	new \discipulo\Modelo\estadoCivil();
+                     $estadoCivil =	new \Discipulo\Modelo\EstadoCivil();
 
                      $post = $url['post'] ;
 
@@ -562,7 +562,7 @@ class foto
 
         public function listarEstadoCivil()
         {
-            $estadosCivies = new \discipulo\Modelo\estadoCivil();
+            $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
             $estadosCivies = $estadosCivies->listarTodos();
 
             require_once 'modulos/discipulo/visao/estadoCivil/listar.php';
@@ -573,14 +573,14 @@ class foto
         {
             if ( empty ( $url['post'] ) ) {
 
-                $estadoCivil = new \discipulo\Modelo\estadoCivil();
+                $estadoCivil = new \Discipulo\Modelo\EstadoCivil();
                 $estadoCivil->id = $url[3] ;
                 $estadoCivil = $estadoCivil->listarUm();
 
                 require_once 'modulos/discipulo/visao/estadoCivil/atualizar.php';
 
             } else {
-                $estadoCivil =	new \discipulo\Modelo\estadoCivil();
+                $estadoCivil =	new \Discipulo\Modelo\EstadoCivil();
 
                 $post = $url['post'] ;
 
@@ -599,7 +599,7 @@ class foto
 
         public function excluirEstadoCivil($url)
         {
-                $estadoCivil =	new \discipulo\Modelo\estadoCivil();
+                $estadoCivil =	new \Discipulo\Modelo\EstadoCivil();
                 $estadoCivil->id = $url[3];
                 $estadoCivil->excluir();
                 header ('location:/discipulo/listarEstadoCivil');
@@ -629,7 +629,7 @@ class foto
           $totalDiscipulos = \Discipulo\Modelo\Discipulo::totalDiscipulos() ;
           $totalDiscipulos = (int) $totalDiscipulos['total'] ;
 
-                $estadosCivies = new \discipulo\Modelo\estadoCivil();
+                $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
 
                 $estadosCivies = $estadosCivies->listarTodos();
 

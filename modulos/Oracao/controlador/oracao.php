@@ -23,7 +23,7 @@ class oracao
 
     public function index()
     {
-        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
         $oracao =	new \oracao\modelo\pedidoOracao();
         $oracoesPublicas =	$oracao->listar(1);
         $oracoesPrivadas =	$oracao->listar(0);
@@ -33,7 +33,7 @@ class oracao
     public function excluir($url)
     {
         include 'seguranca/ACL/assets/php/database.php';
-        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
 
         if ($acl->hasPermission('intercessao') == true) {
 

@@ -80,7 +80,7 @@ if (isset($_POST['action']))
 
     <?php
     if ($_GET['action'] == 'user' ) { 
-		$userACL = new \seguranca\modelo\acl($_GET['userID']);
+		$userACL = new \Seguranca\Modelo\Acl($_GET['userID']);
 	?>
     	<h2>Managing <?php echo $myACL->getUsername($_GET['userID']); ?>:</h2>
         ... Some form to edit user info ...
@@ -114,7 +114,7 @@ if (isset($_POST['action']))
         <table border="0" cellpadding="5" cellspacing="0">
         <tr><th></th><th>Member</th><th>Not Member</th></tr>
         <?php 
-		$roleACL = new \seguranca\modelo\acl($_GET['userID']);
+		$roleACL = new \Seguranca\Modelo\Acl($_GET['userID']);
 		$roles = $roleACL->getAllRoles('full');
 
 		foreach ($roles as $k => $v): ?>
@@ -153,7 +153,7 @@ if (isset($_POST['action']))
             <table border="0" cellpadding="5" cellspacing="0">
             <tr><th></th><th></th></tr>
             <?php 
-						$userACL = new \seguranca\modelo\acl($_GET['userID']);
+						$userACL = new \Seguranca\Modelo\Acl($_GET['userID']);
             $rPerms = $userACL->perms;
 						$aPerms = $userACL->getAllPerms('full');
 ?>

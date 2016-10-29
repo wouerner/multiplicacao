@@ -27,55 +27,58 @@ class ModeloFramework {
 	 /**@todo
      * Perform an INSERT statement
      */
-    public static function insert($data)
+    public function insert()
     {
-				$reflect = new \ReflectionClass($data);
-				$class = ucfirst ($reflect->getShortName());
-				$props   = $reflect->getProperties();
+        $reflect = new \ReflectionClass($data);
+        $class = ucfirst ($reflect->getShortName());
+        $props   = $reflect->getProperties();
 
-				$values = array();
-				$fields = array();
-				$numFields = '';
-				$map = array();
+        $values = array();
+        $fields = array();
+        $numFields = '';
+        $map = array();
 
-				foreach($props as $d){
-					$prop = $d->name;
-						if( $data->$prop ){
-							$fields = $d->name;
-							$values = $data->$prop;
-							$map[$fields] = $values;
-					}
-				}
+        foreach($props as $d){
+            $prop = $d->name;
+            if( $data->$prop ){
+                $fields = $d->name;
+                $values = $data->$prop;
+                $map[$fields] = $values;
+            }
+        }
 
-				$numFields = count($map);
-				$num = 0;
+        $numFields = count($map);
+        $num = 0;
 
-				$fields = '';
-				$values = '';
-				$int = '';
-				foreach($map as $k => $v ){
-					++$num;
-					$fields .= ($num < $numFields ) ? $k.', ' : $k ;
-					$values .= ($num < $numFields ) ? $v.', ' : $v ;
-					$int[] = ':'.$k ;
-				}
+        $fields = '';
+        $values = '';
+        $int = '';
+        foreach($map as $k => $v ){
+            ++$num;
+            $fields .= ($num < $numFields ) ? $k.', ' : $k ;
+            $values .= ($num < $numFields ) ? $v.', ' : $v ;
+            $int[] = ':'.$k ;
+        }
 
-				$int = implode(',',$int);
+        $int = implode(',',$int);
 
-				$pdo = self::pegarConexao();
+        $pdo = self::pegarConexao();
 
-				$sql = 'INSERT INTO '.$class.' ('.$fields.') VALUES ('.$int.')';
-			  $stm = $pdo->prepare($sql);
+        $sql = 'INSERT INTO '.$class.' ('.$fields.') VALUES ('.$int.')';
 
-				foreach( $map as $k => $v ){
-								$parameter = ':'.$k;
-								$stm->bindValue($parameter, $v , \PDO::PARAM_STR);
-				}
+        echo $sql;die;
 
-			  $stm->execute();
-				var_dump($stm->debugDumpParams());
+      $stm = $pdo->prepare($sql);
 
-				var_dump($stm->errorInfo());
+        foreach( $map as $k => $v ){
+            $parameter = ':'.$k;
+            $stm->bindValue($parameter, $v , \PDO::PARAM_STR);
+        }
+
+      $stm->execute();
+        var_dump($stm->debugDumpParams());
+
+        var_dump($stm->errorInfo());
         return $pdo->lastInsertId();
 
     }

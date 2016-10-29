@@ -113,7 +113,7 @@ class EstadoCivil
 
         $stm->execute();
 
-        $resposta =$stm->fetchObject('\discipulo\Modelo\estadoCivil');
+        $resposta =$stm->fetchObject('\Discipulo\Modelo\EstadoCivil');
 
         return $resposta ;
 

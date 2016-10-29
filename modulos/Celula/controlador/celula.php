@@ -13,7 +13,7 @@ class celula
         $celulas =	new \celula\modelo\celula();
 
         //include("seguranca/ACL/assets/php/database.php");
-        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
         //$redes =	new \Rede\Modelo\TipoRede();
         //$redes =	$redes->listarTodos();
 

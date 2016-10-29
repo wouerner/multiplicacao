@@ -23,7 +23,7 @@ class discipulo
     * */
     public function index()
     {
-        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
 
         $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
@@ -46,13 +46,41 @@ class discipulo
           require_once 'modulos/discipulo/visao/listar.php';
     }
 
+    public function store()
+    {
+        $discipulo = new \Discipulo\Modelo\Discipulo();
+        $post = $url['post'];
+
+        $discipulo->igreja = (int)$url[4];
+        $discipulo->nome = $post['nome'];
+        $discipulo->alcunha = $post['alcunha'] ;
+        $discipulo->setDataNascimento($post['dataNascimento']) ;
+        $discipulo->telefone = $post['telefone'];
+        $discipulo->sexo = $post['sexo'] ;
+        $discipulo->estadoCivilId = $post['estadoCivilId'] ;
+        $discipulo->endereco = $post['endereco'] ;
+        $discipulo->email = $post['email'] ;
+        $discipulo->celula = $post['celula'] ?$post['celula'] : null ;
+        $discipulo->ativo = 1 ;
+        $discipulo->lider = $post['lider'] ? $post['lider'] : null;
+
+        $discipulo::insert();
+
+        //$_SESSION['mensagem'] = array('mensagem'=> 'Cadastro Realizado com Sucesso!',
+                                                  //'class' => 'alert alert-success');
+
+        header('Content-Type: application/json');
+        echo json_encode(["success"=>$success, "total"=>$total]);
+        die;
+    }
+
     public function lista(){
           require_once 'modulos/discipulo/visao/lista.php';
     }
 
     public function index2()
     {
-        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
 
         $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
@@ -77,7 +105,7 @@ class discipulo
     public function listarPorLider($url)
     {
         include 'seguranca/ACL/assets/php/database.php';
-        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
       $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
       $quantidadePorPagina = 50;
@@ -95,7 +123,7 @@ class discipulo
 
     public function inativos()
     {
-        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
 
       $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
@@ -237,7 +265,7 @@ class discipulo
 
     public function arquivo()
     {
-        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
           $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
           $discipulos =	new \Discipulo\Modelo\Discipulo();
@@ -503,7 +531,7 @@ class discipulo
 
     public function atualizar($url)
     {
-        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
 
         if ( empty ( $url['post'] ) ) {
 
@@ -514,7 +542,7 @@ class discipulo
             $discipulo = $discipulo->listarUm();
 
             //estado civil
-            $estadosCivies = new \discipulo\Modelo\estadoCivil();
+            $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
             $estadosCivies->id = $discipulo->estadoCivilId ;
 
             $estadoCivil = $estadosCivies->listarUm();
@@ -641,7 +669,7 @@ class discipulo
 
                 $discipulo->atualizar() ;
 
-                $estadosCivies = new \discipulo\Modelo\estadoCivil();
+                $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
                 $estadosCivies->id = $discipulo->estadoCivilId ;
 
                 $estadoCivil = $estadosCivies->listarUm();
@@ -674,7 +702,7 @@ class discipulo
 
     public function excluir($url)
     {
-        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
 
         if ($acl->hasPermission('admin_acesso') == true) {
 
@@ -766,14 +794,14 @@ class discipulo
 
         public function chamar ()
         {
-        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
 
             $nome = (!empty($_GET['nome'])) ? $_GET['nome'] : NULL;
             $discipulo =	new \Discipulo\Modelo\Discipulo();
             $discipulo->nome = $nome;
             $discipulos = $discipulo->chamar($nome);
 
-                $estadosCivies = new \discipulo\Modelo\estadoCivil();
+                $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
 
                 $estadosCivies = $estadosCivies->listarTodos();
 
@@ -830,14 +858,14 @@ class discipulo
 
         public function chamarPorId ()
         {
-        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
             $discipulo =	new \Discipulo\Modelo\Discipulo();
             $discipulo->id = isset( $_GET['id'] )? $_GET['id']: '' ;
             $discipulos = $discipulo->listarUm() ;
             $nome = is_object($discipulos) ? $discipulos : NULL ;
             $discipulos = array($discipulo->listarUm()) ;
             //var_dump($discipulos);
-                $estadosCivies = new \discipulo\Modelo\estadoCivil();
+                $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
 
                 $estadosCivies = $estadosCivies->listarTodos();
 
@@ -950,7 +978,7 @@ class discipulo
                      require_once 'modulos/discipulo/visao/estadoCivil/novo.php';
 
             } else {
-                     $estadoCivil =	new \discipulo\Modelo\estadoCivil();
+                     $estadoCivil =	new \Discipulo\Modelo\EstadoCivil();
 
                      $post = $url['post'] ;
 
@@ -972,7 +1000,7 @@ class discipulo
 
         public function listarEstadoCivil()
         {
-            $estadosCivies = new \discipulo\Modelo\estadoCivil();
+            $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
             $estadosCivies = $estadosCivies->listarTodos();
 
             require_once 'modulos/discipulo/visao/estadoCivil/listar.php';
@@ -983,14 +1011,14 @@ class discipulo
         {
             if ( empty ( $url['post'] ) ) {
 
-                $estadoCivil = new \discipulo\Modelo\estadoCivil();
+                $estadoCivil = new \Discipulo\Modelo\EstadoCivil();
                 $estadoCivil->id = $url[3] ;
                 $estadoCivil = $estadoCivil->listarUm();
 
                 require_once 'modulos/discipulo/visao/estadoCivil/atualizar.php';
 
             } else {
-                $estadoCivil =	new \discipulo\Modelo\estadoCivil();
+                $estadoCivil =	new \Discipulo\Modelo\EstadoCivil();
 
                 $post = $url['post'] ;
 
@@ -1009,7 +1037,7 @@ class discipulo
 
         public function excluirEstadoCivil($url)
         {
-                $estadoCivil =	new \discipulo\Modelo\estadoCivil();
+                $estadoCivil =	new \Discipulo\Modelo\EstadoCivil();
                 $estadoCivil->id = $url[3];
                 $estadoCivil->excluir();
                 header ('location:/discipulo/listarEstadoCivil');
@@ -1035,7 +1063,7 @@ class discipulo
       $quantidadePorPagina = 30;
 
         //include("seguranca/ACL/assets/php/database.php");
-        $acl = new \seguranca\modelo\acl($_SESSION['usuario_id']);
+        $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
 
         if ($acl->hasPermission('admin_acesso') == true) {
           $discipulos = $discipulos->listarTodosPag($_SESSION['usuario_id'], $quantidadePorPagina  , $pagina);
@@ -1047,7 +1075,7 @@ class discipulo
 
       $totalDiscipulos = count($discipulos) ;
 
-        $estadosCivies = new \discipulo\Modelo\estadoCivil();
+        $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
 
         $estadosCivies = $estadosCivies->listarTodos();
 
