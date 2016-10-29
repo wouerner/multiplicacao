@@ -295,8 +295,8 @@ class familia
             $estadosCivies = $estadosCivies->listarTodos();
             $lideres =	new \Discipulo\Modelo\Discipulo();
             $lideres =	$lideres->listarlideres();
-            $celula = new \celula\modelo\celula();
-            $celulas = new \celula\modelo\celula();
+            $celula = new \Celula\Modelo\Celula();
+            $celulas = new \Celula\Modelo\Celula();
             $celulas = $celulas->listarTodos();
 
             //status celular da pessoa
@@ -586,9 +586,9 @@ class familia
                 $lideres =	new \Discipulo\Modelo\Discipulo();
                 $lideres =	$lideres->listarlideres();
 
-                $celula = new \celula\modelo\celula();
+                $celula = new \Celula\Modelo\Celula();
 
-                $celulas = new \celula\modelo\celula();
+                $celulas = new \Celula\Modelo\Celula();
                 $celulas = $celulas->listarTodos();
 
             //status celular da pessoa
@@ -650,9 +650,9 @@ class familia
                 $lideres =	new \Discipulo\Modelo\Discipulo();
                 $lideres =	$lideres->listarlideres();
 
-                $celula = new \celula\modelo\celula();
+                $celula = new \Celula\Modelo\Celula();
 
-                $celulas = new \celula\modelo\celula();
+                $celulas = new \Celula\Modelo\Celula();
                 $celulas = $celulas->listarTodos();
 
             //status celular da pessoa
@@ -860,9 +860,9 @@ class familia
                 $lideres =	new \Discipulo\Modelo\Discipulo();
                 $lideres =	$lideres->listarlideres();
 
-                $celula = new \celula\modelo\celula();
+                $celula = new \Celula\Modelo\Celula();
 
-                $celulas = new \celula\modelo\celula();
+                $celulas = new \Celula\Modelo\Celula();
                 $celulas = $celulas->listarTodos();
 
             //status celular da pessoa

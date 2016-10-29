@@ -131,7 +131,7 @@ class Celula extends ModeloFramework
 
         $resposta = array();
 
-        while ( $obj = $stm->fetchObject('\celula\modelo\celula') ) {
+        while ( $obj = $stm->fetchObject('\Celula\Modelo\Celula') ) {
             $resposta[$obj->id] = $obj ;
         }
 
@@ -150,7 +150,7 @@ class Celula extends ModeloFramework
 
         $resposta = array();
 
-        while ( $obj = $stm->fetchObject('\celula\modelo\celula') ) {
+        while ( $obj = $stm->fetchObject('\Celula\Modelo\Celula') ) {
             $resposta[$obj->id] = $obj ;
         }
 
@@ -169,7 +169,7 @@ class Celula extends ModeloFramework
 
         $resposta = array();
 
-        while ( $obj = $stm->fetchObject('\celula\modelo\celula') ) {
+        while ( $obj = $stm->fetchObject('\Celula\Modelo\Celula') ) {
             $resposta[$obj->id] = $obj ;
         }
 
@@ -189,7 +189,7 @@ class Celula extends ModeloFramework
         $stm->execute();
         $resposta = array();
 
-        while ( $obj = $stm->fetchObject('\celula\modelo\celula') ) {
+        while ( $obj = $stm->fetchObject('\Celula\Modelo\Celula') ) {
             $resposta[$obj->id] = $obj ;
         }
 
@@ -488,7 +488,7 @@ order by dnome
         $stm->execute();
         $resposta = array();
 
-        while ( $obj = $stm->fetchObject ('\celula\modelo\celula') ) {
+        while ( $obj = $stm->fetchObject ('\Celula\Modelo\Celula') ) {
             $resposta[$obj->id] = $obj ;
         }
 
@@ -508,7 +508,7 @@ order by dnome
         $stm->execute();
         $resposta = array();
 
-        while ( $obj = $stm->fetchObject ('\celula\modelo\celula') ) {
+        while ( $obj = $stm->fetchObject ('\Celula\Modelo\Celula') ) {
             $resposta[$obj->id] = $obj;
         }
 
@@ -701,7 +701,7 @@ group by d.id
         //var_dump ( $this->id);
         //var_dump ( $stm->errorInfo());
         //var_dump ( $stm->fetchObject());
-        return $stm->fetchObject('\celula\modelo\celula');
+        return $stm->fetchObject('\Celula\Modelo\Celula');
 
     }
 
@@ -790,7 +790,7 @@ group by d.id
 
         $stm->execute();
 
-        $result = $stm->fetchObject('\celula\modelo\celula');
+        $result = $stm->fetchObject('\Celula\Modelo\Celula');
         return $result;
     }
 }

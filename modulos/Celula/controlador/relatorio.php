@@ -21,7 +21,7 @@ class relatorio
 
     public function blog()
     {
-        $celula = new \celula\modelo\celula();
+        $celula = new \Celula\Modelo\Celula();
 
 
         $celula->alias =$_GET['d'];
@@ -46,7 +46,7 @@ class relatorio
             if ( empty ( $post ) ) {
                 $celulaId = $url[4];
 
-                $celula = new \celula\modelo\celula($celulaId);
+                $celula = new \Celula\Modelo\Celula($celulaId);
                 $temas = new \celula\modelo\temaRelatorioCelula();
 
                 $temas = $temas->listarTodosAtivos();
@@ -111,7 +111,7 @@ class relatorio
 
         public function excluir($url)
         {
-                $celula =	new \celula\modelo\celula();
+                $celula =	new \Celula\Modelo\Celula();
                 $celula->id = $url[3];
                 $celula->excluir();
 
@@ -143,7 +143,7 @@ class relatorio
         public function chamar ()
         {
             $nome = isset($_GET['nome']) ? $_GET['nome'] : NULL ;
-            $celula =	new \celula\modelo\celula();
+            $celula =	new \Celula\Modelo\Celula();
             $celula->nome = $nome;
             $celulas = $celula->chamar($nome);
             require_once 'celula/visao/chamar.php';
@@ -152,7 +152,7 @@ class relatorio
 
         public function lideresCelula()
         {
-            $lideres = new \celula\modelo\celula();
+            $lideres = new \Celula\Modelo\Celula();
             $lideres = $lideres->listarLideresCelula() ;
 
             require_once 'celula/visao/listarLideresCelula.php';

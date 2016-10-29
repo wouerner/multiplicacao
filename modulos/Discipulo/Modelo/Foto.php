@@ -73,7 +73,7 @@ class foto extends modeloFramework
      * */
     public function getCelula()
     {
-        $celula = new \celula\modelo\celula();
+        $celula = new \Celula\Modelo\Celula();
         $celula->id = $this->celula;
         $this->celula = $celula->listarUm();
 

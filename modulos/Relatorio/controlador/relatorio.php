@@ -15,7 +15,7 @@ class relatorio
 
     public function celulas()
     {
-        $celulas = new \celula\modelo\celula();
+        $celulas = new \Celula\Modelo\Celula();
         $celulas= $celulas->listarTodos();
 
         require 'relatorio/visao/celulas.php';
@@ -61,7 +61,7 @@ class relatorio
         $estadoCivies = new \Discipulo\Modelo\EstadoCivil();
         $estadoCivies = $estadoCivies->listarTodos();
 
-        $celulas = new \celula\modelo\celula();
+        $celulas = new \Celula\Modelo\Celula();
         $celulas = $celulas->listarTodos();
 
         $tipoRedes = new \Rede\Modelo\TipoRede();
@@ -108,7 +108,7 @@ class relatorio
         }
 
         if ($celula != 'todos') {
-        $celula = new \celula\modelo\celula();
+        $celula = new \Celula\Modelo\Celula();
         $celula->id = $post['celula'];
         $celula = $celula->listarUm();
         }
@@ -147,7 +147,7 @@ class relatorio
         $estadoCivies = new \Discipulo\Modelo\EstadoCivil();
         $estadoCivies = $estadoCivies->listarTodos();
 
-        $celulas = new \celula\modelo\celula();
+        $celulas = new \Celula\Modelo\Celula();
         $celulas = $celulas->listarTodos();
 
         $tipoRedes = new \Rede\Modelo\TipoRede();
@@ -194,7 +194,7 @@ class relatorio
         }
 
         if ($celula != 'todos') {
-        $celula = new \celula\modelo\celula();
+        $celula = new \Celula\Modelo\Celula();
         $celula->id = $post['celula'];
         $celula = $celula->listarUm();
         }
@@ -248,13 +248,13 @@ class relatorio
     {
     if (empty($url['post'])) {
 
-        $celulas = new \celula\modelo\celula();
+        $celulas = new \Celula\Modelo\Celula();
         $celulas = $celulas->listarTodos();
         require 'relatorio/visao/graficoPorCelula.php';
     } else {
         $celula = $url['post'];
 
-        $celulas = new \celula\modelo\celula();
+        $celulas = new \Celula\Modelo\Celula();
 
         $celulas->id = $celula['celula'];
         $nomeCelula = $celulas->listarUm();

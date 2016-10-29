@@ -120,7 +120,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
      * */
     public function getCelula()
     {
-        $celula = new \celula\modelo\celula();
+        $celula = new \Celula\Modelo\Celula();
         $celula->id = $this->celula;
         $this->celula = $celula->listarUm();
 
@@ -130,7 +130,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
     public function getCelulaLider()
     {
-        $celula = new \celula\modelo\celula();
+        $celula = new \Celula\Modelo\Celula();
         $celula->lider = $this->id;
         $this->celulaLidera = $celula->listarCelulasLider();
 

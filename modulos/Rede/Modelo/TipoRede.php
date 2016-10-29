@@ -148,7 +148,7 @@ class TipoRede extends ModeloFramework
         $stm->execute();
         $resposta = array();
 
-        while ($obj = $stm->fetchObject('\celula\modelo\celula')) {
+        while ($obj = $stm->fetchObject('\Celula\Modelo\Celula')) {
             $resposta[$obj->id] = $obj;
         }
 

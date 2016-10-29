@@ -10,7 +10,7 @@ class celula
      **/
     public function index()
     {
-        $celulas =	new \celula\modelo\celula();
+        $celulas =	new \Celula\Modelo\Celula();
 
         //include("seguranca/ACL/assets/php/database.php");
         $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
@@ -22,7 +22,7 @@ class celula
             $celulasInativas = $celulas->listarTodosInativos();
             $celulas = $celulas->listarTodosAtivos();
             //$celulas = $celulas->listarCelulasPorRede();
-            //$totalCelulas = \celula\modelo\celula::totalCelulas();
+            //$totalCelulas = \Celula\Modelo\Celula::totalCelulas();
             $totalCelulas = count($celulas);
         } else {
             $celulas->lider = $_SESSION['usuario_id'];
@@ -47,7 +47,7 @@ class celula
                 require_once 'modulos/celula/visao/novo.php';
 
             } else {
-                $celula =	new \celula\modelo\celula();
+                $celula =	new \Celula\Modelo\Celula();
 
                 $post = $url['post'] ;
                 $celula->nome = $post['nome'];
@@ -66,7 +66,7 @@ class celula
         {
             if ( empty($url['post']) ) {
 
-                $celula =	new \celula\modelo\celula();
+                $celula =	new \Celula\Modelo\Celula();
                 $lideres = $celula->listarLideres();
 
                 $celula->id =  $url[4] ;
@@ -90,7 +90,7 @@ class celula
 
             } else {
 
-                $celula =	new \celula\modelo\celula();
+                $celula =	new \Celula\Modelo\Celula();
 
                 $post = $url['post'] ;
                 $celula->nome = $post['nome'];
@@ -114,7 +114,7 @@ class celula
 
         public function excluir($url)
         {
-                $celula =	new \celula\modelo\celula();
+                $celula =	new \Celula\Modelo\Celula();
                 $celula->id = $url[4];
                 $celula->excluir();
 
@@ -126,7 +126,7 @@ class celula
 
     public function detalhar($url)
     {
-        $celula =	new \celula\modelo\celula() ;
+        $celula =	new \Celula\Modelo\Celula() ;
         $celula->id = $url[4] ;
         $discipulos= $celula->listarDiscipulos() ;
         $celula = $celula->listarUm() ;
@@ -144,7 +144,7 @@ class celula
         public function chamar ()
         {
             $nome = isset($_GET['nome']) ? $_GET['nome'] : NULL ;
-            $celula =	new \celula\modelo\celula();
+            $celula =	new \Celula\Modelo\Celula();
             $celula->nome = $nome;
             $celulas = $celula->chamar($nome);
             require_once 'celula/visao/chamar.php';
@@ -153,7 +153,7 @@ class celula
 
         public function lideresCelula()
         {
-            $lideres = new \celula\modelo\celula();
+            $lideres = new \Celula\Modelo\Celula();
             $lideres = $lideres->listarLideresCelula() ;
 
             $tipoStatus= new \statusCelular\modelo\tipoStatusCelular();
@@ -166,7 +166,7 @@ class celula
 
     public function participacao($url)
     {
-        $celulas =	new \celula\modelo\celula();
+        $celulas =	new \Celula\Modelo\Celula();
         $celulas->id =	$url[4];
         $participacao =	$celulas->listarParticipacao() ;
 
@@ -185,7 +185,7 @@ class celula
                 require_once 'modulos/celula/visao/lideresPorStatus.php';
             } else {
                 $id = $post['statusId'] ;
-                $celula = new \celula\modelo\celula();
+                $celula = new \Celula\Modelo\Celula();
                 $lideres = $celula->lideresPorStatus($id);
                 $lideresSem = $celula->lideresSemStatus($id);
 
@@ -232,7 +232,7 @@ class celula
 
             } else {
                 $id = $post['statusId'] ;
-                $celula = new \celula\modelo\celula();
+                $celula = new \Celula\Modelo\Celula();
                 $lideres = $celula->statusPorLiderCelula($id);
 
                 //var_dump($lideres);
@@ -273,7 +273,7 @@ class celula
             $tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
             $tipoStatus = $tipoStatus->listarTodos() ;
 
-                $celula = new \celula\modelo\celula();
+                $celula = new \Celula\Modelo\Celula();
                 $lideres = $celula->lideresPorTodosStatus();
 
                 $resposta = array() ;

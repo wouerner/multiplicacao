@@ -168,11 +168,11 @@ public function listarMembrosRede($url)
             $lider->id = $discipulo['lider'] ;
             $lider = $lider->listarUm($discipulo['lider']);
 
-            $celula = new \celula\modelo\celula();
+            $celula = new \Celula\Modelo\Celula();
             $celula->id = $discipulo['celula'];
             $celula = $celula->listarUm();
 
-            $celulas = new \celula\modelo\celula();
+            $celulas = new \Celula\Modelo\Celula();
             $celulas = $celulas->listarTodos();
 
             require_once 'modulos/discipulo/visao/atualizar.php';

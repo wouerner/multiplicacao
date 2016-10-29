@@ -77,7 +77,7 @@ class temaRelatorioCelula
         {
             if ( empty ( $url['post'] ) ) {
 
-                $celula =	new \celula\modelo\celula();
+                $celula =	new \Celula\Modelo\Celula();
                 $lideres = $celula->listarLideres();
 
                 $celula->id =  $url[4] ;
@@ -91,7 +91,7 @@ class temaRelatorioCelula
 
             } else {
 
-                $celula =	new \celula\modelo\celula();
+                $celula =	new \Celula\Modelo\Celula();
 
                 $post = $url['post'] ;
                 $celula->nome = $post['nome'];
@@ -122,7 +122,7 @@ class temaRelatorioCelula
 
         public function detalhar($url)
         {
-            $celula =	new \celula\modelo\celula() ;
+            $celula =	new \Celula\Modelo\Celula() ;
             $celula->id = $url[3] ;
             $discipulos= $celula->listarDiscipulos() ;
             $celula = $celula->listarUm() ;
@@ -140,7 +140,7 @@ class temaRelatorioCelula
         public function chamar ()
         {
             $nome = isset($_GET['nome']) ? $_GET['nome'] : NULL ;
-            $celula =	new \celula\modelo\celula();
+            $celula =	new \Celula\Modelo\Celula();
             $celula->nome = $nome;
             $celulas = $celula->chamar($nome);
             require_once 'celula/visao/chamar.php';
@@ -149,7 +149,7 @@ class temaRelatorioCelula
 
         public function lideresCelula()
         {
-            $lideres = new \celula\modelo\celula();
+            $lideres = new \Celula\Modelo\Celula();
             $lideres = $lideres->listarLideresCelula() ;
 
             require_once 'celula/visao/listarLideresCelula.php';
@@ -158,7 +158,7 @@ class temaRelatorioCelula
 
     public function participacao($url)
     {
-        $celulas =	new \celula\modelo\celula();
+        $celulas =	new \Celula\Modelo\Celula();
         $celulas->id =	$url[4];
         $participacao =	$celulas->listarParticipacao() ;
 
