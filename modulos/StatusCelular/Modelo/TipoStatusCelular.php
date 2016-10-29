@@ -60,7 +60,7 @@ class  tipoStatusCelular{
 		
 		$resposta = array();
 
-		while ( $obj = $stm->fetchObject('\statusCelular\modelo\tipoStatusCelular') ) {
+		while ( $obj = $stm->fetchObject('\StatusCelular\Modelo\TipoStatusCelular') ) {
 			$resposta[$obj->id] = $obj ; 
 		}
 		return $resposta;

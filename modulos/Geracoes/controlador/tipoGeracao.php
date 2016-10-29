@@ -60,14 +60,14 @@ class tipoGeracao
         {
             if ( empty ( $url['post'] ) ) {
 
-                $tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular();
+                $tipoStatusCelular =	new \StatusCelular\Modelo\TipoStatusCelular();
                 $tipoStatusCelular->id = $url[4] ;
                 $tipoStatusCelular = $tipoStatusCelular->listarUm();
 
                 require_once 'modulos/statusCelular/visao/atualizarTipoStatus.php';
 
             } else {
-                $tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular();
+                $tipoStatusCelular =	new \StatusCelular\Modelo\TipoStatusCelular();
 
                 $post = $url['post'] ;
 
@@ -86,7 +86,7 @@ class tipoGeracao
 
         public function excluirTipoStatusCelular($url)
         {
-                $tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular();
+                $tipoStatusCelular =	new \StatusCelular\Modelo\TipoStatusCelular();
                 $tipoStatusCelular->id = $url[4];
                 $tipoStatusCelular->excluir();
 
@@ -98,7 +98,7 @@ class tipoGeracao
 
         public function detalhar ($url)
         {
-            $status = new \statusCelular\modelo\tipoStatusCelular() ;
+            $status = new \StatusCelular\Modelo\TipoStatusCelular() ;
 
             $status->id = $url[4] ;
             $status = $status->listarUm() ;
@@ -178,7 +178,7 @@ class tipoGeracao
 
             $cont = 0 ;
 
-            $tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
+            $tipoStatus = new \StatusCelular\Modelo\TipoStatusCelular() ;
             $tipoStatus->id = (int) $id ;
             $tipoStatus = $tipoStatus->listarUm() ;
 

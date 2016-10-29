@@ -11,7 +11,7 @@ class grafico
         $max = max($crescimento);
         $min = min($crescimento);
 
-        $tipoStatus =	new \statusCelular\modelo\tipoStatusCelular() ;
+        $tipoStatus =	new \StatusCelular\Modelo\TipoStatusCelular() ;
         $tipoStatus = $tipoStatus->listarTodos();
 
         $redes = new	\relatorio\modelo\discipulos();
@@ -117,7 +117,7 @@ class grafico
     public function crescimentoStatus()
     {
         $begin = new \relatorio\modelo\discipulos();
-        $tipoStatus =	new \statusCelular\modelo\tipoStatusCelular() ;
+        $tipoStatus =	new \StatusCelular\Modelo\TipoStatusCelular() ;
         $tipoStatus = $tipoStatus->listarTodos();
 
         $aux = array();

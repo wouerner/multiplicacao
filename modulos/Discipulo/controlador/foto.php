@@ -99,7 +99,7 @@ class foto
                 $celulas = $celulas->listarTodos();
 
             //status celular da pessoa
-             $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
+             $tiposStatusCelulares =	new \StatusCelular\Modelo\TipoStatusCelular() ;
              $statusCelularDiscipulo =	new \StatusCelular\Modelo\StatusCelular() ;
 
              $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
@@ -266,7 +266,7 @@ class foto
                 $celulas = $celulas->listarTodos();
 
             //status celular da pessoa
-             $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
+             $tiposStatusCelulares =	new \StatusCelular\Modelo\TipoStatusCelular() ;
              $statusCelularDiscipulo =	new \StatusCelular\Modelo\StatusCelular() ;
 
              $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
@@ -450,7 +450,7 @@ class foto
                 $celulas = $celulas->listarTodos();
 
             //status celular da pessoa
-             $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
+             $tiposStatusCelulares =	new \StatusCelular\Modelo\TipoStatusCelular() ;
              $statusCelularDiscipulo =	new \StatusCelular\Modelo\StatusCelular() ;
 
              $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
@@ -642,7 +642,7 @@ class foto
                 $celulas = $celulas->listarTodos();
 
             //status celular da pessoa
-             $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
+             $tiposStatusCelulares =	new \StatusCelular\Modelo\TipoStatusCelular() ;
              $statusCelularDiscipulo =	new \StatusCelular\Modelo\StatusCelular() ;
 
              $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();

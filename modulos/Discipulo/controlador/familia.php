@@ -300,7 +300,7 @@ class familia
             $celulas = $celulas->listarTodos();
 
             //status celular da pessoa
-            $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
+            $tiposStatusCelulares =	new \StatusCelular\Modelo\TipoStatusCelular() ;
             $statusCelularDiscipulo =	new \StatusCelular\Modelo\StatusCelular() ;
 
             $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
@@ -504,7 +504,7 @@ class familia
             $eventoDiscipulo = new \Evento\Modelo\EventoDiscipulo();
             $ministerios = new \ministerio\modelo\ministerioTemDiscipulo();
             $statusCelular = new \StatusCelular\Modelo\StatusCelular();
-            $tipoStatus= new \statusCelular\modelo\tipoStatusCelular();
+            $tipoStatus= new \StatusCelular\Modelo\TipoStatusCelular();
 
             $statusCelulares = $tipoStatus->listarTodos() ;
 //var_dump($statusCelulares);
@@ -592,7 +592,7 @@ class familia
                 $celulas = $celulas->listarTodos();
 
             //status celular da pessoa
-             $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
+             $tiposStatusCelulares =	new \StatusCelular\Modelo\TipoStatusCelular() ;
              $statusCelularDiscipulo =	new \StatusCelular\Modelo\StatusCelular() ;
 
              $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
@@ -656,7 +656,7 @@ class familia
                 $celulas = $celulas->listarTodos();
 
             //status celular da pessoa
-             $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
+             $tiposStatusCelulares =	new \StatusCelular\Modelo\TipoStatusCelular() ;
              $statusCelularDiscipulo =	new \StatusCelular\Modelo\StatusCelular() ;
 
              $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
@@ -866,7 +866,7 @@ class familia
                 $celulas = $celulas->listarTodos();
 
             //status celular da pessoa
-             $tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
+             $tiposStatusCelulares =	new \StatusCelular\Modelo\TipoStatusCelular() ;
              $statusCelularDiscipulo =	new \StatusCelular\Modelo\StatusCelular() ;
 
              $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();

@@ -43,7 +43,7 @@ class relatorio
 
     public function statusCelularIndex($url)
     {
-        $statusCelulares = new \statusCelular\modelo\tipoStatusCelular();
+        $statusCelulares = new \StatusCelular\Modelo\TipoStatusCelular();
         $statusCelulares= $statusCelulares->listarTodos();
 
         require 'relatorio/visao/statusCelularIndex.php';
@@ -55,7 +55,7 @@ class relatorio
     {
         $post = $url['post'];
     if (empty($post)) {
-        $tipoStatusCelulares = new \statusCelular\modelo\tipoStatusCelular();
+        $tipoStatusCelulares = new \StatusCelular\Modelo\TipoStatusCelular();
         $tipoStatusCelulares= $tipoStatusCelulares->listarTodos();
 
         $estadoCivies = new \Discipulo\Modelo\EstadoCivil();
@@ -102,7 +102,7 @@ class relatorio
         }
 
         if ($status != 'todos') {
-        $status = new \statusCelular\modelo\tipoStatusCelular();
+        $status = new \StatusCelular\Modelo\TipoStatusCelular();
         $status->id = $post['tipoStatusCelular'];
         $status = $status->listarUm();
         }
@@ -141,7 +141,7 @@ class relatorio
     {
         $post = $url['post'];
     if (empty($post)) {
-        $tipoStatusCelulares = new \statusCelular\modelo\tipoStatusCelular();
+        $tipoStatusCelulares = new \StatusCelular\Modelo\TipoStatusCelular();
         $tipoStatusCelulares= $tipoStatusCelulares->listarTodos();
 
         $estadoCivies = new \Discipulo\Modelo\EstadoCivil();
@@ -188,7 +188,7 @@ class relatorio
         }
 
         if ($status != 'todos') {
-        $status = new \statusCelular\modelo\tipoStatusCelular();
+        $status = new \StatusCelular\Modelo\TipoStatusCelular();
         $status->id = $post['tipoStatusCelular'];
         $status = $status->listarUm();
         }
@@ -359,7 +359,7 @@ class relatorio
         $lideres = new \Discipulo\Modelo\Discipulo();
         $lideres = $lideres->listarTodosDiscipulos();
 
-        $tiposStatus = new \statusCelular\modelo\tipoStatusCelular();
+        $tiposStatus = new \StatusCelular\Modelo\TipoStatusCelular();
         $tiposStatus =  $tiposStatus->listarTodos();
 
         if (!empty($post)) {

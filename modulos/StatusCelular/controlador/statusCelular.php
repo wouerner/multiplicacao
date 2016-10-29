@@ -1,5 +1,5 @@
 <?php
-use \statusCelular\modelo\tipoStatusCelular ;
+use \StatusCelular\Modelo\TipoStatusCelular ;
 use \StatusCelular\Modelo\StatusCelular ;
 use \Discipulo\Modelo\Discipulo ;
 
@@ -17,7 +17,7 @@ namespace statusCelular\controlador;
 		}
 		public function novo($url){
 			if ( empty ( $url['post'] ) ) {
-				$tiposStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular() ;
+				$tiposStatusCelulares =	new \StatusCelular\Modelo\TipoStatusCelular() ;
 			 	$statusCelularDiscipulo =	new \StatusCelular\Modelo\StatusCelular() ;
 
 			 	$tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
@@ -62,7 +62,7 @@ namespace statusCelular\controlador;
 
 			}else{
 
-			$tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular() ;
+			$tipoStatusCelular =	new \StatusCelular\Modelo\TipoStatusCelular() ;
 
 			$post = $url['post'] ;
 			$tipoStatusCelular->nome = $post['nome'] ;
@@ -80,7 +80,7 @@ namespace statusCelular\controlador;
 
 		public function listarTipoStatusCelular(){
 
-				  $tipoStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular();
+				  $tipoStatusCelulares =	new \StatusCelular\Modelo\TipoStatusCelular();
 				  $tipoStatusCelulares = $tipoStatusCelulares->listarTodos();
 
 				  require 'modulos/statusCelular/visao/listarTipoStatusCelular.php' ;
@@ -139,13 +139,13 @@ namespace statusCelular\controlador;
 
 			if ( empty ( $url['post'] ) ) {
 
-				$tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular();
+				$tipoStatusCelular =	new \StatusCelular\Modelo\TipoStatusCelular();
 				$tipoStatusCelular->id = $url[4] ;
 				$tipoStatusCelular = $tipoStatusCelular->listarUm();
 
 				require_once  'modulos/statusCelular/visao/atualizarTipoStatus.php';
 			}else {
-				$tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular();
+				$tipoStatusCelular =	new \StatusCelular\Modelo\TipoStatusCelular();
 
 				$post = $url['post'] ;
 
@@ -163,7 +163,7 @@ namespace statusCelular\controlador;
 		}
 
 		public function excluirTipoStatusCelular($url){
-				$tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular();
+				$tipoStatusCelular =	new \StatusCelular\Modelo\TipoStatusCelular();
 				$tipoStatusCelular->id = $url[4];
 				$tipoStatusCelular->excluir();
 
@@ -176,7 +176,7 @@ namespace statusCelular\controlador;
 
 		public function detalhar ($url) {
 
-			$status = new \statusCelular\modelo\tipoStatusCelular() ;
+			$status = new \StatusCelular\Modelo\TipoStatusCelular() ;
 
 			$status->id = $url[4] ;
 			$status = $status->listarUm() ;
@@ -265,7 +265,7 @@ namespace statusCelular\controlador;
 
 			$cont = 0 ;
 
-			$tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
+			$tipoStatus = new \StatusCelular\Modelo\TipoStatusCelular() ;
 			$tipoStatus->id = (int)$id ;
 			$tipoStatus = $tipoStatus->listarUm() ;
 

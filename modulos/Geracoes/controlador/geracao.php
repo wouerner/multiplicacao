@@ -48,7 +48,7 @@ class geracao
 
             } else {
 
-            $tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular() ;
+            $tipoStatusCelular =	new \StatusCelular\Modelo\TipoStatusCelular() ;
 
             $post = $url['post'] ;
             $tipoStatusCelular->nome = $post['nome'] ;
@@ -65,7 +65,7 @@ class geracao
 
         public function listarTipoStatusCelular()
         {
-                  $tipoStatusCelulares =	new \statusCelular\modelo\tipoStatusCelular();
+                  $tipoStatusCelulares =	new \StatusCelular\Modelo\TipoStatusCelular();
                   $tipoStatusCelulares = $tipoStatusCelulares->listarTodos();
 
                   require 'modulos/statusCelular/visao/listarTipoStatusCelular.php';
@@ -121,14 +121,14 @@ class geracao
         {
             if ( empty ( $url['post'] ) ) {
 
-                $tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular();
+                $tipoStatusCelular =	new \StatusCelular\Modelo\TipoStatusCelular();
                 $tipoStatusCelular->id = $url[4] ;
                 $tipoStatusCelular = $tipoStatusCelular->listarUm();
 
                 require_once 'modulos/statusCelular/visao/atualizarTipoStatus.php';
 
             } else {
-                $tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular();
+                $tipoStatusCelular =	new \StatusCelular\Modelo\TipoStatusCelular();
 
                 $post = $url['post'] ;
 
@@ -147,7 +147,7 @@ class geracao
 
         public function excluirTipoStatusCelular($url)
         {
-                $tipoStatusCelular =	new \statusCelular\modelo\tipoStatusCelular();
+                $tipoStatusCelular =	new \StatusCelular\Modelo\TipoStatusCelular();
                 $tipoStatusCelular->id = $url[4];
                 $tipoStatusCelular->excluir();
 
@@ -159,7 +159,7 @@ class geracao
 
         public function detalhar ($url)
         {
-            $status = new \statusCelular\modelo\tipoStatusCelular() ;
+            $status = new \StatusCelular\Modelo\TipoStatusCelular() ;
 
             $status->id = $url[4] ;
             $status = $status->listarUm() ;
@@ -239,7 +239,7 @@ class geracao
 
             $cont = 0 ;
 
-            $tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
+            $tipoStatus = new \StatusCelular\Modelo\TipoStatusCelular() ;
             $tipoStatus->id = (int) $id ;
             $tipoStatus = $tipoStatus->listarUm() ;
 

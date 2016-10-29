@@ -148,7 +148,7 @@ class StatusCelular{
 			  }
 
 			  public function getTipoStatusCelular(){
-						 $tipoStatus = new \statusCelular\modelo\tipoStatusCelular();
+						 $tipoStatus = new \StatusCelular\Modelo\TipoStatusCelular();
 						 $tipoStatus->id = $this->tipoStatusCelular ;
 						 return $tipoStatus->listarUm();
 

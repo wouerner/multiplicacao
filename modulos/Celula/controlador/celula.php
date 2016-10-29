@@ -156,7 +156,7 @@ class celula
             $lideres = new \Celula\Modelo\Celula();
             $lideres = $lideres->listarLideresCelula() ;
 
-            $tipoStatus= new \statusCelular\modelo\tipoStatusCelular();
+            $tipoStatus= new \StatusCelular\Modelo\TipoStatusCelular();
 
             $statusCelulares = $tipoStatus->listarTodos() ;
 
@@ -177,7 +177,7 @@ class celula
         public function listarPorStatus($url)
         {
             $post = $url['post'] ;
-            $tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
+            $tipoStatus = new \StatusCelular\Modelo\TipoStatusCelular() ;
             $tipoStatus = $tipoStatus->listarTodos() ;
 
             if (empty($post)) {
@@ -225,7 +225,7 @@ class celula
         public function statusPorLiderCelula($url)
         {
             $post = $url['post'] ;
-            $tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
+            $tipoStatus = new \StatusCelular\Modelo\TipoStatusCelular() ;
             $tipoStatus = $tipoStatus->listarTodos() ;
 
             if (empty($post)) {
@@ -270,7 +270,7 @@ class celula
 
         public function listarPorStatusTodos($url)
         {
-            $tipoStatus = new \statusCelular\modelo\tipoStatusCelular() ;
+            $tipoStatus = new \StatusCelular\Modelo\TipoStatusCelular() ;
             $tipoStatus = $tipoStatus->listarTodos() ;
 
                 $celula = new \Celula\Modelo\Celula();
