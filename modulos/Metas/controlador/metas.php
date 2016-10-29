@@ -204,7 +204,7 @@ class metas
 
             } else {
 
-            $ministerio =	new \ministerio\modelo\ministerio() ;
+            $ministerio =	new \Ministerio\Modelo\Ministerio() ;
 
             $post = $url['post'] ;
             $ministerio->nome = $post['nome'] ;
@@ -294,14 +294,14 @@ class metas
         {
             if ( empty ( $url['post'] ) ) {
 
-                $ministerio =	new \ministerio\modelo\ministerio();
+                $ministerio =	new \Ministerio\Modelo\Ministerio();
                 $ministerio->id = $url[3] ;
                 $ministerio = $ministerio->listarUm();
 
                 require_once 'modulos/ministerio/visao/atualizarMinisterio.php';
 
             } else {
-                $ministerio =	new \ministerio\modelo\ministerio();
+                $ministerio =	new \Ministerio\Modelo\Ministerio();
 
                 $post = $url['post'] ;
 
@@ -393,7 +393,7 @@ class metas
 
         public function detalharMinisterio ($url)
         {
-            $ministerio = new \ministerio\modelo\ministerio() ;
+            $ministerio = new \Ministerio\Modelo\Ministerio() ;
 
             $ministerio->id = $url[3] ;
             $ministerio = $ministerio->listarUm() ;

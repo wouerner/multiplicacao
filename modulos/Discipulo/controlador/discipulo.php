@@ -588,7 +588,7 @@ class discipulo
              $redeAtual = $rede->listarUm();
 
             //ministerio da pessoa.
-             $ministerio = new \ministerio\modelo\ministerio() ;
+             $ministerio = new \Ministerio\Modelo\Ministerio() ;
              $ministerio = $ministerio->listarTodos() ;
 
              $funcaoMinisterio = new \ministerio\modelo\funcao() ;
@@ -661,7 +661,7 @@ class discipulo
 
                 //ministerio
 
-                $ministerio = new \ministerio\modelo\ministerioTemDiscipulo();
+                $ministerio = new \Ministerio\Modelo\MinisterioTemDiscipulo();
                 $ministerio->discipuloId = $discipulo->id ;
                 $ministerio->funcaoId = $post['fministerio'] ;
                 $ministerio->ministerioId = $post['ministerio'] ;
@@ -719,7 +719,7 @@ class discipulo
         {
             $discipulo = new \Discipulo\Modelo\Discipulo() ;
             $eventoDiscipulo = new \Evento\Modelo\EventoDiscipulo();
-            $ministerios = new \ministerio\modelo\ministerioTemDiscipulo();
+            $ministerios = new \Ministerio\Modelo\MinisterioTemDiscipulo();
             $statusCelular = new \StatusCelular\Modelo\StatusCelular();
             $tipoStatus= new \StatusCelular\Modelo\TipoStatusCelular();
 
@@ -767,7 +767,7 @@ class discipulo
             //var_dump($_SESSION);
             $discipulo = new \Discipulo\Modelo\Discipulo() ;
             $eventoDiscipulo = new \Evento\Modelo\EventoDiscipulo();
-            $ministerios = new \ministerio\modelo\ministerioTemDiscipulo();
+            $ministerios = new \Ministerio\Modelo\MinisterioTemDiscipulo();
             $statusCelular = new \StatusCelular\Modelo\StatusCelular();
 
             $discipulo->id = $url[4] ;
@@ -840,7 +840,7 @@ class discipulo
              $redeAtual = $rede->listarUm();
 
             //ministerio da pessoa.
-             $ministerio = new \ministerio\modelo\ministerio() ;
+             $ministerio = new \Ministerio\Modelo\Ministerio() ;
              $ministerio = $ministerio->listarTodos() ;
 
              $funcaoMinisterio = new \ministerio\modelo\funcao() ;
@@ -904,7 +904,7 @@ class discipulo
              $redeAtual = $rede->listarUm();
 
             //ministerio da pessoa.
-             $ministerio = new \ministerio\modelo\ministerio() ;
+             $ministerio = new \Ministerio\Modelo\Ministerio() ;
              $ministerio = $ministerio->listarTodos() ;
 
              $funcaoMinisterio = new \ministerio\modelo\funcao() ;
@@ -1117,7 +1117,7 @@ class discipulo
          $funcaoRedes = $funcaoRedes->listarTodos();
 
         //ministerio da pessoa.
-         $ministerio = new \ministerio\modelo\ministerio() ;
+         $ministerio = new \Ministerio\Modelo\Ministerio() ;
          $ministerio = $ministerio->listarTodos() ;
 
          $funcaoMinisterio = new \ministerio\modelo\funcao() ;

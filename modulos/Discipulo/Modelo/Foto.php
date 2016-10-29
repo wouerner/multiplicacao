@@ -146,7 +146,7 @@ class foto extends modeloFramework
 
     public function getMinisterio()
     {
-        $ministerio = new \ministerio\modelo\ministerioTemDiscipulo();
+        $ministerio = new \Ministerio\Modelo\MinisterioTemDiscipulo();
         $ministerio->discipuloId = $this->id;
         $ministerio =  $ministerio->pegarMinisterioDiscipulo();
 

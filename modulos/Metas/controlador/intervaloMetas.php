@@ -42,7 +42,7 @@ class intervaloMetas
 
             } else {
 
-            $ministerio =	new \ministerio\modelo\ministerio() ;
+            $ministerio =	new \Ministerio\Modelo\Ministerio() ;
 
             $post = $url['post'] ;
             $ministerio->nome = $post['nome'] ;
@@ -76,7 +76,7 @@ class intervaloMetas
 
         public function listarMinisterio()
         {
-                  $ministerios =	new \ministerio\modelo\ministerio();
+                  $ministerios =	new \Ministerio\Modelo\Ministerio();
                   $ministerios = $ministerios->listarTodos();
 
                   require 'modulos/ministerio/visao/listarMinisterio.php';
@@ -141,14 +141,14 @@ class intervaloMetas
         {
             if ( empty ( $url['post'] ) ) {
 
-                $ministerio =	new \ministerio\modelo\ministerio();
+                $ministerio =	new \Ministerio\Modelo\Ministerio();
                 $ministerio->id = $url[3] ;
                 $ministerio = $ministerio->listarUm();
 
                 require_once 'modulos/ministerio/visao/atualizarMinisterio.php';
 
             } else {
-                $ministerio =	new \ministerio\modelo\ministerio();
+                $ministerio =	new \Ministerio\Modelo\Ministerio();
 
                 $post = $url['post'] ;
 
@@ -234,7 +234,7 @@ class intervaloMetas
 
         public function detalharMinisterio ($url)
         {
-            $ministerio = new \ministerio\modelo\ministerio() ;
+            $ministerio = new \Ministerio\Modelo\Ministerio() ;
 
             $ministerio->id = $url[3] ;
             $ministerio = $ministerio->listarUm() ;

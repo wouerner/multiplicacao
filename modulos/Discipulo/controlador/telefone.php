@@ -251,7 +251,7 @@ class telefone
              $redeAtual = $rede->listarUm();
 
             //ministerio da pessoa.
-             $ministerio = new \ministerio\modelo\ministerio() ;
+             $ministerio = new \Ministerio\Modelo\Ministerio() ;
              $ministerio = $ministerio->listarTodos() ;
 
              $funcaoMinisterio = new \ministerio\modelo\funcao() ;
@@ -315,7 +315,7 @@ class telefone
 
                 //ministerio
 
-                $ministerio = new \ministerio\modelo\ministerioTemDiscipulo();
+                $ministerio = new \Ministerio\Modelo\MinisterioTemDiscipulo();
                 $ministerio->discipuloId = $discipulo->id ;
                 $ministerio->funcaoId = $post['fministerio'] ;
                 $ministerio->ministerioId = $post['ministerio'] ;
@@ -368,7 +368,7 @@ class telefone
         {
             $discipulo = new \Discipulo\Modelo\Discipulo() ;
             $eventoDiscipulo = new \Evento\Modelo\EventoDiscipulo();
-            $ministerios = new \ministerio\modelo\ministerioTemDiscipulo();
+            $ministerios = new \Ministerio\Modelo\MinisterioTemDiscipulo();
             $statusCelular = new \StatusCelular\Modelo\StatusCelular();
 
             $discipulo->id = $url[3] ;
@@ -434,7 +434,7 @@ class telefone
              $redeAtual = $rede->listarUm();
 
             //ministerio da pessoa.
-             $ministerio = new \ministerio\modelo\ministerio() ;
+             $ministerio = new \Ministerio\Modelo\Ministerio() ;
              $ministerio = $ministerio->listarTodos() ;
 
              $funcaoMinisterio = new \ministerio\modelo\funcao() ;
@@ -629,7 +629,7 @@ class telefone
              $funcaoRedes = $funcaoRedes->listarTodos();
 
             //ministerio da pessoa.
-             $ministerio = new \ministerio\modelo\ministerio() ;
+             $ministerio = new \Ministerio\Modelo\Ministerio() ;
              $ministerio = $ministerio->listarTodos() ;
 
              $funcaoMinisterio = new \ministerio\modelo\funcao() ;

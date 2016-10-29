@@ -171,7 +171,7 @@ class equipe
 
             } else {
 
-            $ministerio =	new \ministerio\modelo\ministerio() ;
+            $ministerio =	new \Ministerio\Modelo\Ministerio() ;
 
             $post = $url['post'] ;
             $ministerio->nome = $post['nome'] ;
@@ -205,7 +205,7 @@ class equipe
 
         public function listarMinisterio()
         {
-                  $ministerios =	new \ministerio\modelo\ministerio();
+                  $ministerios =	new \Ministerio\Modelo\Ministerio();
                   $ministerios = $ministerios->listarTodos();
 
                   require 'modulos/ministerio/visao/listarMinisterio.php';
@@ -270,14 +270,14 @@ class equipe
         {
             if ( empty ( $url['post'] ) ) {
 
-                $ministerio =	new \ministerio\modelo\ministerio();
+                $ministerio =	new \Ministerio\Modelo\Ministerio();
                 $ministerio->id = $url[3] ;
                 $ministerio = $ministerio->listarUm();
 
                 require_once 'modulos/ministerio/visao/atualizarMinisterio.php';
 
             } else {
-                $ministerio =	new \ministerio\modelo\ministerio();
+                $ministerio =	new \Ministerio\Modelo\Ministerio();
 
                 $post = $url['post'] ;
 
@@ -353,7 +353,7 @@ class equipe
 
         public function excluir($url)
         {
-                $ministerio =	new \ministerio\modelo\ministerioTemDiscipulo();
+                $ministerio =	new \Ministerio\Modelo\MinisterioTemDiscipulo();
                 $ministerio->discipuloId = $url[3];
                 $ministerio->ministerioId = $url[4];
                 $ministerio->excluir();
@@ -385,7 +385,7 @@ class equipe
 
         public function detalharMinisterio ($url)
         {
-            $ministerio = new \ministerio\modelo\ministerio() ;
+            $ministerio = new \Ministerio\Modelo\Ministerio() ;
 
             $ministerio->id = $url[3] ;
             $ministerio = $ministerio->listarUm() ;
