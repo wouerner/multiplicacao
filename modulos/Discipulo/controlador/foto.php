@@ -109,15 +109,15 @@ class foto
             //
 
              //Tipos de admissão e admissão atual
-             $tipoAdmissao = new \admissao\modelo\tipoAdmissao();
+             $tipoAdmissao = new \Admissao\Modelo\TipoAdmissao();
              $tiposAdmissoes = $tipoAdmissao->listarTodos();
 
-             $tipoAdmissaoAtual = new \admissao\modelo\admissao();
+             $tipoAdmissaoAtual = new \Admissao\Modelo\Admissao();
              //$tipoAdmissaoAtual->discipuloId = $url[3] ;
              $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
 
              //tipos de rede e rede atual da pessoa
-             $rede = new \rede\modelo\rede();
+             $rede = new \Rede\Modelo\Rede();
              $tipoRede = new \Rede\Modelo\TipoRede();
              $funcaoRede = new \rede\modelo\funcaoRede();
 
@@ -178,13 +178,13 @@ class foto
                 if (!$statusCelular->salvar()) $statusCelular->atualizar();
 
                 //admissão
-                 $admissao = new \admissao\modelo\admissao();
+                 $admissao = new \Admissao\Modelo\Admissao();
                  $admissao->tipoAdmissao = $post['tipoAdmissao'] ;
                  $admissao->discipuloId = $discipulo->id ;
                  if (!$admissao->salvar()) $admissao->atualizar() ;
 
                 //tipos de rede e rede atual da pessoa
-                $rede = new \rede\modelo\rede();
+                $rede = new \Rede\Modelo\Rede();
 
                  $rede->discipuloId = $discipulo->id;
                  $rede->tipoRedeId = $post['tipoRedeId'];
@@ -276,15 +276,15 @@ class foto
             //
 
              //Tipos de admissão e admissão atual
-             $tipoAdmissao = new \admissao\modelo\tipoAdmissao();
+             $tipoAdmissao = new \Admissao\Modelo\TipoAdmissao();
              $tiposAdmissoes = $tipoAdmissao->listarTodos();
 
-             $tipoAdmissaoAtual = new \admissao\modelo\admissao();
+             $tipoAdmissaoAtual = new \Admissao\Modelo\Admissao();
              $tipoAdmissaoAtual->discipuloId = $url[3] ;
              $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
 
              //tipos de rede e rede atual da pessoa
-             $rede = new \rede\modelo\rede();
+             $rede = new \Rede\Modelo\Rede();
              $tipoRede = new \Rede\Modelo\TipoRede();
              $funcaoRedes = new \rede\modelo\funcaoRede();
 
@@ -338,13 +338,13 @@ class foto
                 if (!$statusCelular->salvar()) $statusCelular->atualizar();*/
 
                 //admissão
-                 $admissao = new \admissao\modelo\admissao();
+                 $admissao = new \Admissao\Modelo\Admissao();
                  $admissao->discipuloId = $post['discipuloId'] ;
                  $admissao->tipoAdmissao = $post['tipoAdmissao'] ;
                  if (!$admissao->salvar()) $admissao->atualizar() ;
 
                 //tipos de rede e rede atual da pessoa
-                $rede = new \rede\modelo\rede();
+                $rede = new \Rede\Modelo\Rede();
 
                  $rede->discipuloId = $post['discipuloId'];
                  $rede->tipoRedeId = $post['tipoRedeId'];
@@ -460,14 +460,14 @@ class foto
             //
 
              //Tipos de admissão e admissão atual
-             $tipoAdmissao = new \admissao\modelo\tipoAdmissao();
+             $tipoAdmissao = new \Admissao\Modelo\TipoAdmissao();
              $tiposAdmissoes = $tipoAdmissao->listarTodos();
 
-             $tipoAdmissaoAtual = new \admissao\modelo\admissao();
+             $tipoAdmissaoAtual = new \Admissao\Modelo\Admissao();
              $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
 
              //tipos de rede e rede atual da pessoa
-             $rede = new \rede\modelo\rede();
+             $rede = new \Rede\Modelo\Rede();
              $tipoRede = new \Rede\Modelo\TipoRede();
              $funcaoRede = new \rede\modelo\funcaoRede();
 
@@ -655,14 +655,14 @@ class foto
             //
 
              //Tipos de admissão e admissão atual
-             $tipoAdmissao = new \admissao\modelo\tipoAdmissao();
+             $tipoAdmissao = new \Admissao\Modelo\TipoAdmissao();
              $tiposAdmissoes = $tipoAdmissao->listarTodos();
 
-             $tipoAdmissaoAtual = new \admissao\modelo\admissao();
+             $tipoAdmissaoAtual = new \Admissao\Modelo\Admissao();
              $tipoAdmissaoAtual = $tipoAdmissaoAtual->listarUm();
 
              //tipos de rede e rede atual da pessoa
-             $rede = new \rede\modelo\rede();
+             $rede = new \Rede\Modelo\Rede();
 
              $tipoRede = new \Rede\Modelo\TipoRede();
              $funcaoRedes = new \rede\modelo\funcaoRede();

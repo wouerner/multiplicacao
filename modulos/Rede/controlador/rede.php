@@ -15,7 +15,7 @@ class rede
               if ( empty ( $url['post'] ) ) {
                          $post = $url['post'] ;
 
-         $rede =	new \rede\modelo\rede() ;
+         $rede =	new \Rede\Modelo\Rede() ;
          $funcaoRede =	new \rede\modelo\funcaoRede() ;
          $tipoRede =	new \Rede\Modelo\TipoRede() ;
 
@@ -30,7 +30,7 @@ class rede
         require_once 'modulos/rede/visao/novo.php';
 
         } else {
-            $rede =	new \rede\modelo\rede();
+            $rede =	new \Rede\Modelo\Rede();
 
     $post = $url['post'] ;
     $rede->discipuloId = $post['discipuloId'];
@@ -112,7 +112,7 @@ public function listarMembrosRede($url)
 {
     $redeId = $url[4];
 
-    $rede =	new \rede\modelo\rede();
+    $rede =	new \Rede\Modelo\Rede();
     $funcao =	new \rede\modelo\funcaoRede();
     $tipoRede = new \Rede\Modelo\TipoRede();
     $tipoRede->id = $redeId;
@@ -257,7 +257,7 @@ public function listarMembrosRede($url)
 
     public function excluir($url)
     {
-            $rede =	new \rede\modelo\redeTemDiscipulo();
+            $rede =	new \Rede\Modelo\RedeTemDiscipulo();
             $rede->discipuloId = $url[4];
             $rede->redeId = $url[4];
             $rede->excluir();

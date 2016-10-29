@@ -15,7 +15,7 @@ class aviso{
 
 	public function listarTipoAdmissao(){
 
-		$tipoAdmissoes =	new \admissao\modelo\tipoAdmissao();
+		$tipoAdmissoes =	new \Admissao\Modelo\TipoAdmissao();
 		$tipoAdmissoes = $tipoAdmissoes->listarTodos();
 
 		require_once  'modulos/admissao/visao/listarTipoAdmissao.php';
@@ -28,7 +28,7 @@ class aviso{
 		    	 require_once  'modulos/admissao/visao/novo.php';
 			
 			}else {
-				 $admissao =	new \admissao\modelo\admissao();
+				 $admissao =	new \Admissao\Modelo\Admissao();
 
 				 $admissao->discipuloId = $post['discipuloId'] ;
 				 $admissao->tipoAdmissao = $post['tipoAdmissao'] ;
@@ -50,7 +50,7 @@ class aviso{
 		    	 require_once  'modulos/admissao/visao/novoTipoAdmissao.php';
 			
 			}else {
-				 $admissao =	new \admissao\modelo\tipoAdmissao();
+				 $admissao =	new \Admissao\Modelo\TipoAdmissao();
 
 				 $post = $url['post'] ;
 				 $admissao->nome = $post['nome'] ;
@@ -65,7 +65,7 @@ class aviso{
 
 			if ( empty ( $url['post'] ) ) {
 
-				$tipoAdmissao =	new \admissao\modelo\tipoAdmissao();
+				$tipoAdmissao =	new \Admissao\Modelo\TipoAdmissao();
 
 				$tipoAdmissao->id =  $url[3] ;
 				$tipoAdmissao = $tipoAdmissao->listarUm();
@@ -73,7 +73,7 @@ class aviso{
 				require_once  'modulos/admissao/visao/atualizarTipoAdmissao.php';
 			
 			}else {
-				$tipoAdmissao =	new \admissao\modelo\tipoAdmissao();
+				$tipoAdmissao =	new \Admissao\Modelo\TipoAdmissao();
 
 				$post = $url['post'] ;
 
@@ -92,7 +92,7 @@ class aviso{
 		}
 
 		public function excluirTipoAdmissao($url){
-				$tipoAdmissao =	new \admissao\modelo\tipoAdmissao();
+				$tipoAdmissao =	new \Admissao\Modelo\TipoAdmissao();
 				$tipoAdmissao->id = $url[3]; 
 				$tipoAdmissao->excluir();
 
@@ -102,7 +102,7 @@ class aviso{
 		}
 
 		public function excluirEventoDiscipulo($url){
-				$admissao =	new \admissao\modelo\admissaoDiscipulo();
+				$admissao =	new \Admissao\Modelo\AdmissaoDiscipulo();
 				$admissao->admissaoId = $url[3];
 				$admissao->discipuloId = $url[4];
 
@@ -115,7 +115,7 @@ class aviso{
 
 		public function detalhar ($url) {
 
-			$admissao = new \admissao\modelo\admissao() ;
+			$admissao = new \Admissao\Modelo\Admissao() ;
 
 			$admissao->id = $url[3] ; 
 			$admissao = $admissao->listarUm() ;

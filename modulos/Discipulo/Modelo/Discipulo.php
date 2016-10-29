@@ -183,7 +183,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
     public function getAdmissao()
     {
-        $admissao = new \admissao\modelo\admissao();
+        $admissao = new \Admissao\Modelo\Admissao();
         $admissao->discipuloId = $this->id;
         $admissao=  $admissao->listarUm();
 
@@ -193,7 +193,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
     public function getRede()
     {
-        $rede = new \rede\modelo\rede();
+        $rede = new \Rede\Modelo\Rede();
         $rede->discipuloId = $this->id;
         $rede =  $rede->pegarRedeDiscipulo();
 
@@ -203,7 +203,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
     public function getFuncaoRede()
     {
-        $rede = new \rede\modelo\rede();
+        $rede = new \Rede\Modelo\Rede();
         $rede->discipuloId = $this->id;
         $rede =  $rede->pegarFuncaoRede();
 

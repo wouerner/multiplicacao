@@ -7,7 +7,7 @@ class admissao{
 	public function index(){
 
 		//$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
-		$admissaos =	new \admissao\modelo\tipoAdmissao();
+		$admissaos =	new \Admissao\Modelo\TipoAdmissao();
 		//$admissaos =	$admissaos->listarTodos(8);
 		$admissaos = $admissaos->listarTodos();
 		///$totalDiscipulos = \admissao\Modelo\Discipulo::totalDiscipulos();
@@ -20,7 +20,7 @@ class admissao{
 
 	public function listarTipoAdmissao(){
 
-		$tipoAdmissoes =	new \admissao\modelo\tipoAdmissao();
+		$tipoAdmissoes =	new \Admissao\Modelo\TipoAdmissao();
 		$tipoAdmissoes = $tipoAdmissoes->listarTodos();
 
 		require_once  'modulos/admissao/visao/listarTipoAdmissao.php';
@@ -33,7 +33,7 @@ class admissao{
 		    	 require_once  'modulos/admissao/visao/novo.php';
 			
 			}else {
-				 $admissao =	new \admissao\modelo\admissao();
+				 $admissao =	new \Admissao\Modelo\Admissao();
 
 				 $admissao->discipuloId = $post['discipuloId'] ;
 				 $admissao->tipoAdmissao = $post['tipoAdmissao'] ;
@@ -55,7 +55,7 @@ class admissao{
 		    	 require_once  'modulos/admissao/visao/novoTipoAdmissao.php';
 			
 			}else {
-				 $admissao =	new \admissao\modelo\tipoAdmissao();
+				 $admissao =	new \Admissao\Modelo\TipoAdmissao();
 
 				 $post = $url['post'] ;
 				 $admissao->nome = $post['nome'] ;
@@ -70,7 +70,7 @@ class admissao{
 
 			if ( empty ( $url['post'] ) ) {
 
-				$tipoAdmissao =	new \admissao\modelo\tipoAdmissao();
+				$tipoAdmissao =	new \Admissao\Modelo\TipoAdmissao();
 
 				$tipoAdmissao->id =  $url[3] ;
 				$tipoAdmissao = $tipoAdmissao->listarUm();
@@ -78,7 +78,7 @@ class admissao{
 				require_once  'modulos/admissao/visao/atualizarTipoAdmissao.php';
 			
 			}else {
-				$tipoAdmissao =	new \admissao\modelo\tipoAdmissao();
+				$tipoAdmissao =	new \Admissao\Modelo\TipoAdmissao();
 
 				$post = $url['post'] ;
 
@@ -97,7 +97,7 @@ class admissao{
 		}
 
 		public function excluirTipoAdmissao($url){
-				$tipoAdmissao =	new \admissao\modelo\tipoAdmissao();
+				$tipoAdmissao =	new \Admissao\Modelo\TipoAdmissao();
 				$tipoAdmissao->id = $url[3]; 
 				$tipoAdmissao->excluir();
 
@@ -107,7 +107,7 @@ class admissao{
 		}
 
 		public function excluirEventoDiscipulo($url){
-				$admissao =	new \admissao\modelo\admissaoDiscipulo();
+				$admissao =	new \Admissao\Modelo\AdmissaoDiscipulo();
 				$admissao->admissaoId = $url[3];
 				$admissao->discipuloId = $url[4];
 
@@ -120,7 +120,7 @@ class admissao{
 
 		public function detalhar ($url) {
 
-			$admissao = new \admissao\modelo\admissao() ;
+			$admissao = new \Admissao\Modelo\Admissao() ;
 
 			$admissao->id = $url[3] ; 
 			$admissao = $admissao->listarUm() ;

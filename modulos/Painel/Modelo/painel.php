@@ -127,7 +127,7 @@ class Discipulo
 
     public function getAdmissao()
     {
-        $admissao = new \admissao\modelo\admissao();
+        $admissao = new \Admissao\Modelo\Admissao();
         $admissao->discipuloId = $this->id;
         $admissao=  $admissao->listarUm();
 
@@ -137,7 +137,7 @@ class Discipulo
 
     public function getRede()
     {
-        $rede = new \rede\modelo\rede();
+        $rede = new \Rede\Modelo\Rede();
         $rede->discipuloId = $this->id;
         $rede =  $rede->pegarRedeDiscipulo();
 

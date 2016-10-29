@@ -60,7 +60,7 @@ class painel
         $totalInativosLider = \Discipulo\Modelo\Discipulo::totalInativosLider($usuarioId) ;
 
         $totalRedes =  RedeModelo::pegarTodasRedes();
-        $totalRedesLideres =  \rede\modelo\rede::pegarTodasRedesPorLider($usuarioId);
+        $totalRedesLideres =  \Rede\Modelo\Rede::pegarTodasRedesPorLider($usuarioId);
 
         $tiposRedes = new TipoRede();
         $tiposRedes = $tiposRedes->listarTodos();
