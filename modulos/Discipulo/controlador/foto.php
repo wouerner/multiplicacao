@@ -296,7 +296,7 @@ class foto
              $ministerio = new \Ministerio\Modelo\Ministerio() ;
              $ministerio = $ministerio->listarTodos() ;
 
-             $funcaoMinisterio = new \ministerio\modelo\funcao() ;
+             $funcaoMinisterio = new \Ministerio\Modelo\Funcao() ;
              $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
 
              //escala de exito
@@ -479,7 +479,7 @@ class foto
              $ministerio = new \Ministerio\Modelo\Ministerio() ;
              $ministerio = $ministerio->listarTodos() ;
 
-             $funcaoMinisterio = new \ministerio\modelo\funcao() ;
+             $funcaoMinisterio = new \Ministerio\Modelo\Funcao() ;
              $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
 
              //escala de exito
@@ -674,7 +674,7 @@ class foto
              $ministerio = new \Ministerio\Modelo\Ministerio() ;
              $ministerio = $ministerio->listarTodos() ;
 
-             $funcaoMinisterio = new \ministerio\modelo\funcao() ;
+             $funcaoMinisterio = new \Ministerio\Modelo\Funcao() ;
              $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
 
              //escala de exito

@@ -621,7 +621,7 @@ class familia
              $ministerio = new \Ministerio\Modelo\Ministerio() ;
              $ministerio = $ministerio->listarTodos() ;
 
-             $funcaoMinisterio = new \ministerio\modelo\funcao() ;
+             $funcaoMinisterio = new \Ministerio\Modelo\Funcao() ;
              $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
 
              //escala de exito
@@ -685,7 +685,7 @@ class familia
              $ministerio = new \Ministerio\Modelo\Ministerio() ;
              $ministerio = $ministerio->listarTodos() ;
 
-             $funcaoMinisterio = new \ministerio\modelo\funcao() ;
+             $funcaoMinisterio = new \Ministerio\Modelo\Funcao() ;
              $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
 
              //escala de exito
@@ -898,7 +898,7 @@ class familia
              $ministerio = new \Ministerio\Modelo\Ministerio() ;
              $ministerio = $ministerio->listarTodos() ;
 
-             $funcaoMinisterio = new \ministerio\modelo\funcao() ;
+             $funcaoMinisterio = new \Ministerio\Modelo\Funcao() ;
              $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
 
              //escala de exito

@@ -62,7 +62,7 @@ class intervaloMetas
 
             } else {
 
-            $funcao =	new \ministerio\modelo\funcao() ;
+            $funcao =	new \Ministerio\Modelo\Funcao() ;
 
             $post = $url['post'] ;
             $funcao->nome = $post['nome'] ;
@@ -85,7 +85,7 @@ class intervaloMetas
 
         public function listarFuncao()
         {
-                  $funcoes =	new \ministerio\modelo\funcao();
+                  $funcoes =	new \Ministerio\Modelo\Funcao();
                   $funcoes = $funcoes->listarTodos();
 
                   require 'modulos/ministerio/visao/listarFuncao.php';
@@ -167,14 +167,14 @@ class intervaloMetas
         {
             if ( empty ( $url['post'] ) ) {
 
-                $funcao =	new \ministerio\modelo\funcao();
+                $funcao =	new \Ministerio\Modelo\Funcao();
                 $funcao->id = $url[3] ;
                 $funcao = $funcao->listarUm();
 
                 require_once 'modulos/ministerio/visao/atualizarFuncao.php';
 
             } else {
-                $funcao =	new \ministerio\modelo\funcao();
+                $funcao =	new \Ministerio\Modelo\Funcao();
 
                 $post = $url['post'] ;
 
@@ -201,7 +201,7 @@ class intervaloMetas
 
         public function excluirFuncao($url)
         {
-                $funcao =	new \ministerio\modelo\funcao();
+                $funcao =	new \Ministerio\Modelo\Funcao();
                 $funcao->id = $url[3];
                 $funcao->excluir();
 
@@ -223,7 +223,7 @@ class intervaloMetas
 
         public function detalharFuncao ($url)
         {
-            $funcao = new \ministerio\modelo\funcao() ;
+            $funcao = new \Ministerio\Modelo\Funcao() ;
 
             $funcao->id = $url[3] ;
             $funcao = $funcao->listarUm() ;
