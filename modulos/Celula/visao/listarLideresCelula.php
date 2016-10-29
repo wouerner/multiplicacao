@@ -21,7 +21,7 @@ unset($_SESSION['mensagem']) ;
         </header>
         <section>
             <article>
-            <?php require 'modulos/celula/visao/chamarCelula.php' ; ?>
+            <?php require 'modulos/Celula/visao/chamarCelula.php' ; ?>
             <?php if (isset($mensagem)) : ?>
                 <div class="alert <?php echo ($mensagem=='ok') ? 'alert-success' : 'alert-error' ; ?>">
                     <h4 class="alert-heading">

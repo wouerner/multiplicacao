@@ -44,7 +44,7 @@ class geracao
         {
             if ( empty ( $url['post'] ) ) {
 
-                require_once 'modulos/statusCelular/visao/novoTipoStatus.php';
+                require_once 'modulos/StatusCelular/visao/novoTipoStatus.php';
 
             } else {
 
@@ -68,7 +68,7 @@ class geracao
                   $tipoStatusCelulares =	new \StatusCelular\Modelo\TipoStatusCelular();
                   $tipoStatusCelulares = $tipoStatusCelulares->listarTodos();
 
-                  require 'modulos/statusCelular/visao/listarTipoStatusCelular.php';
+                  require 'modulos/StatusCelular/visao/listarTipoStatusCelular.php';
 
         }
 
@@ -125,7 +125,7 @@ class geracao
                 $tipoStatusCelular->id = $url[4] ;
                 $tipoStatusCelular = $tipoStatusCelular->listarUm();
 
-                require_once 'modulos/statusCelular/visao/atualizarTipoStatus.php';
+                require_once 'modulos/StatusCelular/visao/atualizarTipoStatus.php';
 
             } else {
                 $tipoStatusCelular =	new \StatusCelular\Modelo\TipoStatusCelular();

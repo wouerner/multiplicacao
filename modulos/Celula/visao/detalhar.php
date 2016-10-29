@@ -20,7 +20,7 @@
                             <tr>
                                 <td class = "" ><h4><a href= "/discipulo/discipulo/detalhar/id/<?php echo $celula->pegaLider()->id ; ?>" >Líder: <?php echo $celula->pegaLider()->nome ; ?> </a></h4></td>
                                 <td class = "span6" ><h4>Célula: <?php echo $celula->nome ; ?> </h4></td>
-                                <?php require 'celula/visao/menuCelula.inc.php' ; ?></tr>
+                                <?php require 'Celula/visao/menuCelula.inc.php' ; ?></tr>
                             <tr>
                                 <td>Endereço:<?php echo $celula->endereco ; ?>	</td>
                                 <td>Horario:<?php echo $celula->horarioFuncionamento ; ?></td>

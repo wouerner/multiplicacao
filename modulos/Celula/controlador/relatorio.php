@@ -15,7 +15,7 @@ class relatorio
         $relatorioCelula->celulaId  = $url[4];
         $relatorios = $relatorioCelula->listarTodos();
 
-        require_once 'modulos/celula/visao/relatorioCelula/listar.php';
+        require_once 'modulos/Celula/visao/relatorioCelula/listar.php';
 
     }
 
@@ -35,7 +35,7 @@ class relatorio
 
         $relatorios = $relatorioCelula->listarTodos();
 
-        require_once 'modulos/celula/visao/relatorioCelula/blog.php';
+        require_once 'modulos/Celula/visao/relatorioCelula/blog.php';
     }
 
         public function novo($url)
@@ -53,7 +53,7 @@ class relatorio
                 $lider = $celula->pegaLider();
 
                 $discipulos = $celula->listarDiscipulos();
-                require_once 'modulos/celula/visao/relatorioCelula/novo.php';
+                require_once 'modulos/Celula/visao/relatorioCelula/novo.php';
             } else {
 
                 $relatorioCelula = new \celula\modelo\relatorioCelula() ;
@@ -91,7 +91,7 @@ class relatorio
             $relatorio = $relatorio->listarUm() ;
             //var_dump($relatorio);exit;
 
-            require_once 'modulos/celula/visao/relatorioCelula/atualizar.php';
+            require_once 'modulos/Celula/visao/relatorioCelula/atualizar.php';
 
         } else {
 
@@ -136,7 +136,7 @@ class relatorio
             //var_dump($participacao);
             //exit;
 
-            require 'celula/visao/relatorioCelula/detalhar.php';
+            require 'Celula/visao/relatorioCelula/detalhar.php';
 
         }
 
@@ -146,7 +146,7 @@ class relatorio
             $celula =	new \Celula\Modelo\Celula();
             $celula->nome = $nome;
             $celulas = $celula->chamar($nome);
-            require_once 'celula/visao/chamar.php';
+            require_once 'Celula/visao/chamar.php';
 
         }
 
@@ -155,7 +155,7 @@ class relatorio
             $lideres = new \Celula\Modelo\Celula();
             $lideres = $lideres->listarLideresCelula() ;
 
-            require_once 'celula/visao/listarLideresCelula.php';
+            require_once 'Celula/visao/listarLideresCelula.php';
 
         }
     /*
@@ -188,7 +188,7 @@ class relatorio
             //var_dump($ids);
             //var_dump($rel);
             //die();
-            require_once 'celula/visao/relatorioCelula/porMes.php';
+            require_once 'Celula/visao/relatorioCelula/porMes.php';
 
         }
 
@@ -199,7 +199,7 @@ class relatorio
             $relatorio = new relatorioModelo();
             $relatorio->temaRelatorioCelulaId = isset($url['post']['temaId']) ? $url['post']['temaId'] : $url[4] ;
             $relatorios = $relatorio->lerPorTema();
-            require_once 'celula/visao/relatorioCelula/lerPorTema.php';
+            require_once 'Celula/visao/relatorioCelula/lerPorTema.php';
         }
 
         public function lerPorCelula($url)
@@ -209,7 +209,7 @@ class relatorio
             $relatorio = new relatorioModelo();
             $relatorio->celulaId = isset($url['post']['temaId']) ? $url['post']['temaId'] : $url[4] ;
             $relatorios = $relatorio->lerPorCelula();
-            require_once 'celula/visao/relatorioCelula/lerPorCelula.php';
+            require_once 'Celula/visao/relatorioCelula/lerPorCelula.php';
         }
 
 }

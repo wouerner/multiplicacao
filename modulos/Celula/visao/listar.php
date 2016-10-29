@@ -56,7 +56,7 @@ unset($_SESSION['mensagem']) ;
                                         <td><a href ="/celula/celula/detalhar/id/<?php echo $celula->id ; ?>" ><?php echo $celula->nome ; ?></td>
                                         <td><?php echo $celula->endereco ; ?>	</td>
                                         <td><?php echo $celula->horarioFuncionamento ; ?></td>
-                                        <?php require 'celula/visao/menuCelula.inc.php' ; ?>
+                                        <?php require 'Celula/visao/menuCelula.inc.php' ; ?>
                                     </tr>
                                 <?php endforeach ; ?>
                             </tbody>
@@ -87,7 +87,7 @@ unset($_SESSION['mensagem']) ;
                         <td><a href ="/celula/celula/detalhar/id/<?php echo $celula->id ; ?>" ><?php echo $celula->nome ; ?></td>
                         <td><?php echo $celula->endereco ; ?>	</td>
                         <td><?php echo $celula->horarioFuncionamento ; ?></td>
-                        <?php require 'celula/visao/menuCelula.inc.php' ; ?>
+                        <?php require 'Celula/visao/menuCelula.inc.php' ; ?>
                     </tr>
                 <?php endforeach ; ?>
                 </table>

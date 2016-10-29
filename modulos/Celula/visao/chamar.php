@@ -22,7 +22,7 @@
 
         <section>
             <article>
-                    <?php require 'modulos/celula/visao/chamarCelula.php' ; ?>
+                    <?php require 'modulos/Celula/visao/chamarCelula.php' ; ?>
 
                         <table class = "table table-bordered">
                         <caption>Lista de Discipulos</caption>
@@ -35,7 +35,7 @@
 
                         <tr><td colspan = "2" ><h2><a href="/celula/detalhar/id/<?php echo $celula['id']; ?>"><?php echo $celula['nome'] ; ?></a> </h2></td></tr>
                         <tr><td>Endereco:<?php echo $celula['endereco'] ; ?></td> <td>Horario:<?php echo $celula['horarioFuncionamento'] ; ?></td></tr>
-                            <?php require 'celula/visao/menuCelula.inc.php' ; ?>
+                            <?php require 'Celula/visao/menuCelula.inc.php' ; ?>
                         <?php endforeach ; ?>
                         <?php endif ; ?>
                         </table>

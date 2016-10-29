@@ -464,7 +464,7 @@ class batismo
             $discipulo->id = $url[4] ;
             $discipulo = $discipulo->listarUm() ;
 
-            $meta = new \metas\modelo\metas() ;
+            $meta = new \Metas\Modelo\Metas() ;
             $meta->discipuloId = $url[4] ;
             $metas = $meta->listar() ;
             //var_dump($metas);

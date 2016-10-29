@@ -64,7 +64,7 @@ class tipoGeracao
                 $tipoStatusCelular->id = $url[4] ;
                 $tipoStatusCelular = $tipoStatusCelular->listarUm();
 
-                require_once 'modulos/statusCelular/visao/atualizarTipoStatus.php';
+                require_once 'modulos/StatusCelular/visao/atualizarTipoStatus.php';
 
             } else {
                 $tipoStatusCelular =	new \StatusCelular\Modelo\TipoStatusCelular();

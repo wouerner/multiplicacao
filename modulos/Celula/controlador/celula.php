@@ -31,7 +31,7 @@ class celula
             $totalCelulas = count($celulas);
         }
 
-        require_once 'modulos/celula/visao/listar.php';
+        require_once 'modulos/Celula/visao/listar.php';
 
     }
         public function novo($url)
@@ -44,7 +44,7 @@ class celula
                 $tiposRedes = new \Rede\Modelo\TipoRede() ;
                 $tiposRedes = $tiposRedes->listarTodos() ;
 
-                require_once 'modulos/celula/visao/novo.php';
+                require_once 'modulos/Celula/visao/novo.php';
 
             } else {
                 $celula =	new \Celula\Modelo\Celula();
@@ -86,7 +86,7 @@ class celula
                 $tiposRedes = $tipoRede->listarTodos();
                 $tipoRede = $tipoRede->listarUm();
 
-                require_once 'modulos/celula/visao/atualizar.php';
+                require_once 'modulos/Celula/visao/atualizar.php';
 
             } else {
 
@@ -137,7 +137,7 @@ class celula
 
                     //var_dump($discipulos);
 
-        require 'celula/visao/detalhar.php';
+        require 'Celula/visao/detalhar.php';
 
     }
 
@@ -147,7 +147,7 @@ class celula
             $celula =	new \Celula\Modelo\Celula();
             $celula->nome = $nome;
             $celulas = $celula->chamar($nome);
-            require_once 'celula/visao/chamar.php';
+            require_once 'Celula/visao/chamar.php';
 
         }
 
@@ -160,7 +160,7 @@ class celula
 
             $statusCelulares = $tipoStatus->listarTodos() ;
 
-            require_once 'celula/visao/listarLideresCelula.php';
+            require_once 'Celula/visao/listarLideresCelula.php';
 
         }
 
@@ -170,7 +170,7 @@ class celula
         $celulas->id =	$url[4];
         $participacao =	$celulas->listarParticipacao() ;
 
-        require_once 'modulos/celula/visao/participacao.php';
+        require_once 'modulos/Celula/visao/participacao.php';
 
     }
 
@@ -182,7 +182,7 @@ class celula
 
             if (empty($post)) {
 
-                require_once 'modulos/celula/visao/lideresPorStatus.php';
+                require_once 'modulos/Celula/visao/lideresPorStatus.php';
             } else {
                 $id = $post['statusId'] ;
                 $celula = new \Celula\Modelo\Celula();
@@ -218,7 +218,7 @@ class celula
                     $totalDiscipulosSem += $ls['total'] ;
                 }
 
-                    require_once 'modulos/celula/visao/lideresPorStatus.php';
+                    require_once 'modulos/Celula/visao/lideresPorStatus.php';
             }
         }
 
@@ -265,7 +265,7 @@ class celula
                 //exit();
 
             }
-                    require_once 'modulos/celula/visao/statusPorLiderCelula.php';
+                    require_once 'modulos/Celula/visao/statusPorLiderCelula.php';
         }
 
         public function listarPorStatusTodos($url)
@@ -288,7 +288,7 @@ class celula
                 foreach ($lider as $l) {
                     $totalDiscipulos += $l['total'] ;
                 }
-                    require_once 'modulos/celula/visao/lideresPorStatus.php';
+                    require_once 'modulos/Celula/visao/lideresPorStatus.php';
 
             }
 

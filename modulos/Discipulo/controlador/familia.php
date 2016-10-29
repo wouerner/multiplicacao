@@ -530,7 +530,7 @@ class familia
 
             //meta dos discipulos:
 
-            $meta = new \metas\modelo\metas() ;
+            $meta = new \Metas\Modelo\Metas() ;
             $meta->discipuloId = $discipulo->id;
             $metas = $meta->listar() ;
 

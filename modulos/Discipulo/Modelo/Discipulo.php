@@ -231,7 +231,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
     public function getMeta()
     {
-        $meta = new \metas\modelo\metas();
+        $meta = new \Metas\Modelo\Metas();
         $meta->discipuloId = $this->id;
         $this->meta = $meta->listarUm();
         if ($this->meta) {

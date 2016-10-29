@@ -150,7 +150,7 @@ WHERE discipuloId = ?
                 //var_dump($stm->errorInfo());
               $resposta = array();
 
-            while ( $obj = $stm->fetchObject ('\metas\modelo\metas')  ) {
+            while ( $obj = $stm->fetchObject ('\Metas\Modelo\Metas')  ) {
                     $resposta[$obj->id] = $obj ;
                 }
 

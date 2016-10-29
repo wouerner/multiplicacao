@@ -1,6 +1,6 @@
 <?php
 namespace metas\controlador;
-use \metas\modelo\metas as metasModelo;
+use \Metas\Modelo\Metas as metasModelo;
 use \Discipulo\Modelo\Discipulo as discipulo;
 use \Rede\Modelo\TipoRede as TipoRede;
 
@@ -42,7 +42,7 @@ class metas
 
          $post = $url['post'] ;
 
-         $metas = new \metas\modelo\metas() ;
+         $metas = new \Metas\Modelo\Metas() ;
 
          $metas->quantidade = $post['quantidade'] ;
          $metas->discipuloId = $post['discipuloId'] ;
@@ -371,7 +371,7 @@ class metas
             $discipulo->id = $url[4] ;
             $discipulo = $discipulo->listarUm() ;
 
-            $meta = new \metas\modelo\metas() ;
+            $meta = new \Metas\Modelo\Metas() ;
             $meta->discipuloId = $url[4] ;
             $metas = $meta->listar() ;
             //var_dump($metas);

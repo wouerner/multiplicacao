@@ -7,8 +7,8 @@ use Celula\Modelo\Celula as CelulaModelo;
 use evento\modelo\evento;
 use evento\modelo\eventoDiscipulo;
 use seguranca\modelo\acl;
-use oferta\modelo\oferta as OfertaModelo;
-use oferta\modelo\tipoOferta as TipoOfertaModelo;
+use Oferta\modelo\oferta as OfertaModelo;
+use Oferta\modelo\tipoOferta as TipoOfertaModelo;
 
 /**
  * Discipulo
@@ -104,7 +104,7 @@ class discipulo
 
     public function listarPorLider($url)
     {
-        include 'seguranca/ACL/assets/php/database.php';
+        //include 'seguranca/ACL/assets/php/database.php';
         $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
       $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1 ;
 
@@ -752,7 +752,7 @@ class discipulo
 
             //meta dos discipulos:
 
-            $meta = new \metas\modelo\metas() ;
+            $meta = new \Metas\Modelo\Metas() ;
             $meta->discipuloId = $discipulo->id;
             $metas = $meta->listar() ;
 
@@ -1194,7 +1194,7 @@ class discipulo
         $lideres = new DiscipuloModelo();
         $lideres = $lideres->lideres() ;
 
-        require_once 'celula/visao/listarLideresCelula.php';
+        require_once 'Celula/visao/listarLideresCelula.php';
     }
 
     public function emailUnico($url)

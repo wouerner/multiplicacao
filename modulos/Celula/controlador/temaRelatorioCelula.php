@@ -17,14 +17,14 @@ class temaRelatorioCelula
 
         $temas = $temas->listarTodos();
 
-        require_once 'modulos/celula/visao/temaRelatorioCelula/listar.php';
+        require_once 'modulos/Celula/visao/temaRelatorioCelula/listar.php';
 
     }
         public function novo($url)
         {
             if ( empty ( $url['post'] ) ) {
 
-                require_once 'modulos/celula/visao/temaRelatorioCelula/novo.php';
+                require_once 'modulos/Celula/visao/temaRelatorioCelula/novo.php';
 
             } else {
                 $tema =	new \celula\modelo\temaRelatorioCelula();
@@ -87,7 +87,7 @@ class temaRelatorioCelula
                 $lider->id = $celula->lider ;
                 $lider = $lider->listarUm($celula->lider) ;
 
-                require_once 'modulos/celula/visao/atualizar.php';
+                require_once 'modulos/Celula/visao/atualizar.php';
 
             } else {
 
@@ -133,7 +133,7 @@ class temaRelatorioCelula
 
 //				var_dump($discipulos);
 
-            require 'celula/visao/detalhar.php';
+            require 'Celula/visao/detalhar.php';
 
         }
 
@@ -143,7 +143,7 @@ class temaRelatorioCelula
             $celula =	new \Celula\Modelo\Celula();
             $celula->nome = $nome;
             $celulas = $celula->chamar($nome);
-            require_once 'celula/visao/chamar.php';
+            require_once 'Celula/visao/chamar.php';
 
         }
 
@@ -152,7 +152,7 @@ class temaRelatorioCelula
             $lideres = new \Celula\Modelo\Celula();
             $lideres = $lideres->listarLideresCelula() ;
 
-            require_once 'celula/visao/listarLideresCelula.php';
+            require_once 'Celula/visao/listarLideresCelula.php';
 
         }
 
@@ -162,7 +162,7 @@ class temaRelatorioCelula
         $celulas->id =	$url[4];
         $participacao =	$celulas->listarParticipacao() ;
 
-        require_once 'modulos/celula/visao/participacao.php';
+        require_once 'modulos/Celula/visao/participacao.php';
 
     }
 

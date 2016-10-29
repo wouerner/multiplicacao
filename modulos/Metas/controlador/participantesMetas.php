@@ -2,7 +2,7 @@
 namespace metas\controlador;
 
 use \Discipulo\Modelo\Discipulo 		as discipulo;
-use \metas\modelo\metas					as metas;
+use \Metas\Modelo\Metas					as metas;
 use \metas\modelo\participantesMetas 	as participantesMetasModelo;
 
 class participantesMetas
