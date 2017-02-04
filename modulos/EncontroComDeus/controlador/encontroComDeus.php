@@ -7,10 +7,10 @@ class encontroComDeus
 {
     public function index()
     {
-        $encontro = new \encontroComDeus\modelo\encontroComDeus() ;
+        $encontro = new \EncontroComDeus\Modelo\EncontroComDeus() ;
         $encontros = $encontro->listarTodos();
 
-        require_once 'modulos/encontroComDeus/visao/encontroComDeus/listar.php';
+        require_once 'modulos/EncontroComDeus/visao/encontroComDeus/listar.php';
 
     }
     public function novo($url)

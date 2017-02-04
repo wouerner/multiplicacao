@@ -1,8 +1,8 @@
 <?php
 
 namespace encontroComDeus\modelo ;
-use \framework\modelo\modeloFramework ;
-class participantesEncontro extends modeloFramework
+use \Framework\Modelo\ModeloFramework ;
+class ParticipantesEncontro extends ModeloFramework
 {
   private $id ;
   private $discipuloId ;
@@ -127,7 +127,7 @@ class participantesEncontro extends modeloFramework
 
                 $resposta = array();
 
-                while ( $obj = $stm->fetchObject ('discipulo\Modelo\Discipulo')  ) {
+                while ( $obj = $stm->fetchObject ('Discipulo\Modelo\Discipulo')  ) {
                     $resposta[$obj->id] = $obj ;
                 }
 

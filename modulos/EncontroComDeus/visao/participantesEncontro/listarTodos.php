@@ -27,7 +27,7 @@ $('.table').tab('show');
                 <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
 
                 <h3>Quantidade de Encontrista: <?php echo $total?></h3>
-                <?php require 'modulos/encontroComDeus/visao/participantesEncontro/menuParticipante.php' ; ?>
+                <?php require 'modulos/EncontroComDeus/visao/participantesEncontro/menuParticipante.php' ; ?>
                 <div class = "row-fluid" >
                         <table class = "table bordered-table">
                                         <h2></h2>

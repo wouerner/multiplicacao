@@ -7,26 +7,26 @@ class participantesEncontro
 {
     public function index($url)
     {
-        $participante = new \encontroComDeus\modelo\participantesEncontro() ;
+        $participante = new \EncontroComDeus\Modelo\ParticipantesEncontro() ;
         $participante->encontroComDeusId =$url[4] ;
         $discipulos = $participante->listarTodos();
 
         $total = count ($discipulos) ;
         $ativo = 'active' ;
 
-        require_once 'modulos/encontroComDeus/visao/participantesEncontro/listarTodos.php';
+        require_once 'modulos/EncontroComDeus/visao/participantesEncontro/listarTodos.php';
     }
 
     public function imprimir($url)
     {
-        $participante = new \encontroComDeus\modelo\participantesEncontro() ;
+        $participante = new \EncontroComDeus\Modelo\ParticipantesEncontro() ;
         $participante->encontroComDeusId =$url[4] ;
         $discipulos = $participante->listarTodos();
 
         $total = count ($discipulos) ;
         $ativo = 'active' ;
 
-        require_once 'modulos/encontroComDeus/visao/participantesEncontro/imprimir.php';
+        require_once 'modulos/EncontroComDeus/visao/participantesEncontro/imprimir.php';
     }
 
     public function lista($url)
