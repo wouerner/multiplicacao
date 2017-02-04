@@ -91,17 +91,15 @@ $(function(){
     <div  class="row">
         <div class="col-md-12">
         <div class="panel panel-default">
-          <!-- Default panel contents -->
           <div class="panel-heading"><h5 class="panel-title">Encontros</h5></div>
             <ul class="list-group">
             <?php foreach($encontros as $encontro):?>
                 <li class="list-group-item">
                     <div class="btn-toolbar" role="toolbar" aria-label="...">
                         <div class="btn-group" role="group" aria-label="...">
-                            <a href="#" class="btn btn-default"><?php echo $encontro->nome?></a>
+                            <a href="#" class=" btn btn-default"><?php echo $encontro->nome?></a>
                             <a class="btn btn-mini btn-primary" href="/encontroComDeus/participantesEncontro/novoParticipante/id/<?php echo $_SESSION['usuario_id'] ?>">Participar</a>
                             <a class="btn btn-mini btn-primary" href="/encontroComDeus/preEquipe/novoMembro/id/<?php echo $_SESSION['usuario_id'] ?>">Trabalhar</a>
-
                         </div>
                         <div class="btn-group" role="group" aria-label="...">
                             <a class="btn btn-mini btn-default" href="/encontroComDeus/participantesEncontro/lista/id/<?php echo $encontro->id?>"><i class="icon-list-alt"></i> Lista do Encontro</a>
@@ -114,10 +112,10 @@ $(function(){
             </ul>
         </div>
     </div>
-        </div>
+</div>
 <?php endif;?>
 
-<div class="row">
+<!--div class="row">
     <div class="col-md-12">
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -132,7 +130,7 @@ $(function(){
                         <a  class="thumbnail" href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
                            <img class="img-responsive"  src="<?php echo is_object($d->getFoto()) ? $d->getFoto()->url : '' ; ?>" alt="">
                         </a>
-                        <!--div class="caption">
+                        <div class="caption">
                            <a class = " " href = "/discipulo/discipulo/detalhar/id/<?php echo $d->id ; ?>" >
                               <i class = "<?php echo $d->eLider() ? 'icon-certificate': '' ?>"></i>
                               <i class = "<?php echo $d->eLiderCelula() ? 'icon-home': '' ?>"></i>
@@ -140,7 +138,7 @@ $(function(){
                                   <?php echo $d->getAlcunha() ; ?>
                               </small>
                            </a>
-                        </div-->
+                        </div>
                     </div>
                 <?php endforeach ; ?>
             </div>
@@ -171,7 +169,7 @@ $(function(){
 </div>
 
     </div>
-</div>
+</div-->
 
 <!-- div class="row">
     <div class = "col-md-4">

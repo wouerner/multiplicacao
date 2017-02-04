@@ -22,14 +22,13 @@
             <script>
                 var t = jQuery.get('/relatorio/grafico/status')
                         .done(function( data ) {
-console.log(data);
                             var chart = c3.generate({
                             bindto: '#chart',
                             data: {
                               json: data,
                               type: 'pie',
                             },
-                              legend: {position: 'right'}
+                              legend: {position: 'bottom'}
                             });
                         });
             </script>
@@ -113,7 +112,8 @@ console.log(data);
                       json: data,
                       type: 'pie',
                     },
-                      legend: {position: 'right'}
+                    legend: {position: 'bottom'},
+                    size: { height: 300 }
                     });
                 });
     </script>
@@ -177,7 +177,8 @@ console.log(data);
                               json: data,
                               type: 'pie',
                             },
-                              legend: {position: 'right'}
+                            legend: {position: 'bottom'},
+                            size: { height: 240 }
                             });
                         });
             </script>
@@ -201,11 +202,11 @@ console.log(data);
     </div>
 </div>
 
-<div class="col-md-4">
+<!--div class="col-md-4">
     <div class="panel panel-default">
         <div class="panel-heading"><h5 class="panel-title">Média de Idade da Igreja</h5></div>
         <div class="panel-body">
             <h2 class="text-center"><?php echo round($idade->media, 1)?> anos</h2>
         </div>
     </div>
-</div>
+</div-->
