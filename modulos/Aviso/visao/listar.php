@@ -203,7 +203,7 @@
             <article>
 
                 <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
-                <?php require 'modulos/aviso/visao/tabAviso.inc.php' ; ?>
+                <?php require 'modulos/Aviso/visao/tabAviso.inc.php' ; ?>
 
             </article>
 

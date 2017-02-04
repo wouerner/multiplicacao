@@ -222,51 +222,41 @@ class celula
             }
         }
 
-        public function statusPorLiderCelula($url)
-        {
-            $post = $url['post'] ;
-            $tipoStatus = new \StatusCelular\Modelo\TipoStatusCelular() ;
-            $tipoStatus = $tipoStatus->listarTodos() ;
+    public function statusPorLiderCelula($url)
+    {
+        $post = $url['post'] ;
+        $tipoStatus = new \StatusCelular\Modelo\TipoStatusCelular() ;
+        $tipoStatus = $tipoStatus->listarTodos() ;
 
-            if (empty($post)) {
+        if (empty($post)) {
 
-            } else {
-                $id = $post['statusId'] ;
-                $celula = new \Celula\Modelo\Celula();
-                $lideres = $celula->statusPorLiderCelula($id);
+        } else {
+            $id = $post['statusId'] ;
+            $celula = new \Celula\Modelo\Celula();
+            $lideres = $celula->statusPorLiderCelula($id);
 
-                //var_dump($lideres);
+            $resposta = array() ;
+            $lider= array();
 
-                $resposta = array() ;
-                $lider= array();
-
-                foreach ($lideres as $l) {
-                    $lider[$l['dnome']][$l['nome']] = array('id'=>$l['id'], 'nome'=>$l['nome'],'tem'=>$l['tem']);
-
-                    //$lider[$l['dnome']]['total'] = !isset ($i)? $i =1 : ++$i ;
-
-                }
-
-                $totalDiscipulos=0;
-                $total = 0 ;
-                foreach ($lider as $k => $l) {
-                    foreach ($l as $d) {
-                        //var_dump($l);
-                        $total = is_null ($d['id']) ? 0 : count($l);
-                        break;
-                    }
-                    $lider[$k]['total'] = $total ;
-                    $totalDiscipulos+= $total;
-
-                }
-
-                $cont = 0 ;
-                //var_dump($lider);
-                //exit();
-
+            foreach ($lideres as $l) {
+                $lider[$l['dnome']][$l['nome']] = array('id'=>$l['id'], 'nome'=>$l['nome'],'tem'=>$l['tem']);
             }
-                    require_once 'modulos/Celula/visao/statusPorLiderCelula.php';
+
+            $totalDiscipulos=0;
+            $total = 0 ;
+            foreach ($lider as $k => $l) {
+                foreach ($l as $d) {
+                    $total = is_null ($d['id']) ? 0 : count($l);
+                    break;
+                }
+                $lider[$k]['total'] = $total ;
+                $totalDiscipulos+= $total;
+            }
+
+            $cont = 0 ;
         }
+        require_once 'modulos/Celula/visao/statusPorLiderCelula.php';
+    }
 
         public function listarPorStatusTodos($url)
         {

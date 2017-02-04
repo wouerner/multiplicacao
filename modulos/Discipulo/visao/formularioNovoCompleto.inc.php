@@ -1,8 +1,8 @@
-<form id="form" action="/discipulo/discipulo/novoCompleto/igreja/<?php echo $url['4']?>" method="post"  class="form-horizontal ">
+<form id="form" action="/discipulo/discipulo/novoCompleto/igreja/<?php echo !empty($url['4'])? $url['4']: ''?>" method="post"  class="form-horizontal ">
     <fieldset class="col-md-6">
         <legend>Dados Pessoais</legend>
         <div class="form-group ">
-            <label class="control-label col-md-3" for="nome" ><i class="icon-user" ></i> Nome*:</label>
+            <label class="control-label col-md-3" for="nome" ><i class="icon-user" ></i> Nome:</label>
             <div class="col-md-8">
                 <input id="nome" type="text" class="form-control" maxlength="45" name="nome" placeholder="Nome Completo" value="<?php echo $dados['nome']?>" required autofocus>
                 <p class="help-block">(obrigatório)</p>
@@ -75,32 +75,28 @@
     </fieldset>
     <fieldset class="col-md-12">
         <legend>Dados Ministériais</legend>
-        <div class="control-group col-md-2" >
+        <div class="form-group ">
             <label class="control-label " for="lider" >
-                <i class="icon-user" ></i>
-                Nome do Líder:
+                <i class="icon-user"></i> Líder:
             </label>
-            <select id="combobox" class="combobox lider " name="lider" >
-                <option value="" selected> </option>
-                    <?php foreach($lideres as $lider) : ?>
-                        <option value="<?php echo $lider->id ; ?>"><?php echo $lider->getAlcunha(); ?> </option>
-                    <?php endforeach ; ?>
+            <select id="lider" name="lider" >
+                <?php foreach($lideres as $lider) : ?>
+                    <option value="<?php echo $lider->id; ?>"><?php echo $lider->getAlcunha(); ?> </option>
+                <?php endforeach ; ?>
             </select>
         </div>
-        <div class="control-group col-md-2" >
-            <div class="ui-widget-celula" >
-                <label class="control-label" for="celula">
-                    <i class="icon-home"></i> Célula que Participa:
-                </label>
-                <select id="comboboxCelula" class="comboboxCelula" name="celula" >
-                    <option value="" ></option>
-                    <?php foreach($celulas as $celula) : ?>
-                        <option value="<?php echo $celula->id; ?>"><?php echo $celula->nome; ?> </option>
-                    <?php endforeach ; ?>
-                </select>
-            </div>
+        <div class="form-group" >
+            <label class="control-label" for="celula">
+                <i class="icon-home"></i> Célula:
+            </label>
+            <select id="celula" class="celula" name="celula" >
+                <option value="" ></option>
+                <?php foreach($celulas as $celula) : ?>
+                    <option value="<?php echo $celula->id; ?>"><?php echo $celula->nome; ?> </option>
+                <?php endforeach ; ?>
+            </select>
         </div>
-        <div class="control-group col-md-2" >
+        <div class="form-group" >
             <label class="" >Status Celular:</label>
             <select class="form-control" name="tipoStatusCelular"  >
              <option value=""></option>
@@ -111,39 +107,33 @@
                 <?php endforeach ; ?>
             </select>
         </div>
-        <div class="form-group col-md-2" >
+        <div class="form-group" >
             <label class="control-label" >Admissão:</label>
-            <div class="controls" >
-                <select class="form-control" name="tipoAdmissao" id="tipoAdmissao">
-                     <option value=""></option>
-                      <?php foreach ($tiposAdmissoes as $tipoAdmissao) : ?>
-                            <option value="<?php echo $tipoAdmissao['id'] ; ?>" >
-                            <?php echo $tipoAdmissao['nome'] ; ?></option>
-                      <?php endforeach ; ?>
-                </select>
-            </div>
+            <select class="form-control" name="tipoAdmissao" id="tipoAdmissao">
+                 <option value=""></option>
+                  <?php foreach ($tiposAdmissoes as $tipoAdmissao) : ?>
+                        <option value="<?php echo $tipoAdmissao['id'] ; ?>" >
+                        <?php echo $tipoAdmissao['nome'] ; ?></option>
+                  <?php endforeach ; ?>
+            </select>
         </div>
-        <div class="control-group col-md-2" >
+        <div class="form-group" >
             <label class="control-label" >Função</label>
-            <div class="controls" >
-                <select class="form-control" name="funcaoRedeId" >
-                    <option value=""></option>
-                    <?php foreach ($funcoesRedes as $funcaoRede) : ?>
-                        <option value="<?php echo $funcaoRede['id'] ; ?>" ><?php echo $funcaoRede['nome'] ; ?></option>
-                    <?php endforeach ; ?>
-                </select>
-            </div>
+            <select class="form-control" name="funcaoRedeId" >
+                <option value=""></option>
+                <?php foreach ($funcoesRedes as $funcaoRede) : ?>
+                    <option value="<?php echo $funcaoRede['id'] ; ?>" ><?php echo $funcaoRede['nome'] ; ?></option>
+                <?php endforeach ; ?>
+            </select>
         </div>
-        <div class="control-group col-md-1" >
+        <div class="form-group " >
             <label class="control-label" >Rede:</label>
-            <div class="controls" >
-                <select class="form-control" name="tipoRedeId" >
-                    <option value=""></option>
-                    <?php foreach ($tiposRedes as $tipoRede) : ?>
-                        <option value="<?php echo $tipoRede->id ; ?>" ><?php echo $tipoRede->nome ; ?></option>
-                    <?php endforeach ; ?>
-                </select>
-            </div>
+            <select class="form-control" name="tipoRedeId" >
+                <option value=""></option>
+                <?php foreach ($tiposRedes as $tipoRede) : ?>
+                    <option value="<?php echo $tipoRede->id ; ?>" ><?php echo $tipoRede->nome ; ?></option>
+                <?php endforeach ; ?>
+            </select>
         </div>
     </fieldset>
     <fieldset class="col-md-12">
@@ -157,12 +147,53 @@
     Deseja Salvar?
 </div>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<link href="https://raw.1githubusercontent.com/t0m/select2-bootstrap-css/bootstrap3/select2-bootstrap.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 <script src="https://raw.githubusercontent.com/jzaefferer/jquery-validation/master/src/localization/messages_pt_BR.js"></script>
 <script>
-    jQuery("#tipoAdmissao").select2();
+/*
+* Translated default messages for the jQuery validation plugin.
+* Locale: PT_BR
+*/
+jQuery.extend(jQuery.validator.messages, {
+required: "Este campo &eacute; requerido.",
+remote: "Por favor, corrija este campo.",
+email: "Por favor, forne&ccedil;a um endere&ccedil;o eletr&ocirc;nico v&aacute;lido.",
+url: "Por favor, forne&ccedil;a uma URL v&aacute;lida.",
+date: "Por favor, forne&ccedil;a uma data v&aacute;lida.",
+dateISO: "Por favor, forne&ccedil;a uma data v&aacute;lida (ISO).",
+number: "Por favor, forne&ccedil;a um n&uacute;mero v&aacute;lido.",
+digits: "Por favor, forne&ccedil;a somente d&iacute;gitos.",
+creditcard: "Por favor, forne&ccedil;a um cart&atilde;o de cr&eacute;dito v&aacute;lido.",
+equalTo: "Por favor, forne&ccedil;a o mesmo valor novamente.",
+accept: "Por favor, forne&ccedil;a um valor com uma extens&atilde;o v&aacute;lida.",
+maxlength: jQuery.validator.format("Por favor, forne&ccedil;a n&atilde;o mais que {0} caracteres."),
+minlength: jQuery.validator.format("Por favor, forne&ccedil;a ao menos {0} caracteres."),
+rangelength: jQuery.validator.format("Por favor, forne&ccedil;a um valor entre {0} e {1} caracteres de comprimento."),
+range: jQuery.validator.format("Por favor, forne&ccedil;a um valor entre {0} e {1}."),
+max: jQuery.validator.format("Por favor, forne&ccedil;a um valor menor ou igual a {0}."),
+min: jQuery.validator.format("Por favor, forne&ccedil;a um valor maior ou igual a {0}.")
+});
+    jQuery("select").select2();
 
+    jQuery.validator.setDefaults({
+        highlight: function(element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function(element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        errorPlacement: function(error, element) {
+            if(element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
+    });
     jQuery("#form").validate();
 
     //jQuery("#salvar").on('click', function(){

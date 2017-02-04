@@ -93,7 +93,7 @@ $_SESSION['dados'] = isset($_SESSION['dados']) ? NULL : NULL;
             <h3 class="panel-title">Novo Cadastro</h3>
           </div>
           <div class="panel-body">
-                        <?php include 'Discipulo/visao/formularioNovoCompleto.inc.php' ; ?>
+                        <?php include 'modulos/Discipulo/visao/formularioNovoCompleto.inc.php' ; ?>
           </div>
         </div>
                 </article>

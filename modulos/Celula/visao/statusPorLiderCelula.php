@@ -51,7 +51,7 @@ unset($_SESSION['mensagem']) ;
 
 <div class = "tab-content" >
     <div class = "tab-pane active" id = "com"  >
-            <h4>Total de Discipulos: <?php echo $totalDiscipulos?></h4>
+            <h4>Total de Discipulos: <?php //echo $totalDiscipulos?></h4>
             <?php if (isset($lider)) : ?>
 
                             <div class="accordion" id="accordion2">

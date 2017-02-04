@@ -27,7 +27,7 @@ class rede
         $discipulo->id = $url[3] ;
         $discipulo = $discipulo->listarUm();
 
-        require_once 'modulos/rede/visao/novo.php';
+        require_once 'modulos/Rede/visao/novo.php';
 
         } else {
             $rede =	new \Rede\Modelo\Rede();
@@ -52,7 +52,7 @@ class rede
     {
         if ( empty ( $url['post'] ) ) {
 
-            require_once 'modulos/rede/visao/tipoRede/novo.php';
+            require_once 'modulos/Rede/visao/tipoRede/novo.php';
 
         } else {
 
@@ -72,7 +72,7 @@ class rede
     {
         if ( empty ( $url['post'] ) ) {
 
-            require_once 'modulos/rede/visao/funcaoRede/nova.php';
+            require_once 'modulos/Rede/visao/funcaoRede/nova.php';
 
         } else {
 
@@ -95,7 +95,7 @@ class rede
                 $totalMeta= 0 ;
                 $totalDisc= 0 ;
 
-              require 'modulos/rede/visao/tipoRede/listar.php';
+              require 'modulos/Rede/visao/tipoRede/listar.php';
 
     }
 
@@ -104,7 +104,7 @@ class rede
               $funcoes =	new \Rede\Modelo\FuncaoRede();
               $funcoes = $funcoes->listarTodos();
 
-              require 'modulos/rede/visao/funcaoRede/listar.php';
+              require 'modulos/Rede/visao/funcaoRede/listar.php';
 
     }
 
@@ -137,7 +137,7 @@ public function listarMembrosRede($url)
     $metaTotal=0;
     $metaTotalLider=0;
 
-    require 'modulos/rede/visao/rede/listar.php';
+    require 'modulos/Rede/visao/rede/listar.php';
 
 }
 
@@ -150,7 +150,7 @@ public function listarMembrosRede($url)
                 $celulas = $tipoRede->listarCelulas();
                 $cont = 0;
 
-              require 'modulos/rede/visao/tipoRede/celulas.php';
+              require 'modulos/Rede/visao/tipoRede/celulas.php';
 
     }
 
@@ -206,7 +206,7 @@ public function listarMembrosRede($url)
             $rede->id = $url[4] ;
             $rede = $rede->listarUm();
 
-            require_once 'modulos/rede/visao/tipoRede/atualizar.php';
+            require_once 'modulos/Rede/visao/tipoRede/atualizar.php';
 
         } else {
             $rede =	new \Rede\Modelo\TipoRede();
@@ -230,7 +230,7 @@ public function listarMembrosRede($url)
         $funcao->id = $url[4] ;
         $funcao = $funcao->listarUm();
 
-        require_once 'modulos/rede/visao/funcaoRede/atualizar.php';
+        require_once 'modulos/Rede/visao/funcaoRede/atualizar.php';
     }
 
     public function excluirTipoRede($url)
@@ -333,9 +333,93 @@ public function listarMembrosRede($url)
 
                  header ('location:/discipulo/evento/id/'.$id);
                  exit();
-
         }
-
     }
 
+    /**
+     * relatorioSemanal
+     *
+     * @param mixed $url
+     * @access public
+     * @return void
+     */
+    public function relatorioSemanal($url)
+    {
+        $redeId = $url[4];
+
+        $rede = new \Rede\Modelo\ConsolidacaoRedeSemanal();
+        $rede->tipoRedeId = $redeId;
+
+        $redeMembros = $rede->listarPorRedeData($redeId);
+        $resumoRede = $rede->resumoRede($redeId);
+
+        require 'modulos/Rede/visao/rede/ConsolidacaoRedeSemanal.php';
+    }
+
+    public function compararRelatorio($url)
+    {
+        $redeId = $url[4];
+        $data = $url[6];
+
+        $rede = new \Rede\Modelo\ConsolidacaoRedeSemanal();
+        $teste =  $rede->proximaDataRelatorio($redeId, $data);
+        $relatorio =  $rede->redePorData($redeId, $data);
+        $relatorioProximo =  $rede->redePorData($redeId, $teste[0]['data']);
+
+        //var_dump($relatorio, $relatorioProximo);
+        //foreach($relatorio as $rel){
+            //echo $rel->discipuloNome . '<br>';
+        //}
+
+        //echo '-----------<br>';
+        //foreach($relatorioProximo as $rel){
+            //echo $rel->discipuloNome . '<br>';
+        //}
+
+        $estavel = array();
+        foreach($relatorio as $rel){
+            foreach($relatorioProximo as $relNovo) {
+                if ($rel->discipuloId == $relNovo->discipuloId){
+                    //echo '==: '. $rel->discipuloNome. '<br>';
+                    $estavel[$rel->discipuloId] = $rel;
+                    break;
+                }
+            }
+        }
+
+        $adicionados = $relatorioProximo;
+        foreach($estavel as $rel){
+            foreach($relatorioProximo as $relNovo) {
+                if ($rel->discipuloId == $relNovo->discipuloId){
+                    unset($adicionados[$relNovo->discipuloId]);
+                    break;
+                }
+            }
+        }
+
+        $sairam = $relatorio;
+
+        foreach($relatorio as $rel){
+            foreach($estavel as $relNovo) {
+                if ($rel->discipuloId == $relNovo->discipuloId) {
+                    unset($sairam[$relNovo->discipuloId]);
+                    break;
+                }
+            }
+        }
+
+        //foreach($estavel as $rel){
+            //echo '==: '. $rel->discipuloNome. '<br>';
+        //}
+
+        //foreach($adicionados as $rel){
+            //echo '++: ' . $rel->discipuloNome. '<br>';
+        //}
+
+        //foreach ($sairam as $rel) {
+            //echo '--: ' . $rel->discipuloNome. '<br>';
+        //}
+
+        require 'modulos/Rede/visao/rede/compararRelatorioSemanal.php';
+    }
 }

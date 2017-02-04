@@ -6,10 +6,8 @@ class aviso
     {
         $avisos =	new \Aviso\Modelo\Aviso();
         $avisos = $avisos->listarTodos();
-        //var_dump($avisos);
 
-        require_once 'modulos/aviso/visao/listar.php';
-
+        require_once 'modulos/Aviso/visao/listar.php';
     }
 
     public function json()
