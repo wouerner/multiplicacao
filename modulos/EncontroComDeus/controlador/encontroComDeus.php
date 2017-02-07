@@ -17,13 +17,13 @@ class encontroComDeus
     {
       if ( empty ( $url['post'] ) ) {
 
-            require_once 'modulos/encontroComDeus/visao/encontroComDeus/novo.php';
+            require_once 'modulos/EncontroComDeus/visao/encontroComDeus/novo.php';
 
         } else {
 
         $post = $url['post'] ;
 
-        $encontro = new \encontroComDeus\modelo\encontroComDeus() ;
+        $encontro = new \EncontroComDeus\Modelo\EncontroComDeus() ;
         $encontro->nome = $post['nome'];
         $encontro->dataEncontroComDeus = implode ('-',array_reverse(explode('/',$post['dataEncontroComDeus'])));
         $encontro->endereco = $post['endereco'];
@@ -39,7 +39,7 @@ class encontroComDeus
     public function ativar($url)
     {
         if (isset($url['post'])) {
-            $encontro = new \encontroComDeus\modelo\encontroComDeus() ;
+            $encontro = new EncontroComDeus\Modelo\EncontroComDeus() ;
             $encontro->id = $url[4];
             $encontro->ativar() ;
             header ('location:/encontroComDeus/encontroComDeus' );
@@ -50,18 +50,18 @@ class encontroComDeus
 
     public function grafico($url)
     {
-        $encontro = new \encontroComDeus\modelo\encontroComDeus() ;
+        $encontro = new EncontroComDeus\Modelo\EncontroComDeus() ;
         $encontro->id = $url[4];
         $encontro = $encontro->listarUm();
 
-        require_once 'modulos/encontroComDeus/visao/encontroComDeus/grafico.php';
+        require_once 'modulos/EncontroComDeus/visao/encontroComDeus/grafico.php';
     }
 
 
     public function desativar($url)
     {
       if ( isset ( $url['post'] ) ) {
-                        $encontro = new \encontroComDeus\modelo\encontroComDeus() ;
+                        $encontro = new EncontroComDeus\Modelo\EncontroComDeus() ;
                         $encontro->id = $url[4];
                         $encontro->desativar() ;
                         header ('location:/encontroComDeus/encontroComDeus' );
@@ -249,7 +249,7 @@ class encontroComDeus
 
         public function excluir($url)
         {
-                $encontro =	new \encontroComDeus\modelo\encontroComDeus();
+                $encontro =	new EncontroComDeus\Modelo\EncontroComDeus();
                 $encontro->id = $url[4];
                 $encontro->excluir();
                 header ('location:/encontroComDeus/encontroComDeus');
