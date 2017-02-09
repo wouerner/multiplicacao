@@ -14,16 +14,12 @@
                 <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
         <div class = "row-fluid" >
             <div class = "col-md-12">
-                <a href="/rede/rede/relatorioSemanal/id/<?php echo $tipoRede->id ; ?>" class="btn">Resumo</a>
-            </div>
-        </div>
-        <div class = "row-fluid" >
-            <div class = "col-md-12">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#ativos" aria-controls="ativos" role="tab" data-toggle="tab">Ativos</a></li>
                         <li role="presentation"><a href="#inativos" aria-controls="inativos" role="tab" data-toggle="tab">Inativos</a></li>
                         <li role="presentation"><a href="#arquivo" aria-controls="arquivo" role="tab" data-toggle="tab">Arquivo</a></li>
+                        <li role="presentation"><a href="/rede/rede/relatorioSemanal/id/<?php echo $tipoRede->id ; ?>" class="btn">Resumo</a></li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">

@@ -24,6 +24,9 @@ class  Igreja implements \JsonSerializable {
 
 		  }
 
+    public function getId() {
+        return $this->id;
+    }
     public function salvar(){
 
         //abrir conexao com o banco
