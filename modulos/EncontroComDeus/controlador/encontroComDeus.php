@@ -60,15 +60,14 @@ class encontroComDeus
 
     public function desativar($url)
     {
-      if ( isset ( $url['post'] ) ) {
-                        $encontro = new EncontroComDeus\Modelo\EncontroComDeus() ;
-                        $encontro->id = $url[4];
-                        $encontro->desativar() ;
-                        header ('location:/encontroComDeus/encontroComDeus' );
-                        exit();
+        if ( isset ( $url['post'] ) ) {
+            $encontro = new \EncontroComDeus\Modelo\EncontroComDeus();
+            $encontro->id = $url[4];
+            $encontro->desativar() ;
+            header ('location:/encontroComDeus/encontroComDeus' );
+            exit();
         }
-
-        }
+    }
 
         public function novoMinisterio($url)
         {
