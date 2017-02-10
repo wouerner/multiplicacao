@@ -64,7 +64,6 @@ use Discipulo\modelo\role;
 		}
 
 
-
 		public function sair(){
 
 			session_destroy();
@@ -74,23 +73,23 @@ use Discipulo\modelo\role;
 
 		}
 
-		public function trocarSenha($url){
-			$discipulo = new \Discipulo\Modelo\Discipulo() ;
+    public function trocarSenha($url){
+        $discipulo = new \Discipulo\Modelo\Discipulo() ;
 
-			if (empty($url['post'])){
-				$discipulo->id = $url[4] ;
-				$discipulo = $discipulo->listarUm() ;
-				require 'modulos/seguranca/visao/trocarSenha.php' ;
-				exit();
-			}
+        if (empty($url['post'])){
+            $discipulo->id = $url[4] ;
+            $discipulo = $discipulo->listarUm() ;
+            require 'modulos/Seguranca/visao/trocarSenha.php' ;
+            exit();
+        }
 
-		$discipulo->senha = $url['post']['senha'];
-		$discipulo->email = $url['post']['email'];
-		$discipulo->trocarSenha();
-		$mens = "Senha trocada." ;
-		require 'modulos/seguranca/visao/trocarSenha.php' ;
-			exit();
-		}
+        $discipulo->senha = $url['post']['senha'];
+        $discipulo->email = $url['post']['email'];
+        $discipulo->trocarSenha();
+        $mens = "Senha trocada." ;
+        require 'modulos/Seguranca/visao/trocarSenha.php' ;
+        exit();
+    }
 
     public function recuperar($url){
         $discipulo = new \Discipulo\Modelo\Discipulo() ;
