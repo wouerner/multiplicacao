@@ -39,7 +39,7 @@ class encontroComDeus
     public function ativar($url)
     {
         if (isset($url['post'])) {
-            $encontro = new EncontroComDeus\Modelo\EncontroComDeus() ;
+            $encontro = new \EncontroComDeus\Modelo\EncontroComDeus() ;
             $encontro->id = $url[4];
             $encontro->ativar() ;
             header ('location:/encontroComDeus/encontroComDeus' );
@@ -50,7 +50,7 @@ class encontroComDeus
 
     public function grafico($url)
     {
-        $encontro = new EncontroComDeus\Modelo\EncontroComDeus() ;
+        $encontro = new \EncontroComDeus\Modelo\EncontroComDeus() ;
         $encontro->id = $url[4];
         $encontro = $encontro->listarUm();
 
@@ -127,76 +127,6 @@ class encontroComDeus
 
         }
 
-        public function atualizar($url)
-        {
-            if ( empty ( $url['post'] ) ) {
-
-                $discipulo =	new \Discipulo\Modelo\Discipulo();
-                $lideres = $discipulo->listarLideres();
-
-                $discipulo->id =  $url[3] ;
-                $discipulo = $discipulo->listarUm();
-
-                $lider =	new \Discipulo\Modelo\Discipulo();
-                $lider->id = $discipulo['lider'] ;
-                $lider = $lider->listarUm($discipulo['lider']);
-
-                $celula = new \Celula\Modelo\Celula();
-                $celula->id = $discipulo['celula'];
-                $celula = $celula->listarUm();
-
-                $celulas = new \Celula\Modelo\Celula();
-                $celulas = $celulas->listarTodos();
-
-                require_once 'modulos/Discipulo/visao/atualizar.php';
-
-            } else {
-                $discipulo =	new \Discipulo\Modelo\Discipulo();
-
-                $post = $url['post'] ;
-
-                $discipulo->id = $post['id'];
-                $discipulo->nome = $post['nome'];
-                $discipulo->telefone = $post['telefone'];
-                $discipulo->endereco = $post['endereco'];
-                $discipulo->email = $post['email'];
-                $discipulo->celula = $post['celula'];
-                $discipulo->ativo =isset( $post['ativo']) ? $post['ativo']: null;
-                $discipulo->lider = $post['lider'];
-
-                $discipulo->atualizar();
-
-                header ('location:/discipulo/atualizar/id/'.$discipulo->id);
-                exit();
-            }
-
-        }
-
-        public function atualizarMinisterio($url)
-        {
-            if ( empty ( $url['post'] ) ) {
-
-                $ministerio =	new \Ministerio\Modelo\Ministerio();
-                $ministerio->id = $url[3] ;
-                $ministerio = $ministerio->listarUm();
-
-                require_once 'modulos/ministerio/visao/atualizarMinisterio.php';
-
-            } else {
-                $ministerio =	new \Ministerio\Modelo\Ministerio();
-
-                $post = $url['post'] ;
-
-                $ministerio->id = $post['id'];
-                $ministerio->nome = $post['nome'];
-
-                $ministerio->atualizarMinisterio();
-
-                header ('location:/ministerio/atualizarMinisterio/id/'.$ministerio->id);
-                exit();
-            }
-
-        }
 
         public function atualizarFuncao($url)
         {
@@ -224,36 +154,14 @@ class encontroComDeus
 
         }
 
-        public function excluirMinisterio($url)
-        {
-                $ministerio =	new \Ministerio\Modelo\Ministerio();
-                $ministerio->id = $url[3];
-                $ministerio->excluir();
-
-                $_SESSION['mensagem'] = !is_null($ministerio->erro) ? $ministerio->erro : null ;
-                header ('location:/ministerio/listarMinisterio');
-                exit();
-        }
-
-        public function excluirFuncao($url)
-        {
-                $funcao =	new \Ministerio\Modelo\Funcao();
-                $funcao->id = $url[3];
-                $funcao->excluir();
-
-                $_SESSION['mensagem'] = !is_null($funcao->erro) ? $funcao->erro : null ;
-                header ('location:/ministerio/listarFuncao');
-                exit();
-        }
-
-        public function excluir($url)
-        {
-                $encontro =	new EncontroComDeus\Modelo\EncontroComDeus();
-                $encontro->id = $url[4];
-                $encontro->excluir();
-                header ('location:/encontroComDeus/encontroComDeus');
-                exit();
-        }
+    public function excluir($url)
+    {
+        $encontro = new \EncontroComDeus\Modelo\EncontroComDeus();
+        $encontro->id = $url[4];
+        $encontro->excluir();
+        header ('location:/encontroComDeus/encontroComDeus');
+        exit();
+    }
 
         public function detalhar ($url)
         {
