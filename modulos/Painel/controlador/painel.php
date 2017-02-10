@@ -24,8 +24,10 @@ class painel
         require_once 'modulos/Painel/visao/escolhaIgreja.php';
     }
 
-    public function igreja()
+    public function igreja($url)
     {
+        //var_dump($url[4]);
+        $igrejaId = $url['4'];
         $usuarioId= $_SESSION['usuario_id'];
         $status = new \StatusCelular\Modelo\StatusCelular() ;
         $status = $status->quantidadePorStatusCelular();
@@ -52,9 +54,9 @@ class painel
 
         }
 
-        $totalAtivos =  DiscipuloModelo::totalAtivos() ;
-        $totalInativos = \Discipulo\Modelo\Discipulo::totalInativos() ;
-        $totalArquivados =  \Discipulo\Modelo\Discipulo::totalArquivados() ;
+        $totalAtivos =  DiscipuloModelo::totalAtivos($igrejaId) ;
+        $totalInativos = \Discipulo\Modelo\Discipulo::totalInativos($igrejaId) ;
+        $totalArquivados =  \Discipulo\Modelo\Discipulo::totalArquivados($igrejaId) ;
 
         $totalAtivosLider =  \Discipulo\Modelo\Discipulo::totalAtivosLider($usuarioId) ;
         $totalInativosLider = \Discipulo\Modelo\Discipulo::totalInativosLider($usuarioId) ;

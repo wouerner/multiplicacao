@@ -102,7 +102,7 @@ class Geracoes
 
         $stm->execute();
 
-        return $stm->fetchObject('\geracoes\modelo\tipoGeracao');
+        return $stm->fetchObject('\Geracoes\Modelo\TipoGeracao');
     }
               /*
                 *Este metodo retorna todos os Status do discipulo ordenado por data.

@@ -104,7 +104,7 @@
   <div class="panel-body">
     <div id="redesChart"></div>
     <script>
-        var redes = jQuery.get('/relatorio/grafico/redes')
+            var redes = jQuery.get('/relatorio/grafico/redes/igreja/<?php echo $igrejaId?>')
                 .done(function( data ) {
                     var chart = c3.generate({
                     bindto: '#redesChart',
@@ -137,7 +137,7 @@
                         <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->nome ?></a>
                     </td>
                     <td>
-                    <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->totalDiscipulosPorRede() ?></a>
+                    <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->totalDiscipulosPorRede($igrejaId) ?></a>
                     </td>
                     <td>
                         <a href = "/rede/rede/listarCelulas/id/<?php echo $s->id ; ?>"><?php echo $s->totalCelulasMultiplicacao() ?></a>
@@ -146,7 +146,7 @@
                         <a href = "#"><?php echo $s->getMeta() ?></a>
                     </td>
                 </tr>
-                <?php $total['discipulos'] += $s->totalDiscipulosPorRede()?>
+                <?php $total['discipulos'] += $s->totalDiscipulosPorRede($igrejaId)?>
                 <?php $total['celulas']+= $s->totalCelulasMultiplicacao()?>
                 <?php $total['metas']+= $s->getMeta()?>
                 <?php endforeach ; ?>
@@ -169,7 +169,7 @@
         <div class="panel-body">
             <div id="ativosChart"></div>
             <script>
-                var ativos = jQuery.get('/relatorio/grafico/ativos')
+                    var ativos = jQuery.get('/relatorio/grafico/ativos/igreja/<?php echo $igrejaId?>')
                         .done(function( data ) {
                             var chart = c3.generate({
                             bindto: '#ativosChart',

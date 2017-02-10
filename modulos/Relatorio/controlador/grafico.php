@@ -49,24 +49,25 @@ class grafico
         header('Content-type: application/json; charset=utf-8');
     }
 
-    public function redes()
+    public function redes($url)
     {
         $tiposRedes = new \Rede\Modelo\TipoRede();
         $tiposRedes = $tiposRedes->listarTodos();
 
         $aux = array();
         foreach ($tiposRedes as $rede) {
-            $aux[$rede->nome] = $rede->totalDiscipulosPorRede();
+            $aux[$rede->nome] = $rede->totalDiscipulosPorRede($url['4']);
         }
         echo json_encode($aux);
 
         header('Content-type: application/json; charset=utf-8');
     }
-    public function ativos()
+    public function ativos($url)
     {
-        $totalAtivos =  \Discipulo\Modelo\Discipulo::totalAtivos() ;
-        $totalInativos = \Discipulo\Modelo\Discipulo::totalInativos() ;
-        $totalArquivados =  \Discipulo\Modelo\Discipulo::totalArquivados() ;
+
+        $totalAtivos =  \Discipulo\Modelo\Discipulo::totalAtivos($url['4']) ;
+        $totalInativos = \Discipulo\Modelo\Discipulo::totalInativos($url['4']) ;
+        $totalArquivados =  \Discipulo\Modelo\Discipulo::totalArquivados($url['4']) ;
 
         echo json_encode(array('ativo'=> $totalAtivos['total'], 'inativos'=> $totalInativos['total'], 'arquivado' => $totalArquivados['total']));
 

@@ -2,6 +2,19 @@
     <fieldset class="col-md-6">
         <legend>Dados Pessoais</legend>
         <div class="form-group ">
+            <label class="control-label col-md-3" for="nome" ><i class="icon-user" ></i> Igreja:</label>
+            <div class="col-md-8">
+                <select name="igreja">
+                    <?php foreach($igrejas as $igreja): ?>
+                    <option value="<?php echo $igreja->id?>">
+                        <?php echo $igreja->nome?>
+                    </option>
+                    <?php endforeach ?>
+                </select>
+                <p class="help-block">(obrigatório)</p>
+            </div>
+        </div>
+        <div class="form-group ">
             <label class="control-label col-md-3" for="nome" ><i class="icon-user" ></i> Nome:</label>
             <div class="col-md-8">
                 <input id="nome" type="text" class="form-control" maxlength="45" name="nome" placeholder="Nome Completo" value="<?php echo $dados['nome']?>" required autofocus>

@@ -1,6 +1,7 @@
 <?php
 namespace discipulo\controlador;
 
+use Igreja\Modelo\Igreja as IgrejaModelo;
 use Discipulo\Modelo\Discipulo as DiscipuloModelo;
 use discipulo\Modelo\estadoCivil;
 use Celula\Modelo\Celula as CelulaModelo;
@@ -356,6 +357,9 @@ class discipulo
     public function novoCompleto($url)
     {
         if (empty ($url['post'])) {
+            $igreja = new IgrejaModelo();
+            $igrejas = $igreja->listarTodos();
+
             $estadosCivies = new \Discipulo\Modelo\EstadoCivil();
             $estadosCivies = $estadosCivies->listarTodos();
 
@@ -400,7 +404,7 @@ class discipulo
 
             $post = $url['post'];
 
-            $discipulo->igreja = (int)$url[4];
+            $discipulo->igreja = $post['igreja'];
             $discipulo->nome = $post['nome'];
             $discipulo->alcunha = $post['alcunha'] ;
             $discipulo->setDataNascimento($post['dataNascimento']) ;
@@ -535,6 +539,9 @@ class discipulo
 
         if ( empty ( $url['post'] ) ) {
 
+            $igreja = new IgrejaModelo();
+            $igrejas = $igreja->listarTodos();
+
             $discipulo =	new \Discipulo\Modelo\Discipulo();
             $lideres = $discipulo->listarLideres();
 
@@ -612,7 +619,8 @@ class discipulo
 
                 $post = $url['post'] ;
 
-                $discipulo->id = $post['discipuloId'] ;
+                $discipulo->igreja = $post['igreja'];
+                $discipulo->id = $post['discipuloId'];
                 $discipulo->nome = $post['nome'];
                 $discipulo->alcunha = isset($post['alcunha']) ?$post['alcunha'] : null;
                 $discipulo->setDataNascimento($post['dataNascimento']) ;

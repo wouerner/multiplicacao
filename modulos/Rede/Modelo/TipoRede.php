@@ -97,20 +97,21 @@ class TipoRede extends ModeloFramework
         return $resposta;
     }
 
-    public function totalDiscipulosPorRede()
+    public function totalDiscipulosPorRede($igreja)
     {
         $pdo = self::pegarConexao();
 
         $sql ='
                 SELECT count(*) FROM Discipulo as d
                 inner join Redes as r on d.id = r.discipuloId and d.ativo = 1
-                WHERE r.tipoRedeId = ?
+                WHERE r.tipoRedeId = ? and d.igreja= ?
                 ';
 
         $stm = $pdo->prepare($sql);
         $id = $this->id;
 
         $stm->bindParam(1, $id);
+        $stm->bindParam(2, $igreja);
 
         $stm->execute();
         $resposta = $stm->fetch();

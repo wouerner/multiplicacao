@@ -418,7 +418,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
             $pdo = self::pegarConexao();
             //cria sql
             $sql = "UPDATE Discipulo SET 	nome = :nome, telefone = :telefone, email = :email, endereco = :endereco, nivel = :nivel,
-            lider = :lider, celula = :celula, dataNascimento = :dataNascimento , estadoCivilId = :estadoCivilId ,sexo = :sexo";
+            lider = :lider, celula = :celula, dataNascimento = :dataNascimento , estadoCivilId = :estadoCivilId ,sexo = :sexo,igreja= :igreja";
 	    $sql .= isset($this->alcunha) ?	 ',alcunha = :alcunha ' : '';
             $sql.=" WHERE id = :id ";
 
@@ -435,6 +435,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
             $stm->bindParam(':estadoCivilId', $this->estadoCivilId, \PDO::PARAM_INT);
             $stm->bindParam(':sexo', $this->sexo, \PDO::PARAM_STR);
             $stm->bindParam(':id', $this->id, \PDO::PARAM_INT);
+            $stm->bindParam(':igreja', $this->igreja, \PDO::PARAM_INT);
 
             isset($this->alcunha) ? $stm->bindParam(':alcunha', $this->alcunha, \PDO::PARAM_STR): null;
 
@@ -645,42 +646,45 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
         return $resposta;
     }
 
-    public static function totalAtivos()
+    public static function totalAtivos($igrejaId)
     {
         $pdo = self::pegarConexao();
 
-        $sql = 'SELECT count(*) AS total FROM Discipulo WHERE ativo = 1 and arquivo=0 ';
+        $sql = 'SELECT count(*) AS total FROM Discipulo WHERE ativo = 1 and arquivo=0 and igreja = ? ';
 
         $stm = $pdo->prepare($sql);
 
+        $stm->BindParam(1, $igrejaId);
         $stm->execute();
 
         return $stm->fetch();
 
     }
 
-    public static function totalInativos()
+    public static function totalInativos($igrejaId)
     {
         $pdo = self::pegarConexao();
 
-        $sql = 'SELECT count(*) AS total FROM Discipulo WHERE ativo = 0 AND arquivo =0';
+        $sql = 'SELECT count(*) AS total FROM Discipulo WHERE ativo = 0 AND arquivo =0 and igreja=?';
 
         $stm = $pdo->prepare($sql);
 
+        $stm->BindParam(1, $igrejaId);
         $stm->execute();
 
         return $stm->fetch();
 
     }
 
-    public static function totalArquivados()
+    public static function totalArquivados($igrejaId)
     {
         $pdo = self::pegarConexao();
 
-        $sql = 'SELECT count(*) AS total FROM Discipulo WHERE arquivo = 1 ';
+        $sql = 'SELECT count(*) AS total FROM Discipulo WHERE arquivo = 1 and igreja=?';
 
         $stm = $pdo->prepare($sql);
 
+        $stm->BindParam(1, $igrejaId);
         $stm->execute();
 
         return $stm->fetch();

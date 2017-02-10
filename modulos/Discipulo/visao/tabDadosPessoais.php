@@ -2,6 +2,19 @@
     <input id="idDiscipulo" type="hidden"   value="<?php echo $discipulo->id ; ?>">
     <fieldset  class="col-sm-6">
         <legend>Dados Pessoais</legend>
+        <div class="form-group ">
+            <label class="control-label col-md-3" for="nome" ><i class="icon-user" ></i> Igreja:</label>
+            <div class="col-md-8">
+                <select name="igreja">
+                    <?php foreach($igrejas as $igreja): ?>
+                    <option <?php echo $discipulo->igreja == $igreja->id ? 'selected': null ?> value="<?php echo $igreja->id?>">
+                        <?php echo $igreja->nome?>
+                    </option>
+                    <?php endforeach ?>
+                </select>
+                <p class="help-block">(obrigatório)</p>
+            </div>
+        </div>
         <div class="form-group">
             <label class="control-label col-md-3" for="nome" >Nome:</label>
             <div class="col-sm-8">
