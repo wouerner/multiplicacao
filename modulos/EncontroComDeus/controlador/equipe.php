@@ -15,7 +15,7 @@ class equipe
 
         //var_dump($equipes);
 
-        require_once 'modulos/encontroComDeus/visao/equipe/listar.php';
+        require_once 'modulos/EncontroComDeus/visao/equipe/listar.php';
 
     }
 
@@ -25,7 +25,7 @@ class equipe
         $tiposEquipe = $tipoEquipe->listarUm();
         $encontroId = $url[6] ;
 
-        require_once 'modulos/encontroComDeus/visao/equipe/listar.php';
+        require_once 'modulos/EncontroComDeus/visao/equipe/listar.php';
 
     }
 
@@ -40,7 +40,7 @@ class equipe
          $eq[$e['eNome']][] = $e ;
         }
 
-        require_once 'modulos/encontroComDeus/visao/equipe/listarTodos.php';
+        require_once 'modulos/EncontroComDeus/visao/equipe/listarTodos.php';
     }
 
     public function membros($url)
@@ -53,7 +53,7 @@ class equipe
         $membros = $equipe->membros();
         $total = count($membros);
 
-        require_once 'modulos/encontroComDeus/visao/equipe/membros.php';
+        require_once 'modulos/EncontroComDeus/visao/equipe/membros.php';
     }
 
     public function novoEquipe($url)
@@ -64,7 +64,7 @@ class equipe
             $tipoEquipe = new \encontroComDeus\modelo\tipoEquipe();
             $tiposEquipe = $tipoEquipe->listarTodos() ;
 
-            require_once 'modulos/encontroComDeus/visao/equipe/novo.php';
+            require_once 'modulos/EncontroComDeus/visao/equipe/novo.php';
         } else {
 
         $post = $url['post'] ;
@@ -95,7 +95,7 @@ class equipe
 
             //var_dump($equipes);
 
-            require_once 'modulos/encontroComDeus/visao/equipe/novoMembro.php';
+            require_once 'modulos/EncontroComDeus/visao/equipe/novoMembro.php';
         } else {
 
             $post = $url['post'] ;
@@ -145,7 +145,7 @@ class equipe
             $tipoEquipe = new \encontroComDeus\modelo\tipoEquipe();
             $tipoEquipe =$tipoEquipe->listarTodos() ;
 
-            require_once 'modulos/encontroComDeus/visao/equipe/novo.php';
+            require_once 'modulos/EncontroComDeus/visao/equipe/novo.php';
         } else {
 
         $post = $url['post'] ;

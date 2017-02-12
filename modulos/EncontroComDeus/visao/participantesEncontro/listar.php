@@ -21,8 +21,8 @@ $(function () {
             <article>
                 <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
                 <h3>Quantidade de Encontrista: <?php echo $total?></h3>
-                <?php require 'modulos/encontroComDeus/visao/participantesEncontro/menuParticipante.php' ; ?>
-                <?php require 'modulos/encontroComDeus/visao/participantesEncontro/tab.php' ; ?>
+                <?php require 'modulos/EncontroComDeus/visao/participantesEncontro/menuParticipante.php' ; ?>
+                <?php require 'modulos/EncontroComDeus/visao/participantesEncontro/tab.php' ; ?>
 
                 <div class = "row-fluid" >
             <div class="tab-content">

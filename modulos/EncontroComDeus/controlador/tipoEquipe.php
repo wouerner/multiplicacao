@@ -6,7 +6,7 @@ namespace encontroComDeus\controlador;
         {
             $tipoEquipes =	new \encontroComDeus\modelo\tipoEquipe();
             $tipoEquipes = $tipoEquipes->listarTodos();
-            require_once 'modulos/encontroComDeus/visao/tipoEquipe/listar.php';
+            require_once 'modulos/EncontroComDeus/visao/tipoEquipe/listar.php';
 
         }
 
@@ -14,7 +14,7 @@ namespace encontroComDeus\controlador;
         {
           if ( empty ( $url['post'] ) ) {
 
-            require_once 'modulos/encontroComDeus/visao/tipoEquipe/novo.php';
+            require_once 'modulos/EncontroComDeus/visao/tipoEquipe/novo.php';
 
             } else {
                 $tipoEquipe =	new \encontroComDeus\modelo\tipoEquipe();

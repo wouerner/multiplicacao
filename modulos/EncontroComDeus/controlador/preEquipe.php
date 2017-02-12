@@ -14,7 +14,7 @@ class preEquipe
         $discipulos = $preEquipe->listar();
         $total = count($discipulos);
 
-        require_once 'modulos/encontroComDeus/visao/preEquipe/listar.php';
+        require_once 'modulos/EncontroComDeus/visao/preEquipe/listar.php';
 
     }
 
@@ -24,7 +24,7 @@ class preEquipe
         $tiposEquipe = $tipoEquipe->listarUm();
         $encontroId = $url[6] ;
 
-        require_once 'modulos/encontroComDeus/visao/equipe/listar.php';
+        require_once 'modulos/EncontroComDeus/visao/equipe/listar.php';
 
     }
 
@@ -40,7 +40,7 @@ class preEquipe
         }
 //var_dump($eq);
 
-        require_once 'modulos/encontroComDeus/visao/equipe/listarTodos.php';
+        require_once 'modulos/EncontroComDeus/visao/equipe/listarTodos.php';
 
     }
 
@@ -51,7 +51,7 @@ class preEquipe
         $membros = $equipe->membros();
         //var_dump($membros);
 
-        require_once 'modulos/encontroComDeus/visao/equipe/membros.php';
+        require_once 'modulos/EncontroComDeus/visao/equipe/membros.php';
 
     }
 
@@ -63,7 +63,7 @@ class preEquipe
             $tipoEquipe = new \encontroComDeus\modelo\tipoEquipe();
             $tiposEquipe = $tipoEquipe->listarTodos() ;
 
-            require_once 'modulos/encontroComDeus/visao/equipe/novo.php';
+            require_once 'modulos/EncontroComDeus/visao/equipe/novo.php';
         } else {
 
         $post = $url['post'] ;
@@ -94,7 +94,7 @@ class preEquipe
 
             $encontro = $encontro->listarTodosAtivos();
 
-            require_once 'modulos/encontroComDeus/visao/preEquipe/novoMembro.php';
+            require_once 'modulos/EncontroComDeus/visao/preEquipe/novoMembro.php';
         } else {
 
             $post = $url['post'] ;
@@ -122,7 +122,7 @@ class preEquipe
             $tipoEquipe = new \encontroComDeus\modelo\tipoEquipe();
             $tipoEquipe =$tipoEquipe->listarTodos() ;
 
-            require_once 'modulos/encontroComDeus/visao/equipe/novo.php';
+            require_once 'modulos/EncontroComDeus/visao/equipe/novo.php';
         } else {
 
         $post = $url['post'] ;

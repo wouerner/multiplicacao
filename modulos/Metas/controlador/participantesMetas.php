@@ -15,7 +15,7 @@ class participantesMetas
 
         $equipes = $encontro->listarEquipeEncontro();
 
-        require_once 'modulos/encontroComDeus/visao/equipe/listar.php';
+        require_once 'modulos/EncontroComDeus/visao/equipe/listar.php';
 
     }
 
@@ -36,7 +36,7 @@ class participantesMetas
         $membros = $equipe->membros();
         //var_dump($membros);
 
-        require_once 'modulos/encontroComDeus/visao/equipe/membros.php';
+        require_once 'modulos/EncontroComDeus/visao/equipe/membros.php';
 
     }
 
@@ -48,7 +48,7 @@ class participantesMetas
             $tipoEquipe = new \encontroComDeus\modelo\tipoEquipe();
             $tiposEquipe = $tipoEquipe->listarTodos() ;
 
-            require_once 'modulos/encontroComDeus/visao/equipe/novo.php';
+            require_once 'modulos/EncontroComDeus/visao/equipe/novo.php';
         } else {
 
         $post = $url['post'] ;
@@ -79,7 +79,7 @@ class participantesMetas
 
             //var_dump($equipes);
 
-            require_once 'modulos/encontroComDeus/visao/equipe/novoMembro.php';
+            require_once 'modulos/EncontroComDeus/visao/equipe/novoMembro.php';
         } else {
 
         $post = $url['post'] ;

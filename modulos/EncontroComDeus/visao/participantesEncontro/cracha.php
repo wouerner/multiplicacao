@@ -37,7 +37,7 @@
                         /*width:500px;*/
                         height:274px;
                         border-color: 1px solid black;
-                        background : url('/modulos/encontroComDeus/visao/participantesEncontro/cracha.png) ;
+                        background : url('/modulos/EncontroComDeus/visao/participantesEncontro/cracha.png) ;
                     }
 
                     .nome{

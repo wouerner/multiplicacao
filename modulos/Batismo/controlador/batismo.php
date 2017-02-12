@@ -58,7 +58,7 @@ class batismo
 
                 $pdf->SetFont('Times','',40);
                 $pdf->Image('modulos/batismo/visao/batismo.jpg',0,0+$yi,50,147);
-                $pdf->Image('modulos/encontroComDeus/visao/participantesEncontro/mga.jpg',160,120+$yi,40,$t);
+                $pdf->Image('modulos/EncontroComDeus/visao/participantesEncontro/mga.jpg',160,120+$yi,40,$t);
                 $pdf->Image('modulos/batismo/visao/assinatura.jpg',80,97+$yi,100,18);
                 $pdf->SetY($y);
                 $pdf->SetX($x+50);
@@ -164,7 +164,7 @@ class batismo
 
         } else {
         $post = $url['post'] ;
-        $participantes = new \encontroComDeus\modelo\participantesEncontro() ;
+        $participantes = new \EncontroComDeus\Modelo\ParticipantesEncontro() ;
 
         $participantes->encontroComDeusId = $post['encontroId'] ;
         $participantes->discipuloId = $post['id'] ;
@@ -173,13 +173,13 @@ class batismo
         header ('location:/discipulo/discipulo' );
         exit();
         }
-        require_once 'modulos/encontroComDeus/visao/participantesEncontro/novoParticipante.php';
+        require_once 'modulos/EncontroComDeus/visao/participantesEncontro/novoParticipante.php';
 
     }
 
     public function preEncontroAtivar($url)
     {
-        $participante = new \encontroComDeus\modelo\participantesEncontro();
+        $participante = new \EncontroComDeus\Modelo\ParticipantesEncontro();
         $participante->id = $url[4] ;
         $participante->preEncontroAtivar();
         $redirecionar = $_SERVER['HTTP_REFERER'];
@@ -189,7 +189,7 @@ class batismo
 
     public function preEncontroDesativar($url)
     {
-        $participante = new \encontroComDeus\modelo\participantesEncontro();
+        $participante = new \EncontroComDeus\Modelo\ParticipantesEncontro();
         $participante->id = $url[4] ;
         $participante->preEncontroDesativar();
         $redirecionar = $_SERVER['HTTP_REFERER'];
@@ -199,7 +199,7 @@ class batismo
 
     public function encontroAtivar($url)
     {
-        $participante = new \encontroComDeus\modelo\participantesEncontro();
+        $participante = new \EncontroComDeus\Modelo\ParticipantesEncontro();
         $participante->id = $url[4] ;
         $participante->encontroAtivar();
         $redirecionar = $_SERVER['HTTP_REFERER'];
@@ -209,7 +209,7 @@ class batismo
 
     public function encontroDesativar($url)
     {
-        $participante = new \encontroComDeus\modelo\participantesEncontro();
+        $participante = new \EncontroComDeus\Modelo\ParticipantesEncontro();
         $participante->id = $url[4] ;
         $participante->encontroDesativar();
         $redirecionar = $_SERVER['HTTP_REFERER'];
@@ -218,7 +218,7 @@ class batismo
 
     public function posEncontroAtivar($url)
     {
-        $participante = new \encontroComDeus\modelo\participantesEncontro();
+        $participante = new \EncontroComDeus\Modelo\ParticipantesEncontro();
         $participante->id = $url[4] ;
         $participante->posEncontroAtivar();
         $redirecionar = $_SERVER['HTTP_REFERER'];
@@ -227,7 +227,7 @@ class batismo
 
     public function posEncontroDesativar($url)
     {
-        $participante = new \encontroComDeus\modelo\participantesEncontro();
+        $participante = new \EncontroComDeus\Modelo\ParticipantesEncontro();
         $participante->id = $url[4] ;
         $participante->posEncontroDesativar();
         $redirecionar = $_SERVER['HTTP_REFERER'];
@@ -236,7 +236,7 @@ class batismo
 
     public function desistiuAtivar($url)
     {
-        $participante = new \encontroComDeus\modelo\participantesEncontro();
+        $participante = new \EncontroComDeus\Modelo\ParticipantesEncontro();
         $participante->id = $url[4] ;
         $participante->desistiuAtivar();
         $redirecionar = $_SERVER['HTTP_REFERER'];
@@ -245,7 +245,7 @@ class batismo
 
     public function desistiuDesativar($url)
     {
-        $participante = new \encontroComDeus\modelo\participantesEncontro();
+        $participante = new \EncontroComDeus\Modelo\ParticipantesEncontro();
         $participante->id = $url[4] ;
         $participante->desistiuDesativar();
         $redirecionar = $_SERVER['HTTP_REFERER'];
@@ -254,38 +254,38 @@ class batismo
 
     public function preEncontro($url)
     {
-        $participante = new \encontroComDeus\modelo\participantesEncontro();
+        $participante = new \EncontroComDeus\Modelo\ParticipantesEncontro();
         $participante->encontroComDeusId = $url[4] ;
         $discipulos = $participante->preEncontroAtivos();
         $discipulosInativos = $participante->preEncontroInativos();
         $total = count ($discipulos) ;
         $totalInativos = count ($discipulosInativos) ;
         $preEncontro= 'active';
-        require_once 'modulos/encontroComDeus/visao/participantesEncontro/listar.php';
+        require_once 'modulos/EncontroComDeus/visao/participantesEncontro/listar.php';
         //header ('location:/encontroComDeus/participantesEncontro/x/id/'.$url[4] );
     }
     public function encontro($url)
     {
-        $participante = new \encontroComDeus\modelo\participantesEncontro();
+        $participante = new \EncontroComDeus\Modelo\ParticipantesEncontro();
         $participante->encontroComDeusId = $url[4] ;
         $discipulos = $participante->encontroAtivos();
         $discipulosInativos = $participante->encontroInativos();
         $total = count ($discipulos) ;
         $totalInativos = count ($discipulosInativos) ;
         $encontro= 'active';
-        require_once 'modulos/encontroComDeus/visao/participantesEncontro/listar.php';
+        require_once 'modulos/EncontroComDeus/visao/participantesEncontro/listar.php';
         //header ('location:/encontroComDeus/participantesEncontro/x/id/'.$url[4] );
     }
     public function posEncontro($url)
     {
-        $participante = new \encontroComDeus\modelo\participantesEncontro();
+        $participante = new \EncontroComDeus\Modelo\ParticipantesEncontro();
         $participante->encontroComDeusId = $url[4] ;
         $discipulos = $participante->posEncontroAtivos();
         $discipulosInativos = $participante->posEncontroInativos();
         $total = count ($discipulos) ;
         $totalInativos = count ($discipulosInativos) ;
         $posEncontro= 'active';
-        require_once 'modulos/encontroComDeus/visao/participantesEncontro/listar.php';
+        require_once 'modulos/EncontroComDeus/visao/participantesEncontro/listar.php';
         //header ('location:/encontroComDeus/participantesEncontro/x/id/'.$url[4] );
     }
 
@@ -537,7 +537,7 @@ class batismo
 
     public function cracha($url)
     {
-            $encontro = new \encontroComDeus\modelo\participantesEncontro() ;
+            $encontro = new \EncontroComDeus\Modelo\ParticipantesEncontro() ;
             $encontro->encontroComDeusId =  $url[4];
             $discipulos = $encontro->cracha() ;
         //	var_dump($discipulos);
@@ -562,7 +562,7 @@ class batismo
                                     $novaPagina = false ;
                     }
             $pdf->SetFont('Arial','B',25);
-            $pdf->Image('modulos/encontroComDeus/visao/participantesEncontro/cracha.png',$x,$y,114,$t);
+            $pdf->Image('modulos/EncontroComDeus/visao/participantesEncontro/cracha.png',$x,$y,114,$t);
             $pdf->SetY($y+20);
             $pdf->SetX($x);
             $pdf->Cell(70,10,$d->getNomeAbreviado());
@@ -589,7 +589,7 @@ class batismo
 
     public function ficha($url)
     {
-            $encontro = new \encontroComDeus\modelo\participantesEncontro() ;
+            $encontro = new \EncontroComDeus\Modelo\ParticipantesEncontro() ;
             $encontro->encontroComDeusId =  $url[4];
             $discipulos = $encontro->cracha() ;
         //	var_dump($discipulos);
@@ -615,7 +615,7 @@ class batismo
                     }
 
             $pdf->SetFont('Arial','B',20);
-            $pdf->Image('modulos/encontroComDeus/visao/participantesEncontro/mga.jpg',$x,$y,30,$t);
+            $pdf->Image('modulos/EncontroComDeus/visao/participantesEncontro/mga.jpg',$x,$y,30,$t);
             $pdf->SetY($y+10);
             $pdf->SetX($x+30);
             $pdf->Cell(70,10,' Encontro com Deus dias 15, 16 e 17/03/2013');
