@@ -124,7 +124,7 @@ class equipe extends modeloFramework
               $pdo = null ;
                 $resposta = array();
 
-                while ( $obj = $stm->fetchObject ('\encontroComDeus\modelo\equipe')  ) {
+                while ( $obj = $stm->fetchObject ('\EncontroComDeus\Modelo\Equipe')  ) {
                     $resposta[$obj->id] = $obj ;
                 }
 
@@ -150,7 +150,7 @@ class equipe extends modeloFramework
               $pdo = null ;
                 $resposta = array();
 
-                while ( $obj = $stm->fetchObject ('\encontroComDeus\modelo\equipe')  ) {
+                while ( $obj = $stm->fetchObject ('\EncontroComDeus\Modelo\Equipe')  ) {
                     $resposta[$obj->id] = $obj ;
                 }
 

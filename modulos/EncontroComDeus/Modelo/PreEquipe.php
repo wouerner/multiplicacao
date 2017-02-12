@@ -1,9 +1,9 @@
 <?php
-namespace encontroComDeus\modelo ;
+namespace EncontroComDeus\Modelo ;
 
-use \framework\modelo\modeloFramework ;
+use \Framework\Modelo\ModeloFramework ;
 
-class preEquipe extends modeloFramework
+class PreEquipe extends ModeloFramework
 {
   private $id ;
   private $encontroComDeusId ;
@@ -177,7 +177,7 @@ WHERE e.encontroComDeusId = ?
               $pdo = null ;
                 $resposta = array();
 
-                while ( $obj = $stm->fetchObject ('\encontroComDeus\modelo\equipe')  ) {
+                while ( $obj = $stm->fetchObject ('\EncontroComDeus\Modelo\Equipe')  ) {
                     $resposta[$obj->id] = $obj ;
                 }
 

@@ -1,9 +1,9 @@
 <?php
 namespace encontroComDeus\modelo ;
 
-use \framework\modelo\modeloFramework ;
+use \Framework\Modelo\ModeloFramework ;
 
-class equipe extends modeloFramework
+class equipe extends ModeloFramework
 {
   private $id ;
   private $equipeId ;
@@ -142,7 +142,7 @@ class equipe extends modeloFramework
               $pdo = null ;
                 $resposta = array();
 
-                while ( $obj = $stm->fetchObject ('\encontroComDeus\modelo\equipe')  ) {
+                while ( $obj = $stm->fetchObject ('\EncontroComDeus\Modelo\Equipe')  ) {
                     $resposta[$obj->id] = $obj ;
                 }
 
@@ -167,7 +167,7 @@ class equipe extends modeloFramework
               $pdo = null ;
                 $resposta = array();
 
-                while ( $obj = $stm->fetchObject ('\encontroComDeus\modelo\equipe')  ) {
+                while ( $obj = $stm->fetchObject ('\EncontroComDeus\Modelo\Equipe')  ) {
                     $resposta[$obj->id] = $obj ;
                 }
 
@@ -185,7 +185,7 @@ class equipe extends modeloFramework
                         inner join TipoEquipe AS te on te.id = e.tipoEquipeId
                         inner join EncontroComDeus as ecd ON ecd.id = e.encontroComDeusId
                         WHERE e.id = ?
-                        ORDER BY te.nome 
+                        ORDER BY te.nome
                         ' ;
 
         $stm = $pdo->prepare($sql);
@@ -193,9 +193,9 @@ class equipe extends modeloFramework
         $resposta = $stm->execute();
 
         $pdo = null ;
-        $resposta = $stm->fetchObject ('\encontroComDeus\modelo\equipe');
+        $resposta = $stm->fetchObject ('\EncontroComDeus\Modelo\Equipe');
 
-        //while ( $obj = $stm->fetchObject ('\encontroComDeus\modelo\equipe')  ) {
+        //while ( $obj = $stm->fetchObject ('\EncontroComDeus\Modelo\Equipe')  ) {
             //$resposta[$obj->id] = $obj ;
         //}
 
@@ -246,7 +246,7 @@ WHERE e.encontroComDeusId = ?
               $pdo = null ;
                 $resposta = array();
 
-                while ( $obj = $stm->fetchObject ('\encontroComDeus\modelo\equipe')  ) {
+                while ( $obj = $stm->fetchObject ('\EncontroComDeus\Modelo\Equipe')  ) {
                     $resposta[$obj->id] = $obj ;
                 }
 

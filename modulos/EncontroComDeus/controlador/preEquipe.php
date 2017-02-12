@@ -8,7 +8,7 @@ class preEquipe
     public function index($url)
     {
         $encontroId = $url['4'] ;
-        $preEquipe = new \encontroComDeus\modelo\preEquipe() ;
+        $preEquipe = new \EncontroComDeus\Modelo\PreEquipe() ;
         $preEquipe->encontroComDeusId = $encontroId ;
 
         $discipulos = $preEquipe->listar();
@@ -31,7 +31,7 @@ class preEquipe
     public function listarTodasEquipes($url)
     {
         $encontroId = $url['4'] ;
-        $equipe = new \encontroComDeus\modelo\equipe() ;
+        $equipe = new \EncontroComDeus\Modelo\Equipe() ;
         $equipe->encontroComDeusId = $encontroId ;
         $equipes = $equipe->listarTodasEquipes() ;
 
@@ -46,7 +46,7 @@ class preEquipe
 
     public function membros($url)
     {
-        $equipe = new \encontroComDeus\modelo\equipe() ;
+        $equipe = new \EncontroComDeus\Modelo\Equipe() ;
         $equipe->id = $url[4] ;
         $membros = $equipe->membros();
         //var_dump($membros);
@@ -68,7 +68,7 @@ class preEquipe
 
         $post = $url['post'] ;
 
-        $equipe = new \encontroComDeus\modelo\equipe() ;
+        $equipe = new \EncontroComDeus\Modelo\Equipe() ;
 
         $equipe->tipoEquipeId = $post['tipoEquipeId'] ;
         $equipe->encontroComDeusId = $post['encontroId'] ;
@@ -89,7 +89,7 @@ class preEquipe
             $discipulo = $discipulo->listarUm();
 
             $encontro = new \encontroComDeus\modelo\encontroComDeus();
-            $equipe = new \encontroComDeus\modelo\equipe();
+            $equipe = new \EncontroComDeus\Modelo\Equipe();
             $equipes = $equipe->listarEquipes() ;
 
             $encontro = $encontro->listarTodosAtivos();
@@ -99,7 +99,7 @@ class preEquipe
 
             $post = $url['post'] ;
 
-            $equipe = new \encontroComDeus\modelo\preEquipe() ;
+            $equipe = new \EncontroComDeus\Modelo\PreEquipe() ;
             $equipe->encontroComDeusId = $post['encontroId'] ;
             $equipe->discipuloId = $post['discipuloId'] ;
             $equipe->salvar() ;
@@ -127,7 +127,7 @@ class preEquipe
 
         $post = $url['post'] ;
 
-        $equipe = new \encontroComDeus\modelo\equipe() ;
+        $equipe = new \EncontroComDeus\Modelo\Equipe() ;
 
         $discipulos= $post['equipe'] ;
         $equipe->tipoEquipeId = $post['tipoEquipeId'] ;
@@ -297,7 +297,7 @@ class preEquipe
 
         public function excluirMembro($url)
         {
-                $equipe =	new \encontroComDeus\modelo\preEquipe();
+                $equipe =	new \EncontroComDeus\Modelo\PreEquipe();
                 $equipe->discipuloId = $url[4];
                 $equipe->excluir();
             $redirecionar = $_SERVER['HTTP_REFERER'];
@@ -310,7 +310,7 @@ class preEquipe
         public function excluirEquipe($url)
         {
                 $encontroId = $url[6] ;
-                $equipe =	new \encontroComDeus\modelo\equipe();
+                $equipe =	new \EncontroComDeus\Modelo\Equipe();
                 $equipe->equipeId = $url[4];
                 $equipe->excluirEquipe();
 

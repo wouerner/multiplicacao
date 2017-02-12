@@ -8,7 +8,7 @@ class equipe
     public function index($url)
     {
         $encontroId = $url['4'] ;
-        $encontro = new \encontroComDeus\modelo\equipe() ;
+        $encontro = new \EncontroComDeus\Modelo\Equipe() ;
         $encontro->encontroComDeusId = $encontroId ;
 
         $equipes = $encontro->listarEquipeEncontro();
@@ -32,7 +32,7 @@ class equipe
     public function listarTodasEquipes($url)
     {
         $encontroId = $url['4'] ;
-        $equipe = new \encontroComDeus\modelo\equipe() ;
+        $equipe = new \EncontroComDeus\Modelo\Equipe() ;
         $equipe->encontroComDeusId = $encontroId ;
         $equipes = $equipe->listarTodasEquipes() ;
 
@@ -45,7 +45,7 @@ class equipe
 
     public function membros($url)
     {
-        $equipe = new \encontroComDeus\modelo\equipe() ;
+        $equipe = new \EncontroComDeus\Modelo\Equipe() ;
         $equipe->id = $url[4] ;
         $equip = $equipe->listarUm();
 
@@ -69,7 +69,7 @@ class equipe
 
         $post = $url['post'] ;
 
-        $equipe = new \encontroComDeus\modelo\equipe() ;
+        $equipe = new \EncontroComDeus\Modelo\Equipe() ;
 
         $equipe->tipoEquipeId = $post['tipoEquipeId'] ;
         $equipe->encontroComDeusId = $post['encontroId'] ;
@@ -90,7 +90,7 @@ class equipe
             $discipulo = $discipulo->listarUm();
 
             $encontro = new \encontroComDeus\modelo\encontroComDeus();
-            $equipe = new \encontroComDeus\modelo\equipe();
+            $equipe = new \EncontroComDeus\Modelo\Equipe();
             $equipes = $equipe->listarEquipesAtivas() ;
 
             //var_dump($equipes);
@@ -99,7 +99,7 @@ class equipe
         } else {
 
             $post = $url['post'] ;
-            $equipe = new \encontroComDeus\modelo\equipe() ;
+            $equipe = new \EncontroComDeus\Modelo\Equipe() ;
             $equipe->id = $post['equipeId'] ;
 
             $equipe->equipeId = $post['equipeId'] ;
@@ -109,7 +109,7 @@ class equipe
 
                 $equipe->salvarMembro($post['discipuloId']) ;
 
-                $preEquipe = new \encontroComDeus\modelo\preEquipe() ;
+                $preEquipe = new \EncontroComDeus\Modelo\PreEquipe() ;
                 $preEquipe->discipuloId = $post['discipuloId'] ;
                 $preEquipe->excluir() ;
 
@@ -117,7 +117,7 @@ class equipe
                                                                   'class' => 'alert alert-success');
             }
             else{
-                $preEquipe = new \encontroComDeus\modelo\preEquipe() ;
+                $preEquipe = new \EncontroComDeus\Modelo\PreEquipe() ;
                 $preEquipe->discipuloId = $post['discipuloId'] ;
                 $preEquipe->excluir() ;
 
@@ -150,7 +150,7 @@ class equipe
 
         $post = $url['post'] ;
 
-        $equipe = new \encontroComDeus\modelo\equipe() ;
+        $equipe = new \EncontroComDeus\Modelo\Equipe() ;
 
         $discipulos= $post['equipe'] ;
         $equipe->tipoEquipeId = $post['tipoEquipeId'] ;
@@ -266,31 +266,6 @@ class equipe
 
         }
 
-        public function atualizarMinisterio($url)
-        {
-            if ( empty ( $url['post'] ) ) {
-
-                $ministerio =	new \Ministerio\Modelo\Ministerio();
-                $ministerio->id = $url[3] ;
-                $ministerio = $ministerio->listarUm();
-
-                require_once 'modulos/ministerio/visao/atualizarMinisterio.php';
-
-            } else {
-                $ministerio =	new \Ministerio\Modelo\Ministerio();
-
-                $post = $url['post'] ;
-
-                $ministerio->id = $post['id'];
-                $ministerio->nome = $post['nome'];
-
-                $ministerio->atualizarMinisterio();
-
-                header ('location:/ministerio/atualizarMinisterio/id/'.$ministerio->id);
-                exit();
-            }
-
-        }
 
         public function atualizarFuncao($url)
         {
@@ -320,7 +295,7 @@ class equipe
 
         public function excluirMembro($url)
         {
-                $equipe =	new \encontroComDeus\modelo\equipe();
+                $equipe =	new \EncontroComDeus\Modelo\Equipe();
                 $equipe->equipeId = $url[4];
                 $equipe->discipuloId = $url[6];
                 $equipe->excluir();
@@ -332,7 +307,7 @@ class equipe
         public function excluirEquipe($url)
         {
                 $encontroId = $url[6] ;
-                $equipe =	new \encontroComDeus\modelo\equipe();
+                $equipe =	new \EncontroComDeus\Modelo\Equipe();
                 $equipe->equipeId = $url[4];
                 $equipe->excluirEquipe();
 
@@ -401,36 +376,6 @@ class equipe
             $discipulo->nome = $nome;
             $discipulos = $discipulo->chamar($nome);
             require_once 'Discipulo/visao/chamar.php';
-
-        }
-
-        public function evento($url)
-        {
-            if ( empty ( $url['post'] ) ) {
-
-                  $eventos = new \Evento\Modelo\Evento();
-
-                  $id = $url[3];
-                  $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
-                $eventos = $eventos->listarTodos();
-
-            require_once 'modulos/Discipulo/visao/evento.php';
-            } else {
-                      $post = $url['post'];
-                     $discipuloEvento = new \Evento\Modelo\Evento();
-                      $eventoId = $post['eventoId'];
-                        $discipuloId = $post['discipuloId'];
-
-                     $discipuloEvento->salvarDiscipuloEvento($discipuloId, $eventoId );
-
-                      echo "url" ;
-                     var_dump($url);
-                     $id = $post['discipuloId'];
-
-                     header ('location:/discipulo/evento/id/'.$id);
-                     exit();
-
-            }
 
         }
 

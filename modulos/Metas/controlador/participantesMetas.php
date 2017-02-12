@@ -10,7 +10,7 @@ class participantesMetas
     public function index($url)
     {
         $encontroId = $url['4'] ;
-        $encontro = new \encontroComDeus\modelo\equipe() ;
+        $encontro = new \EncontroComDeus\Modelo\Equipe() ;
         $encontro->encontroComDeusId = $encontroId ;
 
         $equipes = $encontro->listarEquipeEncontro();
@@ -31,7 +31,7 @@ class participantesMetas
 
     public function membros($url)
     {
-        $equipe = new \encontroComDeus\modelo\equipe() ;
+        $equipe = new \EncontroComDeus\Modelo\Equipe() ;
         $equipe->id = $url[4] ;
         $membros = $equipe->membros();
         //var_dump($membros);
@@ -53,7 +53,7 @@ class participantesMetas
 
         $post = $url['post'] ;
 
-        $equipe = new \encontroComDeus\modelo\equipe() ;
+        $equipe = new \EncontroComDeus\Modelo\Equipe() ;
 
         $equipe->tipoEquipeId = $post['tipoEquipeId'] ;
         $equipe->encontroComDeusId = $post['encontroId'] ;
@@ -74,7 +74,7 @@ class participantesMetas
             $discipulo = $discipulo->listarUm();
 
             $encontro = new \encontroComDeus\modelo\encontroComDeus();
-            $equipe = new \encontroComDeus\modelo\equipe();
+            $equipe = new \EncontroComDeus\Modelo\Equipe();
             $equipes = $equipe->listarEquipes() ;
 
             //var_dump($equipes);
@@ -84,7 +84,7 @@ class participantesMetas
 
         $post = $url['post'] ;
 
-        $equipe = new \encontroComDeus\modelo\equipe() ;
+        $equipe = new \EncontroComDeus\Modelo\Equipe() ;
         $equipe->id = $post['equipeId'] ;
         $equipe->salvarMembro($post['discipuloId']) ;
 
@@ -279,7 +279,7 @@ class participantesMetas
 
         public function excluirMembro($url)
         {
-                $equipe =	new \encontroComDeus\modelo\equipe();
+                $equipe =	new \EncontroComDeus\Modelo\Equipe();
                 $equipe->equipeId = $url[4];
                 $equipe->discipuloId = $url[6];
                 $equipe->excluir();
@@ -291,7 +291,7 @@ class participantesMetas
         public function excluirEquipe($url)
         {
                 $encontroId = $url[6] ;
-                $equipe =	new \encontroComDeus\modelo\equipe();
+                $equipe =	new \EncontroComDeus\Modelo\Equipe();
                 $equipe->equipeId = $url[4];
                 $equipe->excluirEquipe();
 
