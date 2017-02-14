@@ -38,7 +38,7 @@
                                     <td><?php echo !isset($c) ? $c=1 : ++$c ; ?></td>
                                     <td><?php echo $d->nome ; ?></td>
                                     <td><?php echo !empty($d->getLider()) ? $d->getLider()->getAlcunha() : null ; ?></td>
-                                    <td><?php echo $d->getRede() ? utf8_encode($d->getRede()[0]['tipoRede']) : null; ?></td>
+                                    <td><?php echo !empty($d->getRede()) ? utf8_encode($d->getRede()[0]['tipoRede']) : null; ?></td>
                                 </tr>
                                 <?php endforeach ; ?>
                         </table>
