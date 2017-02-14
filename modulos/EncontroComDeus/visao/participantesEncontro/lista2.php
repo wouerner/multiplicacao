@@ -31,14 +31,11 @@
                                     <th>#</th>
                                     <th>Nome</th>
                                     <th>Líder</th>
-                                    <th>Rede</th>
                                 </thead>
                                 <?php foreach ( $discipulos as $d) : ?>
                                 <tr class = "<?php echo $d->desistiu==1 ? 'error' : ''; ?>" >
                                     <td><?php echo !isset($c) ? $c=1 : ++$c ; ?></td>
                                     <td><?php echo $d->nome ; ?></td>
-                                    <td><?php echo !empty($d->getLider()) ? $d->getLider()->getAlcunha() : null ; ?></td>
-                                    <td><?php echo !empty($d->getRede()) ? utf8_encode($d->getRede()[0]['tipoRede']) : null; ?></td>
                                 </tr>
                                 <?php endforeach ; ?>
                         </table>
