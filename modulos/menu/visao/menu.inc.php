@@ -160,7 +160,7 @@ $igreja = $igreja->sede();
                 </li>
             <?php endif ; ?>
 
-            <li class = "dropdown">
+            <!-- li class = "dropdown">
                 <a href = "#" class="dropdown-toggle" data-toggle="dropdown" role = "button">
                     <i class = "icon-screenshot" ></i> Metas<b class="caret"></b>
                 </a>
@@ -175,7 +175,7 @@ $igreja = $igreja->sede();
                         <li><a href = "/rede/rede/listarTipoRede"><i class = "icon-list-alt " ></i> Listar intervalo</a></li>
                     <?php endif ; ?>
                 </ul>
-            </li>
+            </li-->
 
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                 <!--li class="dropdown">

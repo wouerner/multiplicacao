@@ -41,7 +41,8 @@ class participantesEncontro
         $total = count ($discipulos) ;
         $ativo = 'active' ;
 
-        require_once 'modulos/EncontroComDeus/visao/participantesEncontro/lista.php';
+        require_once 'modulos/EncontroComDeus/visao/participantesEncontro/lista2.php';
+        //require_once 'modulos/EncontroComDeus/visao/participantesEncontro/lista.php';
     }
 
     public function novo($url)

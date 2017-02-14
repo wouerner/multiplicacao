@@ -23,7 +23,7 @@
                                             <td><?php echo  $resumo->tipoNome;  ?></td>
                                             <td><?php echo $resumo->total; ?></td>
                                             <td>
-                                                <a href="/rede/rede/compararRelatorio/id/2/data/<?php echo $resumo->data; ?>" >
+                                                <a href="/rede/rede/compararRelatorio/id/<?php echo $resumo->tipoRedeId ?>/data/<?php echo $resumo->data; ?>" >
                                                     <?php echo $resumo->data; ?>
                                                 </a>
                                             </td>
