@@ -1,8 +1,7 @@
 <?php
+namespace Relatorio\Modelo;
 
-namespace relatorio\modelo;
-
-class discipulos
+class Discipulos
 {
     function ordenar($a, $b) { return strnatcmp($a['lastname'], $b['lastname']); }
 

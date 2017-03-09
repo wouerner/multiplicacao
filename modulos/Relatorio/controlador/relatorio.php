@@ -9,7 +9,7 @@ class relatorio
         $discipulos = new \Discipulo\Modelo\Discipulo();
         $discipulos= $discipulos->listarTodosDiscipulos();
 
-        require 'relatorio/visao/discipulos.php';
+        require 'Relatorio/visao/discipulos.php';
 
     }
 
@@ -18,7 +18,7 @@ class relatorio
         $celulas = new \Celula\Modelo\Celula();
         $celulas= $celulas->listarTodos();
 
-        require 'relatorio/visao/celulas.php';
+        require 'Relatorio/visao/celulas.php';
 
     }
 
@@ -27,7 +27,7 @@ class relatorio
         $statusCelulares = new \StatusCelular\Modelo\StatusCelular();
         $statusCelulares= $statusCelulares->listarStatusCelularTodos();
 
-        require 'relatorio/visao/statusCelular.php';
+        require 'Relatorio/visao/statusCelular.php';
 
     }
 
@@ -37,7 +37,7 @@ class relatorio
         $statusCelulares->tipoStatusCelular = $url['2'] ;
         $statusCelulares= $statusCelulares->listarStatusCelularPorTipo();
         $status= $statusCelulares[0]['status'];
-        require 'relatorio/visao/statusCelularTipo.php';
+        require 'Relatorio/visao/statusCelularTipo.php';
 
     }
 
@@ -46,7 +46,7 @@ class relatorio
         $statusCelulares = new \StatusCelular\Modelo\TipoStatusCelular();
         $statusCelulares= $statusCelulares->listarTodos();
 
-        require 'relatorio/visao/statusCelularIndex.php';
+        require 'Relatorio/visao/statusCelularIndex.php';
 
     }
 
@@ -70,7 +70,7 @@ class relatorio
         $lideres = new \Discipulo\Modelo\Discipulo();
         $lideres = $lideres->listarTodosDiscipulos();
 
-        require 'relatorio/visao/discipulosResumido.php';
+        require 'Relatorio/visao/discipulosResumido.php';
     } else {
 
         $idadeMinima = new \DateTime( "now" ,new \DateTimeZone('America/Sao_Paulo')) ;
@@ -87,7 +87,7 @@ class relatorio
         $ativo = $post['ativo'];
         $lider = $post['lider'];
 
-        $relatorio = new \relatorio\modelo\discipulos();
+        $relatorio = new \Relatorio\Modelo\Discipulos();
 
         $relatorio = $relatorio->discipulosResumido($idadeMaxima->format('Y-m-d'), $idadeMinima->format('Y-m-d') ,$sexo,$estadoCivil,$status , $celula , $rede,$ativo , $lider);
 
@@ -132,7 +132,7 @@ class relatorio
         //
         $total = count($relatorio);
         $count = 0 ;
-        require 'relatorio/visao/discipulosResumidoRelatorio.php';
+        require 'Relatorio/visao/discipulosResumidoRelatorio.php';
     }
 
     }
@@ -156,7 +156,7 @@ class relatorio
         $lideres = new \Discipulo\Modelo\Discipulo();
         $lideres = $lideres->listarTodosDiscipulos();
 
-        require 'relatorio/visao/discipulosResumido.php';
+        require 'Relatorio/visao/discipulosResumido.php';
     } else {
 
         $idadeMinima = new \DateTime( "now" ,new \DateTimeZone('America/Sao_Paulo')) ;
@@ -218,7 +218,7 @@ class relatorio
         //
         $total = count($relatorio);
         $count = 0 ;
-        require 'relatorio/visao/discipulosResumidoRelatorio.php';
+        require 'Relatorio/visao/discipulosResumidoRelatorio.php';
     }
 
     }
@@ -231,7 +231,7 @@ class relatorio
 
 //		var_dump($relatorio);
 
-        require 'relatorio/visao/liderComDiscipulos.php';
+        require 'Relatorio/visao/liderComDiscipulos.php';
 
     }
 
@@ -240,7 +240,7 @@ class relatorio
         $relatorio = new \relatorio\modelo\discipulos();
         $relatorio = $relatorio->graficoPorStatusCelular();
 
-        require 'relatorio/visao/graficoPorStatusCelular.php';
+        require 'Relatorio/visao/graficoPorStatusCelular.php';
 
     }
 
@@ -250,7 +250,7 @@ class relatorio
 
         $celulas = new \Celula\Modelo\Celula();
         $celulas = $celulas->listarTodos();
-        require 'relatorio/visao/graficoPorCelula.php';
+        require 'Relatorio/visao/graficoPorCelula.php';
     } else {
         $celula = $url['post'];
 
@@ -264,7 +264,7 @@ class relatorio
         $relatorio = new \relatorio\modelo\discipulos();
         $relatorio = $relatorio->graficoPorCelula($celula['celula']);
 
-        require 'relatorio/visao/graficoPorCelula.php';
+        require 'Relatorio/visao/graficoPorCelula.php';
 
     }
 
@@ -275,7 +275,7 @@ class relatorio
         $relatorio = new \relatorio\modelo\discipulos();
         $relatorio = $relatorio->graficoPorEvento();
 
-        require 'relatorio/visao/graficoPorEvento.php';
+        require 'Relatorio/visao/graficoPorEvento.php';
 
     }
 
@@ -287,9 +287,9 @@ class relatorio
         $relatorios = new \relatorio\modelo\discipulos();
         $relatorios = $relatorios->aniversarianteMes($post['data']);
 
-        require 'relatorio/visao/aniversariantes.php';
+        require 'Relatorio/visao/aniversariantes.php';
         } else {
-        require 'relatorio/visao/aniversarios.php';
+        require 'Relatorio/visao/aniversarios.php';
 
         }
 
@@ -307,7 +307,7 @@ class relatorio
         $relatorios = \celula\modelo\relatorioCelula::porData($inicio,$fim);
         }
 
-        require 'relatorio/visao/relatorioCelula.php';
+        require 'Relatorio/visao/relatorioCelula.php';
 
     }
 
@@ -323,7 +323,7 @@ class relatorio
         $relatorios = \celula\modelo\relatorioCelula::envioPorCelula($inicio,$fim);
         }
 
-        require 'relatorio/visao/relatorioCelulaEnvio.php';
+        require 'Relatorio/visao/relatorioCelulaEnvio.php';
 
     }
 
