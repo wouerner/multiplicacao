@@ -78,7 +78,7 @@ class participantesEncontro
             $discipulo->id = $id ;
             $discipulo = $discipulo->listarUm();
 
-            $encontro = new \encontroComDeus\modelo\encontroComDeus();
+            $encontro = new \EncontroComDeus\Modelo\EncontroComDeus();
             $encontro = $encontro->listarTodosAtivos();
 
         } else {
