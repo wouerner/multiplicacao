@@ -1,5 +1,5 @@
 <style type="text/css">
-    @import url("/ext/jquery-ui/css/bootstrap/jquery-ui.css");
+    @import url("https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css");
     @import url("/incluidos/font-awesome/css/font-awesome.css");
     @import url("/ext/c3/c3.css");
     @import url("/incluidos/css/estilo.css");
