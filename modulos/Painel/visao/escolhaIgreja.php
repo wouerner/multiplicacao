@@ -42,7 +42,7 @@ $(function(){
                   <img src="/modulos/Painel/visao/logo_<?php echo $igreja->sigla?>.png" alt="...">
                   <div class="caption">
                     <h3><?php echo $igreja->nome?></h3>
-                    <p><a href="/painel/painel/igreja/igreja/<?php echo $igreja->id?>" class="btn btn-primary" role="button">Acessar</a> </p>
+                    <p><a href="/painel/painel/escolher/igreja/<?php echo $igreja->id?>" class="btn btn-primary" role="button">Acessar</a> </p>
                   </div>
                 </div>
               </div>

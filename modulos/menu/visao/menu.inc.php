@@ -114,13 +114,13 @@ $igreja = $igreja->sede();
                     </a>
                     <ul class="dropdown-menu">
                         <?php if ($acesso->hasPermission('rede_criar') == true): ?>
-                                <li><a href = "/rede/rede/novoTipoRede"><i class = "icon-plus " ></i > Nova</a></li>
+                            <li><a href = "/rede/rede/novoTipoRede"><i class="icon-plus"></i > Nova</a></li>
                         <?php endif ; ?>
-                                <li><a href = "/rede/rede/listarTipoRede"><i class = "icon-list-alt " ></i> Listar</a></li>
+                        <li><a href = "/rede/rede/listarTipoRede/igreja/<?php echo $_SESSION['igreja']?>"><i class="icon-list-alt"></i> Listar</a></li>
                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                                <li class="divider"></li>
-                                <li><a href = "/rede/rede/novaFuncaoRede" >Nova Função</a></li>
-                                <li><a href = "/rede/rede/listarFuncaoRede" >Listar Função</a></li>
+                            <li class="divider"></li>
+                            <li><a href = "/rede/rede/novaFuncaoRede" >Nova Função</a></li>
+                            <li><a href = "/rede/rede/listarFuncaoRede" >Listar Função</a></li>
                         <?php endif ; ?>
                     </ul>
                 </li>

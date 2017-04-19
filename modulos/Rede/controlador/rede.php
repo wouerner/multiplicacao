@@ -1,7 +1,8 @@
 <?php
-use \Discipulo\Modelo\Discipulo ;
-
 namespace rede\controlador;
+
+use \Discipulo\Modelo\Discipulo ;
+use \Rede\Modelo\TipoRede as TipoRedeModelo;
 
 class rede
 {
@@ -347,6 +348,10 @@ public function listarMembrosRede($url)
     {
         $redeId = $url[4];
 
+        $tipoRede = new TipoRedeModelo();
+        $tipoRede->id = $redeId;
+        $tipoRede = $tipoRede->listarUm();
+
         $rede = new \Rede\Modelo\ConsolidacaoRedeSemanal();
         $rede->tipoRedeId = $redeId;
 
@@ -361,31 +366,24 @@ public function listarMembrosRede($url)
         $redeId = $url[4];
         $data = $url[6];
 
+        $tipoRede = new TipoRedeModelo();
+        $tipoRede->id = $redeId;
+        $tipoRede = $tipoRede->listarUm();
+
         $rede = new \Rede\Modelo\ConsolidacaoRedeSemanal();
-        $teste =  $rede->proximaDataRelatorio($redeId, $data);
+        $dataFinal =  $rede->proximaDataRelatorio($redeId, $data);
         $relatorio =  $rede->redePorData($redeId, $data);
-        $relatorioProximo =  $rede->redePorData($redeId, $teste[0]['data']);
-
-        //var_dump($relatorio, $relatorioProximo);
-        //foreach($relatorio as $rel){
-            //echo $rel->discipuloNome . '<br>';
-        //}
-
-        //echo '-----------<br>';
-        //foreach($relatorioProximo as $rel){
-            //echo $rel->discipuloNome . '<br>';
-        //}
-
+        $relatorioProximo =  $rede->redePorData($redeId, $dataFinal[0]['data']);
         $estavel = array();
         foreach($relatorio as $rel){
             foreach($relatorioProximo as $relNovo) {
                 if ($rel->discipuloId == $relNovo->discipuloId){
-                    //echo '==: '. $rel->discipuloNome. '<br>';
                     $estavel[$rel->discipuloId] = $rel;
                     break;
                 }
             }
         }
+        $totalEstavel = count($estavel);
 
         $adicionados = $relatorioProximo;
         foreach($estavel as $rel){
@@ -396,9 +394,9 @@ public function listarMembrosRede($url)
                 }
             }
         }
+        $totalAdicionados = count($adicionados);
 
         $sairam = $relatorio;
-
         foreach($relatorio as $rel){
             foreach($estavel as $relNovo) {
                 if ($rel->discipuloId == $relNovo->discipuloId) {
@@ -408,17 +406,7 @@ public function listarMembrosRede($url)
             }
         }
 
-        //foreach($estavel as $rel){
-            //echo '==: '. $rel->discipuloNome. '<br>';
-        //}
-
-        //foreach($adicionados as $rel){
-            //echo '++: ' . $rel->discipuloNome. '<br>';
-        //}
-
-        //foreach ($sairam as $rel) {
-            //echo '--: ' . $rel->discipuloNome. '<br>';
-        //}
+        $totalSairam = count($sairam);
 
         require 'modulos/Rede/visao/rede/compararRelatorioSemanal.php';
     }

@@ -104,7 +104,9 @@
         <div class="form-group" >
             <label class = "control-label  col-md-3" for = "celula" >Célula que Participa:</label>
             <select id="comboboxCelula" class="comboboxCelula" name="celula">
-                <option value = "<?php echo $celula->id ; ?>" ><?php echo $celula->nome ; ?></option>
+                <?php if($celula): ?>
+                    <option value = "<?php echo $celula->id ; ?>" ><?php echo $celula->nome ; ?></option>
+                <?php endif; ?>
                 <option>--------- </option>
                     <?php foreach($celulas as $celula) : ?>
                         <option value = "<?php echo $celula->id ; ?>"><?php echo $celula->nome ; ?> </option>
@@ -189,3 +191,78 @@
         <a class = "btn" href = "/discipulo/discipulo/crachaIndividual/id/<?php echo $discipulo->id ; ?>" target = "blank" >cracha</a>
     </fieldset>
 </form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+<script src="https://raw.githubusercontent.com/jzaefferer/jquery-validation/master/src/localization/messages_pt_BR.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.7.0/chosen.jquery.js"></script>
+<style type="text/css">
+    @import url("https://cdnjs.cloudflare.com/ajax/libs/chosen/1.7.0/chosen.min.css");
+</style>
+<script>
+    /*
+    * Translated default messages for the jQuery validation plugin.
+    * Locale: PT_BR
+    */
+    jQuery.extend(jQuery.validator.messages, {
+        required: "Este campo &eacute; requerido.",
+        remote: "Por favor, corrija este campo.",
+        email: "Por favor, forne&ccedil;a um endere&ccedil;o eletr&ocirc;nico v&aacute;lido.",
+        url: "Por favor, forne&ccedil;a uma URL v&aacute;lida.",
+        date: "Por favor, forne&ccedil;a uma data v&aacute;lida.",
+        dateISO: "Por favor, forne&ccedil;a uma data v&aacute;lida (ISO).",
+        number: "Por favor, forne&ccedil;a um n&uacute;mero v&aacute;lido.",
+        digits: "Por favor, forne&ccedil;a somente d&iacute;gitos.",
+        creditcard: "Por favor, forne&ccedil;a um cart&atilde;o de cr&eacute;dito v&aacute;lido.",
+        equalTo: "Por favor, forne&ccedil;a o mesmo valor novamente.",
+        accept: "Por favor, forne&ccedil;a um valor com uma extens&atilde;o v&aacute;lida.",
+        maxlength: jQuery.validator.format("Por favor, forne&ccedil;a n&atilde;o mais que {0} caracteres."),
+        minlength: jQuery.validator.format("Por favor, forne&ccedil;a ao menos {0} caracteres."),
+        rangelength: jQuery.validator.format("Por favor, forne&ccedil;a um valor entre {0} e {1} caracteres de comprimento."),
+        range: jQuery.validator.format("Por favor, forne&ccedil;a um valor entre {0} e {1}."),
+        max: jQuery.validator.format("Por favor, forne&ccedil;a um valor menor ou igual a {0}."),
+        min: jQuery.validator.format("Por favor, forne&ccedil;a um valor maior ou igual a {0}.")
+    });
+
+    jQuery.validator.setDefaults({
+        highlight: function(element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function(element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        errorPlacement: function(error, element) {
+            if(element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
+    });
+
+    $("select").chosen();
+
+    jQuery("#form").validate(
+    {
+        rules: {
+            nome: {
+                required: true
+            },
+            dataNascimento: {
+                required: true
+            },
+            email: {
+                required: true
+            },
+            endereco: {
+                required: true
+            },
+            lider: {
+                required: true
+            },
+            celula: {
+                required: true
+            }
+        }
+    });
+</script>

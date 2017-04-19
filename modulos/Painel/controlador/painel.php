@@ -24,9 +24,16 @@ class painel
         require_once 'modulos/Painel/visao/escolhaIgreja.php';
     }
 
+    public function escolher($url)
+    {
+
+        $_SESSION['igreja'] = (int)$url['4'];
+
+        header('location: /painel/painel/igreja/igreja/'. $url['3']);
+    }
+
     public function igreja($url)
     {
-        //var_dump($url[4]);
         $igrejaId = $url['4'];
         $usuarioId= $_SESSION['usuario_id'];
         $status = new \StatusCelular\Modelo\StatusCelular() ;

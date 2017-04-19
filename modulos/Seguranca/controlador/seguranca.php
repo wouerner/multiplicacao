@@ -36,7 +36,6 @@ use Discipulo\modelo\role;
 			header('Location:/seguranca/seguranca');
 			exit();
 
-
 			}
 
 		}

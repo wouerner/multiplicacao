@@ -16,15 +16,16 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="ativos">
                             <table class = "well table bordered-table">
-                                <caption><h3>Resumo Semanal</h3></caption>
+                                <caption><h3><a href="/rede/rede/listarMembrosRede/id/<?php echo $tipoRede->id ?>"><?php echo $tipoRede->nome ?></a>: Resumo Mensal</h3></caption>
                                 <tbody>
                                     <?php foreach ( $resumoRede as $resumo) : ?>
                                         <tr>
                                             <td><?php echo  $resumo->tipoNome;  ?></td>
                                             <td><?php echo $resumo->total; ?></td>
                                             <td>
-                                                <a href="/rede/rede/compararRelatorio/id/<?php echo $resumo->tipoRedeId ?>/data/<?php echo $resumo->data; ?>" >
-                                                    <?php echo $resumo->data; ?>
+                                                <a class="btn btn-default" href="/rede/rede/compararRelatorio/id/<?php echo $resumo->tipoRedeId ?>/data/<?php echo $resumo->data; ?>" >
+                                                    <i class="icon-bar-chart"></i>
+                                                    <?php $date = new DateTime($resumo->data) ; echo $date->format('d-m-Y'); ?>
                                                 </a>
                                             </td>
                                         </tr>
