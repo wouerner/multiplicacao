@@ -1,5 +1,6 @@
 <?php
 namespace Seguranca\Modelo;
+
 use \Framework\Modelo\ModeloFramework;
 
 class Acl extends ModeloFramework
@@ -120,9 +121,15 @@ class Acl extends ModeloFramework
     {
         $format = strtolower($format);
         $strSQL = "SELECT * FROM `permissions` ORDER BY `permName` ASC";
-        $data = mysql_query($strSQL);
+
+        $stm = $this->con->prepare($strSQL);
+        $stm->execute();
+
+        //$data = mysql_query($strSQL);
         $resp = array();
-        while($row = mysql_fetch_assoc($data))
+
+        while($row = $stm->fetch())
+        //while($row = mysql_fetch_assoc($data))
         {
             if ($format == 'full')
             {
@@ -213,9 +220,17 @@ class Acl extends ModeloFramework
 
     function getUsername($userID)
     {
+        $pdo = self::pegarConexao();
+
         $strSQL = "SELECT `email` FROM `Discipulo` WHERE `id` = " . floatval($userID) . " LIMIT 1";
-        $data = mysql_query($strSQL);
-        $row = mysql_fetch_array($data);
-        return $row[0];
+        //$data = mysql_query($strSQL);
+        //$row = mysql_fetch_array($data);
+        //return $row[0];
+
+        $stm = $pdo->prepare($strSQL);
+
+        $stm->execute();
+
+        return $stm->fetchAll();
     }
 }
