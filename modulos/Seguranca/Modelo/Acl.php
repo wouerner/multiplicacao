@@ -23,12 +23,17 @@ class Acl extends ModeloFramework
 
     public function __construct($userID = '')
     {
+        include("modulos/Seguranca/ACL/assets/php/database.php");
+        $this->link = $link;
+
         $this->con = self::pegarConexao();
         if ($userID != '')
         {
             $this->userID = floatval($userID);
         } else {
-            $this->userID = floatval($_SESSION['userID']);
+            //var_dump($_SESSION);die;
+            $this->userID = floatval($_SESSION['usuario_id']);
+            //$this->userID = floatval($_SESSION['userID']);
         }
         $this->userRoles = $this->getUserRoles('ids');
         $this->buildACL();
@@ -75,9 +80,11 @@ class Acl extends ModeloFramework
 
     function getRoleNameFromID($roleID)
     {
+        include("modulos/Seguranca/ACL/assets/php/database.php");
+
         $strSQL = "SELECT `roleName` FROM `roles` WHERE `ID` = " . floatval($roleID) . " LIMIT 1";
-        $data = mysql_query($strSQL);
-        $row = mysql_fetch_array($data);
+        $data = mysqli_query($link, $strSQL);
+        $row = mysqli_fetch_array($data);
         return $row[0];
     }
 
@@ -103,9 +110,9 @@ class Acl extends ModeloFramework
     {
         $format = strtolower($format);
         $strSQL = "SELECT * FROM `roles` ORDER BY `roleName` ASC";
-        $data = mysql_query($strSQL);
+        $data = mysqli_query($this->link, $strSQL);
         $resp = array();
-        while($row = mysql_fetch_array($data))
+        while($row = mysqli_fetch_array($data))
         {
             if ($format == 'full')
             {

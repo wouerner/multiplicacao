@@ -36,7 +36,7 @@ $igreja = $igreja->sede();
             <?php if ($acesso->hasPermission('aviso_acesso') == true): ?>
                 <li><a href = "/aviso/aviso" ><i class = " icon-bullhorn " ></i></a></li>
             <?php endif ; ?>
-            <?php if ($acesso->hasPermission('financeiro_editar') == true): ?>
+            <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                 <li><a href = "/oferta/oferta/geral" ><i class = " icon-money " ></i></a></li>
             <?php endif ; ?>
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>

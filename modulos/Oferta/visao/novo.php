@@ -8,7 +8,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 	</head>
 	<body>
-		<section class="container">
+		<section class="container-fluid">
             <header>
                 <nav>
                 <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
@@ -16,19 +16,23 @@
             </header>
             <section>
                 <article>
-                    <?php if ($acesso->hasPermission('financeiro_editar') == true): ?>
+                    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                    <div class="panel panel-default">
+                      <div class="panel-heading">Nova Oferta</div>
+                      <div class="panel-body">
+
                     <form action="/oferta/oferta/novo" method="post"  class="form-horizontal">
                         <fieldset>
                             <legend>Ofertas</legend>
                             <div class="form-group" >
-                                <label class="control-label col-md-2" >Nome</label>
+                                <label class="control-label col-md-2" >Nome:</label>
                                 <div class="col-md-8">
                                     <a class="btn btn-link" href="/discipulo/detalhar/id/<?php echo $discipulo->id?>" ><?php echo $discipulo->nome; ?></a></strong>
                                     <input type="hidden" name="discipuloId" value="<?php echo $discipulo->id ; ?>" >
                                 </div>
                             </div>
                             <div class="form-group" >
-                                <label class = "control-label col-md-2" >Tipo da Oferta</label>
+                                <label class = "control-label col-md-2" >Tipo:</label>
                                 <div class="col-md-8">
                                     <select class="form-control col-md-8" name = "tipoOfertaId" >
                                         <?php foreach ($tiposOfertas as $tipoOferta) : ?>
@@ -48,7 +52,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class = "control-label col-md-2" >Data da Oferta:</label>
+                                <label class = "control-label col-md-2" >Data:</label>
                                 <div class="col-md-4">
                                     <input placeholder="dd/mm/aaaa" id="data" class="form-control " type="date" name="data" required>
                                 </div>
@@ -63,6 +67,8 @@
                             <button type = "reset" class = "btn" >Limpar</button>
                         </fieldset>
                     </form>
+                    </div>
+                    </div>
                     <script>
                         $(function() {
                             console.log('reste');
@@ -89,7 +95,7 @@
                                     <th>Tipo</th>
                                     <th>Valor</th>
                                     <th>Data</th>
-                                    <?php if ($acesso->hasPermission('financeiro_editar') == true): ?>
+                                    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                                         <th>Ações</th>
                                     <?php endif; ?>
                                 </tr>
@@ -109,7 +115,7 @@
                                         <td>
                                             <?php echo $oferta['valor'] ; ?>
                                         </td>
-                                        <?php if ($acesso->hasPermission('financeiro_editar') == true): ?>
+                                        <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                                             <td>
                                                 <a class = "btn btn-danger" href="/oferta/oferta/excluir/id/<?php echo $oferta['0'] ; ?>/<?php echo $oferta['discipuloId']?>" >Excluir</a>
                                             </td>

@@ -298,21 +298,20 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
         }
     }
 
-    public function ofertasMesAno($ano, $tipo = null, $mes = ['inicio' => 1, 'fim'=> 12])
+    public function ofertasMesAno($ano, $tipo = null, $mes = ['inicio' => 1, 'fim'=> 12], $rede = null)
     {
-        $oferta = new \oferta\modelo\oferta();
+        $oferta = new \Oferta\Modelo\Oferta();
         $oferta->discipuloId = $this->id;
 
         $mes = empty($mes) ? ['inicio'=> 1, 'fim'=> 12] : $mes;
         $ofertasMesAno = array();
         for($i = $mes['inicio']; $i <= $mes['fim'] ; $i++ ){
-            $ofertasMesAno[$i] = $oferta->discipuloMesAno($i, $ano, $tipo);
+            $ofertasMesAno[$i] = $oferta->discipuloMesAno($i, $ano, $tipo, $rede ? $rede : null);
         }
 
         $resultado = $ofertasMesAno;
 
         return $resultado	;
-
     }
 
     public function salvar()

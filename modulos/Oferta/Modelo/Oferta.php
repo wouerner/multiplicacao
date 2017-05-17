@@ -91,35 +91,44 @@ class oferta {
     return $stm->fetchAll();
     }
 
-    public function discipuloMesAno($mes, $ano, $tipo = null){
-
-        //abrir conexao com o banco
+    public function discipuloMesAno($mes, $ano, $tipo = null, $rede = null)
+    {
         $pdo = new \PDO(DSN, USER, PASSWD);
-        //cria sql
+
         $sql = "
-            select * from Oferta o inner join TipoOferta tp ON tp.id = o.tipoOfertaId
-                where discipuloId = ? and
-            month(data) = ?  and year(data) = ?
+            select *
+                from Oferta o
+                inner join TipoOferta tp ON tp.id = o.tipoOfertaId
+                join Redes as r ON r.discipuloId = o.discipuloId
+                where r.discipuloId = :discipulo and
+                    month(data) = :mes
+                    and year(data) = :ano
         ";
 
         if ($tipo){
-            $sql .= '  and tp.id in (?)';
+            $sql .= '  and tp.id in (:tipo)';
         }
 
-        //prepara sql
+        if ($rede){
+            $sql .= 'and r.tipoRedeId = :rede ';
+        }
+
         $stm = $pdo->prepare($sql);
         //trocar valores
-        $stm->bindParam(1, $this->discipuloId);
-        $stm->bindParam(2, $mes);
-        $stm->bindParam(3, $ano);
+        $stm->bindParam(':discipulo', $this->discipuloId);
+        $stm->bindParam(':mes', $mes);
+        $stm->bindParam(':ano', $ano);
 
         if ($tipo){
-            $stm->bindParam(4, implode(',',$tipo));
+            $stm->bindParam(':tipo', implode(',',$tipo));
+        }
+
+        if ($rede){
+            $stm->bindParam(':rede', $rede);
         }
 
         $stm->execute();
 
-        //fechar conexÃ£o
         $pdo = null ;
 
         return $stm->fetchAll();

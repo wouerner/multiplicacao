@@ -1,22 +1,24 @@
 <?php
-
 namespace oferta\controlador;
 
 use \Discipulo\Modelo\Discipulo ;
+use \Oferta\Modelo\TipoOferta as TipoOfertaModelo;
+use \Oferta\Modelo\Oferta as OfertaModelo;
+use \Oferta\Modelo\Conta as ContaModelo;
 
-class oferta{
-
+class oferta
+{
     public function index(){
-
 //			require_once  'modulos/Discipulo/visao/listar.php';
-
     }
-    public function novo($url){
+
+    public function novo($url)
+    {
       if ( empty ( $url['post'] ) ) {
 
-        $tiposOfertas = new \oferta\modelo\tipoOferta() ;
-        $ofertasDiscipulo = new \oferta\modelo\oferta() ;
-        $conta = new \oferta\modelo\conta() ;
+        $tiposOfertas = new TipoOfertaModelo() ;
+        $ofertasDiscipulo = new OfertaModelo() ;
+        $conta = new ContaModelo() ;
 
         $tiposOfertas = $tiposOfertas->listarTodos();
         $contas = $conta->listarTodos();
@@ -34,14 +36,14 @@ class oferta{
         $discipulo->id = $url[3] ;
         $discipulo = $discipulo->listarUm();
 
-        require_once  'modulos/oferta/visao/novo.php';
+        require_once  'modulos/Oferta/visao/novo.php';
 
-        }else {
+        } else {
             $discipulo = new \Discipulo\Modelo\Discipulo() ;
             $discipulo->id = $url[3] ;
             $discipulo = $discipulo->listarUm();
 
-            $oferta = new \oferta\modelo\oferta();
+            $oferta = new OfertaModelo();
 
             $post = $url['post'] ;
             $oferta->discipuloId = $post['discipuloId'];
@@ -73,9 +75,11 @@ class oferta{
 
     }
 
-    public function geral($url) {
+    public function geral($url)
+    {
         $tipo = array_key_exists('id', $_GET) ? $_GET['id'] : null ;
         $inativos = array_key_exists('inativos', $_GET) ? $_GET['inativos'] : null ;
+        $rede = array_key_exists('rede', $_GET) ? $_GET['rede'] : null ;
 
         $mes['inicio'] = array_key_exists('inicio', $_GET) ? $_GET['inicio'] : null;
         $mes['fim'] = array_key_exists('fim', $_GET) ?$_GET['fim'] : null;
@@ -85,11 +89,16 @@ class oferta{
 
         $relatorios = array();
         foreach( $discipulos as $discipulo ) {
-            $ofertas = $discipulo->ofertasMesAno(2015, $tipo ? $tipo : null,
-                                                                    !empty($mes['inicio']) ? $mes : null);
+            $ofertas = $discipulo->ofertasMesAno(
+                2017,
+                $tipo ? $tipo : null,
+                !empty($mes['inicio']) ? $mes : null,
+                $rede
+            );
+
             $mostrar = false;
             foreach($ofertas as $oferta){
-                 if( !empty($oferta) ){
+                 if( !empty($oferta ) ){
                     $mostrar = true;
                  }
             }
@@ -99,12 +108,13 @@ class oferta{
                                 'id'=>$discipulo->id,
                                 'mostrar'=> $mostrar);
         }
-        //var_dump($relatorios);
-        //die;
 
-        $tipoOferta =	new \oferta\modelo\tipoOferta() ;
+        $tipoOferta =	new \Oferta\Modelo\TipoOferta() ;
+        $tiposRede =	new \Rede\Modelo\TipoRede() ;
+        $tiposRede =	$tiposRede->listarTodos() ;
+
         $tipoOferta = $tipoOferta->listarTodos();
-        require_once  'modulos/oferta/visao/oferta/geral.php' ;
+        require_once  'modulos/Oferta/visao/oferta/geral.php' ;
     }
 
     public function novoTipoOferta($url){
@@ -221,7 +231,7 @@ class oferta{
     }
 
     public function excluir($url){
-            $oferta =	new \oferta\modelo\oferta();
+            $oferta =	new OfertaModelo();
             $oferta->id = $url[4];
             $oferta->excluir();
             header ('location:/oferta/oferta/novo/'.$url[5]);

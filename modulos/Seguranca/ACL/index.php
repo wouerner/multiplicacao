@@ -11,7 +11,7 @@
 <div id="page">
 	<h2>Permissions for <?php $myACL->getUsername($userID); ?>:</h2>
 
-	<?php 
+	<?php
 		$aPerms = $userACL->getAllPerms('full');
 		echo 'ID user: '.$userID.' <br>' ;
 
@@ -32,10 +32,12 @@
 	?>
     <h3>Change User:</h3>
 
-    <?php 
+    <?php
+    //var_dump($link);die;
 		$strSQL = "SELECT * FROM `Discipulo` ORDER BY `nome` ASC";
-		$data = mysql_query($strSQL);
-		while ($row = mysql_fetch_assoc($data))
+		$data = mysqli_query($link, $strSQL);
+
+		while ($row = mysqli_fetch_assoc( $data))
 		{
 			echo "<a href=\"?userID=" . $row['id'] . "\">" . $row['email'] . "</a><br />";
 		}

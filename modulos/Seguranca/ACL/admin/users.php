@@ -1,5 +1,5 @@
-<?php 
-//include("../assets/php/database.php"); 
+<?php
+//include("../assets/php/database.php");
 //include("../assets/php/class.acl.php");
 
 $_GET['action'] = isset($_GET['action']) ? $_GET['action'] : '';
@@ -22,10 +22,10 @@ if (isset($_POST['action']))
 						$strSQL = sprintf("REPLACE INTO `user_roles` SET `userID` = %u, `roleID` = %u, `addDate` = '%s'",$_POST['userID'],$roleID,date ("Y-m-d H:i:s"));
 					}
 				//	echo $strSQL."<br>";
-					mysql_query($strSQL);
+					mysqli_query($link, $strSQL);
 				}
 			}
-		//exit;	
+		//exit;
 		break;
 		case 'savePerms':
 			$redir = "?action=user&userID=" . $_POST['userID'];
@@ -69,17 +69,17 @@ if (isset($_POST['action']))
 	<?php
 		if ($_GET['action'] == '' ) : ?>
     	<h2>Select a User to Manage:</h2>
-        <?php  
+        <?php
 				$strSQL = "SELECT * FROM Discipulo ORDER BY nome ASC";
-				$data = mysql_query($strSQL);
+				$data = mysqli_query($link, $strSQL);
 				?>
-			<?php while ($row = mysql_fetch_assoc($data)): ?>
+			<?php while ($row = mysqli_fetch_assoc($data)): ?>
 						<a href="?action=user&userID=<?php echo $row['id'] ; ?>"><?php echo $row['email'] ?></a><br />
 			<?php endwhile; ?>
 		<?php endif ; ?>
 
     <?php
-    if ($_GET['action'] == 'user' ) { 
+    if ($_GET['action'] == 'user' ) {
 		$userACL = new \Seguranca\Modelo\Acl($_GET['userID']);
 	?>
     	<h2>Managing <?php echo $myACL->getUsername($_GET['userID']); ?>:</h2>
@@ -113,29 +113,29 @@ if (isset($_POST['action']))
      <form action="/seguranca/acl/user" method="post">
         <table border="0" cellpadding="5" cellspacing="0">
         <tr><th></th><th>Member</th><th>Not Member</th></tr>
-        <?php 
+        <?php
 		$roleACL = new \Seguranca\Modelo\Acl($_GET['userID']);
 		$roles = $roleACL->getAllRoles('full');
 
 		foreach ($roles as $k => $v): ?>
-        
+
 				<tr><td><label><?php echo $v['Name'] ; ?> </label></td>
 
 				<td><input type="radio" name="role_<?php echo $v['ID'] ; ?>" id="role_<?php echo $v['ID'] ?>_1" value="1"
 						<?php if ($roleACL->userHasRole($v['ID'])) : ?>
-								checked="checked"; 
+								checked="checked";
 							<?php endif ; ?>
 						 /></td>
-	
+
 						<td><input type="radio" name="role_<?php echo $v['ID'] ; ?>" id="role_<?php echo $v['ID'] ; ?>_0" value="0"
-							<?php if (!$roleACL->userHasRole($v['ID'])) :?> 
-							 checked="checked" 
+							<?php if (!$roleACL->userHasRole($v['ID'])) :?>
+							 checked="checked"
 							<?php endif; ?>
              /></td>
             </tr>
 
-						<?php endforeach ; ?> 
-    
+						<?php endforeach ; ?>
+
         </table>
         <input type="hidden" name="action" value="saveRoles" />
         <input type="hidden" name="userID" value="<?php echo $_GET['userID']; ?>" />
@@ -146,18 +146,18 @@ if (isset($_POST['action']))
     </form>
      <?php } ?>
      <?php
-    if ($_GET['action'] == 'perms' ) { 
+    if ($_GET['action'] == 'perms' ) {
 	?>
     	<h2>Manage User Permissions: (<?php echo  $myACL->getUsername($_GET['userID']); ?>) </h2>
         <form action="/seguranca/acl/user" method="post">
             <table border="0" cellpadding="5" cellspacing="0">
             <tr><th></th><th></th></tr>
-            <?php 
+            <?php
 						$userACL = new \Seguranca\Modelo\Acl($_GET['userID']);
             $rPerms = $userACL->perms;
 						$aPerms = $userACL->getAllPerms('full');
 ?>
-						
+
 
 				<?php foreach ($aPerms as $k => $v): ?>
 					<tr><td>
@@ -170,9 +170,9 @@ if (isset($_POST['action']))
 							<option value="1"
 
 						<?php
-						if ($userACL->hasPermission($v['Key']) && $rPerms[$v['Key']]['inheritted'] != true)		{ echo "selected=\"selected\""; } 
+						if ($userACL->hasPermission($v['Key']) && $rPerms[$v['Key']]['inheritted'] != true)		{ echo "selected=\"selected\""; }
 						?>
-						<?php 
+						<?php
 									echo ">Allow</option>";
 									echo "<option value=\"0\"";
 

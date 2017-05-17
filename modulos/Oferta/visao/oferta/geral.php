@@ -6,7 +6,7 @@
         <?php include 'incluidos/js.inc.php' ?>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     </head>
-    <body class="container">
+    <body class="container-fluid">
 		<header>
 			<nav>
 			<?php include 'modulos/menu/visao/menu.inc.php' ; ?>
@@ -45,6 +45,17 @@
                             Fim
                         </label>
                         <input  id="fim" class="form-control" value="12" name="fim">
+                    </div>
+                    <div class="form-group">
+                        <label>Rede</label>
+                        <select class="form-control" name="rede">
+                            <option value="0"> Todos</option>
+                            <?php foreach($tiposRede as $rede): ?>
+                                <option value="<?php echo $rede->id ?>">
+                                    <?php echo $rede->nome; ?>
+                                </option>
+                            <?php endforeach ?>
+                        </select >
                     </div>
             </fieldset>
             <fieldset>

@@ -6,6 +6,7 @@ use seguranca\modelo;
 class acl
 {
 		public function index(){
+
 			include("modulos/Seguranca/ACL/assets/php/database.php");
 
 			$userID = !empty($_GET['userID']) ? $_GET['userID'] : 1 ;
@@ -17,7 +18,7 @@ class acl
 		}
 
 		public function admin(){
-			include("modulos/seguranca/ACL/assets/php/database.php");
+			include("modulos/Seguranca/ACL/assets/php/database.php");
 
 			//$userID = $_GET['userID'] =1;
 			//$_SESSION['userID'] = 1;
@@ -28,11 +29,11 @@ class acl
 			//$userACL = new \Seguranca\Modelo\Acl($userID);
 
 
-			include 'modulos/seguranca/ACL/admin/index.php' ;
+			include 'modulos/Seguranca/ACL/admin/index.php' ;
 		}
 
 		public function user(){
-			include("modulos/seguranca/ACL/assets/php/database.php");
+			include("modulos/Seguranca/ACL/assets/php/database.php");
 
 			//$userID = $_GET['userID'] =1;
 			//$_SESSION['userID'] = 1;
@@ -43,11 +44,11 @@ class acl
 			//$userACL = new \Seguranca\Modelo\Acl($userID);
 
 
-			include 'modulos/seguranca/ACL/admin/users.php' ;
+			include 'modulos/Seguranca/ACL/admin/users.php' ;
 		}
 
 		public function roles(){
-			include("modulos/seguranca/ACL/assets/php/database.php");
+			include("modulos/Seguranca/ACL/assets/php/database.php");
 
 			//$userID = $_GET['userID'] =1;
 			//$_SESSION['userID'] = 1;
@@ -58,11 +59,11 @@ class acl
 			//$userACL = new \Seguranca\Modelo\Acl($userID);
 
 
-			include 'modulos/seguranca/ACL/admin/roles.php' ;
+			include 'modulos/Seguranca/ACL/admin/roles.php' ;
 		}
 
 		public function perms(){
-			include("modulos/seguranca/ACL/assets/php/database.php");
+			include("modulos/Seguranca/ACL/assets/php/database.php");
 
 			//$userID = $_GET['userID'] =1;
 			//$_SESSION['userID'] = 1;
@@ -73,7 +74,7 @@ class acl
 			//$userACL = new \Seguranca\Modelo\Acl($userID);
 
 
-			include 'modulos/seguranca/ACL/admin/perms.php' ;
+			include 'modulos/Seguranca/ACL/admin/perms.php' ;
 		}
 
 }
