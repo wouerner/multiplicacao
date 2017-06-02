@@ -21,7 +21,7 @@ class equipe
 
     public function listarEquipe($url)
     {
-        $tipoEquipe = new \encontroComDeus\modelo\tipoEquipe() ;
+        $tipoEquipe = new \EncontroComDeus\Modelo\TipoEquipe() ;
         $tiposEquipe = $tipoEquipe->listarUm();
         $encontroId = $url[6] ;
 
@@ -61,7 +61,7 @@ class equipe
       if ( empty ( $url['post'] ) ) {
             $encontroId = $url[4] ;
 
-            $tipoEquipe = new \encontroComDeus\modelo\tipoEquipe();
+            $tipoEquipe = new \EncontroComDeus\Modelo\TipoEquipe();
             $tiposEquipe = $tipoEquipe->listarTodos() ;
 
             require_once 'modulos/EncontroComDeus/visao/equipe/novo.php';
@@ -89,7 +89,7 @@ class equipe
             $discipulo->id = $id ;
             $discipulo = $discipulo->listarUm();
 
-            $encontro = new \encontroComDeus\modelo\encontroComDeus();
+            $encontro = new \EncontroComDeus\Modelo\EncontroComDeus();
             $equipe = new \EncontroComDeus\Modelo\Equipe();
             $equipes = $equipe->listarEquipesAtivas() ;
 
@@ -142,7 +142,7 @@ class equipe
             $discipulos = new discipulo();
             $discipulos = $discipulos->listarTodos($_SESSION['usuario_id']);
 
-            $tipoEquipe = new \encontroComDeus\modelo\tipoEquipe();
+            $tipoEquipe = new \EncontroComDeus\Modelo\TipoEquipe();
             $tipoEquipe =$tipoEquipe->listarTodos() ;
 
             require_once 'modulos/EncontroComDeus/visao/equipe/novo.php';

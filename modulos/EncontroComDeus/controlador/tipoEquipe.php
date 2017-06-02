@@ -4,7 +4,7 @@ namespace encontroComDeus\controlador;
     {
         public function index()
         {
-            $tipoEquipes =	new \encontroComDeus\modelo\tipoEquipe();
+            $tipoEquipes =	new \EncontroComDeus\Modelo\TipoEquipe();
             $tipoEquipes = $tipoEquipes->listarTodos();
             require_once 'modulos/EncontroComDeus/visao/tipoEquipe/listar.php';
 
@@ -17,7 +17,7 @@ namespace encontroComDeus\controlador;
             require_once 'modulos/EncontroComDeus/visao/tipoEquipe/novo.php';
 
             } else {
-                $tipoEquipe =	new \encontroComDeus\modelo\tipoEquipe();
+                $tipoEquipe =	new \EncontroComDeus\Modelo\TipoEquipe();
 
                 $post = $url['post'] ;
                 $tipoEquipe->nome = $post['nome'];
@@ -186,7 +186,7 @@ namespace encontroComDeus\controlador;
 
         public function excluir($url)
         {
-                $tipoEquipe =	new \encontroComDeus\modelo\tipoEquipe();
+                $tipoEquipe =	new \EncontroComDeus\Modelo\TipoEquipe();
                 $tipoEquipe->id = $url[4];
                 $tipoEquipe->excluir();
 

@@ -1,8 +1,8 @@
 <?php
 
 namespace encontroComDeus\modelo ;
-use framework\modelo\modeloFramework;
-class  tipoEquipe extends modeloFramework
+use Framework\Modelo\ModeloFramework;
+class  tipoEquipe extends ModeloFramework
 {
     private $id ;
     private $nome ;
