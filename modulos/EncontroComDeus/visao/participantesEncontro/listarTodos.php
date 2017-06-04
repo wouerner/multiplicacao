@@ -4,34 +4,27 @@
         <meta charset="UTF-8">
         <?php include 'incluidos/css.inc.php' ; ?>
         <?php include 'incluidos/js.inc.php' ; ?>
-
 <script>
 $(function () {
 $('.table').tab('show');
 })
 </script>
-
     </head>
-
     <body>
         <section class = "container-fluid">
-
         <nav>
-
             <?php include 'modulos/menu/visao/menu.inc.php' ; ?>
         </nav>
-
         <section>
             <article>
-
                 <?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
-
                 <h3>Quantidade de Encontrista: <?php echo $total?></h3>
                 <?php require 'modulos/EncontroComDeus/visao/participantesEncontro/menuParticipante.php' ; ?>
                 <div class = "row-fluid" >
+                    <div class="panel panel-default">
+                      <div class="panel-heading">Todos os particpantes</div>
+                      <div class="panel-body">
                         <table class = "table bordered-table">
-                                        <h2></h2>
-                        </caption>
                         <thead>
                                 <th>#</th>
                                 <th>Nome</th>
@@ -95,12 +88,35 @@ $('.table').tab('show');
                         <?php endforeach ; ?>
                         </table>
 
+
+
+
+                      </div>
+                    </div>
+
+
     </div>
             </div>
             </article>
-
+        </section>
         </section>
 
-        </section>
+<style type="text/css">
+    @import url("http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css");
+</style>
+<script src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script>
+    console.log(jQuery);
+    $(document).ready(function(){
+        $('table').DataTable({
+                "language": {
+                    "url": "http://cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json"
+                },
+                "iDisplayLength": 100
+            }
+        );
+    });
+</script>
+
     </body>
 </html>
