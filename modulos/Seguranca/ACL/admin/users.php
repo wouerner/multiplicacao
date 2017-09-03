@@ -148,16 +148,15 @@ if (isset($_POST['action']))
      <?php
     if ($_GET['action'] == 'perms' ) {
 	?>
-    	<h2>Manage User Permissions: (<?php echo  $myACL->getUsername($_GET['userID']); ?>) </h2>
+    	<h2>Manage User Permissions: (<?php echo  $myACL->getUsername($_GET['userID'])[0]['email']; ?>) </h2>
         <form action="/seguranca/acl/user" method="post">
             <table border="0" cellpadding="5" cellspacing="0">
             <tr><th></th><th></th></tr>
             <?php
-						$userACL = new \Seguranca\Modelo\Acl($_GET['userID']);
-            $rPerms = $userACL->perms;
-						$aPerms = $userACL->getAllPerms('full');
-?>
-
+                $userACL = new \Seguranca\Modelo\Acl($_GET['userID']);
+                $rPerms = $userACL->perms;
+                $aPerms = $userACL->getAllPerms('full');
+            ?>
 
 				<?php foreach ($aPerms as $k => $v): ?>
 					<tr><td>
@@ -166,33 +165,32 @@ if (isset($_POST['action']))
 
 						<td>
 							<select name= "perm_<?php	echo $v['ID'] ?>" />
+                                <option value="1"
+                                    <?php echo ($userACL->hasPermission($v['Key']) && $rPerms[$v['Key']]['inheritted'] != true) ? 'selected="selected"' :'' ?>
+                                >Allow</option>
 
-							<option value="1"
+                            <option value="0"
+                                <?php
+                echo (in_array($v['Key'], $rPerms)  && $rPerms[$v['Key']]['value'] === false &&
+                    $rPerms[$v['Key']]['inheritted'] != true) ? 'selected="selected"' :'';
+                                                    $iVal = '';
+                                        ?>
+                            >Deny</option>
 
-						<?php
-						if ($userACL->hasPermission($v['Key']) && $rPerms[$v['Key']]['inheritted'] != true)		{ echo "selected=\"selected\""; }
-						?>
-						<?php
-									echo ">Allow</option>";
-									echo "<option value=\"0\"";
-
-										if ($rPerms[$v['Key']]['value'] === false && $rPerms[$v['Key']]['inheritted'] != true) { echo " selected=\"selected\""; }
-											$iVal = '';
-											echo ">Deny</option>";
-											echo "<option value=\"x\"";
-											if ($rPerms[$v['Key']]['inheritted'] == true || !array_key_exists($v['Key'],$rPerms))
-											{
-												echo " selected=\"selected\"";
-													if ($rPerms[$v['Key']]['value'] === true )
-														{
-															$iVal = '(Allow)';
-													} else {
-															$iVal = '(Deny)';
-													}
-											}
+                            <?php
+                                    echo "<option value=\"x\"";
+                                    if (in_array($v['Key'], $rPerms) && $rPerms[$v['Key']]['inheritted'] == true || !array_key_exists($v['Key'],$rPerms))
+                                    {
+                                        echo " selected=\"selected\"";
+                                            if (in_array($v['Key'], $rPerms) && $rPerms[$v['Key']]['value'] === true )
+                                                {
+                                                    $iVal = '(Allow)';
+                                            } else {
+                                                    $iVal = '(Deny)';
+                                            }
+                                    }
 				echo ">Inherit $iVal</option>";
 				echo "</select></td></tr>"; ?>
-
 				<?php   endforeach ; ?>
     	</table>
 
