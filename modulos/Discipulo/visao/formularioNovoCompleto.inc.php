@@ -21,16 +21,6 @@
                 <p class="help-block">(obrigatório)</p>
             </div>
         </div>
-        <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-            <div class="form-group">
-                <label class="control-label col-md-3" for="nome">Alcunha:</label>
-                <div class="col-md-8" >
-                    <input id="alcunha" type="text" class="form-control" name="alcunha" placeholder="Ou apelido"  value="<?php echo $dados['alcunha']?>">
-                </div>
-            </div>
-        <?php else: ?>
-            <input id="alcunha" type="hidden" class="form-control " name="alcunha" placeholder="Ou apelido"  value="<?php echo $dados['alcunha']?>">
-        <?php endif ; ?>
         <div class="form-group">
             <label class="control-label col-md-3" for="dataNascimento" >
                 <i class="icon-calendar" ></i> Nasc*.:
@@ -67,21 +57,14 @@
         <div class="form-group ">
             <label class="control-label col-md-4" for="telefone" >Telefone:</label>
             <div class=" col-md-4" >
-                <input id="telefone" class="form-control" type="tel" value="<?php echo $dados['telefone']?>"  maxlength="14"
-                    pattern="\([0-9]{2}\) [0-9]{4}\-[0-9]{4}" placeholder="(00) 9999-9999" value="" name="telefone" id="telefone">
+                <input id="telefone" class="form-control" type="tel" value="<?php echo $dados['telefone']?>"  maxlength="15"
+                    pattern="\([0-9]{2}\) [0-9]{5}\-[0-9]{4}" placeholder="(00) 9999-9999" value="" name="telefone" id="telefone">
             </div>
         </div>
         <div class="form-group" >
             <label class="control-label col-md-4" for="endereco" >Endereço*:</label>
             <div class="col-md-4" >
               <input id="endereco" type="text" maxlength="45" class="form-control" name="endereco" value="<?php echo $dados['endereco']?>" placeholder=""  >
-              <p class="help-block">(obrigatório)</p>
-            </div>
-        </div>
-        <div class="control-group " >
-            <label class="control-label col-md-4" for="email" >E-mail*:</label>
-            <div class="col-md-4" >
-                <input id="email" class="form-control" maxlength="60" name="email" type="email" placeholder="exemplo@exemplo.com"  value="<?php echo $dados['email']?>" >
               <p class="help-block">(obrigatório)</p>
             </div>
         </div>
@@ -95,9 +78,11 @@
                         <i class="icon-user"></i> Líder:
                     </label>
                     <div class="col-md-9">
-                        <select  data-placeholder="Lider" class="form-control" id="lider" name="lider" >
+                        <select data-placeholder="Lider" class="form-control" id="lider" name="lider" >
                             <?php foreach($lideres as $lider) : ?>
-                                <option value="<?php echo $lider->id; ?>"><?php echo $lider->getAlcunha(); ?> </option>
+                                <option value="<?php echo $lider->id; ?>">
+                                    <?php echo $lider->getAlcunha(); ?>
+                                </option>
                             <?php endforeach ; ?>
                         </select>
                     </div>
@@ -109,7 +94,7 @@
                         <i class="icon-home"></i> Célula:
                     </label>
                     <div class="col-md-9">
-                        <select data-placeholder="Celula" id="celula" class="form-control" name="celula" >
+                        <select  data-placeholder="Selecione" id="celula" class="form-control" name="celula" >
                             <option value="" ></option>
                             <?php foreach($celulas as $celula) : ?>
                                 <option value="<?php echo $celula->id; ?>"><?php echo $celula->nome; ?> </option>
@@ -122,9 +107,9 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group" >
-                    <label class="col-md-3" >Status Celular:</label>
+                    <label class="col-md-3 control-label">Status Celular:</label>
                     <div class="col-md-9">
-                        <select class="form-control" name="tipoStatusCelular"  >
+                        <select  data-placeholder="Selecione" class="form-control" name="tipoStatusCelular"  >
                              <option value=""></option>
                             <?php foreach ($tiposStatusCelulares as $tipoStatusCelular) : ?>
                                 <option value="<?php echo $tipoStatusCelular->id ; ?>" >
@@ -139,7 +124,7 @@
                 <div class="form-group" >
                     <label class="col-md-3 control-label" >Admissão:</label>
                     <div class="col-md-9" >
-                        <select class="form-control" name="tipoAdmissao" id="tipoAdmissao">
+                        <select data-placeholder="Selecione" class="form-control" name="tipoAdmissao" id="tipoAdmissao">
                              <option value=""></option>
                               <?php foreach ($tiposAdmissoes as $tipoAdmissao) : ?>
                                     <option value="<?php echo $tipoAdmissao['id'] ; ?>" >
@@ -151,32 +136,6 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group" >
-                    <label class="col-md-3 control-label" >Função</label>
-                    <div class="col-md-9">
-                        <select class="form-control" name="funcaoRedeId" >
-                            <option value=""></option>
-                            <?php foreach ($funcoesRedes as $funcaoRede) : ?>
-                                <option value="<?php echo $funcaoRede['id'] ; ?>" ><?php echo $funcaoRede['nome'] ; ?></option>
-                            <?php endforeach ; ?>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group " >
-                    <label class="col-md-3 control-label" >Rede:</label>
-                    <div class="col-md-9 " >
-                        <select class="form-control" name="tipoRedeId" >
-                            <option value=""></option>
-                            <?php foreach ($tiposRedes as $tipoRede) : ?>
-                                <option value="<?php echo $tipoRede->id ; ?>" ><?php echo $tipoRede->nome ; ?></option>
-                            <?php endforeach ; ?>
-                        </select>
-                    </div>
-                </div>
-            </div>
         </div>
     </fieldset>
     <fieldset class="col-md-12">
@@ -187,7 +146,10 @@
     </fieldset>
 </form>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
-<script src="https://raw.githubusercontent.com/jzaefferer/jquery-validation/master/src/localization/messages_pt_BR.js"></script>
+<!--script src="https://raw.githubusercontent.com/jzaefferer/jquery-validation/master/src/localization/messages_pt_BR.js"></script-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.7.0/chosen.jquery.js"></script>
 <style type="text/css">
     @import url("https://cdnjs.cloudflare.com/ajax/libs/chosen/1.7.0/chosen.min.css");
@@ -260,4 +222,8 @@
             }
         }
     });
+
+   jQuery("#dataNascimento").mask("99/99/9999");
+   jQuery("#telefone").mask("(99) 99999-9999");
+
 </script>
