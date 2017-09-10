@@ -31,9 +31,6 @@ unset($_SESSION['mensagem']);
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                    Entrar
                 </button>
-                <button id="recuperarBtn" class="btn btn-lg btn-default btn-block" type="button">
-                   Recuperar Senha
-                </button>
             </form>
         </div>
         <div class="container form-signin">
