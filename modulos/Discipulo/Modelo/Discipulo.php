@@ -1422,4 +1422,34 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
 
         return $resposta;
     }
+
+    public function listarFiltro($filtro = null)
+    {
+        $pdo = self::pegarConexao();
+
+        $sql = 'SELECT * FROM Discipulo WHERE ativo = 1 AND arquivo = 0  ';
+
+        if (!empty($filtro['celula'])) {
+            $sql .= ' AND celula = :celula ';
+        }
+
+        $sql .= ' order by nome';
+
+        $stm = $pdo->prepare($sql);
+
+        if (!empty($filtro['celula'])) {
+            $stm->bindParam(':celula', $filtro['celula']);
+        }
+
+        $stm->execute();
+
+        $resposta = array();
+
+        while ($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')) {
+            $resposta[$ob->id] = $ob;
+        }
+
+        return $resposta;
+    }
+
 }

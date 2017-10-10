@@ -57,6 +57,17 @@
                             <?php endforeach ?>
                         </select >
                     </div>
+                    <div class="form-group">
+                        <label>Celula:</label>
+                        <select class="form-control" name="celula">
+                            <option value="0"> Todos</option>
+                            <?php foreach($celulas as $celula): ?>
+                                <option value="<?php echo $celula->id ?>">
+                                    <?php echo $celula->nome; ?>
+                                </option>
+                            <?php endforeach ?>
+                        </select >
+                    </div>
             </fieldset>
             <fieldset>
                 <legend>Ações</legend>
@@ -65,9 +76,47 @@
             </fieldset>
         </form>
         <hr>
+
+        <?php if ($relatorios): ?>
+        <table class="table table-bordered table-condensed">
+            <thead>
+                <th>Nome</th>
+                <?php foreach ($relatorios[0]['ofertas'] as $key =>$oferta): ?>
+                    <th><?php echo($key)?></th>
+                <?php endforeach;?>
+            </thead>
+            <tbody>
+                <?php foreach ($relatorios as $relatorio): ?>
+                    <tr>
+                        <td>
+                            <a href="/oferta/oferta/novo/<?php echo $relatorio['id']?>">
+                                <?php echo $relatorio['nome']?>
+                            </a>
+                        </td>
+                        <?php foreach ($relatorio['ofertas'] as $key =>$oferta): ?>
+                                <?php if($oferta):?>
+                                    <td class="<?php echo !$oferta ? 'warning' : 'info' ?>">
+                                        <?php foreach ($oferta as $o): ?>
+                                             <span class="label label-default">
+                                                <?php echo $o['nome']?>:
+                                                <?php echo $o['valor']?>
+                                              </span>
+                                        <?php endforeach;?>
+                                    </td>
+                                <?php else:?>
+                                        <td class="warning">
+                                        </td>
+                                <?php endif?>
+                        <?php endforeach;?>
+                    </tr>
+                <?php endforeach;?>
+            <tbody>
+        </table>
+                            <?php endif?>
+
         <?php foreach ($relatorios as $relatorio): ?>
             <?php if ($relatorio['mostrar'] || $inativos): ?>
-                <table class="table table-bordered table-condensed well well-small">
+                <!--table class="table table-bordered table-condensed well well-small">
                     <tr >
                         <td rowspan="2">
                             <a href="/oferta/oferta/novo/<?php echo $relatorio['id']?>">
@@ -84,10 +133,9 @@
                                 <td class="<?php echo !$oferta ? 'warning' : 'info' ?>">
                                     <?php foreach ($oferta as $o): ?>
                                          <span class="label label-default">
-                                            <?php //var_dump($oferta)?>
                                             <?php echo $o['nome']?>:
                                             <?php echo $o['valor']?>
-                                          </span><br/>
+                                          </span>
                                     <?php endforeach;?>
                                 </td>
                             <?php else:?>
@@ -96,13 +144,12 @@
                             <?php endif?>
                     <?php endforeach;?>
                     </tr>
-                </table>
+                </table-->
         <?php endif;?>
         <?php endforeach;?>
         <script>
             jQuery("#btnOk").on('click', function(){
-                //window.location = '/oferta/oferta/geral?inicio='+jQuery("#inicio")+'fim'+jQuery("#fim");
-                console.log(jQuery("#form").serialize());
+                jQuery("#form").serialize();
             });
         </script>
     </body>

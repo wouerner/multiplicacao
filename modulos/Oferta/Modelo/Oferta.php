@@ -120,7 +120,8 @@ class oferta {
         $stm->bindParam(':ano', $ano);
 
         if ($tipo){
-            $stm->bindParam(':tipo', implode(',',$tipo));
+            $tipo =  implode(',',$tipo);
+            $stm->bindParam(':tipo', $tipo);
         }
 
         if ($rede){

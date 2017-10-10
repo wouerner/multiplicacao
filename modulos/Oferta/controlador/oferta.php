@@ -5,6 +5,7 @@ use \Discipulo\Modelo\Discipulo ;
 use \Oferta\Modelo\TipoOferta as TipoOfertaModelo;
 use \Oferta\Modelo\Oferta as OfertaModelo;
 use \Oferta\Modelo\Conta as ContaModelo;
+use \Celula\Modelo\Celula as CelulaModelo;
 
 class oferta
 {
@@ -80,12 +81,16 @@ class oferta
         $tipo = array_key_exists('id', $_GET) ? $_GET['id'] : null ;
         $inativos = array_key_exists('inativos', $_GET) ? $_GET['inativos'] : null ;
         $rede = array_key_exists('rede', $_GET) ? $_GET['rede'] : null ;
+        $celulaId = array_key_exists('celula', $_GET) ? $_GET['celula'] : null ;
 
         $mes['inicio'] = array_key_exists('inicio', $_GET) ? $_GET['inicio'] : null;
         $mes['fim'] = array_key_exists('fim', $_GET) ?$_GET['fim'] : null;
 
         $discipulos = new Discipulo();
-        $discipulos = $discipulos->listarAtivos();
+        $discipulos = $discipulos->listarFiltro(['celula' => $celulaId]);
+
+        $celula = new CelulaModelo() ;
+        $celulas = $celula->listarTodos() ;
 
         $relatorios = array();
         foreach( $discipulos as $discipulo ) {
@@ -103,10 +108,11 @@ class oferta
                  }
             }
             $relatorios[] = array(
-                                'ofertas'=> $ofertas,
-                                'nome'=>$discipulo->nome,
-                                'id'=>$discipulo->id,
-                                'mostrar'=> $mostrar);
+                            'ofertas'=> $ofertas,
+                            'nome'=>$discipulo->nome,
+                            'id'=>$discipulo->id,
+                            'mostrar'=> $mostrar
+                            );
         }
 
         $tipoOferta =	new \Oferta\Modelo\TipoOferta() ;
