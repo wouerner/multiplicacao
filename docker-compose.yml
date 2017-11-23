@@ -1,0 +1,22 @@
+version: '3.4'
+services:
+  web:
+    container_name: m-web
+    depends_on:
+    - db
+    image: multiplicacao
+    build: .
+    command: /bin/sh
+    links: 
+    - "db:database"
+    volumes: 
+     - .:/var/www/multiplicacao 
+  db:
+    container_name: m-db
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+      MYSQL_DATABASE: root 
+      MYSQL_USER: root 
+      MYSQL_PASSWORD: root 
