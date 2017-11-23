@@ -224,6 +224,7 @@ $igreja = $igreja->sede();
                         <?php endif ; ?>
                     </ul>
                 </li>
+                <li><a href = "/consolidacao/consolidacao" ><i class = "" ></i>Consolidação</a></li>
             <?php endif ; ?>
             </ul>
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>

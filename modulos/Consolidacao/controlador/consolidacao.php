@@ -1,28 +1,48 @@
 <?php
+namespace Consolidacao\controlador;
+
 use \StatusCelular\Modelo\TipoStatusCelular ;
 use \StatusCelular\Modelo\StatusCelular ;
 use \Discipulo\Modelo\Discipulo ;
+use \Consolidacao\Modelo\Consolidacao as ConsolidacaoModelo ;
 
-namespace Consolidacao\controlador;
 
 class Consolidacao 
 {
 
     public function index() {
-        require_once  'modulos/Consolidacao/visao/listar.php';
-        /* die('die') */
+        $id = 4;
+        $status = new \StatusCelular\Modelo\StatusCelular() ;
+        $status->tipoStatusCelular = (int)$id ;
+
+        $discipulos = $status->listarStatusCelularPorTipo();
+
+        $discipulosInativos = $status->discipulosInativos();
+        $discipulosArquivo = $status->discipulosArquivo();
+
+        $totalDiscipulos = count($discipulos);
+        $totalArquivo = count($discipulosArquivo);
+        $totalInativos = count($discipulosInativos);
+
+        $cont = 0 ;
+
+        $tipoStatus = new \StatusCelular\Modelo\TipoStatusCelular() ;
+        $tipoStatus->id = (int)$id ;
+        $tipoStatus = $tipoStatus->listarUm() ;
+
+        require 'modulos/Consolidacao/visao/discipuloPorStatus.php' ;
     }
 
-public function novo($url){
-    if ( empty ( $url['post'] ) ) {
+    public function novo ($url) {
         $tiposStatusCelulares =	new \StatusCelular\Modelo\TipoStatusCelular() ;
         $statusCelularDiscipulo =	new \StatusCelular\Modelo\StatusCelular() ;
 
         $tiposStatusCelulares = $tiposStatusCelulares->listarTodos();
 
-        $statusCelularDiscipulo->discipuloId= $url[4];
+        $consolidacao = new ConsolidacaoModelo();
+        $consolidacao->discipuloId= $url[4];
 
-        $historico = $statusCelularDiscipulo->listarTodosStatus();
+        $historico = $consolidacao->listarPorDiscipulo();
 
         $statusCelularDiscipulo = $statusCelularDiscipulo->pegarStatusCelular();
 
@@ -30,28 +50,27 @@ public function novo($url){
         $discipulo->id = $url[4] ;
         $discipulo = $discipulo->listarUm();
 
-        require_once  'modulos/StatusCelular/visao/novo.php';
+        require_once  'modulos/Consolidacao/visao/novo.php';
+    }
 
-    }else {
-        $statusCelular =	new \StatusCelular\Modelo\StatusCelular();
+    public function salvar($url) {
+        $consolidacao = new ConsolidacaoModelo();
 
-        $post = $url['post'] ;
-        $statusCelular->discipuloId = $post['discipuloId'];
-        $statusCelular->tipoStatusCelular = $post['tipoStatusCelular'];
+        $post = $url['post'];
+        $consolidacao->discipuloId = $post['discipuloId'];
+        $consolidacao->consolidadorId = $post['consolidadorId'];
+        $consolidacao->observacao = $post['observacao'];
+        /* var_dump($consolidacao);die; */
 
-        if ($statusCelular->salvar()){
-            header ('location:/statusCelular/statusCelular/novo/id/'.$statusCelular->discipuloId);
+        if ($consolidacao->salvar()){
+            header ('location:/consolidacao/consolidacao/novo/id/'.$consolidacao->discipuloId);
             exit();
         }else {
             $statusCelular->atualizar();
             header ('location:/discipulo/discipulo/detalhar/id/'.$statusCelular->discipuloId);
             exit();
-
         }
     }
-
-
-}
 
 public function novoTipoStatusCelular($url){
     if ( empty ( $url['post'] ) ) {
@@ -182,54 +201,6 @@ public function listarTipoStatusCelular(){
 
     }
 
-
-    public function chamar () {
-
-        $nome = (!empty($_GET['nome'])) ? $_GET['nome'] : NULL;
-        $discipulo =	new \Discipulo\Modelo\Discipulo();
-        $discipulo->nome = $nome;
-        $discipulos = $discipulo->chamar($nome);
-        require_once 'Discipulo/visao/chamar.php' ;
-
-
-    }
-
-    public function evento($url){
-
-
-        if ( empty ( $url['post'] ) ) {
-
-              $eventos = new \Evento\Modelo\Evento();
-
-              $id = $url[3];
-              $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
-            $eventos = $eventos->listarTodos();
-
-
-        require_once 'modulos/Discipulo/visao/evento.php' ;
-        }else {
-                  $post = $url['post'];
-                 $discipuloEvento = new \Evento\Modelo\Evento();
-                  $eventoId = $post['eventoId'];
-                    $discipuloId = $post['discipuloId'];
-
-                 $discipuloEvento->salvarDiscipuloEvento($discipuloId, $eventoId );
-
-                  echo "url" ;
-                 var_dump($url);
-                 $id = $post['discipuloId'];
-
-                 header ('location:/discipulo/evento/id/'.$id);
-                 exit();
-
-
-
-
-        }
-
-
-    }
-
     public function excluir($url){
 
 
@@ -241,8 +212,6 @@ public function listarTipoStatusCelular(){
         $status->excluir();
         header ('location:/statusCelular/statusCelular/novo/id/'.$discipulo);
         exit();
-
-
     }
 
     public function listarDiscipulosPorStatus($url){
@@ -266,7 +235,7 @@ public function listarTipoStatusCelular(){
         $tipoStatus->id = (int)$id ;
         $tipoStatus = $tipoStatus->listarUm() ;
 
-        require 'statusCelular/visao/discipuloPorStatus.php' ;
+        require 'modulos/statusCelular/visao/discipuloPorStatus.php' ;
     }
 
 }

@@ -1,52 +1,47 @@
 <?php
 
-namespace StatusCelular\Modelo;
+namespace Consolidacao\Modelo;
 
-class StatusCelular{
+class Consolidacao
+{
+    private $id ;
+    private $discipuloId;
+    private $consolidadorId;
+    private $observacao;
 
-		  private $id ;
-		  private $discipuloId;
-		  private $tipoStatusCelular;
-		  private $dataInicio;
-		  private $ativo;
+    public function __get($prop){
+        return $this->$prop ;
+    }
 
-		  public function __get($prop){
+    public function __set($prop, $valor){
+        $this->$prop = $valor ;
+    }
 
-					 return $this->$prop ;
+    public function salvar() {
+        //abrir conexao com o banco
+        $pdo = new \PDO(DSN, USER, PASSWD);
+        //cria sql
+        $sql = "INSERT INTO Consolidacao (discipuloId, observacao, consolidadorId)
+          VALUES ( ? , ? , ? )";
 
-		  }
+        //prepara sql
+        $stm = $pdo->prepare($sql);
+        //trocar valores
+        $stm->bindParam(1, $this->discipuloId);
+        $stm->bindParam(2, $this->observacao);
+        $stm->bindParam(3, $this->consolidadorId);
 
-		  public function __set($prop, $valor){
+        $resposta = $stm->execute();
 
-					 $this->$prop = $valor ;
+        //atualiza para esse o status atual
+        $this->id = $pdo->lastInsertId();
+        $this->atualizarAtivo();
 
-		  }
-			  public function salvar(){
+        //fechar conexÃ£o
+        $pdo = null ;
 
-			  //abrir conexao com o banco
-			  $pdo = new \PDO(DSN, USER, PASSWD);
-			  //cria sql
-			  $sql = "INSERT INTO StatusCelular ( discipuloId, tipoStatusCelular,dataInicio, ativo )
-				  VALUES ( ? , ? , NOW(), 1 )";
-
-			  //prepara sql
-			  $stm = $pdo->prepare($sql);
-			  //trocar valores
-			  $stm->bindParam(1, $this->discipuloId);
-			  $stm->bindParam(2, $this->tipoStatusCelular);
-
-			  $resposta = $stm->execute();
-
-
-			//atualiza para esse o status atual
-			  $this->id = $pdo->lastInsertId();
-			  $this->atualizarAtivo();
-
-			  //fechar conexÃ£o
-			  $pdo = null ;
-
-			  return $resposta;
-		}
+        return $resposta;
+    }
 
 		public function atualizarAtivo(){
 			  //abrir conexao com o banco
@@ -122,30 +117,34 @@ class StatusCelular{
 				*
 				* */
 
-			  public function listarTodosStatus(){
+    public function listarPorDiscipulo(){
 
-				  $pdo = new \PDO (DSN,USER,PASSWD);
+      $pdo = new \PDO (DSN,USER,PASSWD);
 
-				  $sql = 'SELECT  discipuloId, dataInicio , nome , s.id AS statusId , ts.id AS tipoId
-							FROM StatusCelular AS s , TipoStatusCelular AS ts
-							WHERE
-							s.discipuloId = ? AND ts.id = s.tipoStatusCelular ORDER BY s.dataInicio DESC';
+      $sql = '
+        SELECT
+            c.id as id,
+            c.consolidadorId,
+            consolidador.nome,
+            c.observacao
+        FROM multiplicacao.Consolidacao as c
+        JOIN Discipulo as consolidador ON consolidador.id = c.consolidadorId
+        WHERE c.discipuloId = ? 
+       ';
 
-				  $stm = $pdo->prepare($sql);
+      $stm = $pdo->prepare($sql);
 
-				  $stm->bindParam(1, $this->discipuloId);
+      $stm->bindParam(1, $this->discipuloId);
 
-				  $stm->execute();
+      $stm->execute();
 
-				  $resposta = array();
+      $resposta = array();
 
-					while($ob = $stm->fetchObject('\StatusCelular\Modelo\StatusCelular')){
-						$resposta[$ob->statusId] = $ob ;
-					}
-				  return $resposta;
-
-
-			  }
+        while($ob = $stm->fetchObject('\Discipulo\Modelo\Discipulo')){
+            $resposta[$ob->id] = $ob ;
+        }
+      return $resposta;
+    }
 
 			  public function getTipoStatusCelular(){
 						 $tipoStatus = new \StatusCelular\Modelo\TipoStatusCelular();
