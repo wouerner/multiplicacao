@@ -33,7 +33,15 @@
                 </div>
             </fieldset>
             <fieldset>
-                <legend>Meses</legend>
+                <legend>Data</legend>
+                <div class="form-group">
+                    <label>Ano</label>
+                    <select class="form-control" name="ano">
+                        <option selected value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                    </select >
+                </div>
                     <div class="form-group">
                         <label>
                             Inicio
@@ -153,4 +161,19 @@
             });
         </script>
     </body>
+    <style type="text/css">
+        @import url("http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css");
+    </style>
+    <script src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('table').DataTable({
+                    "language": {
+                        "url": "http://cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json"
+                    },
+                    "iDisplayLength": 100
+                }
+            );
+        });
+    </script>
 </html>

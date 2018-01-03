@@ -83,6 +83,7 @@ class oferta
         $rede = array_key_exists('rede', $_GET) ? $_GET['rede'] : null ;
         $celulaId = array_key_exists('celula', $_GET) ? $_GET['celula'] : null ;
 
+        $ano = array_key_exists('ano', $_GET) ? $_GET['ano'] : null;
         $mes['inicio'] = array_key_exists('inicio', $_GET) ? $_GET['inicio'] : null;
         $mes['fim'] = array_key_exists('fim', $_GET) ?$_GET['fim'] : null;
 
@@ -95,7 +96,7 @@ class oferta
         $relatorios = array();
         foreach( $discipulos as $discipulo ) {
             $ofertas = $discipulo->ofertasMesAno(
-                2017,
+                $ano,
                 $tipo ? $tipo : null,
                 !empty($mes['inicio']) ? $mes : null,
                 $rede
@@ -115,9 +116,9 @@ class oferta
                             );
         }
 
-        $tipoOferta =	new \Oferta\Modelo\TipoOferta() ;
-        $tiposRede =	new \Rede\Modelo\TipoRede() ;
-        $tiposRede =	$tiposRede->listarTodos() ;
+        $tipoOferta = new \Oferta\Modelo\TipoOferta() ;
+        $tiposRede = new \Rede\Modelo\TipoRede() ;
+        $tiposRede = $tiposRede->listarTodos() ;
 
         $tipoOferta = $tipoOferta->listarTodos();
         require_once  'modulos/Oferta/visao/oferta/geral.php' ;
