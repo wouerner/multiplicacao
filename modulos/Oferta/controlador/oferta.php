@@ -257,5 +257,54 @@ class oferta
 
     }
 
+    public function geralSemValor($url)
+    {
+        $tipo = array_key_exists('id', $_GET) ? $_GET['id'] : null ;
+        $inativos = array_key_exists('inativos', $_GET) ? $_GET['inativos'] : null ;
+        $rede = array_key_exists('rede', $_GET) ? $_GET['rede'] : null ;
+        $celulaId = array_key_exists('celula', $_GET) ? $_GET['celula'] : null ;
+
+        $ano = array_key_exists('ano', $_GET) ? $_GET['ano'] : null;
+        $mes['inicio'] = array_key_exists('inicio', $_GET) ? $_GET['inicio'] : null;
+        $mes['fim'] = array_key_exists('fim', $_GET) ?$_GET['fim'] : null;
+
+        $discipulos = new Discipulo();
+        $discipulos = $discipulos->listarFiltro(['celula' => $celulaId]);
+
+        $celula = new CelulaModelo() ;
+        $celulas = $celula->listarTodos() ;
+
+        $relatorios = array();
+        foreach( $discipulos as $discipulo ) {
+            $ofertas = $discipulo->ofertasMesAno(
+                $ano ? date('Y'): null,
+                $tipo ? $tipo : null,
+                !empty($mes['inicio']) ? $mes : null,
+                $rede
+            );
+
+            $mostrar = false;
+            foreach($ofertas as $oferta){
+                 if( !empty($oferta ) ){
+                    $mostrar = true;
+                 }
+            }
+            $relatorios[] = array(
+                            'ofertas'=> $ofertas,
+                            'nome'=>$discipulo->nome,
+                            'lider'=>$discipulo->getLider(),
+                            'id'=>$discipulo->id,
+                            'mostrar'=> $mostrar
+                            );
+        }
+
+        $tipoOferta = new \Oferta\Modelo\TipoOferta() ;
+        $tiposRede = new \Rede\Modelo\TipoRede() ;
+        $tiposRede = $tiposRede->listarTodos() ;
+
+        $tipoOferta = $tipoOferta->listarTodos();
+        require_once  'modulos/Oferta/visao/oferta/geralSemValor.php' ;
+    }
+
 
 }
