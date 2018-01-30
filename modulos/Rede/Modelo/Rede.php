@@ -237,7 +237,8 @@ group by r.tipoRedeId
               //cria sql
               $sql = "
                     SELECT
-                                d.id AS id , d.nome AS nome, d.telefone , d.endereco , d.email , d.lider AS lider
+                        d.id AS id , d.nome AS nome, d.telefone , d.endereco , 
+                        d.email , d.lider AS lider, d.endereco
                     FROM Discipulo AS d inner join Redes AS r ON d.id = r.discipuloId
                                   inner join TipoRede AS tp ON r.tipoRedeId = tp.id
                     WHERE r.tipoRedeId = ?
@@ -266,7 +267,8 @@ group by r.tipoRedeId
               //cria sql
               $sql = "
                     SELECT
-                                d.id AS id , d.nome AS nome, d.telefone , d.endereco , d.email , d.lider AS lider, d.observacao
+                        d.id AS id , d.nome AS nome, d.telefone , d.endereco , d.email , 
+                        d.lider AS lider, d.observacao, d.endereco, d.dataNascimento
                     FROM Discipulo AS d inner join Redes AS r ON d.id = r.discipuloId AND d.ativo = 1
                                   inner join TipoRede AS tp ON r.tipoRedeId = tp.id
                     WHERE r.tipoRedeId = ?
@@ -287,7 +289,7 @@ group by r.tipoRedeId
                         $resposta[ $obj->id ] = $obj ;
                 }
 
-              return $resposta ;
+              return $resposta;
     }
 
     public function pegarMembrosInativos()

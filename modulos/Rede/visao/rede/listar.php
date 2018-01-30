@@ -32,6 +32,8 @@
                                         <th>Nome</th>
                                         <th>Função</th>
                                         <th>Líder</th>
+                                        <th>Endereço</th>
+                                        <th>Dt. Nasc.</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -41,15 +43,18 @@
                                             <?php if ( $funcao['id'] == $discipulo->getFuncaoRede()->id) : ?>
                                                 <tr>
                                                     <td><?php echo  $cont++  ?></td>
-                                                        <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                                                    <td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ?>" ><?php echo $discipulo->nome ; ?></a></td>
+                                                    <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
+                                                        <td><a href="/discipulo/discipulo/detalhar/id/<?php echo $discipulo->id ?>" ><?php echo $discipulo->nome ; ?></a></td>
                                                         <td><?php echo $discipulo->getFuncaoRede()->nome; ?></td>
-                                                    <td><a href="/discipulo/discipulo/detalhar/id/<?php echo is_object($lider=$discipulo->getLider()) ? $lider->id : '' ; ?>"><?php echo $lider->nome ; ?></a></td>
-
+                                                        <td><a href="/discipulo/discipulo/detalhar/id/<?php echo is_object($lider=$discipulo->getLider()) ? $lider->id : '' ; ?>"><?php echo $lider->nome ; ?></a></td>
+                                                        <td><?php echo ($discipulo->endereco); ?></td>
+                                                        <td><?php echo ($discipulo->dataNascimento->format('d/m/y')); ?></td>
                                                     <?php else : ?>
                                                         <td><?php echo $discipulo->nome ; ?></td>
                                                         <td><?php echo $discipulo->getFuncaoRede()->nome; ?></td>
                                                         <td><?php echo is_object($lider=$discipulo->getLider()) ? $lider->nome : '' ; ?></td>
+                                                        <td><?php echo($discipulo->endereco); ?></td>
+                                                        <td><?php echo ($discipulo->dataNascimento->format('d/m/y')); ?></td>
                                                     <?php endif ; ?>
                                                     <?php if ($acesso->hasPermission('admin_acesso') == true || $liderRede): ?>
                                                         <td><a target="blank" class="btn-xs btn btn-mini btn-danger" href="/discipulo/discipulo/arquivar/id/<?php echo $discipulo->id?>"> Arquivar</a></td>
