@@ -98,9 +98,7 @@
                 <?php foreach ($relatorios as $relatorio): ?>
                     <tr>
                         <td>
-                            <a href="/oferta/oferta/novo/<?php echo $relatorio['id']?>">
-                                <?php echo $relatorio['nome']?>
-                            </a>
+                            <?php echo $relatorio['nome']?>
                         </td>
                         <td>
                             <?php echo $relatorio['lider']->nome ?>

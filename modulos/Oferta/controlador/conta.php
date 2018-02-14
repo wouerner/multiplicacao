@@ -7,7 +7,7 @@ namespace oferta\controlador;
 class conta {
 
     public function index() {
-        require_once  'modulos/oferta/visao/conta/index.php';
+        require_once  'modulos/Oferta/visao/conta/index.php';
     }
 
     public function all ($url) {
@@ -73,7 +73,7 @@ class conta {
         $discipulo->id = $url[3] ;
         $discipulo = $discipulo->listarUm();
 
-        require_once  'modulos/oferta/visao/novo.php';
+        require_once  'modulos/Oferta/visao/novo.php';
 
         }else {
             $oferta =	new \oferta\modelo\oferta();
@@ -124,7 +124,7 @@ class conta {
               $tipoOfertas =	new \oferta\modelo\tipoOferta();
               $tipoOfertas = $tipoOfertas->listarTodos();
 
-              require 'modulos/oferta/visao/listarTipoOferta.php' ;
+              require 'modulos/Oferta/visao/listarTipoOferta.php' ;
 
     }
 
@@ -185,7 +185,7 @@ class conta {
             $tipoOferta->id = $url[3] ;
             $tipoOferta = $tipoOferta->listarUm();
 
-            require_once  'modulos/oferta/visao/atualizarTipoOferta.php';
+            require_once  'modulos/Oferta/visao/atualizarTipoOferta.php';
 
         }else {
             $tipoOferta =	new \oferta\modelo\tipoOferta();
@@ -228,7 +228,7 @@ class conta {
         $oferta->id = $url[3] ;
         $oferta = $oferta->listarUm() ;
 
-        require 'oferta/visao/detalhar.php' ;
+        require 'Oferta/visao/detalhar.php' ;
 
     }
 
