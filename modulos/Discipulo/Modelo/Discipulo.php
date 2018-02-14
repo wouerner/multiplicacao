@@ -1427,7 +1427,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
     {
         $pdo = self::pegarConexao();
 
-        $sql = 'SELECT * FROM Discipulo WHERE ativo = 1 AND arquivo = 0  ';
+        $sql = 'SELECT * FROM Discipulo WHERE ativo = 1 AND arquivo = 0  AND igreja = 1 ';
 
         if (!empty($filtro['celula'])) {
             $sql .= ' AND celula = :celula ';
