@@ -37,9 +37,9 @@ $igreja = $igreja->sede();
                 <li><a href = "/aviso/aviso" ><i class = " icon-bullhorn " ></i></a></li>
             <?php endif ; ?>
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                <li><a href = "/oferta/oferta/geral" ><i class = " icon-money " ></i></a></li>
+                <li><a href = "/oferta/oferta/geral?ano=2018&inicio=1&fim=12&rede=0&celula=0" ><i class = " icon-money " ></i></a></li>
             <?php else: ; ?>
-                <li><a href = "/oferta/oferta/geralSemValor" ><i class = " icon-money " ></i></a></li>
+                <li><a href = "/oferta/oferta/geralSemValor?ano=2018&inicio=1&fim=12&rede=0&celula=0" ><i class = " icon-money " ></i></a></li>
             <?php endif ; ?>
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                 <li class="dropdown">

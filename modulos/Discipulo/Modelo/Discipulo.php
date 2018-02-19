@@ -412,12 +412,15 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
     public function atualizar()
     {
         try {
-
-            //abrir conexao com o banco
             $pdo = self::pegarConexao();
             //cria sql
-            $sql = "UPDATE Discipulo SET 	nome = :nome, telefone = :telefone, email = :email, endereco = :endereco, nivel = :nivel,
-            lider = :lider, celula = :celula, dataNascimento = :dataNascimento , estadoCivilId = :estadoCivilId ,sexo = :sexo,igreja= :igreja";
+            $sql = "UPDATE Discipulo SET 	
+                nome = :nome, telefone = :telefone, email = :email, 
+                endereco = :endereco, nivel = :nivel,
+                lider = :lider, celula = :celula, dataNascimento = :dataNascimento , 
+                estadoCivilId = :estadoCivilId ,
+                sexo = :sexo,igreja= :igreja, dizimista = :dizimista
+            ";
 	    $sql .= isset($this->alcunha) ?	 ',alcunha = :alcunha ' : '';
             $sql.=" WHERE id = :id ";
 
@@ -435,6 +438,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
             $stm->bindParam(':sexo', $this->sexo, \PDO::PARAM_STR);
             $stm->bindParam(':id', $this->id, \PDO::PARAM_INT);
             $stm->bindParam(':igreja', $this->igreja, \PDO::PARAM_INT);
+            $stm->bindParam(':dizimista', $this->dizimista, \PDO::PARAM_INT);
 
             isset($this->alcunha) ? $stm->bindParam(':alcunha', $this->alcunha, \PDO::PARAM_STR): null;
 
@@ -1427,7 +1431,7 @@ class Discipulo extends ModeloFramework implements \JsonSerializable
     {
         $pdo = self::pegarConexao();
 
-        $sql = 'SELECT * FROM Discipulo WHERE ativo = 1 AND arquivo = 0  AND igreja = 1 ';
+        $sql = 'SELECT * FROM Discipulo WHERE ativo = 1 AND arquivo = 0  AND igreja = 1 AND dizimista = 1';
 
         if (!empty($filtro['celula'])) {
             $sql .= ' AND celula = :celula ';

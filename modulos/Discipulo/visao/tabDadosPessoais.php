@@ -183,6 +183,12 @@
                 </select>
             </div>
         </div>
+        <div class="form-group">
+            <label class = "control-label col-md-3">É dizimista:</label>
+            <div class="col-md-8">
+            <input type="checkbox" name="dizimista" value="1" <?php echo $discipulo->dizimista  == 1 ? 'checked' :''?> >
+            </div>
+        </div>
     </fieldset>
     <fieldset class="col-md-12 " >
         <input type = "hidden" name = "discipuloId" value = "<?php echo $discipulo->id ; ?>" >

@@ -537,7 +537,7 @@ class discipulo
     {
         $acl = new \Seguranca\Modelo\Acl($_SESSION['usuario_id']);
 
-        if ( empty ( $url['post'] ) ) {
+        if (empty($url['post'])) {
 
             $igreja = new IgrejaModelo();
             $igrejas = $igreja->listarTodos();
@@ -602,7 +602,7 @@ class discipulo
              $funcaoMinisterio = $funcaoMinisterio->listarTodos() ;
 
              //escala de exito
-              $eventos = new \Evento\Modelo\Evento();
+             $eventos = new \Evento\Modelo\Evento();
 
           $id = $url[3];
           $eventosDiscipulos = $eventos->listarTodosDiscipulo($id);
@@ -637,7 +637,9 @@ class discipulo
                 //var_dump($discipulo->ativo);
                 //exit();
                 //}
-                $discipulo->lider = $post['lider'] ;
+                $discipulo->lider = $post['lider'];
+
+                $discipulo->dizimista = isset($post['dizimista']) ? 1 : 0; ;
 
                 //var_dump($discipulo);
                 //exit();
@@ -650,21 +652,22 @@ class discipulo
                 if (!$statusCelular->salvar()) $statusCelular->atualizar();*/
 
                 //admissão
-                 $admissao = new \Admissao\Modelo\Admissao();
-                 $admissao->discipuloId = $post['discipuloId'] ;
-                 $admissao->tipoAdmissao = $post['tipoAdmissao'] ;
-                 if (!$admissao->salvar()) $admissao->atualizar() ;
+                $admissao = new \Admissao\Modelo\Admissao();
+                $admissao->discipuloId = $post['discipuloId'] ;
+                $admissao->tipoAdmissao = $post['tipoAdmissao'] ;
+                if (!$admissao->salvar()) $admissao->atualizar() ;
 
                 //tipos de rede e rede atual da pessoa
                 $rede = new \Rede\Modelo\Rede();
 
-                 $rede->discipuloId = $post['discipuloId'];
-                 $rede->tipoRedeId = $post['tipoRedeId'];
-                 $rede->funcaoRedeId = $post['funcaoRedeId'];
+                $rede->discipuloId = $post['discipuloId'];
+                $rede->tipoRedeId = $post['tipoRedeId'];
+                $rede->funcaoRedeId = $post['funcaoRedeId'];
+
                 if (!$rede->salvar()) $rede->atualizar();
 
                 $discipuloEventos = new \Evento\Modelo\Evento();
-              $eventos = isset($post['eventos']) ? $post['eventos'] : NULL ;
+                $eventos = isset($post['eventos']) ? $post['eventos'] : NULL ;
                 if (!is_null($eventos)) $discipuloEventos->salvarEventos($eventos,$discipulo->id);
 
                 //ministerio
