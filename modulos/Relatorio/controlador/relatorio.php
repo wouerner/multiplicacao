@@ -1,6 +1,7 @@
 <?php
-use discipulo\Modelo\Discipulo ;
 namespace relatorio\controlador ;
+
+use discipulo\Modelo\Discipulo ;
 
 class relatorio
 {
@@ -281,18 +282,16 @@ class relatorio
 
     public function aniversariantes($url)
     {
-        $post = $url['post']	;
+        $post = $url['post'];
 
         if ( !empty($post) ) {
-        $relatorios = new \relatorio\modelo\discipulos();
-        $relatorios = $relatorios->aniversarianteMes($post['data']);
+            $relatorios = new \Relatorio\Modelo\Discipulos();
+            $relatorios = $relatorios->aniversarianteMes($post['data']);
 
-        require 'Relatorio/visao/aniversariantes.php';
+            require 'Relatorio/visao/aniversariantes.php';
         } else {
-        require 'Relatorio/visao/aniversarios.php';
-
+            require 'Relatorio/visao/aniversarios.php';
         }
-
     }
 
     public function relatorioCelula($url)

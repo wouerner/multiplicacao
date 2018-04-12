@@ -208,7 +208,10 @@ ORDER BY TipoStatusCelular.nome';
             $pdo = new \PDO(DSN,USER,PASSWD);
             $sql = ' SELECT *
                         FROM Discipulo
-                        WHERE month( dataNascimento ) = ? order by dayofmonth(dataNascimento)';
+                        WHERE month( dataNascimento ) = ? 
+                    and ativo = 1 and igreja =1 
+                    order by dayofmonth(dataNascimento)
+            ';
 
             $stm = $pdo->prepare($sql);
             $stm->bindParam( 1, $mes ) ;
