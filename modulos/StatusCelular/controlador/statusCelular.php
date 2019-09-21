@@ -269,7 +269,7 @@ namespace statusCelular\controlador;
 			$tipoStatus->id = (int)$id ;
 			$tipoStatus = $tipoStatus->listarUm() ;
 
-			require 'statusCelular/visao/discipuloPorStatus.php' ;
+			require 'StatusCelular/visao/discipuloPorStatus.php' ;
 
 		}
 
