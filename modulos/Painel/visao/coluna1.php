@@ -104,7 +104,7 @@
   <div class="panel-body">
     <div id="redesChart"></div>
     <script>
-            var redes = jQuery.get('/relatorio/grafico/redes/igreja/<?php echo $igrejaId?>')
+            var redes = jQuery.get('/relatorio/grafico/redes/igreja/1')
                 .done(function( data ) {
                     var chart = c3.generate({
                     bindto: '#redesChart',
@@ -130,33 +130,21 @@
             <tbody>
                 <?php $total['discipulos']=0?>
                 <?php $total['celulas']= 0?>
-                <?php $total['metas']= 0?>
                 <?php foreach( $tiposRedes as $s) :?>
                 <tr>
                     <td>
                         <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->nome ?></a>
                     </td>
                     <td>
-                    <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->totalDiscipulosPorRede($igrejaId) ?></a>
+                    <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->totalDiscipulosPorRede(1) ?></a>
                     </td>
                     <td>
                         <a href = "/rede/rede/listarCelulas/id/<?php echo $s->id ; ?>"><?php echo $s->totalCelulasMultiplicacao() ?></a>
                     </td>
-                    <td>
-                        <a href = "#"><?php echo $s->getMeta() ?></a>
-                    </td>
                 </tr>
                 <?php $total['discipulos'] += $s->totalDiscipulosPorRede($igrejaId)?>
                 <?php $total['celulas']+= $s->totalCelulasMultiplicacao()?>
-                <?php $total['metas']+= $s->getMeta()?>
                 <?php endforeach ; ?>
-
-                <tr class = "info" >
-                    <td></td>
-                    <td><?php echo $total['discipulos'] ; ?></td>
-                    <td><?php echo $total['celulas'] ; ?></td>
-                    <td><?php echo $total['metas'] ; ?></td>
-                </tr>
             </tbody>
         </table>
 </div>
@@ -169,36 +157,36 @@
         <div class="panel-body">
             <div id="ativosChart"></div>
             <script>
-                    var ativos = jQuery.get('/relatorio/grafico/ativos/igreja/<?php echo $igrejaId?>')
-                        .done(function( data ) {
-                            var chart = c3.generate({
-                            bindto: '#ativosChart',
-                            data: {
-                              json: data,
-                              type: 'pie',
-                            },
-                            legend: {position: 'bottom'},
-                            size: { height: 240 }
-                            });
+                var ativos = jQuery.get('/relatorio/grafico/ativos/igreja/1')
+                    .done(function( data ) {
+                        var chart = c3.generate({
+                        bindto: '#ativosChart',
+                        data: {
+                          json: data,
+                          type: 'pie',
+                        },
+                        legend: {position: 'bottom'},
+                        size: { height: 240 }
                         });
+                    });
             </script>
-            </div>
-            <table class="table table-condensed" >
-                <thead>
-                    <th scope="col">Ativos</th>
-                    <th scope="col">Inativos</th>
-                    <th scope="col">Arquivados</th>
-                    <th scope="col">Total</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td scope="row"><?php echo $totalAtivos['total'] ; ?></td>
-                        <td scope="row"><?php echo $totalInativos['total'] ; ?></td>
-                        <td scope="row"><?php echo $totalArquivados['total'] ; ?></td>
-                        <td><?php echo $totalAtivos['total']+$totalInativos['total']+$totalArquivados['total'] ?></td>
-                    </tr>
-                </tbody>
-            </table>
+        </div>
+        <table class="table table-condensed" >
+            <thead>
+                <th scope="col">Ativos</th>
+                <th scope="col">Inativos</th>
+                <th scope="col">Arquivados</th>
+                <th scope="col">Total</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row"><?php echo $totalAtivos['total']; ?></td>
+                    <td scope="row"><?php echo $totalInativos['total']; ?></td>
+                    <td scope="row"><?php echo $totalArquivados['total']; ?></td>
+                    <td><?php echo $totalAtivos['total']+$totalInativos['total']+$totalArquivados['total'] ?></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 

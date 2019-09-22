@@ -61,9 +61,9 @@ class painel
 
         }
 
-        $totalAtivos =  DiscipuloModelo::totalAtivos($igrejaId) ;
-        $totalInativos = \Discipulo\Modelo\Discipulo::totalInativos($igrejaId) ;
-        $totalArquivados =  \Discipulo\Modelo\Discipulo::totalArquivados($igrejaId) ;
+        $totalAtivos =  DiscipuloModelo::totalAtivos(1) ;
+        $totalInativos = \Discipulo\Modelo\Discipulo::totalInativos(1) ;
+        $totalArquivados =  \Discipulo\Modelo\Discipulo::totalArquivados(1) ;
 
         $totalAtivosLider =  \Discipulo\Modelo\Discipulo::totalAtivosLider($usuarioId) ;
         $totalInativosLider = \Discipulo\Modelo\Discipulo::totalInativosLider($usuarioId) ;

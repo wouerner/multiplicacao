@@ -10,33 +10,28 @@ $('#myTab a:last').tab('show');
 })
 </script>
 	</head>
-
 	<body>
 		<section class = "container-fluid">
-
 		<nav>
-
 			<?php include 'menu/visao/menu.inc.php' ; ?>
 		</nav>
 		<section>
 			<article>
-
 				<?php require 'modulos/Discipulo/visao/chamarDiscipulo.php' ; ?>
 				<div class = "row-fluid" >
-
-				<div class = "span12" >
+                <div class = "span12" >
 <h3>Discipulos em: <?php echo $tipoStatus->nome ?></h3>
     <ul class="nav nav-tabs">
-		<li class = "active" ><a href="#ativos" data-toggle="tab">Ativos(<?php echo $totalDiscipulos ; ?>)</a></li>
-		<li><a href="#inativos" data-toggle="tab">Inativos(<?php echo $totalInativos ; ?>)</a></li>
+        <li class = "active" ><a href="#ativos" data-toggle="tab">Ativos(<?php echo $totalDiscipulos ; ?>)</a></li>
+        <li><a href="#inativos" data-toggle="tab">Inativos(<?php echo $totalInativos ; ?>)</a></li>
     <li><a href="#arquivo" data-toggle="tab">Arquivo(<?php echo $totalArquivo ; ?>)</a></li>
     </ul>
 
 <div class="tab-content">
 <div class="tab-pane active" id="ativos">
 
-				<div class = "well" >
-				<table class = "table bordered-table">
+                <div class = "well" >
+                <table class = "table bordered-table">
 				<thead>
 						<th>#</th>
 						<th>Nome</th>
