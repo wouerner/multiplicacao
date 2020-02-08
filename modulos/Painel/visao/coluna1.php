@@ -125,26 +125,41 @@
                 <th>Nome</th>
                 <th>Discipulos</th>
                 <th>Celulas</th>
-                <th>Metas</th>
+                <!--th>Metas</th-->
             </thead>
             <tbody>
                 <?php $total['discipulos']=0?>
                 <?php $total['celulas']= 0?>
                 <?php foreach( $tiposRedes as $s) :?>
-                <tr>
+                    <tr>
+                        <td>
+                            <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->nome ?></a>
+                        </td>
+                        <td>
+                            <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>">
+                                <?php echo $s->totalDiscipulosPorRede(1) ?>
+                            </a>
+                        </td>
+                        <td>
+                            <a href = "/rede/rede/listarCelulas/id/<?php echo $s->id ; ?>">
+                                <?php echo $s->totalCelulasMultiplicacao() ?>
+                            </a>
+                        </td>
+                    </tr>
+                    <?php $total['discipulos'] += $s->totalDiscipulosPorRede(1)?>
+                    <?php $total['celulas']+= $s->totalCelulasMultiplicacao()?>
+                <?php endforeach ; ?>
+                <tr class="info">
                     <td>
-                        <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->nome ?></a>
+                        Total
                     </td>
                     <td>
-                    <a href = "/rede/rede/listarMembrosRede/id/<?php echo $s->id ; ?>"><?php echo $s->totalDiscipulosPorRede(1) ?></a>
+                        <?php echo $total['discipulos'] ?>
                     </td>
                     <td>
-                        <a href = "/rede/rede/listarCelulas/id/<?php echo $s->id ; ?>"><?php echo $s->totalCelulasMultiplicacao() ?></a>
+                        <?php echo $total['celulas']?>
                     </td>
                 </tr>
-                <?php $total['discipulos'] += $s->totalDiscipulosPorRede($igrejaId)?>
-                <?php $total['celulas']+= $s->totalCelulasMultiplicacao()?>
-                <?php endforeach ; ?>
             </tbody>
         </table>
 </div>
@@ -175,15 +190,15 @@
             <thead>
                 <th scope="col">Ativos</th>
                 <th scope="col">Inativos</th>
-                <th scope="col">Arquivados</th>
+                <!--th scope="col">Arquivados</th-->
                 <th scope="col">Total</th>
             </thead>
             <tbody>
                 <tr>
                     <td scope="row"><?php echo $totalAtivos['total']; ?></td>
                     <td scope="row"><?php echo $totalInativos['total']; ?></td>
-                    <td scope="row"><?php echo $totalArquivados['total']; ?></td>
-                    <td><?php echo $totalAtivos['total']+$totalInativos['total']+$totalArquivados['total'] ?></td>
+                    <!--td scope="row"><?php echo $totalArquivados['total']; ?></td-->
+                    <td><?php echo $totalAtivos['total']+$totalInativos['total']/*+$totalArquivados['total']*/ ?></td>
                 </tr>
             </tbody>
         </table>

@@ -69,7 +69,12 @@ class grafico
         $totalInativos = \Discipulo\Modelo\Discipulo::totalInativos($url['4']) ;
         $totalArquivados =  \Discipulo\Modelo\Discipulo::totalArquivados($url['4']) ;
 
-        echo json_encode(array('ativo'=> $totalAtivos['total'], 'inativos'=> $totalInativos['total'], 'arquivado' => $totalArquivados['total']));
+        echo json_encode(array(
+            'ativo'=> $totalAtivos['total'], 
+            'inativos'=> $totalInativos['total'], 
+            /* 'arquivado' => $totalArquivados['total'] */
+            )
+        );
 
         header('Content-type: application/json; charset=utf-8');
 
