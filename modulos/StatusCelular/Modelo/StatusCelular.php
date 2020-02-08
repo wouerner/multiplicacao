@@ -228,13 +228,16 @@ class StatusCelular{
 			  //abrir conexao com o banco
 			  $pdo = new \PDO(DSN, USER, PASSWD);
 
-			  $sql = 'SELECT d.*  ,sc.id AS idStatus, tpsc.nome AS tipoNome
+              $sql = '
+                SELECT d.*  ,sc.id AS idStatus, tpsc.nome AS tipoNome
 				  FROM Discipulo AS d inner join StatusCelular AS sc
 				  ON d.id = sc.discipuloId and d.ativo = 1 AND d.arquivo = 0
 				INNER JOIN TipoStatusCelular AS tpsc ON sc.tipoStatusCelular = tpsc.id
-WHERE 1
-AND sc.ativo =1 AND sc.tipoStatusCelular = ?
-';
+                WHERE 1
+                AND sc.ativo =1 
+                AND sc.tipoStatusCelular = ?
+                ORDER BY d.nome
+                ';
 
 			  //prepara sql
 			  $stm = $pdo->prepare($sql);
