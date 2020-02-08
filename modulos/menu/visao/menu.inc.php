@@ -34,12 +34,12 @@ $igreja = $igreja->sede();
         <div class="collapse navbar-collapse" >
             <ul class="nav navbar-nav" role="navigation">
             <?php if ($acesso->hasPermission('aviso_acesso') == true): ?>
-                <li><a href = "/aviso/aviso" ><i class = " icon-bullhorn " ></i></a></li>
+                <!--li><a href = "/aviso/aviso" ><i class = " icon-bullhorn " ></i></a></li-->
             <?php endif ; ?>
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                <li><a href = "/oferta/oferta/geral?ano=2018&inicio=1&fim=12&rede=0&celula=0" ><i class = " icon-money " ></i></a></li>
+                <!--li><a href = "/oferta/oferta/geral?ano=2018&inicio=1&fim=12&rede=0&celula=0" ><i class = " icon-money " ></i></a></li-->
             <?php else: ; ?>
-                <li><a href = "/oferta/oferta/geralSemValor?ano=2018&inicio=1&fim=12&rede=0&celula=0" ><i class = " icon-money " ></i></a></li>
+                <!--li><a href = "/oferta/oferta/geralSemValor?ano=2018&inicio=1&fim=12&rede=0&celula=0" ><i class = " icon-money " ></i></a></li-->
             <?php endif ; ?>
             <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                 <li class="dropdown">
@@ -130,33 +130,33 @@ $igreja = $igreja->sede();
             <?php if ($acesso->hasPermission('celula_acesso') == true): ?>
                 <li class = "dropdown"><a href = "#" class="dropdown-toggle" data-toggle="dropdown"><i class = "icon-home" ></i>Célula<b class="caret"></b></a>
                     <ul  class="dropdown-menu">
-                        <li><a href = "/celula/celula" ><i class = "icon-list " ></i> Listar</a></li>
                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                             <li><a href = "/celula/celula/novo" ><i class = "icon-plus " ></i> Nova</a></li>
+                            <li><a href = "/celula/celula" ><i class = "icon-list " ></i> Listar</a></li>
                             <li><a href = "/celula/celula/lideresCelula" >Líderes e Discipulos</a></li>
-                            <li><a href = "/celula/celula/chamar">Pesquisar</a></li>
+                            <!--li><a href = "/celula/celula/chamar">Pesquisar</a></li-->
 
-                            <li><a href = "/celula/relatorio/lerPorTema" ><i class = "icon-plus " ></i> Ler Relatórios</a></li>
-                            <li><a href = "/celula/relatorio/lerPorCelula" ><i class = " " ></i> Ler Relatórios Por Celula</a></li>
+                            <!--li><a href = "/celula/relatorio/lerPorTema" ><i class = "icon-plus " ></i> Ler Relatórios</a></li>
+                            <li><a href = "/celula/relatorio/lerPorCelula" ><i class = " " ></i> Ler Relatórios Por Celula</a></li-->
                         <?php endif ; ?>
                         <?php if ($acesso->hasPermission('celulaRelatorioAcesso') == true) : ?>
-                            <li class = "dropdown-submenu" >
+                            <!--li class = "dropdown-submenu" >
                                 <a href = "#" ><i class = "" ></i>Relatorio de Célula</a>
                                 <ul class = "dropdown-menu" >
                                     <li><a href = "/relatorio/relatorio/relatorioCelulaEnvio" ><i class = "" ></i> Por Data</a></li>
                                     <li><a href="/relatorio/relatorio/relatorioCelulaEnvioPorTema">Por Tema</a></li>
                                     <li><a href="/celula/relatorio/porMes">Por Mês</a></li>
                                 </ul>
-                            </li>
+                            </li-->
                         <?php endif ; ?>
 
                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
-                            <li class = "dropdown-submenu" >
+                            <!--li class = "dropdown-submenu" >
                                 <a class="" data-toggle="" href ="/celula/temaRelatorioCelula">Tema Relatório</a>
                                 <ul class = "dropdown-menu" >
                                     <li><a href = "/celula/temaRelatorioCelula/novo">Novo Tema</a></li>
                                 </ul>
-                            </li>
+                            </li-->
                         <?php endif ; ?>
                     </ul>
                 </li>
