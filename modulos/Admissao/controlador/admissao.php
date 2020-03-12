@@ -19,7 +19,7 @@ class admissao{
 	}
 
 	public function listarTipoAdmissao(){
-
+		
 		$tipoAdmissoes =	new \Admissao\Modelo\TipoAdmissao();
 		$tipoAdmissoes = $tipoAdmissoes->listarTodos();
 
@@ -52,7 +52,7 @@ class admissao{
 	public function novoTipoAdmissao($url){
 	
 			if ( empty ( $url['post'] ) ) {
-		    	 require_once  'modulos/admissao/visao/novoTipoAdmissao.php';
+		    	 require_once  'modulos/Admissao/visao/novoTipoAdmissao.php';
 			
 			}else {
 				 $admissao =	new \Admissao\Modelo\TipoAdmissao();

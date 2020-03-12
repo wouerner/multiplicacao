@@ -93,7 +93,7 @@ $igreja = $igreja->sede();
                                 <li><a href = "/ministerio/ministerio/listarFuncao" >Listar Função</a></li>
                             </ul>
                         </li>
-                        <li class = "dropdown-submenu"><a href = "/admissao/listarTipoAdmissao" >Admissão</a>
+                        <li class = "dropdown-submenu"><a href = "/admissao/admissao/listarTipoAdmissao" >Admissão</a>
                             <ul class="dropdown-menu">
                                 <li><a href = "/admissao/admissao/novoTipoAdmissao">Novo</a></li>
                                 <li><a href = "/admissao/admissao/listarTipoAdmissao" >Lista</a></li>
