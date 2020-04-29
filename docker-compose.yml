@@ -5,6 +5,7 @@ services:
     image: multiplicacao
     build: .
     command: /bin/sh
+    #restart: always
     volumes: 
      - .:/var/www/multiplicacao 
      - ./php/php.ini:/etc/php/7.0/apache2/php.ini
@@ -15,14 +16,30 @@ services:
   db:
     container_name: m-db
     image: mysql:5.7
-    restart: always
+    #restart: always
+    volumes: 
     ports: 
      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root 
-      MYSQL_USER: root 
-      MYSQL_PASSWORD: root 
-      MYSQL_DATABASE: multiplicacao 
+      # MYSQL_USER: root 
+      #MYSQL_PASSWORD: root 
+      #MYSQL_DATABASE: multiplicacao
     volumes:
       - ./mysql:/var/lib/mysql
       - ./mysql-cnf/mysql.conf.d/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+
+  composer:
+    container_name: vendor
+    image: composer:1.7
+    working_dir: /var/www/multiplicacao
+    entrypoint:
+      - composer
+      - install
+      - --ignore-platform-reqs
+      - --no-interaction
+      - --no-plugins
+      - --no-scripts
+      - --prefer-dist
+    volumes:
+     - .:/var/www/multiplicacao
