@@ -2,6 +2,9 @@ pre requisitos
  - Docker
  - docker-compose
 
+Opicional
+- [Dbeaver](https://dbeaver.io/)
+
 
 clonando o repositorio:  
 ``` sh
@@ -12,6 +15,12 @@ Entre na pasta do projeto
 ``` sh
 cd multiplicacao/  
 ```
+
+Iniciar o projeto  
+``` sh
+docker-compose up -d --build   
+```
+
 
 Restaurando dados de teste da aplicação  
 ``` sh
