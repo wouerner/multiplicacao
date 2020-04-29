@@ -1,3 +1,5 @@
+Link do youtube: https://youtu.be/ZGX0s8Xv7EA
+
 pre requisitos
  - Docker
  - docker-compose
