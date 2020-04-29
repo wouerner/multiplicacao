@@ -20,9 +20,8 @@ Iniciar o projeto
 ``` sh
 docker-compose up -d --build   
 ```
-
-
-Restaurando dados de teste da aplicação  
+Restaurando dados de teste da aplicação (demora entorno de 3 minutos)
 ``` sh
 docker exec -i m-db sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < dump1.sql  
 ```
+Acessar no navegador: http://localhost
