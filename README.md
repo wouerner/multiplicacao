@@ -2,6 +2,9 @@ pre requisitos
  - Docker
  - docker-compose
 
+Opicional
+- [Dbeaver](https://dbeaver.io/)
+
 
 clonando o repositorio:  
 ``` sh
@@ -13,7 +16,20 @@ Entre na pasta do projeto
 cd multiplicacao/  
 ```
 
-Restaurando dados de teste da aplicação  
+Iniciar o projeto  
+``` sh
+docker-compose up -d --build   
+```
+Restaurando dados de teste da aplicação (demora entorno de 3 minutos)
 ``` sh
 docker exec -i m-db sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < dump1.sql  
 ```
+Acessar no navegador: http://localhost
+
+Acesso ao banco de dados:  
+host: 127.0.0.1  
+usuário: root  
+senha: root  
+
+
+
