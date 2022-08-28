@@ -189,6 +189,14 @@
             <input type="checkbox" name="dizimista" value="1" <?php echo $discipulo->dizimista  == 1 ? 'checked' :''?> >
             </div>
         </div>
+        <div class="form-group">
+            <label class = "control-label col-md-3">Governo:</label>
+            <div class="col-md-8">
+            <a href="/governoDiscipulo/governo/novo/id/<?php echo $discipulo->id ?>">
+                    Atualizar Governo
+                </a>
+            </div>
+        </div>
     </fieldset>
     <fieldset class="col-md-12 " >
         <input type = "hidden" name = "discipuloId" value = "<?php echo $discipulo->id ; ?>" >

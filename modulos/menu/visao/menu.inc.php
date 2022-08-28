@@ -128,7 +128,8 @@ $igreja = $igreja->sede();
                 </li>
             <?php endif ; ?>
             <?php if ($acesso->hasPermission('celula_acesso') == true): ?>
-                <li class = "dropdown"><a href = "#" class="dropdown-toggle" data-toggle="dropdown"><i class = "icon-home" ></i>Célula<b class="caret"></b></a>
+                <li class = "dropdown"><a href = "#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class = "icon-home" ></i>PG<b class="caret"></b></a>
                     <ul  class="dropdown-menu">
                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                             <li><a href = "/celula/celula/novo" ><i class = "icon-plus " ></i> Nova</a></li>

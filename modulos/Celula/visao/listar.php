@@ -34,7 +34,7 @@ unset($_SESSION['mensagem']) ;
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="home">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Lista de Células Ativas: <?php echo $totalCelulas; ?></div>
+                        <div class="panel-heading">Lista de PGs Ativos: <?php echo $totalCelulas; ?></div>
                             <table class="table" >
                                 <thead>
                                     <th>#</th>

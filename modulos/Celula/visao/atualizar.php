@@ -23,7 +23,7 @@
             <article>
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h3 class="panel-title">Atualizar Célula</h3>
+                    <h3 class="panel-title">Atualizar PG</h3>
                   </div>
                   <div class="panel-body">
                     <form action="/celula/celula/atualizar" method="post"  class="form-horizontal">
@@ -74,10 +74,11 @@
                                 </select>
                             </div>
                         </div>
+
                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                             <div class="form-group " >
                                 <div class="ui-widget">
-                                    <label class = "control-label col-md-2" for = "lider" >Líder</label>
+                                    <label class = "control-label col-md-2" for = "lider" >Líder 1:</label>
                                     <div class="col-md-10" >
                                         <select id = "combobox" class = "combobox lider form-control" name = "lider"  >
                                            <option value = "<?php echo $lider->id?>"><?php echo $lider->nome ?></option>
@@ -94,7 +95,7 @@
                         <?php if ($acesso->hasPermission('admin_acesso') == true): ?>
                             <div class = "form-group " >
                                 <div class="ui-widget" >
-                                    <label class="control-label col-md-2" for="lider">Co-líder</label>
+                                    <label class="control-label col-md-2" for="lider">Líder 2:</label>
                                     <div class="col-md-4" >
                                          <select  class="colider form-control" name = "colider"  >
                                             <option value = "<?php echo $colider->id?>">
@@ -112,6 +113,49 @@
                             <script>
                                 jQuery(".colider").select2();
                             </script>
+
+                            <div class = "form-group " >
+                                <div class="ui-widget" >
+                                    <label class="control-label col-md-2" for="lider">Líder 3:</label>
+                                    <div class="col-md-4" >
+                                         <select  class="colider form-control" name = "colider"  >
+                                            <option value = "<?php echo $colider->id?>">
+                                                <?php echo $colider->nome ?>
+                                            </option>
+                                            <?php foreach($lideres as $lider) : ?>
+                                                <option value = "<?php echo $lider['id']?>">
+                                                    <?php echo $lider['nome']?>
+                                                </option>
+                                            <?php endforeach ; ?>
+                                         </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                jQuery(".colider").select2();
+                            </script>
+
+                            <div class = "form-group " >
+                                <div class="ui-widget" >
+                                    <label class="control-label col-md-2" for="lider">Líder 4:</label>
+                                    <div class="col-md-4" >
+                                         <select  class="colider form-control" name = "colider"  >
+                                            <option value = "<?php echo $colider->id?>">
+                                                <?php echo $colider->nome ?>
+                                            </option>
+                                            <?php foreach($lideres as $lider) : ?>
+                                                <option value = "<?php echo $lider['id']?>">
+                                                    <?php echo $lider['nome']?>
+                                                </option>
+                                            <?php endforeach ; ?>
+                                         </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                jQuery(".colider").select2();
+                            </script>
+
                         <?php else: ?>
                             <input name="lider" type="hidden" value = "<?php echo $lider->id?>">
                         <?php endif; ?>
